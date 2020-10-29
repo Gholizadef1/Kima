@@ -1,0 +1,13 @@
+.navbar-brand{
+
+font-size: 500px;
+}
+/* change the background color */
+.navbar {
+    background-color:#d68796;
+}
+.searchbar{
+    margin: 0 auto;
+width: 800px;
+   
+}
