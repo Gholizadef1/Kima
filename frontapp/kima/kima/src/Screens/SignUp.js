@@ -39,7 +39,7 @@ const signschema=yup.object({
 
 
 })
- const SignUp=(pro)=> {
+ const SignUp=(pro,{Users})=> {
   const[check,setcheck]=useState(false);
   return (
     
@@ -63,8 +63,7 @@ const signschema=yup.object({
       onSubmit={(values,actions)=>{
         
          actions.resetForm();
-         pro.navigation.navigate('log');
-         console.log(values);
+         pro.navigation.navigate('Log');
 
       }}
      >
@@ -144,7 +143,7 @@ const signschema=yup.object({
    
    
      <Button bordered rounded style={styles.button}
-       onPress={Formik.onSubmit}
+       onPress={props.handleSubmit}
        >
          <Text style={{color:'#25DECC', fontSize:15,fontWeight:'300',width:80, marginLeft:58}}>Signup</Text>
         </Button>
