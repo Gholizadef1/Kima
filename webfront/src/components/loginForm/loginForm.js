@@ -56,7 +56,7 @@ function LoginForm(props) {
     return(
         <div className="card-group" >
             <div className="card ">
-                <img src="Whispers in the Static.jpeg" class="rounded col-12 hv-center frontColor" alt="" width="204" height="236"/> 
+                <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">
             <form>

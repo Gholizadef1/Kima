@@ -66,8 +66,9 @@ function RegistrationForm(props) {
     }
     return(
         <div className="card-group" >
-            <div className="card ">
-                <img src="Whispers in the Static.jpeg" class="rounded col-12 hv-center frontColor" alt="" width="204" height="236"/> 
+            <div className="card col-12 hv-center frontColor">
+                <h1>Wellcome to KIMA</h1>
+                <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">
             <form>
