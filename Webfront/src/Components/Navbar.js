@@ -10,8 +10,7 @@ import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 export class NavBar extends Component{
     render(){
-    return(
-    
+    return(   
 <Navbar className= "navbar navbar-expand-lg navbar-dark{color:#ff5500;}">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
@@ -24,7 +23,7 @@ export class NavBar extends Component{
       <Nav.Link class="nav-link text-dark" href="groups" style = {{fontSize:20, padding:30}}>Groups</Nav.Link>
       <Nav.Link class="nav-link text-dark" href="quize"style = {{fontSize:20, padding:30}} >Quiz</Nav.Link>
     </Nav> 
-    <Nav className = "searchbar">  
+    <Nav className = "searchbar mx-auto">  
            <form class = "form-inline">
                    <input class = "form-control mr-lg-2"style={{width:500}} type = "search"
                    placeholder="Search in books..." aria-label= "Search">
