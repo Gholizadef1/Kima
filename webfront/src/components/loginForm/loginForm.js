@@ -61,12 +61,12 @@ function LoginForm(props) {
             <div className="card col-12 hv-center frontColor">
             <form>
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Enter your email address</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
-                       aria-describedby="emailHelp" 
-                       placeholder="Enter email" 
+                       //aria-describedby="emailHelp" 
+                       //placeholder="Enter email" 
                        value={state.email}
                        onChange={handleChange}
                 />
@@ -74,11 +74,11 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputPassword1">Password</label>
+                <label htmlFor="exampleInputPassword1">Enter your password</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
-                       placeholder="Password"
+                       //placeholder="Password"
                        value={state.password}
                        onChange={handleChange} 
                 />

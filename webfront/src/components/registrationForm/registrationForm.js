@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 function RegistrationForm(props) {
     const [state , setState] = useState({
-        name : "",
+        userName : "",
         email : "",
         password : "",
         confirmPassword: "",
@@ -20,10 +20,10 @@ function RegistrationForm(props) {
         }))
     }
     const sendDetailsToServer = () => {
-        if(state.name.length && state.email.length && state.password.length) {
+        if(state.userName.length && state.email.length && state.password.length) {
             props.showError(null);
             const payload={
-                "name":state.name,
+                "userName":state.userName,
                 "email":state.email,
                 "password":state.password,
             }
@@ -72,22 +72,22 @@ function RegistrationForm(props) {
             <div className="card col-12 hv-center frontColor">
             <form>
             <div className="form-group text-left">
-                <label htmlFor="exampleInputName">Your name</label>
-                <input type="name" 
+                <label htmlFor="exampleInputUserName">Enter your username</label>
+                <input type="userName" 
                        className="form-control" 
-                       id="name" 
-                       placeholder="Name" 
-                       value={state.name}
+                       id="userName" 
+                       //placeholder="userName" 
+                       value={state.userName}
                        onChange={handleChange}
                 />
                 </div>
 
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Enter your email address</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
-                       placeholder="Enter email" 
+                       //placeholder="Enter email" 
                        value={state.email}
                        onChange={handleChange}
                 />
@@ -95,21 +95,21 @@ function RegistrationForm(props) {
                 </div>
                 
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <label htmlFor="exampleInputPassword1">Enter your password</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
-                        placeholder="Password"
+                        //placeholder="Password"
                         value={state.password}
                         onChange={handleChange} 
                     />
                 </div>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                    <label htmlFor="exampleInputPassword1">Confirm password</label>
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
-                        placeholder="Confirm Password"
+                        //placeholder="Confirm Password"
                         value={state.confirmPassword}
                         onChange={handleChange} 
                     />
