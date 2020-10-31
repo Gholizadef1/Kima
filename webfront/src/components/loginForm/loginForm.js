@@ -55,7 +55,9 @@ function LoginForm(props) {
     }
     return(
         <div className="card-group" >
-            <div className="card ">
+            <div className="card col-12 hv-center frontColor">
+                <h1>Wellcome back to KIMA</h1>
+                <p>good to see you again</p>
                 <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">

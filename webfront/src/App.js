@@ -18,7 +18,7 @@ function App() {
     <Router>
       <div className="App" >
         
-        <div className="container d-flex flex-column align-items-center">
+        <div >
           
           <Switch>
             <Route path="/" exact={true}>
