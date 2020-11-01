@@ -10,6 +10,9 @@ import {
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Home from './components/home/home'; 
+import Slide from './slides/Slide';
+import {NavBar} from "./Components/Navbar";
+//import *as ReactBootstrap from "react-bootstrap";
 
 function App() {
   const [title, updateTitle] = useState(null);
@@ -31,7 +34,9 @@ function App() {
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="/home">
-                <Home/>
+               <NavBar/>
+               <Slide/>
+ 
             </Route>
           </Switch>
         <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
