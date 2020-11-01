@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'kima.kyma',
+    'tutorial.kyma',
 ]
 
 # REST_FRAMEWORK = {
@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'kima.urls'
+ROOT_URLCONF = 'tutorial.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kima.wsgi.application'
+WSGI_APPLICATION = 'tutorial.wsgi.application'
 
 
 # Database
