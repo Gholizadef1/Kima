@@ -23,7 +23,7 @@ export class NavBar extends Component{
       <Nav.Link class="nav-link text-dark" href="groups" style = {{fontSize:20, padding:30}}>Groups</Nav.Link>
       <Nav.Link class="nav-link text-dark" href="quize"style = {{fontSize:20, padding:30}} >Quiz</Nav.Link>
     </Nav> 
-    <Nav className = "searchbar mx-auto">  
+    <Nav className = "searchbar">  
            <form class = "form-inline">
                    <input class = "form-control mr-lg-2"style={{width:500}} type = "search"
                    placeholder="Search in books..." aria-label= "Search">
