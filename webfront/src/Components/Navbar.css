@@ -14,7 +14,7 @@
     }
     .searchbar{
         margin: 0 auto;
-    width: 800px;
+        width: 800px;
     }
 
     @media (max-width :768px) 
