@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-<<<<<<< HEAD
-=======
-
->>>>>>> Feature/LoginSignup-webfront
 import $ from 'jquery';
 
 import 'slick-carousel';
