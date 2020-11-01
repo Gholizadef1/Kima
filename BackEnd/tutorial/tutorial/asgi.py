@@ -1,5 +1,5 @@
 """
-ASGI config for tutorial project.
+ASGI config for kima project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

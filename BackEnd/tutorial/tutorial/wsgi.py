@@ -1,5 +1,5 @@
 """
-WSGI config for tutorial project.
+WSGI config for kima project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

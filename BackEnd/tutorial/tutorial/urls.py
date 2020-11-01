@@ -1,4 +1,4 @@
-"""tutorial URL Configuration
+"""kima URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -14,23 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls import url
-from django.urls import include, path
-#from rest_framework import routers
-from .quickstart import views
+from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+from tutorial.kyma import views
+from .quickstart import views
+from . import kyma
 from .quickstart.views import registration_view
 from .quickstart.views import login
 from rest_framework.authtoken.views import obtain_auth_token
 
-app_name= "quickstart"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #url(r'^SignUpView/',views.SignUp_view.as_view()),
-   # url(r'^LoginView/',views.login_view.as_view()),
+    path('bookdetail/', kyma.views.BookView.as_view()),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
-
 ]
-

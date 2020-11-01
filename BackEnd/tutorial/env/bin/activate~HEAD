@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/melikano2000/Documents/KIMA/env"
+VIRTUAL_ENV="/home/asus/tutorial/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
