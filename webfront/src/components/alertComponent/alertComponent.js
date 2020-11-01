@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './alertComponent.css';
+
 function AlertComponent(props) {
     const [modalDisplay, toggleDisplay] = useState('none');
     const openModal = () => {
