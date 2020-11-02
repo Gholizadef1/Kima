@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-<<<<<<< HEAD
 
 
 import jQuery from "jquery";
@@ -13,8 +12,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {BrowserRouter as Router} from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-=======
->>>>>>> Feature/LoginSignup-webfront
 
 ReactDOM.render(
   <React.StrictMode>
