@@ -8,7 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
-import AlertComponent from './components/alertComponent/alertComponent.js';  
+import AlertComponent from './components/alertComponent/alertComponent';  
 import Home from './components/home/home'; 
 import Slide from './slides/Slide';
 import {NavBar} from "./Components/Navbar";

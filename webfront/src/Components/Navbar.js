@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+//import {NavLink} from 'react-router-dom';
 import {Navbar,Nav} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 import {CgProfile} from 'react-icons/cg';
 import "./Navbar.css";
 import {GoSearch} from 'react-icons/go';
-import ReactNavbar from "react-responsive-animate-navbar";
-import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+//import ReactNavbar from "react-responsive-animate-navbar";
+//import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
+//import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 export class NavBar extends Component{
     render(){
     return(   
