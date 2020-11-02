@@ -61,9 +61,11 @@ function LoginForm(props) {
                 <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">
-            <form>
+            <form className="mx-5">
+                <h1>Login</h1>
+                <br></br>
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Enter your email address</label>
+                <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -72,11 +74,10 @@ function LoginForm(props) {
                        value={state.email}
                        onChange={handleChange}
                 />
-                
                 </div>
                 
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputPassword1">Enter your password</label>
+                <label htmlFor="exampleInputPassword1">Password</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -89,9 +90,10 @@ function LoginForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn "
+                    className="btn btn-outline-success"
                     onClick={handleSubmitClick}
                 >Submit</button>
+                
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}

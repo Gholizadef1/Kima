@@ -72,9 +72,11 @@ function RegistrationForm(props) {
                 <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">
-            <form>
-            <div className="form-group text-left">
-                <label htmlFor="exampleInputUserName">Enter your username</label>
+            <form className="mx-5">
+                <h1>Register</h1>
+                <br></br>
+                <div className="form-group text-left">
+                <label htmlFor="exampleInputUserName">Username</label>
                 <input type="userName" 
                        className="form-control" 
                        id="userName" 
@@ -85,7 +87,7 @@ function RegistrationForm(props) {
                 </div>
 
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Enter your email address</label>
+                <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -97,7 +99,7 @@ function RegistrationForm(props) {
                 </div>
                 
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Enter your password</label>
+                    <label htmlFor="exampleInputPassword1">Password</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -118,7 +120,7 @@ function RegistrationForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn"
+                    className="btn btn-outline-success"
                     onClick={handleSubmitClick}
                 >
                     Register
