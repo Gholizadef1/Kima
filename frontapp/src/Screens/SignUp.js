@@ -51,7 +51,7 @@ const signschema=yup.object({
      </Title> */}
      
      <View>
-      <Image source={require('../../assets/kima2.png')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima6.jpg')} style={styles.imagee}></Image>
 
      </View>
 
@@ -68,7 +68,7 @@ const signschema=yup.object({
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:175,marginHorizontal:20}}>
+     <View style={{alignItems:'center', marginTop:80,marginHorizontal:20}}>
 
      <Item style={styles.input}>
 
@@ -78,12 +78,12 @@ const signschema=yup.object({
          value={props.values.Username}
          placeholder="Name..." placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="user" size={24} color="green" style={styles.Icon} />
+         <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
         
        </Item>
        
       
-       <Text style={{fontSize:10, color:'purple'}}>{props.touched.Username&&props.errors.Username}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
  
        
 
@@ -96,11 +96,11 @@ const signschema=yup.object({
          placeholder="Email..." placeholderTextColor='lightgray'>
         
          </Input>
-         <Feather name="mail" size={24} color="green" style={styles.Icon} />
+         <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
 
        
-       <Text style={{fontSize:10, color:'purple'}}>{props.touched.Email&&props.errors.Email}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.Email&&props.errors.Email}</Text>
      
        
 
@@ -112,12 +112,12 @@ const signschema=yup.object({
          onBlur={props.handleBlur('Password')}
          placeholder="Password" placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="lock" size={24} color="green"  style={styles.Icon}/>
+         <AntDesign name="lock" size={24} color="#BFDBF7"  style={styles.Icon}/>
        </Item>
 
     
       
-       <Text style={{fontSize:10, color:'purple'}}>{props.touched.Password&&props.errors.Password}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
 
        
        <Item style={styles.input}>
@@ -127,25 +127,25 @@ const signschema=yup.object({
           onBlur={props.handleBlur('repeatPassword')}
           placeholder="Repeat your password" placeholderTextColor='lightgray'>
          </Input>
-         <Feather name="check" size={24} color="green" style={styles.Icon} />
+         <Feather name="check" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
-       <Text style={{fontSize:10, color:'purple'}}>{props.touched.repeatPassword&&props.errors.repeatPassword}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatPassword&&props.errors.repeatPassword}</Text>
        
   
        <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
        
      <CheckBox checked={check} onPress={()=>{if(check===true){setcheck(false)}else {setcheck(true)}}} 
-     color='green' style={{marginTop:34,marginLeft:14}} />
+     color='#BFDBF7' style={{marginTop:34,marginLeft:25}} />
             <Body>
-              <Text  style={{marginTop:20,marginLeft:0,color:'green',fontSize:12}}>sign up as a publisher?</Text>
+              <Text  style={{marginTop:20,marginLeft:0,color:'#1F7A8C',fontSize:12}}>sign up as a publisher?</Text>
             </Body>
    
    
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#25DECC', fontSize:15,fontWeight:'300',width:80, marginLeft:58}}>Signup</Text>
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300',width:80, marginLeft:58}}>Signup</Text>
         </Button>
       
      </View>
@@ -158,7 +158,7 @@ const signschema=yup.object({
      </Formik>
     
     
-     <StatusBar style="auto" />
+     <StatusBar backgroundColor='#BFDBF7' style='light' />
     </Container>
    
   );
@@ -176,11 +176,12 @@ const styles = StyleSheet.create({
   },
   imagee:{
   
-    height:220,
-    width:200,
-    marginTop:550,
+    height:320,
+    width:300,
+    marginTop:450,
     position:'absolute',
-    marginLeft:10
+    marginLeft:50
+    
   },
   temp:{
     flexDirection:"row"
@@ -188,10 +189,12 @@ const styles = StyleSheet.create({
   button:{
     marginTop:20,
     width:170,
-    backgroundColor:'white',
-    borderColor:'aqua',
+    backgroundColor:'#E1E5F2',
+    borderColor:'#BFDBF7',
     marginRight:22,
+ 
   
+    
    
 
     

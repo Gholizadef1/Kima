@@ -8,6 +8,13 @@ import { AntDesign } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
+// import axios from 'axios';
+import Home from './Home';
+import TabScreen from './TabScreen';
+// import {creatStore} from 'redux'
+
+
+
 
 
 const logschema=yup.object({
@@ -30,12 +37,12 @@ const logschema=yup.object({
      
      
   return (
-      
+      // <navigationconta>
     
      <Container backgroundColor='white'>
      
      <View>
-      <Image source={require('../../assets/kima2.png')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima6.jpg')} style={styles.imagee}></Image>
 
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
@@ -44,7 +51,11 @@ const logschema=yup.object({
 
 
       onSubmit={(values,actions)=>{
-         pro.navigation.navigate('log');
+         
+        //  window.location='home';
+
+         pro.navigation.navigate('home');
+        
          actions.resetForm();
          console.log(values);
 
@@ -53,7 +64,7 @@ const logschema=yup.object({
      {(props)=>(
 
     
-     <View style={{alignItems:'center', marginTop:230}}>
+     <View style={{alignItems:'center', marginTop:120}}>
 
        <Item style={styles.input}>
 
@@ -67,7 +78,7 @@ const logschema=yup.object({
          placeholder="Email..." placeholderTextColor='lightgray'>
          
          </Input>
-         <Feather name="mail" size={24} color="lightgreen" style={styles.Icon} />
+         <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
        
       
@@ -86,12 +97,8 @@ const logschema=yup.object({
 
          </Input>
 
-         {/* <TouchableOpacity style={{color:'blue',marginRight:10,position:"absolute"}}
-            
-         ><Text style={{color:'lightblue',marginLeft:300}}>{show}</Text></TouchableOpacity> */}
 
-
-         <AntDesign name="lock" size={24} color="lightgreen" style={styles.Icon}/>
+         <AntDesign name="lock" size={24} color="#BFDBF7" style={styles.Icon}/>
        </Item>
 
       
@@ -108,14 +115,15 @@ const logschema=yup.object({
 
          
          >
-         <Text style={{color:'green', fontSize:12,fontWeight:'300',width:170,marginLeft:25,marginTop:20}}>Dont have an account?Signup</Text>
+         <Text style={{color:'#1F7A8C', fontSize:12,fontWeight:'300',width:170,marginLeft:25,marginTop:20}}>Dont have an account?Signup</Text>
          
         </TouchableOpacity>
         <Button
          bordered rounded style={styles.button}
-        
+         onPress={props.handleSubmit}
         >
-         <Text style={{color:'#25DECC', fontSize:15,fontWeight:'300', alignItems:'center',width:100,marginLeft:85}}>Login</Text>
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300', alignItems:'center',width:100,marginLeft:85}
+         }>Login</Text>
         </Button>
         {/* <Button bordered success style={{position:'absolute', marginTop:90,marginHorizontal:40,width:300}}>
          <Text style={{color:'#25DECC', fontSize:17,fontWeight:'300',width:185}}>ورود ناشر</Text>
@@ -132,7 +140,7 @@ const logschema=yup.object({
      
     
     
-     <StatusBar style='light' />
+     <StatusBar backgroundColor='#BFDBF7' style='light' />
     </Container>
    
   );
@@ -150,11 +158,11 @@ const styles = StyleSheet.create({
   // },
   imagee:{
   
-    height:220,
-    width:200,
-    marginTop:550,
+    height:320,
+    width:300,
+    marginTop:450,
     position:'absolute',
-    marginLeft:23
+    marginLeft:50
     
   },
   temp:{
@@ -165,7 +173,7 @@ const styles = StyleSheet.create({
     marginTop:60,
     width:210,
     backgroundColor:'white',
-    borderColor:'aqua',
+    borderColor:'#BFDBF7',
     marginLeft:98,
     height:43
 
