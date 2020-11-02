@@ -119,17 +119,17 @@ dmypy.json
 .pyre/
 
 ### venv ###
-# Virtualenv
-# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
-# pyvenv.cfg
-# .env
-# .venv
-# env/
-# venv/
-# ENV/
-# env.bak/
-# venv.bak/
-# pip-selfcheck.json
+ Virtualenv
+ http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+ pyvenv.cfg
+ .env
+ .venv
+ env/
+ venv/
+ ENV/
+ env.bak/
+ venv.bak/
+ pip-selfcheck.json
 
 ### VisualStudioCode ###
 .vscode/
