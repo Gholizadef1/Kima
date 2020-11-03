@@ -20,7 +20,7 @@ const formikform=()=>{
          <Image source={require('../../assets/kima2.png')} style={styles.imagee}></Image>
    
         </View>
-        <formikform>
+        
         <Form style={{borderStyle:'dashed',justifyContent:'space-around',marginHorizontal:15}}>
         <View style={{alignItems:'center', marginTop:230}}>
    
@@ -66,7 +66,7 @@ const formikform=()=>{
           
           </View>
         </Form>
-        </formikform>
+       
         <View style={{flexDirection:'row',width:400,marginHorizontal:15}}>
             <Button bordered rounded style={styles.button}
             onPress={() =>{pro.navigation.navigate('Sign')}}

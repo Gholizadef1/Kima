@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "^5.10.2",
+    "axios": "^0.21.0",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
     "formik": "^2.2.1",
