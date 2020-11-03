@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slide.css";
-
 import Slider from "react-slick";
 
 function Slide() {
@@ -55,15 +54,16 @@ function Slide() {
               <div className="card cat ">
                 <img
                   className="squere " 
-                  alt={"img"}
+                  alt={"users here"}
                   src={`https://source.unsplash.com/random/${current.id}`}
                   height={56}
                   width={56}
                 />
                 <div className="card-body ">
-                  <b className="card-title">{current.title}</b>
-                  <b className="card-text">{current.author}
-                  </b>
+                  <h5 className="card-title title-sm-center ">{current.username}</h5>
+                  <small className="card-text text-sm-center text-muted">
+                    In your contacts
+                  </small>
                 </div>
               </div>
             </div>
