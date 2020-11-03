@@ -1,6 +1,6 @@
 
 import { StatusBar } from 'expo-status-bar';
-import React ,{useState} from 'react';
+import React ,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { Feather } from '@expo/vector-icons'; 
@@ -11,7 +11,9 @@ import * as yup from 'yup';
 // import axios from 'axios';
 import Home from './Home';
 import TabScreen from './TabScreen';
+import Axios from 'axios';
 // import {creatStore} from 'redux'
+import { Context } from '../context/Authcontext';   
 
 
 
@@ -33,16 +35,18 @@ const logschema=yup.object({
  const Login=(pro)=> {
    
   
+  const { state, signin, clearErrorMessage } = useContext(Context);      
 
      
      
   return (
+    
       // <navigationconta>
     
      <Container backgroundColor='white'>
      
      <View>
-      <Image source={require('../../assets/kima6.jpg')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
 
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
@@ -53,8 +57,14 @@ const logschema=yup.object({
       onSubmit={(values,actions)=>{
          
         //  window.location='home';
+        //  Axios.post(urll+'login',valuesl)
+        //  .then(function(response){
+        //    if(response.data.placeholderTextColor===200)
+        //  })
+        
+        // {signin};
 
-         pro.navigation.navigate('home');
+         pro.navigation.navigate('mainFlow');
         
          actions.resetForm();
          console.log(values);

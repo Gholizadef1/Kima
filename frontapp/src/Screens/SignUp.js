@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
 
@@ -11,6 +11,9 @@ import {Formik,formik} from 'formik';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import { log } from 'react-native-reanimated';
+import { Context as Authcontext } from '../context/Authcontext';  
+
+
 
 const signschema=yup.object({
 
@@ -41,6 +44,7 @@ const signschema=yup.object({
 })
  const SignUp=(pro,{Users})=> {
   const[check,setcheck]=useState(false);
+  const { state, signup } = useContext(Authcontext);
   return (
     
      <Container>
@@ -51,7 +55,7 @@ const signschema=yup.object({
      </Title> */}
      
      <View>
-      <Image source={require('../../assets/kima6.jpg')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
 
      </View>
 
@@ -61,7 +65,7 @@ const signschema=yup.object({
       
 
       onSubmit={(values,actions)=>{
-        
+         signup(values);
          actions.resetForm();
          pro.navigation.navigate('Log');
 
@@ -189,7 +193,7 @@ const styles = StyleSheet.create({
   button:{
     marginTop:20,
     width:170,
-    backgroundColor:'#E1E5F2',
+    backgroundColor:'white',
     borderColor:'#BFDBF7',
     marginRight:22,
  

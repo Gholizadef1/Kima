@@ -2,10 +2,13 @@ import React , {useState} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
-import TabScreen from './TabScreen';
 import { Container } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
 import { createStackNavigator } from 'react-navigation-stack';
+import axios from 'axios';
+
+// const [Books,SetBooks]=useState([]);
+
 
 const Home = (props) => {
 
@@ -13,47 +16,46 @@ const Home = (props) => {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdccFt7gPEal9yTqTapS4P17TMFSVq9SYhKA&usqp=CAU"
     };
 
+    // const [gallery , setgallery] = useState([]);
+
+
+
     const [gallery , setgallery] = useState([
 
-            {image : {uri:
-                'https://m.media-amazon.com/images/I/41VYw5zI7kL.jpg'}, title: 'book1' , key: '1'
-            },
-            {image : {uri:
-                'https://qph.fs.quoracdn.net/main-qimg-9b4267c07c73a0c6099650d9fd3e9933'},title: 'book2' , key: '2'
-            },
-            {image :{uri:
-                'https://miro.medium.com/max/1486/1*fS70iIas8jKGK0lCLpKr9g.jpeg'} ,title: 'book3' , key: '3'
-            },
-            {image : {uri:
-                'https://www.theartworksinc.com/wp-content/uploads/2016/12/ls307-800x1185.jpg'} ,title: 'book4' , key: '4'
-            }
+        {image : {uri:
+            'https://m.media-amazon.com/images/I/41VYw5zI7kL.jpg'}, title: 'book1' , key: '1'
+        },
+        {image : {uri:
+            'https://qph.fs.quoracdn.net/main-qimg-9b4267c07c73a0c6099650d9fd3e9933'},title: 'book2' , key: '2'
+        },
+        {image :{uri:
+            'https://miro.medium.com/max/1486/1*fS70iIas8jKGK0lCLpKr9g.jpeg'} ,title: 'book3' , key: '3'
+        },
+        {image : {uri:
+            'https://www.theartworksinc.com/wp-content/uploads/2016/12/ls307-800x1185.jpg'} ,title: 'book4' , key: '4'
+        }
 
-    ]);
-    // const navigator = createStackNavigator(
-    //     {
-    //       home: Home,  
-    //     },
-    //     {
-    //       initialRouteName: 'home',
-    //       headerMode:'none'
-    //     //   defaultNavigationOptions: {
-    //     //     title: 'Kima',
-            
-    //     //     headerTintColor:'#1F7A8C',
-    //     //     headerStyle: {
-    //     //       backgroundColor: '#E1E5F2',
-              
-    //     //     },
-          
-          
-    //     //   },
-    //     }
-    //   );
-         
+]);
+
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const imageee = res.data;
+        this.setState(() =>({...gallery,
+            imageee
+        }) );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     return(
+    
         
         <Container>
-       
+     
+        {/* <ul>
+        { this.state.gallery.map(person => <li>{gallery.name}</li>)}
+       </ul> */}
         <View style>
         
             <View>
@@ -67,15 +69,7 @@ const Home = (props) => {
                         <Text style={styles.userGreet}>Welcome to KIMA</Text>
                         <Text style={styles.userText}> What do you want to read today?</Text>
                     </View>
-                    <View>
-                        <TextInput
-                        style={styles.searchBox}
-                        placeholder='Search Destination'
-                        placeholderTextColor='#666'>
-                        </TextInput>
-                        <Feather name='search' size={22} color='#666' style style={
-                            {position:'absolute' , top: 25 , right:'90%' , opacity: 0.6}} />
-                    </View>
+                   
                     <Feather name='menu' size={22} color='#fff' style style={
                             {position:'absolute' , top: 40 ,left: 16 }} />
                     <Feather name='bell' size={22} color='#fff' style style={
@@ -111,7 +105,7 @@ const Home = (props) => {
             
 
         </View>
-        <StatusBar backgroundColor='white' style='dark' />
+        {/* <StatusBar backgroundColor='white' style='dark' /> */}
       
         </Container>
     );

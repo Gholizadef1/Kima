@@ -50,7 +50,8 @@ import { createStackNavigator } from 'react-navigation-stack';
           backgroundColor: '#E1E5F2',
           
         },
-        headerShown:'false'
+      
+      
       
       
       },
