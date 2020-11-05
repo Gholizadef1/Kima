@@ -21,9 +21,6 @@ class book(models.Model):
     #number of pages
     numpages = models.IntegerField(blank=True, null=True)
 
-    #format of book
-    formatbook = models.TextField(blank=True,null=True)
-
     #book publisher
     publisher = models.TextField(blank=True,null=True)
 
