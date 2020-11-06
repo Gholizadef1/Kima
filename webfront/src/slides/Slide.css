@@ -28,16 +28,11 @@
     color: #262626;
     display: flex;
     overflow: hidden;
-    font-size: 15px;
+    font-size: 20px;
     line-height: 18px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin:-20px;
     margin-bottom: 0 !important;
-}
-.card-text{
-    margin-left:-80px;
-    font-size:13px ;
 }
 
 .container{
