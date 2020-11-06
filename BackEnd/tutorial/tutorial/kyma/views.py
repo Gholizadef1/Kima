@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from . models import book
 from . serializers import bookSerializer
+from rest_framework import filters
+from rest_framework import generics
 
 class BookView(APIView):
     """
@@ -25,3 +27,8 @@ class BookView(APIView):
             serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
+class BookListView(generics.ListAPIView):
+    queryset = book.objects.all()
+    serializer_class = bookSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'author']
