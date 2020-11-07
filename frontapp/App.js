@@ -20,14 +20,23 @@ import { State } from 'react-native-gesture-handler';
 import {Provider as AuthProvider } from './src/context/Authcontext';
 import {Context as AuthContext} from './src/context/Authcontext'
 
+
+
+
 const SwitchNavigator=createSwitchNavigator({
+
     
     loginflow:StackScreen,
-    mainFlow:TabScreen    
+    mainFlow:TabScreen
+
+    
+    
+
 })
 
 // export default createAppContainer(SwitchNavigator);
 const App=createAppContainer(SwitchNavigator);
+
 
 export default()=>{
   return(
@@ -36,6 +45,8 @@ export default()=>{
     <App/>
   </AuthProvider>
   )
+
+
 }
 
 // const Tab = createBottomTabNavigator();
@@ -53,8 +64,11 @@ export default()=>{
 //   )
 // }
 
-
-
-
-
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

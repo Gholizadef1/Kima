@@ -4,7 +4,11 @@ TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
+import { createStackNavigator } from 'react-navigation-stack';
 import axios from 'axios';
+
+// const [Books,SetBooks]=useState([]);
+
 
 const Home = (props) => {
 
@@ -12,7 +16,24 @@ const Home = (props) => {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdccFt7gPEal9yTqTapS4P17TMFSVq9SYhKA&usqp=CAU"
     };
 
-    const [gallery , setgallery] = useState([]);
+    // const [gallery , setgallery] = useState([]);
+
+    const [gallery , setgallery] = useState([
+
+        {image : {uri:
+            'https://m.media-amazon.com/images/I/41VYw5zI7kL.jpg'}, title: 'book1' , key: '1'
+        },
+        {image : {uri:
+            'https://qph.fs.quoracdn.net/main-qimg-9b4267c07c73a0c6099650d9fd3e9933'},title: 'book2' , key: '2'
+        },
+        {image :{uri:
+            'https://miro.medium.com/max/1486/1*fS70iIas8jKGK0lCLpKr9g.jpeg'} ,title: 'book3' , key: '3'
+        },
+        {image : {uri:
+            'https://www.theartworksinc.com/wp-content/uploads/2016/12/ls307-800x1185.jpg'} ,title: 'book4' , key: '4'
+        }
+
+]);
 
     axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then(res => {

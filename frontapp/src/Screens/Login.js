@@ -15,6 +15,10 @@ import Axios from 'axios';
 // import {creatStore} from 'redux'
 import { Context } from '../context/Authcontext';   
 
+
+
+
+
 const logschema=yup.object({
 
   Email:yup.string()
@@ -30,18 +34,25 @@ const logschema=yup.object({
 
  const Login=(pro)=> {
    
-
+  
   const { state, signin, clearErrorMessage } = useContext(Context);      
+
      
-  return (    
+     
+  return (
+    
+      // <navigationconta>
+    
      <Container backgroundColor='white'>
+     
      <View>
-      <Image source={require('../../assets/kima2.png')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
 
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Email:'',Password:''}}
       validationSchema={logschema}
+
 
       onSubmit={(values,actions)=>{
          
@@ -71,6 +82,8 @@ const logschema=yup.object({
          onChangeText={props.handleChange('Email')}
           value={props.values.Email}
           onBlur={props.handleBlur('Email')}
+        
+
        
          placeholder="Email..." placeholderTextColor='lightgray'>
          
@@ -78,8 +91,12 @@ const logschema=yup.object({
          <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
        
+      
        <Text style={{fontSize:9, color:'red'}}>{props.touched.Email&&props.errors.Email}</Text>
        
+       
+
+
        <Item style={styles.input}>
          <Input name='passs' style={styles.Input} autoCapitalize='none' autoCorrect={false}
 
@@ -90,14 +107,23 @@ const logschema=yup.object({
 
          </Input>
 
+
          <AntDesign name="lock" size={24} color="#BFDBF7" style={styles.Icon}/>
        </Item>
+
+      
        
        <Text style={{fontSize:9, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
+      
        <View style={{flexDirection:'row',width:400,marginHorizontal:15}}>
+      
+       
+       
         <TouchableOpacity
         
          onPress={() =>{pro.navigation.navigate('Sign')}}
+
+         
          >
          <Text style={{color:'#1F7A8C', fontSize:12,fontWeight:'300',width:170,marginLeft:25,marginTop:20}}>Dont have an account?Signup</Text>
          
@@ -118,11 +144,18 @@ const logschema=yup.object({
             
        )}
 
-</Formik>   
+</Formik>
+   
+     
+     
+    
+    
      <StatusBar backgroundColor='#BFDBF7' style='light' />
     </Container>
+   
   );
 }
+
 const styles = StyleSheet.create({
   // container: {
   //   flex: 1,
@@ -149,7 +182,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     marginTop:60,
     width:210,
-    backgroundColor:'white',
+    backgroundColor:'#E1E5F2',
     borderColor:'#BFDBF7',
     marginLeft:98,
     height:43

@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
+
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { AntDesign } from '@expo/vector-icons'; 
@@ -37,6 +38,9 @@ const signschema=yup.object({
   //   return repeatPassword.string()===repeatPassword.string();
   // })
 
+
+
+
 })
  const SignUp=(pro,{Users})=> {
   const[check,setcheck]=useState(false);
@@ -51,7 +55,7 @@ const signschema=yup.object({
      </Title> */}
      
      <View>
-      <Image source={require('../../assets/kima8.jpg')} style={styles.imagee}></Image>
+      <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
 
      </View>
 
@@ -61,7 +65,7 @@ const signschema=yup.object({
       
 
       onSubmit={(values,actions)=>{
-        //  signup(values);
+         signup(values);
          actions.resetForm();
          pro.navigation.navigate('Log');
 

@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -5,6 +6,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import Home from './Home'
