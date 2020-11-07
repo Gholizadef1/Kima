@@ -1,4 +1,5 @@
 
+
 import { StatusBar } from 'expo-status-bar';
 import React ,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity } from 'react-native';
@@ -85,7 +86,7 @@ const logschema=yup.object({
         
 
        
-         placeholder="Email..." placeholderTextColor='lightgray'>
+         placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
          
          </Input>
          <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
@@ -103,7 +104,7 @@ const logschema=yup.object({
           onChangeText={props.handleChange('Password')}
           value={props.values.Password}
           onBlur={props.handleBlur('Password')}
-          placeholder="Password..."placeholderTextColor='lightgray'>
+          placeholder="رمز خود را وارد کنید ..."placeholderTextColor='lightgray'>
 
          </Input>
 
@@ -125,15 +126,16 @@ const logschema=yup.object({
 
          
          >
-         <Text style={{color:'#1F7A8C', fontSize:12,fontWeight:'300',width:170,marginLeft:25,marginTop:20}}>Dont have an account?Signup</Text>
+         <Text style={{color:'#1F7A8C', fontSize:12,fontWeight:'300',width:140,marginTop:15,marginLeft:235}}>هنوز ثبت نام نکرده اید؟</Text>
+         <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'bold',marginTop:5}}>ثبت نام</Text>
          
         </TouchableOpacity>
         <Button
          bordered rounded style={styles.button}
          onPress={props.handleSubmit}
         >
-         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300', alignItems:'center',width:100,marginLeft:85}
-         }>Login</Text>
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300', alignItems:'center',width:100,marginLeft:20}
+         }>ورود</Text>
         </Button>
         {/* <Button bordered success style={{position:'absolute', marginTop:90,marginHorizontal:40,width:300}}>
          <Text style={{color:'#25DECC', fontSize:17,fontWeight:'300',width:185}}>ورود ناشر</Text>
@@ -180,9 +182,9 @@ const styles = StyleSheet.create({
   },
   button:{
     position:'absolute',
-    marginTop:60,
+    marginTop:80,
     width:210,
-    backgroundColor:'white',
+    backgroundColor:'#E1E5F2',
     borderColor:'#BFDBF7',
     marginLeft:98,
     height:43
