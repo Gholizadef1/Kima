@@ -11,7 +11,7 @@ import {GoSearch} from 'react-icons/go';
 export class NavBar extends Component{
     render(){
     return(   
-<Navbar className= "navbar">
+<Navbar className= "navbar navbar-expand-lg navbar-dark{color:#ff5500;}">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
@@ -19,11 +19,11 @@ export class NavBar extends Component{
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:30}}>Topics</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:30}}>Groups</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:30}} >Quiz</Nav.Link>
+      <Nav.Link class="nav-link text-dark" href="topics" style = {{fontSize:20, padding:30}}>Topics</Nav.Link>
+      <Nav.Link class="nav-link text-dark" href="groups" style = {{fontSize:20, padding:30}}>Groups</Nav.Link>
+      <Nav.Link class="nav-link text-dark" href="quize"style = {{fontSize:20, padding:30}} >Quiz</Nav.Link>
     </Nav> 
-    <Nav className = "searchbar">  
+    <Nav className = "searchbar mx-auto">  
            <form class = "form-inline">
                    <input class = "form-control mr-lg-2"style={{width:500}} type = "search"
                    placeholder="Search in books..." aria-label= "Search">
@@ -34,7 +34,9 @@ export class NavBar extends Component{
                </form>  
                </Nav>
      
-       <a class="nav-item" href="profile" >
+       <a class="nav-link text-dark" href="profile"style = {{display: "flex", 
+  justifyContent:"space-between",
+  alignItems: "center"}} >
     <small size="50">
     user name
     </small>

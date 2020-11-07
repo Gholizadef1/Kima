@@ -5,24 +5,47 @@
     
     }
     .navbar {
-        background-color:#d68796;
+        background-color:#1f7a8c;
         display: flex;
          max-height: 60px;
-         
-          
-    
+    }
+    .nav-item{
+        color: black;
     }
     .searchbar{
         margin: 0 auto;
         width: 800px;
     }
+    @media (max-width :420px) 
+    {
+        .searchbar{
+            display:none;
+        }.nav-item{
+            display: none;
+        }
 
+    .nav-link{
+        width: 10px;
+    }
+      }
+    
     @media (max-width :768px) 
     {
         .searchbar{
             display:none;
         }
-    
+        .nav-link{
+            width: 30px;
+        }
       }
-    
+      @media (max-width :800px) 
+      {
+          .searchbar{
+              display:none;
+          }
+          .nav-link{
+            width: 30px;
+        }
+        }
+      
       
