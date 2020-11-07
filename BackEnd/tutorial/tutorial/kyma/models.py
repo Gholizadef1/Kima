@@ -13,16 +13,13 @@ class book(models.Model):
     title = models.TextField(blank=True,null=True)
 
     #big image
-    imgurl = models.ImageField(upload_to='Images/',max_length=255 ,blank=True,null=True)
+    imgurl = models.TextField(blank=True,null=True)
 
     #small image
-    smallimgurl = models.ImageField( upload_to='Images/',max_length=255 , blank=True, null=True)
+    smallimgurl = models.TextField(blank=True,null=True)
 
     #number of pages
     numpages = models.IntegerField(blank=True, null=True)
-
-    #format of book
-    formatbook = models.TextField(blank=True,null=True)
 
     #book publisher
     publisher = models.TextField(blank=True,null=True)
