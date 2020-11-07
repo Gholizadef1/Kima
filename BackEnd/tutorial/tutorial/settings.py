@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from . import quickstart
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
+#SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
+SECRET_KEY = env("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,13 +104,29 @@ DATABASES = {
    #    'HOST': 'localhost', 
    #     'PORT': '',
    # }
+   # 'default': {
+   #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+   #     'NAME': 'mydb',
+   #     'USER': 'postgres',
+   #     'PASSWORD': 'fateme9622',
+   #     'HOST': 'localhost',
+   #     'PORT': '',
+   # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+<<<<<<< HEAD
         'NAME': 'mydb',
         'USER': 'fateme',
         'PASSWORD': 'fateme9622',
         'HOST': 'localhost',
         'PORT': '',
+=======
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': env("DATABASE_HOST"),
+        'PORT': env("DATABASE_PORT"),
+>>>>>>> 47f2c344a8e7770ba356fd5485b5b0ccb0a9179b
     }
 }
 
