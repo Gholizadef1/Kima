@@ -48,26 +48,26 @@ function Slide() {
           <span className="sr-only">Loading...</span>
         </div>
       ) : (
+       <div className = "slide">
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
-              <div className="card cat ">
+              <div className="card cat">
                 <img
                   className="squere" 
-                  src={current.smallimgurl}
+                  src={current.imgurl}
                   height={56}
                   width={56}
                 />
-                <div className="card-body">
+                <small className= "title">
                   <b className="card-title1">{current.title}</b>
-                  
-                  <h5 className="card-title2">{current.author}</h5>
-                  
-                </div>
+                   <h5 className="card-title2">{current.author}</h5>
+                   </small>
               </div>
             </div>
           ))}
         </Slider>
+        </div>
       )}
     </div>
   );

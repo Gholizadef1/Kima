@@ -12,39 +12,16 @@
     margin-left: -900px;
 }
 
-.slick-list {
-    box-sizing: initial;
-    padding: 25px 0px;
-  }
+.title{
+    color: black;
+}
+
 .cat{
-    text-align: center;
+    
     padding-top: 10px;
     opacity: 1;
     width: 200px;
     
-}
-
-.card-title1{
-    color: #262626;
-    display: flex;
-    overflow: hidden;
-    font-size: 15px;
-    padding-left:20px ;
-    padding-right: 20px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 0 !important;
-}
-.card-title2{
-    color: #262626;
-    display: flex;
-    overflow: hidden;
-    font-size: 20px;
-    padding-left:20px ;
-    padding-right: 20px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 0 !important;
 }
 
 .container{
@@ -63,6 +40,48 @@
 .slick-prev:before, .slick-next:before {
     color: black !important;
 }
-.card-body{
-    height: 100px;
+.out{
+    height: 300px;
+    width: 300px;
+   
 }
+
+@media (max-width :420px) 
+{
+    .container{
+        width: 120PX;
+    }
+    .slide{
+       display: contents;
+        
+    }
+    
+  }
+
+@media (max-width :768px) 
+{
+    .container{
+        width: 220PX;
+    }
+    .slide{
+        margin-left: -230px;
+        margin-right: -230px;
+    }
+    
+  }
+  @media (max-width :800px) 
+  {
+      .container{
+        width: 220PX;
+        
+      }
+      .slide{
+        margin-left: -230px;
+        margin-right: -230px;
+    }
+    
+       
+      
+    }
+  
+  
