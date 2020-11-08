@@ -62,10 +62,10 @@ function LoginForm(props) {
             </div>
             <div className="card col-12 hv-center frontColor">
             <form className="mx-5">
-                <h1>Login</h1>
+                <h1>ورود</h1>
                 <br></br>
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputEmail1">آدرس ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -76,8 +76,8 @@ function LoginForm(props) {
                 />
                 </div>
                 
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputPassword1">Password</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputPassword1">رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -92,15 +92,15 @@ function LoginForm(props) {
                     type="submit" 
                     className="btn btn-outline-success"
                     onClick={handleSubmitClick}
-                >Submit</button>
+                >ثبت</button>
                 
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
             <div className="registerMessage">
-                <span>Dont have an account? </span>
-                <span className="loginText" onClick={() => redirectToRegister()}>Register</span> 
+                <span>قبلاً ثبت نام نکرده اید؟</span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت نام کنید</span> 
             </div>
             </div>
         </div>

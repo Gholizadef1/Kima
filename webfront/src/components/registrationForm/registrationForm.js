@@ -68,16 +68,16 @@ function RegistrationForm(props) {
     return(
         <div className="card-group" >
             <div className="card col-12 hv-center frontColor">
-                <h1>Wellcome to KIMA</h1>
-                <p>where you can search about books</p>
+                <h1>به کیما خوش آمدید</h1>
+                <p>جایی که می توایید به دنبال کتاب های مورد علاقه خود بگردید</p>
                 <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
             <div className="card col-12 hv-center frontColor">
             <form className="mx-5">
-                <h1>Register</h1>
+                <h1>ثبت نام</h1>
                 <br></br>
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputUserName">Username</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputUserName">نام کاربری</label>
                 <input type="userName" 
                        className="form-control" 
                        id="userName" 
@@ -87,8 +87,8 @@ function RegistrationForm(props) {
                 />
                 </div>
 
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputEmail1">آدرس ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -99,8 +99,8 @@ function RegistrationForm(props) {
                 
                 </div>
                 
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Password</label>
+                <div className="form-group text-right">
+                    <label htmlFor="exampleInputPassword1">رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -109,8 +109,8 @@ function RegistrationForm(props) {
                         onChange={handleChange} 
                     />
                 </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirm password</label>
+                <div className="form-group text-right">
+                    <label htmlFor="exampleInputPassword1">تأیید رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
@@ -124,15 +124,15 @@ function RegistrationForm(props) {
                     className="btn btn-outline-success"
                     onClick={handleSubmitClick}
                 >
-                    Register
+                    ثبت
                 </button>
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
             <div className="mt-2">
-                <span>Already have an account? </span>
-                <span className="loginText" onClick={() => redirectToLogin()}>Login here </span> 
+                <span>قبلاً ثبت نام کرده اید؟ </span>
+                <span className="loginText" onClick={() => redirectToLogin()}>اینجا وارد شوید</span> 
             </div>
             </div>
         </div>
