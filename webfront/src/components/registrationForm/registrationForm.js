@@ -20,12 +20,13 @@ function RegistrationForm(props) {
         }))
     }
     const sendDetailsToServer = () => {
-        if(state.userName.length && state.email.length && state.password.length) {
+        if(state.userName.length && state.email.length && state.password.length ) {
             props.showError(null);
             const payload={
                 "userName":state.userName,
                 "email":state.email,
                 "password":state.password,
+                "password2":state.confirmPassword,
             }
             axios.post(API_BASE_URL+'register', payload)
                 .then(function (response) {
