@@ -42,7 +42,7 @@ function Slide() {
   };
   return (
     <div className="container">
-      <b className="slider-brand">Random Books</b>
+      <b class="brand">Random Books</b> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>

@@ -6,11 +6,7 @@
     box-shadow: 0px 1px 30px 0px rgb(116, 116, 225) !important; 
 }
 
-.slider-brand{
-    font-size: 30px;
-    margin-bottom: 80px;
-    margin-left: -900px;
-}
+
 
 .title{
     color: black;
@@ -40,21 +36,19 @@
 .slick-prev:before, .slick-next:before {
     color: black !important;
 }
-.out{
-    height: 300px;
-    width: 300px;
-   
-}
 
+.brand{
+    margin-left: -995px;
+}
 @media (max-width :420px) 
 {
     .container{
-        width: 120PX;
+        width: 120px;
     }
     .slide{
        display: contents;
-        
-    }
+       
+    } 
     
   }
 
@@ -68,7 +62,7 @@
         margin-right: -230px;
     }
     
-  }
+    }
   @media (max-width :800px) 
   {
       .container{
@@ -79,9 +73,10 @@
         margin-left: -230px;
         margin-right: -230px;
     }
-    
-       
-      
+    .brand{
+        display: contents;
+    }
+  
     }
   
   
