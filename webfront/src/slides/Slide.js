@@ -42,12 +42,14 @@ function Slide() {
   };
   return (
     <div className="container">
-      <b class="brand">Random Books</b> 
+      <div class="brand">کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
+          <div className="sr-only">Loading...</div>
         </div>
+        
       ) : (
+        
        <div className = "slide">
         <Slider {...settings}>
           {suggestions.map((current) => (

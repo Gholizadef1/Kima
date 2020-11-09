@@ -38,7 +38,13 @@
 }
 
 .brand{
-    margin-left: -995px;
+    margin-left: 940px;
+    font-weight: bold;
+    font-size: 25px;
+}
+.sr-only{
+    margin-left: 500px;
+    color: black;
 }
 @media (max-width :420px) 
 {

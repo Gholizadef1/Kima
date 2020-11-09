@@ -9,12 +9,21 @@
         display: flex;
          max-height: 60px;
     }
-    .nav-item{
-        color: black;
-    }
+    
     .searchbar{
         margin: 0 auto;
         width: 800px;
+    }
+    .form-control{
+        padding-left: 420px;
+    }
+    .name{
+        padding: 10px;
+        color: black;
+    }
+    .nav-link{
+        width: 10px;
+        font-size: 20px;
     }
     @media (max-width :420px) 
     {
@@ -24,9 +33,6 @@
             display: none;
         }
 
-    .nav-link{
-        width: 10px;
-    }
       }
     
     @media (max-width :768px) 

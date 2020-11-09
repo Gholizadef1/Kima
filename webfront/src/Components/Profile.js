@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {Component} from "react";
+import {Redirect} from "react-router-dom";
+import { Button } from 'react-bootstrap';
+import "./Profile.css";
 
-const dank = () => {
-    return(
-        <div className="App">
-            <h1>Profile</h1>
-        </div>
-    )
+class Profile extends Component{
+    state={
+        navigate:false
+    };
+    logout = () =>{
+        localStorage.clear("token");
+        this.setState({navigate:true});
+    };
+    render(){
+        const{navigate} = this.state;
+        if(navigate){
+            return <Redirect to = "/register" push = {true}/>;
+        }
+        return  <button type="button" class="btn-default"onClick = {this.logout} >log out</button>
+    } 
+   
 }
 
-export default dank;
+export default Profile;

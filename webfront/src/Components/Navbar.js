@@ -15,31 +15,31 @@ export class NavBar extends Component{
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
-             <b class=" text-dark" style = {{fontSize:30}}>Kima</b>     
+             <b class=" text-dark" style = {{fontSize:30}}>کیما</b>     
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:30}}>Topics</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:30}}>Groups</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:30}} >Quiz</Nav.Link>
+      <Nav.Link class="nav-link" href="topics" style = {{padding:30}}>عناوین</Nav.Link>
+      <Nav.Link class="nav-link" href="groups" style = {{padding:30}}>گروه‌ها</Nav.Link>
+      <Nav.Link class="nav-link" href="quize"style = {{padding:30}} >آزمونک</Nav.Link>
     </Nav> 
     <Nav className = "searchbar">  
            <form class = "form-inline">
-                   <input class = "form-control mr-lg-2"style={{width:500}} type = "search"
-                   placeholder="Search in books..." aria-label= "Search">
+                   <input class = "form-control"style={{width:500,fontSize:20}} type = "search"
+                   placeholder="...جستجو">
                    </input>
-                   <button class = "btn btn-dark my-sm-0" type ="submit">
-                       <GoSearch/>
+                   <button class = "btn btn-dark" type ="submit">
+                       <GoSearch size="30"/>
                    </button>
                </form>  
                </Nav>
      
        <a class="nav-item" href="profile" >
-    <small size="50">
-    user name
+    <small className="name" size="50">
+      نام کاربری
     </small>
 
-    <CgProfile size="35" vertical-align='center'/> 
+    <CgProfile size="35" vertical-align='center' color="black"/> 
      </a>
     
 
