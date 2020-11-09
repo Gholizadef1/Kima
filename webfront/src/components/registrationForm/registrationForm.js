@@ -33,7 +33,7 @@ function RegistrationForm(props) {
                     if(response.data.code === 200){
                         setState(prevState => ({
                             ...prevState,
-                            'successMessage' : 'Registration successful. Redirecting to home page..'
+                            'successMessage' : 'ثبت نام موفقیت آمیز بود...'
                         }))
                         redirectToHome();
                         props.showError(null)
@@ -66,14 +66,14 @@ function RegistrationForm(props) {
         }
     }
     return(
-        <div className="card-group color3" >
-            <div className="card col-12 hv-center color3">
+        <div className="card-group color2" >
+            <div className="card col-12 hv-center color2">
                 <h1>به کیما خوش آمدی</h1>
-                <p>اینجا می توانی به دنبال کتاب های مورد علاقه خودت بگردی</p>
+                <p>در کیما می توانی به دنبال کتاب های مورد علاقه خودت بگردی</p>
                 <p>!و درباره کتاب ها گفتگو کنی</p>
                 <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
-            <div className="card col-12 hv-center color3">
+            <div className="card col-12 hv-center color2">
             <form className="mx-5">
                 <h1>ثبت نام</h1>
                 <br></br>
@@ -89,7 +89,7 @@ function RegistrationForm(props) {
                 </div>
 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputEmail1">آدرس ایمیل</label>
+                <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 

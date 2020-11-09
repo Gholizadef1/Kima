@@ -29,16 +29,16 @@ function LoginForm(props) {
                 if(response.data.code === 200){
                     setState(prevState => ({
                         ...prevState,
-                        'successMessage' : 'Login successful. Redirecting to home page..'
+                        'successMessage' : 'ورود موفقیت آمیز بود...'
                     }))
                     redirectToHome();
                     props.showError(null)
                 }
                 else if(response.data.code === 204){
-                    props.showError("Username and password do not match");
+                    props.showError("رمز یا ایمیل اشتباه است.");
                 }
                 else{
-                    props.showError("Username does not exists");
+                    props.showError("ایمیل وجود ندارد.");
                 }
             })
             .catch(function (error) {
@@ -54,7 +54,7 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
-        <div className="card-group color3" >
+        <div className="card-group color3 " >
             <div className="card col-12 hv-center color3" >
                 <h1>به کیما خوش آمدی</h1>
                 <p>"کتاب یار مهربان است"</p>
@@ -66,7 +66,7 @@ function LoginForm(props) {
                 <h1>ورود</h1>
                 <br></br>
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputEmail1">آدرس ایمیل</label>
+                <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 

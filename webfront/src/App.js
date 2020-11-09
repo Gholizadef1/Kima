@@ -36,7 +36,6 @@ function App() {
             <Route path="/home">
                <NavBar/>
                <Slide/>
- 
             </Route>
           </Switch>
         <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
