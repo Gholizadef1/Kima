@@ -27,8 +27,19 @@ class BookView(APIView):
             serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
+
+class DynamicSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search_fields', [])
+
 class BookListView(generics.ListAPIView):
     queryset = book.objects.all()
     serializer_class = bookSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title','author']
+
+
+class DynamicBookAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = book.objects.all()
+    serializer_class = bookSerializer
