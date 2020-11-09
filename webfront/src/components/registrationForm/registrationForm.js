@@ -66,13 +66,14 @@ function RegistrationForm(props) {
         }
     }
     return(
-        <div className="card-group" >
-            <div className="card col-12 hv-center frontColor">
-                <h1>به کیما خوش آمدید</h1>
-                <p>جایی که می توایید به دنبال کتاب های مورد علاقه خود بگردید</p>
-                <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
+        <div className="card-group color3" >
+            <div className="card col-12 hv-center color3">
+                <h1>به کیما خوش آمدی</h1>
+                <p>اینجا می توانی به دنبال کتاب های مورد علاقه خودت بگردی</p>
+                <p>!و درباره کتاب ها گفتگو کنی</p>
+                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
-            <div className="card col-12 hv-center frontColor">
+            <div className="card col-12 hv-center color3">
             <form className="mx-5">
                 <h1>ثبت نام</h1>
                 <br></br>
