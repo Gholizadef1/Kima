@@ -16,7 +16,7 @@ class Profile extends Component{
         if(navigate){
             return <Redirect to = "/register" push = {true}/>;
         }
-        return  <button type="button" class="btn-default"onClick = {this.logout} >log out</button>
+        return  <button type="button" class="btn-default"onClick = {this.logout} >خروج ازحساب</button>
     } 
    
 }
