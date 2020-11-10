@@ -10,7 +10,7 @@ import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
-import {NavBar} from "./Components/Navbar";
+import NavBar from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 
 function App() {

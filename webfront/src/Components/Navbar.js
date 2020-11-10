@@ -1,50 +1,34 @@
-import React, { Component } from 'react';
-//import {NavLink} from 'react-router-dom';
-import {Navbar,Nav} from 'react-bootstrap';
-import {GiBookshelf} from 'react-icons/gi';
-import {CgProfile} from 'react-icons/cg';
-import "./Navbar.css";
-import {GoSearch} from 'react-icons/go';
-//import ReactNavbar from "react-responsive-animate-navbar";
-//import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
-//import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-export class NavBar extends Component{
-    render(){
-    return(   
-<Navbar className= "navbar">
-            <h1>  
-             <GiBookshelf style = {{padding:4, height:100,width:40}}/>
-             </h1>
-             <b class=" text-dark" style = {{fontSize:30}}>کیما</b>     
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:30}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:30}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:30}} >آزمونک</Nav.Link>
-    </Nav> 
-    <Nav className = "searchbar">  
-           <form class = "form-inline">
-                   <input class = "form-control"style={{width:500,fontSize:20}} type = "search"
-                   placeholder="...جستجو">
-                   </input>
-                   <button class = "btn btn-dark" type ="submit">
-                       <GoSearch size="30"/>
-                   </button>
-               </form>  
-               </Nav>
-     
-       <a class="nav-item" href="profile" >
-    <small className="name" size="50">
-      نام کاربری
-    </small>
 
-    <CgProfile size="35" vertical-align='center' color="black"/> 
-     </a>
-    
-
-  </Navbar.Collapse>
-</Navbar>
-    );
-    }
+import AsyncSelect from 'react-select/async';
+import React, {PureComponent} from 'react';
+class Navbar extends PureComponent{
+  state = {selectedUsers:[]}
+  onChange = selectedUsers => {
+    this.setState({
+      selectedUsers: selectedUsers || []
+    })
+  }
+  loadOptions = async (inputText,callback) =>{
+    const response = await fetch(`http://localhost:3001/api/users?first_name_like=${inputText}`)
+    const json = await response.json()
+    callback (json.map(i =>({label:i.first_name,value:i.id,avatar:i.avatar})))
+  }
+  renderEveryUser = user =>{
+    return <img src= {user.avatar} alt='user avatar'/>
+  }
+  render(){
+    return(<div className = 'users'>
+      <div className = 'avatar'>
+        {this.state.selectedUsers.map(this.renderEveryUser)}
+      </div>
+      <AsyncSelect
+      isMulti
+      value = {this.state.selectedUsers}
+      onChange = {this.onChange}
+      placeholder = {'type sth...'}
+      loadOptions = {this.loadOptions}
+     />
+    </div>)
+  }
 }
+export default Navbar;
