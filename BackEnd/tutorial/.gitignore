@@ -5,7 +5,11 @@ tutorial/.env
 *.log
 *.pot
 *.pyc
-__pycache__/
+tutorial/__pycache__/
+tutorial/quickstart/__pycache__/
+tutorial/quickstart/migrations/__pycache__/
+tutorial/kyma/__pycache__/
+tutorial/kyma/migrations/__pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal

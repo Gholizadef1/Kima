@@ -104,14 +104,15 @@ DATABASES = {
    #    'HOST': 'localhost', 
    #     'PORT': '',
    # }
-   # 'default': {
-   #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-   #     'NAME': 'mydb',
-   #     'USER': 'postgres',
-   #     'PASSWORD': 'fateme9622',
-   #     'HOST': 'localhost',
-   #     'PORT': '',
-   # }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'mydb',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'fateme9622',
+    #    'HOST': 'localhost',
+    #    'PORT': '5433',
+    #}
+ 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env("DATABASE_NAME"),
@@ -120,6 +121,7 @@ DATABASES = {
         'HOST': env("DATABASE_HOST"),
         'PORT': env("DATABASE_PORT"),
     }
+
 }
 
 
