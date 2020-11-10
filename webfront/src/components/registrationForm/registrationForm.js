@@ -28,8 +28,11 @@ function RegistrationForm(props) {
                 "password":state.password,
                 "password2":state.confirmPassword,
             }
-            axios.post(API_BASE_URL+'register', JSON.stringify(payload))
+            const back= JSON.stringify(payload)
+            axios.post(API_BASE_URL+'register', back)
                 .then(function (response) {
+                    
+                    console.log(response);
                     if(response.data.code === 200){
                         setState(prevState => ({
                             ...prevState,
