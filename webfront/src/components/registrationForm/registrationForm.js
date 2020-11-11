@@ -29,11 +29,12 @@ function RegistrationForm(props) {
                 "password2":state.confirmPassword,
             }
             const back= JSON.stringify(payload)
-            axios.post(API_BASE_URL+'register', back)
+            axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
                     
                     console.log(response);
-                    if(response.data.code === 200){
+                    console.log(response.data);
+                    if(response.status=== 200){
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'Registration successful. Redirecting to home page..'
