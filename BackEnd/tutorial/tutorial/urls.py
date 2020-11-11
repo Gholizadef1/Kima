@@ -16,16 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from tutorial.kyma import views
+from .kyma import views
 from .quickstart import views
 from . import kyma
 from .quickstart.views import registration_view
 from .quickstart.views import login
+from .kyma.views import bookpage_view
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookdetail/', kyma.views.BookView.as_view()),
+    path(r'^bookview/(?P<book_id>\d+)/$',bookpage_view,name="bookview"),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
 ]

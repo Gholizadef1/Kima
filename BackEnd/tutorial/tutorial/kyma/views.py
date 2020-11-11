@@ -1,6 +1,7 @@
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
 from . serializers import bookSerializer
@@ -24,4 +25,12 @@ class BookView(APIView):
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def bookpage_view(request,book_id):
+   
+    if request.method == 'GET':
+        wantedbook=book.objects.get(id=book_id)
+        serializer=bookSerializer(wantedbook,many=True)
+        return Response(serializer.data)
 
