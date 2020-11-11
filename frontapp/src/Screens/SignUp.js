@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState,useContext} from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View,Image,ImageBackground,Alert } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
 
 import { createAppContainer } from 'react-navigation';
@@ -81,16 +81,63 @@ const signschema=yup.object({
         //    console.log(errors)
         //  }
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
-        axios.post('...',backk,{"headers":{"content-type":"application/json",}})
+        axios.post(' http://312cfbacb4a5.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
         .then(function(response){
+          // console.log(response);
+          // console.log(response.data.email);
+          // console.log(response.data);
+          // // console.log(response.data.email[0]);
+          // // console.log(response.data.email[0]==="Enter a valid email address.");
+          // console.log(response.response);
+          // response.data.email[0]
+          console.log(back.email)
+          console.log(response.status);
+          console.log(response.data.email);
+          console.log(response.data.username);
           //  console.log(response);
-           console.log(response.data.object.email[0]);
+          
+            if(response.data.email!==back.email||response.data.username!==back.username){
+            if(response.data.email!==undefined&&response.data.username!==undefined){
+              console.log(response.data.username);
+              console.log(response.data.email);
+              Alert.alert('oops','کاربری با این ایمیل و نام کاربری از قبل وجود دارد',[{
+
+            title:'فهمیدم',onPress:()=>console.log('alert closed')
+              }])
+            }
+            else if(response.data.username!==undefined){
+            Alert.alert('oops','کاربری با این نام کاربری از قبل وجود دارد',[{
+              title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            
+          }
+          else if(response.data.email!==undefined){
+            Alert.alert('oops','کاربری با این ایمیل از قبل وجود دارد',[{
+              title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+          }
+            else{
+              Alert.alert('oops','لطفا ایمیل درستی را وارد کنید',[{
+
+            title:'فهمیدم',onPress:()=>console.log('alert closed')
+              }])
+              
+            }
+            }
+             else{
+            console.log(back.email);
+            pro.navigation.navigate('Log');
+            actions.resetForm();
+          }
+          
+          
+
+           
+          //  console.log(response);
         })
         .catch(function(error){
-          //  console.log(error);
-          //  console.log(response);
-          // // console.log(params);
-          // console.log(error);
+            console.log(error);
+         
         })
 
          
@@ -111,12 +158,12 @@ const signschema=yup.object({
     //   //   console.log(res);
     //   //   console.log(res.data);
     //   // }))
-         actions.resetForm();
-         pro.navigation.navigate('Log');
+        //  actions.resetForm();
+        //  pro.navigation.navigate('Log');
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:80,marginHorizontal:20}}>
+     <View style={{alignItems:'center', marginTop:55,marginHorizontal:20}}>
 
      <Item style={styles.input}>
 
@@ -184,16 +231,20 @@ const signschema=yup.object({
        <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
        
      <CheckBox checked={check} onPress={()=>{if(check===true){setcheck(false)}else {setcheck(true)}}} 
-     color='#BFDBF7' style={{marginTop:34,marginLeft:25}} />
+     color='#BFDBF7' style={{marginTop:43,marginLeft:332,position:'absolute'}} />
             <Body>
-              <Text  style={{marginTop:20,marginLeft:0,color:'#1F7A8C',fontSize:12}}>ثبت نام به عنوان ناشر؟</Text>
+              <Text  style={{marginTop:45,marginLeft:150,color:'#1F7A8C',fontSize:12,fontWeight:'bold'}}>ثبت نام به عنوان ناشر؟</Text>
             </Body>
    
    
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
+       Title='ad'
+      
+       
+
        >
-         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300',width:80, marginLeft:30}}>ثبت نام</Text>
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'bold', marginHorizontal:60}}>ثبت نام</Text>
         </Button>
       
      </View>
@@ -235,22 +286,16 @@ const styles = StyleSheet.create({
     flexDirection:"row"
   },
   button:{
-    marginTop:20,
+    position:'absolute',
+    marginTop:30,
     width:170,
     backgroundColor:'#E1E5F2',
     borderColor:'#BFDBF7',
-    marginRight:22,
- 
-  
+    marginLeft:30
     
-   
-
-    
-    
-
   },
   input:{
-     marginTop:16,
+     marginTop:15,
      marginLeft:20,
      marginRight:20
 
