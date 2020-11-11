@@ -2,7 +2,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React ,{useState,useContext} from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity,Alert } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { Feather } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
@@ -15,6 +15,8 @@ import TabScreen from './TabScreen';
 import Axios from 'axios';
 // import {creatStore} from 'redux'
 import { Context } from '../context/Authcontext';   
+import axiosinst from '../api/axiosinst';
+import axios from 'axios';
 
 
 
@@ -35,8 +37,8 @@ const logschema=yup.object({
 
  const Login=(pro)=> {
    
-  
-  const { state, signin, clearErrorMessage } = useContext(Context);      
+  const { state, signin } = useContext(Context);
+  // const { state, signin, clearErrorMessage } = useContext(Context);      
 
      
      
@@ -57,18 +59,41 @@ const logschema=yup.object({
 
       onSubmit={(values,actions)=>{
          
-        //  window.location='home';
-        //  Axios.post(urll+'login',valuesl)
-        //  .then(function(response){
-        //    if(response.data.placeholderTextColor===200)
-        //  })
+     
+        const back={   
+          email:values.Email,
+          password:values.Password,
+        }
+         const backk=JSON.stringify(back);
+         axios.post('http://312cfbacb4a5.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+        .then(function(response){
+          console.log(response.status);
         
-        // {signin};
+          pro.navigation.navigate('mainFlow');
+         
+        
+         
+        })
+        .catch(function(error){
+          Alert.alert('oops','ایمیل و یا رمز عبور اشتباه است',[{
+            
 
-         pro.navigation.navigate('mainFlow');
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+        console.log(error);
+        console.log(error.status);
+         
+        })
+        // axios.post('http://127.0.0.1:8000/',{values});
+      // .then(res => {
+      //   console.log(res);
+      //   console.log(res.data);
+      // })
+        //  pro.navigation.navigate('mainFlow');
         
-         actions.resetForm();
+        //  actions.resetForm();
          console.log(values);
+
 
       }}
      >
@@ -126,15 +151,15 @@ const logschema=yup.object({
 
          
          >
-         <Text style={{color:'#1F7A8C', fontSize:12,fontWeight:'300',width:140,marginTop:15,marginLeft:235}}>هنوز ثبت نام نکرده اید؟</Text>
-         <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'bold',marginTop:5}}>ثبت نام</Text>
+         <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'300',width:140,marginTop:15,marginLeft:235,position:'absolute'}}>هنوز ثبت نام نکرده اید؟</Text>
+         <Text style={{color:'#1F7A8C', fontSize:14,fontWeight:'bold',marginTop:15,marginLeft:205}}>ثبت نام</Text>
          
         </TouchableOpacity>
         <Button
          bordered rounded style={styles.button}
          onPress={props.handleSubmit}
         >
-         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300', alignItems:'center',width:100,marginLeft:20}
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:88}
          }>ورود</Text>
         </Button>
         {/* <Button bordered success style={{position:'absolute', marginTop:90,marginHorizontal:40,width:300}}>
@@ -212,17 +237,6 @@ const styles = StyleSheet.create({
   }
 });
 export default Login;
-
-
-
-
-
-
-
-
-
-
-
 
 
 
