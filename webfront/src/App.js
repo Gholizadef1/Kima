@@ -10,7 +10,7 @@ import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
-import NavBar from "./Components/Navbar";
+import UsersList from "./Components/UsersList";
 //import *as ReactBootstrap from "react-bootstrap";
 
 function App() {
@@ -33,7 +33,8 @@ function App() {
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="/home">
-               <NavBar/>
+              
+               <UsersList/>
                <Slide/>
             </Route>
             <Route path="/profile">
