@@ -34,7 +34,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['312cfbacb4a5.ngrok.io']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'tutorial.kyma',
     'tutorial.quickstart',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'corsheaders'
 ]
 
 # REST_FRAMEWORK = {
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -172,3 +174,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',]
 }
 AUTH_USER_MODEL = 'quickstart.Account'
+CORS_ORIGIN_ALLOW_ALL=True

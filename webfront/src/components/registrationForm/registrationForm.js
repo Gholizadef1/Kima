@@ -33,7 +33,8 @@ function RegistrationForm(props) {
                 .then(function (response) {
                     
                     console.log(response);
-                    if(response.data.code === 200){
+                    console.log(response.data);
+                    if(response.status=== 200){
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'Registration successful. Redirecting to home page..'
