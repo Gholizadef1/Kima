@@ -13,7 +13,8 @@ import * as yup from 'yup';
 import { log } from 'react-native-reanimated';
 import { Context as Authcontext } from '../context/Authcontext';  
 
-
+import axios from 'axios';
+import axiosinst from '../api/axiosinst';
 
 const signschema=yup.object({
 
@@ -63,12 +64,55 @@ const signschema=yup.object({
       initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
       validationSchema={signschema}
       
+        onSubmit={(values,actions)=>{
+        //  signup(values);
+        const back={
+          username:values.Username,
+          email:values.Email,
+          password:values.Password,
+          password2:values.repeatPassword,
+        
+        }
+         const backk=JSON.stringify(back);
+        // try{
+        //  const response=await axios.post('http://127.0.0.1:8000/register',JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'}))
+        //  }
+        //  catch(errors){
+        //    console.log(errors)
+        //  }
+        const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
+        axios.post('...',backk,{"headers":{"content-type":"application/json",}})
+        .then(function(response){
+          //  console.log(response);
+           console.log(response.data.object.email[0]);
+        })
+        .catch(function(error){
+          //  console.log(error);
+          //  console.log(response);
+          // // console.log(params);
+          // console.log(error);
+        })
 
-      onSubmit={(values,actions)=>{
-         signup(values);
+         
+        //  console.log('hi'); 
+        
+          // let res=await axiosinst.post('/register',values)
+        
+    //     axios.post(' http://127.0.0.1:8000/register',backk)
+    //   .then((response) => {
+        
+    // console.log(response);
+    // }, (error) => {
+    // console.log(error);
+    //   });
+    //     // await axios.post('http://127.0.0.1:8000/register',backk)
+       
+    //   // .then(res => {
+    //   //   console.log(res);
+    //   //   console.log(res.data);
+    //   // }))
          actions.resetForm();
          pro.navigation.navigate('Log');
-
       }}
      >
      {(props)=>(
@@ -80,7 +124,7 @@ const signschema=yup.object({
          onChangeText={props.handleChange('Username')}
          onBlur={props.handleBlur('Username')}
          value={props.values.Username}
-         placeholder="Name..." placeholderTextColor='lightgray'>
+         placeholder="نام خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
          <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
         
@@ -97,7 +141,7 @@ const signschema=yup.object({
            onChangeText={props.handleChange('Email')}
            value={props.values.Email}
            onBlur={props.handleBlur('Email')}
-         placeholder="Email..." placeholderTextColor='lightgray'>
+         placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
         
          </Input>
          <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
@@ -114,7 +158,7 @@ const signschema=yup.object({
          onChangeText={props.handleChange('Password')}
          value={props.values.Password}
          onBlur={props.handleBlur('Password')}
-         placeholder="Password" placeholderTextColor='lightgray'>
+         placeholder="رمز خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
          <AntDesign name="lock" size={24} color="#BFDBF7"  style={styles.Icon}/>
        </Item>
@@ -129,7 +173,7 @@ const signschema=yup.object({
           onChangeText={props.handleChange('repeatPassword')}
           value={props.values.repeatPassword}
           onBlur={props.handleBlur('repeatPassword')}
-          placeholder="Repeat your password" placeholderTextColor='lightgray'>
+          placeholder="رمز خود را تکرار کنید" placeholderTextColor='lightgray'>
          </Input>
          <Feather name="check" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
@@ -142,14 +186,14 @@ const signschema=yup.object({
      <CheckBox checked={check} onPress={()=>{if(check===true){setcheck(false)}else {setcheck(true)}}} 
      color='#BFDBF7' style={{marginTop:34,marginLeft:25}} />
             <Body>
-              <Text  style={{marginTop:20,marginLeft:0,color:'#1F7A8C',fontSize:12}}>sign up as a publisher?</Text>
+              <Text  style={{marginTop:20,marginLeft:0,color:'#1F7A8C',fontSize:12}}>ثبت نام به عنوان ناشر؟</Text>
             </Body>
    
    
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300',width:80, marginLeft:58}}>Signup</Text>
+         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'300',width:80, marginLeft:30}}>ثبت نام</Text>
         </Button>
       
      </View>
@@ -193,7 +237,7 @@ const styles = StyleSheet.create({
   button:{
     marginTop:20,
     width:170,
-    backgroundColor:'white',
+    backgroundColor:'#E1E5F2',
     borderColor:'#BFDBF7',
     marginRight:22,
  
