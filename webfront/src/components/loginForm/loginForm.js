@@ -26,7 +26,7 @@ function LoginForm(props) {
         }
         axios.post(API_BASE_URL+'login', payload)
             .then(function (response) {
-                if(response.data.code === 200){
+                if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
                         'successMessage' : 'ورود موفقیت آمیز بود...'
@@ -36,6 +36,7 @@ function LoginForm(props) {
                 }
                 else if(response.data.code === 404){
                     props.showError("رمز یا ایمیل اشتباه است.");
+
                 }
                 else{
                     props.showError("ایمیل وجود ندارد.");

@@ -23,14 +23,18 @@ function RegistrationForm(props) {
         if(state.userName.length && state.email.length && state.password.length ) {
             props.showError(null);
             const payload={
-                "userName":state.userName,
+                "username":state.userName,
                 "email":state.email,
                 "password":state.password,
                 "password2":state.confirmPassword,
             }
-            axios.post(API_BASE_URL+'register', payload)
+            const back= JSON.stringify(payload)
+            axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    if(response.data.code === 200){
+                    
+                    console.log(response);
+                    console.log(response.data);
+                    if(response.status=== 200){
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'ثبت نام موفقیت آمیز بود...'
