@@ -1,4 +1,5 @@
 
+
 import { StatusBar } from 'expo-status-bar';
 import React ,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity,Alert } from 'react-native';
@@ -59,39 +60,39 @@ const logschema=yup.object({
       onSubmit={(values,actions)=>{
         pro.navigation.navigate('mainFlow');
      
-        // const back={   
-        //   email:values.Email,
-        //   password:values.Password,
-        // }
-        //  const backk=JSON.stringify(back);
-        //  axios.post('http://312cfbacb4a5.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
-        // .then(function(response){
-        //   console.log(response.status);
+      //   const back={   
+      //     email:values.Email,
+      //     password:values.Password,
+      //   }
+      //    const backk=JSON.stringify(back);
+      //    axios.post('http://312cfbacb4a5.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+      //   .then(function(response){
+      //     console.log(response.status);
         
-        //   pro.navigation.navigate('mainFlow');
+      //     pro.navigation.navigate('mainFlow');
          
         
          
-        // })
-        // .catch(function(error){
-        //   Alert.alert('oops','ایمیل و یا رمز عبور اشتباه است',[{
+      //   })
+      //   .catch(function(error){
+      //     Alert.alert('oops','ایمیل و یا رمز عبور اشتباه است',[{
             
 
-        //     Title:'فهمیدم',onPress:()=>console.log('alert closed')
-        //     }])
-        // console.log(error);
-        // console.log(error.status);
+      //       Title:'فهمیدم',onPress:()=>console.log('alert closed')
+      //       }])
+      //   console.log(error);
+      //   console.log(error.status);
          
-        // })
-        // axios.post('http://127.0.0.1:8000/',{values});
-      // .then(res => {
-      //   console.log(res);
-      //   console.log(res.data);
-      // })
-        //  pro.navigation.navigate('mainFlow');
+      //   })
+      //   // axios.post('http://127.0.0.1:8000/',{values});
+      // // .then(res => {
+      // //   console.log(res);
+      // //   console.log(res.data);
+      // // })
+      //   //  pro.navigation.navigate('mainFlow');
         
-        //  actions.resetForm();
-         console.log(values);
+      //   //  actions.resetForm();
+      //    console.log(values);
 
 
       }}
@@ -236,19 +237,6 @@ const styles = StyleSheet.create({
   }
 });
 export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
