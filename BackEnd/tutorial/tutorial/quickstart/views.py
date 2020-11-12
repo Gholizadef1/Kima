@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-#from .serializers import SignUpUserSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -14,7 +13,6 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-#from .models import SignUpUser
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -45,27 +43,6 @@ def registration_view(request):
         return Response(serializer.data)
 
 
-
-"""
-class SignUp_view(APIView):
-
-   def get(self,request):
-        Users=SignUpUser.objects.all()
-        serializer=SignUpUserSerializer(Users,many=True)
-        return Response(serializer.data)
-
-
-   def post(self,request):
-        serializer=SignUpUserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
-
-#class login_view(APIView):
-    #authentication_classes = [SessionAuthentication, BasicAuthentication]
-   # permission_classes = [IsAuthenticated]
-
-"""
 
 @api_view(["POST"])
 @permission_classes([AllowAny],)

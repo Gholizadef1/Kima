@@ -21,13 +21,13 @@ from .quickstart import views
 from . import kyma
 from .quickstart.views import registration_view
 from .quickstart.views import login
-from .kyma.views import bookpage_view
+from .kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookdetail/', kyma.views.BookView.as_view()),
-    path(r'^bookview/(?P<book_id>\d+)/$',bookpage_view,name="bookview"),
+    path('bookview/<int:pk>',kyma.views.BookViewPage.as_view()),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
 ]

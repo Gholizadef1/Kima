@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
 from . serializers import bookSerializer
+from django.shortcuts import render, get_object_or_404, redirect
 
 class BookView(APIView):
     """
@@ -16,7 +17,7 @@ class BookView(APIView):
         books = book.objects.all()
         serializer = bookSerializer(books,many=True)
         return Response(serializer.data)
-    
+ 
     parser_classes = [JSONParser]
 
     def post(self, request, format=None):
@@ -26,11 +27,16 @@ class BookView(APIView):
             serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
-@api_view(['GET'])
-def bookpage_view(request,book_id):
-   
-    if request.method == 'GET':
-        wantedbook=book.objects.get(id=book_id)
-        serializer=bookSerializer(wantedbook,many=True)
-        return Response(serializer.data)
 
+class BookViewPage(APIView):
+    
+    def get_object(self, pk):
+        try:
+            return book.objects.get(pk=pk)
+        except book.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        wantedbook = self.get_object(pk)
+        serializer = bookSerializer(wantedbook)
+        return Response(serializer.data)
