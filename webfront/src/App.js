@@ -22,7 +22,7 @@ function App() {
       <div className="App" >
         
         <div >
-          
+          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           <Switch>
             <Route path="/" exact={true}>
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -38,7 +38,7 @@ function App() {
                <Slide/>
             </Route>
           </Switch>
-        <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+        
       </div>
     </div>
     </Router>

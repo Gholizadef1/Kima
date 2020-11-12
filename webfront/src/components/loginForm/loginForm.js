@@ -34,7 +34,7 @@ function LoginForm(props) {
                     redirectToHome();
                     props.showError(null)
                 }
-                else if(response.data.code === 204){
+                else if(response.data.code === 404){
                     props.showError("رمز یا ایمیل اشتباه است.");
                 }
                 else{
@@ -54,15 +54,15 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
-        <div className="card-group color3 " >
-            <div className="card col-12 hv-center color3" >
+        <div className="card-group color2 " >
+            <div className="card col-12 hv-center color2" >
                 <h1>به کیما خوش آمدی</h1>
                 <p>"کتاب یار مهربان است"</p>
                 <p>خوشحالیم امروز میبینیمت</p>
                 <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
-            <div className="card col-12 hv-center color3">
-            <form className="mx-5">
+            <div className="card col-12 hv-center color2">
+            <form className="mx-5 ">
                 <h1>ورود</h1>
                 <br></br>
                 <div className="form-group text-right">
