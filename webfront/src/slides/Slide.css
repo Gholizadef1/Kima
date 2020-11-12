@@ -1,7 +1,7 @@
-.body{
+/*.body{
 
     background: radial-gradient#e5e5e5;
-}
+}*/
 .cat:hover{
     box-shadow: 0px 1px 30px 0px rgb(41, 125, 228) !important; 
 }
@@ -21,7 +21,6 @@
     padding-top: 10px;
     opacity: 1;
     width: 200px;
-    color: white;
 }
 card-text{
     margin-left: -50px;

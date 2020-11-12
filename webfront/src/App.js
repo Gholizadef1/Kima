@@ -1,5 +1,5 @@
 import React ,{useState}  from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import RegistrationForm from './components/registrationForm/registrationForm';
 import {
@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
-import Home from './components/home/home'; 
+//import Home from './components/home/home'; 
 import Slide from './slides/Slide';
 import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
@@ -22,7 +22,7 @@ function App() {
       <div className="App" >
         
         <div >
-          
+          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           <Switch>
             <Route path="/" exact={true}>
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -36,10 +36,9 @@ function App() {
             <Route path="/home">
                <NavBar/>
                <Slide/>
- 
             </Route>
           </Switch>
-        <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+        
       </div>
     </div>
     </Router>

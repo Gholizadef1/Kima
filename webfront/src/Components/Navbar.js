@@ -15,26 +15,26 @@ export class NavBar extends Component{
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
-             <b class=" text-dark" style = {{fontSize:30}}>Kima</b>     
+             <b className=" text-dark" style = {{fontSize:30}}>Kima</b>     
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link class="nav-link text-dark" href="topics" style = {{fontSize:20, padding:30}}>Topics</Nav.Link>
-      <Nav.Link class="nav-link text-dark" href="groups" style = {{fontSize:20, padding:30}}>Groups</Nav.Link>
-      <Nav.Link class="nav-link text-dark" href="quize"style = {{fontSize:20, padding:30}} >Quiz</Nav.Link>
+      <Nav.Link className="nav-link text-dark" href="topics" style = {{fontSize:20, padding:30}}>Topics</Nav.Link>
+      <Nav.Link className="nav-link text-dark" href="groups" style = {{fontSize:20, padding:30}}>Groups</Nav.Link>
+      <Nav.Link className="nav-link text-dark" href="quize"style = {{fontSize:20, padding:30}} >Quiz</Nav.Link>
     </Nav> 
     <Nav className = "searchbar mx-auto">  
-           <form class = "form-inline">
-                   <input class = "form-control mr-lg-2"style={{width:500}} type = "search"
+           <form className = "form-inline">
+                   <input className = "form-control mr-lg-2"style={{width:500}} type = "search"
                    placeholder="Search in books..." aria-label= "Search">
                    </input>
-                   <button class = "btn btn-dark my-sm-0" type ="submit">
+                   <button className = "btn btn-dark my-sm-0" type ="submit">
                        <GoSearch/>
                    </button>
                </form>  
                </Nav>
      
-       <a class="nav-link text-dark" href="profile"style = {{display: "flex", 
+       <a className="nav-link text-dark" href="profile"style = {{display: "flex", 
   justifyContent:"space-between",
   alignItems: "center"}} >
     <small size="50">

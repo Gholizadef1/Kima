@@ -29,16 +29,17 @@ function LoginForm(props) {
                 if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
-                        'successMessage' : 'Login successful. Redirecting to home page..'
+                        'successMessage' : 'ورود موفقیت آمیز بود...'
                     }))
                     redirectToHome();
                     props.showError(null)
                 }
-                else if(response.status=== 404){
-                    props.showError("Username and password do not match");
+                else if(response.data.code === 404){
+                    props.showError("رمز یا ایمیل اشتباه است.");
+
                 }
                 else{
-                    props.showError("Username does not exists");
+                    props.showError("ایمیل وجود ندارد.");
                 }
             })
             .catch(function (error) {
@@ -54,18 +55,19 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
-        <div className="card-group" >
-            <div className="card col-12 hv-center frontColor">
-                <h1>Wellcome back to KIMA</h1>
-                <p>good to see you again</p>
-                <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
+        <div className="card-group color2 " >
+            <div className="card col-12 hv-center color2" >
+                <h1>به کیما خوش آمدی</h1>
+                <p>"کتاب یار مهربان است"</p>
+                <p>خوشحالیم امروز میبینیمت</p>
+                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
-            <div className="card col-12 hv-center frontColor">
-            <form className="mx-5">
-                <h1>Login</h1>
+            <div className="card col-12 hv-center color2">
+            <form className="mx-5 ">
+                <h1>ورود</h1>
                 <br></br>
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -76,8 +78,8 @@ function LoginForm(props) {
                 />
                 </div>
                 
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputPassword1">Password</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputPassword1">رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -92,15 +94,15 @@ function LoginForm(props) {
                     type="submit" 
                     className="btn btn-outline-success"
                     onClick={handleSubmitClick}
-                >Submit</button>
+                >ثبت</button>
                 
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
             <div className="registerMessage">
-                <span>Dont have an account? </span>
-                <span className="loginText" onClick={() => redirectToRegister()}>Register</span> 
+                <span>قبلاً ثبت نام نکرده اید؟</span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت نام کنید</span> 
             </div>
             </div>
         </div>
