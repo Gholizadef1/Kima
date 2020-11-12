@@ -6,11 +6,14 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
+import {HelpingNavbar} from"./Components/HelpingNavbar";
 import UsersList from "./Components/UsersList";
+import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 
 function App() {
@@ -33,9 +36,12 @@ function App() {
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="/home">
-              
-               <UsersList/>
+               <NavBar/>
                <Slide/>
+            </Route>
+            <Route path="/search">
+             
+              <HelpingNavbar/>
             </Route>
             <Route path="/profile">
               <Profile/>
