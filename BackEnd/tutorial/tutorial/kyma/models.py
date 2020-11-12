@@ -15,11 +15,14 @@ class book(models.Model):
     #big image
     imgurl = models.TextField(blank=True,null=True)
 
+
     #small image
-    smallimgurl = models.TextField(blank=True,null=True)
+    smallimgurl =models.TextField(blank=True,null=True)
+
 
     #number of pages
     numpages = models.IntegerField(blank=True, null=True)
+
 
     #book publisher
     publisher = models.TextField(blank=True,null=True)

@@ -8,16 +8,10 @@ import { AntDesign } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
-// import axios from 'axios';
 import Home from './Home';
 import TabScreen from './TabScreen';
 import Axios from 'axios';
-// import {creatStore} from 'redux'
 import { Context } from '../context/Authcontext';   
-
-
-
-
 
 const logschema=yup.object({
 
@@ -33,15 +27,9 @@ const logschema=yup.object({
 })
 
  const Login=(pro)=> {
-   
-  
+     
   const { state, signin, clearErrorMessage } = useContext(Context);      
-
-     
-     
   return (
-    
-      // <navigationconta>
     
      <Container backgroundColor='white'>
      

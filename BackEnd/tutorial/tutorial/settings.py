@@ -26,7 +26,7 @@ SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['668ae353e791.ngrok.io']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'tutorial.kyma',
+    'corsheaders',
     'tutorial.quickstart',
     'rest_framework.authtoken'
 ]
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'tutorial.urls'
@@ -90,11 +92,11 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'hope', 
-       'USER': 'postgres', 
-       'PASSWORD': 'melika55540430',
+       'NAME': 'database1', 
+       'USER': 'mydb1', 
+       'PASSWORD': '2700mdk',
       'HOST': 'localhost', 
-       'PORT': '',
+       'PORT': '5433',
    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -124,8 +126,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
-
+# CORS_ALLOWED_ORIGINS = [
+# "http://localhost:3000/",
+# "http://localhost:3000/home",
+# ]
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
