@@ -132,18 +132,12 @@ const logschema=yup.object({
             
        )}
 
-</Formik>
-   
-     
-     
-    
-    
+</Formik>   
      <StatusBar backgroundColor='#BFDBF7' style='light' />
     </Container>
    
   );
 }
-
 const styles = StyleSheet.create({
   // container: {
   //   flex: 1,
