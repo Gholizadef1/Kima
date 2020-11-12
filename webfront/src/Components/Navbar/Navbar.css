@@ -1,0 +1,28 @@
+
+.navbar-brand{
+
+    font-size: 500px;
+    
+    }
+    .navbar {
+        background-color:#1f7a8c;
+        display: flex;
+         max-height: 60px;
+         
+          
+    
+    }
+    .searchbar{
+        margin: 0 auto;
+        width: 800px;
+    }
+
+    @media (max-width :768px) 
+    {
+        .searchbar{
+            display:none;
+        }
+    
+      }
+    
+      

@@ -13,13 +13,58 @@
         margin: 0 auto;
         width: 800px;
     }
-
+    .nav-link{
+        color: black;
+        font-size: 20px;
+    }
+.nav-item{
+    color: black;
+}
+.nav-item:hover{
+    color: black;
+}
     @media (max-width :768px) 
     {
+        .nav-item{
+            display: none;
+        }
+        .nav-link{
+            font-size: small;
+        }
         .searchbar{
             display:none;
         }
     
       }
+      @media (max-width :414px) 
+    {
+        .nav-item{
+            display: none;
+        }
+        .username small{
+            display: none;
+        }
+        .nav-link{
+            width: 0px;
+         
+        }
+        .searchbar{
+            display:none;
+        }
+    
+      }
+      @media (max-width :800px) 
+      { .nav-link{
+            font-size: small;
+        }
+        .nav-item{
+            display: none;
+        }
+          .searchbar{
+              display:none;
+          }
+      
+        }
+
     
       

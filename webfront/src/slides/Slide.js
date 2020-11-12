@@ -64,6 +64,9 @@ function Slide() {
                   <small className="card-text text-sm-center text-muted">
                     In your contacts
                   </small>
+                  
+                 
+                  
                 </div>
               </div>
             </div>
