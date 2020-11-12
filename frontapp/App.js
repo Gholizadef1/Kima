@@ -8,7 +8,7 @@ import HomeScreen from './src/Screens/HomeScreen';
 import Login from './src/Screens/Login';
 import SignUp from './src/Screens/SignUp';
 import Home from './src/Screens/Home';
-import Profie from './src/Screens/Profile'
+import Profie from './src/Screens/Profile';
 import Search from './src/Screens/Search'
 import Mybooks from './src/Screens/Mybooks'
 import TabScreen from './src/Screens/TabScreen'
