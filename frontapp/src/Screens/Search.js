@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
@@ -19,13 +19,20 @@ const Search = () => {
     const [submit,setSubmit]=useState(false);
     // const [errormessage,setErrormessage]=useState('');
     // let sumbit =false;
-
-    const searchapi=async()=>{
+    const serchitem='';
+    const searchapi=async searchTerm=>{
         try{
+        // if(term===undefined)
+        // searchitem=searchTerm;
+        // else
+        // serchitem=term;
+
+        
         const response = await axiosinst.get('/dyanmicsearch/',{
             params:{
-                search:term,
-                search_fields:'author'
+                search:searchTerm,
+                search_fields:'author',
+               
             }
         })
         setResults(response.data.results);
@@ -41,12 +48,22 @@ const Search = () => {
     }
     }
 
-
+    useEffect(()=>{
+        const tempresponse=searchapi('احمد ')
+        .then(
+        
+        console.log(tempresponse)
+        )
+        
+     
+     
+        
+    },[])
     return(
     
       <Container>
         <Text style={{marginTop:100,position:'absolute'}}>Hiii</Text>
-        <Searchbar style={{position:'absoloute'}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={searchapi} />
+        <Searchbar style={{position:'absoloute'}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>searchapi(term)} />
         <Text style={{position:'absolute',marginTop:200,marginLeft:200,marginTop:112}}>با اطلاعات شما {results.length} کتاب پیدا شدند</Text>
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
         </Container>
