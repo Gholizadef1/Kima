@@ -4,8 +4,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons'; 
 import {Container,Header,Title,Form,Item,Input,Button, Icon, Content} from 'native-base';
 import { StatusBar } from 'expo-status-bar';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Searchbar = ({term,onTermChange,onTermsubmit}) => {
+const Searchbar = ({term,onTermChange,onTermsubmit,onStartEditing}) => {
     return(
 
        <View>
@@ -17,8 +18,12 @@ const Searchbar = ({term,onTermChange,onTermsubmit}) => {
             placeholder='نام کتاب نویسنده ...'style={styles.Icontext}
             value={term}
             onChangeText={newterm=>onTermChange(newterm)}
-            onEndEditing={onTermsubmit}
+            onEndEditing={onTermsubmit&&onStartEditing(false)}
+            onTouchStart={onStartEditing(true)}
             />
+           
+            <AntDesign name="close" size={24} onPress={()=>{onStartEditing(false)}} color="black" style={{position:'absolute',marginLeft:10}} />
+         
 
 
             </Item>

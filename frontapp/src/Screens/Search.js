@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,Alert } from 'react-native';
+import { StyleSheet, Text, View,Alert} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
@@ -94,34 +94,17 @@ const Search = () => {
 
     useEffect(()=>{
         try{
-        const tempresponse=searchapi('احمد')
-        .then(
-        
-        console.log(start)&&console.log(tempresponse)&&console.log(authors)
-      
-        
-        )
-        const authorresponse=searchauthorapi('احمذ').then(
-            setAuthors(authorresponse.data.results)
-        )
-        const titleresponse=searchtitleapi('احمد').then(
-            setTitles(titleresponse.data.results)
-        )
+            searchapi('احمد');
+            searchauthorapi('احمد');
+            searchtitleapi('احمد');
         
         }
         catch(err){
             console.log(err);
         }
-      
-        
-     
-     
-        
     },[])
-  
-    var authorlistresult=authors;
-    var titlelistresult=titles;
-    const tempresponse=[authors];
+  //mikhastam inja start bashe vali warning midad va nafahmidam chera
+    
     return(
     
       <View style={{backgroundColor:'white',height:1000}}>
