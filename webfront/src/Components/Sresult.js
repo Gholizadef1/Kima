@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 
 function Sresult(){
     const [suggestions, setSuggestions] = useState([]);
-
     useEffect(() => {
       fetch(`http://127.0.0.1:8000/bookdetail/`)
         .then((res) => res.json())

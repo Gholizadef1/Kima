@@ -16,8 +16,7 @@ export class HelpingNavbar extends Component{
   
     render(){
     return(   
-      <div class="card">
-      <div class="card-header">
+   
 <Navbar className= "navbar">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
@@ -34,7 +33,6 @@ export class HelpingNavbar extends Component{
     <small className="name1" size="60">
       خانه
     </small>
-    
 <FaHome size="30" color="black"/>
 
   </a>
@@ -44,8 +42,7 @@ export class HelpingNavbar extends Component{
 
   </Navbar.Collapse>
 </Navbar>
-</div>
-</div>
+
     );
     }
 }

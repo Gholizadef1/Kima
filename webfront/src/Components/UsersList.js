@@ -20,13 +20,11 @@ const UsersList = () =>{
   return(
   
     <div className="searchbar">
-       
     <input type ="text" 
     placeholder="...جستجو" 
     value={img}
     onChange={inputEvent}/>
    {img === ""? null: <Sresult name={img}/>}
-   
     </div>
     
   );
