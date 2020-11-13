@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,Alert} from 'react-native';
+import { StyleSheet, Text, View,Alert,Image} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
+//searchbar
 import { StatusBar } from 'expo-status-bar';
 import Searchbar from '../components/Searchbar';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -17,14 +18,14 @@ import ResultsList from '../components/ResultsList';
 const Search = () => {
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
-    const [start,setStart]=useState(false);
+    // const [start,setStart]=useState(false);
     const [authors,setAuthors]=useState([]);
     const[titles,setTitles]=useState([]);
     // const [errormessage,setErrormessage]=useState('');
     // let sumbit =false;
     const serchitem='';
-    if(term===undefined)
-    setStart(false)
+    // if(term===undefined)
+    // setStart(false)
     const searchapi=async (searchTerm)=>{
         try{
         const response = await axiosinst.get('/dyanmicsearch/',{
@@ -91,34 +92,39 @@ const Search = () => {
                 }])
     }
     }
-
+    const [exitsearch,setExitsearch]=useState([]);
     useEffect(()=>{
-        try{
-            searchapi('احمد');
-            searchauthorapi('احمد');
-            searchtitleapi('احمد');
-        
-        }
-        catch(err){
-            console.log(err);
-        }
+            searchapi('احمد')&&
+            searchauthorapi('احمد')&&
+            searchtitleapi('احمد')  
     },[])
   //mikhastam inja start bashe vali warning midad va nafahmidam chera
     
     return(
     
       <View style={{backgroundColor:'white',height:1000}}>
-       
-        <Searchbar style={{}} term={term} onStartEditing={(val)=>setStart(val)} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}} />
-        <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length} کتاب پیدا شدند</Text>
+     
+        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
+        <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} />
+        <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length+titles.length} کتاب پیدا شدند</Text>
         <ResultsList 
         listresult={authors}
         stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
-       
+          <Image
+         source={require('../../assets/line3.png')}
+         style={{marginTop:30,marginHorizontal:10,width:390,height:1}}
+         ></Image>
         <ResultsList 
         listresult={titles}
         stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
+         {/* <Image
+         source={require('../../assets/kima6.jpeg')}
+         style={{width:100,height:100,marginTop:700,marginLeft:40,position:'absolute'}}
+         >
+             
+         </Image>
+         <Text style={{marginHorizontal:50,marginTop:750,width:220,marginLeft:130,position:'absolute',fontWeight:'bold',fontSize:14}} >با کیما کتاب مورد علاقه ات را پیدا کن</Text> */}
         </View>
       
        

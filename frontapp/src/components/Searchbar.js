@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View ,TextInput} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
@@ -6,10 +6,13 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon, Content} from 'nati
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Searchbar = ({term,onTermChange,onTermsubmit,onStartEditing}) => {
+const Searchbar = ({term,onTermChange,onTermsubmit}) => {
+  const [showCancel, setShowCancel] = useState(true);
+
     return(
 
        <View>
+      
          <Item rounded style={styles.backgroundd}>
              <Feather name="search" size={24} color="black"style={styles.Icon} />
             <Input 
@@ -17,14 +20,19 @@ const Searchbar = ({term,onTermChange,onTermsubmit,onStartEditing}) => {
             autoCorrect={false}
             placeholder='نام کتاب نویسنده ...'style={styles.Icontext}
             value={term}
-            onChangeText={newterm=>onTermChange(newterm)}
-            onEndEditing={onTermsubmit&&onStartEditing(false)}
-            onTouchStart={onStartEditing(true)}
+            onChangeText={newterm=>{onTermChange(newterm)}}
+            onEndEditing={onTermsubmit}
+            
             />
            
-            <AntDesign name="close" size={24} onPress={()=>{onStartEditing(false)}} color="black" style={{position:'absolute',marginLeft:10}} />
+            
+           <Button transparent light style={{position:'absolute'}}
+           onPress={()=>{console.log(prees)}}
+           >
+           
+           {showCancel? <AntDesign name="close" size={24}  color="black" style={{position:'absolute',marginLeft:10,marginTop:10}} />:null}
          
-
+           </Button>
 
             </Item>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
