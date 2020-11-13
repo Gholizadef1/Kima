@@ -13,25 +13,26 @@ import axios from 'axios';
 import { sub } from 'react-native-reanimated';
 import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
+
 const Search = () => {
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
-    const [submit,setSubmit]=useState(false);
+    const [start,setStart]=useState(false);
+    const [authors,setAuthors]=useState([]);
+    const[titles,setTitles]=useState([]);
     // const [errormessage,setErrormessage]=useState('');
     // let sumbit =false;
     const serchitem='';
-    const searchapi=async searchTerm=>{
+    if(term===undefined)
+    setStart(false)
+    const searchapi=async (searchTerm)=>{
         try{
-        // if(term===undefined)
-        // searchitem=searchTerm;
-        // else
-        // serchitem=term;
-
-        
         const response = await axiosinst.get('/dyanmicsearch/',{
             params:{
                 search:searchTerm,
+                //nemidonam chetori ham title va ham author ro behesh bedam
                 search_fields:'author',
+                
                
             }
         })
@@ -39,7 +40,50 @@ const Search = () => {
     }
     catch(err){
         console.log('error');
-        //  setErrormessage('سیمامون به هم گیر کرده صبر داشته باش :)')
+        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+            
+
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
+
+    const searchauthorapi=async (searchTerm)=>{
+        try{
+        const response = await axiosinst.get('/dyanmicsearch/',{
+            params:{
+                search:searchTerm,
+                search_fields:'author',
+               
+               
+            }
+        })
+        setAuthors(response.data.results);
+    }
+    catch(err){
+        console.log('error');
+        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+            
+
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
+
+    const searchtitleapi=async (searchTerm)=>{
+        try{
+        const response = await axiosinst.get('/dyanmicsearch/',{
+            params:{
+                search:searchTerm,
+                search_fields:'title',
+               
+               
+            }
+        })
+        setTitles(response.data.results);
+    }
+    catch(err){
+        console.log('error');
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
 
@@ -49,24 +93,48 @@ const Search = () => {
     }
 
     useEffect(()=>{
-        const tempresponse=searchapi('احمد ')
+        try{
+        const tempresponse=searchapi('احمد')
         .then(
         
-        console.log(tempresponse)
+        console.log(start)&&console.log(tempresponse)&&console.log(authors)
+      
+        
         )
+        const authorresponse=searchauthorapi('احمذ').then(
+            setAuthors(authorresponse.data.results)
+        )
+        const titleresponse=searchtitleapi('احمد').then(
+            setTitles(titleresponse.data.results)
+        )
+        
+        }
+        catch(err){
+            console.log(err);
+        }
+      
         
      
      
         
     },[])
+  
+    var authorlistresult=authors;
+    var titlelistresult=titles;
+    const tempresponse=[authors];
     return(
     
       <View style={{backgroundColor:'white',height:1000}}>
        
-        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>searchapi(term)} />
+        <Searchbar style={{}} term={term} onStartEditing={(val)=>setStart(val)} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}} />
         <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length} کتاب پیدا شدند</Text>
-        <ResultsList stylee={{}}></ResultsList>
-        <ResultsList stylee={{}}></ResultsList>
+        <ResultsList 
+        listresult={authors}
+        stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
+       
+        <ResultsList 
+        listresult={titles}
+        stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
         </View>
       

@@ -85,10 +85,10 @@ const Home = (props) => {
                     data={gallery}
                     renderItem= {({item}) =>{
                         return(
-                            <View style={{paddingVertical: 5 , paddingLeft: 12}}>
+                            <View style={{paddingVertical: 5 , paddingLeft: 5}}>
                                 <TouchableOpacity>
-                                    <Image source={item.image} style={{width: 150,
-                                    marginRight: 14 , height: 170 , borderRadius:10 }}/>
+                                    <Image source={item.image} style={{width: 120,
+                                    marginRight: 14 , height: 180 , borderRadius:10 }}/>
                                     <View style={styles.ImageOverlay}></View>
                                     <Text style={styles.ImageText}>{item.title}</Text>
                                 </TouchableOpacity>

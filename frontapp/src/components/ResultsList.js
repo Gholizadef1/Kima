@@ -1,13 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,FlatList} from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
+import ResultsDetail from './ResultsDetail';
 
-const ResultsList = (stylee) => {
+const ResultsList = ({stylee,title,listresult}) => {
     return(
-        <View style={stylee}>
-            <Text>
-                ResultsList
+        <View >
+            <Text style={styles.title}>
+                {title}
             </Text>
+            <FlatList  style={styles.flastlist}
+                horizontal={true}
+                
+                data={listresult}
+                keyExtractor={(listresult)=>listresult.id}
+                renderItem={({item})=>{
+                    return(<ResultsDetail
+                        result={item}
+                    />)
+
+                
+                }}
+            />
+            
         </View>
     );
 }
@@ -20,5 +35,15 @@ const styles = StyleSheet.create({
     //   alignItems: 'center',
     //   justifyContent: 'center',
     // },
+    title:{
+        marginRight:30,
+        marginTop:40,
+        fontSize:15,
+        fontWeight:'bold'
+    },
+    flastlist:{
+        marginHorizontal:5
+    }
+    
   });
   export default ResultsList;
