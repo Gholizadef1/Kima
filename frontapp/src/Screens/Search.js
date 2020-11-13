@@ -12,10 +12,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 import { sub } from 'react-native-reanimated';
 import axiosinst from '../api/axiosinst';
+import ResultsList from '../components/ResultsList';
 const Search = () => {
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
-    const Tab = createMaterialTopTabNavigator();
     const [submit,setSubmit]=useState(false);
     // const [errormessage,setErrormessage]=useState('');
     // let sumbit =false;
@@ -61,12 +61,14 @@ const Search = () => {
     },[])
     return(
     
-      <Container>
-        <Text style={{marginTop:100,position:'absolute'}}>Hiii</Text>
-        <Searchbar style={{position:'absoloute'}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>searchapi(term)} />
-        <Text style={{position:'absolute',marginTop:200,marginLeft:200,marginTop:112}}>با اطلاعات شما {results.length} کتاب پیدا شدند</Text>
+      <View style={{backgroundColor:'white',height:1000}}>
+       
+        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>searchapi(term)} />
+        <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length} کتاب پیدا شدند</Text>
+        <ResultsList stylee={{}}></ResultsList>
+        <ResultsList stylee={{}}></ResultsList>
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
-        </Container>
+        </View>
       
        
    

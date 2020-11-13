@@ -8,7 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 const Searchbar = ({term,onTermChange,onTermsubmit}) => {
     return(
 
-       <Content style={{height:200,width:400}}>
+       <View>
          <Item rounded style={styles.backgroundd}>
              <Feather name="search" size={24} color="black"style={styles.Icon} />
             <Input 
@@ -24,7 +24,7 @@ const Searchbar = ({term,onTermChange,onTermsubmit}) => {
             </Item>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
 
-       </Content>
+       </View>
     );
 }
 
