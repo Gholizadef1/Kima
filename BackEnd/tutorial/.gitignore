@@ -1,4 +1,4 @@
- # Created by https://www.gitignore.io/api/venv,django,visualstudiocode
+# Created by https://www.gitignore.io/api/venv,django,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=venv,django,visualstudiocode
 
 ### Django ###
@@ -10,7 +10,6 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
-
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
@@ -44,8 +43,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-**/migrations/*
-!**/__pycache__/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -124,15 +121,15 @@ dmypy.json
 ### venv ###
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
-# pyvenv.cfg
-# .env
-# .venv
-# env/
-# venv/
-# ENV/
-# env.bak/
-# venv.bak/
-# pip-selfcheck.json
+pyvenv.cfg
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-selfcheck.json
 
 ### VisualStudioCode ###
 .vscode/
