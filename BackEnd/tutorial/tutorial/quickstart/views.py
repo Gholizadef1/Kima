@@ -46,26 +46,6 @@ def registration_view(request):
 
 
 
-"""
-class SignUp_view(APIView):
-
-   def get(self,request):
-        Users=SignUpUser.objects.all()
-        serializer=SignUpUserSerializer(Users,many=True)
-        return Response(serializer.data)
-
-
-   def post(self,request):
-        serializer=SignUpUserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
-
-#class login_view(APIView):
-    #authentication_classes = [SessionAuthentication, BasicAuthentication]
-   # permission_classes = [IsAuthenticated]
-
-"""
 
 @api_view(["POST"])
 @permission_classes([AllowAny],)

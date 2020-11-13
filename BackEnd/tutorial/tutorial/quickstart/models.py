@@ -62,12 +62,3 @@ def create_auth_token(sender,instance=None,created=False,**kwargs):
 
 
 
-"""
-class SignUpUser(models.Model):
-    username = models.CharField(max_length=10)
-    email = models.EmailField()
-    password = models.IntegerField() 
-
-    def __str__(self):
-         return self.username
-"""

@@ -3,16 +3,6 @@ from rest_framework import serializers
 from .models import Account
 #from .models import SignUpUser
 
-"""
-class SignUpUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SignUpUser
-        fields = '__all__'
-   #     model.username =serializers.CharField(max_length=10)
-    #    model.email = serializers.CharField(max_length=30)
-   #     model.password = serializers.IntegerField() 
-
-"""
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'},write_only=True)
 
@@ -36,3 +26,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account.set_password(password)
         account.save()
         return account
+
+
+

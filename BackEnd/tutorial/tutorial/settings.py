@@ -45,18 +45,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken'
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PARSER_CLASSES': [
-#         'rest_framework_xml.parsers.XMLParser',
-#     ],
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework_xml.renderers.XMLRenderer',
-#     ],
-# }
 
 MIDDLEWARE = [
-    #'corsheaders.middleware.CorsMiddleware',
-    #'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,14 +91,7 @@ DATABASES = {
       'HOST': 'localhost', 
        'PORT': '',
    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'mydb',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'fateme9622',
-    #     'HOST': 'localhost',
-    #     'PORT': '',
-    # }
+   
 }
 
 
@@ -152,8 +137,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-       # 'rest_framework.authentication.BasicAuthentication',
-       # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',]
 }
 AUTH_USER_MODEL = 'quickstart.Account'
