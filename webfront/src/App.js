@@ -13,6 +13,7 @@ import AlertComponent from './components/alertComponent/alertComponent.js';
 import Slide from './slides/Slide';
 import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
+import BookView from './components/bookView/bookView'
 
 function App() {
   const [title, updateTitle] = useState(null);
@@ -36,6 +37,10 @@ function App() {
             <Route path="/home">
                <NavBar/>
                <Slide/>
+            </Route>
+            <Route path="/book">
+              <NavBar/>
+              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
           </Switch>
         

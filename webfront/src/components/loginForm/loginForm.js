@@ -55,6 +55,7 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
+        <div className="container-fluid">
         <div className="card-group color2 " >
             <div className="card col-12 hv-center color2" >
                 <h1>به کیما خوش آمدی</h1>
@@ -92,7 +93,7 @@ function LoginForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn btn-outline-success"
+                    className="btn btn-outline-success badge-pill"
                     onClick={handleSubmitClick}
                 >ثبت</button>
                 
@@ -103,6 +104,7 @@ function LoginForm(props) {
             <div className="registerMessage">
                 <span>قبلاً ثبت نام نکرده اید؟</span>
                 <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت نام کنید</span> 
+            </div>
             </div>
             </div>
         </div>

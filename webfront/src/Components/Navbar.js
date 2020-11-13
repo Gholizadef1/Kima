@@ -11,7 +11,7 @@ import {GoSearch} from 'react-icons/go';
 export class NavBar extends Component{
     render(){
     return(   
-<Navbar className= "navbar navbar-expand-lg navbar-dark{color:#ff5500;}">
+<Navbar className= "navbar color4 navbar-expand-lg navbar-dark{color:#ff5500;}">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>

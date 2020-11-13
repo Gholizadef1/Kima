@@ -5,12 +5,8 @@
     
     }
     .navbar {
-        background-color:#1f7a8c;
         display: flex;
          max-height: 60px;
-         
-          
-    
     }
     .searchbar{
         margin: 0 auto;

@@ -49,7 +49,7 @@ function RegistrationForm(props) {
                     console.log(error);
                 });    
         } else {
-            props.showError('Please enter valid username and password')    
+            props.showError('لطفا مشخصات خود را درست وارد کنید')    
         }
         
     }
@@ -70,6 +70,7 @@ function RegistrationForm(props) {
         }
     }
     return(
+        <div className="container-fluid ">
         <div className="card-group color2" >
             <div className="card col-12 hv-center color2">
                 <h1>به کیما خوش آمدی</h1>
@@ -126,7 +127,7 @@ function RegistrationForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn btn-outline-success"
+                    className="btn btn-outline-success badge-pill"
                     onClick={handleSubmitClick}
                 >
                     ثبت
@@ -138,6 +139,7 @@ function RegistrationForm(props) {
             <div className="mt-2">
                 <span>قبلاً ثبت نام کرده اید؟ </span>
                 <span className="loginText" onClick={() => redirectToLogin()}>اینجا وارد شوید</span> 
+            </div>
             </div>
             </div>
         </div>
