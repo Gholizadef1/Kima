@@ -1,0 +1,67 @@
+
+.navbar-brand{
+
+    font-size: 500px;
+    
+    }
+    .navbar {
+        background-color:#1f7a8c;
+        display: flex;
+         max-height: 60px;
+    }
+
+
+
+    .searchbar{
+        margin: 0 auto;
+        width: 800px;
+    }
+    .form-control{
+        padding-left: 420px;
+    }
+    .name{
+        padding: 10px;
+        color: black;
+    }
+    .name1{
+        color: black;
+        padding: 10px;
+
+    }
+    .nav-link{
+        padding-top: 5px;
+        width: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+    @media (max-width :420px) 
+    {
+        .searchbar{
+            display:none;
+        }.nav-item{
+            display: none;
+        }
+
+      }
+    
+    @media (max-width :768px) 
+    {
+        .searchbar{
+            display:none;
+        }
+        .nav-link{
+            width: 30px;
+        }
+      }
+      @media (max-width :800px) 
+      {
+          .searchbar{
+              display:none;
+          }
+          .nav-link{
+            width: 30px;
+        }
+        }
+      
+      
