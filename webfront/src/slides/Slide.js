@@ -23,7 +23,7 @@ function Slide(props) {
 
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("http://127.0.0.1:8000/bookdetail/")
       .then((res) => res.json())
       .then((data) => {
         setSuggestions(data);
@@ -85,7 +85,7 @@ function Slide(props) {
                 <img
                   className="squere " 
                   alt={"users here"}
-                  src={`https://source.unsplash.com/random/${current.id}`}
+                  src={current.imgurl}
                   height={56}
                   width={56}
                 />
