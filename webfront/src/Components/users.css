@@ -1,13 +1,14 @@
-.searchbar{
-    width:50%;
-    height: auto;
-    margin: 0 auto;
-    text-align: center;
+.users{
+    width: 400px;
+    background-color: rgba(20, 20, 10,0.2);
+    border-radius: 20px;
 }
-.searchbar input{
-    margin: 30px 0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-align: right;
-    
+
+.users .avatars{
+   display: grid;
+   grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+
+}
+.users img{
+    width: 100%;
 }
