@@ -1,4 +1,3 @@
-
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -6,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import { MaterialIcons } from '@expo/vector-icons';
@@ -16,11 +16,22 @@ import Profie from './Profile'
 import Search from './Search'
 import Mybooks from './Mybooks'
 import Groups from './Groups';
+import Bookresult from './Bookresult';
+import Searchnavigation from './Searchnavigation';
+// const SNavigation = createStackNavigator();
+//  Snavigation=()=>{
+//    return(
+//     <SNavigation>
+//       <SNavigation.Screen name='search' component={Search}></SNavigation.Screen>
+//       <SNavigation.Screen name="book"   component={Bookresult}></SNavigation.Screen>
 
+//     </SNavigation>
+//    )
+
+//  }
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
-        <NavigationContainer>
           <Tab.Navigator
           initialRoute={{
             headerShown: false
@@ -35,7 +46,7 @@ const TabSreen = () => {
               ),
             }}/>
             
-            <Tab.Screen name="جستجو" component={Search} options={{tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name="جستجو" component={Searchnavigation} options={{tabBarIcon: ({ color, size }) => (
                 <Feather name="search" size={size} color={color} />
               ),
     
@@ -52,7 +63,6 @@ const TabSreen = () => {
               }}/>
            
           </Tab.Navigator>
-        </NavigationContainer>
       );
 }
 

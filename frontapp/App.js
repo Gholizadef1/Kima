@@ -21,34 +21,39 @@ import {Provider as AuthProvider } from './src/context/Authcontext';
 import {Context as AuthContext} from './src/context/Authcontext'
 
 
+const lala=()=>{
+  return(
+    <TabScreen></TabScreen>
+  )
+}
 
+// const SwitchNavigator=createSwitchNavigator({
 
-const SwitchNavigator=createSwitchNavigator({
+//   mainFlow:TabScreen,
+//     loginflow:StackScreen,
 
-  mainFlow:TabScreen,
-    loginflow:StackScreen,
  
    
-
+export default createAppContainer(lala);
     
     
 
-})
+// })
 
-// export default createAppContainer(SwitchNavigator);
-const App=createAppContainer(SwitchNavigator);
-
-
-export default()=>{
-  return(
-  <AuthProvider>
-
-    <App/>
-  </AuthProvider>
-  )
+// // export default createAppContainer(SwitchNavigator);
+// const App=createAppContainer(SwitchNavigator);
 
 
-}
+// export default()=>{
+//   return(
+//   <AuthProvider>
+
+//     <App/>
+//   </AuthProvider>
+//   )
+
+
+// }
 
 // const Tab = createBottomTabNavigator();
 
