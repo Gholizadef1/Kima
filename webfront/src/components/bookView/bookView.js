@@ -17,35 +17,37 @@ import './bookView.css';
 
 function BookView(props) {
     let { bookId } = useParams();
+
     //const bookId= props.match.params.id;
     console.log(bookId);
     console.log(bookId.name);
     const [state , setState] = useState({
         //bookId:props.match.params.id,
     })
-    
+    console.log(useParams);
     console.log(props);
     //const {bookId} = props.match.params;
-    if (props.match.params.id) {       
-        axios.get('/book/' + props.match.params.id)
+    if (props.match.params.bookId) {       
+        axios.get('/book/' + props.match.params.bookId)
             .then(response => {
             // console.log(response);
               setState({ bookId: response.data });
             });
             
     }
+    console.log(props.match.params.bookId);
     
 
 
 
     return(
         
-        <div className="container-fluid rTOl text-right " >
+        <div className="container-fluid col-sm-8 rTOl text-right " >
             <div className="row color1 my-2 mx-auto">
-                <div className="col-sm-2 ">
+                <div className="col-sm-3 ">
                     <img src="Whispers in the Static.jpeg" className="img-fluid" alt="" />
                 </div>
-                <div className="col-sm-8 mt-auto">
+                <div className="mt-auto">
                  <table className=" table table-hover text-right" >
                   <tbody >
                     <tr >
@@ -79,19 +81,20 @@ function BookView(props) {
                 </div>
                 
             </div>
-            <nav class="navbar navbar-expand-sm navbar-light sticky-top color3">  
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#bookSummary">خلاصه</a>
+            <nav className="navbar navbar-expand-sm navbar-light sticky-top color3">  
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#bookSummary">خلاصه</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#bookCriticism">نقد</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#bookCriticism">نقد</a>
                      </li>
     
                 </ul>
             </nav>
 
             <div id="bookSummary" className="color1 p-2">
+                <br></br>
                 <h3>خلاصه کتاب {bookId.name}</h3>
                 <br></br>
                 <p>
@@ -103,7 +106,9 @@ function BookView(props) {
                 </p>
             </div>
             <div id="bookCriticism" className="color1 p-2">
+                <br></br>
                 <h3>نقد کتاب {bookId.name}</h3>
+                <br></br>
 باشیم. برای عادت های جدید وقت بگذاریم (حتی وقتی زندگی با ما سر ناسازگاری دارد). محیط مان را طوری طراحی کنیم که در آن موفقیت آسان تر باشد. تغییرات کوچک و ساده ای ایجاد کنیم که نتایج بزرگی به همراه دارند. و مهم تر از همه، چگونه این ایده ها را در زندگی واقعی مان به اجرا در آوریم.
 
 معرفی کتاب عادت‌های اتمی
