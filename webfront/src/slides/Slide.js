@@ -4,9 +4,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slide.css";
 import Slider from "react-slick";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  withRouter
+} from "react-router-dom";
+import BookView from "../components/bookView/bookView";
 
-function Slide() {
+function Slide(props) {
   const [suggestions, setSuggestions] = useState([]);
+  //let match=useRouteMatch();
+  //console.log(useRouteMatch())
+
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -15,6 +28,20 @@ function Slide() {
         setSuggestions(data);
       });
   }, []);
+
+  const bookSelectedHandler = ( b ) => {
+        console.log(b);
+        props.history.push( '/book/' + b.id );
+        return (
+          <div>
+              <Link to={'/book/' + b.id} key={b.id}> </Link>
+              {/* <section className="Posts">
+                  {suggestions}
+              </section>
+              <Route path={props.match.url + '/:id'} exact component={BookView} /> */}
+          </div>
+      );
+  }
 
   let settings = {
     infinite: false,
@@ -40,6 +67,8 @@ function Slide() {
       },
     ],
   };
+
+  
   return (
     <div className="container">
       <b className="slider-brand">Random Books</b>
@@ -51,7 +80,7 @@ function Slide() {
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
-              <div className="card cat ">
+              <div className="card cat" onClick={() => bookSelectedHandler( current )} >
                 <img
                   className="squere " 
                   alt={"users here"}
@@ -65,15 +94,26 @@ function Slide() {
                     In your contacts
                   </small>
                   <br />
-                  
                 </div>
+                
               </div>
             </div>
           ))}
         </Slider>
       )}
+
+{/* 
+      <Switch>
+        <Route path={`${match.path}/:bookId`}>
+          <BookView/>
+        </Route>
+        <Route path={match.path}>
+          <h3>Please select a topic.</h3>
+        </Route>
+      </Switch> */}
+
     </div>
   );
 }
 
-export default Slide;
+export default withRouter(Slide);

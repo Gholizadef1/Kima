@@ -1,22 +1,49 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import {API_BASE_URL} from '../../constants/apiContants';
-import { withRouter } from "react-router-dom";
-import './bookView.css'
-import { unstable_concurrentAct } from 'react-dom/cjs/react-dom-test-utils.production.min';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams,
+    withRouter
+  } from "react-router-dom";
+import './bookView.css';
+//import {API_BASE_URL} from '../../constants/apiContants';
+//import { unstable_concurrentAct } from 'react-dom/cjs/react-dom-test-utils.production.min';
+
 
 function BookView(props) {
-    const [state , setState]=useState({
-        id:"",
-        name:"بار دیگر شهری که دوست می داشتم"
+    let { bookId } = useParams();
+    //const bookId= props.match.params.id;
+    console.log(bookId);
+    console.log(bookId.name);
+    const [state , setState] = useState({
+        //bookId:props.match.params.id,
     })
+    
+    console.log(props);
+    //const {bookId} = props.match.params;
+    if (props.match.params.id) {       
+        axios.get('/book/' + props.match.params.id)
+            .then(response => {
+            // console.log(response);
+              setState({ bookId: response.data });
+            });
+            
+    }
+    
+
 
 
     return(
+        
         <div className="container-fluid rTOl text-right " >
-            <div className="row color3 my-2 mx-auto">
+            <div className="row color1 my-2 mx-auto">
                 <div className="col-sm-2 ">
-                    <img src="Whispers in the Static.jpeg" className="img-fluid img-" alt="" />
+                    <img src="Whispers in the Static.jpeg" className="img-fluid" alt="" />
                 </div>
                 <div className="col-sm-8 mt-auto">
                  <table className=" table table-hover text-right" >
@@ -52,7 +79,7 @@ function BookView(props) {
                 </div>
                 
             </div>
-            <nav class="navbar navbar-expand-sm navbar-light sticky-top color2">  
+            <nav class="navbar navbar-expand-sm navbar-light sticky-top color3">  
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#bookSummary">خلاصه</a>
@@ -65,12 +92,18 @@ function BookView(props) {
             </nav>
 
             <div id="bookSummary" className="color1 p-2">
-                <h3>خلاصه کتاب {state.name}</h3>
+                <h3>خلاصه کتاب {bookId.name}</h3>
+                <br></br>
+                <p>
+
                 بار دیگر شهری که دوست می‌داشتم اثر ماندگار دیگری از نادر ابراهیمی است که در سال ۱۳۱۵ در تهران متولد شد و در ۷۲ سالگی بر اثر بیماری درگذشت. از این داستان‌نویس معاصر ایرانی بیش از نود کتاب به یادگار مانده است که از معروف‌ترین آنها می‌توان به یک عاشقانهٔ آرام، خانه‌ای برای شب، چهل نامهٔ کوتاه به همسرم اشاره کرد.
 
 وی علاوه بر داستان‌نویسی، در زمینه‌های فیلم‌سازی، ترانه‌سرایی، ترجمه و روزنامه‌نگاری نیز فعالیت کرده‌ و نویسندهٔ یک مجموعهٔ هفت‌جلدی به نام «آتش بدون دود» است که فیلم آن نیز ساخته شده است.
-<br></br>
-<br></br><br></br>
+                    <br></br>
+                </p>
+            </div>
+            <div id="bookCriticism" className="color1 p-2">
+                <h3>نقد کتاب {bookId.name}</h3>
 باشیم. برای عادت های جدید وقت بگذاریم (حتی وقتی زندگی با ما سر ناسازگاری دارد). محیط مان را طوری طراحی کنیم که در آن موفقیت آسان تر باشد. تغییرات کوچک و ساده ای ایجاد کنیم که نتایج بزرگی به همراه دارند. و مهم تر از همه، چگونه این ایده ها را در زندگی واقعی مان به اجرا در آوریم.
 
 معرفی کتاب عادت‌های اتمی

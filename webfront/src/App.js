@@ -5,7 +5,11 @@ import RegistrationForm from './components/registrationForm/registrationForm';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  withRouter
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
@@ -14,6 +18,7 @@ import Slide from './slides/Slide';
 import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
+//import loginForm from './components/loginForm/loginForm';
 
 function App() {
   const [title, updateTitle] = useState(null);
@@ -26,7 +31,7 @@ function App() {
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           <Switch>
             <Route path="/" exact={true}>
-               <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="/login">
               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -38,7 +43,11 @@ function App() {
                <NavBar/>
                <Slide/>
             </Route>
-            <Route path="/book">
+            {/* <Route path="/book">
+              <NavBar/>
+              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
+            </Route> */}
+            <Route path="/book/:bookId">
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
