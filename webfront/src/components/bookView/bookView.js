@@ -11,8 +11,6 @@ import {
     withRouter
   } from "react-router-dom";
 import './bookView.css';
-//import {API_BASE_URL} from '../../constants/apiContants';
-//import { unstable_concurrentAct } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 
 function BookView(props) {
