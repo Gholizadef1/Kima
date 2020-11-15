@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,Alert,Image} from 'react-native';
+import { StyleSheet, Text, View,Alert,Image,ScrollView} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
@@ -15,7 +15,7 @@ import { sub } from 'react-native-reanimated';
 import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
 
-const Search = () => {
+const Search = ({navigation}) => {
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
     // const [start,setStart]=useState(false);
@@ -94,29 +94,34 @@ const Search = () => {
     }
     const [exitsearch,setExitsearch]=useState([]);
     useEffect(()=>{
-            searchapi('احمد')&&
-            searchauthorapi('احمد')&&
-            searchtitleapi('احمد')  
+            searchapi('')&&
+            searchauthorapi('')&&
+            searchtitleapi('')  
     },[])
   //mikhastam inja start bashe vali warning midad va nafahmidam chera
     
     return(
+        
     
-      <View style={{backgroundColor:'white',height:1000}}>
+      <View style={{backgroundColor:'white',flex:1}}>
      
         <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
-        <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} />
+        {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
         <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length+titles.length} کتاب پیدا شدند</Text>
+        <ScrollView>
         <ResultsList 
+        navigation={navigation}
         listresult={authors}
         stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:30,marginHorizontal:10,width:390,height:1}}
+         style={{marginTop:20,marginHorizontal:10,width:390,height:1}}
          ></Image>
         <ResultsList 
+        navigation={navigation}
         listresult={titles}
         stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>
+        </ScrollView>
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
          {/* <Image
          source={require('../../assets/kima6.jpeg')}

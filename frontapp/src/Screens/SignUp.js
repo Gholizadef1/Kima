@@ -81,7 +81,7 @@ const signschema=yup.object({
         //    console.log(errors)
         //  }
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
-        axios.post(' http://312cfbacb4a5.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+        axios.post('http://47317a656b11.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
         .then(function(response){
           // console.log(response);
           // console.log(response.data.email);

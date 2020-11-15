@@ -33,7 +33,7 @@ import { createStackNavigator } from 'react-navigation-stack';
  
 
 
-  const navigator = createStackNavigator(
+  const StackScreen = createStackNavigator(
     {
       Log:Login,
       home: Home,  
@@ -59,4 +59,4 @@ import { createStackNavigator } from 'react-navigation-stack';
   );
  
   
-  export default createAppContainer(navigator);
+  export default createAppContainer(StackScreen);

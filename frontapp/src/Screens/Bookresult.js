@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Bookresult = () => {
+const Bookresult = ({navigation}) => {
+// const id=navigation.getPram(id);
+// console.log(id);
     return(
         <View style={styles.container}>
             <Text>

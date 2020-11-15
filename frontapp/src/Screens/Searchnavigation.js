@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Login from './Login';
 import SignUp from './SignUp';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Bookresult from './Bookresult';
 import Search from './Search';
 
@@ -17,16 +17,19 @@ import Search from './Search';
  import {NavigationContainer} from '@react-navigation/native';
  
  const SNavigation = createStackNavigator();
- export default function Snavigation(){
+const Searchnavigation=()=>{
    return(
-    <SNavigation.Navigator>
-      <SNavigation.Screen name='search' component={Search}></SNavigation.Screen>
-      <SNavigation.Screen name="book"   component={Bookresult}></SNavigation.Screen>
+    
+    <SNavigation.Navigator initialRouteName={'Search'}>
+      <SNavigation.Screen name='Search' component={Search} options={{headerShown: false}} ></SNavigation.Screen>
+      <SNavigation.Screen name="Bookresult"   component={Bookresult} options={{headerShown: true}}></SNavigation.Screen>
 
     </SNavigation.Navigator>
+  
    )
 
  }
+ export default  Searchnavigation;
   
   // export default ()=>
   // (

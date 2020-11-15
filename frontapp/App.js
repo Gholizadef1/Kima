@@ -13,7 +13,6 @@ import Search from './src/Screens/Search'
 import Mybooks from './src/Screens/Mybooks'
 import TabScreen from './src/Screens/TabScreen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import { NavigationContainer } from "@react-navigation/native";
 import StackScreen from './src/Screens/StackScreen';
 import { State } from 'react-native-gesture-handler';
@@ -21,37 +20,38 @@ import {Provider as AuthProvider } from './src/context/Authcontext';
 import {Context as AuthContext} from './src/context/Authcontext'
 
 
-const lala=()=>{
-  return(
-    <TabScreen></TabScreen>
-  )
-}
+// const lala=()=>{
+//   return(
+//     <TabScreen></TabScreen>
+//   )
+// }
 
-// const SwitchNavigator=createSwitchNavigator({
-
-//   mainFlow:TabScreen,
-//     loginflow:StackScreen,
+const SwitchNavigator=createSwitchNavigator({
+  mainFlow:TabScreen,
+  loginflow:StackScreen,
+ 
+ 
 
  
    
-export default createAppContainer(lala);
+// export default createAppContainer(lala);
     
     
 
-// })
+})
 
 // // export default createAppContainer(SwitchNavigator);
-// const App=createAppContainer(SwitchNavigator);
+const App=createAppContainer(SwitchNavigator);
 
 
-// export default()=>{
-//   return(
-//   <AuthProvider>
+export default()=>{
+  return(
+  <AuthProvider>
 
-//     <App/>
-//   </AuthProvider>
-//   )
-
+    <App/>
+  </AuthProvider>
+  )
+  }
 
 // }
 

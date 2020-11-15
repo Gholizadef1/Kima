@@ -30,7 +30,7 @@ const Searchbar = ({term,onTermChange,onTermsubmit}) => {
            onPress={()=>{console.log(prees)}}
            >
            
-           {showCancel? <AntDesign name="close" size={24}  color="black" style={{position:'absolute',marginLeft:10,marginTop:10}} />:null}
+           {showCancel? <AntDesign name="close" size={24}  color="black" style={{position:'absolute', color:'#BFDBF7',marginLeft:10,marginTop:10}} />:null}
          
            </Button>
 
@@ -51,11 +51,13 @@ const styles = StyleSheet.create({
       marginLeft:15,
       width:382,
     
+    
       
     },
     Icon:{
         position:'absolute',
         marginLeft:345,
+       color:'#BFDBF7'
     },
     Icontext:{
      marginRight:40,

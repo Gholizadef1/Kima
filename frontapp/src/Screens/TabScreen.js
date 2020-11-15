@@ -1,3 +1,4 @@
+
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -5,8 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-import { createStackNavigator } from 'react-navigation-stack';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -32,6 +32,7 @@ import Searchnavigation from './Searchnavigation';
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
+      <NavigationContainer options={{}} >
           <Tab.Navigator
           initialRoute={{
             headerShown: false
@@ -63,6 +64,7 @@ const TabSreen = () => {
               }}/>
            
           </Tab.Navigator>
+          </NavigationContainer>
       );
 }
 
