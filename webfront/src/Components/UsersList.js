@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
 function UsersList() {
-  const [user,setUser] = useState({user:""});
+  const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [users,setUsers] = useState([]);
  
@@ -14,6 +14,9 @@ try {
 const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch`,{params:{
   search:user.user,
   search_fields:'author',}
+}).then((res)=> {
+ setSearch(res.data.results)
+  
 });
 if (search == [null]) {
 setSearch([]);
@@ -23,26 +26,21 @@ setSearch(result.data);
 }
 catch (err) {}
 };
-useEffect(()=>{
-  const UsersList = () => {
-    axios.get(`http://127.0.0.1:8000/dyanmicsearch/`)
-    .then((res)=> {
-      setUser([res.data])
-    })
-    .catch((error)=>{});
-  };
-    UsersList();
 
-},[]);
 useEffect(() => {
   searchUsers();
   }, [user]);
 
     return ( 
     <div className = "search">
-      {search.map((item) => (
-        <div className="out" key={item.id}>
-        <h5 className="card-title2">{item.name}</h5>
+      
+    
+        <label>
+            <input type="text" name="name" onChange={handleChange}  value={user.user} style={{position:"absolute",left:10,top:100}} />
+          </label>
+          <button type="submit">Search</button>{search.map((item) => (
+        <div className="out" key={item.id}  style={{padding:800}}>
+        <h5 className="card-title2">{item.title}</h5>
          <div className="card cat">
             <img
               className="squere" 
@@ -50,11 +48,6 @@ useEffect(() => {
               height={56}
               width={56}
             />
-    
-        <label>
-            <input type="text" name="name" onChange={handleChange}  value={user.user} />
-          </label>
-          <button type="submit">Search</button>
           </div>
           </div>
           
