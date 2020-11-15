@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
 SECRET_KEY = env("SECRET_KEY")
 
 
@@ -53,14 +52,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PARSER_CLASSES': [
-#         'rest_framework_xml.parsers.XMLParser',
-#     ],
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework_xml.renderers.XMLRenderer',
-#     ],
-# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,22 +89,6 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-   # 'default': {
-   #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-   #     'NAME': 'hope', 
-   #     'USER': 'postgres', 
-   #     'PASSWORD': 'melika55540430',
-   #    'HOST': 'localhost', 
-   #     'PORT': '',
-   # }
-   # 'default': {
-   #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-   #     'NAME': 'mydb',
-   #     'USER': 'postgres',
-   #     'PASSWORD': 'fateme9622',
-   #     'HOST': 'localhost',
-   #     'PORT': '',
-   # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env("DATABASE_NAME"),
