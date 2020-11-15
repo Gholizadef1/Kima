@@ -15,15 +15,26 @@ import Home from './Home'
 import Profie from './Profile'
 import Search from './Search'
 import Mybooks from './Mybooks'
-import Bookview from './Bookview'
 import Groups from './Groups';
+import Bookresult from './Bookresult';
+import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
-import StackScreen from './StackScreen';
+import Bookview from './Bookview';
+// const SNavigation = createStackNavigator();
+//  Snavigation=()=>{
+//    return(
+//     <SNavigation>
+//       <SNavigation.Screen name='search' component={Search}></SNavigation.Screen>
+//       <SNavigation.Screen name="book"   component={Bookresult}></SNavigation.Screen>
 
+//     </SNavigation>
+//    )
+
+//  }
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
-        <NavigationContainer>
+      <NavigationContainer options={{}} >
           <Tab.Navigator
           initialRoute={{
             headerShown: false
@@ -38,7 +49,7 @@ const TabSreen = () => {
               ),
             }}/>
             
-            <Tab.Screen name="جستجو" component={Search} options={{tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name="جستجو" component={Searchnavigation} options={{tabBarIcon: ({ color, size }) => (
                 <Feather name="search" size={size} color={color} />
               ),
     
@@ -55,12 +66,11 @@ const TabSreen = () => {
               }}/>
            
           </Tab.Navigator>
-        </NavigationContainer>
+          </NavigationContainer>
       );
 }
 
 export default TabSreen ;
-
 
 const styles = StyleSheet.create({
   container: {

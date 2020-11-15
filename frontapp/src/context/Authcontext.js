@@ -32,7 +32,7 @@ const authReducer = (state, action) => {
   
   const signup = dispatch => async ({ email, password }) => {
     try {
-      const response = await axiosinst.post('/signup', { email, password });
+      const response = await axiosinst.post('/register', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin', payload: response.data.token });
   
@@ -47,7 +47,7 @@ const authReducer = (state, action) => {
   
   const signin = dispatch => async ({ email, password }) => {
     try {
-      const response = await axiosinst.post('/signin', { email, password });
+      const response = await axiosinst.post('/login', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin', payload: response.data.token });
       navigate('home');

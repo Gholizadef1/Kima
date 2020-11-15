@@ -11,7 +11,27 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 // import TabScreen from './TabScreen';
  import Home from './Home';
-import Bookview from './Bookview';
+
+
+// const AuthStack=createStackNavigator();
+
+// const AuthStackScreen=() => {
+
+//   <AuthStack.navigator>
+
+//     <AuthStack.Screen>
+
+
+//     </AuthStack.Screen>
+
+//   </AuthStack.navigator>
+
+
+// }
+
+  
+ 
+
 
   const StackScreen = createStackNavigator(
     {
@@ -30,6 +50,10 @@ import Bookview from './Bookview';
           backgroundColor: '#E1E5F2',
           
         },
+      
+      
+      
+      
       },
     }
   );
