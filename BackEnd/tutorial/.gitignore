@@ -5,9 +5,21 @@ tutorial/.env
 *.log
 *.pot
 *.pyc
-tutorial/__pycache__/
-tutorial/quickstart/__pycache__/
-tutorial/quickstart/migrations/__pycache__/
+#tutorial/__pycache__/
+#tutorial/__pycache__/__init__.cpyhton-37.pyc
+#tutorial/__pycache__/settings.cpyhton-37.pyc
+#tutorial/__pycache__/urls.cpyhton-37.pyc
+#tutorial/__pycache__/wsgi.cpyhton-37.pyc
+#tutorial/quickstart/__pycache__/
+#tutorial/quickstart/__pycache__/__init__.cpyhton-37.pyc
+#tutorial/quickstart/__pycache__/admin.cpyhton-37.pyc
+#tutorial/quickstart/__pycache__/models.cpyhton-37.pyc
+#tutorial/quickstart/__pycache__/serializers.cpyhton-37.pyc
+#tutorial/quickstart/__pycache__/views.cpyhton-37.pyc
+#tutorial/quickstart/migrations/__pycache__/
+#tutorial/quickstart/migrations/__pycache__/0001_initial.cpython-37.pyc
+#tutorial/quickstart/migrations/__pycache__/0002_auto_20201029.cpython-37.pyc
+#tutorial/quickstart/migrations/__pycache__/__init__.cpython-37.pyc
 
 local_settings.py
 db.sqlite3
