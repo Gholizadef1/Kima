@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import Account
-#from .models import SignUpUser
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
