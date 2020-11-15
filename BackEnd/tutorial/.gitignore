@@ -21,6 +21,8 @@ tutorial/quickstart/migrations/__pycache__/*.pyc
 #tutorial/quickstart/migrations/__pycache__/0002_auto_20201029.cpython-37.pyc
 #tutorial/quickstart/migrations/__pycache__/__init__.cpython-37.pyc
 
+*/__pycache__/*
+
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
