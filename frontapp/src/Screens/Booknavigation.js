@@ -8,31 +8,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Login from './Login';
 import SignUp from './SignUp';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from '@react-navigation/stack';
+import Search from './Search';
+
 // import TabScreen from './TabScreen';
  import Home from './Home';
-import Bookview from './Bookview';
+ import {NavigationContainer} from '@react-navigation/native';
 
-  const StackScreen = createStackNavigator(
-    {
-      Log:Login,
-      home: Home,  
-      Sign:SignUp
-  
-    },
-    {
-      initialRouteName: 'Log',
-      defaultNavigationOptions: {
-        title: 'Kima',
-        
-        headerTintColor:'#1F7A8C',
-        headerStyle: {
-          backgroundColor: '#E1E5F2',
-          
-        },
-      },
-    }
-  );
+
+const Stack = createStackNavigator();
+
+const Booknavigation = () => {
+  return (
+      <NavigationContainer>
+                <Stack.Navigator initialRouteName={'Home'}>
+                <Stack.Screen name = 'Home' component={Home}></Stack.Screen>
+                <Stack.Screen name = 'Showbookview' component={Bookview} />
+                </Stack.Navigator>
+      </NavigationContainer>
  
-  
-  export default createAppContainer(StackScreen);
+  );
+}
+export default Booknavigation;

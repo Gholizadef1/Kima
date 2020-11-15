@@ -2,7 +2,7 @@ import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-
+import {withNavigation} from 'react-navigation'
 const Bookview = () => {
     return(
         <Container>
@@ -19,7 +19,7 @@ const Bookview = () => {
               </Left>
             </CardItem>
             <CardItem cardBody>
-              <Image source={{uri : imgurl}} style={{height: 200, width: null, flex: 1}}/>
+              <Image source={{}} style={{height: 200, width: null, flex: 1}}/>
             </CardItem>
             <CardItem>
               <Left>

@@ -6,7 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -15,7 +15,10 @@ import Home from './Home'
 import Profie from './Profile'
 import Search from './Search'
 import Mybooks from './Mybooks'
+import Bookview from './Bookview'
 import Groups from './Groups';
+import Booknavigation from './Booknavigation'
+import StackScreen from './StackScreen';
 
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
@@ -26,7 +29,7 @@ const TabSreen = () => {
             headerShown: false
           }}
           >
-             <Tab.Screen name="خانه" component={Home} options ={{tabBarIcon: ({ color, size }) => (
+             <Tab.Screen name="خانه" component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="home" size={size} color={color} />
               ),
               }}/>
@@ -57,6 +60,7 @@ const TabSreen = () => {
 }
 
 export default TabSreen ;
+
 
 const styles = StyleSheet.create({
   container: {
