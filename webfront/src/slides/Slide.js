@@ -16,7 +16,7 @@ import {
 import BookView from "../components/bookView/bookView";
 
 function Slide(props) {
-  console.log(props);
+  //console.log(props);
   const [suggestions, setSuggestions] = useState([]);
   //let match=useRouteMatch();
   //console.log(useRouteMatch())
@@ -31,7 +31,7 @@ function Slide(props) {
   }, []);
 
   const bookSelectedHandler = ( b ) => {
-        console.log(b);
+        //console.log(b);
         props.history.push( '/book/' + b.id );
       //   return (
       //     <div>
