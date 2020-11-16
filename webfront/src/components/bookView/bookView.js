@@ -1,12 +1,12 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
-import {API_BASE_URL} from '../../constants/apiContants';
+//import {API_BASE_URL} from '../../constants/apiContants';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch,
+    // Switch,
+    // Route,
+    // Link,
+    // useRouteMatch,
     useParams,
     withRouter
   } from "react-router-dom";
@@ -25,6 +25,7 @@ function BookView(props) {
     console.log(useParams);
     console.log(props);
     //const {bookId} = props.match.params;
+    useEffect(() => {
     if (props.match.params.bookId) {       
         axios.get('/book/' + props.match.params.bookId)
             .then(response => {
@@ -33,6 +34,7 @@ function BookView(props) {
             });
             
     }
+    }, []);
     console.log(props.match.params.bookId);
     
 

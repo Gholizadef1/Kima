@@ -3,6 +3,7 @@ import axios from 'axios';
 import './registrationForm.css';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function RegistrationForm(props) {
     const [state , setState] = useState({
@@ -12,6 +13,7 @@ function RegistrationForm(props) {
         confirmPassword: "",
         successMessage: null
     })
+    const [cookies, setCookie] = useCookies(['token']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -35,6 +37,7 @@ function RegistrationForm(props) {
                     console.log(response);
                     console.log(response.data);
                     if(response.status=== 200){
+                        setCookie('token', response.data.token, { path: '/' });
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'ثبت نام موفقیت آمیز بود...'

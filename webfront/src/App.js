@@ -6,10 +6,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams,
-  withRouter
+//  Link,
+//  useRouteMatch,
+//  useParams,
+//  withRouter
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
@@ -19,10 +19,20 @@ import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
+//import {withCookies, Cookies , useCookies} from "react-cookie";
+
 
 function App() {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
+  //const [cookies, setCookie ] =useCookies(["user"]);
+
+  // const onChange = (newName)  => {
+  //   setCookie('name', newName, { path: '/' });
+  // }
+
+
+
   return (
     <Router>
       <div className="App" >
