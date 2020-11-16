@@ -3,7 +3,17 @@ import { StyleSheet, View , Image , ImageBackground , ScrollView ,
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import {withNavigation} from 'react-navigation'
-const Bookview = () => {
+const Bookview = ({navigation}) => {
+
+  const [result , setResult] = useState(null);
+  const id = navigation.getParam('id');
+  const getResult = async (id) => {
+  const response = await yelp.get(`/${id}`);
+  setResult(response.data);
+  };
+  useEffect(() =>{
+    getResult(id);
+  }, [])
     return(
         <Container>
         <Header />

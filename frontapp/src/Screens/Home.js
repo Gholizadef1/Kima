@@ -33,10 +33,6 @@ const Home = ({navigation}) => {
         return null
     }
 
-    //  const ShowBookview = () => {
-    //      navigation.navigate('Bookview');
-    //  }
-
     return(      
         <Container style={styles.frame}>
         <View>
@@ -45,7 +41,8 @@ const Home = ({navigation}) => {
         <Header style={{backgroundColor:'#1F7A8C',marginTop:35}}>
           <Left/>
           <Body>
-            <Title>Kima</Title>
+            <Title style={{fontSize:23 , fontWeight:'bold' , marginRight: 40, marginLeft: 10 
+            , left: 210}}>Kima</Title>
           </Body>
           <Right />
         </Header>
@@ -53,21 +50,22 @@ const Home = ({navigation}) => {
             </View>
 
              <ScrollView>
-                 <View style={{padding: 40}}>
+                 <View style={{padding: 50 , marginRight: 50}}>
                  </View>
                  <View>
-                 <Text style={{fontSize: 22 , fontWeight:'bold' , color:'#1F7A8C'}}>کتاب های پیشنهادی</Text>
+                 <Text style={{fontSize: 22 , fontWeight:'bold' , color:'#1F7A8C',
+                 right:0.01 , left:10 , top:5 }}>کتاب های پیشنهادی</Text>
                     <FlatList
                     horizontal={true}
                     data={image}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview')}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
                                     <Card>
                                     <CardItem cardBody>
                                     <Image source={{uri : item.imgurl}} style={{width: 120,
-                                      height: 180 , borderRadius:10 }}/>
+                                      height: 180 , borderRadius:20}}/>
                                     </CardItem>
                                     </Card>                                    
                                         <CardItem>
