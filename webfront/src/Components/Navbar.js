@@ -38,7 +38,7 @@ export class NavBar extends Component{
 <GoSearch size="30" color="black"/>
   </a>
             
-       <a class="nav-item" href="profile" >
+       <a class="nav-item1" href="profile" >
     <small className="name" size="50">
       نام کاربری
     </small>

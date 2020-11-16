@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
+import { HelpingNavbar } from './HelpingNavbar';
+
 function UsersList() {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
@@ -33,12 +35,10 @@ useEffect(() => {
 
     return ( 
     <div className = "search">
-      
-    
-        <label>
-            <input type="text" name="name" onChange={handleChange}  value={user.user} style={{position:"absolute",left:10,top:100}} />
-          </label>
-          <button type="submit">Search</button>{search.map((item) => (
+        
+        
+            <input type="text" name="name" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}} placeholder="...جستجو" />
+          {search.map((item) => (
         <div className="out" key={item.id}  style={{padding:800}}>
         <h5 className="card-title2">{item.title}</h5>
          <div className="card cat">
@@ -54,6 +54,7 @@ useEffect(() => {
         )
         )            
 }
+
         
  </div>
     );

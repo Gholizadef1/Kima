@@ -42,6 +42,7 @@ function App() {
             <Route path="/search">
              
               <HelpingNavbar/>
+              
             </Route>
             <Route path="/profile">
               <Profile/>
