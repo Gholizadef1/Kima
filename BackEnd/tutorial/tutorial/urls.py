@@ -27,6 +27,8 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookdetail/', kyma.views.BookView.as_view()),
+    path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
+    path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),

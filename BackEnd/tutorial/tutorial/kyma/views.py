@@ -5,7 +5,10 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
 from . serializers import bookSerializer
+from rest_framework import filters
+from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
+
 
 class BookView(APIView):
     """
@@ -28,6 +31,23 @@ class BookView(APIView):
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
+
+class DynamicSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search_fields', [])
+
+class BookListView(generics.ListAPIView):
+    queryset = book.objects.all()
+    serializer_class = bookSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title','author']
+
+
+class DynamicBookAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = book.objects.all()
+    serializer_class = bookSerializer
+
 class BookViewPage(APIView):
     
     def get_object(self, pk):
@@ -40,3 +60,4 @@ class BookViewPage(APIView):
         wantedbook = self.get_object(pk)
         serializer = bookSerializer(wantedbook)
         return Response(serializer.data)
+
