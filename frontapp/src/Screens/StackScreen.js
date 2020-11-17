@@ -12,42 +12,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 // import TabScreen from './TabScreen';
  import Home from './Home';
 
-
-// const AuthStack=createStackNavigator();
-
-// const AuthStackScreen=() => {
-
-//   <AuthStack.navigator>
-
-//     <AuthStack.Screen>
-
-
-//     </AuthStack.Screen>
-
-//   </AuthStack.navigator>
-
-
-// }
-
-  
-//  const stackscreen=createStackNavigator();
-
-
-//  StackScreen
-// const stackScreen = createStackNavigator();
-// const Searchnavigation=()=>{
-//   return(
-   
-//    <stackScreen.Navigator initialRouteName={'Search'}>
-//      <stackScreen.Screen name='Search' component={Search} options={{headerShown: false}} ></stackScreen.Screen>
-//      <stackScreen.Screen name="Bookresult"   component={Bookresult} options={{headerShown: true}}></stackScreen.Screen>
-
-//    </stackScreen.Navigator>
- 
-//   )
-
-// }
-
   const StackScreen = createStackNavigator(
     {
       Log:Login,
@@ -72,7 +36,5 @@ import { createStackNavigator } from 'react-navigation-stack';
       },
     }
   );
-  //  const StackScreen=()=>{return createAppContainer(stackScreen);}
- 
-  
-  export default StackScreen;
+
+    export default createAppContainer(StackScreen);

@@ -20,27 +20,9 @@ import {Provider as AuthProvider } from './src/context/Authcontext';
 import {Context as AuthContext} from './src/context/Authcontext'
 
 
-// const lala=()=>{
-//   return(
-//     <TabScreen></TabScreen>
-//   )
-// }
-
 const SwitchNavigator=createSwitchNavigator({
-  loginFlow:StackScreen,
+  loginflow:StackScreen,
   mainFlow:TabScreen,
- 
- 
-
-
- 
- 
-
- 
-   
-// export default createAppContainer(lala);
-    
-    
 
 })
 
@@ -57,19 +39,3 @@ export default()=>{
   )
   }
 
-// }
-
-// const Tab = createBottomTabNavigator();
-
-// export default function App(){
-//   return(
-
-//     // <NavigationContainer>
-//     // <StackScreen />
-    
-    
-    
-//     // </NavigationContainer>
-  
-//   )
-// }

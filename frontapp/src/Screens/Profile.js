@@ -1,15 +1,11 @@
 import React,{useContext} from 'react';
 import { StyleSheet, Text, View ,Button} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 // import Login from './Login';
 import { Context as AuthContext } from '../context/Authcontext'; 
 // import { Button } from 'native-base';
-// import TabScreen from './TabScreen'
-// import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-// import { NavigationContainer } from "@react-navigation/native";
-// import StackScreen from './StackScreen';
-// import { State } from 'react-native-gesture-handler';
 import App from '../../App'
 
 

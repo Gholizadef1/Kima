@@ -31,7 +31,7 @@ const ResultsList = ({stylee,title,listresult,navigation}) => {
                     />
                     </TouchableOpacity>
                     
-                    
+                 
                     )
 
                 

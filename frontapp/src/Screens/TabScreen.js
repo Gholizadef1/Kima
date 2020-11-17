@@ -20,17 +20,6 @@ import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
 import Bookview from './Bookview';
-// const SNavigation = createStackNavigator();
-//  Snavigation=()=>{
-//    return(
-//     <SNavigation>
-//       <SNavigation.Screen name='search' component={Search}></SNavigation.Screen>
-//       <SNavigation.Screen name="book"   component={Bookresult}></SNavigation.Screen>
-
-//     </SNavigation>
-//    )
-
-//  }
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
