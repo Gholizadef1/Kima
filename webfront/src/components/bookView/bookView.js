@@ -1,12 +1,12 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
-import {API_BASE_URL} from '../../constants/apiContants';
+//import {API_BASE_URL} from '../../constants/apiContants';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch,
+    // BrowserRouter as Router,
+    // Switch,
+    // Route,
+    // Link,
+    // useRouteMatch,
     useParams,
     withRouter
   } from "react-router-dom";
@@ -70,21 +70,21 @@ function BookView(props) {
     return(
         
         <div className="container-fluid col-sm-8 rTOl text-right " >
-            <div className="shadow color1 my-1">
+            <div className="d-flex flex-row shadow color1 table-borderless my-1">
                 
-                <img src={state.imgurl} className="p-1 img-fluid col-sm-4 shadow float-right" alt="" />
-                
-              
+                <img src={state.imgurl} className="m-3 img-fluid col-sm-3 shadow float-right" alt="" />
+                <div className="d-flex flex-column p-3">
+                <h2>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
-                    <tr >
+                    {/* <tr >
                         <th >
                             نام کتاب
                         </th>
                         <td>
                             {state.title}
                         </td>
-                    </tr>
+                    </tr> */}
                     <tr>
                         <th>
                             نام نویسنده
@@ -103,6 +103,7 @@ function BookView(props) {
                     </tr>
                   </tbody>
                 </table>
+                </div>
     
                 
             </div>

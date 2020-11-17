@@ -5,15 +5,15 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Slide.css";
 import Slider from "react-slick";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  // Link,
+  // useRouteMatch,
+  // useParams,
   withRouter
 } from "react-router-dom";
-import BookView from "../components/bookView/bookView";
+//import BookView from "../components/bookView/bookView";
 
 function Slide(props) {
   //console.log(props);
