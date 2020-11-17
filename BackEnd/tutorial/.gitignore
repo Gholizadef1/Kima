@@ -1,12 +1,11 @@
 # Created by https://www.gitignore.io/api/venv,django,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=venv,django,visualstudiocode
-
+tutorial/.env
 ### Django ###
 *.log
 *.pot
 *.pyc
-*__pycache__*
-*.py[cod]
+
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -120,6 +119,7 @@ dmypy.json
 .pyre/
 
 ### venv ###
+
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 pyvenv.cfg
@@ -131,6 +131,7 @@ ENV/
 env.bak/
 venv.bak/
 pip-selfcheck.json
+
 
 ### VisualStudioCode ###
 .vscode/
