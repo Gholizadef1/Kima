@@ -3,6 +3,7 @@ import axios from 'axios';
 import './registrationForm.css';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function RegistrationForm(props) {
     const [state , setState] = useState({
@@ -12,6 +13,7 @@ function RegistrationForm(props) {
         confirmPassword: "",
         successMessage: null
     })
+    const [cookies, setCookie] = useCookies(['token']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -20,19 +22,25 @@ function RegistrationForm(props) {
         }))
     }
     const sendDetailsToServer = () => {
-        if(state.userName.length && state.email.length && state.password.length) {
+        if(state.userName.length && state.email.length && state.password.length ) {
             props.showError(null);
             const payload={
-                "userName":state.userName,
+                "username":state.userName,
                 "email":state.email,
                 "password":state.password,
+                "password2":state.confirmPassword,
             }
-            axios.post(API_BASE_URL+'register', payload)
+            const back= JSON.stringify(payload)
+            axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    if(response.data.code === 200){
+                    
+                    console.log(response);
+                    console.log(response.data);
+                    if(response.status=== 200){
+                        setCookie('token', response.data.token, { path: '/' });
                         setState(prevState => ({
                             ...prevState,
-                            'successMessage' : 'Registration successful. Redirecting to home page..'
+                            'successMessage' : 'ثبت نام موفقیت آمیز بود...'
                         }))
                         redirectToHome();
                         props.showError(null)
@@ -44,7 +52,7 @@ function RegistrationForm(props) {
                     console.log(error);
                 });    
         } else {
-            props.showError('Please enter valid username and password')    
+            props.showError('لطفا مشخصات خود را درست وارد کنید')    
         }
         
     }
@@ -65,16 +73,20 @@ function RegistrationForm(props) {
         }
     }
     return(
-        <div className="card-group" >
-            <div className="card col-12 hv-center frontColor">
-                <h1>Wellcome to KIMA</h1>
-                <p>where you can search about books</p>
-                <img src="people&books.png" class="col-12 hv-center" alt="" width="204" height="236"/> 
+        <div className="container-fluid ">
+        <div className="card-group color2" >
+            <div className="card col-12 hv-center color2">
+                <h1>به کیما خوش آمدی</h1>
+                <p>در کیما می توانی به دنبال کتاب های مورد علاقه خودت بگردی</p>
+                <p>!و درباره کتاب ها گفتگو کنی</p>
+                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
             </div>
-            <div className="card col-12 hv-center frontColor">
-            <form>
-            <div className="form-group text-left">
-                <label htmlFor="exampleInputUserName">Enter your username</label>
+            <div className="card col-12 hv-center color2">
+            <form className="mx-5">
+                <h1>ثبت نام</h1>
+                <br></br>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputUserName">نام کاربری</label>
                 <input type="userName" 
                        className="form-control" 
                        id="userName" 
@@ -84,8 +96,8 @@ function RegistrationForm(props) {
                 />
                 </div>
 
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Enter your email address</label>
+                <div className="form-group text-right">
+                <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -96,8 +108,8 @@ function RegistrationForm(props) {
                 
                 </div>
                 
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Enter your password</label>
+                <div className="form-group text-right">
+                    <label htmlFor="exampleInputPassword1">رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -106,8 +118,8 @@ function RegistrationForm(props) {
                         onChange={handleChange} 
                     />
                 </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirm password</label>
+                <div className="form-group text-right">
+                    <label htmlFor="exampleInputPassword1">تأیید رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
@@ -118,18 +130,19 @@ function RegistrationForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn"
+                    className="btn btn-outline-success badge-pill"
                     onClick={handleSubmitClick}
                 >
-                    Register
+                    ثبت
                 </button>
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
             <div className="mt-2">
-                <span>Already have an account? </span>
-                <span className="loginText" onClick={() => redirectToLogin()}>Login here </span> 
+                <span>قبلاً ثبت نام کرده اید؟ </span>
+                <span className="loginText" onClick={() => redirectToLogin()}>اینجا وارد شوید</span> 
+            </div>
             </div>
             </div>
         </div>

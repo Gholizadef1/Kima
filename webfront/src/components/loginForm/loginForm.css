@@ -1,10 +1,4 @@
 
-/*
-.login-card {
-    min-height: 60vh;
-}
-*/
-
 .registerMessage {
     margin-top: 10vh;
 }
@@ -14,5 +8,5 @@
 }
 
 .frontColor{
-    background-color: #b4c4b4;
+    background-color:#66dd2e;
 }

@@ -4,30 +4,47 @@ import RegistrationForm from './components/registrationForm/registrationForm';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+//  Link,
+//  useRouteMatch,
+//  useParams,
+//  withRouter
 } from "react-router-dom";
 
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
+
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
 import {HelpingNavbar} from"./Components/HelpingNavbar";
 import UsersList from "./Components/UsersList";
 import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
+import BookView from './components/bookView/bookView'
+//import loginForm from './components/loginForm/loginForm';
+//import {withCookies, Cookies , useCookies} from "react-cookie";
+
 
 function App() {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
+  //const [cookies, setCookie ] =useCookies(["user"]);
+
+  // const onChange = (newName)  => {
+  //   setCookie('name', newName, { path: '/' });
+  // }
+
+
+
   return (
     <Router>
       <div className="App" >
         
         <div >
-          
+          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           <Switch>
             <Route path="/" exact={true}>
-               <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="/login">
               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -39,6 +56,7 @@ function App() {
                <NavBar/>
                <Slide/>
             </Route>
+
             <Route path="/search">
              
               <HelpingNavbar/>
@@ -46,9 +64,18 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile/>
+
+            {/* <Route path="/book">
+              <NavBar/>
+              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
+            </Route> */}
+            <Route path="/book/:bookId">
+              <NavBar/>
+              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
+
             </Route>
           </Switch>
-        <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+        
       </div>
     </div>
     </Router>

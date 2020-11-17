@@ -15,6 +15,7 @@ export class NavBar extends Component{
   
     render(){
     return(   
+
 <Navbar className= "navbar">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
@@ -41,6 +42,7 @@ export class NavBar extends Component{
        <a class="nav-item1" href="profile" >
     <small className="name" size="50">
       نام کاربری
+
     </small>
 
     <CgProfile size="35" vertical-align='center' color="black"/> 
