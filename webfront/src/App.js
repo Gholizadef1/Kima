@@ -64,7 +64,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile/>
-
+</Route>
             {/* <Route path="/book">
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -74,13 +74,15 @@ function App() {
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
 
             </Route>
+            
           </Switch>
         
       </div>
     </div>
     </Router>
-  )
-  // return (
+  );
+  
+  //</Router>return (
   //   <div className="App">
   //     <header className="App-header">
   //       <img src={logo} className="App-logo" alt="logo" />
