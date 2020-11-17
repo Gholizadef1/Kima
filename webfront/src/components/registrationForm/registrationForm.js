@@ -37,7 +37,7 @@ function RegistrationForm(props) {
                     if(response.status=== 200){
                         setState(prevState => ({
                             ...prevState,
-                            'successMessage' : 'ثبت نام موفقیت آمیز بود...'
+                            'successMessage' : 'ثبت‌نام موفقیت‌آمیز بود...'
                         }))
                         redirectToHome();
                         props.showError(null)
@@ -66,21 +66,22 @@ function RegistrationForm(props) {
         if(state.password === state.confirmPassword) {
             sendDetailsToServer()    
         } else {
-            props.showError('Passwords do not match');
+            props.showError('رمز ها فرق دارند');
         }
     }
     return(
-        <div className="container-fluid ">
-        <div className="card-group color2" >
-            <div className="card col-12 hv-center color2">
+        <div className="d-flex justify-content-center py-sm-4 color4">
+        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
+            <div className="card color2 " >
+                <br></br>
                 <h1>به کیما خوش آمدی</h1>
-                <p>در کیما می توانی به دنبال کتاب های مورد علاقه خودت بگردی</p>
-                <p>!و درباره کتاب ها گفتگو کنی</p>
-                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
+                <p>در کیما می‌توانی به دنبال کتاب‌های مورد‌علاقه خودت بگردی</p>
+                <p>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنی</p>
+                <img src="people&books.png" className="col-12 hv-center" alt="" /> 
             </div>
-            <div className="card col-12 hv-center color2">
-            <form className="mx-5">
-                <h1>ثبت نام</h1>
+            <div className="card color2 p-2">
+            <form className="col-8 m-auto ">
+                <h1>ثبت‌نام</h1>
                 <br></br>
                 <div className="form-group text-right">
                 <label htmlFor="exampleInputUserName">نام کاربری</label>
@@ -127,7 +128,7 @@ function RegistrationForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn btn-outline-success badge-pill"
+                    className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
                     onClick={handleSubmitClick}
                 >
                     ثبت
@@ -137,7 +138,7 @@ function RegistrationForm(props) {
                 {state.successMessage}
             </div>
             <div className="mt-2">
-                <span>قبلاً ثبت نام کرده اید؟ </span>
+                <span>قبلاً ثبت‌نام کرده‌اید؟ </span>
                 <span className="loginText" onClick={() => redirectToLogin()}>اینجا وارد شوید</span> 
             </div>
             </div>

@@ -28,7 +28,7 @@ function App() {
       <div className="App" >
         
         <div >
-          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+          {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
           <Switch>
             <Route path="/" exact={true}>
                <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>

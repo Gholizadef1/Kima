@@ -29,7 +29,7 @@ function LoginForm(props) {
                 if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
-                        'successMessage' : 'ورود موفقیت آمیز بود...'
+                        'successMessage' : 'ورود موفقیت‌آمیز بود...'
                     }))
                     redirectToHome();
                     props.showError(null)
@@ -55,16 +55,17 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
-        <div className="container-fluid">
-        <div className="card-group color2 " >
-            <div className="card col-12 hv-center color2" >
-                <h1>به کیما خوش آمدی</h1>
+        <div className="d-flex justify-content-center py-sm-4 color4">
+        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
+            <div className="card color2 " >
+                <br></br>
+                <h1>به کیما خوش‌آمدی</h1>
                 <p>"کتاب یار مهربان است"</p>
-                <p>خوشحالیم امروز میبینیمت</p>
-                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
+                <p>خوشحالیم امروز می‌بینیمت</p>
+                <img src="people&books.png" className="col-12" alt=""/> 
             </div>
-            <div className="card col-12 hv-center color2">
-            <form className="mx-5 ">
+            <div className="card color2 p-2">
+            <form className="col-8 m-auto ">
                 <h1>ورود</h1>
                 <br></br>
                 <div className="form-group text-right">
@@ -89,11 +90,10 @@ function LoginForm(props) {
                        onChange={handleChange} 
                 />
                 </div>
-                <div className="form-check">
-                </div>
+                
                 <button 
                     type="submit" 
-                    className="btn btn-outline-success badge-pill"
+                    className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
                     onClick={handleSubmitClick}
                 >ثبت</button>
                 
@@ -102,11 +102,11 @@ function LoginForm(props) {
                 {state.successMessage}
             </div>
             <div className="registerMessage">
-                <span>قبلاً ثبت نام نکرده اید؟</span>
-                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت نام کنید</span> 
+                <span>قبلاً ثبت‌نام نکرده‌اید؟</span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
-            </div>
+        </div>
         </div>
     )
 }
