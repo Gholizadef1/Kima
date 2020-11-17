@@ -1,0 +1,51 @@
+.navbar1{
+    background-color:#1f7a8c;
+    top:-1px;
+    max-height: 60px;
+    min-width: 160px;
+    position: absolute;
+
+}
+.icon{
+padding-right: 100rem;
+ position: absolute;
+margin-top: 0.5rem;
+
+}
+.name3{
+    padding-right:20rem;
+  
+  color: black;
+
+    font-weight: bold;
+}
+
+@media (max-width :420px) 
+{
+    .name3{
+        display:none;
+    }.icon{
+        padding-left: 10px;
+    }
+
+  }
+
+@media (max-width :768px) 
+{
+    .searchbar{
+        display:none;
+    }
+    .nav-link{
+        width: 30px;
+    }
+  }
+  @media (max-width :800px) 
+  {
+      .searchbar{
+          display:none;
+      }
+      .nav-link{
+        width: 30px;
+    }
+    }
+  

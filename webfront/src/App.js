@@ -1,5 +1,4 @@
 import React ,{useState}  from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import RegistrationForm from './components/registrationForm/registrationForm';
 import {
@@ -11,10 +10,14 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
+
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
-//import Home from './components/home/home'; 
+
+import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
+import {HelpingNavbar} from"./Components/HelpingNavbar";
+import UsersList from "./Components/UsersList";
 import {NavBar} from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
@@ -53,6 +56,15 @@ function App() {
                <NavBar/>
                <Slide/>
             </Route>
+
+            <Route path="/search">
+             
+              <HelpingNavbar/>
+              
+            </Route>
+            <Route path="/profile">
+              <Profile/>
+
             {/* <Route path="/book">
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
@@ -60,6 +72,7 @@ function App() {
             <Route path="/book/:bookId">
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
+
             </Route>
           </Switch>
         

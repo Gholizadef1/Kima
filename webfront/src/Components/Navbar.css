@@ -5,20 +5,62 @@
     
     }
     .navbar {
-        display: flex;
-         max-height: 60px;
-    }
-    .searchbar{
-        margin: 0 auto;
-        width: 800px;
-    }
+        background-color:#1f7a8c;
+        top:-1px;
+        max-height: 60px;
 
+    }
+.nav-item1{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+    .form-control{
+        padding-left: 420px;
+
+    }
+    .name{
+        padding: 15px;
+        color: black;
+    }
+    .name1{
+        color: black;
+        padding: 15px;
+
+    }
+    .nav-link{
+        padding-top: 5px;
+        width: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+    @media (max-width :420px) 
+    {
+        .searchbar{
+            display:none;
+        }.nav-item{
+            display: none;
+        }
+
+      }
+    
     @media (max-width :768px) 
     {
         .searchbar{
             display:none;
         }
-    
+        .nav-link{
+            width: 30px;
+        }
       }
-    
+      @media (max-width :800px) 
+      {
+          .searchbar{
+              display:none;
+          }
+          .nav-link{
+            width: 30px;
+        }
+        }
+      
       

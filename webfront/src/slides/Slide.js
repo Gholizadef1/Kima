@@ -72,35 +72,38 @@ function Slide(props) {
   
   return (
     <div className="container">
-      <b className="slider-brand">Random Books</b>
+      <div class="brand">کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
+          <div className="sr-only">Loading...</div>
         </div>
+        
       ) : (
+        
+       <div className = "slide">
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
-              <div className="card cat" onClick={() => bookSelectedHandler( current )} >
+
+              <div className="card cat"onClick={() => bookSelectedHandler( current )}>
                 <img
-                  className="squere " 
+                  className="squere" 
                   alt={"users here"}
                   src={current.imgurl}
                   height={56}
                   width={56}
                 />
-                <div className="card-body ">
-                  <h5 className="card-text title-sm-center ">{current.username}</h5>
-                  <small className="card-text text-sm-center text-muted">
-                    In your contacts
-                  </small>
-                  <br />
-                </div>
-                
+
+                <small className= "title">
+                  <b className="card-title1">{current.title}</b>
+                   <h5 className="card-title2">{current.author}</h5>
+                   </small>
+
               </div>
             </div>
           ))}
         </Slider>
+        </div>
       )}
 
 {/* 
