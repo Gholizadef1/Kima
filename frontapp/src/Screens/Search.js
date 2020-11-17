@@ -16,6 +16,7 @@ import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
 
 const Search = ({navigation}) => {
+    console.log({navigation})
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
     // const [start,setStart]=useState(false);

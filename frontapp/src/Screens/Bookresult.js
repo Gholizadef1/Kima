@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Bookresult = ({navigation}) => {
+const Bookresult = (props) => {
+   const id= props.route.params.id
+   console.log(id);
 // const id=navigation.getPram(id);
 // console.log(id);
     return(

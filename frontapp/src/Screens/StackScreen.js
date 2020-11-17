@@ -30,8 +30,23 @@ import { createStackNavigator } from 'react-navigation-stack';
 // }
 
   
- 
+//  const stackscreen=createStackNavigator();
 
+
+//  StackScreen
+// const stackScreen = createStackNavigator();
+// const Searchnavigation=()=>{
+//   return(
+   
+//    <stackScreen.Navigator initialRouteName={'Search'}>
+//      <stackScreen.Screen name='Search' component={Search} options={{headerShown: false}} ></stackScreen.Screen>
+//      <stackScreen.Screen name="Bookresult"   component={Bookresult} options={{headerShown: true}}></stackScreen.Screen>
+
+//    </stackScreen.Navigator>
+ 
+//   )
+
+// }
 
   const StackScreen = createStackNavigator(
     {
@@ -57,6 +72,7 @@ import { createStackNavigator } from 'react-navigation-stack';
       },
     }
   );
+  //  const StackScreen=()=>{return createAppContainer(stackScreen);}
  
   
-  export default createAppContainer(StackScreen);
+  export default StackScreen;

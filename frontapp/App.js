@@ -27,8 +27,12 @@ import {Context as AuthContext} from './src/context/Authcontext'
 // }
 
 const SwitchNavigator=createSwitchNavigator({
+  loginFlow:StackScreen,
   mainFlow:TabScreen,
-  loginflow:StackScreen,
+ 
+ 
+
+
  
  
 

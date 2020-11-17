@@ -18,6 +18,8 @@ import Mybooks from './Mybooks'
 import Groups from './Groups';
 import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
+import Booknavigation from './Booknavigation'
+import Bookview from './Bookview';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -38,8 +40,8 @@ const TabSreen = () => {
             headerShown: false
           }}
           >
-             <Tab.Screen name="خانه" component={Home} options ={{tabBarIcon: ({ color, size }) => (
-                <AntDesign name="home" size={size} color={color} />
+             <Tab.Screen  name="خانه"  component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
+                <AntDesign name="home" size={size} color={color}  />
               ),
               }}/>
                <Tab.Screen name="کتاب های من" component={Mybooks} options={{tabBarIcon: ({ color, size }) => (
