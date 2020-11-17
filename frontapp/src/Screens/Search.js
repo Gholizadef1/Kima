@@ -6,6 +6,7 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 //searchbar
 import { StatusBar } from 'expo-status-bar';
 import Searchbar from '../components/Searchbar';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Authorresult from './Authorresult';
 import Bookresult from './Bookresult';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,6 +16,7 @@ import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
 
 const Search = ({navigation}) => {
+    console.log({navigation})
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
     // const [start,setStart]=useState(false);

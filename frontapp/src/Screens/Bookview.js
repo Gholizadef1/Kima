@@ -6,13 +6,13 @@ import {withNavigation} from 'react-navigation'
 import Home from './Home';
 import axiosinst from '../api/axiosinst'
 
-
 const Bookview = (prop) => {
 
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
+
   setResult(response.data);
   console.log(id);
   };
@@ -24,16 +24,19 @@ const Bookview = (prop) => {
     return null;
   }
     return(
-
       
         <Container>
         <Header style={{backgroundColor:'#1F7A8C',marginTop:15}}/>
+        <Container>
+        <Header />
+
         <Content>
           <Card>
             <CardItem>
               <Left>
-                {/* <Thumbnail source={require('./assets/download.jpg')} /> */}
                 <Body>
+                <Body>
+                      <Text>itemId: {JSON.stringify(id)}</Text>
                       <Text>{result.title}</Text>
                   <Text note>مشخصات</Text>
                 </Body>
@@ -69,13 +72,16 @@ const Bookview = (prop) => {
           </Card>
           <Card>
             <CardItem>
+
             <Text>{result.description}</Text>
+
             </CardItem>
           </Card>
         </Content>
       </Container>
     );
 };
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -126,5 +132,6 @@ const styles = StyleSheet.create({
     marginHorizontal:100,
   }
 });
+
 
 export default Bookview;

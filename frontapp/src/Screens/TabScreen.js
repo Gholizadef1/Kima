@@ -20,19 +20,17 @@ import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
 import Bookview from './Bookview';
-
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
       <NavigationContainer options={{}} >
           <Tab.Navigator
-          backgroundColor='#BFDBF7'
           initialRoute={{
             headerShown: false
           }}
           >
-             <Tab.Screen name="خانه" component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
-                <AntDesign name="home" size={size} color={color} />
+             <Tab.Screen  name="خانه"  component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
+                <AntDesign name="home" size={size} color={color}  />
               ),
               }}/>
                <Tab.Screen name="کتاب های من" component={Mybooks} options={{tabBarIcon: ({ color, size }) => (

@@ -12,27 +12,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 // import TabScreen from './TabScreen';
  import Home from './Home';
 
-
-// const AuthStack=createStackNavigator();
-
-// const AuthStackScreen=() => {
-
-//   <AuthStack.navigator>
-
-//     <AuthStack.Screen>
-
-
-//     </AuthStack.Screen>
-
-//   </AuthStack.navigator>
-
-
-// }
-
-  
- 
-
-
   const StackScreen = createStackNavigator(
     {
       Log:Login,
@@ -57,6 +36,5 @@ import { createStackNavigator } from 'react-navigation-stack';
       },
     }
   );
- 
-  
-  export default createAppContainer(StackScreen);
+
+    export default createAppContainer(StackScreen);

@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Searchbar = ({term,onTermChange,onTermsubmit}) => {
-  const [showCancel, setShowCancel] = useState(true);
+  const [showCancel, setShowCancel] = useState(false);
 
     return(
 

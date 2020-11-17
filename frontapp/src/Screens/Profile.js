@@ -6,8 +6,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 // import Login from './Login';
 import { Context as AuthContext } from '../context/Authcontext'; 
 // import { Button } from 'native-base';
+import App from '../../App'
 
-const Profile = (prop) => {
+
+
+const Profile = ({navigation}) => {
     const { signout } = useContext(AuthContext);  
     return(
         <View style={styles.container}>
@@ -19,7 +22,7 @@ const Profile = (prop) => {
             
             > */}
             <Button title='logout'
-            onPress={()=>prop.navigation.navigate('loginflow')}
+            onPress={()=>{navigation.navigate('loginFlow')}}
             >
 
             </Button>

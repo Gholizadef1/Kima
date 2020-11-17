@@ -24,14 +24,14 @@ const ResultsList = ({stylee,title,listresult,navigation}) => {
                 keyExtractor={(listresult)=>listresult.id}
                 renderItem={({item})=>{
                     return(
-                    <TouchableOpacity onPress={()=>navigation.navigate('Bookresult')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Showbookview',{id:item.id})}>
                     {/* //,{id: item.id}) */}
                     <ResultsDetail
                         result={item}
                     />
                     </TouchableOpacity>
                     
-                    
+                 
                     )
 
                 
