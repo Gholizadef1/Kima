@@ -64,6 +64,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile/>
+            </Route>
 
             {/* <Route path="/book">
               <NavBar/>

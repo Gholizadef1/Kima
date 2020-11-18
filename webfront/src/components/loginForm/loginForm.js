@@ -9,9 +9,11 @@ function LoginForm(props) {
     const [state , setState] = useState({
         email : "",
         password : "",
-        successMessage: null
+        successMessage: null,
+        backError : ""
     })
     const [cookies, setCookie] = useCookies(['token']);
+
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -22,32 +24,48 @@ function LoginForm(props) {
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
+        setState(prevState => ({
+            ...prevState,
+            'backError' : ""
+        }));
         const payload={
             "email":state.email,
             "password":state.password,
         }
-        axios.post(API_BASE_URL+'login', payload)
+        const back= JSON.stringify(payload)
+        console.log(payload);
+        console.log(back);
+        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json"}})
             .then(function (response) {
+                console.log(response);
+                console.log(response.data);
                 if(response.status === 200){
-                    setCookie('token', response.data.token, { path: '/' });
-
                     setState(prevState => ({
                         ...prevState,
-                        'successMessage' : 'ورود موفقیت آمیز بود...'
+                        'successMessage' : 'ورود موفقیت‌آمیز بود...'
                     }))
                     redirectToHome();
                     props.showError(null)
                 }
-                else if(response.data.code === 404){
-                    props.showError("رمز یا ایمیل اشتباه است.");
+                else if(response.status === 404){
+                    props.showError("رمز یا ایمیل اشتباه است.")
+                    setState(prevState => ({
+                        ...prevState,
+                        'backError' : "رمز یا ایمیل اشتباه است."
+                    })); 
 
                 }
                 else{
                     props.showError("ایمیل وجود ندارد.");
+                    setState(prevState => ({
+                        ...prevState,
+                        'backError' : "ایمیل وجود ندارد."
+                    })); 
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                
             });
     }
     const redirectToHome = () => {
@@ -59,19 +77,20 @@ function LoginForm(props) {
         props.updateTitle('Register');
     }
     return(
-        <div className="container-fluid">
-        <div className="card-group color2 " >
-            <div className="card col-12 hv-center color2" >
-                <h1>به کیما خوش آمدی</h1>
+        <div className="d-flex justify-content-center py-sm-4 color4">
+        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
+            <div className="card color2 " >
+                <br></br>
+                <h1>به کیما خوش‌آمدی</h1>
                 <p>"کتاب یار مهربان است"</p>
-                <p>خوشحالیم امروز میبینیمت</p>
-                <img src="people&books.png" className="col-12 hv-center" alt="" width="204" height="236"/> 
+                <p>خوشحالیم امروز می‌بینیمت</p>
+                <img src="people&books.png" className="col-12" alt=""/> 
             </div>
-            <div className="card col-12 hv-center color2">
-            <form className="mx-5 ">
+            <div className="card color2 p-2">
+            <form className="col-8 m-auto was-validated">
                 <h1>ورود</h1>
                 <br></br>
-                <div className="form-group text-right">
+                <div className="form-group-sm text-right">
                 <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
@@ -79,8 +98,13 @@ function LoginForm(props) {
                        //aria-describedby="emailHelp" 
                        //placeholder="Enter email" 
                        value={state.email}
+                       required
                        onChange={handleChange}
+                       
                 />
+                {/* <div class="invalid-feedback">
+                    لطفا یک ایمیل وارد کنید
+                </div> */}
                 </div>
                 
                 <div className="form-group text-right">
@@ -90,27 +114,31 @@ function LoginForm(props) {
                        id="password" 
                        //placeholder="Password"
                        value={state.password}
+                       required
                        onChange={handleChange} 
                 />
+                {/* <div class="invalid-feedback">
+                    لطفا رمز خود وارد کنید
+                </div> */}
                 </div>
-                <div className="form-check">
-                </div>
+                <p className="loginText"> {state.backError} </p>
                 <button 
                     type="submit" 
-                    className="btn btn-outline-success badge-pill"
+                    className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
                     onClick={handleSubmitClick}
                 >ثبت</button>
                 
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
-                {state.successMessage}
+                {props.showError}
             </div>
+            
             <div className="registerMessage">
-                <span>قبلاً ثبت نام نکرده اید؟</span>
-                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت نام کنید</span> 
+                <span>قبلاً ثبت‌نام نکرده‌اید؟</span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
-            </div>
+        </div>
         </div>
     )
 }
