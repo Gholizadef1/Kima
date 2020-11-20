@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -15,7 +16,7 @@ from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Account
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer,ChangePasswordSerializer
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -57,3 +58,35 @@ def login(request):
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key},
                     status=HTTP_200_OK)
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+
+    serializer_class = ChangePasswordSerializer
+    model = Account
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self,queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self,request,*args,**kwargs):
+
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password" : ["Wrong Password"]},status=status.HTTP_400_BAD_REQUEST)
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Password updated succesfully!',
+                'data' : [],
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

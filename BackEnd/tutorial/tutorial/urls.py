@@ -20,6 +20,7 @@ from .kyma import views
 from .quickstart import views
 from . import kyma
 from .quickstart.views import registration_view
+from .quickstart.views import ChangePasswordView
 from .quickstart.views import login
 from .kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
@@ -30,6 +31,7 @@ urlpatterns = [
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
+    path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
 ]
