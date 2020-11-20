@@ -298,6 +298,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# expo
+.expo/
+
+
 ### vscode ###
 .vscode/*
 !.vscode/settings.json
@@ -307,4 +311,8 @@ Temporary Items
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,vscode
+
+
+
+
 
