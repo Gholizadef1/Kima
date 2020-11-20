@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,vscode,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,vscode,venv
 
+
+tutorial/tutorial/.env
+
 ### Django ###
 *.log
 *.pot

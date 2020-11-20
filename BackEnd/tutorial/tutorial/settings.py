@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 
 from pathlib import Path
-#from . import quickstart
+from . import quickstart
 import environ
 
 env = environ.Env()
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'tutorial.kyma',
     'tutorial.quickstart',
     'rest_framework.authtoken',
-    'corsheaders',
 ]
 
 
