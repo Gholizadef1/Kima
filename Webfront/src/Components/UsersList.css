@@ -1,0 +1,68 @@
+.body{
+
+    background: radial-gradient#e5e5e5;
+}
+
+.squere1:hover{
+    box-shadow: 1px 1px 30px 1px rgb(116, 116, 225) !important; 
+}
+.cat1{
+    
+    padding-top: 10px;
+    opacity: 1;
+    
+    margin-bottom: 100px;
+    padding-bottom: 300px;
+    padding-left: 20px;
+    margin-right: 5px;
+    height: 100px;
+    
+}
+
+.card-title3{
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+
+}.card-title4{
+    font-size: 13px;
+    color: black;
+  
+    font-weight: bold;
+    
+}
+
+.row{
+    margin-top: 310px;
+
+margin-left: 80px;
+   
+}
+.squere1 {
+    
+    
+    width: 100px;
+    height: 100px;
+    padding-top:4px;
+    padding-right: 10px;
+margin-left: 4px;
+margin-right: 10px;
+   
+   
+}
+.horizontal{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.brand1{
+    margin-bottom: 150px;
+    margin-left: 1000px;
+    font-weight: bold;
+    font-size: 25px;
+}
+.spinner-border{
+    margin-left:500px;
+    margin-top: -10px;
+    color: black;
+}
