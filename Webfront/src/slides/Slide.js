@@ -88,7 +88,6 @@ function Slide(props) {
               <div className="card cat"onClick={() => bookSelectedHandler( current )}>
                 <img
                   className="squere" 
-                  alt={"users here"}
                   src={current.imgurl}
                   height={56}
                   width={56}

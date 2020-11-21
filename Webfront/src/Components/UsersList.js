@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Horizontal from 'react-scroll-horizontal';
  import "./UsersList.css";
  import "./HelpingNavbar";
-
 function UsersList() {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
@@ -35,8 +34,8 @@ useEffect(() => {
 
     return ( 
       
-    <div className="row">
-       <input type="text" name="name" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}} placeholder="جستجوی کتاب یا نویسنده" />
+      <div className="row">
+       
     <div class="brand1">نتایج</div> 
     {search.length === 0 ? (
       <div className="spinner-border" role="status">
@@ -68,7 +67,9 @@ useEffect(() => {
       )}
     </div>
     
+    
   );
 }
+
 
 export default UsersList;

@@ -27,11 +27,13 @@
     padding-top: 10px;
     opacity: 1;
     width: 200px;
+    height: 250px;
 
 }
 
 .container{
     margin-top: 30px;
+    
 }
 .squere {
     display:flex;
@@ -49,7 +51,8 @@
 
 .brand{
    margin-top: 100px;
-    margin-left: 910px;
+    margin-left: 835px;
+   margin-bottom: 10px;
     font-weight: bold;
     font-size: 25px;
 }
