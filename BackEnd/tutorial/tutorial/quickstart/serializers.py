@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import Account
+from tutorial.kyma.serializers import bookSerializer
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'},write_only=True)
-
     class Meta:
         model = Account
         fields = ['email', 'username','password','password2']

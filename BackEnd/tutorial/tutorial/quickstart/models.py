@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from tutorial.kyma.models import book
 
 class MyAccountManager(BaseUserManager):
     def create_user(self,email,username,password=None):
@@ -38,6 +39,7 @@ class Account(AbstractBaseUser):
     last_login=models.DateTimeField(verbose_name="last login",auto_now=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    mybook = models.ManyToManyField(book)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
