@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
@@ -34,4 +36,5 @@ urlpatterns = [
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
-]
+    
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
