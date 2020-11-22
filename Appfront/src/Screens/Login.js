@@ -15,9 +15,10 @@ import Home from './Home';
 import TabScreen from './TabScreen';
 import Axios from 'axios';
 // import {creatStore} from 'redux'
-import { Context } from '../context/Authcontext';   
+// import { Context } from '../context/AuthContext';   
 import axiosinst from '../api/axiosinst';
 import axios from 'axios';
+import AuthContext,{AuthProvider} from '../context/AuthContext';
 
 
 
@@ -38,9 +39,9 @@ const logschema=yup.object({
 
  const Login=(pro)=> {
    
-  const { state, signin } = useContext(Context);
+  // const { state, signin } = useContext(Context);
   // const { state, signin, clearErrorMessage } = useContext(Context);      
-
+  const val=useContext(AuthContext);
      
      
   return (
@@ -60,7 +61,7 @@ const logschema=yup.object({
 
       onSubmit={(values,actions)=>{
          
-     
+        val.changelogged(true);
         const back={   
           email:values.Email,
           password:values.Password,
@@ -69,7 +70,7 @@ const logschema=yup.object({
          axios.post('47317a656b11.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(function(response){
           console.log(response.status);
-        
+          setLogged(true);
           pro.navigation.navigate('mainFlow');
           console.log('Hiiiiiiii')
          

@@ -11,7 +11,8 @@ import {Formik,formik} from 'formik';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import { log } from 'react-native-reanimated';
-import { Context as Authcontext } from '../context/Authcontext';  
+// import AuthContext,{AuthProvider} from '../context/AuthContext';
+// import { Context as Authcontext } from '../context/AuthContext';  
 
 import axios from 'axios';
 import axiosinst from '../api/axiosinst';
@@ -45,7 +46,7 @@ const signschema=yup.object({
 })
  const SignUp=(pro,{Users})=> {
   const[check,setcheck]=useState(false);
-  const { state, signup } = useContext(Authcontext);
+  // const { state, signup } = useContext(Authcontext);
   return (
     
      <Container>
@@ -315,6 +316,21 @@ const styles = StyleSheet.create({
   }
 });
 export default SignUp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

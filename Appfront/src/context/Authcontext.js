@@ -1,72 +1,119 @@
-import axiosinst from '../api/axiosinst';
-import CreateDataContext from './CreatDataContext';
+import React ,{useState,createContext} from 'react';
 
-const authReducer = (state, action) => {
-    switch (action.type) {
-      case 'add_error':
-        return { ...state, errorMessage: action.payload };
-      case 'signin':
-        return { errorMessage: '', token: action.payload };
-      case 'clear_error_message':
-        return { ...state, errorMessage: '' };
-      case 'signout':
-        return { token: null, errorMessage: '' };
-      default:
-        return state;
-    }
-  };
+
+const AuthContext=React.createContext();
+
+export const AuthProvider=({children})=>{
+  const [logged,setlogged]=useState(false);
+ const  changelogged=(val)=>{
+   setlogged(val);
+  //  if(logged)
+  //  setlogged(false);
+  //  else
+  //  setlogged(true);
+ }
+
+  return(<AuthContext.Provider value={{logged:logged,changelogged:changelogged}}>{children}</AuthContext.Provider>)
+}
+//,changelogged:changelogged
+export default AuthContext;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import axiosinst from '../api/axiosinst';
+// import CreateDataContext from './CreatDataContext';
+
+
+// const authReducer = (state, action) => {
+//     switch (action.type) {
+//       case 'add_error':
+//         return { ...state, errorMessage: action.payload };
+//       case 'signin':
+//         return { errorMessage: '', token: action.payload };
+//       case 'clear_error_message':
+//         return { ...state, errorMessage: '' };
+//       case 'signout':
+//         return { token: null, errorMessage: '' };
+//       default:
+//         return state;
+//     }
+//   };
   
-  const tryLocalSignin = dispatch => async () => {
-    const token = await AsyncStorage.getItem('token');
-    if (token) {
-      dispatch({ type: 'signin', payload: token });
-      navigate('home');
-    } else {
-      navigate('Signup');
-    }
-  };
+//   const tryLocalSignin = dispatch => async () => {
+//     const token = await AsyncStorage.getItem('token');
+//     if (token) {
+//       dispatch({ type: 'signin', payload: token });
+//       navigate('home');
+//     } else {
+//       navigate('Signup');
+//     }
+//   };
   
-  const clearErrorMessage = dispatch => () => {
-    dispatch({ type: 'clear_error_message' });
-  };
+//   const clearErrorMessage = dispatch => () => {
+//     dispatch({ type: 'clear_error_message' });
+//   };
   
-  const signup = dispatch => async ({ email, password }) => {
-    try {
-      const response = await axiosinst.post('/register', { email, password });
-      await AsyncStorage.setItem('token', response.data.token);
-      dispatch({ type: 'signin', payload: response.data.token });
+//   const signup = dispatch => async ({ email, password }) => {
+//     try {
+//       const response = await axiosinst.post('/register', { email, password });
+//       await AsyncStorage.setItem('token', response.data.token);
+//       dispatch({ type: 'signin', payload: response.data.token });
   
-      navigate('home');
-    } catch (err) {
-      dispatch({
-        type: 'add_error',
-        payload: 'Something went wrong with sign up'
-      });
-    }
-  };
+//       navigate('home');
+//     } catch (err) {
+//       dispatch({
+//         type: 'add_error',
+//         payload: 'Something went wrong with sign up'
+//       });
+//     }
+//   };
   
-  const signin = dispatch => async ({ email, password }) => {
-    try {
-      const response = await axiosinst.post('/login', { email, password });
-      await AsyncStorage.setItem('token', response.data.token);
-      dispatch({ type: 'signin', payload: response.data.token });
-      navigate('home');
-    } catch (err) {
-      dispatch({
-        type: 'add_error',
-        payload: 'Something went wrong with sign in'
-      });
-    }
-  };
+//   const signin = dispatch => async ({ email, password }) => {
+//     try {
+//       const response = await axiosinst.post('/login', { email, password });
+//       await AsyncStorage.setItem('token', response.data.token);
+//       dispatch({ type: 'signin', payload: response.data.token });
+//       navigate('home');
+//     } catch (err) {
+//       dispatch({
+//         type: 'add_error',
+//         payload: 'Something went wrong with sign in'
+//       });
+//     }
+//   };
   
-  const signout = dispatch => async () => {
-    await AsyncStorage.removeItem('token');
-    dispatch({ type: 'signout' });
-    navigate('loginFlow');
-  };
+//   const signout = dispatch => async () => {
+//     await AsyncStorage.removeItem('token');
+//     dispatch({ type: 'signout' });
+//     navigate('loginFlow');
+//   };
   
-  export const { Provider, Context } = CreateDataContext(
-    authReducer,
-    { signin, signout, signup, clearErrorMessage, tryLocalSignin },
-    { token: null, errorMessage: '' }
-  );
+//   export const { Provider, Context } = CreateDataContext(
+//     authReducer,
+//     { signin, signout, signup, clearErrorMessage, tryLocalSignin },
+//     { token: null, errorMessage: '' }
+//   );

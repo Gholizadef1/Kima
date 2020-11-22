@@ -16,8 +16,10 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { NavigationContainer } from "@react-navigation/native";
 import StackScreen from './src/Screens/StackScreen';
 import { State } from 'react-native-gesture-handler';
-import {Provider as AuthProvider } from './src/context/Authcontext';
-import {Context as AuthContext} from './src/context/Authcontext'
+import AuthContext,{AuthProvider} from './src/context/AuthContext';
+
+// import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
+// import {Context as AuthContext} from './src/context/Authcontext'
 
 
 // const lala=()=>{
@@ -26,15 +28,21 @@ import {Context as AuthContext} from './src/context/Authcontext'
 //   )
 // }
 
-const SwitchNavigator=createSwitchNavigator({
-  mainFlow:TabScreen,
-  loginFlow:StackScreen,
-
- 
- 
+// const SwitchNavigaor=()=>{
+//   return(
+//     <NavigationContainer>
+          
 
 
- 
+//     </NavigationContainer>
+
+
+//   )
+// }
+
+// const SwitchNavigator=createSwitchNavigator({
+//   mainFlow:TabScreen,
+//   loginFlow:StackScreen,
  
 
  
@@ -43,17 +51,32 @@ const SwitchNavigator=createSwitchNavigator({
     
     
 
-})
-
+// })
+// // const SwitchNavigatorr=createAppContainer(SwitchNavigator);
 // // export default createAppContainer(SwitchNavigator);
-const App=createAppContainer(SwitchNavigator);
+const a=true;
+
+const SwitchNavigatorr=(prop)=>{
+  const value=useContext(AuthContext);
+  console.log(value);
+  // return (<NavigationContainer><TabScreen></TabScreen></NavigationContainer>)
+
+  // const {logg,changelogg}=useContext(AuthContext);
+  return(
+    // <TabScreen></TabScreen>
+    <NavigationContainer>
+     {value.logged ? (<TabScreen/>):(<StackScreen/>)}
+     </NavigationContainer>
+  )
+}
 
 
 export default()=>{
   return(
-  <AuthProvider>
+   <AuthProvider>
 
-    <App/>
+    <SwitchNavigatorr/>
+   
   </AuthProvider>
   )
   }

@@ -1,4 +1,5 @@
 
+
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -20,6 +21,9 @@ import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
 import Bookview from './Bookview';
+import { createSwitchNavigator } from 'react-navigation';
+import App from '../../App';
+import Profile from './Profile';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -31,10 +35,17 @@ import Bookview from './Bookview';
 //    )
 
 //  }
+// const logout=createSwitchNavigator({
+//   mainFlow:TabScreen,
+//   loginFlow:StackScreen,
+ 
+// }
+
+// );
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
-      <NavigationContainer options={{}} >
+      // <NavigationContainer options={{}} >
           <Tab.Navigator
           initialRoute={{
             headerShown: false
@@ -60,13 +71,13 @@ const TabSreen = () => {
     
             }}/>
           
-            <Tab.Screen name="حساب کاربری" component={Profie} options={{tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name="حساب کاربری" component={Profile} options={{tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="person" size={size} color={color} />
               ),
               }}/>
            
           </Tab.Navigator>
-          </NavigationContainer>
+          // {/* </NavigationContainer> */}
       );
 }
 
