@@ -34,3 +34,12 @@ class ChangePasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
 
 
+class UpdateUserProfileSerializer(serializers.ModelSerializer):
+
+    lookup_field = 'username'
+
+    class Meta:
+        model = Account
+        fields = ['username','profile_photo']
+
+

@@ -21,7 +21,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
 from .quickstart import views
 from . import kyma
-from .quickstart.views import registration_view
+from .quickstart.views import registration_view,UpdateUserProfileView
 from .quickstart.views import ChangePasswordView
 from .quickstart.views import login
 from .kyma.views import *
@@ -34,6 +34,7 @@ urlpatterns = [
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
+    path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
     

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.mixins import UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -16,7 +17,7 @@ from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Account
-from .serializers import RegistrationSerializer,ChangePasswordSerializer
+from .serializers import RegistrationSerializer,ChangePasswordSerializer,UpdateUserProfileSerializer
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -90,3 +91,20 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
+    serializer_class = UpdateUserProfileSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Account.objects.all()
+    #lookup_field = 'username'
+
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+    # make sure to catch 404's below
+        obj = queryset.get(pk=self.request.user.id)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def put(self,request,*args,**kwargs):
+        return self.partial_update(request, *args, **kwargs)
