@@ -72,7 +72,7 @@ function Slide(props) {
   
   return (
     <div className="container">
-      <div class="brand">کتاب‌های پیشنهادی</div> 
+      <div class="brand" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -88,15 +88,14 @@ function Slide(props) {
               <div className="card cat"onClick={() => bookSelectedHandler( current )}>
                 <img
                   className="squere" 
-                  alt={"users here"}
                   src={current.imgurl}
                   height={56}
                   width={56}
                 />
 
                 <small className= "title">
-                  <b className="card-title1">{current.title}</b>
-                   <h5 className="card-title2">{current.author}</h5>
+                  <b className="card-title1" style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-title2"style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
 
               </div>
