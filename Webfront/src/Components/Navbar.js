@@ -4,8 +4,8 @@ import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
+import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
-import Horizontal from 'react-scroll-horizontal';
  import "./UsersList.css";
  import "./HelpingNavbar";
 import "./Navbar.css";
@@ -43,6 +43,9 @@ catch (err) {}
 useEffect(() => {
   searchUsers();
   }, [user]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
     return(   
 
@@ -50,28 +53,29 @@ useEffect(() => {
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
-             <b class=" text-dark" style = {{fontSize:30}}>کیما</b>     
+             <b style = {{fontSize:35,fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>کیما</b>     
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-    
-      <Nav.Link class="nav-link" href="topics" style = {{padding:40}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:40}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:40}} >آزمونک</Nav.Link>
+      <Nav.Link class="nav-link" href="topics" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
+      <Nav.Link class="nav-link" href="groups" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
+      <Nav.Link class="nav-link" href="quize"style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
     </Nav> 
-    <div class="container"> 
-    <input type="text" name="name" placeholder="...جستجوی کتاب یانویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
-    <div class="row">
+    <>
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
+      >
+    <Button variant="gray" onClick={handleShow}>
+    <GoSearch size="30" color="black"/>
+        </Button>
+      </div>
+      <input className="input"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
     
-      <div class="col-md-12">
-        
-        <div class="modal fade" id="myModal">
-            
-          
-            <div class="modal-header">
-            <button type="Close" class="btn btn-primary" data-dismiss="model">CLose</button>
-              </div>
-              <div class="modal-body">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
        {search.map((item) => (
      <div className="out1" key={item.id}>
        <div className="card cat1">
@@ -87,33 +91,22 @@ useEffect(() => {
           </div>
        </div>
        ))}
-    
-    </div>
-              
-  </div>
-  </div>
-  </div>
-  </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="info" onClick={handleClose}>
+            بستن
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   
- 
-  
-  
-  <a class="nav-item" href="search" data-Toggle="modal" data-target="#myModal" >
-    <small className="name1" size="60" >
-      جستجو
-    </small>
-<GoSearch size="30" color="black"/>
-  </a>
        <a class="nav-item1" href="profile" >
-    <small className="name" size="50">
+       <small className="name" size="50">
       نام کاربری
-
     </small>
 
-    <CgProfile size="35" vertical-align='center' color="black"/> 
+    <CgProfile size="35" vertical-align='center' style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}/> 
      </a>
-    
-
   </Navbar.Collapse>
 </Navbar>
     );

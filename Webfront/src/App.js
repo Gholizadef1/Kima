@@ -33,9 +33,6 @@ function App() {
   // const onChange = (newName)  => {
   //   setCookie('name', newName, { path: '/' });
   // }
-
-
-
   return (
     <Router>
       <div className="App" >
