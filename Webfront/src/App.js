@@ -60,6 +60,7 @@ function App() {
               
             </Route>
             <Route path="/profile">
+              <NavBar/>
               <Profile/>
               <Avatar/>
             </Route>
