@@ -19,6 +19,8 @@ import Axios from 'axios';
 import axiosinst from '../api/axiosinst';
 import axios from 'axios';
 import AuthContext,{AuthProvider} from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
@@ -59,19 +61,22 @@ const logschema=yup.object({
       validationSchema={logschema}
 
 
-      onSubmit={(values,actions)=>{
+      onSubmit={async(values,actions)=>{
          
-        val.changelogged(true);
+      
         const back={   
           email:values.Email,
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-         axios.post('47317a656b11.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
-        .then(function(response){
+         axios.post('http://1d5bf2d8221a.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+        .then(async function(response){
+          
+          await AsyncStorage.setItem('token',response.data.token)
+          console.log(response)
           console.log(response.status);
-          setLogged(true);
-          pro.navigation.navigate('mainFlow');
+          val.changelogged(true);
+          // pro.navigation.navigate('mainFlow');
           console.log('Hiiiiiiii')
          
         

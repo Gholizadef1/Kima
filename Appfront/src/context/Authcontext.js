@@ -1,11 +1,29 @@
-import React ,{useState,createContext} from 'react';
+import React ,{useState,createContext,useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AuthContext=React.createContext();
 
+const trylocallogin=async()=>{
+  const val = useContext(AuthContext); 
+  const token=await AsyncStorage.getItem('token');
+  if(token!=null){
+    val.changelogged(token);
+  }
+  else
+  val.changelogged(null);
+
+}
+
+
 export const AuthProvider=({children})=>{
-  const [logged,setlogged]=useState(false);
+  // useEffect(()=>{
+  //   trylocallogin();
+  // },[])
+ 
+  const [logged,setlogged]=useState(null);
  const  changelogged=(val)=>{
+  
    setlogged(val);
   //  if(logged)
   //  setlogged(false);

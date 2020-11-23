@@ -30,7 +30,7 @@ const Profile = ({navigation}) => {
             onPress={()=>{
                 console.log(navigation);
                 // navigation.navigate('loginFlow')}}
-                val.changelogged(false);
+                val.changelogged(null);
 
             }}
             >

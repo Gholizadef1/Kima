@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState ,useContext} from 'react';
+import React, { useState ,useContext,useEffect} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button} from 'native-base';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -17,6 +17,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import StackScreen from './src/Screens/StackScreen';
 import { State } from 'react-native-gesture-handler';
 import AuthContext,{AuthProvider} from './src/context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
 // import {Context as AuthContext} from './src/context/Authcontext'
@@ -57,15 +58,31 @@ import AuthContext,{AuthProvider} from './src/context/AuthContext';
 const a=true;
 
 const SwitchNavigatorr=(prop)=>{
+
   const value=useContext(AuthContext);
   console.log(value);
+  useEffect(async()=>{
+   
+    console.log('checkkard1')
+  const token=await AsyncStorage.getItem('token');
+  console.log(token)
+  console.log('checkkard2')
+  if(token!=null){
+    value.changelogged(token);
+    console.log('checkkard3')
+  }
+  else{
+  value.changelogged(null);
+  console.log('checkkard4')
+  }
+  },[])
   // return (<NavigationContainer><TabScreen></TabScreen></NavigationContainer>)
 
   // const {logg,changelogg}=useContext(AuthContext);
   return(
     // <TabScreen></TabScreen>
     <NavigationContainer>
-     {value.logged ? (<TabScreen/>):(<StackScreen/>)}
+     {value.logged!=null ? (<TabScreen/>):(<StackScreen/>)}
      </NavigationContainer>
   )
 }

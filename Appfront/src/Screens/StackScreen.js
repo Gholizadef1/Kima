@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Login from './Login';
 import SignUp from './SignUp';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 // import { createStackNavigator } from 'react-navigation-stack';
 // import TabScreen from './TabScreen';
  import Home from './Home';
@@ -41,7 +41,12 @@ const StackScreen=(prop)=>{
   return(
 
    <stackScreen.Navigator initialRouteName={'Log'}>
-     <stackScreen.Screen name='Log' component={Login} options={{headerTitle:'kima',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'}}} ></stackScreen.Screen>
+     <stackScreen.Screen name='Log' component={Login} options={{headerTitle:'kima',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'},transitionSpec: {
+    open: TransitionSpecs.TransitionIOSSpec,
+    close: TransitionSpecs.TransitionIOSSpec,
+  },gestureDirection: 'horizontal',
+  }
+  } ></stackScreen.Screen>
      <stackScreen.Screen name="Sign"   component={SignUp} options={{headerTitle:'kima',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'}}} ></stackScreen.Screen>
 
    </stackScreen.Navigator>
