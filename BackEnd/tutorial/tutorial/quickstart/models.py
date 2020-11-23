@@ -39,7 +39,11 @@ class Account(AbstractBaseUser):
     last_login=models.DateTimeField(verbose_name="last login",auto_now=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    mybook = models.ManyToManyField(book)
+
+    mybook = models.ManyToManyField(book,blank=True,related_name='All_Books')
+    #Readbooks = models.ManyToManyField(book,related_name='Read_Books')
+    #WantToRead = models.ManyToManyField(book,related_name='Want_to_Read')
+    #Reading = models.ManyToManyField(book,related_name='I_am_Reading')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
