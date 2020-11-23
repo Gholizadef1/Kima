@@ -13,12 +13,12 @@ import {
 
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
-
+import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
 import {HelpingNavbar} from"./Components/HelpingNavbar";
 import UsersList from "./Components/UsersList";
-import {NavBar} from "./Components/Navbar";
+import NavBar from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
@@ -33,9 +33,6 @@ function App() {
   // const onChange = (newName)  => {
   //   setCookie('name', newName, { path: '/' });
   // }
-
-
-
   return (
     <Router>
       <div className="App" >
@@ -64,6 +61,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile/>
+              <Avatar/>
             </Route>
             {/* <Route path="/book">
               <NavBar/>

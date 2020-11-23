@@ -44,9 +44,12 @@ function App() {
           }}
           onClick={() => imageUploader.current.click()}
         >
+            
+            
           <img className="avatar"
           
             ref={uploadedImage}
+            
           />
         </div>
         
