@@ -13,7 +13,7 @@ import {
 
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
-
+import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
 import {HelpingNavbar} from"./Components/HelpingNavbar";
@@ -61,6 +61,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile/>
+              <Avatar/>
             </Route>
             {/* <Route path="/book">
               <NavBar/>

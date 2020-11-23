@@ -74,6 +74,9 @@ useEffect(() => {
     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
+           <div className="header">
+          نتایج
+          </div>
         </Modal.Header>
         <Modal.Body>
        {search.map((item) => (

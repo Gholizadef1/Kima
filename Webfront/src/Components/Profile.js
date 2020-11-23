@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import "./Profile.css";
-
+import Avatar from "./Avatar";
 class Profile extends Component{
     state={
         navigate:false
@@ -16,7 +16,14 @@ class Profile extends Component{
         if(navigate){
             return <Redirect to = "/register" push = {true}/>;
         }
-        return  <button type="button" class="btn-default"onClick = {this.logout} >خروج ازحساب</button>
+ 
+            
+        
+        return( 
+           
+     <button type="button" class="btn-default"onClick = {this.logout} >خروج ازحساب</button>
+    
+        )
     } 
    
 }
