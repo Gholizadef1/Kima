@@ -128,7 +128,7 @@ const logschema=yup.object({
 
        <Item style={styles.input}>
          <Input name='passs' style={styles.Input} autoCapitalize='none' autoCorrect={false}
-
+          secureTextEntry
           onChangeText={props.handleChange('Password')}
           value={props.values.Password}
           onBlur={props.handleBlur('Password')}

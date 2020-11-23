@@ -65,6 +65,7 @@ const signschema=yup.object({
       initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
       validationSchema={signschema}
       
+
         onSubmit={(values,actions)=>{
         //  signup(values);
         const back={
@@ -203,6 +204,7 @@ const signschema=yup.object({
   
        <Item style={styles.input}>
          <Input  style={styles.Input} 
+          secureTextEntry
          onChangeText={props.handleChange('Password')}
          value={props.values.Password}
          onBlur={props.handleBlur('Password')}
@@ -218,6 +220,7 @@ const signschema=yup.object({
        
        <Item style={styles.input}>
          <Input  style={styles.Input} 
+          secureTextEntry
           onChangeText={props.handleChange('repeatPassword')}
           value={props.values.repeatPassword}
           onBlur={props.handleBlur('repeatPassword')}
