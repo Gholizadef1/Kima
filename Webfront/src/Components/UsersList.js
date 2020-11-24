@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import Horizontal from 'react-scroll-horizontal';
  import "./UsersList.css";
  import "./HelpingNavbar";
+ import {withRouter } from "react-router-dom"
 
-function UsersList() {
+function UsersList(props) {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [users,setUsers] = useState([]);
@@ -29,6 +30,11 @@ setSearch(result.data);
 catch (err) {}
 };
 
+const bookSelectedHandler = ( b ) => {
+  console.log(b);
+  props.history.push( '/book/' + b.id );
+}
+
 useEffect(() => {
   searchUsers();
   }, [user]);
@@ -49,7 +55,7 @@ useEffect(() => {
     <Horizontal className="horizontal" style={{height:200,position:"absolute",width:700}}>
        
           {search.map((item) => (
-        <div className="out1" key={item.id}>
+        <div className="out1" key={item.id} onClick={() => bookSelectedHandler( item)}>
           
             <img
               className="squere1" 
@@ -71,4 +77,4 @@ useEffect(() => {
   );
 }
 
-export default UsersList;
+export default withRouter( UsersList);
