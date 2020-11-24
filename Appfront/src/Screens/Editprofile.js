@@ -18,12 +18,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
+import Animated from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
 
 
 
 const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
+    //nd
+    const fall=new Animated.Value(1);
+
+    const renderheader=()=>{
+        return(
+        <View style={{height:100,width:100}}>
+        <View>
+            <View></View>
+        </View>
+
+        </View>
+        )
+    }
+    const renderinner=()=>{
+        return(
+        <Text>سلامممم</Text>
+        )
+    }
+    const bs=React.createRef(null);
 
     return(
       
@@ -31,10 +52,42 @@ const Profile = ({navigation}) => {
           <ScrollView>
         <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
         <Text style={styles.kima}>کیما</Text>
-        
-        <Avatar.Image style={styles.avatar} size={80}
+        <Text>Editprofile</Text>
+        {/* <Avatar.Image style={styles.avatar} size={80}
         source={require('../../assets/avatar.png')}
-        ></Avatar.Image>
+        ></Avatar.Image> */}
+        {/* <TouchableOpacity style={{position:'absolute'}}> */}
+      
+        {/* <TouchableOpacity >
+        <View style={{marginTop:100,position:'absolute'}}> */}
+        <View style={{position:'absolute'}}>
+        <TouchableOpacity
+        onPress={()=>{bs.current.snapTo(0)}}
+        >
+        <Image
+        source={require('../../assets/avatar.png')}
+        style={{height:100,width:100,marginTop:200,borderRadius:15,marginLeft:50}}
+        
+        >
+
+        </Image>
+        </TouchableOpacity>
+        </View>
+        {/* </View>
+        </TouchableOpacity>
+  */}
+
+        <BottomSheet
+            snapPoints={[800,0]}
+            ref={bs}
+            initialSnap={1}
+            callbackNode={fall}
+            enabledGestureInteraction={true}
+            renderContent={renderinner}
+            renderHeader={renderheader}
+        
+        ></BottomSheet>
+        {/* </TouchableOpacity> */}
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>سلام</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
@@ -46,12 +99,14 @@ const Profile = ({navigation}) => {
         </Button>
         <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:45}}
+         style={{marginTop:492,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:45}}
          ></Image>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:310}}
+         style={{marginTop:492,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:310}}
          ></Image>
+
+         
 
         <Button style={styles.logout} title='logout'
             onPress={()=>{
