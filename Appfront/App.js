@@ -18,6 +18,7 @@ import StackScreen from './src/Screens/StackScreen';
 import { State } from 'react-native-gesture-handler';
 import AuthContext,{AuthProvider} from './src/context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loadingscreen from './src/Screens/Loadingscreen';
 
 // import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
 // import {Context as AuthContext} from './src/context/Authcontext'
@@ -60,6 +61,7 @@ const a=true;
 const SwitchNavigatorr=(prop)=>{
 
   const value=useContext(AuthContext);
+  const [done,setdone]=useState(false);
   console.log(value);
   useEffect(async()=>{
    
@@ -69,34 +71,46 @@ const SwitchNavigatorr=(prop)=>{
   console.log('checkkard2')
   if(token!=null){
     value.changelogged(token);
+    setdone(true);
     console.log('checkkard3')
   }
   else{
   value.changelogged(null);
+  setdone(true);
   console.log('checkkard4')
   }
   },[])
   // return (<NavigationContainer><TabScreen></TabScreen></NavigationContainer>)
-
+  if(!done){
+    return (
+    
+      <Loadingscreen></Loadingscreen>
+    )
+  }
   // const {logg,changelogg}=useContext(AuthContext);
+  else{
   return(
     // <TabScreen></TabScreen>
     <NavigationContainer>
+    
      {value.logged!=null ? (<TabScreen/>):(<StackScreen/>)}
+     
      </NavigationContainer>
   )
+}
 }
 
 
 export default()=>{
-  return(
+ return(
    <AuthProvider>
 
     <SwitchNavigatorr/>
    
   </AuthProvider>
   )
-  }
+  
+}
 
 // }
 

@@ -12,6 +12,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 // import { State } from 'react-native-gesture-handler';
 import App from '../../App';
 import AuthContext,{AuthProvider} from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -30,6 +31,7 @@ const Profile = ({navigation}) => {
             onPress={()=>{
                 console.log(navigation);
                 // navigation.navigate('loginFlow')}}
+                AsyncStorage.setItem('token',null)
                 val.changelogged(null);
 
             }}
