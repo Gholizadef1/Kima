@@ -24,7 +24,7 @@ const Booknavigation = () => {
       
                 <Stack.Navigator initialRouteName={'Home'}>
                 <Stack.Screen name = 'Home' component={Home} options={{headerShown: false}} ></Stack.Screen>
-                <Stack.Screen name = 'Showbookview' component={Bookview} options={{}} />
+                <Stack.Screen name = 'Showbookview' component={Bookview} options={{headerShown: false}} />
                 </Stack.Navigator>
     
  
