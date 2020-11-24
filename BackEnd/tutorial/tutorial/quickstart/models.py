@@ -40,10 +40,10 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    mybook = models.ManyToManyField(book,blank=True,related_name='All_Books')
-    #Readbooks = models.ManyToManyField(book,related_name='Read_Books')
-    #WantToRead = models.ManyToManyField(book,related_name='Want_to_Read')
-    #Reading = models.ManyToManyField(book,related_name='I_am_Reading')
+    mybook = models.ManyToManyField(book,verbose_name="All MyBooks",related_name="mybooks")
+    Readbooks = models.ManyToManyField(book,verbose_name="Read books",related_name="Readbooks")
+    WantToRead = models.ManyToManyField(book,verbose_name="Want to read",related_name="WantToRead")
+    Reading = models.ManyToManyField(book,verbose_name="Reading now",related_name="Reading")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
@@ -64,3 +64,11 @@ class Account(AbstractBaseUser):
 def create_auth_token(sender,instance=None,created=False,**kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+class MyBooks(models.Model):
+    ‌books = models.ForeignKey(book,on_delete=models.CASCADE)
+
+
+
+
