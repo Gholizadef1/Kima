@@ -23,6 +23,8 @@ import Bookview from './Bookview';
 import { createSwitchNavigator } from 'react-navigation';
 import App from '../../App';
 import Profile from './Profile';
+import Editprofile from './Editprofile';
+import Profilenavigation from './Profilenavigation';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -70,7 +72,7 @@ const TabSreen = () => {
     
             }}/>
           
-            <Tab.Screen name="حساب کاربری" component={Profile} options={{tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name="حساب کاربری" component={Profilenavigation} options={{tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="person" size={size} color={color} />
               ),
               }}/>

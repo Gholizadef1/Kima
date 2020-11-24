@@ -41,7 +41,9 @@ const Profile = ({navigation}) => {
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>hi@hi.hi</Text></Text>
         <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, marginLeft:375}} />
 
-        <Button style={styles.edit}>
+        <Button style={styles.edit}
+        onPress={()=>{navigation.navigate('Editprofile')}}
+        >
             <Text style={{marginLeft:55,color:'#1F7A8C'}}>ویرایش پروفایل</Text>
         </Button>
         <Image
