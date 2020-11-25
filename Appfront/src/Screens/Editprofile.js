@@ -27,13 +27,24 @@ const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
     //nd
+ 
     const fall=new Animated.Value(1);
-
     const renderheader=()=>{
         return(
-        <View style={{height:100,width:100}}>
+        <View style={{backgroundColor:'white',
+       
+        
+        }}
+        
+        >
         <View>
-            <View><Text>sfkajdhkjashdflk</Text></View>
+            <View style={{}}>
+            <Image
+         source={require('../../assets/line3.png')}
+         style={{width:100,height:5,marginLeft:155}}
+         ></Image>
+            <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:10,fontSize:16 }}>انتخاب عکس</Text>
+            </View>
         </View>
 
         </View>
@@ -42,9 +53,30 @@ const Profile = ({navigation}) => {
     const renderinner=()=>{
         console.log('inner');
         return(
-      <View>
-        <Text>سلامممم</Text>
-        <Text>سلامممم</Text>
+      <View style={{backgroundColor:'gray'}}>
+         <Image
+         source={require('../../assets/bottomsheet.jpeg')}
+         style={{width:420,height:300,position:'absolute'}}
+         ></Image>
+         <Button
+         bordered rounded style={styles.button}
+        onPress={()=>{}}
+        style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+    
+        >
+         <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:84}
+         }>گرفتن عکس</Text>
+        </Button>
+        <Button
+         bordered rounded style={styles.button}
+        onPress={()=>{}}
+        style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+    
+        >
+         <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:72}
+         }>انتخاب از گالری</Text>
+        </Button>
+      
         </View>
 
 
@@ -52,10 +84,16 @@ const Profile = ({navigation}) => {
         )
     }
     const bs=React.useRef(null);
-
+    
     return(
       <>
-        <View style={styles.container}>
+        <Animated.View style={{
+             flex: 1,
+      opacity:Animated.add(0.1,Animated.multiply(fall,1.0)),
+      
+      
+      backgroundColor: '#fff',
+        }}>
       
      
        
@@ -71,17 +109,19 @@ const Profile = ({navigation}) => {
         {/* <TouchableOpacity >
         <View style={{marginTop:100,position:'absolute'}}> */}
         <BottomSheet
-             snapPoints={[400, 0, 0]}
+             snapPoints={[280, 0, -10]}
             ref={bs}
             initialSnap={1}
-            // callbackNode={fall}
+            callbackNode={fall}
             // enabledGestureInteraction={true}
             renderContent={renderinner}
             renderHeader={renderheader}
-            style={{marginTop:200}}   // style={{position:'absolute',height:200,width:250,marginTop:400}}
+            
+               // style={{position:'absolute',height:200,width:250,marginTop:400}}
+            backgroundColor={'white'}
         
         ></BottomSheet>
-        <Text>bbb</Text>
+        
         <View style={{position:'absolute',height:100,width:100,marginTop:200,marginLeft:50,borderRadius:15}}>
         <TouchableOpacity
         onPress={()=>{bs.current.snapTo(0)}}
@@ -121,24 +161,11 @@ const Profile = ({navigation}) => {
 
          
 
-        {/* <Button style={styles.logout} title='logout'
-            onPress={()=>{
-                console.log(navigation);
-                // navigation.navigate('loginFlow')}}
-                AsyncStorage.removeItem('token')
-                // AsyncStorage.setItem('token',null)
-                val.changelogged(null);
-
-            }}
-      >
-
-          <Text style={{marginLeft:80}}>logout</Text>
-      </Button>   */}
     
     {/* </ScrollView> */}
      
     <StatusBar backgroundColor='#BFDBF7' style='light' />
-        </View>
+        </Animated.View>
         </>
    
         // {/* <Text>HI</Text>
@@ -149,6 +176,7 @@ const Profile = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      opacity:Animated.add(0.1,Animated.multiply(fall,1.0)),
       
       
       backgroundColor: '#fff',
