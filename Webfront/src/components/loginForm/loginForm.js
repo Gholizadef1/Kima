@@ -12,8 +12,8 @@ function LoginForm(props) {
         successMessage: null,
         backError : ""
     })
-    const [cookies, setCookie] = useCookies(['token']);
-
+    const [cookies, setCookie] = useCookies(['user']);
+    //const [cookies, setCookie, removeCookie] = useCookies(['']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -24,10 +24,6 @@ function LoginForm(props) {
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
-        setState(prevState => ({
-            ...prevState,
-            'backError' : ""
-        }));
         const payload={
             "email":state.email,
             "password":state.password,
@@ -35,38 +31,50 @@ function LoginForm(props) {
         const back= JSON.stringify(payload)
         console.log(payload);
         console.log(back);
-        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json"}})
+        console.log(props);
+        console.log(state);
+        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" , "Cookie":"user"}})
             .then(function (response) {
                 console.log(response);
+                console.log(response.status);
                 console.log(response.data);
                 if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
-                        'successMessage' : 'ورود موفقیت‌آمیز بود...'
+                        successMessage : 'ورود موفقیت‌آمیز بود...'
                     }))
+                    console.log(response);
+                    console.log(props);
+                    console.log(state);
+                    setCookie('user',response.data.token,{path:"/"})
+                    console.log(cookies);
                     redirectToHome();
                     props.showError(null)
                 }
-                else if(response.status === 404){
+                // else if(response.status === 404){
+                //     props.showError("رمز یا ایمیل اشتباه است.")
+                //     setState(prevState => ({
+                //         ...prevState,
+                //         backError : "رمز یا ایمیل اشتباه است."
+                //     })); 
+
+                // }
+                // else{
+                //     props.showError("ایمیل وجود ندارد.");
+                //     setState(prevState => ({
+                //         ...prevState,
+                //         backError : "ایمیل وجود ندارد."
+                //     })); 
+                // }
+            })
+            .catch(function (error) {
                     props.showError("رمز یا ایمیل اشتباه است.")
                     setState(prevState => ({
                         ...prevState,
-                        'backError' : "رمز یا ایمیل اشتباه است."
+                        backError : "رمز یا ایمیل اشتباه است."
                     })); 
-
-                }
-                else{
-                    props.showError("ایمیل وجود ندارد.");
-                    setState(prevState => ({
-                        ...prevState,
-                        'backError' : "ایمیل وجود ندارد."
-                    })); 
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                
             });
+            console.log(state);
     }
     const redirectToHome = () => {
         props.updateTitle('Home')
@@ -143,4 +151,4 @@ function LoginForm(props) {
     )
 }
 
-export default withRouter(LoginForm);
+export default withRouter( LoginForm);

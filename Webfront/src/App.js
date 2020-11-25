@@ -22,13 +22,13 @@ import NavBar from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
-//import {withCookies, Cookies , useCookies} from "react-cookie";
+import {withCookies, Cookies , useCookies} from "react-cookie";
 
 
 function App() {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
-  //const [cookies, setCookie ] =useCookies(["user"]);
+  //const [cookies, setCookie ] =useCookies({token:""});
 
   // const onChange = (newName)  => {
   //   setCookie('name', newName, { path: '/' });
