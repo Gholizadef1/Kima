@@ -27,8 +27,8 @@ const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
     //nd
- 
     const fall=new Animated.Value(1);
+
     const renderheader=()=>{
         return(
         <View style={{backgroundColor:'white',
@@ -39,11 +39,15 @@ const Profile = ({navigation}) => {
         >
         <View>
             <View style={{}}>
+            {/* <Image
+         source={require('../../assets/line3.png')}
+         style={{width:300,height:3}}
+         ></Image> */}
             <Image
          source={require('../../assets/line3.png')}
          style={{width:100,height:5,marginLeft:155}}
          ></Image>
-            <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:10,fontSize:16 }}>انتخاب عکس</Text>
+            <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:15,fontSize:16 }}>انتخاب عکس</Text>
             </View>
         </View>
 
@@ -84,16 +88,10 @@ const Profile = ({navigation}) => {
         )
     }
     const bs=React.useRef(null);
-    
+
     return(
       <>
-        <Animated.View style={{
-             flex: 1,
-      opacity:Animated.add(0.1,Animated.multiply(fall,1.0)),
-      
-      
-      backgroundColor: '#fff',
-        }}>
+        <View style={styles.container}>
       
      
        
@@ -165,7 +163,7 @@ const Profile = ({navigation}) => {
     {/* </ScrollView> */}
      
     <StatusBar backgroundColor='#BFDBF7' style='light' />
-        </Animated.View>
+        </View>
         </>
    
         // {/* <Text>HI</Text>
@@ -176,7 +174,6 @@ const Profile = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      opacity:Animated.add(0.1,Animated.multiply(fall,1.0)),
       
       
       backgroundColor: '#fff',
