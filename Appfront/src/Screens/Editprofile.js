@@ -40,8 +40,10 @@ const Profile = ({navigation}) => {
         )
     }
     const renderinner=()=>{
+        console.log('inner');
         return(
         <Text>سلامممم</Text>
+    
         )
     }
     const bs=React.createRef(null);
@@ -60,17 +62,17 @@ const Profile = ({navigation}) => {
       
         {/* <TouchableOpacity >
         <View style={{marginTop:100,position:'absolute'}}> */}
-        <View style={{position:'absolute'}}>
+        <View style={{position:'absolute',height:100,width:100,marginTop:200,marginLeft:50,borderRadius:15}}>
         <TouchableOpacity
         onPress={()=>{bs.current.snapTo(0)}}
         >
-        <Image
+        <ImageBackground borderRadius={15}
         source={require('../../assets/avatar.png')}
-        style={{height:100,width:100,marginTop:200,borderRadius:15,marginLeft:50}}
+        style={{height:100,width:100,borderRadius:15}}
         
         >
 
-        </Image>
+        </ImageBackground>
         </TouchableOpacity>
         </View>
         {/* </View>
