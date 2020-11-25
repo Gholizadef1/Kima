@@ -33,7 +33,7 @@ const Profile = ({navigation}) => {
         return(
         <View style={{height:100,width:100}}>
         <View>
-            <View></View>
+            <View><Text>sfkajdhkjashdflk</Text></View>
         </View>
 
         </View>
@@ -42,16 +42,24 @@ const Profile = ({navigation}) => {
     const renderinner=()=>{
         console.log('inner');
         return(
+      <View>
         <Text>سلامممم</Text>
+        <Text>سلامممم</Text>
+        </View>
+
+
     
         )
     }
-    const bs=React.createRef(null);
+    const bs=React.useRef(null);
 
     return(
-      
+      <>
         <View style={styles.container}>
-          <ScrollView>
+      
+     
+       
+          {/* <ScrollView style={{height:1000}}> */}
         <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
         <Text style={styles.kima}>کیما</Text>
         <Text>Editprofile</Text>
@@ -62,6 +70,18 @@ const Profile = ({navigation}) => {
       
         {/* <TouchableOpacity >
         <View style={{marginTop:100,position:'absolute'}}> */}
+        <BottomSheet
+             snapPoints={[400, 0, 0]}
+            ref={bs}
+            initialSnap={1}
+            // callbackNode={fall}
+            // enabledGestureInteraction={true}
+            renderContent={renderinner}
+            renderHeader={renderheader}
+            style={{marginTop:200}}   // style={{position:'absolute',height:200,width:250,marginTop:400}}
+        
+        ></BottomSheet>
+        <Text>bbb</Text>
         <View style={{position:'absolute',height:100,width:100,marginTop:200,marginLeft:50,borderRadius:15}}>
         <TouchableOpacity
         onPress={()=>{bs.current.snapTo(0)}}
@@ -78,23 +98,14 @@ const Profile = ({navigation}) => {
         {/* </View>
         </TouchableOpacity>
   */}
-
-        <BottomSheet
-            snapPoints={[800,0]}
-            ref={bs}
-            initialSnap={1}
-            callbackNode={fall}
-            enabledGestureInteraction={true}
-            renderContent={renderinner}
-            renderHeader={renderheader}
-        
-        ></BottomSheet>
+  {/* //<View style={{position:'absolute',marginTop:700,width:380,height:100}}> */}
+   
         {/* </TouchableOpacity> */}
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>سلام</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>hi@hi.hi</Text></Text>
-        <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, marginLeft:375}} />
+        <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:367, marginLeft:378}} />
 
         <Button style={styles.edit}>
             <Text style={{marginLeft:55,color:'#1F7A8C'}}>ویرایش پروفایل</Text>
@@ -110,7 +121,7 @@ const Profile = ({navigation}) => {
 
          
 
-        <Button style={styles.logout} title='logout'
+        {/* <Button style={styles.logout} title='logout'
             onPress={()=>{
                 console.log(navigation);
                 // navigation.navigate('loginFlow')}}
@@ -122,12 +133,13 @@ const Profile = ({navigation}) => {
       >
 
           <Text style={{marginLeft:80}}>logout</Text>
-      </Button>  
+      </Button>   */}
     
-    </ScrollView>
+    {/* </ScrollView> */}
      
     <StatusBar backgroundColor='#BFDBF7' style='light' />
         </View>
+        </>
    
         // {/* <Text>HI</Text>
         // </ScrollView> */}
@@ -137,6 +149,7 @@ const Profile = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      
       
       backgroundColor: '#fff',
     //   alignItems: 'center',
@@ -175,8 +188,8 @@ const styles = StyleSheet.create({
         position:'absolute',
     
       
-        marginTop:280,
-        marginLeft:375
+        marginTop:300,
+        marginLeft:378
     },
     avatar:{
         position:'absolute',
