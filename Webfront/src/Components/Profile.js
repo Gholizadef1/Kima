@@ -3,7 +3,7 @@ import {Redirect,withRouter} from "react-router-dom";
 import axios from 'axios';
 //import { Button } from 'react-bootstrap';
 import "./Profile.css";
-
+import Avatar from './Avatar';
 // class Profile extends Component{
 //     state={
 //         navigate:false
@@ -41,14 +41,14 @@ function ProFile (props){
         <div className="main-content">
 
             <div class="container-fluid">
-                <div className="row">
+                <div className="row r">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-                        <div className="card card-profile shadow">
+                        <div className="card card-profile">
                             <div class="row justify-content-center">
                                 <div className="col-lg-3 order-lg-2">
-                                    <div className="card-profile-image">
-                                        <img src="index12.jpeg" className="rounded-circle"/>
-                                    </div>
+                                    <div className="profile">
+                                       <Avatar/>
+                                       </div>
                                 </div>
                             </div>
                             <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">

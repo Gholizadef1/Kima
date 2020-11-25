@@ -6,3 +6,17 @@
 background-color: #9dc3e9;
 
 }
+.profile{
+    margin-left: -1340px;
+    margin-top: -150px;
+}
+.card-profile{
+  margin-top: -180px;
+  height: 500px;
+ left: 800px;
+}
+.card-body{
+    margin-top: -350px;
+    padding-right: -100px;
+    
+}

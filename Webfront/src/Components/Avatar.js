@@ -1,60 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import {CgProfile} from 'react-icons/cg';
 import "./Avatar.css";
-function App() {
-    const uploadedImage = React.useRef(null);
-    const imageUploader = React.useRef(null);
-  
-    const handleImageUpload = e => {
-      const [file] = e.target.files;
-      if (file) {
-        const reader = new FileReader();
-        const { current } = uploadedImage;
-        current.file = file;
-        reader.onload = e => {
-          current.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-  
+import axios from "axios";
+import { Form,Button } from "react-bootstrap";
+import { event } from "jquery";
+class Avatar extends React.Component {
+ state={
+   selectedfile:this.state.selectedfile
+ }
+  fileSelectedHandler=event=>{
+    this.setState({
+    selectedfiles:event.target.files[0]
+    })
+  }
+  uploadHandler=()=>{
+    const fd = new FormData();
+    fd.append('image',this.state.selectedfile,this.state.selectedfile.name);
+
+axios.put('api/update-profile',fd)
+.then(res=>{
+  console.log(res);
+});
+}
+  render(){
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-         
-        }}
-      >
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          ref={imageUploader}
-          style={{
-            display: "none"
-          }}
-        />
-        <div
-          style={{
-            height: "60px",
-            width: "60px",
-            border: "1px dashed black"
-          }}
-          onClick={() => imageUploader.current.click()}
-        >
-            
-            
-          <img className="avatar"
-          
-            ref={uploadedImage}
-            
-          />
-        </div>
-        
-      </div>
+      <div>
+     <input type="file" onChange={this.fileSelectedHandler}/>
+     <button onClick={this.uploadHandler}>upload</button>
+     </div>
     );
   }
-  
-export default App;  
+}
+export default Avatar;  

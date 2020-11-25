@@ -62,7 +62,7 @@ function App() {
             <Route path="/profile">
               <NavBar/>
               <Profile/>
-              <Avatar/>
+          
             </Route>
             {/* <Route path="/book">
               <NavBar/>
