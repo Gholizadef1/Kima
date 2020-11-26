@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import "./Avatar.css";
 import axios from "axios";
-function Avatar() {
-  const state = {
+
+function Avatar(props) {
+  const [state,setState] =useState( {
     file:null
-  }
-     const uploadedImage = React.useRef(null);
+  })
+    const uploadedImage = React.useRef(null);
     const imageUploader = React.useRef(null);
     const handleImageUpload = e => {
       const [file] = e.target.files;
       if (file) {
         const reader = new FileReader();
-        this.setState({file:false})
+        setState({file:false})
         const { current } = uploadedImage;
         current.file = file;
         reader.onload = e => {
@@ -21,7 +22,7 @@ function Avatar() {
       }
     };
     const handleUpload= e =>{
-  let file=this.state.file
+  let file=state.file
   let formdata = new FormData()
   formdata.append("image",file)
   
@@ -42,16 +43,16 @@ function Avatar() {
 
     }}
   >
-    <input
+    <input 
       type="file"
       accept="image/*"
       onChange={handleImageUpload}
       ref={imageUploader}
       style={{
-        display: "none"
+        display: "none",
       }}
     />
-    <div
+    <div className="in"
       style={{
         height: "60px",
         width: "60px",
@@ -63,7 +64,7 @@ function Avatar() {
 
         ref={uploadedImage}
       />
-      <button type="button"onClick={handleUpload}>Upload</button>
+      <button className="hit" type="button"onClick={handleUpload}>Upload</button>
     </div>
 
   </div>

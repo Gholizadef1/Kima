@@ -10,13 +10,14 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
+import Scroll from "./Components/Scroll";
 
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
-import {HelpingNavbar} from"./Components/HelpingNavbar";
+import HelpingNavbar from"./Components/HelpingNavbar";
 import UsersList from "./Components/UsersList";
 import NavBar from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
@@ -54,15 +55,11 @@ function App() {
                <Slide/>
             </Route>
 
-            <Route path="/search">
-             
-              <HelpingNavbar/>
-              
-            </Route>
+           
             <Route path="/profile">
-              <NavBar/>
+              <HelpingNavbar/>
               <Profile/>
-          
+              <Scroll/>
             </Route>
             {/* <Route path="/book">
               <NavBar/>

@@ -1,8 +1,15 @@
 
 .avatar{
-    border-radius: 80px;
+    border-radius: 100px;
+    border-style: dashed;
     width: 150px;
     height: 150px;
-    margin-top:-110px;
-    margin-left: 1250px;
+    margin-top:10px;
+    margin-left: -7px;
+}
+.hit{
+    margin-left: 350px;
+}
+.in{
+    margin-left: 300px;
 }

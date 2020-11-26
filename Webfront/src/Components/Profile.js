@@ -3,6 +3,7 @@ import {Redirect,withRouter} from "react-router-dom";
 import axios from 'axios';
 //import { Button } from 'react-bootstrap';
 import "./Profile.css";
+import Scroll from "./Scroll";
 import Avatar from './Avatar';
 // class Profile extends Component{
 //     state={
@@ -39,10 +40,12 @@ function ProFile (props){
     return(
         
         <div className="main-content">
-
+            
             <div class="container-fluid">
                 <div className="row r">
+                    
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                        
                         <div className="card card-profile">
                             <div class="row justify-content-center">
                                 <div className="col-lg-3 order-lg-2">
@@ -62,15 +65,14 @@ function ProFile (props){
                                 <div className="row">
                                     <div className="col">
                                         <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                                           <div>
+                                           <div className="head">
                                                 <span className="heading">2</span>
                                                 <span className="description">می‌خواهم بخوانم</span>
-                                            </div>
-                                            <div>
+                                          
                                                 <span className="heading">1</span>
                                                 <span className="description">دارم می‌خوانم</span>
-                                            </div>
-                                            <div>
+                                            
+                                            
                                                 <span className="heading">8</span>
                                                 <span className="description">خوانده‌ام</span>
                                             </div>
@@ -89,6 +91,7 @@ function ProFile (props){
             </div>
 
         </div>
+        
     )
 }
 
