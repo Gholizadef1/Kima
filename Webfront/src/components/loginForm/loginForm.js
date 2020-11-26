@@ -13,8 +13,6 @@ function LoginForm(props) {
         successMessage: null,
         backError : ""
     })
-    //const [cookies, setCookie] = useCookies(['user']);
-    //const [cookies, setCookie, removeCookie] = useCookies(['']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
