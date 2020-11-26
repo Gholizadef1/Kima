@@ -100,7 +100,7 @@ function ProFile (props){
                             <div className="row justify-content-center">
                                 <div className="col-lg-3 order-lg-2">
                                     <div className="profile">
-                                    <img src={user.picture} class="rounded-circle img-fluid"/>
+                                    <img src="index12.jpeg" class="rounded-circle img-fluid"/>
                                        <Avatar/>
                                        </div>
                                 </div>
@@ -163,24 +163,24 @@ function ProFile (props){
                             </div>
                             <div className="card-body pt-0 pt-md-4">
                                 <div className="text-center">
-                                    <h3>
+                                    <h3 className="">
                                         فاطمه امیدی
                                     </h3>
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                        <div className="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div className="card-profile-stats d-flex justify-content-between text-right mt-md-5">
                                            <div>
-                                                <span className="heading">2</span>
-                                                <span className="description">می‌خواهم بخوانم</span>
+                                                <span className="heading text-muted">2</span>
+                                                <span className="description"> : می‌خواهم بخوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading">1</span>
-                                                <span className="description">دارم می‌خوانم</span>
+                                                <span className="heading text-muted">1</span>
+                                                <span className="description"> : دارم می‌خوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading">8</span>
-                                                <span className="description">خوانده‌ام</span>
+                                                <span className="heading text-muted">8</span>
+                                                <span className="description"> : خوانده‌ام</span>
                                             </div>
                                         </div>
                                     </div>

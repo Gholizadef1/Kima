@@ -60,6 +60,9 @@ function BookView(props) {
 
         }
     },[] );
+    const addBookToMineHandler = (choices)=>{
+
+    }
     //console.log(state.id);
     //console.log(state.title);
     //console.log(response.data.title);
@@ -102,12 +105,18 @@ function BookView(props) {
                     </tr>
                   </tbody>
                 </table>
+                <div class="input-group-prepend ">
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3>+</h3></button>
+                    <div class="dropdown-menu">
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('toRead')}>می‌خواهم بخوانم</button>
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('reading')}>دارم می‌خوانم</button>
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('read')}>خوانده‌ام</button>
+                    </div>
                 </div>
-    
-                
-            </div>
+            </div> 
+        </div>
 
-            <nav className="shadow navbar navbar-expand-sm navbar-light sticky-top color3">  
+            <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <a className="nav-link" href="#bookDescription">توضیح</a>
