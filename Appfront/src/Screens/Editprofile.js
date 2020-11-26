@@ -73,7 +73,7 @@ const Profile = ({navigation}) => {
 
     const renderheader=()=>{
         return(
-        <View style={{backgroundColor:'white',
+        <View style={{backgroundColor:'white',flex:1
        
         
         }}
@@ -129,7 +129,7 @@ const Profile = ({navigation}) => {
     
         )
     }
-    const bs=React.useRef(null);
+    const bs=React.createRef(null);
 
     return(
       <>
@@ -149,14 +149,14 @@ const Profile = ({navigation}) => {
         {/* <TouchableOpacity >
         <View style={{marginTop:100,position:'absolute'}}> */}
         <BottomSheet
-             snapPoints={[280, 0, -10]}
+             snapPoints={[280, 0, 0]}
             ref={bs}
             initialSnap={1}
             callbackNode={fall}
             enabledGestureInteraction={true}
             renderContent={renderinner}
             renderHeader={renderheader}
-            onCloseEnd={bs}
+            
 
                         
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
@@ -434,9 +434,9 @@ const Profile = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+
       
-      
+      height:850,
       backgroundColor: '#fff',
     //   alignItems: 'center',
     //   justifyContent: 'center',
