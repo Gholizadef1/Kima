@@ -23,7 +23,7 @@ from .quickstart import views
 from . import kyma
 from .quickstart.views import registration_view,UpdateUserProfileView
 from .quickstart.views import ChangePasswordView
-from .quickstart.views import login
+from .quickstart.views import *
 from .kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -35,6 +35,7 @@ urlpatterns = [
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
+     path('api/profile/', UserProfileView.as_view(), name='profile'),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
     

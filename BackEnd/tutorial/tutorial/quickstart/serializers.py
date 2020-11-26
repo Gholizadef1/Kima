@@ -36,10 +36,16 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 class UpdateUserProfileSerializer(serializers.ModelSerializer):
 
-    lookup_field = 'username'
-
     class Meta:
         model = Account
         fields = ['username','profile_photo']
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        fields = ['username','profile_photo','email']
+
 
 
