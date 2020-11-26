@@ -98,23 +98,6 @@ class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
     serializer_class = UpdateUserProfileSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Account.objects.all()
-    #lookup_field = 'username'
-
-    def get_object(self):
-        queryset = self.filter_queryset(self.get_queryset())
-    # make sure to catch 404's below
-        obj = queryset.get(pk=self.request.user.id)
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-    def put(self,request,*args,**kwargs):
-        return self.partial_update(request, *args, **kwargs)
-
-
-class UserProfileView(generics.UpdateAPIView,RetrieveModelMixin):
-    serializer_class =  UserProfileSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset = Account.objects.all()
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
@@ -122,5 +105,33 @@ class UserProfileView(generics.UpdateAPIView,RetrieveModelMixin):
         self.check_object_permissions(self.request, obj)
         return obj
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    def put(self,request,*args,**kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+
+# class UserProfileView(generics.UpdateAPIView,RetrieveModelMixin):
+#     serializer_class =  UserProfileSerializer
+#     permission_classes = (IsAuthenticated,)
+#     queryset = Account.objects.all()
+
+#     def get_object(self):
+#         queryset = self.filter_queryset(self.get_queryset())
+#         obj = get_object_or_404(queryset,pk=self.request.user.id)
+#         self.check_object_permissions(self.request, obj)
+#         return obj
+
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+
+class UserProfileView(APIView):
+    
+    def get_object(self, pk):
+        try:
+            return Account.objects.get(pk=pk)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        userprofile = self.get_object(pk)
+        serializer = UserProfileSerializer(userprofile)
+        return Response(serializer.data)
