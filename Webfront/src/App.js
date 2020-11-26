@@ -22,12 +22,15 @@ import NavBar from "./Components/Navbar";
 //import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
-import {withCookies, Cookies , useCookies} from "react-cookie";
+//import {withCookies, Cookies , useCookies} from "react-cookie";
+import Cookies from 'js-cookie'
+import { render } from '@testing-library/react';
 
 
-function App() {
+function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
+  const [auth,setAuth] = useState(false);
   //const [cookies, setCookie ] =useCookies({token:""});
 
   // const onChange = (newName)  => {
@@ -38,11 +41,12 @@ function App() {
       <div className="App" >
         
         <div >
-          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+          {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
           <Switch>
             <Route path="/" exact={true}>
                <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
+
             <Route path="/login">
               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
@@ -61,7 +65,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <NavBar/>
-              <Profile/>
+              <Profile />
           
             </Route>
             {/* <Route path="/book">
@@ -99,6 +103,19 @@ function App() {
   //     </header>
   //   </div>
   // );
+}
+
+const protectedRoute = ({coponent:Component,...rest})=>{
+  return(
+    <Route
+    {...rest}
+    render={()=>(
+      <Component/> 
+    )}
+    />
+  )
+
+
 }
 
 export default App;

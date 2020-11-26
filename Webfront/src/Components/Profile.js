@@ -4,6 +4,8 @@ import axios from 'axios';
 //import { Button } from 'react-bootstrap';
 import "./Profile.css";
 import Avatar from './Avatar';
+//import { Cookies } from "react-cookie";
+import Cookies from 'js-cookie'
 // class Profile extends Component{
 //     state={
 //         navigate:false
@@ -35,6 +37,28 @@ function ProFile (props){
         localStorage.clear("token");
         props.history.push('/login');
     }
+    const [user , setUser] = useState({
+       token : Cookies.get('userToken'),
+       userName : "",
+       email : "",
+       picture : ""
+    })
+    console.log(user.token);
+    // useEffect(() => {
+    //     if (token) {       
+    //         axios.get('http://127.0.0.1:8000/user/' + token)
+    //             .then(response => {
+    //               //console.log(response);
+    //               //console.log(response.data);
+    //               setState({ 
+    //                 userName: response.data.userName,
+    //                 email: response.data.email,
+    //                 picture : response.data.picture
+    //                 });
+    //             });
+
+    //     }
+    // },[] );
 
     return(
         

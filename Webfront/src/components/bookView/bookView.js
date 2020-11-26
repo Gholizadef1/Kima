@@ -59,7 +59,7 @@ function BookView(props) {
                 });
 
         }
-    }, );
+    },[] );
     //console.log(state.id);
     //console.log(state.title);
     //console.log(response.data.title);
