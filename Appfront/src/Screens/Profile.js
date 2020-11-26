@@ -31,8 +31,11 @@ const Profile = ({navigation}) => {
           <ScrollView>
         <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
         <Text style={styles.kima}>کیما</Text>
-        
-        <Avatar.Image style={styles.avatar} size={80}
+        <Image
+         source={require('../../assets/profilebackk.jpeg')}
+         style={{marginTop:93,width:350,height:350,position:'absolute'}}
+         ></Image>
+        <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>سلام</Text></Text>
@@ -44,7 +47,7 @@ const Profile = ({navigation}) => {
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
         >
-            <Text style={{marginLeft:55,color:'#1F7A8C'}}>ویرایش پروفایل</Text>
+            <Text style={{marginLeft:55,color:'white'}}>ویرایش پروفایل</Text>
         </Button>
         <Image
          source={require('../../assets/line3.png')}
@@ -67,7 +70,8 @@ const Profile = ({navigation}) => {
       >
 
           <Text style={{marginLeft:80}}>logout</Text>
-      </Button>  
+      </Button> 
+
     
     </ScrollView>
      
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
     edit:{
         height:50,
         width:200,
-        backgroundColor:'#E1E5F2',
+        backgroundColor:'#1f7a8c',
         borderRadius:25,
         marginLeft:105,
         marginTop:80
