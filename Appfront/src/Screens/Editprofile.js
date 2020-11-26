@@ -23,33 +23,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
 
-const signschema=yup.object({
 
-    Username:yup.string()
-    .required()
-    .min(4),
-  
-    Email:yup.string()
-    .required()
-    .min(8)
-    .email('invalid email format'),
-  
-    Password:yup.string()
-    .required()
-    .min(5),
-  
-    repeatPassword:yup.string()
-    .required()
-    .min(5)
-    .oneOf([yup.ref('Password'),''],'Password must match')
-    // .test('equaltopass','this should be the same as your password',(val)=>{
-    //   return repeatPassword.string()===repeatPassword.string();
-    // })
-  
-  
-  
-  
-  })
 const userschema=yup.object({
 
     Username:yup.string()
@@ -58,10 +32,16 @@ const userschema=yup.object({
   
   })
   const passschema=yup.object({
-  
     Password:yup.string()
     .required()
     .min(5),
+    newPassword:yup.string()
+    .required()
+    .min(5),
+    repeatnewPassword:yup.string()
+    .required()
+    .min(5)
+    .oneOf([yup.ref('Password'),''],'Password must match')
   
   })
 const Profile = ({navigation}) => {
@@ -141,13 +121,7 @@ const Profile = ({navigation}) => {
         <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
         <Text style={styles.kima}>کیما</Text>
        
-        {/* <Avatar.Image style={styles.avatar} size={80}
-        source={require('../../assets/avatar.png')}
-        ></Avatar.Image> */}
-        {/* <TouchableOpacity style={{position:'absolute'}}> */}
       
-        {/* <TouchableOpacity >
-        <View style={{marginTop:100,position:'absolute'}}> */}
         <BottomSheet
              snapPoints={[280, 0, 0]}
             ref={bs}
@@ -179,62 +153,23 @@ const Profile = ({navigation}) => {
         </View>
 
         <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
-      validationSchema={signschema}
+      initialValues={{Username:''}}
+      validationSchema={userschema}
       
 
         onSubmit={async(values,actions)=>{
         //  signup(values);
         const back={
           username:values.Username,
-          email:values.Email,
-          password:values.Password,
-          password2:values.repeatPassword,
         
         }
          const backk=JSON.stringify(back);
-        const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
+        const params=JSON.stringify({username:'Hi'});
         axios.post('http://1d5bf2d8221a.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           AsyncStorage.setItem('token',response.data.token)
           
-            if(response.data.email!==back.email||response.data.username!==back.username){
-            if(response.data.email!==undefined&&response.data.username!==undefined){
-              console.log(response.data.username);
-              console.log(response.data.email);
-              Alert.alert('oops','کاربری با این ایمیل و نام کاربری از قبل وجود دارد',[{
-
-            title:'فهمیدم',onPress:()=>console.log('alert closed')
-              }])
-            }
-            else if(response.data.username!==undefined){
-            Alert.alert('oops','کاربری با این نام کاربری از قبل وجود دارد',[{
-              title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
-            
-          }
-          else if(response.data.email!==undefined){
-            Alert.alert('oops','کاربری با این ایمیل از قبل وجود دارد',[{
-              title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
-          }
-            else{
-              Alert.alert('oops','لطفا ایمیل درستی را وارد کنید',[{
-
-            title:'فهمیدم',onPress:()=>console.log('alert closed')
-              }])
-              
-            }
-            }
-             else{
-            //  AsyncStorage.setItem('token',response.data.token)
-             console.log('inja')
-            console.log(back.email);
-            pro.navigation.navigate('Log');
-            actions.resetForm();
-          }
-  
-          //  console.log(response);
+          
         })
         .catch(function(error){
             console.log(error);
@@ -244,7 +179,7 @@ const Profile = ({navigation}) => {
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:280,marginHorizontal:40}}>
+     <View style={{alignItems:'center', marginTop:230,marginHorizontal:40}}>
 
      <Item style={styles.input}>
 
@@ -257,7 +192,7 @@ const Profile = ({navigation}) => {
          <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
         
        </Item>
-
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
       
        <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
        
@@ -280,61 +215,23 @@ const Profile = ({navigation}) => {
      </Formik>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
-      validationSchema={signschema}
+      validationSchema={passschema}
       
 
         onSubmit={async(values,actions)=>{
         //  signup(values);
         const back={
-          username:values.Username,
-          email:values.Email,
-          password:values.Password,
-          password2:values.repeatPassword,
+          
+          password:values.newPassword,
+          password2:values.repeatnewPassword,
         
         }
          const backk=JSON.stringify(back);
-        const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
+        const params=JSON.stringify({password:'12345',password2:'12345'});
         axios.post('http://1d5bf2d8221a.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           AsyncStorage.setItem('token',response.data.token)
-          
-            if(response.data.email!==back.email||response.data.username!==back.username){
-            if(response.data.email!==undefined&&response.data.username!==undefined){
-              console.log(response.data.username);
-              console.log(response.data.email);
-              Alert.alert('oops','کاربری با این ایمیل و نام کاربری از قبل وجود دارد',[{
-
-            title:'فهمیدم',onPress:()=>console.log('alert closed')
-              }])
-            }
-            else if(response.data.username!==undefined){
-            Alert.alert('oops','کاربری با این نام کاربری از قبل وجود دارد',[{
-              title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
-            
-          }
-          else if(response.data.email!==undefined){
-            Alert.alert('oops','کاربری با این ایمیل از قبل وجود دارد',[{
-              title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
-          }
-            else{
-              Alert.alert('oops','لطفا ایمیل درستی را وارد کنید',[{
-
-            title:'فهمیدم',onPress:()=>console.log('alert closed')
-              }])
-              
-            }
-            }
-             else{
-            //  AsyncStorage.setItem('token',response.data.token)
-             console.log('inja')
-            console.log(back.email);
-            pro.navigation.navigate('Log');
-            actions.resetForm();
-          }
-  
-          //  console.log(response);
+   
         })
         .catch(function(error){
             console.log(error);
@@ -348,21 +245,24 @@ const Profile = ({navigation}) => {
 
      <Item style={styles.input}>
 
-         <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
-         onChangeText={props.handleChange('Username')}
-         onBlur={props.handleBlur('Username')}
-         value={props.values.Username}
+         <Input style={styles.Input} autoCapitalize='none' autoCorrect={false}
+         secureTextEntry
+         onChangeText={props.handleChange('Password')}
+         onBlur={props.handleBlur('Password')}
+         value={props.values.Password}
          placeholder="رمز خود را وارد کنید  ..." placeholderTextColor='lightgray'>
          </Input>
          <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
+       
         
        </Item>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
        <Item style={styles.input}>
          <Input  style={styles.Input} 
           secureTextEntry
-         onChangeText={props.handleChange('Password')}
-         value={props.values.Password}
-         onBlur={props.handleBlur('Password')}
+         onChangeText={props.handleChange('newPassword')}
+         value={props.values.newPassword}
+         onBlur={props.handleBlur('newPassword')}
          placeholder="رمز جدید خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
          <AntDesign name="lock" size={24} color="#BFDBF7"  style={styles.Icon}/>
@@ -370,21 +270,21 @@ const Profile = ({navigation}) => {
 
     
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
 
        
-       <Item style={styles.input}>
+       <Item style={{}}>
          <Input  style={styles.Input} 
           secureTextEntry
-          onChangeText={props.handleChange('repeatPassword')}
-          value={props.values.repeatPassword}
-          onBlur={props.handleBlur('repeatPassword')}
+          onChangeText={props.handleChange('repeatnewPassword')}
+          value={props.values.repeatnewPassword}
+          onBlur={props.handleBlur('repeatnewPassword')}
           placeholder="رمز جدید خود را تکرار کنید" placeholderTextColor='lightgray'>
          </Input>
          <Feather name="check" size={24} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatPassword&&props.errors.repeatPassword}</Text>
+       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
        
 
 
@@ -481,6 +381,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         marginTop:190,
         marginLeft:50,
+    
         
     },
     edit:{
@@ -493,7 +394,7 @@ const styles = StyleSheet.create({
     },
     button:{
         position:'absolute',
-        marginTop:50,
+        marginTop:30,
         marginLeft:10,
         width:170,
         backgroundColor:'#E1E5F2',
@@ -509,5 +410,13 @@ const styles = StyleSheet.create({
         
         
       },
+//         input:{
+//      marginTop:5,
+//      marginLeft:5,
+//      marginRight:5
+
+     
+//     // fontWeight:'100'
+//   },
   });
   export default Profile;
