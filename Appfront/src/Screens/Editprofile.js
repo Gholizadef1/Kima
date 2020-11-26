@@ -27,21 +27,21 @@ import * as yup from 'yup';
 const userschema=yup.object({
 
     Username:yup.string()
-    .required()
-    .min(4),
+    .required("لطفا نام کاربری خود را وارد کنید")
+    .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
   
   })
   const passschema=yup.object({
     Password:yup.string()
-    .required()
-    .min(5),
+    .required("رمز عبود نمیتواند خالی باشد.")
+    .min(5,"لطفا رمزی به طول حداقل 5 کاراکتر وارد کنید"),
     newPassword:yup.string()
-    .required()
-    .min(5),
+    .required("رمز جدید شما نمیتواند خالی باشد.")
+    .min(5,"اندازه رمز شما باید حداقل 5 کرارکتر باشد"),
     repeatnewPassword:yup.string()
-    .required()
-    .min(5)
-    .oneOf([yup.ref('Password'),''],'Password must match')
+    .required("لطفا رمز جدید خود را تکرار کنید")
+    .min(5,"طول رمز شما حداقل 5 کلمه است")
+    .oneOf([yup.ref('Password'),''],'رمز ها باید یکی باشند')
   
   })
 const Profile = ({navigation}) => {
@@ -54,8 +54,6 @@ const Profile = ({navigation}) => {
     const renderheader=()=>{
         return(
         <View style={{backgroundColor:'white',flex:1
-       
-        
         }}
         
         >
@@ -202,7 +200,7 @@ const Profile = ({navigation}) => {
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#1f7a8c', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
         </Button>
       
      </View>
@@ -302,7 +300,7 @@ const Profile = ({navigation}) => {
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#1f7a8c', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
         </Button>
       
      </View>
@@ -397,7 +395,7 @@ const styles = StyleSheet.create({
         marginTop:30,
         marginLeft:10,
         width:170,
-        backgroundColor:'#E1E5F2',
+        backgroundColor:'#1f7a8c',
         borderColor:'#BFDBF7',
         marginLeft:112,
         borderRadius:17
