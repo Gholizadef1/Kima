@@ -18,7 +18,7 @@ from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
 from .quickstart import views
-from . import kyma
+from . import kyma,quickstart
 from .quickstart.views import registration_view
 from .quickstart.views import login
 from .kyma.views import *
@@ -30,6 +30,7 @@ urlpatterns = [
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
+    path('book-collection/<int:pk>',quickstart.views.BookCollection.as_view()),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
 ]

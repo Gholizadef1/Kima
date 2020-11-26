@@ -60,5 +60,10 @@ def login(request):
 
 
 
-#def AddBook(request):
+class BookCollection(APIView):
+
+    def post(self,request,pk):
+        self.request.user.books[pk].Append(request.data)
+        return Response({"success"})
+        
 
