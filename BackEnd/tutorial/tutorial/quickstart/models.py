@@ -7,6 +7,9 @@ from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
 from django.contrib.postgres.fields import ArrayField
 
+
+
+
 class MyAccountManager(BaseUserManager):
     def create_user(self,email,username,password=None):
         if not email:
@@ -41,12 +44,15 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    #mybook = models.ManyToManyField(book,verbose_name="All MyBooks",related_name="mybooks")
-    #Readbooks = models.ManyToManyField(book,verbose_name="Read books",related_name="Readbooks")
-    #WantToRead = models.ManyToManyField(book,verbose_name="Want to read",related_name="WantToRead")
-    #Reading = models.ManyToManyField(book,verbose_name="Reading now",related_name="Reading")
+    #mybook = models.ManyToManyField(book,related_name="+")
+    #Readbooks = models.ManyToManyField(book,related_name="+")
+    #WantToRead = models.ManyToManyField(book,related_name="+")
+    #Reading = models.ManyToManyField(book,related_name="+")
 
-    books = ArrayField(models.ManyToManyField(book),size=4)
+    #books = ArrayField(models.ManyToManyField(book),size=4)
+
+    myshelf=models.ManyToManyField(book,through='MyBook')
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
@@ -62,6 +68,16 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return self.is_superuser
 
+class MyBook(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    book1=models.ForeignKey(book,on_delete=models.CASCADE)
+    state=models.IntegerField()
+    info=models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.info
+
+
 
 @receiver(post_save,sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender,instance=None,created=False,**kwargs):
@@ -69,8 +85,6 @@ def create_auth_token(sender,instance=None,created=False,**kwargs):
         Token.objects.create(user=instance)
 
 
-#class MyBooks(models.Model):
-#    ‌books = models.ForeignKey(book,on_delete=models.CASCADE)
 
 
 

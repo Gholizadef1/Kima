@@ -14,8 +14,10 @@ from rest_framework.status import (
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Account
+from .models import Account,MyBook
 from .serializers import RegistrationSerializer
+from tutorial.kyma.models import book
+from tutorial.kyma.serializers import bookSerializer
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -62,8 +64,23 @@ def login(request):
 
 class BookCollection(APIView):
 
-    def post(self,request,pk):
-        self.request.user.books[pk].Append(request.data)
-        return Response({"success"})
+    def put(self,request,pk):
+        b=MyBook()
+        b.account=self.request.user
+        bk=book(request.data)
+        b.book1=bk
+        b.state=pk
+
+        self.request.user.myshelf.add(b)
+
+#        if (pk==1):
+#            self.request.user.Readbooks.Append(request.data)
+#        elif (pk==2):
+#            self.request.user.WantToRead.Add(request.data)
+#        elif (pk==3):
+#            self.request.user.Reading.Add(request.data)
+        d={}
+        d['response'] = "success"
+        return Response(d)
         
 
