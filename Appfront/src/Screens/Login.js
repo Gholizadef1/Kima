@@ -72,7 +72,7 @@ const logschema=yup.object({
          axios.post('http://8c763622afbf.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           
-          await AsyncStorage.setItem('token',response.data.token)
+          await AsyncStorage.setItem('token',{tokenn:response.data.token})
           console.log(response)
           console.log(response.status);
           val.changelogged(true);

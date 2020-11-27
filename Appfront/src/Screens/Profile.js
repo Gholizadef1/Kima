@@ -1,3 +1,4 @@
+
 import React,{useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
@@ -29,11 +30,11 @@ const Profile = ({navigation}) => {
       
         <View style={styles.container}>
           <ScrollView>
-        <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
+        {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
         <Text style={styles.kima}>کیما</Text>
         <Image
-         source={require('../../assets/profilebackk.jpeg')}
-         style={{marginTop:92,width:350,height:350,position:'absolute'}}
+         source={require('../../assets/backprof4.jpeg')}
+         style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
@@ -47,7 +48,7 @@ const Profile = ({navigation}) => {
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
         >
-            <Text style={{marginLeft:55,color:'white'}}>ویرایش پروفایل</Text>
+            <Text style={{marginLeft:55,color:'#1f7a8c'}}>ویرایش پروفایل</Text>
         </Button>
         <Image
          source={require('../../assets/line3.png')}
@@ -148,10 +149,10 @@ const styles = StyleSheet.create({
         
     },
     edit:{
-        height:50,
+        height:45,
         width:200,
-        backgroundColor:'#1f7a8c',
-        borderRadius:25,
+        backgroundColor:'lightgray',
+        borderRadius:17,
         marginLeft:105,
         marginTop:80
     }
