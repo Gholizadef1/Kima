@@ -22,6 +22,7 @@ import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
+import axiosinst from '../api/axiosinst';
 
 
 const userschema=yup.object({
@@ -33,7 +34,7 @@ const userschema=yup.object({
   })
   const passschema=yup.object({
     Password:yup.string()
-    .required("رمز عبود نمیتواند خالی باشد.")
+    .required("رمز عبور نمیتواند خالی باشد.")
     .min(5,"لطفا رمزی به طول حداقل 5 کاراکتر وارد کنید"),
     newPassword:yup.string()
     .required("رمز جدید شما نمیتواند خالی باشد.")
@@ -116,12 +117,10 @@ const Profile = ({navigation}) => {
      
        
           {/* <ScrollView style={{height:1000}}> */}
-        <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header>
-        <Text style={styles.kima}>کیما</Text>
-       
+            
       
         <BottomSheet
-             snapPoints={[280, 0, 0]}
+             snapPoints={[380, 0, 0]}
             ref={bs}
             initialSnap={1}
             callbackNode={fall}
@@ -136,7 +135,7 @@ const Profile = ({navigation}) => {
         
         ></BottomSheet>
         
-        <View style={{position:'absolute',height:100,width:100,marginTop:150,marginLeft:150,borderRadius:15}}>
+        <View style={{position:'absolute',height:100,width:100,marginTop:57,marginLeft:150,borderRadius:15}}>
         <TouchableOpacity
         onPress={()=>{bs.current.snapTo(0)}}
         >
@@ -212,7 +211,7 @@ const Profile = ({navigation}) => {
 
      </Formik>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
+      initialValues={{Password:'',newPassword:'',repeatnewPassword:'' }}
       validationSchema={passschema}
       
 

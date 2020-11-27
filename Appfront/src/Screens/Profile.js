@@ -33,7 +33,7 @@ const Profile = ({navigation}) => {
         <Text style={styles.kima}>کیما</Text>
         <Image
          source={require('../../assets/profilebackk.jpeg')}
-         style={{marginTop:93,width:350,height:350,position:'absolute'}}
+         style={{marginTop:92,width:350,height:350,position:'absolute'}}
          ></Image>
         <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
@@ -57,6 +57,20 @@ const Profile = ({navigation}) => {
          source={require('../../assets/line3.png')}
          style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:310}}
          ></Image>
+         <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginRight:20,color:"gray"}}>فعالیت ها</Text>
+         <Image
+         source={require('../../assets/Line.png')}
+         style={{marginTop:570,width:80,height:3,position:'absolute'}}
+         ></Image>
+          <Image
+         source={require('../../assets/Line.png')}
+         style={{marginTop:670,width:80,height:3,position:'absolute'}}
+         ></Image>
+           <Image
+         source={require('../../assets/Line.png')}
+         style={{marginTop:770,width:80,height:3,position:'absolute'}}
+         ></Image>
+         
 
         <Button style={styles.logout} title='logout'
             onPress={()=>{

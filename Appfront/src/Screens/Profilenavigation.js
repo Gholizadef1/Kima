@@ -25,7 +25,7 @@ const Profilenavigation=(prop)=>{
 
    <profilenav.Navigator initialRouteName={'Profile'}>
      <profilenav.Screen name='Profile' component={Profile} options={{headerShown:false}} ></profilenav.Screen>
-     <profilenav.Screen name="Editprofile"   component={Editprofile}  options={{headerShown:false  ,headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
+     <profilenav.Screen name="Editprofile"   component={Editprofile}  options={{headerShown:true  ,headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
 
    </profilenav.Navigator>
  
