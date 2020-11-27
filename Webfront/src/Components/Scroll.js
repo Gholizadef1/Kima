@@ -53,7 +53,7 @@ function Slide(props) {
   
   return (
     <div className="con">
-     <div  style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+     <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -80,7 +80,7 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-      <div  style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
+      <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -107,7 +107,7 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-      <div  style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
+      <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>

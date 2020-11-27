@@ -49,7 +49,9 @@ function LoginForm(props) {
                     console.log(response);
                     console.log(props);
                     console.log(state);
-                    Cookies.set('userToken',response.data.token,{path:"/"})
+                    console.log(response.data.token);
+                    Cookies.set('userToken',response.data.token)
+                    console.log(Cookies.get('userToken'))
                     //console.log(cookies.get('user'));
                     console.log(Cookies.get('userToken'));
                     redirectToHome();

@@ -10,10 +10,10 @@ function Avatar(props) {
     const uploadedImage = React.useRef(null);
     const imageUploader = React.useRef(null);
     const handleImageUpload = e => {
+      setState({file:e.target.files[0]});
       const [file] = e.target.files;
       if (file) {
         const reader = new FileReader();
-        setState({file:false})
         const { current } = uploadedImage;
         current.file = file;
         reader.onload = e => {
@@ -23,14 +23,23 @@ function Avatar(props) {
       }
     };
   const handleUpload= e =>{
-  var file=state.file
+
   var formdata = new FormData()
-  formdata.append('image',file)
-  const cooki = JSON.stringify({"userToken":Cookies.get("userToken")})
-  
-      axios.put('http://127.0.0.1:8000/api/update-profile/',cooki,{"headers":{"content-type":"application/json" ,data:formdata}}
+  formdata.append('profile_photo',state.file)
+  // formdata.append('username','file')
+   axios.put('http://127.0.0.1:8000/api/update-profile/'
+   ,formdata,{
+     headers:{
+       
+    "Content-Type":"application/json",
+    "Authorization":"Token "+Cookies.get("userToken")}
+     }
   
   ).then(function(res){
+    console.log("Token" +Cookies.get("userToken"))
+  })
+  
+  .then(function(res){
     console.log(res);
   })
   .catch(function(res){
