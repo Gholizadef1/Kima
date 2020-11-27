@@ -66,7 +66,7 @@ const logschema=yup.object({
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-         axios.post('47317a656b11.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axios.post('http://1d5bf2d8221a.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(function(response){
           console.log(response.status);
         
