@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
 from . import quickstart
 import os
 #import environ
@@ -165,3 +166,5 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'quickstart.Account'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_HEADERS = list(default_headers) 

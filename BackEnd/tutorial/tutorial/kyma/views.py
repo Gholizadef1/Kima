@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
-from . serializers import bookSerializer
+from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
@@ -49,6 +49,9 @@ class DynamicBookAPIView(generics.ListCreateAPIView):
     serializer_class = bookSerializer
 
 class BookViewPage(APIView):
+
+    #queryset = book.objects.all()
+    #serializer_class = UpdateRatingSerializer
     
     def get_object(self, pk):
         try:
@@ -60,3 +63,26 @@ class BookViewPage(APIView):
         wantedbook = self.get_object(pk)
         serializer = bookSerializer(wantedbook)
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        wantedbook = get_object_or_404(book.objects.all(),pk=pk)
+        data = self.request.data.get('userrating')
+        print('correct')
+        serializer = UpdateRatingSerializer(instance=wantedbook,data=data,partial=True)
+        print('correct')
+        if serializer.is_valid(raise_exception=True):
+            print('correct')
+            newratingbook = serializer.save()
+        return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
+
+
+    #def update(self,request, *args, **kwargs):
+        
+
+
+# class UpdateRatingView(generics.UpdateAPIView):
+
+#     queryset = book.objects.all()
+#     serializer_class = UpdateRatingSerializer
+
+#     def
