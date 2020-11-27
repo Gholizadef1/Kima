@@ -2,10 +2,14 @@
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
+   Right, Left , Picker, Form, ActionSheet } from 'native-base';
 import {withNavigation} from 'react-navigation'
-import Home from './Home';
 import axiosinst from '../api/axiosinst'
+import ActionButton from 'react-native-action-button';
+import { HeaderBackground } from '@react-navigation/stack';
+import { HeaderHeightContext } from 'react-navigation-stack';
+
 
 
 const Bookview = (prop) => {
@@ -26,55 +30,29 @@ const Bookview = (prop) => {
     return null;
   }
     return(
-
-      
-        <Container>
-        <Header style={{backgroundColor:'#1F7A8C',marginTop:15}}/>
-        <Content>
-          <Card>
-            <CardItem>
-              <Left>
-                {/* {/ <Thumbnail source={require('./assets/download.jpg')} /> /} */}
-                <Body>
-                      <Text>{result.title}</Text>
-                  <Text note>مشخصات</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem cardBody>
-              <Image source={{uri : result.imgurl}} style={styles.image}/>
-            </CardItem>
-            <CardItem>
-            <Text style ={styles.bookname}>{result.title}</Text>
-            </CardItem>
-            <CardItem>
-              <Text style={styles.author}>{result.author}</Text>
-            </CardItem>
-            <CardItem>
-              <Text>{result.publisher}</Text>
-            </CardItem>
-            <CardItem>
-              <Left>
-                {/* <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>12 Likes</Text>
-                </Button> */}
-              </Left>
-              <Body>
-                <Button  style={styles.bottomshape}>
-                  <Text>اضافه به کتاب های من</Text>
-                </Button>
-              </Body>
-              <Right>
-              </Right>
-            </CardItem>
-          </Card>
-          <Card>
-            <CardItem>
-            <Text>{result.description}</Text>
-            </CardItem>
-          </Card>
-        </Content>
+      <Container>
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:15}}/>
+            <Body>
+              <CardItem>
+                  <Image source={{uri : result.imgurl}} style={styles.image}/>
+              </CardItem>
+              <CardItem>
+                  <Text style={styles.bookname}>نام کتاب:{result.title}</Text>
+              </CardItem>
+              <CardItem>
+                  <Text style={styles.author}>نویسنده:{result.author}</Text>
+              </CardItem>
+              <CardItem>
+                  <Text style={styles.publisher}>انتشارات {result.publisher}</Text>
+              </CardItem>
+            </Body>
+            <Body>
+              <Content style={{top:100}}>
+                <CardItem>
+                   <Text style={styles.description}>{result.description}</Text>
+                </CardItem>
+              </Content>
+            </Body>
       </Container>
     );
 };
@@ -86,50 +64,53 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     image:{
-
-      top:20,
-      marginTop:20,
-      width:140,
-      height:200,
-      marginBottom:40,
+      alignItems: 'center',
+      justifyContent: 'center', 
+      bottom:'2%',
+      right:15,
+      width:180,
+      height:220,
+      marginBottom:0,
       borderRadius:5,
       marginHorizontal:100
-  },
-  bookname: {
-    bottom:20,
-    fontSize:20,
-    width:500,
-    fontWeight:'bold',
-    marginHorizontal:100
-  },
-  author: {
-    bottom:30,
-    color:'#1F7A8C',
-    fontSize:15,
-    marginHorizontal:100
-  },
-  publisher:{
-
-    bottom:40,
-    color:'#1F7A8C',
-    fontSize:10,
-    marginHorizontal:100
-  },
-  bottomshape: {
-    backgroundColor:'#1F7A8C',
-    bottom:15,
-    fontSize:10,
-    width:260,
-    right:70,
-    marginHorizontal:1
-  },
-  bottomtext:{
-
-    right:20,
-    left:20,
-    marginLeft:30,
-    marginHorizontal:100,
-  }
-});
+      },
+    bookname: {
+      alignContent:'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight:10,
+      marginLeft:350,
+      marginBottom:0,
+      bottom:'10%',
+      fontSize:20,
+      width:500,
+      fontWeight:'bold'
+    },
+    author: {
+      right:20,
+      bottom:'12%',
+      marginRight:20,
+      marginLeft:30,
+      marginBottom:0,
+      color:'#1F7A8C',
+      fontSize:17,
+      marginHorizontal:100
+    },
+    publisher:{
+      bottom:'18%',
+      marginRight:105,
+      color:'#1F7A8C',
+      fontSize:15,
+      marginHorizontal:100,
+      marginBottom:0
+    },
+    description:{
+      bottom:'2%',
+      marginRight:20,
+      fontSize:15,
+      marginHorizontal:100,
+      marginBottom:0
+    }
+    });
 
 export default Bookview;
