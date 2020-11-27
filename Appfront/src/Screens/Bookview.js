@@ -3,8 +3,10 @@ import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
-   Right, Left , Picker, Form, ActionSheet } from 'native-base';
+   Right, Left , Picker, Form } from 'native-base';
 import {withNavigation} from 'react-navigation'
+import Home from './Home';
+import PickerShow from './PickerShow'
 import axiosinst from '../api/axiosinst'
 import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
@@ -45,9 +47,14 @@ const Bookview = (prop) => {
               <CardItem>
                   <Text style={styles.publisher}>انتشارات {result.publisher}</Text>
               </CardItem>
+              <Body>
+                <CardItem>
+                  <PickerShow style={styles.Picker}/>
+                </CardItem>
+              </Body>
             </Body>
             <Body>
-              <Content style={{top:100}}>
+              <Content style={{bottom:-300}}>
                 <CardItem>
                    <Text style={styles.description}>{result.description}</Text>
                 </CardItem>
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
       marginBottom:0
     },
     description:{
-      bottom:'2%',
+      bottom:'10%',
       marginRight:20,
       fontSize:15,
       marginHorizontal:100,
