@@ -12,6 +12,7 @@ import "./Navbar.css";
 import {GoSearch} from 'react-icons/go';
 import {MdGroup} from 'react-icons/md';
 import UserList from './UsersList';
+import { Route,withRouter } from 'react-router-dom';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -115,4 +116,4 @@ useEffect(() => {
     );
     }
 
-export default NavBar;
+    export default withRouter( NavBar);

@@ -11,6 +11,7 @@ import {
     withRouter
   } from "react-router-dom";
 import './bookView.css';
+import Cookies from 'js-cookie';
 //import { data } from 'jquery';
 
 function BookView(props) {
@@ -105,14 +106,27 @@ function BookView(props) {
                     </tr>
                   </tbody>
                 </table>
-                <div class="input-group-prepend ">
+                <div className="row">
+                    
+                    {/* <svg width="3.5em" height="3.5em" viewBox="0 0 16 16" className="btn bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+                    </svg> */}
+
+                    <select className="form-control col-6" id="bookMood">
+                        <option className="">اضافه کنید</option>
+                        <option>می‌خواهم بخوانم</option>
+                        <option>دارم می‌خوانم</option>
+                        <option>خوانده‌ام</option>
+                    </select>
+                </div>
+                {/* <div class="input-group-prepend ">
                     <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3>+</h3></button>
                     <div class="dropdown-menu">
                         <button className="dropdown-item" onClick={()=>addBookToMineHandler('toRead')}>می‌خواهم بخوانم</button>
                         <button className="dropdown-item" onClick={()=>addBookToMineHandler('reading')}>دارم می‌خوانم</button>
                         <button className="dropdown-item" onClick={()=>addBookToMineHandler('read')}>خوانده‌ام</button>
                     </div>
-                </div>
+                </div> */}
             </div> 
         </div>
 
@@ -121,9 +135,9 @@ function BookView(props) {
                     <li className="nav-item">
                         <a className="nav-link" href="#bookDescription">توضیح</a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link" href="#bookCriticism">نقد</a>
-                     </li>
+                     </li> */}
     
                 </ul>
             </nav>
@@ -137,7 +151,7 @@ function BookView(props) {
                     <br></br>
                 </p>
             </div>
-            <div id="bookCriticism" className="color1 p-2">
+            {/* <div id="bookCriticism" className="color1 p-2">
                 <br></br>
                 <h3>نقد کتاب {state.title}</h3>
                 <br></br>
@@ -146,7 +160,7 @@ function BookView(props) {
 
                     <br></br>
                 </p>
-            </div>
+            </div> */}
 
 
 

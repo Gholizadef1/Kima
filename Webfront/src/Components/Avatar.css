@@ -2,14 +2,14 @@
 .avatar{
     border-radius: 100px;
     border-style: dashed;
-    width: 150px;
+    /* width: 150px;
     height: 150px;
     margin-top:10px;
-    margin-left: 300px;
+    margin-left: 300px; */
 }
-.hit{
+/* .hit{
     margin-left: 350px;
 }
 .in{
     margin-left: 300px;
-}
+} */

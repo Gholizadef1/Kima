@@ -52,7 +52,7 @@ function Slide(props) {
 
   
   return (
-    <div className="con">
+    <div className="con col-xl-8">
      <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">

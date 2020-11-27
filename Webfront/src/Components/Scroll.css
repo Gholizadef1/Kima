@@ -1,7 +1,4 @@
-/*.body{
 
-    background: radial-gradient#e5e5e5;
-}*/
 .car:hover{
     box-shadow: 1px 5px 30px 1px rgb(55, 26, 100) !important; 
 }
@@ -25,14 +22,14 @@
  
 
 }
-
+/* 
 .con{
     margin-top: -560px;
     margin-left: 20px;
     padding: 20px;
     width: 700px;
     
-}
+} */
 .squer{
   
     width: 100px;

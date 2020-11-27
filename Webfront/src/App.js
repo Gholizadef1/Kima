@@ -68,13 +68,7 @@ function App(props) {
             <Route path="/profile">
               <HelpingNavbar/>
               <Profile/>
-              <Scroll/>
               </Route>
-            <Route path="/search">
-              <HelpingNavbar/>
-            </Route>
-
-          
             
             <Route path="/book/:bookId">
               <NavBar/>
