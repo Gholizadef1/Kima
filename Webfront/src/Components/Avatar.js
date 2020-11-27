@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Avatar.css";
 import axios from "axios";
-
+import Cookies from 'js-cookie';
+import { Form } from "react-bootstrap";
 function Avatar(props) {
   const [state,setState] =useState( {
     file:null
@@ -21,17 +22,19 @@ function Avatar(props) {
         reader.readAsDataURL(file);
       }
     };
-    const handleUpload= e =>{
-  let file=state.file
-  let formdata = new FormData()
-  formdata.append("image",file)
+  const handleUpload= e =>{
+  var file=state.file
+  var formdata = new FormData()
+  formdata.append('image',file)
+  const cooki = JSON.stringify({"userToken":Cookies.get("userToken")})
   
-  axios({
-    url:'api/update-profile',
-    method:"POST",
-    headers:{
-    
-    }
+      axios.put('http://127.0.0.1:8000/api/update-profile/',cooki,{"headers":{"content-type":"application/json" ,data:formdata}}
+  
+  ).then(function(res){
+    console.log(res);
+  })
+  .catch(function(res){
+    console.log(res);
   })
 }
   return (
@@ -40,7 +43,6 @@ function Avatar(props) {
     style={{
       display: "flex",
       flexDirection: "column",
-
     }}
   >
     <input 
@@ -56,16 +58,16 @@ function Avatar(props) {
       style={{
         height: "60px",
         width: "60px",
-        border: "1px dashed black"
+        
       }}
       onClick={() => imageUploader.current.click()}
     >
       <img className="avatar"
-
         ref={uploadedImage}
       />
-      <button className="hit" type="button"onClick={handleUpload}>Upload</button>
+      
     </div>
+    <button className="hit" type="button"onClick={handleUpload}>Upload</button>
 
   </div>
   );

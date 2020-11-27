@@ -6,13 +6,12 @@ import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
-
+ import "./UsersList.css";
  import "./HelpingNavbar";
 import "./Navbar.css";
 import {GoSearch} from 'react-icons/go';
 import {FaHome} from 'react-icons/fa';
-import {MdGroup} from 'react-icons/md';
-
+import UserList from './UsersList';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -50,7 +49,7 @@ useEffect(() => {
 
     return(   
 
-<Navbar className= "navbar">
+<Navbar className= "navbarMain">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
@@ -58,9 +57,9 @@ useEffect(() => {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
+      <Nav.Link class="nav-link2" href="topics" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
+      <Nav.Link class="nav-link2" href="groups" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
+      <Nav.Link class="nav-link2" href="quize"style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
     </Nav> 
     <>
       <div
@@ -71,7 +70,7 @@ useEffect(() => {
     <GoSearch size="30" color="black"/>
         </Button>
       </div>
-      <input className="input"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
+      <input className="inputNavbar"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -105,7 +104,7 @@ useEffect(() => {
     </>
   
        <a class="nav-item1" href="home" >
-       <small className="name" size="50" style={{padding:10}}>
+       <small className="name" size="50">
       خانه
     </small>
 

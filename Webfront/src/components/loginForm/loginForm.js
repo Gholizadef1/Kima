@@ -3,7 +3,8 @@ import axios from 'axios';
 import './loginForm.css';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+//import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 function LoginForm(props) {
     const [state , setState] = useState({
@@ -12,8 +13,6 @@ function LoginForm(props) {
         successMessage: null,
         backError : ""
     })
-    const [cookies, setCookie] = useCookies(['user']);
-    //const [cookies, setCookie, removeCookie] = useCookies(['']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -24,6 +23,10 @@ function LoginForm(props) {
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
+        setState(prevState => ({
+            ...prevState,
+            backError : ""
+        })); 
         const payload={
             "email":state.email,
             "password":state.password,
@@ -33,7 +36,7 @@ function LoginForm(props) {
         console.log(back);
         console.log(props);
         console.log(state);
-        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" , "Cookie":"user"}})
+        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
                 console.log(response);
                 console.log(response.status);
@@ -46,8 +49,9 @@ function LoginForm(props) {
                     console.log(response);
                     console.log(props);
                     console.log(state);
-                    setCookie('user',response.data.token,{path:"/"})
-                    console.log(cookies);
+                    Cookies.set('userToken',response.data.token,{path:"/"})
+                    //console.log(cookies.get('user'));
+                    console.log(Cookies.get('userToken'));
                     redirectToHome();
                     props.showError(null)
                 }
