@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
     TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
-export default class ListThumbnailExample extends Component {
-  render() {
+
+const Mybooks = ({navigation}) => {
+
     return (
       <Container>
         <Header style={{backgroundColor:'#1F7A8C' }} />
@@ -11,13 +12,13 @@ export default class ListThumbnailExample extends Component {
             <Text style={styles.textShow}>دسته بندی ها</Text>
             <View
                     style={{
-                        top:40,
-                        width:240,
-                        right:50,
-                        left:60,
-                        borderBottomColor: 'black',
-                        borderBottomWidth: 1,
-                        fontWeight:'bold'
+                      top:40,
+                      width:240,
+                      right:50,
+                      left:60,
+                      borderBottomColor: 'black',
+                      borderBottomWidth: 1,
+                      fontWeight:'bold'
                     }}
                     />
           <List  style={{marginTop:'35%'}}>
@@ -29,7 +30,7 @@ export default class ListThumbnailExample extends Component {
                 <Text>می خواهم این کتاب را بخوانم</Text>
               </Body>
               <Right>
-                <Button transparent>
+                <Button transparent onPress={() => navigation.navigate('ShowWantToRead')}>
                   <Text>مشاهده</Text>
                 </Button>
               </Right>
@@ -42,7 +43,7 @@ export default class ListThumbnailExample extends Component {
                 <Text>در حال خواندن </Text>
               </Body>
               <Right>
-                <Button transparent>
+                <Button transparent onPress={() => navigation.navigate('ShowIsreading')}>
                   <Text>مشاهده</Text>
                 </Button>
               </Right>
@@ -55,7 +56,7 @@ export default class ListThumbnailExample extends Component {
                 <Text>قبلا خوانده ام </Text>
               </Body>
               <Right>
-                <Button transparent>
+                <Button transparent onPress={() => navigation.navigate('ShowIsRead')}>
                   <Text>مشاهده</Text>
                 </Button>
               </Right>
@@ -64,7 +65,7 @@ export default class ListThumbnailExample extends Component {
         </Content>
       </Container>
     );
-  }
+
 }
 const styles = StyleSheet.create({
     container: {
@@ -81,3 +82,4 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     }
     });
+    export default Mybooks;

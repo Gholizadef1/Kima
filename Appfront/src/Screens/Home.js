@@ -1,14 +1,9 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
-import axios from 'axios';
-import Bookview from './Bookview'
 import axiosinst from '../api/axiosinst';
 
 const Home = ({navigation}) => { 
@@ -20,7 +15,7 @@ const Home = ({navigation}) => {
     },[])
 
     function getImageFromAPI(){
-        axiosinst.get('http://e65b87caf914.ngrok.io/bookdetail')
+        axiosinst.get('http://d23b34f2467a.ngrok.io/bookdetail')
         .then(function(response){
             setImage(response.data)
             console.log(response)
