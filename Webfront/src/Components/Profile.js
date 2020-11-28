@@ -16,7 +16,7 @@ function ProFile (props){
     const logout = () =>{
         
         //localStorage.clear("token");
-        Cookies.remove('userToken')
+        Cookies.remove('userToken',{ path: '/', domain: 'localhost' });
         props.history.push('/login');
     }
     const [user , setUser] = useState({
@@ -27,16 +27,21 @@ function ProFile (props){
     })
     console.log(user.token);
     // useEffect(() => {
-    //     if (token) {       
-    //         axios.get('http://127.0.0.1:8000/user/' + token)
+    //     console.log(user)
+    //     if (user.token) {       
+    //         axios.get('http://127.0.0.1:8000/user/' + user.token)
     //             .then(response => {
-    //               //console.log(response);
-    //               //console.log(response.data);
+    //               console.log(response);
+    //               console.log(response.data);
     //               setState({ 
     //                 userName: response.data.userName,
     //                 email: response.data.email,
     //                 picture : response.data.picture
     //                 });
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+                    
     //             });
 
     //     }
@@ -50,7 +55,7 @@ function ProFile (props){
         }))
     }
 
-    const handleSubmitClick = (e) => {
+    const handleChangeInfisClick = (e) => {
         e.preventDefault();
         setUser(prevState => ({
             ...prevState,
@@ -122,6 +127,7 @@ function ProFile (props){
      }
   
   ).then(function(res){
+    console.log(res);
     console.log("Token" +Cookies.get("userToken"))
   })
   
@@ -139,9 +145,9 @@ function ProFile (props){
             <div class="container-fluid">
                 <div className="row">
                     
-                    <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
                         
-                        <div className="card card-profile">
+                        <div className="card ">
                             <div className=" d-flex justify-content-end">
 
                                 <div className="col-7 mt-4 text-right">
@@ -206,7 +212,7 @@ function ProFile (props){
                                                 <button 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
-                                                onClick={handleSubmitClick}
+                                                onClick={handleChangeInfisClick}
                                                 >تغییر اطلاعات</button>
                                             </div>
                                             <div class="dropdown-divider"></div>
@@ -262,7 +268,7 @@ function ProFile (props){
                                                 <button 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
-                                                onClick={handleSubmitClick}
+                                                
                                                 disabled
                                                 >تغییر رمز</button>
                                             </div>
