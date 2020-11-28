@@ -67,8 +67,8 @@ class BookViewPage(APIView):
     def put(self, request, pk):
         wantedbook = get_object_or_404(book.objects.all(),pk=pk)
         data = self.request.data.get('userrating')
-        print('correct')
-        serializer = UpdateRatingSerializer(instance=wantedbook,data=data,partial=True)
+        print(data)
+        serializer = UpdateRatingSerializer(wantedbook,data={'userrating':data},partial=True)
         print('correct')
         if serializer.is_valid(raise_exception=True):
             print('correct')

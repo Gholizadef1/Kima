@@ -167,4 +167,4 @@ AUTH_USER_MODEL = 'quickstart.Account'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_HEADERS = list(default_headers) + ['data',]
+CORS_ALLOW_HEADERS = list(default_headers) + ['data','Authorization',]
