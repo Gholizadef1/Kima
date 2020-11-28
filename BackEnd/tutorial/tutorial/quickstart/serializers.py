@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import Account
 from tutorial.kyma.serializers import bookSerializer
+from tutorial.kyma.models import book
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'},write_only=True)
@@ -28,4 +29,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 
+
+
+class MyBookSerializer(serializers.Serializer):
+    
+    model = book
+    id = serializers.IntegerField(required=True)
 

@@ -11,13 +11,15 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
+from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Account,MyBook
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer,MyBookSerializer
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
+import json
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -61,26 +63,32 @@ def login(request):
                     status=HTTP_200_OK)
 
 
-
+@permission_classes([AllowAny],)
+@permission_classes([IsAuthenticated])
 class BookCollection(APIView):
+    
+    def get_object(self, pk):
+        try:
+            return book.objects.get(pk=pk)
+        except book.DoesNotExist:
+            raise Http404
 
-    def put(self,request,pk):
+    def post(self,request,pk,format=None):
+        
+        user=self.request.user
         b=MyBook()
-        b.account=self.request.user
-        bk=book(request.data)
-        b.book1=bk
+        b.account=user
+        #idb=MyBookSerializer()
+        print('first')
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        content = body['id']
+        print(content)
+        b.book1=self.get_object(self.request.data.get('id'))
+        print('first2')
         b.state=pk
+        b.save()
 
-        self.request.user.myshelf.add(b)
-
-#        if (pk==1):
-#            self.request.user.Readbooks.Append(request.data)
-#        elif (pk==2):
-#            self.request.user.WantToRead.Add(request.data)
-#        elif (pk==3):
-#            self.request.user.Reading.Add(request.data)
-        d={}
-        d['response'] = "success"
-        return Response(d)
+        return Response({'error': 'Invalid Credentials'})
         
 

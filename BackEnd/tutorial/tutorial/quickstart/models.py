@@ -44,14 +44,7 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    #mybook = models.ManyToManyField(book,related_name="+")
-    #Readbooks = models.ManyToManyField(book,related_name="+")
-    #WantToRead = models.ManyToManyField(book,related_name="+")
-    #Reading = models.ManyToManyField(book,related_name="+")
-
-    #books = ArrayField(models.ManyToManyField(book),size=4)
-
-    myshelf=models.ManyToManyField(book,through='MyBook')
+    #myshelf=models.ManyToManyField(book,through='MyBook',default=False)
 
 
     USERNAME_FIELD = 'email'
@@ -72,10 +65,10 @@ class MyBook(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     book1=models.ForeignKey(book,on_delete=models.CASCADE)
     state=models.IntegerField()
-    info=models.CharField(max_length=5)
+   # info=models.CharField(max_length=5)
 
     def __str__(self):
-        return self.info
+        return " "
 
 
 
