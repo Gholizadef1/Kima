@@ -16,36 +16,45 @@ function ProFile (props){
     const logout = () =>{
         
         //localStorage.clear("token");
-        Cookies.remove('userToken',{ path: '/', domain: 'localhost' });
+        Cookies.remove('userToken');
+        Cookies.remove('userName');
+        Cookies.remove('userId');
         props.history.push('/login');
     }
     const [user , setUser] = useState({
        token : Cookies.get('userToken'),
        userName : "",
        email : "",
-       picture : ""
+       picture : "",
+       oldPass :"",
+       newPass:"",
+       newPass2 : "",
+       backError : ""
     })
-    console.log(user.token);
-    // useEffect(() => {
-    //     console.log(user)
-    //     if (user.token) {       
-    //         axios.get('http://127.0.0.1:8000/user/' + user.token)
-    //             .then(response => {
-    //               console.log(response);
-    //               console.log(response.data);
-    //               setState({ 
-    //                 userName: response.data.userName,
-    //                 email: response.data.email,
-    //                 picture : response.data.picture
-    //                 });
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-                    
-    //             });
+    //console.log(user.token);
 
-    //     }
-    // },[] );
+    useEffect(() => {
+        console.log(user)
+        if (user.token) {       
+            axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+                .then(function (response){
+                  console.log(response);
+                  console.log(response.data);
+                  setUser(prevState => ({ 
+                    ...prevState,
+                    userName: response.data.username,
+                    email: response.data.email,
+                    picture : response.data.profile_photo
+                    }));
+                    console.log(user);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    
+                });
+
+        }
+    },[] );
 
     const handleChange = (e) => {
         const {id , value} = e.target   
@@ -55,7 +64,7 @@ function ProFile (props){
         }))
     }
 
-    const handleChangeInfisClick = (e) => {
+    const handleChangeInfosClick = (e) => {
         e.preventDefault();
         setUser(prevState => ({
             ...prevState,
@@ -66,36 +75,53 @@ function ProFile (props){
             "userName":user.userName,
         }
         const back= JSON.stringify(payload)
-        console.log(payload);
-        console.log(back);
-        console.log(props);
-        console.log(user);
-        axios.post('http://127.0.0.1:8000/edit',back,{"headers":{"content-type":"application/json" }})
+        axios.put('http://127.0.0.1:8000/api/update-profile/',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
                 console.log(response);
-                console.log(response.status);
-                console.log(response.data);
                 if(response.status === 200){
-                    setUser(prevState => ({
-                        ...prevState,
-                        successEdit : 'موفقیت‌آمیز بود'
-                    }))
-                    console.log(response);
-                    console.log(props);
-                    console.log(user);
-                    Cookies.set('userToken',response.data.token,{path:"/"})
-                    
-                    console.log(Cookies.get('userToken'));
+                    console.log(response.status);
+
                     
                 }
             })
             .catch(function (error) {
-                    setState(prevState => ({
-                        ...prevState,
-                        backError : "رمز یا ایمیل اشتباه است."
-                    })); 
+                console.log(error);
             });
-            console.log(user);
+    }
+
+    const handleChangePassClick = (e) => {
+        e.preventDefault();
+        if(user.oldPass.length&&user.newPass.length&&user.newPass2.length){
+            const payload={
+                "oldpassword": user.oldPass,
+                "password":user.password,
+                "password2":user.confirmPassword
+            }
+            const back= JSON.stringify(payload);
+
+            axios.put('http://127.0.0.1:8000/api/update-profile/'
+             ,{
+              headers:{
+             "Content-Type":"application/json",
+            "Authorization":"Token "+Cookies.get("userToken")}
+             }
+  
+            ).then(function(response){
+                console.log(response);
+
+            })
+            .catch(function(error){
+                console.log(error);
+             })
+            
+        }
+        else {
+            setUser(prevState => ({
+             ...prevState,
+             'backError' : 'لطفا همه را درست وارد کنید'
+         })); 
+         }
+
     }
 
     const uploadedImage = React.useRef(null);
@@ -152,13 +178,13 @@ function ProFile (props){
 
                                 <div className="col-7 mt-4 text-right">
                                     <h5 className="">
-                                        فاطمه امیدی
+                                        {user.userName}
                                     </h5>
                                 </div>
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
-                                        <img src="index12.jpeg" className="rounded-circle img-fluid"/>
+                                        <img src={user.picture} className="rounded-circle img-fluid"/>
                                         <img className="" ref={uploadedImage}/>
                                         
                                     </div>
@@ -190,7 +216,7 @@ function ProFile (props){
                                                 <input type="text"
                                                   class="form-control"
                                                   id="userName"
-                                                  placeholder={user.userName}
+                                                //   placeholder={user.userName}
                                                   value={user.userName}
                                                   onChange={handleChange}/>
                                             </div>
@@ -203,7 +229,7 @@ function ProFile (props){
                                                     <input type="text"
                                                      class="form-control"
                                                      id="email" 
-                                                     placeholder={user.email}
+                                                    //  placeholder={user.email}
                                                      value={user.email}
                                                      onChange={handleChange}/>
                                                 </div>
@@ -212,7 +238,7 @@ function ProFile (props){
                                                 <button 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
-                                                onClick={handleChangeInfisClick}
+                                                onClick={handleChangeInfosClick}
                                                 >تغییر اطلاعات</button>
                                             </div>
                                             <div class="dropdown-divider"></div>
@@ -242,8 +268,7 @@ function ProFile (props){
                                                 <input type="text"
                                                   class="form-control"
                                                   id="userName"
-                                                  placeholder={user.userName}
-                                                  value={user.userName}
+                                                  value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
@@ -251,8 +276,7 @@ function ProFile (props){
                                                 <input type="text"
                                                   class="form-control"
                                                   id="userName"
-                                                  placeholder={user.userName}
-                                                  value={user.userName}
+                                                  value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
@@ -260,16 +284,15 @@ function ProFile (props){
                                                 <input type="text"
                                                   class="form-control"
                                                   id="userName"
-                                                  placeholder={user.userName}
-                                                  value={user.userName}
+                                                  value={user.newPass2}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class=" my-2">
                                                 <button 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
-                                                
-                                                disabled
+                                                onClick={handleChangePassClick}
+                                                // disabled
                                                 >تغییر رمز</button>
                                             </div>
                                         </div>

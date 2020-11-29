@@ -10,16 +10,17 @@ import{ useState, useEffect } from "react";
  import "./HelpingNavbar";
 import "./Navbar.css";
 import {GoSearch} from 'react-icons/go';
-import {MdGroup} from 'react-icons/md';
-import UserList from './UsersList';
+// import {MdGroup} from 'react-icons/md';
+// import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
+import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-  const [users,setUsers] = useState([]);
+  // const [users,setUsers] = useState([]);
  
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -122,7 +123,7 @@ useEffect(() => {
   
        <a class="nav-item1"  onClick={routeToProfile} style={{color:"black"}} >
        <small className="name" size="50">
-      نام کاربری
+      {Cookies.get('userName')}
     </small>
 
     <CgProfile size="35" vertical-align='center' color="black"

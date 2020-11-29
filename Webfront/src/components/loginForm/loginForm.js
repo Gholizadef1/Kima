@@ -3,7 +3,6 @@ import axios from 'axios';
 import './loginForm.css';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
-//import { useCookies } from 'react-cookie';
 import Cookies from 'js-cookie';
 
 function LoginForm(props) {
@@ -13,6 +12,7 @@ function LoginForm(props) {
         successMessage: null,
         backError : ""
     })
+
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -32,28 +32,28 @@ function LoginForm(props) {
             "password":state.password,
         }
         const back= JSON.stringify(payload)
-        console.log(payload);
-        console.log(back);
-        console.log(props);
-        console.log(state);
+        //console.log(payload);
+        //console.log(back);
+        //console.log(props);
+        //console.log(state);
         axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
                 console.log(response);
-                console.log(response.status);
-                console.log(response.data);
+                //console.log(response.status);
+                //console.log(response.data);
                 if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
                         successMessage : 'ورود موفقیت‌آمیز بود...'
                     }))
-                    console.log(response);
-                    console.log(props);
-                    console.log(state);
-                    console.log(response.data.token);
-                    Cookies.set('userToken',response.data.token)
-                    console.log(Cookies.get('userToken'))
-                    //console.log(cookies.get('user'));
-                    console.log(Cookies.get('userToken'));
+                    //console.log(response);
+                    //console.log(props);
+                    //console.log(state);
+                    //console.log(response.data.token);
+                    Cookies.set('userToken',response.data.token);
+                    Cookies.set('userId',response.data.userid);
+                    Cookies.set('userName',state.userName);
+                   // console.log(Cookies.get('userToken'));
                     redirectToHome();
                     props.showError(null)
                 }
@@ -80,7 +80,7 @@ function LoginForm(props) {
                         backError : "رمز یا ایمیل اشتباه است."
                     })); 
             });
-            console.log(state);
+            //console.log(state);
     }
     const redirectToHome = () => {
         props.updateTitle('Home')
