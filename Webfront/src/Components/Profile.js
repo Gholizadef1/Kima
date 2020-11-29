@@ -169,11 +169,11 @@ const accent = teal[200]; // #e040fb
                         <div className="card ">
                             <div className=" d-flex justify-content-end">
 
-                                <div className="col-7 mt-4 text-right">
-                                    <h5 className=""style={{fontFamily:'Morvarid'}}>
-                                        فاطمه امیدی
-                                    </h5>
-                                </div>
+                            <div className="col-7 mt-4 text-right">
+<h5 className="" style={{fontFamily:'Morvarid'}}>
+{user.userName}
+</h5>
+</div>
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
