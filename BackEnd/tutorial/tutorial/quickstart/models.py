@@ -61,16 +61,6 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return self.is_superuser
 
-class MyBook(models.Model):
-    account=models.ForeignKey(Account,on_delete=models.CASCADE)
-    book1=models.ForeignKey(book,on_delete=models.CASCADE)
-    state=models.IntegerField()
-   # info=models.CharField(max_length=5)
-
-    def __str__(self):
-        return str(self.state)
-
-
 
 @receiver(post_save,sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender,instance=None,created=False,**kwargs):
@@ -80,5 +70,12 @@ def create_auth_token(sender,instance=None,created=False,**kwargs):
 
 
 
+class MyBook(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    book1=models.ForeignKey(book,on_delete=models.CASCADE)
+    state=models.IntegerField()
+   # info=models.CharField(max_length=5)
 
+    def __str__(self):
+        return str(self.state)
 
