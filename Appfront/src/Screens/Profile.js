@@ -1,5 +1,5 @@
 
-import React,{useContext, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -34,7 +34,7 @@ const Profile = ({navigation}) => {
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://a8a9bc1325f4.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://11df449fbbf1.ngrok.io/api/user-profile/"+id)
             
         
     //    console.log(response)
@@ -43,6 +43,7 @@ const Profile = ({navigation}) => {
        setemail(response.data.email)
     }
     catch(err){
+        console.log(response)
         console.log(err);
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
@@ -57,14 +58,19 @@ const Profile = ({navigation}) => {
     //    response()
     //    console.log('akdfsj;lskafd')
     // });
+ 
+    const a=0;
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
           response();
           console.log('Listenn')
         });
     
-        return unsubscribe;
-      }, [Profilenavigation]);
+       
+      }, [Profilenavigation&&a]);
+     
+
+      
    
     return(
       

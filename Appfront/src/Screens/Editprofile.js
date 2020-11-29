@@ -42,12 +42,17 @@ const userschema=yup.object({
     repeatnewPassword:yup.string()
     .required("لطفا رمز جدید خود را تکرار کنید")
     .min(5,"طول رمز شما حداقل 5 کلمه است")
-    .oneOf([yup.ref('Password'),''],'رمز ها باید یکی باشند')
+    .oneOf([yup.ref('newPassword'),''],'رمز ها باید یکی باشند')
   
   })
-const Profile = ({navigation}) => {
+  const loggg=async()=>{
+    console.log(await AsyncStorage.getItem('token'));
+  }
+const EditProfile = ({navigation}) => {
+    
+
+loggg();
    
-  
     const val = useContext(AuthContext);  
     //nd
     const fall=new Animated.Value(1);
@@ -58,7 +63,7 @@ const Profile = ({navigation}) => {
       const id=await AsyncStorage.getItem('id');
       console.log(id)
       try{
-      const response = await axiosinst.get("http://a8a9bc1325f4.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://11df449fbbf1.ngrok.io/api/user-profile/"+id)
           
       
      console.log(response)
@@ -175,7 +180,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:name}}
+      initialValues={{Username:''}}
       validationSchema={userschema}
       
 
@@ -190,28 +195,37 @@ const Profile = ({navigation}) => {
         await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=axiosinst.put('https://a8a9bc1325f4.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://11df449fbbf1.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
           })
-        .then(async function(response){
+        .then( function(response){
           console.log(response);
-          
-      
+          console.log(response.data.username)
+          console.log(response.username)
+          Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
           
           
         })
-        .catch(async function(error){
-          await console.log(AsyncStorage.getItem('token'))
-            console.log(error);
+        .catch( function(error){
+          // await console.log(AsyncStorage.getItem('token'))
+            // console.log(error);
+            console.log('eroor')
+            console.log(error)
+            
+           
          
         })
 
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:230,marginHorizontal:40}}>
+     <View style={{alignItems:'center', marginTop:215,marginHorizontal:40}}>
 
      <Item style={styles.input}>
 
@@ -252,28 +266,42 @@ const Profile = ({navigation}) => {
 
         onSubmit={async(values,actions)=>{
         //  signup(values);
+        loggg();
         const back={
           
-          password:values.newPassword,
-          password2:values.repeatnewPassword,
+          old_password:values.Password,
+          new_password:values.newPassword,
         
         }
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        axios.post('http://1d5bf2d8221a.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
-        .then(async function(response){
-          AsyncStorage.setItem('token',response.data.token)
-   
+        const response=axiosinst.put('https://11df449fbbf1.ngrok.io/api/change-password/',backk,{
+          headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
+          })
+        .then( function(response){
+          console.log(response);
+          console.log(response.data.username)
+          console.log(response.username)
+      
+          
+          
         })
-        .catch(function(error){
-            console.log(error);
+        .catch( function(error){
+          console.log(response);
+          // await console.log(AsyncStorage.getItem('token'))
+            // console.log(error);
+            console.log('eroor')
+            console.log(error)
+           
          
         })
 
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:100,marginHorizontal:40}}>
+     <View style={{alignItems:'center', marginTop:110,marginHorizontal:40}}>
 
      <Item style={styles.input}>
 
@@ -292,6 +320,7 @@ const Profile = ({navigation}) => {
        <Item style={styles.input}>
          <Input  style={styles.Input} 
           secureTextEntry
+          autoCapitalize='none' autoCorrect={false}
          onChangeText={props.handleChange('newPassword')}
          value={props.values.newPassword}
          onBlur={props.handleBlur('newPassword')}
@@ -308,6 +337,7 @@ const Profile = ({navigation}) => {
        <Item style={{}}>
          <Input  style={styles.Input} 
           secureTextEntry
+          autoCapitalize='none' autoCorrect={false}
           onChangeText={props.handleChange('repeatnewPassword')}
           value={props.values.repeatnewPassword}
           onBlur={props.handleBlur('repeatnewPassword')}
@@ -403,11 +433,11 @@ const styles = StyleSheet.create({
         color:"black",marginLeft:100,position:'absolute'
     },
     Icon:{
-        position:'absolute',
+      
     
       
-        marginTop:300,
-        marginLeft:300
+     
+       
     },
     avatar:{
         position:'absolute',
@@ -438,7 +468,7 @@ const styles = StyleSheet.create({
       Input:{
         fontSize:15,
         fontStyle:'normal',
-        marginRight:40
+        marginLeft:20
         
         
       },
@@ -451,4 +481,4 @@ const styles = StyleSheet.create({
 //     // fontWeight:'100'
 //   },
   });
-  export default Profile;
+  export default EditProfile;
