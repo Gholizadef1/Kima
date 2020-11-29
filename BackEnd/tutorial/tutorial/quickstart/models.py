@@ -68,7 +68,7 @@ class MyBook(models.Model):
    # info=models.CharField(max_length=5)
 
     def __str__(self):
-        return " "
+        return str(self.state)
 
 
 

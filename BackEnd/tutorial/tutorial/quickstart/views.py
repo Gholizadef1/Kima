@@ -63,32 +63,39 @@ def login(request):
                     status=HTTP_200_OK)
 
 
+#@permission_classes([AllowAny],)
+#@permission_classes([IsAuthenticated])
+#class BookCollection(APIView):
+    
+#    def get_object(self, pk):
+#        try:
+#            return book.objects.get(pk=pk)
+#        except book.DoesNotExist:
+#            return Response({'error': 'Book not here'})
+
+#    def post(self,request,pk,format=None):
+        
+#        user=self.request.user
+#        print('first')
+#        print(request.data)
+#        book1=self.get_object(self.request.data.get('id'))
+#        print('first2')
+#        MyBook.save(account=user,book1=book1,state=pk)
+#        return Response({'error': 'Invalid Credentials'})
+        
+
+
+@api_view(["POST"])
 @permission_classes([AllowAny],)
 @permission_classes([IsAuthenticated])
-class BookCollection(APIView):
-    
-    def get_object(self, pk):
-        try:
-            return book.objects.get(pk=pk)
-        except book.DoesNotExist:
-            raise Http404
-
-    def post(self,request,pk,format=None):
-        
-        user=self.request.user
-        b=MyBook()
-        b.account=user
-        #idb=MyBookSerializer()
-        print('first')
-        body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
-        content = body['id']
-        print(content)
-        b.book1=self.get_object(self.request.data.get('id'))
-        print('first2')
-        b.state=pk
-        b.save()
-
-        return Response({'error': 'Invalid Credentials'})
-        
-
+def bookcollec(request,pk):
+    user=request.user
+    print('first')
+    idb=request.data.get("book_id")
+    #idu=request.data.get("user_id")
+    print(idb)
+    book2=book.objects.get(id=idb)
+    print('first2')
+    b=MyBook(account=user,book1=book2,state=pk)
+    b.save()
+    return Response({'error': 'Invalid Credentials'})
