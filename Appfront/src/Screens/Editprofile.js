@@ -28,7 +28,7 @@ import axiosinst from '../api/axiosinst';
 const userschema=yup.object({
 
     Username:yup.string()
-    .required("لطفا نام کاربری خود را وارد کنید")
+    .required("لطفا نام کاربری جدید خود را وارد کنید")
     .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
   
   })
@@ -55,25 +55,25 @@ const Profile = ({navigation}) => {
     const [password,setpassword]=useState(null);
     const oldpassword=null;
     const response=async (searchTerm)=>{
-        try{
-        const response = await axiosinst.get('api/user-profile/'
-            
-        )
-       console.log(response);
-       oldpassword=response.data.password;
-       name=response.data.name;
-       
+      const id=await AsyncStorage.getItem('id');
+      console.log(id)
+      try{
+      const response = await axiosinst.get("http://a8a9bc1325f4.ngrok.io/api/user-profile/"+id)
+          
+      
+     console.log(response)
+     setname(response.data.username)
+    
+  }
+  catch(err){
+      console.log(err);
+      Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+          
 
-    }
-    catch(err){
-        console.log('error');
-        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
-            
-
-                Title:'فهمیدم',onPress:()=>console.log('alert closed')
-                }])
-    }
-    }
+              Title:'فهمیدم',onPress:()=>console.log('alert closed')
+              }])
+  }
+  }
     response();
   
 
@@ -175,7 +175,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:''}}
+      initialValues={{Username:name}}
       validationSchema={userschema}
       
 
@@ -185,15 +185,25 @@ const Profile = ({navigation}) => {
           username:values.Username,
         
         }
+        const token=AsyncStorage.getItem('token');
+        console.log(token)
+        await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        axios.post('http://1d5bf2d8221a.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+        const response=axiosinst.put('https://a8a9bc1325f4.ngrok.io/api/update-profile/',backk,{
+          headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+          })
         .then(async function(response){
-          AsyncStorage.setItem('token',response.data.token)
+          console.log(response);
+          
+      
           
           
         })
-        .catch(function(error){
+        .catch(async function(error){
+          await console.log(AsyncStorage.getItem('token'))
             console.log(error);
          
         })
@@ -209,7 +219,7 @@ const Profile = ({navigation}) => {
          onChangeText={props.handleChange('Username')}
          onBlur={props.handleBlur('Username')}
          value={props.values.Username}
-         placeholder="نام  ..." placeholderTextColor='lightgray'>
+         placeholder={name} placeholderTextColor='gray' style={{}}>
          </Input>
          <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
         

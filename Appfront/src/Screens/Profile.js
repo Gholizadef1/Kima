@@ -20,6 +20,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import axiosinst from '../api/axiosinst';
+import Profilenavigation from './Profilenavigation';
 
 
 
@@ -36,8 +37,9 @@ const Profile = ({navigation}) => {
         const response = await axiosinst.get("http://a8a9bc1325f4.ngrok.io/api/user-profile/"+id)
             
         
-       console.log(response)
+    //    console.log(response)
        setname(response.data.username)
+       console.log(name)
        setemail(response.data.email)
     }
     catch(err){
@@ -50,7 +52,20 @@ const Profile = ({navigation}) => {
     }
     }
 
-   response()
+    // navigation.addListener('Focus', () => {
+      
+    //    response()
+    //    console.log('akdfsj;lskafd')
+    // });
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+          response();
+          console.log('Listenn')
+        });
+    
+        return unsubscribe;
+      }, [Profilenavigation]);
+   
     return(
       
         <View style={styles.container}>
