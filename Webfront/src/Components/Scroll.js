@@ -53,62 +53,63 @@ function Slide(props) {
   
   return (
     <div className="con col-xl-8">
+    
+      {suggestions.length === 0 ? (
+        <div className="spinner-border" role="status">
+          <div className="sr-only">Loading...</div>
+        </div>
+      ) : (
+       <div className = "slid">
+          <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+        <Slider {...settings}>
+          {suggestions.map((current) => (
+            <div className="out" key={current.id}>
+              <div className="card car"onClick={() => bookSelectedHandler( current )}>
+                <img
+                  className="squer" 
+                  src={current.imgurl}
+                  height={56}
+                  width={56}
+                />
+                <small className= "title">
+                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   </small>
+              </div>
+            </div>
+          ))}
+        </Slider>
+        </div>
+      )}
+    
+      {suggestions.length === 0 ? (
+        <div className="spinner-border" role="status">
+          <div className="sr-only">Loading...</div>
+        </div>
+      ) : (
+       <div className = "slid">
+           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
+        <Slider {...settings}>
+          {suggestions.map((current) => (
+            <div className="out" key={current.id}>
+              <div className="card car"onClick={() => bookSelectedHandler( current )}>
+                <img
+                  className="squer" 
+                  src={current.imgurl}
+                  height={56}
+                  width={56}
+                />
+                <small className= "title">
+                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   </small>
+              </div>
+            </div>
+          ))}
+        </Slider>
+        </div>
+      )}
      
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
-      ) : (
-       <div className = "slid">
-        <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
-        <Slider {...settings}>
-          {suggestions.map((current) => (
-            <div className="out" key={current.id}>
-              <div className="card car"onClick={() => bookSelectedHandler( current )}>
-                <img
-                  className="squer" 
-                  src={current.imgurl}
-                  height={56}
-                  width={56}
-                />
-                <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   </small>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        </div>
-      )}
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
-      ) : (
-       <div className = "slid">
-
-      <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
-        <Slider {...settings}>
-          {suggestions.map((current) => (
-            <div className="out" key={current.id}>
-              <div className="card car"onClick={() => bookSelectedHandler( current )}>
-                <img
-                  className="squer" 
-                  src={current.imgurl}
-                  height={56}
-                  width={56}
-                />
-                <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   </small>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        </div>
-      )}
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>

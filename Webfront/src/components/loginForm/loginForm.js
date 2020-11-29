@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './loginForm.css';
+import Button from '@material-ui/core/Button';
+import {withStyles } from '@material-ui/core/styles';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
 //import { useCookies } from 'react-cookie';
@@ -90,6 +92,20 @@ function LoginForm(props) {
         props.history.push('/register'); 
         props.updateTitle('Register');
     }
+    const StyledButton = withStyles({
+        root: {
+          background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+          borderRadius: 3,
+          border: 0,
+          color: 'black',
+          height: 48,
+          padding: '0 30px',
+          boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+        },
+        label: {
+          textTransform: 'capitalize',
+        },
+      })(Button);
     return(
         <div className="d-flex justify-content-center py-sm-4 color4">
         <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
@@ -102,10 +118,10 @@ function LoginForm(props) {
             </div>
             <div className="card color2 p-2">
             <form className="col-8 m-auto was-validated">
-                <h1>ورود</h1>
+                <h1 style={{fontFamily:'Morvarid'}}>ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1">ایمیل</label>
+                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Morvarid'}}>ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -122,7 +138,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1">رمز</label>
+                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Morvarid'}}>رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -136,11 +152,12 @@ function LoginForm(props) {
                 </div> */}
                 </div>
                 <p className="loginText"> {state.backError} </p>
-                <button 
+                <StyledButton 
+                style={{fontFamily:'Morvarid'}}
                     type="submit" 
                     className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
                     onClick={handleSubmitClick}
-                >ثبت</button>
+                >ثبت</StyledButton>
                 
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
@@ -148,8 +165,8 @@ function LoginForm(props) {
             </div>
             
             <div className="registerMessage">
-                <span>قبلاً ثبت‌نام نکرده‌اید؟</span>
-                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
+                <span style={{fontFamily:'Morvarid'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
+                <span className="loginText" style={{fontFamily:'Morvarid'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
         </div>

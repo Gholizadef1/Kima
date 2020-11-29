@@ -38,7 +38,9 @@
 
    
 }
-
+.slid{
+   padding-left: -100px;
+}
 .slick-prev:before, .slick-next:before {
     color: black !important;
 }
@@ -85,3 +87,5 @@
     }
   
     }
+  
+  

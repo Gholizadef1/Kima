@@ -19,7 +19,7 @@ function ProFile (props){
     const logout = () =>{
         
         //localStorage.clear("token");
-        Cookies.remove('userToken')
+        Cookies.remove('userToken',{ path: '/', domain: 'localhost' });
         props.history.push('/login');
     }
     const [user , setUser] = useState({
@@ -30,16 +30,21 @@ function ProFile (props){
     })
     console.log(user.token);
     // useEffect(() => {
-    //     if (token) {       
-    //         axios.get('http://127.0.0.1:8000/user/' + token)
+    //     console.log(user)
+    //     if (user.token) {       
+    //         axios.get('http://127.0.0.1:8000/user/' + user.token)
     //             .then(response => {
-    //               //console.log(response);
-    //               //console.log(response.data);
+    //               console.log(response);
+    //               console.log(response.data);
     //               setState({ 
     //                 userName: response.data.userName,
     //                 email: response.data.email,
     //                 picture : response.data.picture
     //                 });
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+                    
     //             });
 
     //     }
@@ -53,7 +58,7 @@ function ProFile (props){
         }))
     }
 
-    const handleSubmitClick = (e) => {
+    const handleChangeInfisClick = (e) => {
         e.preventDefault();
         setUser(prevState => ({
             ...prevState,
@@ -76,8 +81,7 @@ function ProFile (props){
                 if(response.status === 200){
                     setUser(prevState => ({
                         ...prevState,
-                        successEdit : 'موفقیت‌آمیز بود',
-                       
+                        successEdit : 'موفقیت‌آمیز بود'
                     }))
                     console.log(response);
                     console.log(props);
@@ -122,10 +126,11 @@ function ProFile (props){
      headers:{
        
     "Content-Type":"application/json",
-    "Athorization":"Token "+Cookies.get("userToken")}
+    "Authorization":"Token "+Cookies.get("userToken")}
      }
   
   ).then(function(res){
+    console.log(res);
     console.log("Token" +Cookies.get("userToken"))
   })
   
@@ -136,6 +141,7 @@ function ProFile (props){
     console.log(res);
   })
 }
+
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
@@ -158,13 +164,13 @@ const accent = teal[200]; // #e040fb
             <div class="container-fluid">
                 <div className="row">
                     
-                    <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
                         
-                        <div className="card card-profile">
+                        <div className="card ">
                             <div className=" d-flex justify-content-end">
 
                                 <div className="col-7 mt-4 text-right">
-                                    <h5 className="" style={{fontFamily:'Morvarid'}}>
+                                    <h5 className=""style={{fontFamily:'Morvarid'}}>
                                         فاطمه امیدی
                                     </h5>
                                 </div>
@@ -173,22 +179,22 @@ const accent = teal[200]; // #e040fb
                                     <div className="profile">
                                         <img src="index12.jpeg" className="rounded-circle img-fluid"/>
                                         <img className="" ref={uploadedImage}/>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div className="card-header border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                                 <div className="d-flex justify-content-between">
                                     
-                                    <StyledButton type="button" className="col-4 btn1 const btn-sm"
+                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
                                      aria-expanded="false"
-                                     style={{backgroundColor:accent,fontFamily:'Morvarid'}}
-                                     aria-label="Toggle navigation">
+                                     aria-label="Toggle navigation"style={{fontFamily:'Morvarid'}}>
                                         ویرایش
                                     </StyledButton>
-                                    <StyledButton onClick = {logout} style={{fontFamily:'Morvarid'}}>
+                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info" onClick = {logout}style={{fontFamily:'Morvarid'}} >
                                         خروج ازحساب
                                     </StyledButton>
                                     
@@ -222,16 +228,17 @@ const accent = teal[200]; // #e040fb
                                                 </div>
                                             </div>
                                             <div class=" my-2">
-                                                <StyledButton
+                                                <StyledButton 
                                                 type="submit" 
-                                                className="btn1 d-flex flex-row "
-                                                onClick={handleSubmitClick}
+                                                className="btn color5 d-flex flex-row "
+                                                onClick={handleChangeInfisClick}
                                                 style={{fontFamily:'Morvarid'}}
                                                 >تغییر اطلاعات</StyledButton>
                                             </div>
+                                            
                                             <div class="dropdown-divider"></div>
                                             <div class="my-1">
-                                                <label for="img" style={{fontFamily:'Morvarid'}}> عکس</label>
+                                                <label for="img" style={{fontFamily:'Morvarid'}}style={{fontFamily:'Morvarid'}}> عکس</label>
                                                 <div className="d-flex justify-content-between">
                                                     <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Morvarid'}}>ثبت عکس</StyledButton>
                                                     <input class="form-control" 
@@ -281,13 +288,13 @@ const accent = teal[200]; // #e040fb
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
-                                                className="btn1 text-dark d-flex flex-row "
-                                                onClick={handleSubmitClick}
-                                                disabled
+                                                className="btn color5 d-flex flex-row "
                                                 style={{fontFamily:'Morvarid'}}
+                                                disabled
                                                 >تغییر رمز</StyledButton>
                                             </div>
                                         </div>
+                                            
                                     </form>
                                 </div>
                             </div>
@@ -321,7 +328,7 @@ const accent = teal[200]; // #e040fb
         </div>
         
     )
-}
+} 
 
 export default withRouter(ProFile);
 

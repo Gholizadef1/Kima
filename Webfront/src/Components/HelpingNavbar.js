@@ -10,11 +10,13 @@ import{ useState, useEffect } from "react";
 import "./HelpingNav.css";
 import {GoSearch} from 'react-icons/go';
 import {FaHome} from 'react-icons/fa';
+import {MdGroup} from 'react-icons/md';
 import UserList from './UsersList';
+import { Route,withRouter } from 'react-router-dom';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-function NavBar (){
+function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [users,setUsers] = useState([]);
@@ -46,34 +48,51 @@ useEffect(() => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-    return(   
+  const routeToProfile = ()=>{
+    props.history.push('/profile');
+  }
 
-<Navbar className= "navbarMain">
-            <h1 className="kicon">  
-             <GiBookshelf style = {{padding:4, height:100,width:40}}/>
+    return(   
+<Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar">
+            <h1>  
+             <GiBookshelf color="black"
+            //  style = {{padding:4, height:100,width:40}}
+             />
              </h1>
-             <b className="kima"style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>کیما</b>     
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link class="nav-link2" href="topics" style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link2" href="groups" style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link2" href="quize"style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
+             <b className=""
+            
+            style = {{fontSize:35,fontFamily:'Morvarid',fontWeight:"bold",color:"black"}}
+             >کیما</b>     
+  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+  <Navbar.Collapse id="basic-navbar-nav ">
+    <Nav className="mr-auto pt-2">
+      <Nav.Link className="nav-link2 h4 ml-3" href="topics"
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >عناوین</Nav.Link>
+      <Nav.Link className="nav-link2 h4" href="groups"
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >گروه‌ها</Nav.Link>
+      <Nav.Link className="nav-link2 h4" href="quize"
+       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >آزمونک</Nav.Link>
     </Nav> 
     <>
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ height: "100vh" }}
+      {/* <div
+        // className="d-flex align-items-center justify-content-center"
+        // style={{ height: "100vh" }}
       >
+    
+      </div> */}
+      <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      style={{fontFamily:'Morvarid'}}
+      // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
+      />
     <Button variant="gray" onClick={handleShow}>
     <GoSearch size="30" color="black"/>
         </Button>
-      </div>
-      <input className="inputNavbar1"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right",fontFamily:'Morvarid'}}/>
-    
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-           <div className="header" style={{fontFamily:'Morvarid'}}>
+           <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
           </div>
         </Modal.Header>
@@ -87,8 +106,8 @@ useEffect(() => {
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3">{item.title}</h5>
-         <h5 className="card-title4">{item.author}</h5>
+         <h5 className="card-title3"style={{fontFamily:'Morvarid'}}>{item.title}</h5>
+         <h5 className="card-title4"style={{fontFamily:'Morvarid'}}>{item.author}</h5>
           </small>
           </div>
        </div>
@@ -102,8 +121,8 @@ useEffect(() => {
       </Modal>
     </>
   
-       <a class="nav-item1" href="home" style={{fontFamily:'Morvarid'}} >
-       <small className="name" size="50">
+       <a class="nav-item1" href="home" >
+       <small className="name" size="50"style={{fontFamily:'Morvarid',color:'black'}} >
       خانه
     </small>
 
@@ -114,4 +133,4 @@ useEffect(() => {
     );
     }
 
-export default NavBar;
+    export default withRouter( NavBar);
