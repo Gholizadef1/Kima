@@ -9,7 +9,7 @@ import {
 import "./Scroll.css";
 
 function Slide(props) {
-  console.log(props);
+  //console.log(props);
   const [suggestions, setSuggestions] = useState([]);
   useEffect(() => {
     fetch("http://127.0.0.1:8000/bookdetail/")
