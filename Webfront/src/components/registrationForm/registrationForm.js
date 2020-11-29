@@ -15,7 +15,7 @@ function RegistrationForm(props) {
         successMessage: null,
         backError:""
     })
-    //const [cookies, setCookie] = useCookies(['user']);
+   
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -35,14 +35,15 @@ function RegistrationForm(props) {
             const back= JSON.stringify(payload)
             axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    //console.log(response);
+                    console.log(response);
                     //console.log(response.data);
-                    if(response.status=== 200){
+                    if(response.data.response=== "successfully registered a new user."){
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'ثبت‌نام موفقیت‌آمیز بود...'
                         }))
-                        Cookies.set('userToken',response.data.token,{path:"/"})
+                        Cookies.set('userToken',response.data.token);
+                        Cookies.set('userName',state.userName);
                         redirectToHome();
                         props.showError(null)
                     } else{

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import {NavLink} from 'react-router-dom';
 import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
-import {CgProfile} from 'react-icons/cg';
+// import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
@@ -13,13 +13,14 @@ import {FaHome} from 'react-icons/fa';
 import {MdGroup} from 'react-icons/md';
 import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
+import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-  const [users,setUsers] = useState([]);
+  // const [users,setUsers] = useState([]);
  
  const handleChange = event => {
     setUser({ user: event.target.value });
