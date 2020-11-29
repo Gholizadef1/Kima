@@ -7,7 +7,7 @@ export default class PickerShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "key2"
+      selected: "key0"
     };
   }
   onValueChange(value: string) {
@@ -17,20 +17,23 @@ export default class PickerShow extends Component {
   }
   render() {
     return (
-      <Container>
+      <Container >
         <Content>
           <Form>
             <Picker
-            style={{width: 200, height:40 , bottom:13}} itemStyle={{height: 24}}
+            style={{width: 270,
+              borderWidth:3,
+              borderColor:'#1F7A8C',
+              borderTopColor:'#1F7A8C' }}
               mode="dropdown"
               iosIcon={<Icon name="arrow-down" />}
               headerTitleStyle={{ color: "#fff" }}
               selectedValue={this.state.selected}
               onValueChange={this.onValueChange.bind(this)}
             >
-              <Picker.Item label="Wallet" value="key0" />
-              <Picker.Item label="ATM Card" value="key1" />
-              <Picker.Item label="Debit Card" value="key2" />
+              <Picker.Item label="میخواهم این کتاب را بخوانم" value="key0" />
+              <Picker.Item label="در حال خواندن" value="key1" />
+              <Picker.Item label="قبلا خوانده ام" value="key2" />
              
             </Picker>
           </Form>

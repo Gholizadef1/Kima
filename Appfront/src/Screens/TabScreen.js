@@ -6,9 +6,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import Home from './Home'
@@ -19,22 +16,11 @@ import Groups from './Groups';
 import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
-import Bookview from './Bookview';
-// const SNavigation = createStackNavigator();
-//  Snavigation=()=>{
-//    return(
-//     <SNavigation>
-//       <SNavigation.Screen name='search' component={Search}></SNavigation.Screen>
-//       <SNavigation.Screen name="book"   component={Bookresult}></SNavigation.Screen>
 
-//     </SNavigation>
-//    )
-
-//  }
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
-      <NavigationContainer options={{}} >
+      <NavigationContainer>
           <Tab.Navigator
           initialRoute={{
             headerShown: false

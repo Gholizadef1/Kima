@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const WantToRead = (navigation) => {
+const WantToRead = () => {
     return(
         <View style={styles.container}>
             <Text>

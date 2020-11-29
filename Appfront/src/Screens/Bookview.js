@@ -14,6 +14,7 @@ import { HeaderHeightContext } from 'react-navigation-stack';
 
 
 
+
 const Bookview = (prop) => {
 
   const [result , setResult] = useState(null);
@@ -33,32 +34,22 @@ const Bookview = (prop) => {
   }
     return(
       <Container>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:15}}/>
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:20}}/>
             <Body>
-              <CardItem>
-                  <Image source={{uri : result.imgurl}} style={styles.image}/>
-              </CardItem>
-              <CardItem>
-                  <Text style={styles.bookname}>نام کتاب:{result.title}</Text>
-              </CardItem>
-              <CardItem>
-                  <Text style={styles.author}>نویسنده:{result.author}</Text>
-              </CardItem>
-              <CardItem>
-                  <Text style={styles.publisher}>انتشارات {result.publisher}</Text>
-              </CardItem>
-              <Body>
-                <CardItem>
-                  <PickerShow style={styles.Picker}/>
-                </CardItem>
-              </Body>
-            </Body>
-            <Body>
-              <Content style={{bottom:-300}}>
-                <CardItem>
-                   <Text style={styles.description}>{result.description}</Text>
-                </CardItem>
-              </Content>
+                  <Image source={{uri : result.imgurl}} style={{marginTop:5, height:220 ,
+                     width:200 , borderRadius:10}} />
+
+                  <Text style={{marginTop:10 , fontWeight:'bold',
+                      fontSize:25 , marginRight:180 , marginLeft:5}}>{result.title}</Text>
+
+                  <Text style={{marginRight:180 , marginLeft:5}}>{result.author}</Text>
+
+                     <PickerShow/> 
+
+                  <Text style={{fontWeight:'bold' , fontSize:20}}>درباره کتاب</Text>
+                  <Content>
+                   <Text style={{marginTop:15 , marginHorizontal:15}}>{result.description}</Text>
+                  </Content>
             </Body>
       </Container>
     );
@@ -70,54 +61,43 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    image:{
-      alignItems: 'center',
-      justifyContent: 'center', 
-      bottom:'2%',
-      right:15,
-      width:180,
-      height:220,
-      marginBottom:0,
-      borderRadius:5,
-      marginHorizontal:100
-      },
-    bookname: {
-      alignContent:'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginRight:10,
-      marginLeft:350,
-      marginBottom:0,
-      bottom:'10%',
-      fontSize:20,
-      width:500,
-      fontWeight:'bold'
-    },
-    author: {
-      right:20,
-      bottom:'12%',
-      marginRight:20,
-      marginLeft:30,
-      marginBottom:0,
-      color:'#1F7A8C',
-      fontSize:17,
-      marginHorizontal:100
-    },
-    publisher:{
-      bottom:'18%',
-      marginRight:105,
-      color:'#1F7A8C',
-      fontSize:15,
-      marginHorizontal:100,
-      marginBottom:0
-    },
-    description:{
-      bottom:'10%',
-      marginRight:20,
-      fontSize:15,
-      marginHorizontal:100,
-      marginBottom:0
-    }
+    // image:{
+    //   height:220,
+
+    //   }
+    // bookname: {
+    //   alignContent:'center',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   marginRight:10,
+    //   marginLeft:350,
+    //   fontSize:20,
+    //   width:500,
+    //   fontWeight:'bold'
+    // },
+    // author: {
+    //   right:20,
+    //   marginRight:20,
+    //   marginLeft:30,
+    //   color:'#1F7A8C',
+    //   fontSize:17
+    // },
+    // publisher:{
+    //   marginRight:105,
+    //   color:'#1F7A8C',
+    //   fontSize:15
+    // },
+    // description:{
+    //   marginRight:20,
+    //   fontSize:15
+    // },
+    //    Picker: {
+    //   top:'100 px !important',
+    //   right:20,
+    //   marginRight:20,
+    //   color:'#1F7A8C',
+    //   fontSize:15
+    // }
     });
 
 export default Bookview;

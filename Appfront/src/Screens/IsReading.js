@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const IsReading = (navigation) => {
+const IsReading = () => {
     return(
         <View style={styles.container}>
             <Text>
