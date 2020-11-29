@@ -1,0 +1,87 @@
+.car:hover{
+    box-shadow: 1px 5px 30px 1px rgb(55, 26, 100) !important; 
+}
+
+.card-titl1{
+    font-size: 10px;
+    color: black;
+    
+}.card-titl0{
+    
+    color: black;
+ font-size: 13px;
+}
+
+.car{
+    
+    padding-top: 10px;
+    opacity: 1;
+    width: 120px;
+    height: 144px;
+ 
+
+}
+/* 
+.con{
+    margin-top: -560px;
+    margin-left: 20px;
+    padding: 20px;
+    width: 700px;
+    
+} */
+.squer{
+  
+    width: 100px;
+    height: 80px;
+    padding-top:2px;
+    padding-left:17px;
+
+   
+}
+
+.slick-prev:before, .slick-next:before {
+    color: black !important;
+}
+
+.sr-only{
+    margin-left: 500px;
+    color: black;
+}
+@media (max-width :420px) 
+{
+    .con{
+        width: 120px;
+    }
+    .slid{
+       display: contents;
+       
+    } 
+    
+  }
+
+@media (max-width :768px) 
+{
+    .con{
+        width: 220PX;
+    }
+    .slid{
+        margin-left: -230px;
+        margin-right: -230px;
+    }
+    
+    }
+  @media (max-width :800px) 
+  {
+    .con{
+        width: 220PX;
+        
+      }
+      .slid{
+        margin-left: -230px;
+        margin-right: -230px;
+    }
+    .brand{
+        display: contents;
+    }
+  
+    }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import './registrationForm.css';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 function RegistrationForm(props) {
     const [state , setState] = useState({
@@ -14,7 +14,7 @@ function RegistrationForm(props) {
         successMessage: null,
         backError:""
     })
-    const [cookies, setCookie] = useCookies(['token']);
+    //const [cookies, setCookie] = useCookies(['user']);
     const handleChange = (e) => {
         const {id , value} = e.target   
         setState(prevState => ({
@@ -34,21 +34,50 @@ function RegistrationForm(props) {
             const back= JSON.stringify(payload)
             axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    console.log(response);
-                    console.log(response.data);
+                    //console.log(response);
+                    //console.log(response.data);
                     if(response.status=== 200){
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'ثبت‌نام موفقیت‌آمیز بود...'
                         }))
+                        Cookies.set('userToken',response.data.token,{path:"/"})
                         redirectToHome();
                         props.showError(null)
                     } else{
-                        props.showError("Some error ocurred");
-                        setState(prevState => ({
-                            ...prevState,
-                            'backError' : 'Some error ocurred'
-                        })); 
+                        // props.showError("Some error ocurred");
+                        // setState(prevState => ({
+                        //     ...prevState,
+                        //     'backError' : 'Some error ocurred'
+                        // }));
+                        if(response.data.email!==back.email||response.data.username!==back.username){
+                            if(response.data.email!==undefined&&response.data.username!==undefined){
+                              //console.log(response.data.username);
+                              //console.log(response.data.email);
+                              setState(prevState => ({
+                                ...prevState,
+                                'backError' : 'کاربر وجود دارد'
+                            })); 
+                            }
+                            else if(response.data.username!==undefined){
+                            setState(prevState => ({
+                                ...prevState,
+                                'backError' : 'نام کاربری وجود دارد'
+                            })); 
+                          }
+                          else if(response.data.email!==undefined){
+                            setState(prevState => ({
+                                ...prevState,
+                                'backError' : 'ایمیل وجود دارد'
+                            })); 
+                          }
+                            else{
+                              setState(prevState => ({
+                                ...prevState,
+                                'backError' : 'لطفا ایمیل درست وارد کنید'
+                            })); 
+                            }
+                            };
                     }
                 })
                 .catch(function (error) {
@@ -74,10 +103,16 @@ function RegistrationForm(props) {
     const handleSubmitClick = (e) => {
         setState(prevState => ({
             ...prevState,
-            'backError' : ""
+            backError : ""
         }));
         e.preventDefault();
-        if(state.password === state.confirmPassword) {
+        if(state.password.length < 8){
+            setState(prevState => ({
+                ...prevState,
+                'backError' : 'رمز را بیشتر از هشت کاراکتر انتخاب کنید'
+            }));
+        }
+        else if(state.password === state.confirmPassword) {
             sendDetailsToServer()    
         } else {
             //props.showError('رمز ها فرق دارند');

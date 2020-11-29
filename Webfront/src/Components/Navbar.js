@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 //import {NavLink} from 'react-router-dom';
-import {Navbar,Nav,Button} from 'react-bootstrap';
+import {Navbar,Nav} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
+import Button from '@material-ui/core/Button';
+
  import "./UsersList.css";
  import "./HelpingNavbar";
 import "./Navbar.css";
+import {withStyles } from '@material-ui/core/styles';
 import {GoSearch} from 'react-icons/go';
 import {MdGroup} from 'react-icons/md';
 import UserList from './UsersList';
+import { Route,withRouter } from 'react-router-dom';
+import { fade, makeStyles } from '@material-ui/core/styles';
+
+
+
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
@@ -47,19 +55,35 @@ useEffect(() => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+
+  const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'black',
+      height: 48,
+      padding: '0 30px',
+      boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+    },
+    
+  })(Button);
+
+
     return(   
 
-<Navbar className= "navbar">
+<Navbar className= "navbarMain">
             <h1>  
              <GiBookshelf style = {{padding:4, height:100,width:40}}/>
              </h1>
-             <b style = {{fontSize:35,fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>کیما</b>     
+             <b style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>کیما</b>     
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
+      <Nav.Link class="nav-link2" href="topics" style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
+      <Nav.Link class="nav-link2" href="groups" style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
+      <Nav.Link class="nav-link2" href="quize"style = {{padding:40,fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
     </Nav> 
     <>
       <div
@@ -70,11 +94,11 @@ useEffect(() => {
     <GoSearch size="30" color="black"/>
         </Button>
       </div>
-      <input className="input"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
+      <input className="inputNavbar"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right",fontFamily:'Morvarid'}}/>
     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-           <div className="header">
+           <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
           </div>
         </Modal.Header>
@@ -96,23 +120,23 @@ useEffect(() => {
        ))}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <StyledButton onClick={handleClose}style={{fontFamily:'Morvarid'}}>
             بستن
-          </Button>
+          </StyledButton>
         </Modal.Footer>
       </Modal>
     </>
   
        <a class="nav-item1" href="profile" >
-       <small className="name" size="50">
+       <small className="name" size="50" style={{fontFamily:'Morvarid'}}>
       نام کاربری
     </small>
 
-    <CgProfile size="35" vertical-align='center' style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}/> 
+    <CgProfile size="35" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
      </a>
   </Navbar.Collapse>
 </Navbar>
     );
     }
 
-export default NavBar;
+    export default withRouter( NavBar);

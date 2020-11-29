@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./Avatar.css";
 import axios from "axios";
-function Avatar() {
-  const state = {
+import Cookies from 'js-cookie';
+import { Form } from "react-bootstrap";
+function Avatar(props) {
+  const [state,setState] =useState( {
     file:null
-  }
-     const uploadedImage = React.useRef(null);
+  })
+    const uploadedImage = React.useRef(null);
     const imageUploader = React.useRef(null);
     const handleImageUpload = e => {
+      setState({file:e.target.files[0]});
       const [file] = e.target.files;
       if (file) {
         const reader = new FileReader();
-        this.setState({file:false})
         const { current } = uploadedImage;
         current.file = file;
         reader.onload = e => {
@@ -20,17 +22,28 @@ function Avatar() {
         reader.readAsDataURL(file);
       }
     };
-    const handleUpload= e =>{
-  let file=this.state.file
-  let formdata = new FormData()
-  formdata.append("image",file)
+  const handleUpload= e =>{
+
+  var formdata = new FormData()
+  formdata.append('profile_photo',state.file)
+  // formdata.append('username','file')
+   axios.put('http://127.0.0.1:8000/api/update-profile/'
+   ,formdata,{
+     headers:{
+       
+    "Content-Type":"application/json",
+    "Authorization":"Token "+Cookies.get("userToken")}
+     }
   
-  axios({
-    url:'api/update-profile',
-    method:"POST",
-    headers:{
-    
-    }
+  ).then(function(res){
+    console.log("Token" +Cookies.get("userToken"))
+  })
+  
+  .then(function(res){
+    console.log(res);
+  })
+  .catch(function(res){
+    console.log(res);
   })
 }
   return (
@@ -39,32 +52,31 @@ function Avatar() {
     style={{
       display: "flex",
       flexDirection: "column",
-
     }}
   >
-    <input
+    <input 
       type="file"
       accept="image/*"
       onChange={handleImageUpload}
       ref={imageUploader}
       style={{
-        display: "none"
+        display: "none",
       }}
     />
-    <div
+    <div className="in"
       style={{
         height: "60px",
         width: "60px",
-        border: "1px dashed black"
+        
       }}
       onClick={() => imageUploader.current.click()}
     >
       <img className="avatar"
-
         ref={uploadedImage}
       />
-      <button type="button"onClick={handleUpload}>Upload</button>
+      
     </div>
+    <button className="hit" type="button"onClick={handleUpload}>Upload</button>
 
   </div>
   );
