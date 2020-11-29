@@ -7,12 +7,11 @@ import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
- import "./HelpingNavbar";
-import "./Navbar.css";
-import {FaHome} from 'react-icons/fa';
+import "./HelpingNav.css";
 import {GoSearch} from 'react-icons/go';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
+import {FaHome} from 'react-icons/fa';
+import {MdGroup} from 'react-icons/md';
+import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
@@ -63,19 +62,19 @@ useEffect(() => {
              </h1>
              <b className=""
             
-            style = {{fontSize:35,fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
+            style = {{fontSize:35,fontFamily:'Morvarid',fontWeight:"bold",color:"black"}}
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
   <Navbar.Collapse id="basic-navbar-nav ">
     <Nav className="mr-auto pt-2">
       <Nav.Link className="nav-link2 h4 ml-3" href="topics"
-        style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >عناوین</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="groups"
-        style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >گروه‌ها</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="quize"
-       style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >آزمونک</Nav.Link>
     </Nav> 
     <>
@@ -86,6 +85,7 @@ useEffect(() => {
     
       </div> */}
       <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      style={{fontFamily:'Morvarid'}}
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
@@ -93,7 +93,7 @@ useEffect(() => {
         </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-           <div className="header">
+           <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
           </div>
         </Modal.Header>
@@ -107,33 +107,30 @@ useEffect(() => {
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3">{item.title}</h5>
-         <h5 className="card-title4">{item.author}</h5>
+         <h5 className="card-title3"style={{fontFamily:'Morvarid'}}>{item.title}</h5>
+         <h5 className="card-title4"style={{fontFamily:'Morvarid'}}>{item.author}</h5>
           </small>
           </div>
        </div>
        ))}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <Button variant="info" onClick={handleClose}style={{fontFamily:'Morvarid'}}>
             بستن
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   
-    <a class="nav-item1" href="home" style={{color:"black"}}>
-        <small className="name" size="50">
+       <a class="nav-item1" href="home" >
+       <small className="name" size="50"style={{fontFamily:'Morvarid',color:'black'}} >
       خانه
-     </small>
+    </small>
 
-     <FaHome size="35" vertical-align='center' color="black"
-     // style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
-     /> 
-      </a>
+    <FaHome size="35" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
+     </a>
   </Navbar.Collapse>
 </Navbar>
-
     );
     }
 

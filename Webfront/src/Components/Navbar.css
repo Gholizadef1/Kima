@@ -81,9 +81,7 @@
     }
     @media (max-width :420px) 
     {
-        .searchbar{
-            display:none;
-        }.nav-item{
+        .nav-item{
             display: none;
         }
 

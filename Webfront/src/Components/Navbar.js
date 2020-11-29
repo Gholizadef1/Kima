@@ -62,19 +62,19 @@ useEffect(() => {
              </h1>
              <b className=""
             
-            style = {{fontSize:35,fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
+            style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
   <Navbar.Collapse id="basic-navbar-nav ">
     <Nav className="mr-auto pt-2">
       <Nav.Link className="nav-link2 h4 ml-3" href="topics"
-        style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >عناوین</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="groups"
-        style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >گروه‌ها</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="quize"
-       style = {{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}
+       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >آزمونک</Nav.Link>
     </Nav> 
     <>
@@ -85,6 +85,7 @@ useEffect(() => {
     
       </div> */}
       <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      style={{fontFamily:'Morvarid'}}
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
@@ -92,7 +93,7 @@ useEffect(() => {
         </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-           <div className="header">
+           <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
           </div>
         </Modal.Header>
@@ -114,14 +115,14 @@ useEffect(() => {
        ))}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <Button variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
             بستن
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   
-       <a class="nav-item1"  onClick={routeToProfile} style={{color:"black"}} >
+       <a class="nav-item1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
        <small className="name" size="50">
       {Cookies.get('userName')}
     </small>

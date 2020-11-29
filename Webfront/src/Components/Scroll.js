@@ -53,13 +53,14 @@ function Slide(props) {
   
   return (
     <div className="con col-xl-8">
-     <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+    
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
       ) : (
        <div className = "slid">
+          <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
@@ -71,8 +72,8 @@ function Slide(props) {
                   width={56}
                 />
                 <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
               </div>
             </div>
@@ -80,13 +81,14 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-      <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
+    
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
       ) : (
        <div className = "slid">
+           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
@@ -98,8 +100,8 @@ function Slide(props) {
                   width={56}
                 />
                 <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
               </div>
             </div>
@@ -107,17 +109,22 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-      <div className="brand1 text-right m-2" style={{fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
+     
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
       ) : (
        <div className = "slid">
+         
+      <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (
+            
             <div className="out" key={current.id}>
+              
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
+                
                 <img
                   className="squer" 
                   src={current.imgurl}
@@ -125,8 +132,8 @@ function Slide(props) {
                   width={56}
                 />
                 <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
+                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
               </div>
             </div>
