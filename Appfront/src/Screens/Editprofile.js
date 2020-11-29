@@ -51,6 +51,31 @@ const Profile = ({navigation}) => {
     const val = useContext(AuthContext);  
     //nd
     const fall=new Animated.Value(1);
+    const [name,setname]=useState(null);
+    const [password,setpassword]=useState(null);
+    const oldpassword=null;
+    const response=async (searchTerm)=>{
+        try{
+        const response = await axiosinst.get('api/user-profile/'
+            
+        )
+       console.log(response);
+       oldpassword=response.data.password;
+       name=response.data.name;
+       
+
+    }
+    catch(err){
+        console.log('error');
+        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+            
+
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
+    response();
+  
 
     const renderheader=()=>{
         return(

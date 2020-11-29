@@ -1,5 +1,5 @@
 
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -19,13 +19,38 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
+import axiosinst from '../api/axiosinst';
 
 
 
 const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
+    const [name,setname]=useState(null);
+    const [email,setemail]=useState(null);
+    console.log(AsyncStorage.getItem('id'))
+    const response=async (searchTerm)=>{
+        const id=await AsyncStorage.getItem('id');
+        console.log(id)
+        try{
+        const response = await axiosinst.get("http://a8a9bc1325f4.ngrok.io/api/user-profile/"+id)
+            
+        
+       console.log(response)
+       setname(response.data.username)
+       setemail(response.data.email)
+    }
+    catch(err){
+        console.log(err);
+        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+            
 
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
+
+   response()
     return(
       
         <View style={styles.container}>
@@ -39,10 +64,10 @@ const Profile = ({navigation}) => {
         <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>
-        <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>سلام</Text></Text>
+        <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
-        <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>hi@hi.hi</Text></Text>
+        <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
         <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, marginLeft:375}} />
 
         <Button style={styles.edit}

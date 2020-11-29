@@ -69,12 +69,15 @@ const logschema=yup.object({
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-         axios.post('http://8c763622afbf.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axios.post('http://a8a9bc1325f4.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
-          
-          await AsyncStorage.setItem('token',{tokenn:response.data.token})
-          console.log(response)
-          console.log(response.status);
+          console.log(response.data.userid)
+          // console.log(response)
+          // console.log(response.data.token)
+          await AsyncStorage.setItem('token',response.data.token)
+          await AsyncStorage.setItem('id',response.data.userid.toString())
+          // console.log(response)
+          // console.log(response.status);
           val.changelogged(true);
           // pro.navigation.navigate('mainFlow');
           console.log('Hiiiiiiii')
