@@ -190,16 +190,17 @@ loggg();
           username:values.Username,
         
         }
-        const token=AsyncStorage.getItem('token');
-        console.log(token)
-        await console.log(await AsyncStorage.getItem('token'))
+        // const token=AsyncStorage.getItem('token');
+        // console.log(token)
+        // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
         const response=await axiosinst.put('http://11df449fbbf1.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-          })
+          }
+             )
         .then( function(response){
           console.log(response);
           console.log(response.data.username)
@@ -215,8 +216,31 @@ loggg();
         .catch( function(error){
           // await console.log(AsyncStorage.getItem('token'))
             // console.log(error);
-            console.log('eroor')
-            console.log(error)
+            // console.log(response)
+            // console.log('eroor')
+            // console.log('1111')
+            // console.log(error)
+            // console.log(error[0])
+            // console.log(error.toString().split('\n')[0])
+            // console.log(error.toString().split('\n')[0]==='Request failed with status code 400')
+            // console.log('2222')
+            if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
+              Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            }
+            else
+            {
+              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            }
+
+         
             
            
          
@@ -266,13 +290,14 @@ loggg();
 
         onSubmit={async(values,actions)=>{
         //  signup(values);
-        loggg();
+        // loggg();
         const back={
           
           old_password:values.Password,
           new_password:values.newPassword,
         
         }
+        console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
         const response=axiosinst.put('https://11df449fbbf1.ngrok.io/api/change-password/',backk,{
@@ -280,6 +305,7 @@ loggg();
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
           })
+         
         .then( function(response){
           console.log(response);
           console.log(response.data.username)
@@ -289,11 +315,24 @@ loggg();
           
         })
         .catch( function(error){
-          console.log(response);
+         
           // await console.log(AsyncStorage.getItem('token'))
             // console.log(error);
-            console.log('eroor')
-            console.log(error)
+            if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
+              Alert.alert('oops','رمزتون رو اشتباه وارد کردید',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            }
+            else
+            {
+              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            }
            
          
         })

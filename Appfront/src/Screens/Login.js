@@ -81,11 +81,14 @@ const logschema=yup.object({
           val.changelogged(true);
           // pro.navigation.navigate('mainFlow');
           console.log('Hiiiiiiii')
+          console.log('.....');
          
         
          
         })
         .catch(function(error){
+          console.log('....')
+          console.log(error);
           Alert.alert('oops','ایمیل و یا رمز عبور اشتباه است',[{
             
 
