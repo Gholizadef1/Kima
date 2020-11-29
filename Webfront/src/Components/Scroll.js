@@ -116,7 +116,6 @@ function Slide(props) {
         </div>
       ) : (
        <div className = "slid">
-         
       <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (

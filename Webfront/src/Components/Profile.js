@@ -218,7 +218,10 @@ const accent = teal[200]; // #e040fb
 
             <div class="container-fluid">
                 <div className="row">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3dec72a6f1ad84f458eab99701079e94ef15f753
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
 
                         <div className="card ">
