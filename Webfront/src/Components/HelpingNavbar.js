@@ -123,7 +123,7 @@ useEffect(() => {
     </>
   
        <a class="nav-item1" href="home" >
-       <small className="name" size="50"style={{fontFamily:'Morvarid',color:'black'}} >
+       <small className="name" size="50"style={{fontFamily:'Morvarid',color:'black',margin:17}} >
       خانه
     </small>
 
