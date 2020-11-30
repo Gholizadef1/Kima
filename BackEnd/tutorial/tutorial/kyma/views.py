@@ -49,10 +49,6 @@ class DynamicBookAPIView(generics.ListCreateAPIView):
     serializer_class = bookSerializer
 
 class BookViewPage(APIView):
-
-    #queryset = book.objects.all()
-    #serializer_class = UpdateRatingSerializer
-    
     def get_object(self, pk):
         try:
             return book.objects.get(pk=pk)
@@ -67,22 +63,10 @@ class BookViewPage(APIView):
     def put(self, request, pk):
         wantedbook = get_object_or_404(book.objects.all(),pk=pk)
         data = self.request.data.get('userrating')
-        print(data)
         serializer = UpdateRatingSerializer(wantedbook,data={'userrating':data},partial=True)
-        print('correct')
         if serializer.is_valid(raise_exception=True):
-            print('correct')
             newratingbook = serializer.save()
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
 
-    #def update(self,request, *args, **kwargs):
-        
-
-
-# class UpdateRatingView(generics.UpdateAPIView):
-
-#     queryset = book.objects.all()
-#     serializer_class = UpdateRatingSerializer
-
-#     def
+  

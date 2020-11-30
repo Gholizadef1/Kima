@@ -109,19 +109,19 @@ class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
         return self.partial_update(request, *args, **kwargs)
 
 
-# class UserProfileView(generics.UpdateAPIView,RetrieveModelMixin):
-#     serializer_class =  UserProfileSerializer
-#     permission_classes = (IsAuthenticated,)
-#     queryset = Account.objects.all()
+class UserProfileViewwithToken(generics.UpdateAPIView,RetrieveModelMixin):
+    serializer_class =  UserProfileSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Account.objects.all()
 
-#     def get_object(self):
-#         queryset = self.filter_queryset(self.get_queryset())
-#         obj = get_object_or_404(queryset,pk=self.request.user.id)
-#         self.check_object_permissions(self.request, obj)
-#         return obj
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = get_object_or_404(queryset,pk=self.request.user.id)
+        self.check_object_permissions(self.request, obj)
+        return obj
 
-#     def get(self, request, *args, **kwargs):
-#         return self.retrieve(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 class UserProfileView(APIView):
     
