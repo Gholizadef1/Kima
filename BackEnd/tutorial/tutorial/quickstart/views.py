@@ -62,33 +62,27 @@ def login(request):
     return Response({'token': token.key, 'username' : user.username},
                     status=HTTP_200_OK)
 
-
-#@permission_classes([AllowAny],)
-#@permission_classes([IsAuthenticated])
-#class BookCollection(APIView):
-    
-#    def get_object(self, pk):
-#        try:
-#            return book.objects.get(pk=pk)
-#        except book.DoesNotExist:
-#            return Response({'error': 'Book not here'})
-
-#    def post(self,request,pk,format=None):
-        
-#        user=self.request.user
-#        print('first')
-#        print(request.data)
-#        book1=self.get_object(self.request.data.get('id'))
-#        print('first2')
-#        MyBook.save(account=user,book1=book1,state=pk)
-#        return Response({'error': 'Invalid Credentials'})
         
 
 
-#@api_view(["GET"])
-#@permission_classes([AllowAny],)
-#@permission_classes([IsAuthenticated])
-#def bookcollec(request)
+@api_view(["GET"])
+def Readcollec(request,pk):
+    user=Account.objects.get(pk=pk)
+    readc=MyBook.objects.get(state="Read",account=user)
+    return readc
 
 
+@api_view(["GET"])
+def ToReadcollec(request,pk):
+    user=Account.objects.get(pk=pk)
+    toreadc=MyBook.objects.get(state="ToRead",account=user)
+    return toreadc
+
+
+
+@api_view(["GET"])
+def Readingcollec(request,pk):
+    user=Account.objects.get(pk=pk)
+    readingc=MyBook.objects.get(state="Reading",account=user)
+    return readingc
     
