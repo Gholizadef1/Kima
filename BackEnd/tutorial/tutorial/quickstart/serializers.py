@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Account
+from .models import Account,MyBook
 from tutorial.kyma.serializers import bookSerializer
 from tutorial.kyma.models import book
 
@@ -31,8 +31,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 
-class MyBookSerializer(serializers.Serializer):
-    
-    model = book
-    id = serializers.IntegerField(required=True)
+class MyBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyBook
+        fields = ['book1']
+
+
+        
 

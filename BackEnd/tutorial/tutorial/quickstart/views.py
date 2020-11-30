@@ -67,28 +67,29 @@ def login(request):
 
 @api_view(["GET"])
 def Readcollec(request,pk):
+
     user=Account.objects.get(pk=pk)
     readc=MyBook.objects.get(state="Read",account=user)
-    read=bookSerializer(readc,many=True)
+    read=MyBookSerializer(readc,many=True)
+    print(read)
     return Response(read.data)
 
 
 @api_view(["GET"])
 def ToReadcollec(request,pk):
+
     user=Account.objects.get(pk=pk)
     toreadc=MyBook.objects.get(state="ToRead",account=user)
-    toread=bookSerializer(toreadc,many=True)
+    toread=MyBookSerializer(toreadc,many=True)
     return Response(toread.data)
 
 
 
 @api_view(["GET"])
 def Readingcollec(request,pk):
-    
-    parser_classes = [JSONParser]
 
     user=Account.objects.get(pk=pk)
     readingc=MyBook.objects.get(state="Reading",account=user)
-    reading=bookSerializer(readingc,many=True)
+    reading=MyBookSerializer(readingc,many=True)
     return Response(reading.data)
     
