@@ -5,6 +5,7 @@ import "./Profile.css";
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
+import avatar from './images.png';
 import Scroll from "./Scroll";
 //import Avatar from './Avatar';
 import Cookies from 'js-cookie';
@@ -17,7 +18,7 @@ function ProFile (props){
         }
     )
     const logout = () =>{
-
+        
         //localStorage.clear("token");
         Cookies.remove('userToken');
         Cookies.remove('userName');
@@ -38,12 +39,12 @@ function ProFile (props){
 
     useEffect(() => {
         console.log(user)
-        if (user.token) {
+        if (user.token) {       
             axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
                 .then(function (response){
                   console.log(response);
                   console.log(response.data);
-                  setUser(prevState => ({
+                  setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
                     email: response.data.email,
@@ -53,14 +54,14 @@ function ProFile (props){
                 })
                 .catch(function (error) {
                     console.log(error);
-
+                    
                 });
 
         }
     },[] );
 
     const handleChange = (e) => {
-        const {id , value} = e.target
+        const {id , value} = e.target   
         setUser(prevState => ({
             ...prevState,
             [id] : value
@@ -72,48 +73,29 @@ function ProFile (props){
         setUser(prevState => ({
             ...prevState,
             backError : ""
-        }));
+        })); 
         const payload={
-            // "email":user.email,
-            "username":user.userName
+            "email":user.email,
+            "userName":user.userName,
         }
         const back= JSON.stringify(payload)
-        axios.put('http://127.0.0.1:8000/api/update-profile/',
-            back,{
-                headers:{
-
-               "Content-Type":"application/json",
-               "Authorization":"Token "+Cookies.get("userToken")}
-                })
-
+        axios.put('http://127.0.0.1:8000/api/update-profile/',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
                 console.log(response);
                 if(response.status === 200){
                     console.log(response.status);
-                    setUser(prevState => ({
-                        ...prevState,
-                        backError : 'نام کاربری با موفقیت عوض شد'
-                    }))
 
-
+                    
                 }
             })
             .catch(function (error) {
-                setUser(prevState => ({
-                    ...prevState,
-                    backError : "نام کاربری از قبل وجود دارد"
-                }));
                 console.log(error);
             });
     }
 
     const handleChangePassClick = (e) => {
         e.preventDefault();
-        setUser(prevState => ({
-            ...prevState,
-            backError : ""
-        }));
-        if(user.oldPass.length&&user.newPass.length){
+        if(user.oldPass.length&&user.newPass.length&&user.newPass2.length){
             const payload={
                 "old_password": user.oldPass,
                 "new_password":user.newPass,
@@ -121,16 +103,14 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put('http://127.0.0.1:8000/api/change-password/',
-            back
+            axios.put('http://127.0.0.1:8000/api/update-profile/'
              ,{
               headers:{
              "Content-Type":"application/json",
             "Authorization":"Token "+Cookies.get("userToken")}
              }
-
-            )
-            .then(function(response){
+  
+            ).then(function(response){
                 console.log(response);
                 setUser(prevState => ({
                     ...prevState,
@@ -145,13 +125,13 @@ function ProFile (props){
                     backError : "پسورد قبلی غلط است"
                 }));
              })
-
+            
         }
         else {
             setUser(prevState => ({
              ...prevState,
-             backError : 'لطفا همه را درست وارد کنید'
-         }));
+             'backError' : 'لطفاً همه را درست وارد کنید'
+         })); 
          }
 
     }
@@ -164,18 +144,17 @@ function ProFile (props){
       if (file) {
         const reader = new FileReader();
         const { current } = uploadedImage;
-
         current.file = file;
         reader.onload = e => {
-        //   current.src = e.target.result;
+          //current.src = e.target.result;
           setUser(prevState => ({
             ...prevState,
             picture : e.target.result
         }));
+
         };
         reader.readAsDataURL(file);
       }
-     
     };
   const handleUpload= e =>{
 
@@ -185,10 +164,11 @@ function ProFile (props){
    axios.put('http://127.0.0.1:8000/api/update-profile/'
    ,formdata,{
      headers:{
+       
     "Content-Type":"application/json",
     "Authorization":"Token "+Cookies.get("userToken")}
      }
-
+  
   ).then(function(res){
     console.log(res);
     console.log("Token" +Cookies.get("userToken"));
@@ -196,10 +176,6 @@ function ProFile (props){
         ...prevState,
         backError : 'عکس با موفقیت عوض شد'
     }))
-  })
-
-  .then(function(res){
-    console.log(res);
   })
   .catch(function(res){
     console.log(res);
@@ -214,7 +190,7 @@ const StyledButton = withStyles({
       color: 'black',
       height: 48,
       padding: '0 30px',
-      boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+      boxShadow: '0 3px 5px 2px rgba(165, 105, 255, 0.3)',
     },
     label: {
       textTransform: 'capitalize',
@@ -224,23 +200,26 @@ const StyledButton = withStyles({
 const accent = teal[200]; // #e040fb
     return(
         <div className="main-content">
-
+            
             <div class="container-fluid">
                 <div className="row">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
-
-                        <div className="card ">
+                        
+                        <div className="card cardp">
                             <div className=" d-flex justify-content-end">
 
-                                <div className="col-7 mt-4 text-right">
-                                    <h5 className="" style={{fontFamily:'Morvarid'}}>
+                                <div className="col-7 mt-5 text-center ">
+                                    <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
                                 </div>
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
-                                        <img src={user.picture} ref={uploadedImage} className="m-2 rounded-circle img-fluid"/>
+                                        <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
+                                                                         width: 150,
+                                                                         height: 150,
+                                                                         display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
                                     </div>
@@ -272,10 +251,11 @@ const accent = teal[200]; // #e040fb
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info" onClick = {logout}style={{fontFamily:'Morvarid'}} >
                                         خروج ازحساب
                                     </StyledButton>
+                                                                            
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
-                                     data-toggle="collapse"
-                                     data-target="#navbarToggleExternalContent"
-                                     aria-controls="navbarToggleExternalContent"
+                                     data-toggle="collapse" 
+                                     data-target="#navbarToggleExternalContent" 
+                                     aria-controls="navbarToggleExternalContent" 
                                      aria-expanded="false"
                                      aria-label="Toggle navigation"style={{fontFamily:'Morvarid'}}>
                                         ویرایش
@@ -287,7 +267,6 @@ const accent = teal[200]; // #e040fb
                                 <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
-                                            <p className="loginText my-1" style={{fontFamily:'Morvarid'}}> {user.backError} </p>
                                             <div class="my-1">
                                                 <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
                                                 <input type="text"
@@ -305,31 +284,31 @@ const accent = teal[200]; // #e040fb
                                                     </div>
                                                     <input type="text"
                                                      class="form-control"
-                                                     id="email"
+                                                     id="email" 
                                                     //  placeholder={user.email}
                                                      value={user.email}
                                                      onChange={handleChange}/>
                                                 </div>
                                             </div> */}
                                             <div class=" my-2">
-                                                <StyledButton
-                                                type="submit"
+                                                <StyledButton 
+                                                type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
                                                 style={{fontFamily:'Morvarid'}}
                                                 >تغییر اطلاعات</StyledButton>
-
+                                                
                                             </div>
-
+                                            
                                             <div class="dropdown-divider"></div>
                                             <div class="my-1">
                                                 <label for="img" style={{fontFamily:'Morvarid'}}style={{fontFamily:'Morvarid'}}> عکس</label>
                                                 <div className="d-flex justify-content-between">
                                                     <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Morvarid'}}>ثبت عکس</StyledButton>
-                                                    <input class="form-control"
-                                                    type="file" accept="image/*"
-                                                    onChange={handleImageUpload}
-                                                    ref={imageUploader}
+                                                    <input class="form-control" 
+                                                    type="file" accept="image/*" 
+                                                    onChange={handleImageUpload} 
+                                                    ref={imageUploader} 
                                                     style={{ display: "none", }} />
                                                      <StyledButton className="btn1 col-auto" style={{fontFamily:'Morvarid'}}
                                                      onClick={() => imageUploader.current.click()} >
@@ -342,12 +321,12 @@ const accent = teal[200]; // #e040fb
                                                 </div>
                                             </div>
                                             <div class="dropdown-divider"></div>
-
+                                            
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>رمز قبلی</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="oldPass"
+                                                  id="userName"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
@@ -355,7 +334,7 @@ const accent = teal[200]; // #e040fb
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>رمز جدید</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="newPass"
+                                                  id="userName"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
@@ -363,21 +342,21 @@ const accent = teal[200]; // #e040fb
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="newPass2"
+                                                  id="userName"
                                                   value={user.newPass2}
                                                   onChange={handleChange}/>
                                             </div> */}
                                             <div class=" my-2">
-                                                <StyledButton
-                                                type="submit"
+                                                <StyledButton 
+                                                type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangePassClick}
                                                 style={{fontFamily:'Morvarid'}}
-
+                                               
                                                 >تغییر رمز</StyledButton>
                                             </div>
                                         </div>
-
+                                            
                                     </form>
                                 </div>
                             </div>
@@ -388,9 +367,9 @@ const accent = teal[200]; // #e040fb
             </div>
 
         </div>
-
+        
     )
-}
+} 
 
 export default withRouter(ProFile);
 

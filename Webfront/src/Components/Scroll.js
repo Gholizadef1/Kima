@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import Slider from "react-slick";
 import {
   withRouter
 } from "react-router-dom";
 import "./Scroll.css";
+import { get } from "js-cookie";
 
 function Slide(props) {
-  //console.log(props);
+  console.log(props);
   const [suggestions, setSuggestions] = useState([]);
+  //let match=useRouteMatch();
+  //console.log(useRouteMatch())
+
+
   useEffect(() => {
     fetch("http://127.0.0.1:8000/bookdetail/")
       .then((res) => res.json())
@@ -18,7 +25,6 @@ function Slide(props) {
         setSuggestions(data);
       });
   }, []);
-
   const bookSelectedHandler = ( b ) => {
         console.log(b);
         props.history.push( '/book/' + b.id );
@@ -52,7 +58,7 @@ function Slide(props) {
 
   
   return (
-    <div className="con col-xl-8">
+    <div className="con col-xl-8 col-xl-8-gholi">
     
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
@@ -121,7 +127,7 @@ function Slide(props) {
           {suggestions.map((current) => (
             
             <div className="out" key={current.id}>
-              
+             {/* <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3"> */}
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 
                 <img
@@ -134,6 +140,7 @@ function Slide(props) {
                   <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
                    <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
+              {/* </div> */}
               </div>
             </div>
           ))}

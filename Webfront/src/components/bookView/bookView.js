@@ -100,7 +100,7 @@ function BookView(props) {
                 
                 <img src={state.imgurl} className="m-3 img-fluid col-sm-3 shadow float-right" alt="" />
                 <div className="d-flex flex-column p-3">
-                <h2>{state.title}</h2>
+                <h2 style={{fontFamily:'Morvarid'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
                     {/* <tr >
@@ -112,7 +112,7 @@ function BookView(props) {
                         </td>
                     </tr> */}
                     <tr>
-                        <th>
+                        <th style={{fontFamily:'Morvarid'}}>
                             نام نویسنده
                         </th>
                         <td>
@@ -120,7 +120,7 @@ function BookView(props) {
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th style={{fontFamily:'Morvarid'}}>
                             نام ناشر
                         </th>
                         <td>
@@ -129,13 +129,13 @@ function BookView(props) {
                     </tr>
                   </tbody>
                 </table>
-                <div className="row">
+                <div className="row" style={{fontFamily:'Morvarid'}}>
                     
                     {/* <svg width="3.5em" height="3.5em" viewBox="0 0 16 16" className="btn bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
                     </svg> */}
 
-                    <select className="form-control col-6" id="bookMood" onChange={ addBookToMineHandler}>
+                    <select className="form-control col-6" id="bookMood"onChange={ addBookToMineHandler}>
                         <option value="none">اضافه کنید</option>
                         <option value="ToRead">می‌خواهم بخوانم</option>
                         <option value="Reading">دارم می‌خوانم</option>
@@ -156,7 +156,7 @@ function BookView(props) {
             <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="#bookDescription">توضیح</a>
+                        <a className="nav-link" href="#bookDescription" style={{fontFamily:'Morvarid'}}>توضیح</a>
                     </li>
                     {/* <li className="nav-item">
                         <a className="nav-link" href="#bookCriticism">نقد</a>
@@ -167,9 +167,9 @@ function BookView(props) {
 
             <div id="bookDescription" className="shadow color1 p-2">
                 <br></br>
-                <h3>توضیح کتاب {state.title}</h3>
+                <h3 style={{fontFamily:'Morvarid'}}>توضیح کتاب {state.title}</h3>
                 <br></br>
-                <p>
+                <p style={{fontFamily:'Morvarid'}}>
                     {state.description}
                     <br></br>
                 </p>

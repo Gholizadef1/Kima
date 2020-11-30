@@ -8,10 +8,7 @@ background-color: #9dc3e9;
 .head{
     margin-top: 400px;
 }
-.profile{
-   
-    margin-top: 50px;
-}
+
 .card-profile{
   margin-top: 80px;
   height: 500px;
@@ -22,3 +19,11 @@ background-color: #9dc3e9;
     padding-right: -100px;
     
 } */
+
+.rounded-circle{
+   margin-top: -10px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   
+   
+}
