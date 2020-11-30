@@ -2,22 +2,49 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import Slider from "react-slick";
 import {
   withRouter
 } from "react-router-dom";
 import "./Scroll.css";
+import { get } from "js-cookie";
 
 function Slide(props) {
   console.log(props);
-  const [suggestions, setSuggestions] = useState([]);
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
-      .then((res) => res.json())
-      .then((data) => {
-        setSuggestions(data);
-      });
-  }, []);
+  const [bookRead, setBookRead] = useState(null);
+  const [bookReading, setBookReading] = useState(null);
+  const [bookWantto, setBookWantto] = useState(null);
+
+    const apiURLRead = "" + Cookies.get('userId');
+    const apiURLReading = "" + Cookies.get('userId');
+    const apiURLWantto = "" + Cookies.get('userId');
+
+    useEffect(() => {
+      axios.get(apiURLRead)
+        .then((res) => res.json())
+        .then((data) => {
+          setBookRead(data);
+        });
+    }, []);
+
+    useEffect(() => {
+     axios.get(apiURLReading)
+        .then((res) => res.json())
+        .then((data) => {
+          setBookReading(data);
+        });
+    }, []);
+
+    useEffect(() => {
+      axios.get(apiURLWantto)
+        .then((res) => res.json())
+        .then((data) => {
+          setBookWantto(data);
+        });
+    }, []);
+
 
   const bookSelectedHandler = ( b ) => {
         console.log(b);
@@ -54,7 +81,7 @@ function Slide(props) {
   return (
     <div className="con col-xl-8">
     
-      {suggestions.length === 0 ? (
+      {bookRead.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
@@ -62,7 +89,7 @@ function Slide(props) {
        <div className = "slid">
           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookRead.map((current) => (
             <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
@@ -82,7 +109,7 @@ function Slide(props) {
         </div>
       )}
     
-      {suggestions.length === 0 ? (
+      {bookReading.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
@@ -90,7 +117,7 @@ function Slide(props) {
        <div className = "slid">
            <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookReading.map((current) => (
             <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
@@ -110,7 +137,7 @@ function Slide(props) {
         </div>
       )}
      
-      {suggestions.length === 0 ? (
+      {bookWantto.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
@@ -118,7 +145,7 @@ function Slide(props) {
        <div className = "slid">
       <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookWantto.map((current) => (
             
             <div className="out" key={current.id}>
               

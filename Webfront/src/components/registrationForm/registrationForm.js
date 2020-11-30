@@ -86,6 +86,7 @@ function RegistrationForm(props) {
                     console.log(error);
                 });    
         } else {
+            
            // props.showError('لطفا مشخصات خود را درست وارد کنید')
            setState(prevState => ({
             ...prevState,
@@ -226,8 +227,8 @@ function RegistrationForm(props) {
                 {state.successMessage}
             </div>
             <div className="mt-2">
-                <span>قبلاً ثبت‌نام کرده‌اید؟ </span>
-                <span className="loginText" onClick={() => redirectToLogin()}>اینجا وارد شوید</span> 
+                <span style={{fontFamily:'Morvarid'}}>قبلاً ثبت‌نام کرده‌اید؟ </span>
+                <span className="loginText" onClick={() => redirectToLogin()} style={{fontFamily:'Morvarid'}}>اینجا وارد شوید</span> 
             </div>
             </div>
             </div>

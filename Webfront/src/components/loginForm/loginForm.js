@@ -111,9 +111,9 @@ function LoginForm(props) {
         <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
             <div className="card color2 " >
                 <br></br>
-                <h1>به کیما خوش‌آمدی</h1>
-                <p>"کتاب یار مهربان است"</p>
-                <p>خوشحالیم امروز می‌بینیمت</p>
+                <h1 style={{fontFamily:'Morvarid'}}>به کیما خوش‌آمدی</h1>
+                <p style={{fontFamily:'Morvarid'}}>"کتاب یار مهربان است"</p>
+                <p style={{fontFamily:'Morvarid'}}>خوشحالیم امروز می‌بینیمت</p>
                 <img src="people&books.png" className="col-12" alt=""/> 
             </div>
             <div className="card color2 p-2">
