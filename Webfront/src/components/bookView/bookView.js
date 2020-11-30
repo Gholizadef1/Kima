@@ -128,9 +128,9 @@ function BookView(props) {
 
                     <select className="form-control col-6" id="bookMood"onChange={ addBookToMineHandler}>
                         <option value="none">اضافه کنید</option>
-                        <option value="toRead">می‌خواهم بخوانم</option>
-                        <option value="reading">دارم می‌خوانم</option>
-                        <option value="read">خوانده‌ام</option>
+                        <option value="ToRead">می‌خواهم بخوانم</option>
+                        <option value="Reading">دارم می‌خوانم</option>
+                        <option value="Read">خوانده‌ام</option>
                     </select>
                 </div>
                 {/* <div class="input-group-prepend ">
