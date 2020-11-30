@@ -47,8 +47,9 @@ function App(props) {
           {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
           <Switch>
             <Route path="/" exact={true}>
-              <NavBar/>
-               <Slide showError={updateErrorMessage} updateTitle={updateTitle}/>
+              {/* <NavBar/>
+               <Slide showError={updateErrorMessage} updateTitle={updateTitle}/> */}
+               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
 
             <Route path="/login">

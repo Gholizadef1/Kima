@@ -116,9 +116,10 @@ function ProFile (props){
         if(user.oldPass.length&&user.newPass.length){
             const payload={
                 "old_password": user.oldPass,
-                "new_password":user.password
+                "new_password":user.newPass,
             }
             const back= JSON.stringify(payload);
+            console.log(back);
 
             axios.put('http://127.0.0.1:8000/api/change-password/',
             back
@@ -131,10 +132,18 @@ function ProFile (props){
             )
             .then(function(response){
                 console.log(response);
+                setUser(prevState => ({
+                    ...prevState,
+                    backError : 'پسورد با موفقیت عوض شد'
+                }))
 
             })
             .catch(function(error){
                 console.log(error);
+                setUser(prevState => ({
+                    ...prevState,
+                    backError : "پسورد قبلی غلط است"
+                }));
              })
 
         }
@@ -218,10 +227,6 @@ const accent = teal[200]; // #e040fb
 
             <div class="container-fluid">
                 <div className="row">
-<<<<<<< HEAD
-
-=======
->>>>>>> 3dec72a6f1ad84f458eab99701079e94ef15f753
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
 
                         <div className="card ">
@@ -235,15 +240,38 @@ const accent = teal[200]; // #e040fb
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
-                                        <img src={user.picture} ref={uploadedImage} className="rounded-circle img-fluid"/>
+                                        <img src={user.picture} ref={uploadedImage} className="m-2 rounded-circle img-fluid"/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-header border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                                <div className="d-flex justify-content-between">
 
+                            <div className="card-body pt-0 ">
+                                <div className="row">
+                                    <div className="col">
+                                        <div className="d-flex justify-content-between text-right mt-md-2">
+                                           <div>
+                                                <span className="heading text-muted">2</span>
+                                                <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
+                                            </div>
+                                            <div>
+                                                <span className="heading text-muted">1</span>
+                                                <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
+                                            </div>
+                                            <div>
+                                                <span className="heading text-muted">8</span>
+                                                <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-header border-0 pt-6 pt-md-3 pb-3 pb-md-3">
+                                <div className="d-flex justify-content-between">
+                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info" onClick = {logout}style={{fontFamily:'Morvarid'}} >
+                                        خروج ازحساب
+                                    </StyledButton>
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
                                      data-toggle="collapse"
                                      data-target="#navbarToggleExternalContent"
@@ -252,10 +280,7 @@ const accent = teal[200]; // #e040fb
                                      aria-label="Toggle navigation"style={{fontFamily:'Morvarid'}}>
                                         ویرایش
                                     </StyledButton>
-                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info" onClick = {logout}style={{fontFamily:'Morvarid'}} >
-                                        خروج ازحساب
-                                    </StyledButton>
-
+                                   
                                 </div>
                             </div>
                             <div class="collapse" id="navbarToggleExternalContent">
@@ -272,7 +297,7 @@ const accent = teal[200]; // #e040fb
                                                   value={user.userName}
                                                   onChange={handleChange}/>
                                             </div>
-                                            <div class="my-1">
+                                            {/* <div class="my-1">
                                                 <label for="email"style={{fontFamily:'Morvarid'}}>ایمیل</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
@@ -285,7 +310,7 @@ const accent = teal[200]; // #e040fb
                                                      value={user.email}
                                                      onChange={handleChange}/>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton
                                                 type="submit"
@@ -334,14 +359,14 @@ const accent = teal[200]; // #e040fb
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
-                                            <div class="my-1">
+                                            {/* <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
                                                 <input type="text"
                                                   class="form-control"
                                                   id="newPass2"
                                                   value={user.newPass2}
                                                   onChange={handleChange}/>
-                                            </div>
+                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton
                                                 type="submit"
@@ -354,27 +379,6 @@ const accent = teal[200]; // #e040fb
                                         </div>
 
                                     </form>
-                                </div>
-                            </div>
-                            <div className="card-body pt-0 pt-md-4">
-
-                                <div className="row">
-                                    <div className="col">
-                                        <div className="card-profile-stats d-flex justify-content-between text-right mt-md-5">
-                                           <div>
-                                                <span className="heading text-muted">2</span>
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
-                                            </div>
-                                            <div>
-                                                <span className="heading text-muted">1</span>
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
-                                            </div>
-                                            <div>
-                                                <span className="heading text-muted">8</span>
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

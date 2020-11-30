@@ -54,7 +54,7 @@ function LoginForm(props) {
                     //console.log(response.data.token);
                     Cookies.set('userToken',response.data.token);
                     Cookies.set('userId',response.data.userid);
-                    Cookies.set('userName',state.userName);
+                    Cookies.set('userName',response.data.username);
                    // console.log(Cookies.get('userToken'));
                     redirectToHome();
                     props.showError(null)

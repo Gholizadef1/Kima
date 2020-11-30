@@ -67,8 +67,17 @@ function BookView(props) {
         console.log(choices);
         setUserCoice(choices.target.value);
         console.log(userCoice);
+        const payload={
+            "book_state": choices.target.value,
+        }
+        const back= JSON.stringify(payload);
+        axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
+        back,{
+            headers:{
 
-        axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,choices,{"headers":{"content-type":"application/json" }})
+           "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
         .then(function (response){
             console.log(response);
         })
