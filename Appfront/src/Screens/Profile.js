@@ -29,22 +29,22 @@ const Profile = ({navigation}) => {
     const val = useContext(AuthContext);  
     const [name,setname]=useState(null);
     const [email,setemail]=useState(null);
-    console.log(AsyncStorage.getItem('id'))
+    // console.log(AsyncStorage.getItem('id'))
     const response=async (searchTerm)=>{
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://11df449fbbf1.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://c1c76a73bf1c.ngrok.io/api/user-profile/"+id)
             
         
     //    console.log(response)
        setname(response.data.username)
-       console.log(name)
+    //    console.log(name)
        setemail(response.data.email)
     }
     catch(err){
-        console.log(response)
-        console.log(err);
+        // console.log(response)
+        // console.log(err);
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
 
@@ -121,7 +121,7 @@ const Profile = ({navigation}) => {
 
         <Button style={styles.logout} title='logout'
             onPress={()=>{
-                console.log(navigation);
+                // console.log(navigation);
                 // navigation.navigate('loginFlow')}}
                 AsyncStorage.removeItem('token')
                 // AsyncStorage.setItem('token',null)

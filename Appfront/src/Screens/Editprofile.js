@@ -23,6 +23,54 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
 import axiosinst from '../api/axiosinst';
+import * as permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+import ImageCropPicker from 'react-native-image-crop-picker';
+
+
+
+const pickfromgallery = async ()=>{
+  console.log('gallery')
+    const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
+    if(granted){
+
+        let data=await ImagePicker.launchImageLibraryAsync({
+          mediaTypes:ImagePicker.MediaTypeOptions.Images,
+          allowsEditing:true,
+          aspect:[1,1],
+          quality:1
+        })
+        console.log(data);
+    }
+    else
+    {
+      Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
+        Title:'فهمیدم',onPress:()=>console.log('alert closed')
+        }])
+    }
+
+}
+
+const pickfromcamera = async ()=>{
+  const {granted}=await permissions.askAsync(permissions.CAMERA)
+  if(granted){
+
+      let data=await ImagePicker.launchCameraAsync({
+        mediaTypes:ImagePicker.MediaTypeOptions.Images,
+        allowsEditing:true,
+        aspect:[1,1],
+        quality:1
+      })
+      console.log(data);
+  }
+  else
+  {
+    Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
+      Title:'فهمیدم',onPress:()=>console.log('alert closed')
+      }])
+  }
+
+}
 
 
 const userschema=yup.object({
@@ -51,7 +99,7 @@ const userschema=yup.object({
 const EditProfile = ({navigation}) => {
     
 
-loggg();
+// loggg();
    
     const val = useContext(AuthContext);  
     //nd
@@ -61,17 +109,17 @@ loggg();
     const oldpassword=null;
     const response=async (searchTerm)=>{
       const id=await AsyncStorage.getItem('id');
-      console.log(id)
+      // console.log(id)
       try{
-      const response = await axiosinst.get("http://11df449fbbf1.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://c1c76a73bf1c.ngrok.io/api/user-profile/"+id)
           
       
-     console.log(response)
+    //  console.log(response)
      setname(response.data.username)
     
   }
   catch(err){
-      console.log(err);
+      // console.log(err);
       Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
           
 
@@ -83,6 +131,7 @@ loggg();
   
 
     const renderheader=()=>{
+      console.log('header')
         return(
         <View style={{backgroundColor:'white',flex:1
         }}
@@ -106,28 +155,32 @@ loggg();
         )
     }
     const renderinner=()=>{
+      
         console.log('inner');
         return(
       <View style={{backgroundColor:'gray'}}>
+
          <Image
          source={require('../../assets/bottomsheet.jpeg')}
          style={{width:420,height:300,position:'absolute'}}
          ></Image>
+
          <Button
          bordered rounded style={styles.button}
-        onPress={()=>{}}
+        onPress={console.log('gallery')}
         style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
-    
         >
+
          <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:84}
          }>گرفتن عکس</Text>
         </Button>
+
         <Button
          bordered rounded style={styles.button}
-        onPress={()=>{}}
+        onPress={console.log('camera')}
         style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
-    
         >
+
          <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:72}
          }>انتخاب از گالری</Text>
         </Button>
@@ -138,7 +191,7 @@ loggg();
     
         )
     }
-    const bs=React.createRef(null);
+    const bs=React.useRef();
 
     return(
       <>
@@ -195,16 +248,16 @@ loggg();
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://11df449fbbf1.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://c1c76a73bf1c.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
           }
              )
         .then( function(response){
-          console.log(response);
-          console.log(response.data.username)
-          console.log(response.username)
+          // console.log(response);
+          // console.log(response.data.username)
+          // console.log(response.username)
           Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
             
 
@@ -297,19 +350,24 @@ loggg();
           new_password:values.newPassword,
         
         }
-        console.log(back);
+        // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('https://11df449fbbf1.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('http://c1c76a73bf1c.ngrok.io/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
           })
          
         .then( function(response){
-          console.log(response);
-          console.log(response.data.username)
-          console.log(response.username)
+          // console.log(response);
+          // console.log(response.data.username)
+          // console.log(response.username)
+          Alert.alert('oops','رمزتون با موفقیت تغییر کرد',[{
+            
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+          }])
       
           
           
