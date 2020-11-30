@@ -59,7 +59,7 @@ def login(request):
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key},
+    return Response({'token': token.key, 'username' : user.username},
                     status=HTTP_200_OK)
 
 
@@ -85,17 +85,10 @@ def login(request):
         
 
 
-@api_view(["POST"])
-@permission_classes([AllowAny],)
-@permission_classes([IsAuthenticated])
-def bookcollec(request,pk):
-    user=request.user
-    print('first')
-    idb=request.data.get("book_id")
-    #idu=request.data.get("user_id")
-    print(idb)
-    book2=book.objects.get(id=idb)
-    print('first2')
-    b=MyBook(account=user,book1=book2,state=pk)
-    b.save()
-    return Response({'error': 'Invalid Credentials'})
+#@api_view(["GET"])
+#@permission_classes([AllowAny],)
+#@permission_classes([IsAuthenticated])
+#def bookcollec(request)
+
+
+    

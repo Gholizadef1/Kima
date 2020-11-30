@@ -73,9 +73,9 @@ def create_auth_token(sender,instance=None,created=False,**kwargs):
 class MyBook(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     book1=models.ForeignKey(book,on_delete=models.CASCADE)
-    state=models.IntegerField()
+    state=models.CharField(max_length=10)
    # info=models.CharField(max_length=5)
 
     def __str__(self):
-        return str(self.state)
+        return self.state
 
