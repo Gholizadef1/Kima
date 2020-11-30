@@ -65,7 +65,7 @@ class BookViewPage(APIView):
     def post(self,request,pk):
         user=request.user
         book2=book.objects.get(id=pk)
-        bookcheck=MyBook.objects.get(account=user,book1=book2)
+        bookcheck=self.checkbook(user,book2)
         st=request.data.get("book_state")
         if(bookcheck==None):
             b=MyBook(account=user,book1=book2,state=st)
@@ -75,6 +75,16 @@ class BookViewPage(APIView):
             if(bookcheck.state==st):
                 return Response("this book is already here")
             else:
-                bookcheck.state=request.data.get("book_state")
-                bookcheck.save()
-                return Response("successfully changed state")
+                if(st=="none"):
+                    bookcheck.delete()
+                    return Response("successfully deleted from collection")
+                else:
+                    bookcheck.state=request.data.get("book_state")
+                    bookcheck.save()
+                    return Response("successfully changed state")
+
+    def checkbook(self,user,book2):
+        try:
+            return MyBook.objects.get(account=user,book1=book2)
+        except MyBook.DoesNotExist:
+            return None

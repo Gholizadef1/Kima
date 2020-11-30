@@ -19,7 +19,7 @@ from .models import Account,MyBook
 from .serializers import RegistrationSerializer,MyBookSerializer
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
-import json
+from rest_framework.parsers import JSONParser
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -59,7 +59,7 @@ def login(request):
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key, 'username' : user.username},
+    return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
                     status=HTTP_200_OK)
 
         
@@ -69,20 +69,26 @@ def login(request):
 def Readcollec(request,pk):
     user=Account.objects.get(pk=pk)
     readc=MyBook.objects.get(state="Read",account=user)
-    return readc
+    read=bookSerializer(readc,many=True)
+    return Response(read.data)
 
 
 @api_view(["GET"])
 def ToReadcollec(request,pk):
     user=Account.objects.get(pk=pk)
     toreadc=MyBook.objects.get(state="ToRead",account=user)
-    return toreadc
+    toread=bookSerializer(toreadc,many=True)
+    return Response(toread.data)
 
 
 
 @api_view(["GET"])
 def Readingcollec(request,pk):
+    
+    parser_classes = [JSONParser]
+
     user=Account.objects.get(pk=pk)
     readingc=MyBook.objects.get(state="Reading",account=user)
-    return readingc
+    reading=bookSerializer(readingc,many=True)
+    return Response(reading.data)
     
