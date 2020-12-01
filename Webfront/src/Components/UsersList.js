@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 import Horizontal from 'react-scroll-horizontal';
  import "./UsersList.css";
  import "./HelpingNavbar";
- import {withRouter } from "react-router-dom"
-
-function UsersList(props) {
+function UsersList() {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [users,setUsers] = useState([]);
@@ -30,19 +28,14 @@ setSearch(result.data);
 catch (err) {}
 };
 
-const bookSelectedHandler = ( b ) => {
-  console.log(b);
-  props.history.push( '/book/' + b.id );
-}
-
 useEffect(() => {
   searchUsers();
   }, [user]);
 
     return ( 
       
-    <div className="row">
-       <input type="text" name="name" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}} placeholder="جستجوی کتاب یا نویسنده" />
+      <div className="rowUserlist">
+       
     <div class="brand1">نتایج</div> 
     {search.length === 0 ? (
       <div className="spinner-border" role="status">
@@ -55,7 +48,7 @@ useEffect(() => {
     <Horizontal className="horizontal" style={{height:200,position:"absolute",width:700}}>
        
           {search.map((item) => (
-        <div className="out1" key={item.id} onClick={() => bookSelectedHandler( item)}>
+        <div className="out1" key={item.id}>
           
             <img
               className="squere1" 
@@ -74,7 +67,6 @@ useEffect(() => {
       )}
     </div>
     
+    
   );
 }
-
-export default withRouter( UsersList);

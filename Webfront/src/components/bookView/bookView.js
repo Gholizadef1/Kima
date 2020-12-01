@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, Children} from 'react';
 import axios from 'axios';
 //import {API_BASE_URL} from '../../constants/apiContants';
 import {
@@ -11,6 +11,7 @@ import {
     withRouter
   } from "react-router-dom";
 import './bookView.css';
+import Cookies from 'js-cookie';
 //import { data } from 'jquery';
 
 function BookView(props) {
@@ -19,6 +20,7 @@ function BookView(props) {
     //const bookId= props.match.params.id;
     console.log(bookId);
     console.log(bookId.name);
+    const [userCoice, setUserCoice]= useState();
     const [state , setState] = useState(
         {
         //bookId:props.match.params.id,
@@ -59,7 +61,32 @@ function BookView(props) {
                 });
 
         }
-    }, []);
+    },[] );
+    const addBookToMineHandler = (choices)=>{
+        console.log(choices.target.value);
+        console.log(choices);
+        setUserCoice(choices.target.value);
+        console.log(userCoice);
+        const payload={
+            "book_state": choices.target.value,
+        }
+        const back= JSON.stringify(payload);
+        axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
+        back,{
+            headers:{
+
+           "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
+        .then(function (response){
+            console.log(response);
+        })
+        .catch(function (error) {
+           console.log(error);
+        });
+    
+
+    }
     //console.log(state.id);
     //console.log(state.title);
     //console.log(response.data.title);
@@ -73,7 +100,7 @@ function BookView(props) {
                 
                 <img src={state.imgurl} className="m-3 img-fluid col-sm-3 shadow float-right" alt="" />
                 <div className="d-flex flex-column p-3">
-                <h2>{state.title}</h2>
+                <h2 style={{fontFamily:'Morvarid'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
                     {/* <tr >
@@ -85,7 +112,7 @@ function BookView(props) {
                         </td>
                     </tr> */}
                     <tr>
-                        <th>
+                        <th style={{fontFamily:'Morvarid'}}>
                             نام نویسنده
                         </th>
                         <td>
@@ -93,7 +120,7 @@ function BookView(props) {
                         </td>
                     </tr>
                     <tr>
-                        <th>
+                        <th style={{fontFamily:'Morvarid'}}>
                             نام ناشر
                         </th>
                         <td>
@@ -102,33 +129,52 @@ function BookView(props) {
                     </tr>
                   </tbody>
                 </table>
-                </div>
-    
-                
-            </div>
+                <div className="row" style={{fontFamily:'Morvarid'}}>
+                    
+                    {/* <svg width="3.5em" height="3.5em" viewBox="0 0 16 16" className="btn bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+                    </svg> */}
 
-            <nav className="shadow navbar navbar-expand-sm navbar-light sticky-top color3">  
+                    <select className="form-control col-6" id="bookMood"onChange={ addBookToMineHandler}>
+                        <option value="none">اضافه کنید</option>
+                        <option value="ToRead">می‌خواهم بخوانم</option>
+                        <option value="Reading">دارم می‌خوانم</option>
+                        <option value="Read">خوانده‌ام</option>
+                    </select>
+                </div>
+                {/* <div class="input-group-prepend ">
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3>+</h3></button>
+                    <div class="dropdown-menu">
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('toRead')}>می‌خواهم بخوانم</button>
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('reading')}>دارم می‌خوانم</button>
+                        <button className="dropdown-item" onClick={()=>addBookToMineHandler('read')}>خوانده‌ام</button>
+                    </div>
+                </div> */}
+            </div> 
+        </div>
+
+            <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="#bookDescription">توضیح</a>
+                        <a className="nav-link" href="#bookDescription" style={{fontFamily:'Morvarid'}}>توضیح</a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link" href="#bookCriticism">نقد</a>
-                     </li>
+                     </li> */}
     
                 </ul>
             </nav>
 
             <div id="bookDescription" className="shadow color1 p-2">
                 <br></br>
-                <h3>توضیح کتاب {state.title}</h3>
+                <h3 style={{fontFamily:'Morvarid'}}>توضیح کتاب {state.title}</h3>
                 <br></br>
-                <p>
+                <p style={{fontFamily:'Morvarid'}}>
                     {state.description}
                     <br></br>
                 </p>
             </div>
-            <div id="bookCriticism" className="color1 p-2">
+            {/* <div id="bookCriticism" className="color1 p-2">
                 <br></br>
                 <h3>نقد کتاب {state.title}</h3>
                 <br></br>
@@ -137,7 +183,7 @@ function BookView(props) {
 
                     <br></br>
                 </p>
-            </div>
+            </div> */}
 
 
 

@@ -10,18 +10,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { CookiesProvider } from 'react-cookie';
+import Cookies from 'js-cookie'
+//import { CookiesProvider } from 'react-cookie';
 
 
 ReactDOM.render(
   
-  <CookiesProvider>
+  // <CookiesProvider >
     <React.Fragment>
     <React.StrictMode>
       <App/>
     </React.StrictMode>
   </React.Fragment>
-  </CookiesProvider>,
+  // </CookiesProvider>
+  ,
  
   document.getElementById('root')
 );

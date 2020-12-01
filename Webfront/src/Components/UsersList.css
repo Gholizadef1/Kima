@@ -3,9 +3,7 @@
     background: radial-gradient#e5e5e5;
 }
 
-.squere1:hover{
-    box-shadow: 1px 1px 30px 1px rgb(116, 116, 225) !important; 
-}
+
 .cat1{
     
     padding-top: 10px;
@@ -32,7 +30,7 @@
     
 }
 
-.row{
+.rowUserlist{
     margin-top: 310px;
 
 margin-left: 80px;
