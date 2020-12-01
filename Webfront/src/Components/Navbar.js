@@ -23,25 +23,34 @@ function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   // const [users,setUsers] = useState([]);
- 
+  const [error,setError] = useState("");
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
 
 const searchUsers = async () => {
 try {
+ setError(null);
 const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
- setSearch(res.data.results)
-  
-});
+   if(res.data.count == 0){
+     setError(' ): نتیجه‌ای یافت نشد');
+   }
+   else{
+    setSearch(res.data.results);
+      }
+ 
+}).catch ((err)=> {console.log(err)});
+ 
+
 if (search == [null]) {
 setSearch([]);
 } else {
 setSearch(result.data);
 }
 }
-catch (err) {}
+catch (err) {console.log(err)}
+
 };
 
 useEffect(() => {
@@ -92,7 +101,7 @@ useEffect(() => {
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
-    <GoSearch size="30" color="black"/>
+    <GoSearch size="30" color="black" />
         </Button>
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
@@ -101,6 +110,7 @@ useEffect(() => {
           </div>
         </Modal.Header>
         <Modal.Body>
+    <p style={{textAlign:"center",fontFamily:'Morvarid'}}>{error}</p>
        {search.map((item) => (
      <div className="out1" key={item.id}>
        <div className="card cat1">

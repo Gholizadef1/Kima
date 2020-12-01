@@ -7,7 +7,7 @@ function UsersList() {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [users,setUsers] = useState([]);
- 
+  
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
@@ -20,6 +20,7 @@ const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${us
   
 });
 if (search == [null]) {
+
 setSearch([]);
 } else {
 setSearch(result.data);
