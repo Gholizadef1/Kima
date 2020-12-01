@@ -1,4 +1,4 @@
-import React,{useContext,useState,useRef} from 'react';
+import React,{useContext,useState,useRef, useEffect} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
 import { TouchableOpacity } from 'react-native';
@@ -55,24 +55,26 @@ const userschema=yup.object({
   //   console.log(await AsyncStorage.getItem('token'));
   // }
 const EditProfile = () => {
-  const [image,setimage]=useState(null);
+  const [picture,setpicture]=useState(null);
   const photoresponse=async ()=>{
+    console.log('**'+'\n'+'PHOTRESPONSE'+'\n'+'**')
     const id=await AsyncStorage.getItem('id');
     // console.log(id)
     try{
-    const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
         
     
   //  console.log(response)
-      if(response.data.profile_photo!="/media/default.png"){
-        setimage(response.data.profile_photo)
-      }
+  console.log('*****')
+        console.log(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+      
    console.log(response.data.profile_photo)
   //  setimage(require(response.data.profile_photo))
   
 }
 catch(err){
-    // console.log(err);
+     console.log(err);
     Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
         
 
@@ -80,7 +82,7 @@ catch(err){
             }])
 }
 }
-photoresponse();
+useEffect(()=>{photoresponse(),[]})
   const pickfromgallery = async ()=>{
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
@@ -108,7 +110,7 @@ photoresponse();
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-          const response=await axiosinst.put('http://47fa53e7c300.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://00853ef3a4c0.ngrok.io/api/update-profile/',formdata,{
             headers:{
               "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -119,9 +121,18 @@ photoresponse();
             console.log('1')
             console.log(response.data.profile_photo);
             console.log('1')
-            setimage(response.data.profile_photo);
-            console.log(image);
-            console.log('akasjhdflksjafhlksjhdflkasjhdflkajhfdlskjhf')
+            console.log('*************')
+            console.log('\n')
+            const a=response.data.profile_photo
+            console.log(picture)
+            setpicture(a);
+
+           
+            console.log(picture);
+            console.log('\n'+'this')
+            console.log(response.data.profile_photo)
+            console.log('***********')
+
           
             
           })
@@ -158,7 +169,7 @@ photoresponse();
         })
         console.log(data);
         response();
-        setimage(data.uri);
+        // setimage(data.uri);
         // this.bs.current.snapTo(1);
     }
     else
@@ -182,10 +193,10 @@ photoresponse();
       const id=await AsyncStorage.getItem('id');
       // console.log(id)
       try{
-      const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
           
       if(response.data.profile_photo!="/media/default.png"){
-        setimage(response.data.profile_photo)
+        // setimage(response.data.profile_photo)
         
       }
       // else
@@ -275,7 +286,8 @@ photoresponse();
          const fall=new Animated.Value(1);
         console.log('2222')
        
-console.log(image)
+
+const[pic,setpic]=useState('http://00853ef3a4c0.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
       
         <View style={styles.container}>
@@ -297,13 +309,13 @@ console.log(image)
         
        />
         
-        <View style={{position:'absolute',height:100,width:100,marginTop:57,marginLeft:150,borderRadius:15}}>
-        <TouchableOpacity
+        <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
+        <TouchableOpacity style={{}}
          onPress={async()=>await pickfromgallery()}>
         
-        <ImageBackground borderRadius={15}
-        source={{uri:image}}
-        style={{height:100,width:100,borderRadius:1}}
+        <ImageBackground borderRadius={100}
+        source={{uri:picture}}
+        style={{height:150,width:150,borderRadius:100}}
         
         >
 

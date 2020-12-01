@@ -35,7 +35,7 @@ const Profile = ({navigation}) => {
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
             
         
         console.log(response)
