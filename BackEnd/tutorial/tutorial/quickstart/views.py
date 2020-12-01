@@ -19,7 +19,8 @@ from .models import Account,MyBook
 from .serializers import RegistrationSerializer,MyBookSerializer
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
-from rest_framework.parsers import JSONParser
+from rest_framework import generics
+
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -62,34 +63,47 @@ def login(request):
     return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
                     status=HTTP_200_OK)
 
-        
+
+class Readcollec(generics.ListAPIView):
+    serializer_class=MyBookSerializer
+
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return MyBook.objects.filter(state="Read",account=user)
 
 
-@api_view(["GET"])
-def Readcollec(request,pk):
-
-    user=Account.objects.get(pk=pk)
-    readc=MyBook.objects.get(state="Read",account=user)
-    read=MyBookSerializer(readc,many=True)
-    print(read)
-    return Response(read.data)
-
-
-@api_view(["GET"])
-def ToReadcollec(request,pk):
-
-    user=Account.objects.get(pk=pk)
-    toreadc=MyBook.objects.get(state="ToRead",account=user)
-    toread=MyBookSerializer(toreadc,many=True)
-    return Response(toread.data)
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = MyBookSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 
-@api_view(["GET"])
-def Readingcollec(request,pk):
+class ToReadcollec(generics.ListAPIView):
+    serializer_class=MyBookSerializer
 
-    user=Account.objects.get(pk=pk)
-    readingc=MyBook.objects.get(state="Reading",account=user)
-    reading=MyBookSerializer(readingc,many=True)
-    return Response(reading.data)
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return MyBook.objects.filter(state="ToRead",account=user)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = MyBookSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
+class Readingcollec(generics.ListAPIView):
+    serializer_class=MyBookSerializer
+
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return MyBook.objects.filter(state="Reading",account=user)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = MyBookSerializer(queryset, many=True)
+        return Response(serializer.data)
     

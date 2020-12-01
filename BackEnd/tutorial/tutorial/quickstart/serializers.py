@@ -32,9 +32,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class MyBookSerializer(serializers.ModelSerializer):
+    book_info = serializers.RelatedField(source='book1',read_only=True)
     class Meta:
         model = MyBook
-        fields = ['book1']
+        fields = ['book_info']
+
+    def to_representation(self,value):
+        return bookSerializer(book.objects.get(pk=value.book1.id)).data
 
 
         

@@ -74,7 +74,6 @@ class MyBook(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     book1=models.ForeignKey(book,on_delete=models.CASCADE)
     state=models.CharField(max_length=10)
-   # info=models.CharField(max_length=5)
 
     def __str__(self):
         return self.state
