@@ -55,7 +55,7 @@ const userschema=yup.object({
   //   console.log(await AsyncStorage.getItem('token'));
   // }
 const EditProfile = () => {
-  
+  const [image,setimage]=useState(null);
   const photoresponse=async ()=>{
     const id=await AsyncStorage.getItem('id');
     // console.log(id)
@@ -96,7 +96,12 @@ photoresponse();
           console.log(data);
           console.log(data.uri)
           const formdata = new FormData();
-          formdata.append('profile_photo',data)
+          const newfile={uri:data.uri,
+            type:`test/${data.uri.split(".")[3]}`,
+            name:`test.${data.uri.split(".")[3]}`}
+          console.log(newfile)
+
+          formdata.append('profile_photo',newfile)
           
           if(data.cancelled===false){
           const back={        
@@ -105,13 +110,18 @@ photoresponse();
            const backk=JSON.stringify(back);
           const response=await axiosinst.put('http://47fa53e7c300.ngrok.io/api/update-profile/',formdata,{
             headers:{
-              "Content-Type":"multipart/form-data; boundary--",
+              "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
             }
                )
           .then( function(response){
-            console.log(response.data.profile_photo)
+            console.log(response)
+            console.log('1')
+            console.log(response.data.profile_photo);
+            console.log('1')
             setimage(response.data.profile_photo);
+            console.log(image);
+            console.log('akasjhdflksjafhlksjhdflkasjhdflkajhfdlskjhf')
           
             
           })
@@ -264,7 +274,7 @@ photoresponse();
          const bs = React.useRef(null)
          const fall=new Animated.Value(1);
         console.log('2222')
-        const [image,setimage]=useState(null);
+       
 console.log(image)
     return(
       
