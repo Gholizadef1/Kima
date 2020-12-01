@@ -1,7 +1,7 @@
-import React,{useContext,useState} from 'react';
+import React,{useContext,useState,useRef} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Avatar } from 'react-native-paper';
 // import Login from './Login';
@@ -29,48 +29,6 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 
 
 
-const pickfromgallery = async ()=>{
-  console.log('gallery')
-    const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
-    if(granted){
-
-        let data=await ImagePicker.launchImageLibraryAsync({
-          mediaTypes:ImagePicker.MediaTypeOptions.Images,
-          allowsEditing:true,
-          aspect:[1,1],
-          quality:1
-        })
-        console.log(data);
-    }
-    else
-    {
-      Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
-        Title:'فهمیدم',onPress:()=>console.log('alert closed')
-        }])
-    }
-
-}
-
-const pickfromcamera = async ()=>{
-  const {granted}=await permissions.askAsync(permissions.CAMERA)
-  if(granted){
-
-      let data=await ImagePicker.launchCameraAsync({
-        mediaTypes:ImagePicker.MediaTypeOptions.Images,
-        allowsEditing:true,
-        aspect:[1,1],
-        quality:1
-      })
-      console.log(data);
-  }
-  else
-  {
-    Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
-      Title:'فهمیدم',onPress:()=>console.log('alert closed')
-      }])
-  }
-
-}
 
 
 const userschema=yup.object({
@@ -93,25 +51,70 @@ const userschema=yup.object({
     .oneOf([yup.ref('newPassword'),''],'رمز ها باید یکی باشند')
   
   })
-  const loggg=async()=>{
-    console.log(await AsyncStorage.getItem('token'));
-  }
-const EditProfile = ({navigation}) => {
+  // const loggg=async()=>{
+  //   console.log(await AsyncStorage.getItem('token'));
+  // }
+const EditProfile = () => {
     
-
+  const pickfromgallery = async ()=>{
+    console.log('gallery')
+      const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
+      if(granted){
+  
+          let data=await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            aspect:[1,1],
+            quality:1
+          })
+          console.log(data);
+          bs.current.snapTo(1);
+      }
+      else
+      {
+        Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
+          Title:'فهمیدم',onPress:()=>console.log('alert closed')
+          }])
+      }
+  
+  }
+  
+  const pickfromcamera = async ()=>{
+    console.log('cameraaa')
+    const {granted}=await permissions.askAsync(permissions.CAMERA)
+    if(granted){
+  
+        let data=await ImagePicker.launchCameraAsync({
+          mediaTypes:ImagePicker.MediaTypeOptions.Images,
+          allowsEditing:true,
+          aspect:[1,1],
+          quality:1
+        })
+        console.log(data);
+        // this.bs.current.snapTo(1);
+    }
+    else
+    {
+      Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
+        Title:'فهمیدم',onPress:()=>console.log('alert closed')
+        }])
+    }
+  
+  }
+  
 // loggg();
    
-    const val = useContext(AuthContext);  
+    // const val = useContext(AuthContext);  
     //nd
-    const fall=new Animated.Value(1);
+   
     const [name,setname]=useState(null);
-    const [password,setpassword]=useState(null);
-    const oldpassword=null;
-    const response=async (searchTerm)=>{
+    // const [password,setpassword]=useState(null);
+    // const oldpassword=null;
+    const response=async ()=>{
       const id=await AsyncStorage.getItem('id');
       // console.log(id)
       try{
-      const response = await axiosinst.get("http://c1c76a73bf1c.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
           
       
     //  console.log(response)
@@ -127,17 +130,19 @@ const EditProfile = ({navigation}) => {
               }])
   }
   }
-    response();
+      response();
   
 
-    const renderheader=()=>{
+     renderHeader=()=>{
       console.log('header')
-        return(
+      return(
+    
+      
         <View style={{backgroundColor:'white',flex:1
         }}
         
         >
-        <View>
+        <View style={{}}>
             <View style={{}}>
             {/* <Image
          source={require('../../assets/line3.png')}
@@ -154,10 +159,10 @@ const EditProfile = ({navigation}) => {
         </View>
         )
     }
-    const renderinner=()=>{
-      
-        console.log('inner');
-        return(
+    const print=console.log('1111')
+     renderInner=()=>{
+      return(
+        // console.log('inner');
       <View style={{backgroundColor:'gray'}}>
 
          <Image
@@ -167,7 +172,8 @@ const EditProfile = ({navigation}) => {
 
          <Button
          bordered rounded style={styles.button}
-        onPress={console.log('gallery')}
+        
+        onPress={async()=>await pickfromgallery()}
         style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
@@ -177,7 +183,7 @@ const EditProfile = ({navigation}) => {
 
         <Button
          bordered rounded style={styles.button}
-        onPress={console.log('camera')}
+        onPress={()=>console.log('camera')}
         style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
@@ -186,42 +192,37 @@ const EditProfile = ({navigation}) => {
         </Button>
       
         </View>
-
-
-    
-        )
+      )
     }
-    const bs=React.useRef();
+         bs = React.createRef()
+         fall=new Animated.Value(1);
+        console.log('2222')
 
     return(
-      <>
-        <View style={styles.container}>
       
-     
-       
-          {/* <ScrollView style={{height:1000}}> */}
-            
+        <View style={styles.container}>
       
         <BottomSheet
              snapPoints={[380, 0, 0]}
-            ref={bs}
+            ref={this.bs}
             initialSnap={1}
-            callbackNode={fall}
+            callbackNode={this.fall}
             enabledGestureInteraction={true}
-            renderContent={renderinner}
-            renderHeader={renderheader}
+            renderContent={this.renderInner}
+            renderHeader={this.renderHeader}
+         
             
 
                         
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
             backgroundColor={'white'}
         
-        ></BottomSheet>
+       />
         
         <View style={{position:'absolute',height:100,width:100,marginTop:57,marginLeft:150,borderRadius:15}}>
         <TouchableOpacity
-        onPress={()=>{bs.current.snapTo(0)}}
-        >
+         onPress={() => this.bs.current.snapTo(1)}>
+        
         <ImageBackground borderRadius={15}
         source={require('../../assets/avatar.png')}
         style={{height:100,width:100,borderRadius:1}}
@@ -248,7 +249,7 @@ const EditProfile = ({navigation}) => {
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://c1c76a73bf1c.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://47fa53e7c300.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -353,7 +354,7 @@ const EditProfile = ({navigation}) => {
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('http://c1c76a73bf1c.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('http://47fa53e7c300.ngrok.io/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
@@ -484,7 +485,7 @@ const EditProfile = ({navigation}) => {
      
     <StatusBar backgroundColor='#BFDBF7' style='light' />
         </View>
-        </>
+        
    
         // {/* <Text>HI</Text>
         // </ScrollView> */}
