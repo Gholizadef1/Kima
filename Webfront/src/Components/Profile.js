@@ -36,6 +36,12 @@ function ProFile (props){
        newPass2 : "",
        backError : ""
     })
+    const [bookNumbers,setBookNumbers]=useState({
+        toRead : 1,
+        reading : 2,
+        read: 3
+    })
+
     //console.log(user.token);
 
     useEffect(() => {
@@ -215,14 +221,17 @@ const accent = teal[200]; // #e040fb
                                     <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
+                                    <h6 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                       {user.email}
+                                    </h6>
                                     
                                 </div>
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
-                                                                         width: 150,
-                                                                         height: 150,
+                                                                         width: 120,
+                                                                         height: 120,
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
@@ -235,16 +244,16 @@ const accent = teal[200]; // #e040fb
                                     <div className="col">
                                         <div className="d-flex justify-content-between text-right mt-md-2">
                                            <div>
-                                                <span className="heading text-muted">2</span>
+                                        <span className="heading text-muted">{bookNumbers.toRead}</span>
                                                
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading text-muted">1</span>
+                                                <span className="heading text-muted">{bookNumbers.reading}</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading text-muted">8</span>
+                                                <span className="heading text-muted">{bookNumbers.read}</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
                                                 {/* < FaRegSmileBeam/> */}
                                             </div>
@@ -273,6 +282,7 @@ const accent = teal[200]; // #e040fb
                                 <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
+                                            <p>{user.backError}</p>
                                             <div class="my-1">
                                                 <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
                                                 <input type="text"

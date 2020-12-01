@@ -21,6 +21,7 @@ function BookView(props) {
     console.log(bookId);
     console.log(bookId.name);
     const [userCoice, setUserCoice]= useState();
+    const [selectMassage, setSelectMassage]= useState(<br></br>);
     const [state , setState] = useState(
         {
         //bookId:props.match.params.id,
@@ -79,6 +80,20 @@ function BookView(props) {
            "Authorization":"Token "+Cookies.get("userToken")}
             })
         .then(function (response){
+            if(response.data=== "successfully added"){
+                setSelectMassage("کتاب به مجموعه شما اضافه شد");
+
+            }else if (response.data==="successfully changed state"){
+                setSelectMassage("کتاب به لیست دیگری از مجموعه شما اضافه شد");
+
+            }else if (response.data==="successfully deleted from collection"){
+                setSelectMassage("کتاب از مجموعه شما حذف شد");
+
+            }
+            else if (response.data==="this book is already here"){
+                setSelectMassage("قبلاً اضافه کرده اید");
+
+            }else console.log(response.data);
             console.log(response);
         })
         .catch(function (error) {
@@ -95,11 +110,11 @@ function BookView(props) {
 
     return(
         
-        <div className="container-fluid col-sm-8 rTOl text-right " >
+        <div className="container-fluid col-8 rTOl text-right " >
             <div className="d-flex flex-row shadow color1 table-borderless my-1">
                 
-                <img src={state.imgurl} className="m-3 img-fluid col-sm-3 shadow float-right" alt="" />
-                <div className="d-flex flex-column p-3">
+                <img src={state.imgurl} className="m-3 img-fluid col-3 shadow float-right" alt="" />
+                <div className="d-flex col-6 flex-column p-3">
                 <h2 style={{fontFamily:'Morvarid'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
@@ -134,13 +149,15 @@ function BookView(props) {
                     {/* <svg width="3.5em" height="3.5em" viewBox="0 0 16 16" className="btn bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
                     </svg> */}
-
-                    <select className="form-control col-6" id="bookMood"onChange={ addBookToMineHandler}>
-                        <option value="none">اضافه کنید</option>
+                    <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
+                    <select className="form-control mr-4 col-6" id="bookMood"onChange={ addBookToMineHandler}>
+                        <option value="none">هیچکدام</option>
                         <option value="ToRead">می‌خواهم بخوانم</option>
                         <option value="Reading">دارم می‌خوانم</option>
                         <option value="Read">خوانده‌ام</option>
                     </select>
+                <small className="col-12 text-muted mt-2">{selectMassage}</small>
+
                 </div>
                 {/* <div class="input-group-prepend ">
                     <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3>+</h3></button>
