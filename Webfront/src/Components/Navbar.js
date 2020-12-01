@@ -9,6 +9,8 @@ import{ useState, useEffect } from "react";
  import "./UsersList.css";
  import "./HelpingNavbar";
 import "./Navbar.css";
+import purple from '@material-ui/core/colors/purple';
+import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
 // import {MdGroup} from 'react-icons/md';
 // import UserList from './UsersList';
@@ -52,9 +54,10 @@ useEffect(() => {
   const routeToProfile = ()=>{
     props.history.push('/profile');
   }
+  const accent= { backgroundColor: purple[500], color: '#000' }
 
     return(   
-<Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar">
+<Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar" style={{backgroundColor: teal[500], color: '#000'}}>
             <h1>  
              <GiBookshelf color="black"
             //  style = {{padding:4, height:100,width:40}}
@@ -91,7 +94,7 @@ useEffect(() => {
     <Button variant="gray" onClick={handleShow}>
     <GoSearch size="30" color="black"/>
         </Button>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
            <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
@@ -102,13 +105,12 @@ useEffect(() => {
      <div className="out1" key={item.id}>
        <div className="card cat1">
          <img
-           className="squere1" 
-           
+           className="squere1"
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3">{item.title}</h5>
-         <h5 className="card-title4">{item.author}</h5>
+         <h5 className="card-title3" style={{fontFamily:'Morvarid'}}>{item.title}</h5>
+         <h5 className="card-title4" style={{fontFamily:'Morvarid'}}>{item.author}</h5>
           </small>
           </div>
        </div>
@@ -123,11 +125,11 @@ useEffect(() => {
     </>
   
        <a class="nav-item1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
-       <small className="name" size="50">
+       <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
     </small>
 
-    <CgProfile size="35" vertical-align='center' color="black"
+    <CgProfile size="40" vertical-align='center' color="black"
     //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
      /> 
      </a>

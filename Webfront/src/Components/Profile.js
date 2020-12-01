@@ -2,10 +2,11 @@ import React, {Component,useState,useEffect} from "react";
 import {Redirect,withRouter} from "react-router-dom";
 import axios from 'axios';
 import "./Profile.css";
+import {FaRegSmileBeam} from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-import avatar from './images.png';
+
 import Scroll from "./Scroll";
 //import Avatar from './Avatar';
 import Cookies from 'js-cookie';
@@ -198,6 +199,7 @@ const StyledButton = withStyles({
   })(Button);
 
 const accent = teal[200]; // #e040fb
+
     return(
         <div className="main-content">
             
@@ -209,9 +211,11 @@ const accent = teal[200]; // #e040fb
                             <div className=" d-flex justify-content-end">
 
                                 <div className="col-7 mt-5 text-center ">
+                                    {/* <img src={image} style={{width:300}}></img> */}
                                     <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
+                                    
                                 </div>
 
                                 <div className="col-lg-5 order-lg-2 ">
@@ -232,6 +236,7 @@ const accent = teal[200]; // #e040fb
                                         <div className="d-flex justify-content-between text-right mt-md-2">
                                            <div>
                                                 <span className="heading text-muted">2</span>
+                                               
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
                                             </div>
                                             <div>
@@ -241,6 +246,7 @@ const accent = teal[200]; // #e040fb
                                             <div>
                                                 <span className="heading text-muted">8</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
+                                                {/* < FaRegSmileBeam/> */}
                                             </div>
                                         </div>
                                     </div>
@@ -314,9 +320,9 @@ const accent = teal[200]; // #e040fb
                                                      onClick={() => imageUploader.current.click()} >
                                                           انتخاب عکس
 
-                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                         {/* <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
-                                                        </svg>
+                                                        </svg> */}
                                                     </StyledButton>
                                                 </div>
                                             </div>

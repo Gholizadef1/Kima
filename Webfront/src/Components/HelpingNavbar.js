@@ -123,11 +123,11 @@ useEffect(() => {
     </>
   
        <a class="nav-item1" href="home" >
-       <small className="name" size="50"style={{fontFamily:'Morvarid',color:'black',margin:17}} >
+       <small className="name" style={{fontFamily:'Morvarid',color:'black',margin:15,fontSize:20}} >
       خانه
     </small>
 
-    <FaHome size="35" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
+    <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
      </a>
   </Navbar.Collapse>
 </Navbar>

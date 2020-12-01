@@ -69,9 +69,9 @@
   color: black;
   background-color:#bfdbf7;
 }
+
 .color4{
-  color: white;
-  background-color:#1f7a8c;
+  background: linear-gradient(-45deg, #216780 30%, #5295a0  90%);
 }
 .color5{
   color: white;
