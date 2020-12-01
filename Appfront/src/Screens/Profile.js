@@ -95,10 +95,11 @@ const Profile = ({navigation}) => {
           photoresponse();
           response();
           console.log('Listenn')
+          console.log('\n'+'-----'+Profilenavigation+'-----')
         });
     
        
-      }, [Profilenavigation&&a]);
+      }, [Profilenavigation,[]]);
      
 
       
