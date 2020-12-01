@@ -1,6 +1,6 @@
 
 import React,{useContext, useEffect, useState} from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
+import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEditor} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -29,6 +29,7 @@ const Profile = ({navigation}) => {
     const val = useContext(AuthContext);  
     const [name,setname]=useState(null);
     const [email,setemail]=useState(null);
+    const [Inage,setInage]=useState(require('../../assets/avatar.png'));
     // console.log(AsyncStorage.getItem('id'))
     const response=async (searchTerm)=>{
         const id=await AsyncStorage.getItem('id');
@@ -37,10 +38,12 @@ const Profile = ({navigation}) => {
         const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
             
         
-    //    console.log(response)
+        console.log(response)
        setname(response.data.username)
     //    console.log(name)
        setemail(response.data.email)
+    
+       
     }
     catch(err){
         // console.log(response)
@@ -82,8 +85,9 @@ const Profile = ({navigation}) => {
          source={require('../../assets/backprof4.jpeg')}
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
+      
         <Avatar.Image style={styles.avatar} size={100}
-        source={require('../../assets/avatar.png')}
+        source={Inage}
         ></Avatar.Image>
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
@@ -94,7 +98,7 @@ const Profile = ({navigation}) => {
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
         >
-            <Text style={{marginLeft:55,color:'#1f7a8c'}}>ویرایش پروفایل</Text>
+            <Text style={{marginLeft:54,color:'#1f7a8c',fontWeight:'bold'}}>ویرایش پروفایل</Text>
         </Button>
         <Image
          source={require('../../assets/line3.png')}
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     avatar:{
         position:'absolute',
         marginTop:190,
-        marginLeft:50,
+        marginLeft:40,
         
     },
     edit:{

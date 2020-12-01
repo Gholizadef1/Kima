@@ -55,12 +55,38 @@ const userschema=yup.object({
   //   console.log(await AsyncStorage.getItem('token'));
   // }
 const EditProfile = () => {
+  
+  const photoresponse=async ()=>{
+    const id=await AsyncStorage.getItem('id');
+    // console.log(id)
+    try{
+    const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
+        
     
+  //  console.log(response)
+      if(response.data.profile_photo!="/media/default.png"){
+        setimage(response.data.profile_photo)
+      }
+   console.log(response.data.profile_photo)
+  //  setimage(require(response.data.profile_photo))
+  
+}
+catch(err){
+    // console.log(err);
+    Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+        
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+}
+}
+photoresponse();
   const pickfromgallery = async ()=>{
+    await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
       const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
       if(granted){
-  
+          console.log(granted)
           let data=await ImagePicker.launchImageLibraryAsync({
             mediaTypes:ImagePicker.MediaTypeOptions.Images,
             allowsEditing:true,
@@ -68,6 +94,35 @@ const EditProfile = () => {
             quality:1
           })
           console.log(data);
+          console.log(data.uri)
+          const formdata = new FormData();
+          formdata.append('profile_photo',data)
+          
+          if(data.cancelled===false){
+          const back={        
+            profile_photo:data
+          }
+           const backk=JSON.stringify(back);
+          const response=await axiosinst.put('http://47fa53e7c300.ngrok.io/api/update-profile/',formdata,{
+            headers:{
+              "Content-Type":"multipart/form-data; boundary--",
+              "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+            }
+               )
+          .then( function(response){
+            console.log(response.data.profile_photo)
+            setimage(response.data.profile_photo);
+          
+            
+          })
+          .catch( function(error){
+            console.log(error)
+          })
+          // photoresponse();
+          // setimage(data.uri);
+         
+     
+          }
           bs.current.snapTo(1);
       }
       else
@@ -80,6 +135,7 @@ const EditProfile = () => {
   }
   
   const pickfromcamera = async ()=>{
+    
     console.log('cameraaa')
     const {granted}=await permissions.askAsync(permissions.CAMERA)
     if(granted){
@@ -87,10 +143,12 @@ const EditProfile = () => {
         let data=await ImagePicker.launchCameraAsync({
           mediaTypes:ImagePicker.MediaTypeOptions.Images,
           allowsEditing:true,
-          aspect:[1,1],
+          // aspect:[1,1],
           quality:1
         })
         console.log(data);
+        response();
+        setimage(data.uri);
         // this.bs.current.snapTo(1);
     }
     else
@@ -116,9 +174,18 @@ const EditProfile = () => {
       try{
       const response = await axiosinst.get("http://47fa53e7c300.ngrok.io/api/user-profile/"+id)
           
-      
+      if(response.data.profile_photo!="/media/default.png"){
+        setimage(response.data.profile_photo)
+        
+      }
+      // else
+      // setimage('../../assets/avatar.png')
+   console.log(response.data.profile_photo)
     //  console.log(response)
+    console.log(response.data)
      setname(response.data.username)
+     console.log(response.data.profile_photo)
+    //  setimage(require(response.data.profile_photo))
     
   }
   catch(err){
@@ -133,7 +200,7 @@ const EditProfile = () => {
       response();
   
 
-     renderHeader=()=>{
+     const renderHeader=()=>{
       console.log('header')
       return(
     
@@ -160,7 +227,7 @@ const EditProfile = () => {
         )
     }
     const print=console.log('1111')
-     renderInner=()=>{
+     const renderInner=()=>{
       return(
         // console.log('inner');
       <View style={{backgroundColor:'gray'}}>
@@ -194,22 +261,23 @@ const EditProfile = () => {
         </View>
       )
     }
-         bs = React.createRef()
-         fall=new Animated.Value(1);
+         const bs = React.useRef(null)
+         const fall=new Animated.Value(1);
         console.log('2222')
-
+        const [image,setimage]=useState(null);
+console.log(image)
     return(
       
         <View style={styles.container}>
       
         <BottomSheet
              snapPoints={[380, 0, 0]}
-            ref={this.bs}
+            ref={bs}
             initialSnap={1}
-            callbackNode={this.fall}
+            callbackNode={fall}
             enabledGestureInteraction={true}
-            renderContent={this.renderInner}
-            renderHeader={this.renderHeader}
+            renderContent={renderInner}
+            renderHeader={renderHeader}
          
             
 
@@ -221,10 +289,10 @@ const EditProfile = () => {
         
         <View style={{position:'absolute',height:100,width:100,marginTop:57,marginLeft:150,borderRadius:15}}>
         <TouchableOpacity
-         onPress={() => this.bs.current.snapTo(1)}>
+         onPress={async()=>await pickfromgallery()}>
         
         <ImageBackground borderRadius={15}
-        source={require('../../assets/avatar.png')}
+        source={{uri:image}}
         style={{height:100,width:100,borderRadius:1}}
         
         >
@@ -550,7 +618,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#E1E5F2',
         borderRadius:25,
         marginLeft:105,
-        marginTop:80
+        marginTop:80,
+      
     },
     button:{
         position:'absolute',
