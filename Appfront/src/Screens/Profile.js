@@ -28,6 +28,7 @@ const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
     const [name,setname]=useState(null);
+    const [picture,setpicture]=useState(null);
     const [email,setemail]=useState(null);
     const [Inage,setInage]=useState(require('../../assets/avatar.png'));
     // console.log(AsyncStorage.getItem('id'))
@@ -38,7 +39,7 @@ const Profile = ({navigation}) => {
         const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
             
         
-        console.log(response)
+        // console.log(response)
        setname(response.data.username)
     //    console.log(name)
        setemail(response.data.email)
@@ -61,10 +62,37 @@ const Profile = ({navigation}) => {
     //    response()
     //    console.log('akdfsj;lskafd')
     // });
+    const photoresponse=async ()=>{
+        console.log('**'+'\n'+'PHOTRESPONSE'+'\n'+'**')
+        const id=await AsyncStorage.getItem('id');
+        // console.log(id)
+        try{
+        const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
+            
+        
+      //  console.log(response)
+      console.log('*****')
+            console.log(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+          
+       console.log(response.data.profile_photo)
+      //  setimage(require(response.data.profile_photo))
+      
+    }
+    catch(err){
+         console.log(err);
+        Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
+            
+    
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
  
     const a=0;
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
+          photoresponse();
           response();
           console.log('Listenn')
         });
@@ -87,7 +115,7 @@ const Profile = ({navigation}) => {
          ></Image>
       
         <Avatar.Image style={styles.avatar} size={100}
-        source={Inage}
+        source={{uri:picture}}
         ></Avatar.Image>
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>

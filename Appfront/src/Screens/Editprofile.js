@@ -75,7 +75,7 @@ const EditProfile = () => {
 }
 catch(err){
      console.log(err);
-    Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+    Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن :)',[{
         
 
             Title:'فهمیدم',onPress:()=>console.log('alert closed')
