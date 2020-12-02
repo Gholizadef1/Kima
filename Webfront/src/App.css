@@ -13,6 +13,26 @@
   }
 }
 
+	
+@font-face {
+  font-family: 'Zar';
+  src: url('fonts/Zar.eot') format('eot'),
+  url('fonts/Zar.ttf') format('truetype'),
+  url('fonts/Zar.woff') format('woff');
+  }
+	
+  @font-face {
+    font-family: 'pixelboy-Shams';
+    src: url('fonts/pixelboy-Shams.eot') format('eot'),
+    url('fonts/pixelboy-Shams.ttf') format('truetype'),
+    url('fonts/pixelboy-Shams.woff') format('woff');
+    }
+    @font-face {
+      font-family: 'Morvarid';
+      src: url('fonts/Morvarid.eot') format('eot'),
+      url('fonts/Morvarid.ttf') format('truetype'),
+      url('fonts/Morvarid.woff') format('woff');
+      }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -49,9 +69,9 @@
   color: black;
   background-color:#bfdbf7;
 }
+
 .color4{
-  color: white;
-  background-color:#1f7a8c;
+  background: linear-gradient(-45deg, #216780 30%, #5295a0  90%);
 }
 .color5{
   color: white;
