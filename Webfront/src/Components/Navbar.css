@@ -4,9 +4,21 @@
     font-size: 500px;
     
     }
+    .cat1:hover{
+    box-shadow: 0px 1px 30px 0px rgb(116, 116, 225) !important; 
+    }
+    .cat1{
+    padding-top: 10px;
+    height: 260px;
+    opacity: 1;
+    width: 200px;
+   padding-bottom: 200px;
+    margin-left: 140px;
+    margin-bottom: 20px;
+
+    }
     
-    
-    .navbarMain {
+    .navbar {
         background-color:#1f7a8c;
         top:-1px;
         max-height: 80px;
@@ -27,10 +39,32 @@
     padding-bottom: 5px;
 }
     .name{
-        
         color: black;
     
         
+    }
+    .squere1{
+        margin-left: -12px;
+        margin-right: -12px;
+        width: 180px;
+        height: 180px;
+        padding-top:4px;
+        padding-left:5px;
+        padding-right:5px;
+    }
+    .card-title3{
+        font-size: 15px;
+        color: black;
+        font-weight: bold;
+       text-align: center;
+       margin-left: -20px;
+    }
+    .card-title4{
+        
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        margin-left: -20px;
     }
    
     

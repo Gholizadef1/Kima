@@ -27,3 +27,25 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return account
 
 
+class ChangePasswordSerializer(serializers.Serializer):
+
+    model = Account
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+
+class UpdateUserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        fields = ['username','profile_photo']
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        fields = ['username','profile_photo','email']
+
+
+
