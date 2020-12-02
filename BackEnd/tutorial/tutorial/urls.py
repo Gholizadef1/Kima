@@ -14,11 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
 from .quickstart import views
-from . import kyma,quickstart
+from . import kyma , quickstart
+from .quickstart.views import registration_view,UpdateUserProfileView
+from .quickstart.views import ChangePasswordView
 from .quickstart.views import *
 from .kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
@@ -32,6 +36,11 @@ urlpatterns = [
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
+    path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
+    path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
+    path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
+    path('api/profile/', UserProfileViewwithToken.as_view(), name='profile'),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
-]
+    
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

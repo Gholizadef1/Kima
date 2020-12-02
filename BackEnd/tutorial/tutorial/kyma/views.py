@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
-from . serializers import bookSerializer
+from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
 from tutorial.quickstart.models import MyBook
@@ -50,7 +50,6 @@ class DynamicBookAPIView(generics.ListCreateAPIView):
     serializer_class = bookSerializer
 
 class BookViewPage(APIView):
-    
     def get_object(self, pk):
         try:
             return book.objects.get(pk=pk)
@@ -88,3 +87,13 @@ class BookViewPage(APIView):
             return MyBook.objects.get(account=user,book1=book2)
         except MyBook.DoesNotExist:
             return None
+    def put(self, request, pk):
+        wantedbook = get_object_or_404(book.objects.all(),pk=pk)
+        data = self.request.data.get('userrating')
+        serializer = UpdateRatingSerializer(wantedbook,data={'userrating':data},partial=True)
+        if serializer.is_valid(raise_exception=True):
+            newratingbook = serializer.save()
+        return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
+
+
+  
