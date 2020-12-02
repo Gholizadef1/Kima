@@ -12,8 +12,8 @@ import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
+ import {MdGroup} from 'react-icons/md';
+ import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
@@ -22,7 +22,7 @@ import Cookies from 'js-cookie';
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-  // const [users,setUsers] = useState([]);
+   const [users,setUsers] = useState([]);
  
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -111,6 +111,7 @@ useEffect(() => {
          <small className= "title">
          <h5 className="card-title3" style={{fontFamily:'Morvarid'}}>{item.title}</h5>
          <h5 className="card-title4" style={{fontFamily:'Morvarid'}}>{item.author}</h5>
+
           </small>
           </div>
        </div>
@@ -123,7 +124,6 @@ useEffect(() => {
         </Modal.Footer>
       </Modal>
     </>
-  
        <a class="nav-item1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
        <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
@@ -138,5 +138,4 @@ useEffect(() => {
 
     );
     }
-
     export default withRouter( NavBar);

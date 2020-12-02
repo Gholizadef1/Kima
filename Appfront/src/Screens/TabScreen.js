@@ -20,6 +20,11 @@ import Bookresult from './Bookresult';
 import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
 import Bookview from './Bookview';
+import { createSwitchNavigator } from 'react-navigation';
+import App from '../../App';
+import Profile from './Profile';
+import Editprofile from './Editprofile';
+import Profilenavigation from './Profilenavigation';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -31,10 +36,17 @@ import Bookview from './Bookview';
 //    )
 
 //  }
+// const logout=createSwitchNavigator({
+//   mainFlow:TabScreen,
+//   loginFlow:StackScreen,
+ 
+// }
+
+// );
 const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
-      <NavigationContainer options={{}} >
+      // <NavigationContainer options={{}} >
           <Tab.Navigator
           initialRoute={{
             headerShown: false
@@ -60,13 +72,13 @@ const TabSreen = () => {
     
             }}/>
           
-            <Tab.Screen name="حساب کاربری" component={Profie} options={{tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name="حساب کاربری" component={Profilenavigation} options={{tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="person" size={size} color={color} />
               ),
               }}/>
            
           </Tab.Navigator>
-          </NavigationContainer>
+          // {/* </NavigationContainer> */}
       );
 }
 
