@@ -82,27 +82,45 @@ function ProFile (props){
             backError : ""
         })); 
         const payload={
-            "email":user.email,
-            "userName":user.userName,
+              // "email":user.email,
+              "username":user.userName
         }
         const back= JSON.stringify(payload)
-        axios.put('http://127.0.0.1:8000/api/update-profile/',back,{"headers":{"content-type":"application/json" }})
-            .then(function (response) {
+        axios.put('http://127.0.0.1:8000/api/update-profile/',
+        back,{
+            headers:{
+
+           "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
+                .then(function (response) {
                 console.log(response);
                 if(response.status === 200){
                     console.log(response.status);
+                    setUser(prevState => ({
+                        ...prevState,
+                        backError : 'نام کاربری با موفقیت عوض شد'
+                    }))
 
                     
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                setUser(prevState => ({
+                    ...prevState,
+                    backError : "نام کاربری از قبل وجود دارد"
+                }));
             });
     }
 
     const handleChangePassClick = (e) => {
         e.preventDefault();
-        if(user.oldPass.length&&user.newPass.length&&user.newPass2.length){
+        setUser(prevState => ({
+            ...prevState,
+            backError : ""
+        })); 
+        if(user.oldPass.length&&user.newPass.length){
             const payload={
                 "old_password": user.oldPass,
                 "new_password":user.newPass,
@@ -282,7 +300,7 @@ const accent = teal[200]; // #e040fb
                                 <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
-                                            <p>{user.backError}</p>
+                                            <p className="loginText my-1" style={{fontFamily:'Morvarid'}}>{user.backError}</p>
                                             <div class="my-1">
                                                 <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
                                                 <input type="text"

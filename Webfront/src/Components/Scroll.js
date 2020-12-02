@@ -22,7 +22,7 @@ function Slide(props) {
     fetch("http://127.0.0.1:8000/bookdetail/")
       .then((res) => res.json())
       .then((data) => {
-        setSuggestions(data);
+        // setSuggestions(data);
       });
   }, []);
   const bookSelectedHandler = ( b ) => {
@@ -66,7 +66,7 @@ function Slide(props) {
         </div>
       ) : (
        <div className = "slid">
-          <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+          <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خواندهام</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
@@ -122,12 +122,12 @@ function Slide(props) {
         </div>
       ) : (
        <div className = "slid">
-      <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
+      <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> میخواهم بخوانم</div> 
         <Slider {...settings}>
           {suggestions.map((current) => (
             
             <div className="out" key={current.id}>
-             {/* <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3"> */}
+             {/ <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3"> /}
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 
                 <img
@@ -140,7 +140,7 @@ function Slide(props) {
                   <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
                    <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
-              {/* </div> */}
+              {/* {/ </div> /} */}
               </div>
             </div>
           ))}
