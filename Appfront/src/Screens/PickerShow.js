@@ -4,14 +4,15 @@ import { StyleSheet, View , Image , ImageBackground , ScrollView ,
 import { Container, Header, Content, Icon, Picker, Form } from "native-base";
 import axiosinst from '../api/axiosinst';
 import axios from 'axios';
-import Bookview from './Bookview'
+import Bookview from './Bookview';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class PickerShow extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selected: "ToRead"
+      selected: ""
     };
   }
    onValueChange(value: string) {
@@ -26,22 +27,36 @@ export default class PickerShow extends Component {
   }
 
   render() {
+    console.log(this.props.bookid);
+    
 
-    const addBookToMineHandler = (getValue)=>{
+
+    const addBookToMineHandler = async(getValue)=>{
       console.log(getValue);
       console.log(getValue);
+      console.log(getValue==="");
+      
+      console.log(getValue)
+      if(getValue!=""){
       const payload={
           "book_state": getValue,
       }
       const back= JSON.stringify(payload);
-      axios.post('http://4780edc5f3be.ngrok.io/bookdetail/'+'1',back,{"headers":{"content-type":"application/json",
-      "Authorization":''}})
+      // const id=await AsyncStorage.getItem('id');
+      axios.post('http://abe0e9fde816.ngrok.io/bookdetail/'+this.props.bookid,back,{
+        "headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }
+                })
       .then(async function(response){
         console.log(response.data)
+        console.log('\n'+'++++++++'+'\n')
       })
       .catch(function (error) {
          console.log(error);
+         console.log('***********************')
       });
+    }
     }
       
     return (
@@ -61,6 +76,7 @@ export default class PickerShow extends Component {
               selectedValue={this.state.selected , addBookToMineHandler(this.state.selected) }
               onValueChange={this.onValueChange.bind(this)}
             >
+              <Picker.Item label="______" value="null" />
               <Picker.Item label="میخواهم این کتاب را بخوانم" value="ToRead"  />
               <Picker.Item label="در حال خواندن" value="Reading" />
               <Picker.Item label="قبلا خوانده ام" value="Read" />

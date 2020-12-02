@@ -42,7 +42,7 @@ const Bookview = (prop) => {
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
 
-                  <PickerShow /> 
+                  <PickerShow bookid={id} /> 
 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,right:125 , marginBottom:5}}>
                     درباره کتاب :</Text>
