@@ -73,7 +73,9 @@ function Slide(props) {
   
   return (
     <div className="container">
+
       <div class="brand" style={{fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
+
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -97,6 +99,7 @@ function Slide(props) {
                 <small className= "title">
                   <b className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</b>
                    <h5 className="card-title2"style={{fontWeight:"bold",color:"black"}}>{current.author}</h5>
+
                    </small>
 
               </div>

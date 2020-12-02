@@ -4,6 +4,11 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from tutorial.kyma.models import book
+from django.contrib.postgres.fields import ArrayField
+
+
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self,email,username,password=None):
@@ -34,10 +39,14 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
     email=models.EmailField(verbose_name="email",max_length=60,unique=True)
     username=models.CharField(max_length=30,unique=True)
+    profile_photo = models.ImageField( upload_to='profile_photos',default='default.png')
     date_joined=models.DateTimeField(verbose_name="date joined",auto_now_add=True)
     last_login=models.DateTimeField(verbose_name="last login",auto_now=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+
+    #myshelf=models.ManyToManyField(book,through='MyBook',default=False)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ["username"]
@@ -58,3 +67,15 @@ class Account(AbstractBaseUser):
 def create_auth_token(sender,instance=None,created=False,**kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+
+
+class MyBook(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    book1=models.ForeignKey(book,on_delete=models.CASCADE)
+    state=models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.state
+
