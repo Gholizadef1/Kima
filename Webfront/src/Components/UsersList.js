@@ -34,7 +34,7 @@ useEffect(() => {
 
     return ( 
       
-      <div className="row">
+      <div className="rowUserlist">
        
     <div class="brand1">نتایج</div> 
     {search.length === 0 ? (
@@ -69,7 +69,3 @@ useEffect(() => {
     
     
   );
-}
-
-
-export default UsersList;
