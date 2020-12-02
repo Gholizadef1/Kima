@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Account
+from .models import Account,MyBook
+from tutorial.kyma.serializers import bookSerializer
+from tutorial.kyma.models import book
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'},write_only=True)
-
     class Meta:
         model = Account
         fields = ['email', 'username','password','password2']
@@ -26,4 +27,19 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account.save()
         return account
 
+
+
+
+
+class MyBookSerializer(serializers.ModelSerializer):
+    book_info = serializers.RelatedField(source='book1',read_only=True)
+    class Meta:
+        model = MyBook
+        fields = ['book_info']
+
+    def to_representation(self,value):
+        return bookSerializer(book.objects.get(pk=value.book1.id)).data
+
+
+        
 
