@@ -9,7 +9,9 @@
 .card-title2{
     font-size: 15px;
     color: black;
+
     font-family: 'Morvarid';  
+
 }.card-title1{
     font-family: 'Morvarid';
     color: black;
@@ -54,6 +56,7 @@
     font-weight: bold;
     font-size: 25px;
 font-family: 'Morvarid';
+
 }
 .sr-only{
     margin-left: 500px;

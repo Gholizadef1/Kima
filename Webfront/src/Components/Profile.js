@@ -6,7 +6,7 @@ import {FaRegSmileBeam} from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-
+       
 import Scroll from "./Scroll";
 //import Avatar from './Avatar';
 import Cookies from 'js-cookie';
@@ -239,6 +239,7 @@ const accent = teal[200]; // #e040fb
                                     <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
+
                                     <h6 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
@@ -248,6 +249,7 @@ const accent = teal[200]; // #e040fb
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
+
                                                                          width: 120,
                                                                          height: 120,
                                                                          display: "block"}}/>
@@ -262,11 +264,14 @@ const accent = teal[200]; // #e040fb
                                     <div className="col">
                                         <div className="d-flex justify-content-between text-right mt-md-2">
                                            <div>
+
                                         <span className="heading text-muted">{bookNumbers.toRead}</span>
+
                                                
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
                                             </div>
                                             <div>
+
                                                 <span className="heading text-muted">{bookNumbers.reading}</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
                                             </div>
@@ -300,7 +305,9 @@ const accent = teal[200]; // #e040fb
                                 <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
+
                                             <p className="loginText my-1" style={{fontFamily:'Morvarid'}}>{user.backError}</p>
+
                                             <div class="my-1">
                                                 <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
                                                 <input type="text"
