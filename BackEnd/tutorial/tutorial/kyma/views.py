@@ -4,9 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
 from . models import book
-from . serializers import bookSerializer
+from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
+from tutorial.quickstart.models import MyBook
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -49,7 +50,6 @@ class DynamicBookAPIView(generics.ListCreateAPIView):
     serializer_class = bookSerializer
 
 class BookViewPage(APIView):
-    
     def get_object(self, pk):
         try:
             return book.objects.get(pk=pk)
@@ -60,3 +60,40 @@ class BookViewPage(APIView):
         wantedbook = self.get_object(pk)
         serializer = bookSerializer(wantedbook)
         return Response(serializer.data)
+
+    def post(self,request,pk):
+        user=request.user
+        book2=book.objects.get(id=pk)
+        bookcheck=self.checkbook(user,book2)
+        st=request.data.get("book_state")
+        if(bookcheck==None):
+            b=MyBook(account=user,book1=book2,state=st)
+            b.save()
+            return Response("successfully added")
+        else:
+            if(bookcheck.state==st):
+                return Response("this book is already here")
+            else:
+                if(st=="none"):
+                    bookcheck.delete()
+                    return Response("successfully deleted from collection")
+                else:
+                    bookcheck.state=request.data.get("book_state")
+                    bookcheck.save()
+                    return Response("successfully changed state")
+
+    def checkbook(self,user,book2):
+        try:
+            return MyBook.objects.get(account=user,book1=book2)
+        except MyBook.DoesNotExist:
+            return None
+    def put(self, request, pk):
+        wantedbook = get_object_or_404(book.objects.all(),pk=pk)
+        data = self.request.data.get('userrating')
+        serializer = UpdateRatingSerializer(wantedbook,data={'userrating':data},partial=True)
+        if serializer.is_valid(raise_exception=True):
+            newratingbook = serializer.save()
+        return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
+
+
+  

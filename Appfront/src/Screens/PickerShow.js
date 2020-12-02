@@ -34,7 +34,7 @@ export default class PickerShow extends Component {
           "book_state": getValue,
       }
       const back= JSON.stringify(payload);
-      axios.post('http://9f44aaf6de1d.ngrok.io/bookdetail/'+'1',back,{"headers":{"content-type":"application/json",
+      axios.post('http://4780edc5f3be.ngrok.io/bookdetail/'+'1',back,{"headers":{"content-type":"application/json",
       "Authorization":''}})
       .then(async function(response){
         console.log(response.data)

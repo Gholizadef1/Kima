@@ -9,8 +9,17 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
-import { Context } from '../context/Authcontext';   
+// import axios from 'axios';
+import Home from './Home';
+import TabScreen from './TabScreen';
+import Axios from 'axios';
+// import {creatStore} from 'redux'
+// import { Context } from '../context/AuthContext';   
+import axiosinst from '../api/axiosinst';
 import axios from 'axios';
+import AuthContext,{AuthProvider} from '../context/Authcontext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const logschema=yup.object({
   Email:yup.string()
@@ -26,31 +35,55 @@ const logschema=yup.object({
 
  const Login=(pro)=> {
    
-  const { state, signin } = useContext(Context);
-           
-return (
-
-     <Container backgroundColor='white'>     
+  // const { state, signin } = useContext(Context);
+  // const { state, signin, clearErrorMessage } = useContext(Context);      
+  const val=useContext(AuthContext);
+     
+     
+  return (
+    
+      // <navigationconta>
+    
+     <Container backgroundColor='white'>
+     
      <View>
       <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Email:'',Password:''}}
       validationSchema={logschema}
-      onSubmit={(values,actions)=>{              
+
+
+      onSubmit={async(values,actions)=>{
+         
+      
         const back={   
           email:values.Email,
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-         axios.post('http://1d5bf2d8221a.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
-        .then(function(response){
-          console.log(response.status);
+
+         axios.post('http://4780edc5f3be.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+        .then(async function(response){
+          console.log(response.data.userid)
+           console.log(response)
+           console.log(response.data.token)
+          await AsyncStorage.setItem('token',response.data.token)
+          await AsyncStorage.setItem('id',response.data.userid.toString())
+          // console.log(response)
+          // console.log(response.status);
+          val.changelogged(true);
+          // pro.navigation.navigate('mainFlow');
+
+          console.log('Hiiiiiiii')
+          console.log('.....');
+         
         
-          pro.navigation.navigate('mainFlow');
-          console.log('Hiiiiiiii')         
+         
         })
         .catch(function(error){
+          console.log('....')
+          console.log(error);
           Alert.alert('oops','ایمیل و یا رمز عبور اشتباه است',[{
             
 
@@ -78,7 +111,7 @@ return (
        <Text style={{fontSize:9, color:'red'}}>{props.touched.Email&&props.errors.Email}</Text>
        <Item style={styles.input}>
          <Input name='passs' style={styles.Input} autoCapitalize='none' autoCorrect={false}
-
+          secureTextEntry
           onChangeText={props.handleChange('Password')}
           value={props.values.Password}
           onBlur={props.handleBlur('Password')}
