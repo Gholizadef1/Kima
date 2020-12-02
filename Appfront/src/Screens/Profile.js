@@ -35,7 +35,11 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
+<<<<<<< HEAD
         const response = await axiosinst.get("http://abe0e9fde816.ngrok.io/api/user-profile/"+id)
+=======
+        const response = await axiosinst.get("http://eeb3e397cc7a.ngrok.io/api/user-profile/"+id)
+>>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
             
         
         // console.log(response)

@@ -13,12 +13,16 @@ const WantToRead = ({navigation}) => {
     const [image,setImage] = useState([])
 
     useEffect(() =>{
-        getImageFromAPI()
+        getImageFromAPI1()
     },[])
 
-    function getImageFromAPI(){
+    function getImageFromAPI1(){
 
+<<<<<<< HEAD
         axiosinst.get('https://abe0e9fde816.ngrok.io/bookdetail')
+=======
+        axiosinst.get('http://eeb3e397cc7a.ngrok.io/bookdetail')
+>>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
 
         .then(function(response){
             setImage(response.data)
@@ -48,10 +52,14 @@ const WantToRead = ({navigation}) => {
             </View>
 
              <ScrollView style={{marginTop:100}}>
+<<<<<<< HEAD
                  
                  <View >
+=======
+                 <View>
+>>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     data={image}
@@ -59,15 +67,16 @@ const WantToRead = ({navigation}) => {
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>
                                 <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
-                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15 , 
+                                       marginBottom:-20 ,marginLeft:5 , marginRight:10}}>
                                     <CardItem cardBody>
                                     <Image source={{uri : item.imgurl}} style={{width: 120,
                                       height: 180 , borderRadius:15}}/>
+                                      <Text style={styles.ImageText}>{item.title}</Text>
+                                      <Text style={styles.author}>{item.author}</Text>
                                     </CardItem>
                                     </Card>                                    
-                                        <CardItem>
-                                        <Text style={styles.ImageText}>{item.title}</Text>
-                                        </CardItem>
+                                        
                                 </TouchableOpacity>
                             </View>
                         )
@@ -91,11 +100,17 @@ const styles = StyleSheet.create({
     },
     ImageText: {
         position:'absolute',
+        fontSize:15,
+        marginRight:20,
         color:'#1F7A8C' ,
-        top:2 ,
+        top:12 ,
         fontWeight: 'bold',
-        right:20,
-        left: 20
+        left: 130
+    },
+    author: {
+        left:10,
+        top:-20,
+        fontSize:15
     },
     frame : {
         color: '#1F7A8C'
