@@ -17,15 +17,16 @@ function Slide(props) {
   const [bookReading, setBookReading] = useState(null);
   const [bookWantto, setBookWantto] = useState(null);
 
-    const apiURLRead = "" + Cookies.get('userId');
-    const apiURLReading = "" + Cookies.get('userId');
-    const apiURLWantto = "" + Cookies.get('userId');
+    const apiURLRead = "api/user-profile/<int:pk>/Read" + Cookies.get('userId');
+    const apiURLReading = "api/user-profile/<int:pk>/Reading" + Cookies.get('userId');
+    const apiURLWantto = "api/user-profile/<int:pk>/ToRead" + Cookies.get('userId');
 
     useEffect(() => {
       axios.get(apiURLRead)
         .then((res) => res.json())
         .then((data) => {
           setBookRead(data);
+          console.log(setBookRead);
         });
     }, []);
 
@@ -34,6 +35,7 @@ function Slide(props) {
         .then((res) => res.json())
         .then((data) => {
           setBookReading(data);
+         
         });
     }, []);
 
@@ -90,6 +92,7 @@ function Slide(props) {
           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
         <Slider {...settings}>
           {bookRead.map((current) => (
+            
             <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
