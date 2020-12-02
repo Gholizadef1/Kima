@@ -11,7 +11,10 @@ import {Formik,formik} from 'formik';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import { log } from 'react-native-reanimated';
-import { Context as Authcontext } from '../context/Authcontext';  
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthContext,{AuthProvider} from '../context/AuthContext';
+// import AuthContext,{AuthProvider} from '../context/AuthContext';
+// import { Context as Authcontext } from '../context/AuthContext';  
 
 import axios from 'axios';
 import axiosinst from '../api/axiosinst';
@@ -43,9 +46,11 @@ const signschema=yup.object({
 
 
 })
+
  const SignUp=(pro,{Users})=> {
+  const val = useContext(AuthContext); 
   const[check,setcheck]=useState(false);
-  const { state, signup } = useContext(Authcontext);
+  // const { state, signup } = useContext(Authcontext);
   return (
     
      <Container>
@@ -64,7 +69,8 @@ const signschema=yup.object({
       initialValues={{Email:'',Username:'',Password:'',repeatPassword:'' }}
       validationSchema={signschema}
       
-        onSubmit={(values,actions)=>{
+
+        onSubmit={async(values,actions)=>{
         //  signup(values);
         const back={
           username:values.Username,
@@ -81,8 +87,12 @@ const signschema=yup.object({
         //    console.log(errors)
         //  }
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
-        axios.post('http://47317a656b11.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
-        .then(function(response){
+        axios.post('http://4780edc5f3be.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+        .then(async function(response){
+          // AsyncStorage.setItem('token',response.data.token)
+          
+          // await AsyncStorage.setItem('token',response.data.token)
+          // val.changelogged(response.data.token)
           // console.log(response);
           // console.log(response.data.email);
           // console.log(response.data);
@@ -90,10 +100,10 @@ const signschema=yup.object({
           // // console.log(response.data.email[0]==="Enter a valid email address.");
           // console.log(response.response);
           // response.data.email[0]
-          console.log(back.email)
-          console.log(response.status);
-          console.log(response.data.email);
-          console.log(response.data.username);
+          // console.log(back.email)
+          // console.log(response.status);
+          // console.log(response.data.email);
+          // console.log(response.data.username);
           //  console.log(response);
           
             if(response.data.email!==back.email||response.data.username!==back.username){
@@ -125,6 +135,9 @@ const signschema=yup.object({
             }
             }
              else{
+            //  AsyncStorage.setItem('token',response.data.token)
+            console.log(response)
+             console.log('inja')
             console.log(back.email);
             pro.navigation.navigate('Log');
             actions.resetForm();
@@ -202,6 +215,7 @@ const signschema=yup.object({
   
        <Item style={styles.input}>
          <Input  style={styles.Input} 
+          secureTextEntry
          onChangeText={props.handleChange('Password')}
          value={props.values.Password}
          onBlur={props.handleBlur('Password')}
@@ -217,6 +231,7 @@ const signschema=yup.object({
        
        <Item style={styles.input}>
          <Input  style={styles.Input} 
+          secureTextEntry
           onChangeText={props.handleChange('repeatPassword')}
           value={props.values.repeatPassword}
           onBlur={props.handleBlur('repeatPassword')}
