@@ -7,17 +7,24 @@ import { Container, Header, Left, Body, Right, Title, CardItem, Card, Content } 
 import { StatusBar } from 'expo-status-bar';
 
 import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Mybooks = ({navigation}) => { 
 
-    const [image,setImage] = useState([])
+    const [redimage,setredImage] = useState([])
+    const [readimage,setreadImage] = useState([])
+    const [wanttoreadimage,setwanttoreadImage] = useState([])
 
     useEffect(() =>{
-        getImageFromAPI1()
+        getredImageFromAPI1()
+        getreadImageFromAPI1()
+        getwanttoreadImageFromAPI1()
     },[])
-
-    function getImageFromAPI1(){
-        axiosinst.get('http://9f44aaf6de1d.ngrok.io/bookdetail')
+    const id=AsyncStorage.getItem('id');
+    async function getredImageFromAPI1(){
+        axiosinst.get('http://abe0e9fde816.ngrok.io/api/user-profile'+id+'/Read',{"headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }})
         .then(function(response){
             setImage(response.data)
             console.log(response)
@@ -26,7 +33,31 @@ const Mybooks = ({navigation}) => {
             console.log(error)
         })
     }
-    if(!image){
+    async function getreadImageFromAPI1(){
+        axiosinst.get('http://abe0e9fde816.ngrok.io/api/user-profile'+id+'/Reading',{"headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }})
+        .then(function(response){
+            setImage(response.data)
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+    async function getwanttoreadImageFromAPI1(){
+        axiosinst.get('http://abe0e9fde816.ngrok.io/api/user-profile'+id+'/ToRead',{"headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }})
+        .then(function(response){
+            setImage(response.data)
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+    if(!redimage){
         return null
     }
     return(      
@@ -55,7 +86,7 @@ const Mybooks = ({navigation}) => {
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    data={image}
+                    data={readimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>
@@ -87,7 +118,7 @@ const Mybooks = ({navigation}) => {
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    data={image}
+                    data={wanttoreadimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8 }}>
@@ -119,7 +150,7 @@ const Mybooks = ({navigation}) => {
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    data={image}
+                    data={redimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>
