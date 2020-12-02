@@ -2,43 +2,75 @@ import React, { Component } from "react";
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
   TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Icon, Picker, Form } from "native-base";
+import axiosinst from '../api/axiosinst';
+import axios from 'axios';
+import Bookview from './Bookview'
 
 export default class PickerShow extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      selected: "key0"
+      selected: "ToRead"
     };
   }
-  onValueChange(value: string) {
+   onValueChange(value: string) {
     this.setState({
       selected: value
     });
   }
+  getValue(value : string ){
+    this.setState({
+      backvalue: value
+    });
+  }
+
   render() {
+
+    const addBookToMineHandler = (getValue)=>{
+      console.log(getValue);
+      console.log(getValue);
+      const payload={
+          "book_state": getValue,
+      }
+      const back= JSON.stringify(payload);
+      axios.post('http://9f44aaf6de1d.ngrok.io/bookdetail/'+'1',back,{"headers":{"content-type":"application/json",
+      "Authorization":''}})
+      .then(async function(response){
+        console.log(response.data)
+      })
+      .catch(function (error) {
+         console.log(error);
+      });
+    }
+      
     return (
+
       <Container >
         <Content>
           <Form>
-            <Picker
+            <Picker 
             style={{width: 270,
+              borderRadius:5,
               borderWidth:3,
               borderColor:'#1F7A8C',
               borderTopColor:'#1F7A8C' }}
               mode="dropdown"
               iosIcon={<Icon name="arrow-down" />}
               headerTitleStyle={{ color: "#fff" }}
-              selectedValue={this.state.selected}
+              selectedValue={this.state.selected , addBookToMineHandler(this.state.selected) }
               onValueChange={this.onValueChange.bind(this)}
             >
-              <Picker.Item label="میخواهم این کتاب را بخوانم" value="key0" />
-              <Picker.Item label="در حال خواندن" value="key1" />
-              <Picker.Item label="قبلا خوانده ام" value="key2" />
+              <Picker.Item label="میخواهم این کتاب را بخوانم" value="ToRead"  />
+              <Picker.Item label="در حال خواندن" value="Reading" />
+              <Picker.Item label="قبلا خوانده ام" value="Read" />
              
             </Picker>
           </Form>
         </Content>
       </Container>
+      
+      
     );
   }
 }

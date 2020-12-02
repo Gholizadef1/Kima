@@ -12,9 +12,6 @@ import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
 
-
-
-
 const Bookview = (prop) => {
 
   const [result , setResult] = useState(null);
@@ -32,6 +29,7 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+  
     return(
       <Container>
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:20}}/>
@@ -40,15 +38,18 @@ const Bookview = (prop) => {
                      width:200 , borderRadius:10}} />
 
                   <Text style={{marginTop:10 , fontWeight:'bold',
-                      fontSize:25 , marginRight:180 , marginLeft:5}}>{result.title}</Text>
+                      fontSize:25 }}>{result.title}</Text>
 
-                  <Text style={{marginRight:180 , marginLeft:5}}>{result.author}</Text>
+                  <Text style={{marginTop:5}}>{result.author}</Text>
 
-                     <PickerShow/> 
+                  <PickerShow /> 
 
-                  <Text style={{fontWeight:'bold' , fontSize:20}}>درباره کتاب</Text>
+                  <Text style={{fontWeight:'bold' , fontSize:20 ,right:125 , marginBottom:5}}>
+                    درباره کتاب :</Text>
                   <Content>
-                   <Text style={{marginTop:15 , marginHorizontal:15}}>{result.description}</Text>
+                    <Card>
+                    <Text style={{marginTop:15 , marginHorizontal:15}}>{result.description}</Text>
+                    </Card>
                   </Content>
             </Body>
       </Container>
