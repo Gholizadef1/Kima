@@ -18,7 +18,7 @@ const WantToRead = ({navigation}) => {
 
     function getImageFromAPI(){
 
-        axiosinst.get('http://dce20550f227.ngrok.io/bookdetail')
+        axiosinst.get('https://abe0e9fde816.ngrok.io/bookdetail')
 
         .then(function(response){
             setImage(response.data)
@@ -47,10 +47,9 @@ const WantToRead = ({navigation}) => {
       </Container>
             </View>
 
-             <ScrollView>
-                 <View style={{padding: 50 , marginRight: 50}}>
-                 </View>
-                 <View>
+             <ScrollView style={{marginTop:100}}>
+                 
+                 <View >
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
                  marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
                     <FlatList

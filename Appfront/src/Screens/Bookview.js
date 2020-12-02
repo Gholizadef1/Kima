@@ -11,6 +11,7 @@ import axiosinst from '../api/axiosinst'
 import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
+import { StatusBar } from 'expo-status-bar';
 
 const Bookview = (prop) => {
 
@@ -52,6 +53,7 @@ const Bookview = (prop) => {
                     </Card>
                   </Content>
             </Body>
+            <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
 };

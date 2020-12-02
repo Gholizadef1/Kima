@@ -1,4 +1,3 @@
-
 import React,{useContext, useEffect, useState} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEditor} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
@@ -36,7 +35,7 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://dce20550f227.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://abe0e9fde816.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -74,6 +73,7 @@ import Profilenavigation from './Profilenavigation';
       console.log('*****')
             console.log(`http://abe0e9fde816.ngrok.io${response.data.profile_photo}`)
             setpicture(`http://abe0e9fde816.ngrok.io${response.data.profile_photo}`)
+            console.log(picture);
           
        console.log(response.data.profile_photo)
       //  setimage(require(response.data.profile_photo))
@@ -89,7 +89,7 @@ import Profilenavigation from './Profilenavigation';
     }
     }
  
-    const a=0;
+    let a=0;
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
           photoresponse();
@@ -99,7 +99,7 @@ import Profilenavigation from './Profilenavigation';
         });
     
        
-      }, [Profilenavigation,[]]);
+      }, [Profilenavigation,a]);
      
 
       
@@ -143,15 +143,15 @@ import Profilenavigation from './Profilenavigation';
          <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginRight:20,color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:570,width:80,height:3,position:'absolute'}}
+         style={{marginTop:600,width:80,height:2,position:'absolute'}}
          ></Image>
           <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:670,width:80,height:3,position:'absolute'}}
+         style={{marginTop:700,width:80,height:2,position:'absolute'}}
          ></Image>
            <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:770,width:80,height:3,position:'absolute'}}
+         style={{marginTop:800,width:80,height:2,position:'absolute'}}
          ></Image>
          
 
