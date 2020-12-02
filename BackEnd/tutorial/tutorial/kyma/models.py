@@ -22,7 +22,7 @@ class book(models.Model):
     publisher = models.TextField(blank=True,null=True)
 
     #rating
-    avgrating = models.IntegerField(blank=True, null=True)
+    avgrating = models.FloatField(blank=True, null=True)
 
     #rating count
     ratecount = models.IntegerField(blank=True, null=True)

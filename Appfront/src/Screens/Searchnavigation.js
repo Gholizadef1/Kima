@@ -11,6 +11,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from '@react-navigation/stack';
 import Bookresult from './Bookresult';
 import Search from './Search';
+import Bookview from './Bookview'
 
 // import TabScreen from './TabScreen';
  import Home from './Home';
@@ -22,7 +23,7 @@ const Searchnavigation=()=>{
     
     <SNavigation.Navigator initialRouteName={'Search'}>
       <SNavigation.Screen name='Search' component={Search} options={{headerShown: false}} ></SNavigation.Screen>
-      <SNavigation.Screen name="Bookresult"   component={Bookresult} options={{headerShown: true}}></SNavigation.Screen>
+      <SNavigation.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></SNavigation.Screen>
 
     </SNavigation.Navigator>
   
