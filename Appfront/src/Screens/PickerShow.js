@@ -43,7 +43,7 @@ export default class PickerShow extends Component {
       }
       const back= JSON.stringify(payload);
       // const id=await AsyncStorage.getItem('id');
-      axios.post('http://abe0e9fde816.ngrok.io/bookdetail/'+this.props.bookid,back,{
+      axios.post('http://dce20550f227.ngrok.io/'+this.props.bookid,back,{
         "headers":{"content-type":"application/json",
         "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
                 }

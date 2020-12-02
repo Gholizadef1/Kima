@@ -22,6 +22,7 @@ import App from '../../App';
 import Profile from './Profile';
 import Editprofile from './Editprofile';
 import Profilenavigation from './Profilenavigation';
+import MybooksNavigation from './MybooksNavigation';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -53,7 +54,7 @@ const TabSreen = () => {
                 <AntDesign name="home" size={size} color={color}  />
               ),
               }}/>
-               <Tab.Screen name="کتاب های من" component={Mybooks} options={{tabBarIcon: ({ color, size }) => (
+               <Tab.Screen name="کتاب های من" component={MybooksNavigation} options={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="book" size={size} color={color} />
               ),
             }}/>
