@@ -6,7 +6,7 @@ import {FaRegSmileBeam} from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-
+       
 import Scroll from "./Scroll";
 //import Avatar from './Avatar';
 import Cookies from 'js-cookie';
@@ -36,6 +36,12 @@ function ProFile (props){
        newPass2 : "",
        backError : ""
     })
+    const [bookNumbers,setBookNumbers]=useState({
+        toRead : 1,
+        reading : 2,
+        read: 3
+    })
+
     //console.log(user.token);
 
     useEffect(() => {
@@ -76,27 +82,45 @@ function ProFile (props){
             backError : ""
         })); 
         const payload={
-            "email":user.email,
-            "userName":user.userName,
+              // "email":user.email,
+              "username":user.userName
         }
         const back= JSON.stringify(payload)
-        axios.put('http://127.0.0.1:8000/api/update-profile/',back,{"headers":{"content-type":"application/json" }})
-            .then(function (response) {
+        axios.put('http://127.0.0.1:8000/api/update-profile/',
+        back,{
+            headers:{
+
+           "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
+                .then(function (response) {
                 console.log(response);
                 if(response.status === 200){
                     console.log(response.status);
+                    setUser(prevState => ({
+                        ...prevState,
+                        backError : 'نام کاربری با موفقیت عوض شد'
+                    }))
 
                     
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                setUser(prevState => ({
+                    ...prevState,
+                    backError : "نام کاربری از قبل وجود دارد"
+                }));
             });
     }
 
     const handleChangePassClick = (e) => {
         e.preventDefault();
-        if(user.oldPass.length&&user.newPass.length&&user.newPass2.length){
+        setUser(prevState => ({
+            ...prevState,
+            backError : ""
+        })); 
+        if(user.oldPass.length&&user.newPass.length){
             const payload={
                 "old_password": user.oldPass,
                 "new_password":user.newPass,
@@ -215,14 +239,19 @@ const accent = teal[200]; // #e040fb
                                     <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
+
+                                    <h6 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                       {user.email}
+                                    </h6>
                                     
                                 </div>
 
                                 <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
-                                                                         width: 150,
-                                                                         height: 150,
+
+                                                                         width: 120,
+                                                                         height: 120,
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
@@ -235,16 +264,19 @@ const accent = teal[200]; // #e040fb
                                     <div className="col">
                                         <div className="d-flex justify-content-between text-right mt-md-2">
                                            <div>
-                                                <span className="heading text-muted">2</span>
+
+                                        <span className="heading text-muted">{bookNumbers.toRead}</span>
+
                                                
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading text-muted">1</span>
+
+                                                <span className="heading text-muted">{bookNumbers.reading}</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
                                             </div>
                                             <div>
-                                                <span className="heading text-muted">8</span>
+                                                <span className="heading text-muted">{bookNumbers.read}</span>
                                                 <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
                                                 {/* < FaRegSmileBeam/> */}
                                             </div>
@@ -273,6 +305,9 @@ const accent = teal[200]; // #e040fb
                                 <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
+
+                                            <p className="loginText my-1" style={{fontFamily:'Morvarid'}}>{user.backError}</p>
+
                                             <div class="my-1">
                                                 <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
                                                 <input type="text"

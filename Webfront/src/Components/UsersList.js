@@ -36,7 +36,9 @@ useEffect(() => {
     return ( 
       
 
+
       <div className="rowUserlist">
+
 
        
     <div class="brand1">نتایج</div> 
@@ -71,8 +73,6 @@ useEffect(() => {
     </div>
     
     
-  );
 
-}
-
+  )}
 

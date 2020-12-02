@@ -75,7 +75,6 @@ function Slide(props) {
     <div className="container">
 
       <div class="brand" style={{fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
-
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
