@@ -1,9 +1,12 @@
 
-.navbar-brand{
+       .header{
+        padding-left: 225px;
+        font-weight: bolder;
+       font-size: 20px;
 
-    font-size: 500px;
-    
-    }
+        }
+        
+
     .cat1:hover{
     box-shadow: 0px 1px 30px 0px rgb(116, 116, 225) !important; 
     }
@@ -16,37 +19,6 @@
     margin-left: 140px;
     margin-bottom: 20px;
 
-    }
-    
-    .navbar {
-        background-color:#1f7a8c;
-        top:-1px;
-        max-height: 80px;
-
-    }
-    
-    .input{
-        width: 400px;
-        height: 40px;
-       margin-left: -190px;
-       margin-top:4px;
-   
-    }
-  
-.nav-item1{
-    padding-right: 40px;
-    padding-left: 40px;
-    padding-bottom: 5px;
-}
-    /* .form-control{
-        padding-left: 420px;
-
-    } */
-    .name{
-        
-        color: black;
-    
-        
     }
     .squere1{
         margin-left: -12px;
@@ -63,6 +35,7 @@
         font-weight: bold;
        text-align: center;
        margin-left: -20px;
+       padding-top: 10px;
     }
     .card-title4{
         
@@ -71,40 +44,37 @@
         text-align: center;
         margin-left: -20px;
     }
-    .nav-link{
-        padding-top: 5px;
-        width: 10px;
-        font-size: 20px;
-        font-weight: bold;
-        color: black;
-    }
     @media (max-width :420px) 
     {
-        .searchbar{
-            display:none;
-        }.nav-item{
-            display: none;
+        .modal{
+            width: 300px;
+           margin: 35px;
         }
+        .header{
+            padding-left: 105px;
+            font-weight: bolder;
+           font-size: 15px;
+        }
+        .cat1{
+            padding-top: 10px;
+            height: 200px;
+            opacity: 1;
+            width: 150px;
+           padding-bottom: 200px;
+            margin-left: 40px;
+            margin-bottom: 20px;
+        
+            }
+            .squere1{
+                margin-left: -15px;
+              margin-top: -5px;
+                width: 140px;
+                height: 140px;
+                padding-top:6px;
+                padding-left:5px;
+                padding-right:5px;
+            }
+            
 
       }
     
-    @media (max-width :768px) 
-    {
-        .searchbar{
-            display:none;
-        }
-        .nav-link{
-            width: 30px;
-        }
-      }
-      @media (max-width :800px) 
-      {
-          .searchbar{
-              display:none;
-          }
-          .nav-link{
-            width: 30px;
-        }
-        }
-      
-      
