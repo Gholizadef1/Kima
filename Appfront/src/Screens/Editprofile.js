@@ -61,13 +61,13 @@ const EditProfile = () => {
     const id=await AsyncStorage.getItem('id');
     // console.log(id)
     try{
-    const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
         
     
   //  console.log(response)
   console.log('*****')
-        console.log(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
       
    console.log(response.data.profile_photo)
   //  setimage(require(response.data.profile_photo))
@@ -110,7 +110,7 @@ useEffect(()=>{photoresponse(),[]})
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-          const response=await axiosinst.put('http://00853ef3a4c0.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://4780edc5f3be.ngrok.io/api/update-profile/',formdata,{
             headers:{
               "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -193,7 +193,7 @@ useEffect(()=>{photoresponse(),[]})
       const id=await AsyncStorage.getItem('id');
       // console.log(id)
       try{
-      const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
           
       if(response.data.profile_photo!="/media/default.png"){
         // setimage(response.data.profile_photo)
@@ -287,7 +287,7 @@ useEffect(()=>{photoresponse(),[]})
         console.log('2222')
        
 
-const[pic,setpic]=useState('http://00853ef3a4c0.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
+const[pic,setpic]=useState('http://4780edc5f3be.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
       
         <View style={styles.container}>
@@ -313,13 +313,19 @@ const[pic,setpic]=useState('http://00853ef3a4c0.ngrok.io/media/profile_photos/te
         <TouchableOpacity style={{}}
          onPress={async()=>await pickfromgallery()}>
         
-        <ImageBackground borderRadius={100}
+        {picture!=null?<ImageBackground borderRadius={100}
         source={{uri:picture}}
         style={{height:150,width:150,borderRadius:100}}
         
         >
 
-        </ImageBackground>
+        </ImageBackground>:<ImageBackground borderRadius={100}
+        source={require('../../assets/avatar.png')}
+        style={{height:150,width:150,borderRadius:100}}
+        
+        >
+
+        </ImageBackground> }
         </TouchableOpacity>
         </View>
 
@@ -339,7 +345,7 @@ const[pic,setpic]=useState('http://00853ef3a4c0.ngrok.io/media/profile_photos/te
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://47fa53e7c300.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://4780edc5f3be.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -444,7 +450,7 @@ const[pic,setpic]=useState('http://00853ef3a4c0.ngrok.io/media/profile_photos/te
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('http://47fa53e7c300.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('http://4780edc5f3be.ngrok.io/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
@@ -670,4 +676,5 @@ const styles = StyleSheet.create({
 //     // fontWeight:'100'
 //   },
   });
+  // React.memo(EditProfile);
   export default EditProfile;

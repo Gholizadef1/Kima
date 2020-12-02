@@ -24,7 +24,7 @@ import Profilenavigation from './Profilenavigation';
 
 
 
-const Profile = ({navigation}) => {
+ const Profile = ({navigation}) => {
 
     const val = useContext(AuthContext);  
     const [name,setname]=useState(null);
@@ -36,7 +36,7 @@ const Profile = ({navigation}) => {
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -67,13 +67,13 @@ const Profile = ({navigation}) => {
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://00853ef3a4c0.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://00853ef3a4c0.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
           
        console.log(response.data.profile_photo)
       //  setimage(require(response.data.profile_photo))
@@ -114,10 +114,13 @@ const Profile = ({navigation}) => {
          source={require('../../assets/backprof4.jpeg')}
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
-      
-        <Avatar.Image style={styles.avatar} size={100}
+        
+        {picture!=null? <Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
-        ></Avatar.Image>
+        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
+        source={require('../../assets/avatar.png')}
+        ></Avatar.Image>}
+
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     

@@ -69,11 +69,11 @@ const logschema=yup.object({
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-         axios.post('http://c1c76a73bf1c.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axios.post('http://4780edc5f3be.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           console.log(response.data.userid)
-          // console.log(response)
-          // console.log(response.data.token)
+           console.log(response)
+           console.log(response.data.token)
           await AsyncStorage.setItem('token',response.data.token)
           await AsyncStorage.setItem('id',response.data.userid.toString())
           // console.log(response)
