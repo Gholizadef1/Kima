@@ -30,10 +30,12 @@ import Loadingscreen from './src/Screens/Loadingscreen';
 //   )
 // }
 
+
 // const SwitchNavigaor=()=>{
 //   return(
 //     <NavigationContainer>
           
+
 
 
 //     </NavigationContainer>

@@ -87,12 +87,14 @@ const signschema=yup.object({
         //    console.log(errors)
         //  }
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
+
         axios.post('http://4780edc5f3be.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           // AsyncStorage.setItem('token',response.data.token)
           
           // await AsyncStorage.setItem('token',response.data.token)
           // val.changelogged(response.data.token)
+
           // console.log(response);
           // console.log(response.data.email);
           // console.log(response.data);

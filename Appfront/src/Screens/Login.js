@@ -69,6 +69,7 @@ const logschema=yup.object({
           password:values.Password,
         }
          const backk=JSON.stringify(back);
+
          axios.post('http://4780edc5f3be.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           console.log(response.data.userid)
@@ -80,6 +81,7 @@ const logschema=yup.object({
           // console.log(response.status);
           val.changelogged(true);
           // pro.navigation.navigate('mainFlow');
+
           console.log('Hiiiiiiii')
           console.log('.....');
          
