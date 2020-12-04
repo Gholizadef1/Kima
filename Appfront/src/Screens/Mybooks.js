@@ -1,16 +1,76 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View , Image , ImageBackground , ScrollView , 
+    TouchableOpacity , FlatList , TextInput } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+const Mybooks = ({navigation}) => {
 
-const Mybooks = () => {
-    return(
-        <View style={styles.container}>
-            <Text>
-                This is My books
-            </Text>
-        </View>
+    return (
+      <Container style={{marginTop:35}}>
+        <Header style={{backgroundColor:'#1F7A8C' ,marginTop:0}} />
+        <Content>
+            <Text style={{marginRight:150,marginTop:50,marginBottom:20}} >دسته بندی ها</Text>
+          
+            <View
+                    style={{
+                      top:0,
+                      width:240,
+                      right:0,
+                      left:90,
+                      borderBottomColor: 'black',
+                      borderBottomWidth: 1,
+                      fontWeight:'bold'
+                    }}
+                    />
+          <List  style={{marginTop:'15%'}}>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>می خواهم این کتاب را بخوانم</Text>
+                  </Body>
+                  <Right>
+                    <Button transparent onPress={() => navigation.navigate('ShowToRead')}>
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>در حال خواندن </Text>
+                  </Body>
+                  <Right>
+                    <Button transparent onPress={() => navigation.navigate('ShowReading')}>
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3j6eTFWS7e-4PN3rJxCX2ZJ7a86ZwAWVV0g&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>قبلا خوانده ام </Text>
+                  </Body>
+                  <Right>
+                    <Button transparent onPress={()=> navigation.navigate('ShowRead')}>
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+            
+          </List>
+        </Content>
+        <StatusBar backgroundColor='#BFDBF7' style='light' />
+      </Container>
     );
-}
 
+}
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -18,5 +78,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
-  export default Mybooks;
+    textShow:{
+        
+        right:10,
+        left:130,
+        fontSize:20,
+        fontWeight:'bold',
+        
+    }
+    });
+    export default Mybooks;

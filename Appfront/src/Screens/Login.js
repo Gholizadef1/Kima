@@ -7,7 +7,6 @@ import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity,Alert } 
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { Feather } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
-import * as Animatable from 'react-native-animatable';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
 // import axios from 'axios';
@@ -18,16 +17,11 @@ import Axios from 'axios';
 // import { Context } from '../context/AuthContext';   
 import axiosinst from '../api/axiosinst';
 import axios from 'axios';
-import AuthContext,{AuthProvider} from '../context/AuthContext';
+import AuthContext,{AuthProvider} from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
-
-
-
 const logschema=yup.object({
-
   Email:yup.string()
   .required()
   .min(8)
@@ -54,7 +48,6 @@ const logschema=yup.object({
      
      <View>
       <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
-
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Email:'',Password:''}}
@@ -70,7 +63,7 @@ const logschema=yup.object({
         }
          const backk=JSON.stringify(back);
 
-         axios.post('http://4780edc5f3be.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axios.post('http://7aec6b76c62d.ngrok.io/login/',backk,{"headers":{"content-type":"application/json",}})
         .then(async function(response){
           console.log(response.data.userid)
            console.log(response)
@@ -100,45 +93,22 @@ const logschema=yup.object({
         console.log(error.status);
          
         })
-        // axios.post('http://127.0.0.1:8000/',{values});
-      // .then(res => {
-      //   console.log(res);
-      //   console.log(res.data);
-      // })
-        //  pro.navigation.navigate('mainFlow');
-        
-        //  actions.resetForm();
          console.log(values);
-
-
       }}
      >
      {(props)=>(
-
     
      <View style={{alignItems:'center', marginTop:120}}>
-
        <Item style={styles.input}>
-
          <Input autoCapitalize='none' autoCorrect={false} style={styles.Input} 
          onChangeText={props.handleChange('Email')}
           value={props.values.Email}
-          onBlur={props.handleBlur('Email')}
-        
-
-       
-         placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
-         
+          onBlur={props.handleBlur('Email')}       
+          placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
          <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
-       </Item>
-       
-      
+       </Item>      
        <Text style={{fontSize:9, color:'red'}}>{props.touched.Email&&props.errors.Email}</Text>
-       
-       
-
-
        <Item style={styles.input}>
          <Input name='passs' style={styles.Input} autoCapitalize='none' autoCorrect={false}
           secureTextEntry
@@ -163,9 +133,7 @@ const logschema=yup.object({
        
         <TouchableOpacity
         
-         onPress={() =>{pro.navigation.navigate('Sign')}}
-
-         
+         onPress={() =>{pro.navigation.navigate('Sign')}} 
          >
          <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'300',width:140,marginTop:15,marginLeft:235,position:'absolute'}}>هنوز ثبت نام نکرده اید؟</Text>
          <Text style={{color:'#1F7A8C', fontSize:14,fontWeight:'bold',marginTop:15,marginLeft:205}}>ثبت نام</Text>
