@@ -1,4 +1,3 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
@@ -9,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axiosinst from '../api/axiosinst';
 
+
+
 const WantToRead = ({navigation}) => { 
 
     const [wanttoreadimage,setwanttoreadImage] = useState([])
@@ -16,12 +17,10 @@ const WantToRead = ({navigation}) => {
     useEffect(() =>{
         getwanttoreadImageFromAPI1()
         },[])
-
-
+       
 
         async function getwanttoreadImageFromAPI1(){
-
-            const id= await AsyncStorage.getItem('id');
+            const id=await AsyncStorage.getItem('id');
             axiosinst.get('http://7aec6b76c62d.ngrok.io/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})

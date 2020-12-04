@@ -70,6 +70,8 @@ const EditProfile = () => {
         setpicture(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
       
    console.log(response.data.profile_photo)
+   console.log(!(picture==="http://3097034fddc8.ngrok.io/media/default.jpg"))
+   console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
   
 }
@@ -193,7 +195,7 @@ useEffect(()=>{photoresponse(),[]})
       const id=await AsyncStorage.getItem('id');
       // console.log(id)
       try{
-      const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
+      const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
           
       if(response.data.profile_photo!="/media/default.png"){
         // setimage(response.data.profile_photo)
@@ -287,7 +289,7 @@ useEffect(()=>{photoresponse(),[]})
         console.log('2222')
        
 
-const[pic,setpic]=useState('http://4780edc5f3be.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
+// const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
       
         <View style={styles.container}>
@@ -313,7 +315,7 @@ const[pic,setpic]=useState('http://4780edc5f3be.ngrok.io/media/profile_photos/te
         <TouchableOpacity style={{}}
          onPress={async()=>await pickfromgallery()}>
         
-        {picture!=null?<ImageBackground borderRadius={100}
+        {!(picture==="http://3097034fddc8.ngrok.io/media/default.jpg")?<ImageBackground borderRadius={100}
         source={{uri:picture}}
         style={{height:150,width:150,borderRadius:100}}
         
@@ -345,7 +347,7 @@ const[pic,setpic]=useState('http://4780edc5f3be.ngrok.io/media/profile_photos/te
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://4780edc5f3be.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://3097034fddc8.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -450,7 +452,7 @@ const[pic,setpic]=useState('http://4780edc5f3be.ngrok.io/media/profile_photos/te
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('http://4780edc5f3be.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('http://3097034fddc8.ngrok.io/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
@@ -671,8 +673,6 @@ const styles = StyleSheet.create({
 //      marginTop:5,
 //      marginLeft:5,
 //      marginRight:5
-
-     
 //     // fontWeight:'100'
 //   },
   });

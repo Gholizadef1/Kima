@@ -3,26 +3,27 @@ import { StyleSheet, View , Image , ImageBackground , ScrollView ,
     TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { StatusBar } from 'expo-status-bar';
 const Mybooks = ({navigation}) => {
 
     return (
-      <Container>
-        <Header style={{backgroundColor:'#1F7A8C' }} />
+      <Container style={{marginTop:35}}>
+        <Header style={{backgroundColor:'#1F7A8C' ,marginTop:0}} />
         <Content>
-            <Text style={styles.textShow}>دسته بندی ها</Text>
+            <Text style={{marginRight:150,marginTop:50,marginBottom:20}} >دسته بندی ها</Text>
+          
             <View
                     style={{
-                      top:40,
+                      top:0,
                       width:240,
-                      right:50,
-                      left:60,
+                      right:0,
+                      left:90,
                       borderBottomColor: 'black',
                       borderBottomWidth: 1,
                       fontWeight:'bold'
                     }}
                     />
-          <List  style={{marginTop:'35%'}}>
+          <List  style={{marginTop:'15%'}}>
                 <ListItem thumbnail>
                   <Left>
                     <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
@@ -65,6 +66,7 @@ const Mybooks = ({navigation}) => {
             
           </List>
         </Content>
+        <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
 
@@ -77,11 +79,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     textShow:{
-        top:30,
+        
         right:10,
         left:130,
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        
     }
     });
     export default Mybooks;

@@ -1,4 +1,3 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
@@ -11,6 +10,7 @@ import axiosinst from '../api/axiosinst'
 import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
+import { StatusBar } from 'expo-status-bar';
 
 const Bookview = (prop) => {
 
@@ -32,26 +32,28 @@ const Bookview = (prop) => {
   
     return(
       <Container>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:20}}/>
-            <Body>
-                  <Image source={{uri : result.imgurl}} style={{marginTop:5, height:220 ,
-                     width:200 , borderRadius:10}} />
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:35}}/>
+            <Body style={{marginTop:35}}>
+                  <Image source={{uri : result.imgurl}} style={{marginTop:5, height:180 ,
+                     width:120 , borderRadius:10}} />
 
                   <Text style={{marginTop:10 , fontWeight:'bold',
                       fontSize:25 }}>{result.title}</Text>
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
 
-                  <PickerShow bookid={id} /> 
-
-                  <Text style={{fontWeight:'bold' , fontSize:20 ,right:125 , marginBottom:5}}>
+                  <PickerShow style={{}} bookid={id} /> 
+                  <Text style={{fontWeight:'bold' , fontSize:20 ,marginLeft:240 , marginBottom:5}}>
                     درباره کتاب :</Text>
-                  <Content>
-                    <Card>
+                  <Content style={{}}>
+                    <Card style={{}}>
+                    
+                 
                     <Text style={{marginTop:15 , marginHorizontal:15}}>{result.description}</Text>
                     </Card>
                   </Content>
             </Body>
+            <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
 };

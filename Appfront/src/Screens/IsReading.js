@@ -1,6 +1,7 @@
 
+
 import React , {useState , useEffect} from 'react';
-import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
+import { StyleSheet, Text, View , Image , ImageBackground , ScrollView ,
 TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
@@ -9,7 +10,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axiosinst from '../api/axiosinst';
 
-const IsReading = ({navigation}) => { 
+const IsReading = ({navigation}) => {
+
+const [readimage,setreadImage] = useState([])
 
     const [readimage,setreadImage] = useState([])
 
@@ -89,29 +92,29 @@ const IsReading = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    ImageText: {
-        position:'absolute',
-        fontSize:20,
-        marginRight:20,
-        color:'#1F7A8C' ,
-        top:12 ,
-        fontWeight: 'bold',
-        left: 130
-    },
-    author: {
-        left:10,
-        top:-20,
-        fontSize:15
-    },
-    frame : {
-        color: '#1F7A8C'
-    }
-  });
+container: {
+flex: 1,
+backgroundColor: '#fff',
+alignItems: 'center',
+justifyContent: 'center',
+},
+ImageText: {
+position:'absolute',
+fontSize:20,
+marginRight:20,
+color:'#1F7A8C' ,
+top:12 ,
+fontWeight: 'bold',
+left: 130
+},
+author: {
+left:10,
+top:-20,
+fontSize:15
+},
+frame : {
+color: '#1F7A8C'
+}
+});
 
 export default IsReading;

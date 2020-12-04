@@ -97,7 +97,10 @@ const styles = StyleSheet.create({
         top:2 ,
         fontWeight: 'bold',
         right:20,
-        left: 20
+        left: 20,
+        height:40
+
+    
     },
     frame : {
         color: '#1F7A8C'
