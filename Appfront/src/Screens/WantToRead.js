@@ -1,40 +1,41 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axiosinst from '../api/axiosinst';
 
+
+
 const WantToRead = ({navigation}) => { 
 
-    const [image,setImage] = useState([])
+    const [wanttoreadimage,setwanttoreadImage] = useState([])
 
     useEffect(() =>{
-        getImageFromAPI1()
-    },[])
+        getwanttoreadImageFromAPI1()
+        },[])
+       
 
-    function getImageFromAPI1(){
-
-<<<<<<< HEAD
-        axiosinst.get('https://abe0e9fde816.ngrok.io/bookdetail')
-=======
-        axiosinst.get('http://eeb3e397cc7a.ngrok.io/bookdetail')
->>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
-
-        .then(function(response){
-            setImage(response.data)
-            // console.log(response)
-        })
-        .catch(function(error){
+        async function getwanttoreadImageFromAPI1(){
+            const id=await AsyncStorage.getItem('id');
+            axiosinst.get('http://08ee0a3d4783.ngrok.io/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+            }})
+            .then(function(response){
+            setwanttoreadImage(response.data)
+            console.log(response)
+            })
+            .catch(function(error){
             console.log(error)
-        })
-    }
-    if(!image){
-        return null
-    }
+            })
+            }
+            if(!wanttoreadimage){
+            return null
+            }
+
     return(      
         <Container style={styles.frame}>
         <View>
@@ -52,17 +53,12 @@ const WantToRead = ({navigation}) => {
             </View>
 
              <ScrollView style={{marginTop:100}}>
-<<<<<<< HEAD
-                 
-                 <View >
-=======
                  <View>
->>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
                  marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
-                    data={image}
+                    data={wanttoreadimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>

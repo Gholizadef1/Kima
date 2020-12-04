@@ -11,7 +11,7 @@ const Mybooks = ({navigation}) => {
         <Header style={{backgroundColor:'#1F7A8C' ,marginTop:0}} />
         <Content>
             <Text style={{marginRight:150,marginTop:50,marginBottom:20}} >دسته بندی ها</Text>
-         
+          
             <View
                     style={{
                       top:0,

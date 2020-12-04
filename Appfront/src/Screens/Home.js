@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
 
     function getImageFromAPI(){
 
-        axiosinst.get('http://eeb3e397cc7a.ngrok.io/bookdetail')
+        axiosinst.get('http://08ee0a3d4783.ngrok.io/bookdetail')
 
         .then(function(response){
             setImage(response.data)
@@ -97,7 +97,10 @@ const styles = StyleSheet.create({
         top:2 ,
         fontWeight: 'bold',
         right:20,
-        left: 20
+        left: 20,
+        height:40
+
+    
     },
     frame : {
         color: '#1F7A8C'

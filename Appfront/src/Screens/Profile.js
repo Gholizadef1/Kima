@@ -35,11 +35,7 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-<<<<<<< HEAD
-        const response = await axiosinst.get("http://abe0e9fde816.ngrok.io/api/user-profile/"+id)
-=======
-        const response = await axiosinst.get("http://eeb3e397cc7a.ngrok.io/api/user-profile/"+id)
->>>>>>> 5a6eadbde45f8d53c240ebe6b84f14e91bb1825a
+        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -66,17 +62,17 @@ import Profilenavigation from './Profilenavigation';
     //    console.log('akdfsj;lskafd')
     // });
     const photoresponse=async ()=>{
-        console.log('**'+'\n'+'PHOTRESPONSE'+'\n'+'**')
+        console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://abe0e9fde816.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://abe0e9fde816.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://abe0e9fde816.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
             console.log(picture);
           
        console.log(response.data.profile_photo)
@@ -119,7 +115,7 @@ import Profilenavigation from './Profilenavigation';
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         
-        {picture!=null? <Avatar.Image style={styles.avatar} size={100}
+        {!(picture==="http://3097034fddc8.ngrok.io/media/default.jpg")? <Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
