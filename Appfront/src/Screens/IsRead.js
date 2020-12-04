@@ -5,32 +5,39 @@ TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axiosinst from '../api/axiosinst';
 
 const IsRead = ({navigation}) => { 
 
-    const [image,setImage] = useState([])
-
+    const [redimage,setredImage] = useState([])
+    
     useEffect(() =>{
-        getImageFromAPI3()
+    getredImageFromAPI1()
     },[])
 
-    function getImageFromAPI3(){
 
-        axiosinst.get('http://eeb3e397cc7a.ngrok.io/bookdetail')
+    async function getredImageFromAPI1(){
 
-        .then(function(response){
-            setImage(response.data)
-            // console.log(response)
-        })
-        .catch(function(error){
-            console.log(error)
-        })
+    const id=await AsyncStorage.getItem('id');    
+    axiosinst.get('http://7aec6b76c62d.ngrok.io/api/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
+    "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+    }})
+    .then(function(response){
+    setredImage(response.data)
+    console.log(response)
+    })
+    .catch(function(error){
+    console.log(error)
+    })
     }
-    if(!image){
+    if(!redimage){
         return null
     }
+    
+    
+
     return(      
         <Container style={styles.frame}>
         <View>
@@ -53,7 +60,7 @@ const IsRead = ({navigation}) => {
                  marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>قبلا خوانده ام</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
-                    data={image}
+                    data={redimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>

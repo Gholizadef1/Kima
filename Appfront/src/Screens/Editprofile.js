@@ -61,13 +61,13 @@ const EditProfile = () => {
     const id=await AsyncStorage.getItem('id');
     // console.log(id)
     try{
-    const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://7aec6b76c62d.ngrok.io/api/user-profile/"+id)
         
     
   //  console.log(response)
   console.log('*****')
-        console.log(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
       
    console.log(response.data.profile_photo)
   //  setimage(require(response.data.profile_photo))
@@ -110,7 +110,7 @@ useEffect(()=>{photoresponse(),[]})
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-          const response=await axiosinst.put('http://4780edc5f3be.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://7aec6b76c62d.ngrok.io/api/update-profile/',formdata,{
             headers:{
               "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}

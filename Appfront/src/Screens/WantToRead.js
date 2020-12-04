@@ -5,32 +5,38 @@ TouchableOpacity , FlatList , TextInput} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axiosinst from '../api/axiosinst';
 
 const WantToRead = ({navigation}) => { 
 
-    const [image,setImage] = useState([])
+    const [wanttoreadimage,setwanttoreadImage] = useState([])
 
     useEffect(() =>{
-        getImageFromAPI1()
-    },[])
+        getwanttoreadImageFromAPI1()
+        },[])
 
-    function getImageFromAPI1(){
 
-        axiosinst.get('http://eeb3e397cc7a.ngrok.io/bookdetail')
 
-        .then(function(response){
-            setImage(response.data)
-            // console.log(response)
-        })
-        .catch(function(error){
+        async function getwanttoreadImageFromAPI1(){
+
+            const id= await AsyncStorage.getItem('id');
+            axiosinst.get('http://7aec6b76c62d.ngrok.io/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+            }})
+            .then(function(response){
+            setwanttoreadImage(response.data)
+            console.log(response)
+            })
+            .catch(function(error){
             console.log(error)
-        })
-    }
-    if(!image){
-        return null
-    }
+            })
+            }
+            if(!wanttoreadimage){
+            return null
+            }
+
     return(      
         <Container style={styles.frame}>
         <View>
@@ -53,7 +59,7 @@ const WantToRead = ({navigation}) => {
                  marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
-                    data={image}
+                    data={wanttoreadimage}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical: 15 , paddingLeft: 8}}>
