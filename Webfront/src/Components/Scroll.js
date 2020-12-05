@@ -13,20 +13,47 @@ import { get } from "js-cookie";
 
 function Slide(props) {
   console.log(props);
-  const [suggestions, setSuggestions] = useState([]);
-  //let match=useRouteMatch();
-  //console.log(useRouteMatch())
+  const [bookRead, setBookRead] = useState([]);
+  const [bookReading, setBookReading] = useState([]);
+  const [bookWantto, setBookWantto] = useState([]);
+ 
+    const apiURLRead = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Read`;
+    const apiURLReading = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Reading`;
+    const apiURLWantto = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/ToRead`;
+    useEffect(() => {
+      axios.get(apiURLRead,{
+        headers:{
+          "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
+        .then((data) => {
+          setBookRead(data.data);
+        });
+    }, []);
+
+    useEffect(() => {
+      axios.get(apiURLReading,{
+        headers:{
+          "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
+        .then((data) => {
+          setBookReading(data.data);
+        });
+    }, []);
+
+    useEffect(() => {
+      axios.get(apiURLWantto,{
+        headers:{
+          "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
+        .then((data) => {
+          setBookWantto(data.data);
+        });
+    }, []);
 
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
-      .then((res) => res.json())
-      .then((data) => {
-
-        setSuggestions(data);
-
-      });
-  }, []);
   const bookSelectedHandler = ( b ) => {
         console.log(b);
         props.history.push( '/book/' + b.id );
@@ -61,18 +88,14 @@ function Slide(props) {
   
   return (
     <div className="con col-xl-8 col-xl-8-gholi">
-    
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
+              <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+
+      {bookRead.length === 0 ? (
+        <div>چیزی اضافه نشده‌است</div>
       ) : (
        <div className = "slid">
-
-          <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
-
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookRead.map((current) => (
             <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
@@ -91,16 +114,14 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-    
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
+    <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
+      {bookReading.length === 0 ? (
+        <div>چیزی اضافه نشده‌است</div>
       ) : (
        <div className = "slid">
-           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> درحال خواندن</div> 
+
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookReading.map((current) => (
             <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
@@ -119,21 +140,17 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-     
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
+           <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
+
+      {bookWantto.length === 0 ? (
+          <div>چیزی اضافه نشده است</div>
       ) : (
        <div className = "slid">
-
-      <div className="brand1 text-right m-2" style={{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
-
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {bookWantto.map((current) => (
             
             <div className="out" key={current.id}>
-
+             {/* <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3"> */}
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 
                 <img
@@ -146,7 +163,7 @@ function Slide(props) {
                   <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
                    <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    </small>
-
+              {/* </div> */}
               </div>
             </div>
           ))}
