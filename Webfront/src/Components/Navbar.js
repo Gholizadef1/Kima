@@ -22,7 +22,7 @@ import Cookies from 'js-cookie';
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-   const [users,setUsers] = useState([]);
+   //const [users,setUsers] = useState([]);
  const[error,setError] = useState("");
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -36,7 +36,6 @@ const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${us
   
 });
 }
-
 
 useEffect(() => {
   searchUsers();

@@ -10,7 +10,13 @@ import {
 } from "react-router-dom";
 import "./Scroll.css";
 import { get } from "js-cookie";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles
+} from "@material-ui/core/styles";
 
+import Tooltip from '@material-ui/core/Tooltip';
 function Slide(props) {
   console.log(props);
   const [bookRead, setBookRead] = useState([]);
@@ -59,6 +65,19 @@ function Slide(props) {
         props.history.push( '/book/' + b.id );
      
   }
+  const BlueOnGreenTooltip = withStyles({
+    tooltip: {
+      color: "black",
+      fontFamily:"Morvarid",
+      fontSize:14,
+      backgroundColor: "lightblue",
+      width:120,
+      height:80,
+      textAlign:"center",
+      marginLeft:20,
+      paddingTop:23,
+    }
+  })(Tooltip);
 
   let settings = {
     infinite: false,
@@ -104,10 +123,15 @@ function Slide(props) {
                   height={56}
                   width={56}
                 />
-                <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   </small>
+                     {current.title.length >17 ?
+<BlueOnGreenTooltip title={current.title}>
+<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      </BlueOnGreenTooltip>
+      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      
+} 
+                   <h5 className="card-titl0"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   
               </div>
             </div>
           ))}
@@ -130,10 +154,15 @@ function Slide(props) {
                   height={56}
                   width={56}
                 />
-                <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   </small>
+                    {current.title.length >17 ?
+<BlueOnGreenTooltip title={current.title}>
+<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      </BlueOnGreenTooltip>
+      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      
+} 
+                   <h5 className="card-titl0"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                  
               </div>
             </div>
           ))}
@@ -159,10 +188,15 @@ function Slide(props) {
                   height={56}
                   width={56}
                 />
-                <small className= "title">
-                  <b className="card-titl0" style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.title}</b>
-                   <h5 className="card-titl1"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   </small>
+                 {current.title.length >17 ?
+<BlueOnGreenTooltip title={current.title}>
+<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      </BlueOnGreenTooltip>
+      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      
+} 
+                   <h5 className="card-titl0"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   
               {/* </div> */}
               </div>
             </div>
