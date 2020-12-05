@@ -1,10 +1,22 @@
-.navbar1{
+/* .navbar1{
     background-color:#1f7a8c;
     top:-1px;
     max-height: 60px;
     min-width: 160px;
     position: absolute;
 
+}
+
+.kima{
+    font-Size:35px;
+    font-Family: 'Roboto';
+    font-Weight:"bold";
+    color:"black"
+}
+.kicon{
+    padding:4px;
+    height:100px;
+    width:40px
 }
 .icon{
 padding-right: 100rem;
@@ -13,39 +25,52 @@ margin-top: 0.5rem;
 
 }
 .name3{
-    padding-right:20rem;
+    padding-right:10rem;
   
   color: black;
 
     font-weight: bold;
 }
 
+.inputNavbar1{
+    width: 400px;
+    height: 40px;
+   margin-left: -190px;
+   margin-top:4px;
+}
+
 @media (max-width :420px) 
 {
-    .name3{
-        display:none;
-    }.icon{
-        padding-left: 10px;
+    .inputNavbar1{
+        width: 200px;
+        height: 20px;
+       margin-left: -600px;
+       margin-top:4px;
     }
-
-  }
-
-@media (max-width :768px) 
+    
+    .kicon{
+        display: none;
+    }
+  
+}
+@media (max-width :779px) 
 {
-    .searchbar{
-        display:none;
+    .kicon{
+        display: none;
     }
-    .nav-link{
-        width: 30px;
+    .inputNavbar1{
+     
+            width: 200px;
+            height: 20px;
+           margin-right: -1000px;
+           margin-top:4px;
+       
     }
   }
   @media (max-width :800px) 
   {
-      .searchbar{
-          display:none;
-      }
-      .nav-link{
-        width: 30px;
+    .kicon{
+        display: none;
     }
-    }
-  
+    	}
+   */

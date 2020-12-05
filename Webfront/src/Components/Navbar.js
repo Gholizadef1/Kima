@@ -9,35 +9,48 @@ import{ useState, useEffect } from "react";
  import "./UsersList.css";
  import "./HelpingNavbar";
 import "./Navbar.css";
+import purple from '@material-ui/core/colors/purple';
+import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-import {MdGroup} from 'react-icons/md';
-import UserList from './UsersList';
+// import {MdGroup} from 'react-icons/md';
+// import UserList from './UsersList';
+import { Route,withRouter } from 'react-router-dom';
+import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-function NavBar (){
+function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-  const [users,setUsers] = useState([]);
- 
+  // const [users,setUsers] = useState([]);
+  const [error,setError] = useState("");
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
 
 const searchUsers = async () => {
 try {
+ setError(null);
 const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
- setSearch(res.data.results)
-  
-});
+   if(res.data.count == 0){
+     setError(' ): نتیجه‌ای یافت نشد');
+   }
+   else{
+    setSearch(res.data.results);
+      }
+ 
+}).catch ((err)=> {console.log(err)});
+ 
+
 if (search == [null]) {
 setSearch([]);
 } else {
 setSearch(result.data);
 }
 }
-catch (err) {}
+catch (err) {console.log(err)}
+
 };
 
 useEffect(() => {
@@ -47,69 +60,93 @@ useEffect(() => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-    return(   
+  const routeToProfile = ()=>{
+    props.history.push('/profile');
+  }
+  const accent= { backgroundColor: purple[500], color: '#000' }
 
-<Navbar className= "navbar">
+    return(   
+<Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar" style={{backgroundColor: teal[500], color: '#000'}}>
             <h1>  
-             <GiBookshelf style = {{padding:4, height:100,width:40}}/>
+             <GiBookshelf color="black"
+            //  style = {{padding:4, height:100,width:40}}
+             />
              </h1>
-             <b style = {{fontSize:35,fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}>کیما</b>     
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link class="nav-link" href="topics" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>عناوین</Nav.Link>
-      <Nav.Link class="nav-link" href="groups" style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}}>گروه‌ها</Nav.Link>
-      <Nav.Link class="nav-link" href="quize"style = {{padding:40,fontFamily: 'Roboto',fontSize:25,fontWeight:"bold",color:"black"}} >آزمونک</Nav.Link>
+             <b className=""
+            
+            style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
+             >کیما</b>     
+  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+  <Navbar.Collapse id="basic-navbar-nav ">
+    <Nav className="mr-auto pt-2">
+      <Nav.Link className="nav-link2 h4 ml-3" href="topics"
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >عناوین</Nav.Link>
+      <Nav.Link className="nav-link2 h4" href="groups"
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >گروه‌ها</Nav.Link>
+      <Nav.Link className="nav-link2 h4" href="quize"
+       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       >آزمونک</Nav.Link>
     </Nav> 
     <>
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ height: "100vh" }}
+      {/* <div
+        // className="d-flex align-items-center justify-content-center"
+        // style={{ height: "100vh" }}
       >
-    <Button variant="gray" onClick={handleShow}>
-    <GoSearch size="30" color="black"/>
-        </Button>
-      </div>
-      <input className="input"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} style={{position:"absolute",left:1000,top:18,textAlign:"right"}}/>
     
-      <Modal show={show} onHide={handleClose}>
+      </div> */}
+      <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      style={{fontFamily:'Morvarid'}}
+      // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
+      />
+    <Button variant="gray" onClick={handleShow}>
+    <GoSearch size="30" color="black" />
+        </Button>
+      <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
+           <div className="header"style={{fontFamily:'Morvarid'}}>
+          نتایج
+          </div>
         </Modal.Header>
         <Modal.Body>
+    <p style={{textAlign:"center",fontFamily:'Morvarid'}}>{error}</p>
        {search.map((item) => (
      <div className="out1" key={item.id}>
        <div className="card cat1">
          <img
-           className="squere1" 
-           
+           className="squere1"
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3">{item.title}</h5>
-         <h5 className="card-title4">{item.author}</h5>
+         <h5 className="card-title3" style={{fontFamily:'Morvarid'}}>{item.title}</h5>
+         <h5 className="card-title4" style={{fontFamily:'Morvarid'}}>{item.author}</h5>
           </small>
           </div>
        </div>
        ))}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <Button variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
             بستن
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   
-       <a class="nav-item1" href="profile" >
-       <small className="name" size="50">
-      نام کاربری
+       <a class="nav-item1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
+       <small className="name" size="50" style={{padding:10,fontSize:20}}>
+      {Cookies.get('userName')}
     </small>
 
-    <CgProfile size="35" vertical-align='center' style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}/> 
+    <CgProfile size="40" vertical-align='center' color="black"
+    //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
+     /> 
      </a>
   </Navbar.Collapse>
 </Navbar>
+
     );
     }
 
-export default NavBar;
+    export default withRouter( NavBar);

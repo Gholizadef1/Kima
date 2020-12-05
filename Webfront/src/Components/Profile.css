@@ -1,8 +1,54 @@
-.btn-default
+
+/* .btn-default
  
 {
-
- margin: 100px;
+ margin-top: 100px;
 background-color: #9dc3e9;
-
 }
+.head{
+    margin-top: 400px;
+}
+
+.card-profile{
+  margin-top: 80px;
+  height: 500px;
+ left: 800px;
+}
+.card-body{
+    margin-top: -350px;
+    padding-right: -100px;
+    
+} */
+
+.rounded-circle{
+   margin-top: -10px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   
+   
+}
+.cardp{
+   left: 110px;
+}
+
+@media (max-width :420px) 
+{
+    .cardp{
+        left: -7px;
+    } 
+
+  }
+  @media (max-width :780px) 
+{
+    .cardp{
+        left: -7px;
+    } 
+
+  }
+  @media (max-width :800px) 
+{
+    .cardp{
+        left: -7px;
+    } 
+
+  }
