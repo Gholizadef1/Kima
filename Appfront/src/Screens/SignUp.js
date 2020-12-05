@@ -12,7 +12,7 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import { log } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AuthContext,{AuthProvider} from '../context/AuthContext';
+import AuthContext,{AuthProvider} from '../context/Authcontext';
 // import AuthContext,{AuthProvider} from '../context/AuthContext';
 // import { Context as Authcontext } from '../context/AuthContext';  
 
@@ -87,14 +87,16 @@ const signschema=yup.object({
         //    console.log(errors)
         //  }
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
-
-        axios.post('http://4780edc5f3be.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+<<<<<<< HEAD
+        axios.post('http://7aec6b76c62d.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+=======
+        axios.post('http://3097034fddc8.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+>>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
         .then(async function(response){
           // AsyncStorage.setItem('token',response.data.token)
           
           // await AsyncStorage.setItem('token',response.data.token)
           // val.changelogged(response.data.token)
-
           // console.log(response);
           // console.log(response.data.email);
           // console.log(response.data);
@@ -137,7 +139,7 @@ const signschema=yup.object({
             }
             }
              else{
-            //  AsyncStorage.setItem('token',response.data.token)
+            AsyncStorage.setItem('token',response.data.token)
             console.log(response)
              console.log('inja')
             console.log(back.email);

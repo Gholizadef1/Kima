@@ -1,4 +1,3 @@
-
 import React,{useContext, useEffect, useState} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEditor} from 'react-native';
 import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
@@ -14,7 +13,7 @@ import { Avatar } from 'react-native-paper';
 // import StackScreen from './StackScreen';
 // import { State } from 'react-native-gesture-handler';
 import App from '../../App';
-import AuthContext,{AuthProvider} from '../context/AuthContext';
+import AuthContext,{AuthProvider} from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
@@ -36,7 +35,11 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
+<<<<<<< HEAD
+        const response = await axiosinst.get("http://4eccf11c17a5.ngrok.io/api/user-profile/"+id)
+=======
+        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
+>>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
             
         
         // console.log(response)
@@ -63,17 +66,27 @@ import Profilenavigation from './Profilenavigation';
     //    console.log('akdfsj;lskafd')
     // });
     const photoresponse=async ()=>{
-        console.log('**'+'\n'+'PHOTRESPONSE'+'\n'+'**')
+        console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://4780edc5f3be.ngrok.io/api/user-profile/"+id)
+<<<<<<< HEAD
+        const response = await axiosinst.get("http://7aec6b76c62d.ngrok.io/api/user-profile/"+id)
+=======
+        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
+>>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://4780edc5f3be.ngrok.io${response.data.profile_photo}`)
+<<<<<<< HEAD
+            console.log(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
+=======
+            console.log(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
+            console.log(picture);
+>>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
           
        console.log(response.data.profile_photo)
       //  setimage(require(response.data.profile_photo))
@@ -89,7 +102,7 @@ import Profilenavigation from './Profilenavigation';
     }
     }
  
-    const a=0;
+    let a=0;
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
           photoresponse();
@@ -99,7 +112,7 @@ import Profilenavigation from './Profilenavigation';
         });
     
        
-      }, [Profilenavigation,[]]);
+      }, [Profilenavigation,a]);
      
 
       
@@ -115,7 +128,7 @@ import Profilenavigation from './Profilenavigation';
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         
-        {picture!=null? <Avatar.Image style={styles.avatar} size={100}
+        {!(picture==="http://3097034fddc8.ngrok.io/media/default.jpg")? <Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
@@ -143,15 +156,15 @@ import Profilenavigation from './Profilenavigation';
          <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginRight:20,color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:570,width:80,height:3,position:'absolute'}}
+         style={{marginTop:600,width:80,height:2,position:'absolute'}}
          ></Image>
           <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:670,width:80,height:3,position:'absolute'}}
+         style={{marginTop:700,width:80,height:2,position:'absolute'}}
          ></Image>
            <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:770,width:80,height:3,position:'absolute'}}
+         style={{marginTop:800,width:80,height:2,position:'absolute'}}
          ></Image>
          
 

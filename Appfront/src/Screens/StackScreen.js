@@ -1,10 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground } from 'react-native';
-import {Container,Header,Title,Form,Item,Input,Button} from 'native-base';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import HomeScreen from './HomeScreen';
+import React , {useState , useEffect} from 'react';
 import Login from './Login';
 import SignUp from './SignUp';
 import { createAppContainer } from 'react-navigation';

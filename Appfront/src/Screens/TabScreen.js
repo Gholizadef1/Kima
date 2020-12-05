@@ -6,9 +6,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import Home from './Home'
@@ -25,6 +22,7 @@ import App from '../../App';
 import Profile from './Profile';
 import Editprofile from './Editprofile';
 import Profilenavigation from './Profilenavigation';
+import MybooksNavigation from './MybooksNavigation';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -56,7 +54,7 @@ const TabSreen = () => {
                 <AntDesign name="home" size={size} color={color}  />
               ),
               }}/>
-               <Tab.Screen name="کتاب های من" component={Mybooks} options={{tabBarIcon: ({ color, size }) => (
+               <Tab.Screen name="کتاب های من" component={MybooksNavigation} options={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="book" size={size} color={color} />
               ),
             }}/>
