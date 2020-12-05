@@ -4,13 +4,6 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, Actio
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Avatar } from 'react-native-paper';
-// import Login from './Login';
-// import { Context as AuthContext } from '../context/AuthContext'; 
-// import { Button } from 'native-base';
-// import TabScreen from './TabScreen'
-// import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-// import { NavigationContainer } from "@react-navigation/native";
-// import StackScreen from './StackScreen';
 // import { State } from 'react-native-gesture-handler';
 import App from '../../App';
 import AuthContext,{AuthProvider} from '../context/Authcontext';
@@ -27,6 +20,8 @@ import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useFocusEffect } from '@react-navigation/native';
+import { EvilIcons } from '@expo/vector-icons';
+
 
 
 
@@ -263,7 +258,7 @@ useFocusEffect(
         </View>
       )
     }
-         const bs = React.useRef(null)
+         const bs = React.createRef()
          const fall=new Animated.Value(1);
         console.log('2222')
        
@@ -279,20 +274,20 @@ useFocusEffect(
             initialSnap={1}
             callbackNode={fall}
             enabledGestureInteraction={true}
+            enabledContentTapInteraction={false}
             renderContent={renderInner}
-            renderHeader={renderHeader}
-         
-            
-
-                        
+            renderHeader={renderHeader}            
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
             backgroundColor={'white'}
         
        />
+       <Animated.View style={{margin: 20,
+        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+    }}></Animated.View>
         
         <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
         <TouchableOpacity style={{}}
-         onPress={async()=>await pickfromgallery()}>
+         onPress={async()=>await bs.current.snapTo(0)}>
       {picture==='http://eb506fafbc32.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
         source={require('../../assets/avatar.png')}
@@ -308,6 +303,14 @@ useFocusEffect(
       >
 
       </ImageBackground>}
+      {/* <Feather style={{position:'absolute',Top:'70%',Left:'40%',
+                      opacity: 0.7,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderWidth: 1,
+                      borderColor: '#fff',
+                      borderRadius: 10,
+                    }} name="camera" size={24} color="black" /> */}
         </TouchableOpacity>
         </View>
 
