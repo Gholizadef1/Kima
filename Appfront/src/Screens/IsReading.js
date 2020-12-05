@@ -12,7 +12,7 @@ import axiosinst from '../api/axiosinst';
 
 const IsReading = ({navigation}) => {
 
-const [readimage,setreadImage] = useState([])
+
 
     const [readimage,setreadImage] = useState([])
 
