@@ -21,7 +21,7 @@ const WantToRead = ({navigation}) => {
 
         async function getwanttoreadImageFromAPI1(){
             const id=await AsyncStorage.getItem('id');
-            axiosinst.get('http://7aec6b76c62d.ngrok.io/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
+            axiosinst.get('http://eb506fafbc32.ngrok.io/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})
             .then(function(response){
