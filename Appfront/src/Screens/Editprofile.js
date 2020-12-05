@@ -153,41 +153,103 @@ useFocusEffect(
          
      
           }
-          bs.current.snapTo(1);
+          // bs.current.snapTo(1);
       }
       else
       {
-        Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
+        Alert.alert('oops',' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید',[{
           Title:'فهمیدم',onPress:()=>console.log('alert closed')
           }])
       }
   
   }
-  
+  // await console.log(await AsyncStorage.getItem('token'));
+  // console.log('cameraaa')
+  // const {granted}=await permissions.askAsync(permissions.CAMERA)
+  //   if(granted){
+  //       console.log(granted)
+  //       let data=await ImagePicker.launchCameraAsync({
+  //         mediaTypes:ImagePicker.MediaTypeOptions.Images,
+  //         allowsEditing:true,
+  //         // aspect:[1,1],
+  //         quality:1
+  //       })
+  // let data=await ImagePicker.launchCameraAsync({
+  //   mediaTypes:ImagePicker.MediaTypeOptions.Images,
+  //   allowsEditing:true,
+  //   // aspect:[1,1],
+  //   quality:1
+  // })
   const pickfromcamera = async ()=>{
-    
+    await console.log(await AsyncStorage.getItem('token'));
     console.log('cameraaa')
     const {granted}=await permissions.askAsync(permissions.CAMERA)
-    if(granted){
-  
-        let data=await ImagePicker.launchCameraAsync({
-          mediaTypes:ImagePicker.MediaTypeOptions.Images,
-          allowsEditing:true,
-          // aspect:[1,1],
-          quality:1
-        })
-        console.log(data);
-        response();
-        // setimage(data.uri);
-        // this.bs.current.snapTo(1);
-    }
-    else
-    {
-      Alert.alert('oops',' برای تغییر عکس پروفایل باید اجازه دسترسی به ما بدید',[{
-        Title:'فهمیدم',onPress:()=>console.log('alert closed')
-        }])
-    }
-  
+      if(granted){
+          console.log(granted)
+          let data=await ImagePicker.launchCameraAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            // aspect:[1,1],
+            quality:1
+          })
+          console.log(data);
+          console.log(data.uri)
+          const formdata = new FormData();
+          const newfile={uri:data.uri,
+            type:`test/${data.uri.split(".")[3]}`,
+            name:`test.${data.uri.split(".")[3]}`}
+          console.log(newfile)
+
+          formdata.append('profile_photo',newfile)
+          
+          if(data.cancelled===false){
+          const back={        
+            profile_photo:data
+          }
+           const backk=JSON.stringify(back);
+          const response=await axiosinst.put('http://eb506fafbc32.ngrok.io/api/update-profile/',formdata,{
+            headers:{
+              "Content-Type":"application/json",
+              "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+            }
+               )
+          .then( function(response){
+            console.log(response)
+            console.log('1')
+            console.log(response.data.profile_photo);
+            console.log('1')
+            console.log('*************')
+            console.log('\n')
+            const a=response.data.profile_photo
+            console.log(picture)
+            setpicture(a);
+
+           
+            console.log(picture);
+            console.log('\n'+'this')
+            console.log(response.data.profile_photo)
+            console.log('***********')
+
+          
+            
+          })
+          .catch( function(error){
+            console.log(error)
+          })
+          // photoresponse();
+          // setimage(data.uri);
+         
+     
+          }
+          // bs.current.snapTo(1);
+      }
+      else
+      {
+        Alert.alert('oops',' برای گرفتن عکس باید اجازه دسترسی به دوربینتون رو به ما بدید',[{
+          Title:'فهمیدم',onPress:()=>console.log('alert closed')
+          }])
+      }
+   
   }
   
 // loggg();
@@ -237,7 +299,7 @@ useFocusEffect(
          <Button
          bordered rounded style={styles.button}
         
-        onPress={async()=>await pickfromgallery()}
+        onPress={async()=>await pickfromcamera()}
         style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
@@ -247,7 +309,7 @@ useFocusEffect(
 
         <Button
          bordered rounded style={styles.button}
-        onPress={()=>console.log('camera')}
+        onPress={async()=>await pickfromgallery()}
         style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
