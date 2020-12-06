@@ -5,7 +5,7 @@ class bookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = book
-        fields = '__all__'
+        fields = ['average_rating','title','imgurl','smallimgurl','numpages','publisher','avgrating','ratecount','author','description']
 
    
 
