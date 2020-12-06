@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
 from django.contrib.postgres.fields import ArrayField
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 
 
@@ -45,7 +47,6 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    #myshelf=models.ManyToManyField(book,through='MyBook',default=False)
 
 
     USERNAME_FIELD = 'email'
@@ -78,4 +79,13 @@ class MyBook(models.Model):
 
     def __str__(self):
         return self.state
+
+
+class MyRate(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    userrate=models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    def __str__(self):
+        return self.userrate
 
