@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
 
     function getImageFromAPI(){
 
-        axiosinst.get('http://7aec6b76c62d.ngrok.io/bookdetail')
+        axiosinst.get('http://91ec164d0465.ngrok.io/bookdetail')
 
         .then(function(response){
             setImage(response.data)
@@ -40,7 +40,7 @@ const Home = ({navigation}) => {
           <Left/>
           <Body>
             <Title style={{fontSize:22 , fontWeight:'bold',color:'#E1E5F2' , marginRight: 40, marginLeft: 10 
-            , left: 255,top:2}}>کیما</Title>
+            , right:50,top:2}}>کیما</Title>
           </Body>
           <Right />
         </Header>
@@ -52,7 +52,7 @@ const Home = ({navigation}) => {
                  </View>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}

@@ -14,7 +14,6 @@ const IsReading = ({navigation}) => {
 
 const [readimage,setreadImage] = useState([])
 
-    const [readimage,setreadImage] = useState([])
 
     useEffect(() =>{
         getreadImageFromAPI1()
@@ -24,7 +23,7 @@ const [readimage,setreadImage] = useState([])
         async function getreadImageFromAPI1(){
 
             const id=await AsyncStorage.getItem('id');
-            axiosinst.get('http://7aec6b76c62d.ngrok.io/api/user-profile/'+id+'/Reading',{"headers":{"content-type":"application/json",
+            axiosinst.get('http://91ec164d0465.ngrok.io/api/user-profile/'+id+'/Reading',{"headers":{"content-type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})
             .then(function(response){
@@ -49,7 +48,7 @@ const [readimage,setreadImage] = useState([])
           <Left/>
           <Body>
             <Title style={{fontSize:22 , fontWeight:'bold',color:'#E1E5F2' , marginRight: 40, marginLeft: 10 
-            , left: 255,top:2}}>کیما</Title>
+            , right:55,top:2}}>کیما</Title>
           </Body>
           <Right />
         </Header>
@@ -59,7 +58,7 @@ const [readimage,setreadImage] = useState([])
              <ScrollView style={{marginTop:100}}>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
+                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>در حال خواندن</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     data={readimage}

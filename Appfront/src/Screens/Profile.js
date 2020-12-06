@@ -35,11 +35,7 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-<<<<<<< HEAD
-        const response = await axiosinst.get("http://4eccf11c17a5.ngrok.io/api/user-profile/"+id)
-=======
-        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
->>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -70,23 +66,14 @@ import Profilenavigation from './Profilenavigation';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-<<<<<<< HEAD
-        const response = await axiosinst.get("http://7aec6b76c62d.ngrok.io/api/user-profile/"+id)
-=======
-        const response = await axiosinst.get("http://3097034fddc8.ngrok.io/api/user-profile/"+id)
->>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
         
       //  console.log(response)
       console.log('*****')
-<<<<<<< HEAD
-            console.log(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://7aec6b76c62d.ngrok.io${response.data.profile_photo}`)
-=======
-            console.log(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://3097034fddc8.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
             console.log(picture);
->>>>>>> 56bde92c55a44773c9ff95003cca60ff7f8c8025
           
        console.log(response.data.profile_photo)
       //  setimage(require(response.data.profile_photo))
