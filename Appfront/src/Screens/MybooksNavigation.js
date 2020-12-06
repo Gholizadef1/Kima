@@ -5,6 +5,7 @@ import WantToRead from './WantToRead';
 import IsRead from './IsRead';
 import IsReading from './IsReading'
 import Bookview from './Bookview'
+import Commentcard from './Commentcard';
 
 const Mybooknav = createStackNavigator();
 
@@ -17,6 +18,8 @@ const MybooksNavigation = () => {
       <Mybooknav.Screen name = "ShowReading" component={IsReading} options={{headerShown: false}} />
       <Mybooknav.Screen name = "ShowRead" component={IsRead} options={{headerShown: false}} />
       <Mybooknav.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></Mybooknav.Screen>
+      <Mybooknav.Screen name="commentcard"   component={Commentcard} options={{headerShown: false}}></Mybooknav.Screen>
+
       </Mybooknav.Navigator>
   );
 }
