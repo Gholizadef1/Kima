@@ -81,7 +81,7 @@ class MyBook(models.Model):
         return self.state
 
 
-class MyRate(models.Model):
+class Ratinguser(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
     userrate=models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])

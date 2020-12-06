@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
+from django.db.models import Avg
+from tutorial.quickstart.models import Account,Ratinguser
 
 # Create your models here.
 class book(models.Model):
@@ -35,6 +37,10 @@ class book(models.Model):
     
     def __str__(self):
         return self.title
+
+    @property
+    def average_rating(self):
+        return self.ratinguser_set.all().aggregate(Avg('userrate'))['rate__avg']
 
 
 
