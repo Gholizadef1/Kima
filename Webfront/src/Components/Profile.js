@@ -7,7 +7,7 @@ import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
-
+import Tabs from '../Tabs/Tabs';
 function ProFile (props){
     const [state , setState]=useState(
         {
@@ -230,6 +230,7 @@ useEffect(() => {
     return(
         <div className="main-content">
             
+           
             <div class="container-fluid">
                 <div className="row">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
@@ -378,7 +379,11 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
+                            <div className="Tab">
+            <Tabs/>
+            </div>
                             </div>
+                            
     )
     
 } 

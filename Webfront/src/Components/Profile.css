@@ -24,14 +24,16 @@ background-color: #9dc3e9;
    margin-top: -10px;
    margin-bottom: 15px;
    margin-left: 10px;
-   
-   
 }
 
 .cardp{
-   left: 60rem;
+    
+   left: 63rem;
 }
-
+.Tab{
+    margin-left: 100px;
+    margin-top: -19rem;
+}
 @media (max-width :420px) 
 {
     .cardp{
