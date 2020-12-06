@@ -62,5 +62,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['username','profile_photo','email']
 
+class RateByUserSerializer(serializers.Serializer):
+
+    rate = serializers.IntegerField(required=True,min_value=1,max_value=5)
+
+    
+
 
 

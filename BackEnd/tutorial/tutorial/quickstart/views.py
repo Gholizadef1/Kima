@@ -13,9 +13,10 @@ from rest_framework.status import (
 )
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
+from .serializers import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
@@ -183,3 +184,39 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
+
+class UserRatingview(APIView):
+
+    model = Ratinguser
+
+    def get_object(self, pk):
+        try:
+            return Ratinguser.objects.get(pk=pk)
+        except Ratinguser.DoesNotExist:
+            raise Http404
+
+    def post(self,request,pk):
+
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        print(request.data)
+        postrate = RateByUserSerializer(data=request.data)
+        if postrate.is_valid():
+            new_rating = Ratinguser(account=user,current_book=this_book,userrate=postrate.data.get("rate"))
+            new_rating.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Rate is updated!',
+                'data' : [],
+            }
+            return Response(response)
+        return Response({'error': 'failed'},
+                        status=HTTP_404_NOT_FOUND)
+
+    #def put(self,request,pk):
+
+
+
+    
+
