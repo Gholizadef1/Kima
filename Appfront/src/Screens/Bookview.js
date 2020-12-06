@@ -53,6 +53,7 @@ const Bookview = (prop) => {
                     </Card>
                   </Content>
             </Body>
+            <Button><Text>صفحه نظرات</Text></Button>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
