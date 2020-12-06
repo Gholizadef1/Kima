@@ -27,8 +27,9 @@ background-color: #9dc3e9;
    
    
 }
+
 .cardp{
-   left: 110px;
+   left: 60rem;
 }
 
 @media (max-width :420px) 
