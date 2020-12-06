@@ -27,6 +27,7 @@ import { EvilIcons } from '@expo/vector-icons';
 
 
 
+
 const userschema=yup.object({
 
     Username:yup.string()
@@ -153,7 +154,7 @@ useFocusEffect(
          
      
           }
-          // bs.current.snapTo(1);
+           //bs.current.snapTo(0);
       }
       else
       {
@@ -223,7 +224,7 @@ useFocusEffect(
             const a=response.data.profile_photo
             console.log(picture)
             setpicture(a);
-
+            console.log(picture)
            
             console.log(picture);
             console.log('\n'+'this')
@@ -241,7 +242,7 @@ useFocusEffect(
          
      
           }
-          // bs.current.snapTo(1);
+           //bs.current.snapTo(1);
       }
       else
       {
@@ -344,10 +345,10 @@ useFocusEffect(
         
        />
        <Animated.View style={{margin: 20,
-        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
-    }}></Animated.View>
+        opacity: Animated.add(0.4, Animated.multiply(fall, 1.0)),
+    }}>
         
-        <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
+        <View style={{position:'absolute',height:150,width:150,marginTop:20,marginLeft:110,borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
       {picture==='http://1168ebafd8e4.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
@@ -616,8 +617,9 @@ useFocusEffect(
         {/* </TouchableOpacity> */}
       
     {/* </ScrollView> */}
-     
+    </Animated.View>
     <StatusBar backgroundColor='#BFDBF7' style='light' />
+
         </View>
         
    
