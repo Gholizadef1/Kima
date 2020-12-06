@@ -195,6 +195,19 @@ class UserRatingview(APIView):
         except Ratinguser.DoesNotExist:
             raise Http404
 
+    def get(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        if Ratinguser.objects.filter(account=user,current_book=this_book).exists():
+            wantedbookrate = get_object_or_404(Ratinguser.objects.all(),account=user,current_book=this_book)
+            response = {
+                'data' : [wantedbookrate.userrate,],
+            }
+            return Response(response)
+        response = {'message' : 'No User Rating!',}
+        return Response(response)
+
+
     def post(self,request,pk):
 
         user=request.user
