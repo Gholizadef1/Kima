@@ -344,11 +344,11 @@ useFocusEffect(
             backgroundColor={'white'}
         
        />
-       <Animated.View style={{margin: 20,
+       <Animated.View style={{
         opacity: Animated.add(0.4, Animated.multiply(fall, 1.0)),
     }}>
         
-        <View style={{position:'absolute',height:150,width:150,marginTop:20,marginLeft:110,borderRadius:100}}>
+        <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
       {picture==='http://1168ebafd8e4.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
