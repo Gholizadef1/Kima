@@ -54,7 +54,7 @@ function ProFile (props){
                   setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
-                    email: response.data.email,
+                    //email: response.data.email,
                     picture : "http://127.0.0.1:8000"+response.data.profile_photo
                     }));
                     console.log(user);
@@ -128,7 +128,8 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put('http://127.0.0.1:8000/api/update-profile/'
+            axios.put('http://127.0.0.1:8000/api/change-password/',
+             back
              ,{
               headers:{
              "Content-Type":"application/json",
@@ -367,7 +368,7 @@ const accent = teal[200]; // #e040fb
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>رمز قبلی</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="userName"
+                                                  id="oldPass"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
@@ -375,7 +376,7 @@ const accent = teal[200]; // #e040fb
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>رمز جدید</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="userName"
+                                                  id="newPass"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
@@ -383,7 +384,7 @@ const accent = teal[200]; // #e040fb
                                                 <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
                                                 <input type="text"
                                                   class="form-control"
-                                                  id="userName"
+                                                  id="newPass2"
                                                   value={user.newPass2}
                                                   onChange={handleChange}/>
                                             </div> */}
