@@ -47,25 +47,25 @@ useEffect(() => {
     return(   
 <Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar">
             <h1>  
-             <GiBookshelf color="black"
+             <GiBookshelf color="white"
             //  style = {{padding:4, height:100,width:40}}
              />
              </h1>
              <b className=""
             
-            style = {{fontSize:35,fontFamily:'Morvarid',fontWeight:"bold",color:"black"}}
+            style = {{fontSize:35,fontFamily:'Morvarid',fontWeight:"bold",color:"white"}}
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
   <Navbar.Collapse id="basic-navbar-nav ">
     <Nav className="mr-auto pt-2">
       <Nav.Link className="nav-link2 h4 ml-3" href="topics"
-        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"white"}}
        >عناوین</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="groups"
-        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"white"}}
        >گروه‌ها</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="quize"
-       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
+       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"white"}}
        >آزمونک</Nav.Link>
     </Nav> 
     <>
@@ -80,7 +80,7 @@ useEffect(() => {
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
-    <GoSearch size="30" color="black"/>
+    <GoSearch size="30" color="white"/>
         </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -121,11 +121,11 @@ useEffect(() => {
     </>
   
        <a class="nav-item1" href="home" >
-       <small className="name" style={{fontFamily:'Morvarid',color:'black',margin:15,fontSize:20}} >
+       <small className="name" style={{fontFamily:'Morvarid',color:'white',margin:15,fontSize:20}} >
       خانه
     </small>
 
-    <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
+    <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"white"}}/> 
      </a>
   </Navbar.Collapse>
 </Navbar>

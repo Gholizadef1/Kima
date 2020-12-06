@@ -257,17 +257,14 @@ useEffect(() => {
                                         ویرایش
                                     </StyledButton>
                                 </div>
-
-                                <div className="col-lg-5 order-lg-2 ">
                                     <div className="profile">
-                                        <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
-
+                                        <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
+                                                                        
                                                                          width: 120,
                                                                          height: 120,
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
-                                    </div>
                                 </div>
                             </div>
 
@@ -282,7 +279,7 @@ useEffect(() => {
                                         </div>
                                         <div className="d-flex justify-content-between text-right mt-md-2">
 
-                                        <span className="description ml-2"style={{fontFamily:'Morvarid',fontSize:18}}>  می‌خواهم بخوانم</span>
+                                        <span className="description ml-4"style={{fontFamily:'Morvarid',fontSize:18}}>  می‌خواهم بخوانم</span>
                                         <span className="description mr-4"style={{fontFamily:'Morvarid',fontSize:18}}>  دارم می‌خوانم</span>
                                         <span className="description mr-4"style={{fontFamily:'Morvarid',fontSize:18}}>  خوانده‌ام</span>
                                         </div>   {/* < FaRegSmileBeam/> */}
@@ -380,8 +377,8 @@ useEffect(() => {
                             </div>
                             </div>
                             <div className="Tab">
-            <Tabs/>
-            </div>
+                              <Tabs/>
+                              </div>
                             </div>
                             
     )

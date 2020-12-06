@@ -11,6 +11,7 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
+import HelpingNavBook from "./Components/HelpingNavBook";
 import Scroll from "./Components/Scroll";
 import Tabs from "./Tabs/Tabs";
 import LoginForm from './components/loginForm/loginForm';
@@ -73,7 +74,7 @@ function App(props) {
               </Route>
             
             <Route path="/book/:bookId">
-              <NavBar/>
+              <HelpingNavBook/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="*">
