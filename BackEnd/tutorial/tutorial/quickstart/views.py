@@ -199,7 +199,6 @@ class UserRatingview(APIView):
 
         user=request.user
         this_book=book.objects.get(id=pk)
-        print(request.data)
         postrate = RateByUserSerializer(data=request.data)
         if postrate.is_valid():
             new_rating = Ratinguser(account=user,current_book=this_book,userrate=postrate.data.get("rate"))
@@ -207,14 +206,32 @@ class UserRatingview(APIView):
             response = {
                 'status' : 'success',
                 'code' : 'status.HTTP_200_OK',
-                'message' : 'Rate is updated!',
-                'data' : [],
+                'message' : 'BookRate is updated!',
+                'data' : [postrate.data.get("rate"),],
             }
             return Response(response)
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
 
-    #def put(self,request,pk):
+    def put(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        wantedbookrate = get_object_or_404(Ratinguser.objects.all(),account=user,current_book=this_book)
+        postrate = RateByUserSerializer(data=request.data)
+        if postrate.is_valid():
+            newrate = postrate.data.get("rate")
+            wantedbookrate.userrate = newrate
+            wantedbookrate.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Your Rate is updated!',
+                'data' : [newrate,],
+            }
+            return Response(response)
+        return Response({'error': 'failed'},
+                        status=HTTP_404_NOT_FOUND)
+
 
 
 
