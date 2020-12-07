@@ -62,5 +62,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['username','profile_photo','email']
 
+class QuoteSerializer(serializers.Serializer):
+    
+    textquote = serializers.CharField(required=True)
+
 
 

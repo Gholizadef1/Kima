@@ -96,4 +96,6 @@ class BookViewPage(APIView):
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
 
+
+
   

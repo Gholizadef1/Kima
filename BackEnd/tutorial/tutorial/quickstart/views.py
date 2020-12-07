@@ -15,7 +15,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
@@ -183,3 +183,31 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
+
+class QuoteView(APIView):
+
+    model = MyQuote
+
+    def get_object(self, pk):
+        try:
+            return MyQuote.objects.get(pk=pk)
+        except MyQuote.DoesNotExist:
+            raise Http404
+
+    def post(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        serializer = QuoteSerializer(data=request.data)
+        if serializer.is_valid():
+            quote_text = serializer.data.get("textquote")
+            new_quote = MyQuote(account=user,current_book=this_book,quote_text=quote_text)
+            new_quote.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Quote Saved!!',
+                'data' : [quote_text,],
+            }
+            return Response(response)
+        return Response({'error': 'failed'},
+                        status=HTTP_404_NOT_FOUND)
