@@ -38,6 +38,10 @@ class book(models.Model):
     @property
     def average_rating(self):
         return self.ratinguser_set.all().aggregate(Avg('userrate'))['userrate__avg']
+
+    @property
+    def average_rating_count(self):
+        return self.ratinguser_set.all().count()
     
     def __str__(self):
         return self.title
