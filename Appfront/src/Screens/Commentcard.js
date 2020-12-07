@@ -42,7 +42,10 @@ const Commentcard = () => {
 
                 <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
             </View>
+            <View style={{flexDirection:'row'}}>
             <AntDesign onPress={()=>{if(like==='#ffff'){setlike('#1F7A8C')}else{setlike('#ffff')}}} name="like1" size={20} color={like} style={styles.like} />
+            <Text style={styles.likenumber}>100</Text>
+            </View>
         
         </View>
     );
@@ -90,15 +93,23 @@ const styles = StyleSheet.create({
         marginLeft:'5%',
     },
     like:{
-        marginRight:368,
+        marginLeft:'5%',
         marginTop:'5%',
-        marginBottom:'5%'
+        marginBottom:'5%',
+       
     },
     date:{
         position:'absolute',
         marginTop:'16%',
         left:80,
         fontSize:12,
-    }
+    },
+    likenumber:{
+    
+    marginLeft:'12%',
+    marginTop:'5%',
+    position:'absolute'
+     
+    },
   });
   export default Commentcard;
