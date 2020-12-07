@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'r
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { Avatar } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 const Commentcard = () => {
     return(
@@ -28,6 +29,7 @@ const Commentcard = () => {
 
                 <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
             </View>
+            <AntDesign name="like1" size={20} color="#1F7A8C" style={styles.like} />
         
         </View>
     );
@@ -72,6 +74,11 @@ const styles = StyleSheet.create({
         marginTop:20,
         marginRight:'5%',
         marginLeft:'5%',
+    },
+    like:{
+        marginRight:368,
+        marginTop:'5%',
+        marginBottom:'5%'
     }
   });
   export default Commentcard;
