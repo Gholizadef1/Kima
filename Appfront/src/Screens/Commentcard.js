@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { Avatar } from 'react-native-paper';
@@ -7,11 +7,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const Commentcard = () => {
+    const [like,setlike]=useState('lightblue')
     return(
         <View style={styles.container}>
         <LinearGradient
         // Background Linear Gradient
-        colors={['#ffff','#BFDBF7']}
+        colors={['#ffff','#DBEBFB']}
         style={{
          position:'absolute',
           height:'100%',
@@ -41,7 +42,7 @@ const Commentcard = () => {
 
                 <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
             </View>
-            <AntDesign name="like1" size={20} color="#1F7A8C" style={styles.like} />
+            <AntDesign onPress={()=>{if(like==='#ffff'){setlike('#1F7A8C')}else{setlike('#ffff')}}} name="like1" size={20} color={like} style={styles.like} />
         
         </View>
     );
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
         marginTop:'5%',
         left:80,
         fontSize:15,
+        fontWeight:'bold'
         
      
     },
