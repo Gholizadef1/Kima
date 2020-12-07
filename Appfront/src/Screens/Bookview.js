@@ -12,6 +12,7 @@ import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import PickerScreen from './PickerScreen';
 
 const Bookview = (prop) => {
 
@@ -50,7 +51,7 @@ const Bookview = (prop) => {
 
                   
 
-                  <PickerShow style={{}} bookid={id} /> 
+                  <PickerScreen style={{}} bookid={id} /> 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
                     درباره کتاب :</Text>
                   <Content style={{}}>
