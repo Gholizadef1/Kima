@@ -1,5 +1,6 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -187,12 +188,22 @@ class UserProfileView(APIView):
 class QuoteView(APIView):
 
     model = MyQuote
+    parser_classes = [JSONParser]
 
     def get_object(self, pk):
         try:
             return MyQuote.objects.get(pk=pk)
         except MyQuote.DoesNotExist:
             raise Http404
+
+    def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyQuote.objects.filter(current_book=this_book).exists():
+            quote_list = MyQuote.objects.filter(current_book=this_book)
+            serilalizer = QuoteSerializer(quote_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Quote!',}
+        return Response(response)
 
     def post(self,request,pk):
         user=request.user
