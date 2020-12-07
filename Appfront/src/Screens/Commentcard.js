@@ -22,7 +22,11 @@ const Commentcard = () => {
 
             </ImageBackground>
         </TouchableOpacity>
-            <Text style={styles.username}>salam </Text>
+            <Text style={styles.username}>سلام </Text>
+            </View>
+            <View style={styles.comment}>
+
+                <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
             </View>
         
         </View>
@@ -39,26 +43,35 @@ const styles = StyleSheet.create({
     //   justifyContent: 'center',
     },
     avatar:{
-        height:'100%',
-        width:'68%',
+        height:65,
+        width:65,
         borderRadius:100,
-        marginRight:'0%'
+        position:'absolute'    
     
     },
     avatarname:{
+       marginTop:'5%',
+       marginLeft:'5%',
         flexDirection:'row',
-        marginTop:'5%',
-        marginLeft:'5%',
-       
+      
         width:'50%',
-        height:'27%',
+        height:65,
         borderRadius:100
     },
     username:{
         position:'absolute',
         marginTop:'5%',
-        left:80
+        left:80,
+        fontSize:15,
+        
      
+    },
+    comment:{
+       
+        
+        marginTop:20,
+        marginRight:'5%',
+        marginLeft:'5%',
     }
   });
   export default Commentcard;
