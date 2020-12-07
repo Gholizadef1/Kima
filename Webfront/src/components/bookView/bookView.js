@@ -196,14 +196,11 @@ function BookView(props) {
             </div> 
         </div>
 
-            <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
+            {/* <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <a className="nav-link" href="#bookDescription" style={{fontFamily:'Morvarid'}}>توضیح</a>
                     </li>
-                    {/* <li className="nav-item">
-                        <a className="nav-link" href="#bookCriticism">نقد</a>
-                     </li> */}
     
                 </ul>
             </nav>
@@ -216,19 +213,10 @@ function BookView(props) {
                     {state.description}
                     <br></br>
                 </p>
-            </div>
-            {/* <div id="bookCriticism" className="color1 p-2">
-                <br></br>
-                <h3>نقد کتاب {state.title}</h3>
-                <br></br>
-                <p>
-
-
-                    <br></br>
-                </p>
             </div> */}
+
              <div className="Tab color1 my-3 ">
-                <Tabs book={state.id}/>
+                <Tabs book={state.id} bookdescription={state.description}/>
             </div>
 
             
