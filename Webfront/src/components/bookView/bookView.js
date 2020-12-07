@@ -12,7 +12,7 @@ import {
   } from "react-router-dom";
 import './bookView.css';
 import Cookies from 'js-cookie';
-import Tabs from "./muliTabs"
+import Tabs from "./multiTabs"
 //import { ajax } from 'jquery';
 //import { data } from 'jquery';
 
@@ -137,7 +137,7 @@ function BookView(props) {
 
 
     return(
-        
+      <div>
         <div className="container-fluid col-8 rTOl text-right " >
             <div className="d-flex flex-row shadow color1 table-borderless my-1">
                 
@@ -227,9 +227,11 @@ function BookView(props) {
                     <br></br>
                 </p>
             </div> */}
-             <div className="Tab">
-                <Tabs/>
+             <div className="Tab color1 my-3 ">
+                <Tabs book={state.id}/>
             </div>
+
+            
 
 
 
@@ -238,7 +240,10 @@ function BookView(props) {
 
 
         </div>
+        <div className="color5" style={{height: 120}}>
 
+            </div>
+      </div>
 
 
 

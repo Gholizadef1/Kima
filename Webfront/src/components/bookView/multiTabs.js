@@ -8,6 +8,13 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -20,7 +27,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={2}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -41,15 +48,16 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     backgroundColor: theme.palette.background.paper,
+//     width: 500,
+//   },
+// }));
 
-export default function FullWidthTabs() {
-  const classes = useStyles();
+export default function FullWidthTabs(props) {
+    //console.log(props);
+  //const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -62,7 +70,7 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="rTol">
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -72,9 +80,8 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="نظر‌ها" {...a11yProps(0)} />
+          <Tab label="نقل‌قول‌ها" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -83,13 +90,32 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <div>
+            <List>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                <Avatar alt="فاطمه" src="" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary="فاطمه امیدی"
+                  secondary={
+                  <React.Fragment>
+                    <Typography component="span" variant="body2" className="" color="textPrimary" >
+
+                    </Typography>
+                    {" نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که "}
+                  </React.Fragment>
+                  }
+                />
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </List>
+
+
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
         </TabPanel>
       </SwipeableViews>
     </div>
