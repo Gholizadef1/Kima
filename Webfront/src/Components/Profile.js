@@ -2,15 +2,12 @@ import React, {Component,useState,useEffect} from "react";
 import {Redirect,withRouter} from "react-router-dom";
 import axios from 'axios';
 import "./Profile.css";
-import {FaRegSmileBeam} from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-       
-import Scroll from "./Scroll";
-//import Avatar from './Avatar';
+import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
-
+import Tabs from '../Tabs/Tabs';
 function ProFile (props){
     const [state , setState]=useState(
         {
@@ -210,12 +207,13 @@ function ProFile (props){
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 3,
-      border: 0,
+      borderRadius: 10,
+      border: 10,
       color: 'black',
-      height: 48,
+      height: 50,
       padding: '0 30px',
-      boxShadow: '0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+
     },
     label: {
       textTransform: 'capitalize',
@@ -224,192 +222,168 @@ const StyledButton = withStyles({
 
 const accent = teal[200]; // #e040fb
 
+useEffect(() => {
+  }, [user]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
     return(
         <div className="main-content">
             
+           
             <div class="container-fluid">
                 <div className="row">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
-                        
                         <div className="card cardp">
                             <div className=" d-flex justify-content-end">
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                    <h5 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                    <h6 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
-                                    
-                                </div>
-
-                                <div className="col-lg-5 order-lg-2 ">
-                                    <div className="profile">
-                                        <img src={user.picture} ref={uploadedImage} alt="" className="m-2 rounded-circle img-fluid" style={{
-
-                                                                         width: 120,
-                                                                         height: 120,
-                                                                         display: "block"}}/>
-                                        {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card-body pt-0 ">
-                                <div className="row">
-                                    <div className="col">
-                                        <div className="d-flex justify-content-between text-right mt-md-2">
-                                           <div>
-
-                                        <span className="heading text-muted">{bookNumbers.toRead}</span>
-
-                                               
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : می‌خواهم بخوانم</span>
-                                            </div>
-                                            <div>
-
-                                                <span className="heading text-muted">{bookNumbers.reading}</span>
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : دارم می‌خوانم</span>
-                                            </div>
-                                            <div>
-                                                <span className="heading text-muted">{bookNumbers.read}</span>
-                                                <span className="description"style={{fontFamily:'Morvarid'}}> : خوانده‌ام</span>
-                                                {/* < FaRegSmileBeam/> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-header border-0 pt-6 pt-md-3 pb-3 pb-md-3">
-                                <div className="d-flex justify-content-between">
-                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info" onClick = {logout}style={{fontFamily:'Morvarid'}} >
-                                        خروج ازحساب
-                                    </StyledButton>
-                                                                            
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
                                      aria-expanded="false"
-                                     aria-label="Toggle navigation"style={{fontFamily:'Morvarid'}}>
+                                     variant="gray"
+                                     onClick={handleShow}
+                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra'}}>
                                         ویرایش
                                     </StyledButton>
-                                   
+                                </div>
+                                    <div className="profile">
+                                        <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
+                                                                        
+                                                                         width: 120,
+                                                                         height: 120,
+                                                                         display: "block"}}/>
+                                        {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
+
                                 </div>
                             </div>
-                            <div class="collapse" id="navbarToggleExternalContent">
-                                <div class=" p-4">
+
+                            <div className="card-body pt-0">
+                                <div className="row">
+                                    <div className="col">
+                                <hr style={{width:"90%",height:1,color:"#333",backgroundColor:"#333"}}></hr>
+                                        <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
+                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
+                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
+                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
+                                        </div>
+                                        <div className="d-flex justify-content-between text-right mt-md-2">
+
+                                        <span className="description ml-4"style={{fontFamily:'Mitra',fontSize:18}}>  می‌خواهم بخوانم</span>
+                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  دارم می‌خوانم</span>
+                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  خوانده‌ام</span>
+                                        </div>   {/* < FaRegSmileBeam/> */}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-header border-0 pt-6 pt-md-3 pb-3 pb-md-3">
+                                <div className="d-flex justify-content-between">
+                                    
+                    
+      <Modal show={show} onHide={handleClose} className="maodal">
+        <Modal.Body>
+         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle gholi img-fluid" style={{
+           width: 120,
+             height: 120,
+             marginLeft:300,
+            marginTop:-5,
+             display: "block"}}/>
+            <div className="d-flex justify-content-between">
+                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20}}>ثبت عکس</StyledButton>
+                <input class="form-control" 
+                type="file" accept="image/*" 
+                onChange={handleImageUpload} 
+                ref={imageUploader} 
+                style={{ display: "none", }} />
+              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15}}
+                             onClick={() => imageUploader.current.click()} >
+                             انتخاب عکس
+                            </StyledButton>
+                            </div>
+                            <div class=" p-4">
                                     <form>
                                         <div class="form-group align-items-center text-right">
 
-                                            <p className="loginText my-1" style={{fontFamily:'Morvarid'}}>{user.backError}</p>
+                                            <p className="loginText my-1" style={{fontFamily:'Mitra'}}>{user.backError}</p>
 
                                             <div class="my-1">
-                                                <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
+                                                <label  for="userName"style={{fontFamily:'Mitra'}}>نام کاربری</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                 //   placeholder={user.userName}
                                                   value={user.userName}
                                                   onChange={handleChange}/>
                                             </div>
-                                            {/* <div class="my-1">
-                                                <label for="email"style={{fontFamily:'Morvarid'}}>ایمیل</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">@</div>
-                                                    </div>
-                                                    <input type="text"
-                                                     class="form-control"
-                                                     id="email" 
-                                                    //  placeholder={user.email}
-                                                     value={user.email}
-                                                     onChange={handleChange}/>
-                                                </div>
-                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
-                                                style={{fontFamily:'Morvarid'}}
-                                                >تغییر اطلاعات</StyledButton>
-                                                
-                                            </div>
-                                            
-                                            <div class="dropdown-divider"></div>
-                                            <div class="my-1">
-                                                <label for="img" style={{fontFamily:'Morvarid'}}style={{fontFamily:'Morvarid'}}> عکس</label>
-                                                <div className="d-flex justify-content-between">
-                                                    <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Morvarid'}}>ثبت عکس</StyledButton>
-                                                    <input class="form-control" 
-                                                    type="file" accept="image/*" 
-                                                    onChange={handleImageUpload} 
-                                                    ref={imageUploader} 
-                                                    style={{ display: "none", }} />
-                                                     <StyledButton className="btn1 col-auto" style={{fontFamily:'Morvarid'}}
-                                                     onClick={() => imageUploader.current.click()} >
-                                                          انتخاب عکس
-
-                                                         {/* <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
-                                                        </svg> */}
-                                                    </StyledButton>
-                                                </div>
-                                            </div>
-                                            <div class="dropdown-divider"></div>
-                                            
-                                            <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Morvarid'}}>رمز قبلی</label>
+                                                style={{fontFamily:'Mitra'}}
+                                                >ذخیره</StyledButton>
+                                                <div class="my-1">
+                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Morvarid'}}>رمز جدید</label>
+                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
-                                            {/* <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
-                                                <input type="text"
-                                                  class="form-control"
-                                                  id="userName"
-                                                  value={user.newPass2}
-                                                  onChange={handleChange}/>
-                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangePassClick}
-                                                style={{fontFamily:'Morvarid'}}
+                                                style={{fontFamily:'Mitra'}}
                                                
-                                                >تغییر رمز</StyledButton>
+                                                >ذخیره </StyledButton>
                                             </div>
-                                        </div>
-                                            
-                                    </form>
+                                                
+                                            </div>
+                                            </div>
+                                            </form>
+                                            </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10}}>
+            بستن
+          </StyledButton>
+        </Modal.Footer>
+      </Modal>
+                                   
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <Scroll/>
-                </div>
-            </div>
-
-        </div>
-        
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div className="Tab">
+                              <Tabs/>
+                              </div>
+                            </div>
+                            
     )
+    
 } 
 
 export default withRouter(ProFile);
