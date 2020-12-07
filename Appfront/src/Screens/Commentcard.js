@@ -49,8 +49,7 @@ const Commentcard = () => {
 
 const styles = StyleSheet.create({
     container: {
-      marginTop:40,
-
+    
       backgroundColor: '#fff',
     
     

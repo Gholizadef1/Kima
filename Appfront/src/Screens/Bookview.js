@@ -53,7 +53,7 @@ const Bookview = (prop) => {
                     </Card>
                   </Content>
             </Body>
-            <Button onPress={()=>prop.navigation.navigate('commentcard')}><Text>صفحه نظرات</Text></Button>
+            <Button onPress={()=>prop.navigation.navigate('comment')}><Text>صفحه نظرات</Text></Button>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
