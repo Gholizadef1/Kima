@@ -76,7 +76,7 @@ useEffect(() => {
       >
     
       </div> */}
-      <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      <input className="rounded-pill col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
       style={{fontFamily:'Morvarid'}}
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />

@@ -58,16 +58,16 @@ useEffect(() => {
              </h1>
              <b className=""
             
-            style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"white"}}
+            style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
   <Navbar.Collapse id="basic-navbar-nav ">
     <Nav className="mr-auto pt-2">
       <Nav.Link className="nav-link2 h4" href="groups"
-        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"white"}}
+        style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}
        >گروه‌ها</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="quize"
-       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"white"}}
+       style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}
        >آزمونک</Nav.Link>
     </Nav> 
     <>
@@ -77,8 +77,8 @@ useEffect(() => {
       >
     
       </div> */}
-      <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
-      style={{fontFamily:'Morvarid'}}
+      <input className="rounded-pill col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+      style={{fontFamily:'Mitra'}}
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
@@ -86,7 +86,7 @@ useEffect(() => {
         </Button>
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header"style={{fontFamily:'Morvarid'}}>
+           <div className="header"style={{fontFamily:'Mitra'}}>
           نتایج
           </div>
         </Modal.Header>
@@ -101,8 +101,8 @@ useEffect(() => {
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3" style={{fontFamily:'Morvarid'}}>{item.title}</h5>
-         <h5 className="card-title4" style={{fontFamily:'Morvarid'}}>{item.author}</h5>
+         <h5 className="card-title3" style={{fontFamily:'Mitra'}}>{item.title}</h5>
+         <h5 className="card-title4" style={{fontFamily:'Mitra'}}>{item.author}</h5>
 
           </small>
           </div>
@@ -114,13 +114,13 @@ useEffect(() => {
 }
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
+          <Button variant="info" onClick={handleClose} style={{fontFamily:'Mitra'}}>
             بستن
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-       <a class="nav-item1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
+       <a class="nav-item1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Mitra'}} >
        <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
     </small>

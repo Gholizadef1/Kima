@@ -207,12 +207,13 @@ function ProFile (props){
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 3,
-      border: 0,
+      borderRadius: 10,
+      border: 10,
       color: 'black',
-      height: 48,
+      height: 50,
       padding: '0 30px',
-      boxShadow: '0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+
     },
     label: {
       textTransform: 'capitalize',
@@ -239,11 +240,11 @@ useEffect(() => {
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                    <h5 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="" style={{fontFamily:'Morvarid',fontWeight:"bold"}}>
+                                    <h6 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
@@ -253,7 +254,7 @@ useEffect(() => {
                                      aria-expanded="false"
                                      variant="gray"
                                      onClick={handleShow}
-                                     aria-label="Toggle navigation"style={{fontFamily:'Morvarid'}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra'}}>
                                         ویرایش
                                     </StyledButton>
                                 </div>
@@ -279,9 +280,9 @@ useEffect(() => {
                                         </div>
                                         <div className="d-flex justify-content-between text-right mt-md-2">
 
-                                        <span className="description ml-4"style={{fontFamily:'Morvarid',fontSize:18}}>  می‌خواهم بخوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Morvarid',fontSize:18}}>  دارم می‌خوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Morvarid',fontSize:18}}>  خوانده‌ام</span>
+                                        <span className="description ml-4"style={{fontFamily:'Mitra',fontSize:18}}>  می‌خواهم بخوانم</span>
+                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  دارم می‌خوانم</span>
+                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  خوانده‌ام</span>
                                         </div>   {/* < FaRegSmileBeam/> */}
                                     </div>
                                 </div>
@@ -299,13 +300,13 @@ useEffect(() => {
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">
-                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Morvarid'}}>ثبت عکس</StyledButton>
+                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20}}>ثبت عکس</StyledButton>
                 <input class="form-control" 
                 type="file" accept="image/*" 
                 onChange={handleImageUpload} 
                 ref={imageUploader} 
                 style={{ display: "none", }} />
-              <StyledButton className="btn1" type="button" style={{fontFamily:'Morvarid'}}
+              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15}}
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
                             </StyledButton>
@@ -314,12 +315,12 @@ useEffect(() => {
                                     <form>
                                         <div class="form-group align-items-center text-right">
 
-                                            <p className="loginText my-1" style={{fontFamily:'Morvarid'}}>{user.backError}</p>
+                                            <p className="loginText my-1" style={{fontFamily:'Mitra'}}>{user.backError}</p>
 
                                             <div class="my-1">
-                                                <label for="userName"style={{fontFamily:'Morvarid'}}>نام کاربری</label>
+                                                <label  for="userName"style={{fontFamily:'Mitra'}}>نام کاربری</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                 //   placeholder={user.userName}
                                                   value={user.userName}
@@ -330,20 +331,20 @@ useEffect(() => {
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
-                                                style={{fontFamily:'Morvarid'}}
+                                                style={{fontFamily:'Mitra'}}
                                                 >ذخیره</StyledButton>
                                                 <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Morvarid'}}>رمز قبلی</label>
+                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Morvarid'}}>رمز جدید</label>
+                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="userName"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
@@ -353,7 +354,7 @@ useEffect(() => {
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangePassClick}
-                                                style={{fontFamily:'Morvarid'}}
+                                                style={{fontFamily:'Mitra'}}
                                                
                                                 >ذخیره </StyledButton>
                                             </div>
@@ -364,7 +365,7 @@ useEffect(() => {
                                             </div>
         </Modal.Body>
         <Modal.Footer>
-          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
+          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10}}>
             بستن
           </StyledButton>
         </Modal.Footer>

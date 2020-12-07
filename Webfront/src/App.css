@@ -22,10 +22,10 @@
   }
 	
   @font-face {
-    font-family: 'pixelboy-Shams';
-    src: url('fonts/pixelboy-Shams.eot') format('eot'),
-    url('fonts/pixelboy-Shams.ttf') format('truetype'),
-    url('fonts/pixelboy-Shams.woff') format('woff');
+    font-family: 'Mitra';
+    src: url('fonts/Mitra.eot') format('eot'),
+    url('fonts/Mitra.eot') format('truetype'),
+    url('fonts/Mitra.eot') format('woff');
     }
     @font-face {
       font-family: 'Morvarid';

@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "./Tabs.css";
+import Scroll from "../Components/Scroll";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -67,9 +68,9 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="آخرین نقل‌قول‌ها" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Morvarid",color:"black"}} />
-          <Tab label="آخرین کامنت‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Morvarid",color:"black"}} />
-          <Tab label="کتاب‌های من" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Morvarid",color:"black"}} />
+          <Tab label="آخرین نقل‌قول‌ها" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label="آخرین کامنت‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label="کتاب‌های من" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -78,13 +79,13 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+        <Scroll/>
         </TabPanel>
       </SwipeableViews>
     </div>

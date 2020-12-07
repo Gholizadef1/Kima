@@ -24,7 +24,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const BlueOnGreenTooltip = withStyles({
   tooltip: {
     color: "black",
-    fontFamily:"Morvarid",
+    fontFamily:"Mitra",
     fontSize:20,
     backgroundColor: "lightblue",
     width:170,
@@ -113,7 +113,7 @@ function Slide(props) {
                   height={56}
                   width={56}
                 />
-      {current.title.length >17 ?
+      {current.title.length >19 ?
 <BlueOnGreenTooltip title={current.title}>
 <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       </BlueOnGreenTooltip>
