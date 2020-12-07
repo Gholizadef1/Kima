@@ -20,6 +20,7 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import axiosinst from '../api/axiosinst';
 import Profilenavigation from './Profilenavigation';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -37,11 +38,22 @@ import Profilenavigation from './Profilenavigation';
         try{
         const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
-        
-        // console.log(response)
+        console.log('.....')
+         console.log('in')
+         console.log('.....')
        setname(response.data.username)
     //    console.log(name)
        setemail(response.data.email)
+       console.log('*****')
+       console.log(response.data.profile_photo)
+            console.log(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
+            console.log(';;;;;')
+            console.log(picture);
+            console.log(picture)
+            console.log(';;;;;')
+          
+       console.log(response.data.profile_photo)
     
        
     }
@@ -74,32 +86,56 @@ import Profilenavigation from './Profilenavigation';
             console.log(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
             setpicture(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
             console.log(picture);
+    // const photoresponse=async ()=>{
+    //     console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
+    //     const id=await AsyncStorage.getItem('id');
+    //     // console.log(id)
+    //     try{
+    //     const response = await axiosinst.get("http://eb506fafbc32.ngrok.io/api/user-profile/"+id)
+            
+        
+    //   //  console.log(response)
+    // //   console.log('*****')
+    // //         console.log(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
+    // //         setpicture(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
+    // //         console.log(picture);
           
-       console.log(response.data.profile_photo)
-      //  setimage(require(response.data.profile_photo))
+    // //    console.log(response.data.profile_photo)
+    //   //  setimage(require(response.data.profile_photo))
       
-    }
-    catch(err){
-         console.log(err);
-        Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
+    // }
+    // catch(err){
+    //      console.log(err);
+    //     Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
             
     
-                Title:'فهمیدم',onPress:()=>console.log('alert closed')
-                }])
-    }
-    }
+    //             Title:'فهمیدم',onPress:()=>console.log('alert closed')
+    //             }])
+    // }
+    // }
  
     let a=0;
-    React.useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-          photoresponse();
-          response();
-          console.log('Listenn')
-          console.log('\n'+'-----'+Profilenavigation+'-----')
-        });
-    
+    useFocusEffect(
+        React.useCallback((name,picture,email) => {
+            response();
+            //   console.log('Listenn')
+            alert('in')
+              return() => alert('lost')
+        },[])
        
-      }, [Profilenavigation,a]);
+        )
+    // React.useEffect(() => {
+    //     const unsubscribe = navigation.addListener()
+    //     const unsubscribee = navigation.addListener('focus', () => {
+    //         //   photoresponse();
+    //           response();
+    //           console.log('Listenn')
+    //           console.log('LISTENNNNNN')
+    //         //   console.log('\n'+'-----'+Profilenavigation+'-----')
+    //         });
+        
+       
+    //   }, []);
      
 
       
@@ -115,10 +151,10 @@ import Profilenavigation from './Profilenavigation';
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         
-        {!(picture==="http://3097034fddc8.ngrok.io/media/default.jpg")? <Avatar.Image style={styles.avatar} size={100}
-        source={{uri:picture}}
-        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
+        {picture==='http://eb506fafbc32.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
+        ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
+        source={{uri:picture}}
         ></Avatar.Image>}
 
         <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
