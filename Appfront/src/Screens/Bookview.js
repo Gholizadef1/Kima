@@ -11,8 +11,13 @@ import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
 const Bookview = (prop) => {
+
+  // ratingCompleted(rating) {
+  //   console.log("Rating is: " + rating)
+  // }  
 
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
@@ -42,6 +47,8 @@ const Bookview = (prop) => {
                       fontSize:25 }}>{result.title}</Text>
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
+
+                  
 
                   <PickerShow style={{}} bookid={id} /> 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
