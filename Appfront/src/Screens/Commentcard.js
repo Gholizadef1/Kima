@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Commentcard = () => {
     return(
         <View style={styles.container}>
-        
+        <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground>
             <View style={styles.avatarname}>
             {/* <Avatar.Image size={30} style={styles.avatar}></Avatar.Image> */}
             <TouchableOpacity style={styles.avatar}
