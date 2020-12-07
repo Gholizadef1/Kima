@@ -43,7 +43,7 @@ const Commentcard = () => {
                 <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
             </View>
             <View style={{flexDirection:'row'}}>
-            <AntDesign onPress={()=>{if(like==='#ffff'){setlike('#1F7A8C')}else{setlike('#ffff')}}} name="like1" size={20} color={like} style={styles.like} />
+            <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
             <Text style={styles.likenumber}>100</Text>
             </View>
         
