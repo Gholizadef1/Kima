@@ -8,11 +8,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Commentcard = () => {
     const [like,setlike]=useState('lightblue')
+    console.log('comment')
     return(
         <View style={styles.container}>
         <LinearGradient
         // Background Linear Gradient
-        colors={['#ffff','#DBEBFB']}
+        colors={['#ffff','#EDF5FD']}
         style={{
          position:'absolute',
           height:'100%',
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },
     likenumber:{
     
-    marginLeft:'12%',
+    marginLeft:50,
     marginTop:'5%',
     position:'absolute'
      

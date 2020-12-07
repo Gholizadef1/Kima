@@ -4,6 +4,16 @@ import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
+import { TextInput } from 'react-native-paper';
+import {Formik,formik} from 'formik';
+import * as yup from 'yup';
+
+
+const commentschema=yup.object({
+
+    comment:yup.string()
+    .required("نظر شما نمیتوناد خالی باشد")
+  })
 
 const Groups = () => {
     const bs = React.createRef()
@@ -19,15 +29,12 @@ const Groups = () => {
               >
               <View style={{}}>
                   <View style={{}}>
-                  {/* <Image
-               source={require('../../assets/line3.png')}
-               style={{width:300,height:3}}
-               ></Image> */}
+                
                   <Image
                source={require('../../assets/line3.png')}
-               style={{width:100,height:5,marginLeft:155}}
+               style={{width:100,height:5,marginLeft:155,marginTop:10}}
                ></Image>
-                  <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:15,fontSize:16 }}>انتخاب عکس</Text>
+                  <Text style={{marginLeft:'40%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما؟</Text>
                   </View>
               </View>
       
@@ -37,71 +44,134 @@ const Groups = () => {
          const renderInner=()=>{
             return(
               // console.log('inner');
-            <View style={{backgroundColor:'gray'}}>
+            <View style={{backgroundColor:'white'}}>
+            <TextInput style={{height:200}} underlineColorAndroid={'green'} placeholderTextColor={'blue'}></TextInput>
+             
+               <Formik></Formik>
+               <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
+                initialValues={{comment:''}}
+                validationSchema={commentschema}
       
-               <Image
-               source={require('../../assets/bottomsheet.jpeg')}
-               style={{width:420,height:300,position:'absolute'}}
-               ></Image>
+
+                onSubmit={async(values,actions)=>{
+     
+                const back={
+                 username:values.comment,
+        
+                }
+
+                const backk=JSON.stringify(back);
+                const params=JSON.stringify({username:'Hi'});
+                const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',backk,{
+                headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+                }
+             )
+                .then( function(response){
+                })
+                .catch( function(error){
+         
+                 })
+
+                 }}
+                 >
+            {(props)=>(
+            <View style={{alignItems:'center', marginTop:215,marginHorizontal:40}}>
+
+              <Item style={styles.input}>    
+
+                 <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
+                onChangeText={props.handleChange('Username')}
+                onBlur={props.handleBlur('Username')}
+                value={props.values.comment}
+                placeholder={name} placeholderTextColor='gray' style={{}}>
+                </Input>
+            <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
+        
+          </Item>
+           <Text style={{fontSize:10, color:'red'}}>{props.touched.comment&&props.errors.comment}</Text>
       
-               <Button
-               bordered rounded style={styles.button}
+            <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
+       
+    
+          
+   
+     <Button bordered rounded style={styles.button}
+       onPress={props.handleSubmit}
+       >
+         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+        </Button>
+      
+     </View>
+    
+     </View>
+       
+       
+     )}
+
+     </Formik>
+      
               
-              onPress={async()=>await pickfromcamera()}
-              style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
-              >
-      
-               <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:84}
-               }>گرفتن عکس</Text>
-              </Button>
-      
-              <Button
-               bordered rounded style={styles.button}
-              onPress={async()=>await pickfromgallery()}
-              style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
-              >
-      
-               <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:72}
-               }>انتخاب از گالری</Text>
-              </Button>
-            
+              
               </View>
             )
           }
     return(
-        <View style={styles.container}>
-        <ScrollView>
-           <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
    
+       
+  
+        <View style={styles.container}>
+         <BottomSheet style={{position:''}}
+         
+        snapPoints={['35%', 0, 0]}
+       ref={bs}
+       initialSnap={1}
+       callbackNode={fall}
+       enabledGestureInteraction={true}
+       enabledContentTapInteraction={false}
+       renderContent={renderInner}
+       renderHeader={renderHeader}            
+          // style={{position:'absolute',height:200,width:250,marginTop:400}}
+       backgroundColor={'white'}
+   
+  />
+   <Animated.View style={{
+        opacity: Animated.add(0.2, Animated.multiply(fall, 1.0)),
+    }}>
+        <ScrollView   showsVerticalScrollIndicator={false}>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+     
       
            </ScrollView>
            
-           <BottomSheet
-             snapPoints={[380, 0, 0]}
-            ref={bs}
-            initialSnap={1}
-            callbackNode={fall}
-            enabledGestureInteraction={true}
-            enabledContentTapInteraction={false}
-            renderContent={renderInner}
-            renderHeader={renderHeader}            
-               // style={{position:'absolute',height:200,width:250,marginTop:400}}
-            backgroundColor={'white'}
-        
-       />
+         
 
        <View style={{position:'absolute',marginTop:'175%',width:'100%'}}>
+      
 
-       <Button style={styles.addcomment}>
+       <Button style={styles.addcomment}
+       onPress={()=>bs.current.snapTo(0)}
+       >
 
        <Text style={styles.nazar}>نظر شما چیست؟</Text>
 
        </Button>
 
        </View>
+       </Animated.View>
 
         </View>
     );
@@ -111,7 +181,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      marginTop:38
+      marginTop:38,
+      height:1000
     }, 
     addcomment:{
     
