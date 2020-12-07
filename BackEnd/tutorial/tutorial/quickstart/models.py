@@ -79,3 +79,11 @@ class MyBook(models.Model):
     def __str__(self):
         return self.state
 
+class MyQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    quote_text=models.TextField()
+
+    def __str__(self):
+        return self.quote_text
+
