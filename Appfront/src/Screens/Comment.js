@@ -62,19 +62,20 @@ const Groups = () => {
 
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
-                const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',backk,{
-                headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-                }
-             )
-                .then( function(response){
-                })
-                .catch( function(error){
+            //     const response=await axiosinst.put(' http://aef3d2c5594f.ngrok.io/api/update-profile/',backk,{
+            //     headers:{
+            //     "Content-Type":"application/json",
+            //     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+            //     }
+            //  )
+            //     .then( function(response){
+            //     })
+            //     .catch( function(error){
          
-                 })
+            //      })
 
-                 }}
+            //      }}
+                }}
                  >
             {(props)=>(
             <View style={{alignItems:'center', marginTop:215,marginHorizontal:40}}>
