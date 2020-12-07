@@ -215,7 +215,7 @@ function BookView(props) {
                 </p>
             </div> */}
 
-             <div className="Tab color1 my-3 ">
+             <div className="Tab color1 my-3 mb-5">
                 <Tabs book={state.id} bookdescription={state.description}/>
             </div>
 
@@ -228,9 +228,6 @@ function BookView(props) {
 
 
         </div>
-        <div className="color5" style={{height: 120}}>
-
-            </div>
       </div>
 
 
