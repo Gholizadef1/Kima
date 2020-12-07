@@ -35,6 +35,7 @@ const Commentcard = () => {
             </ImageBackground>
         </TouchableOpacity>
             <Text style={styles.username}>سلام </Text>
+            <Text style={styles.date}>1/1/99</Text>
             </View>
             <View style={styles.comment}>
 
@@ -91,6 +92,12 @@ const styles = StyleSheet.create({
         marginRight:368,
         marginTop:'5%',
         marginBottom:'5%'
+    },
+    date:{
+        position:'absolute',
+        marginTop:'16%',
+        left:80,
+        fontSize:12,
     }
   });
   export default Commentcard;
