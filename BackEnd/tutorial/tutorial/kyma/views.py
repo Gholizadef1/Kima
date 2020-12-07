@@ -1,7 +1,8 @@
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework import status
 from . models import book
 from . serializers import *
@@ -95,5 +96,18 @@ class BookViewPage(APIView):
             newratingbook = serializer.save()
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
+
+@api_view(["GET"])
+@permission_classes([AllowAny],)
+@permission_classes([IsAuthenticated])
+def get_bookstate(request,pk):
+    user=request.user
+    bk=book.objects.get(pk=pk)
+    
+    if((MyBook.objects.get(account=user,book1=bk))==None):
+        return Response({'book_state': 'none'})
+    else:
+        my_bk=MyBook.objects.get(account=user,book1=bk)
+        return Response({'book_state': my_bk.state})
 
   
