@@ -9,8 +9,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Commentcard = () => {
     return(
         <View style={styles.container}>
-       
-        <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground>
+        <LinearGradient
+        // Background Linear Gradient
+        colors={['#ffff','#BFDBF7']}
+        style={{
+         position:'absolute',
+          height:'100%',
+          width:'100%',
+        
+        }}
+      />
+        {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
             {/* <Avatar.Image size={30} style={styles.avatar}></Avatar.Image> */}
             <TouchableOpacity style={styles.avatar}
@@ -42,6 +51,7 @@ const styles = StyleSheet.create({
       marginTop:40,
 
       backgroundColor: '#fff',
+    
     
     //   alignItems: 'center',
     //   justifyContent: 'center',
