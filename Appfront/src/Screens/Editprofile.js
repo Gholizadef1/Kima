@@ -393,7 +393,7 @@ useFocusEffect(
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://1168ebafd8e4.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
