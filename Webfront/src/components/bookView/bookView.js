@@ -12,14 +12,16 @@ import {
   } from "react-router-dom";
 import './bookView.css';
 import Cookies from 'js-cookie';
-import { ajax } from 'jquery';
+import Tabs from "./muliTabs"
+//import { ajax } from 'jquery';
 //import { data } from 'jquery';
+
 
 function BookView(props) {
     let { bookId } = useParams();
 
     //const bookId= props.match.params.id;
-    console.log(bookId);
+    //console.log(bookId);
     //console.log(bookId.name);
     const [userCoice, setUserCoice]= useState("");
 
@@ -75,9 +77,9 @@ function BookView(props) {
                  }
                  )
                  .then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     setUserCoice(response.data.book_state);
-                    console.log(response.data.book_state);
+                    //console.log(response.data.book_state);
                     document.getElementById(response.data.book_state).selected=true;
                  })
                  .catch(function (error) {
@@ -88,10 +90,10 @@ function BookView(props) {
         }
     },[] );
     const addBookToMineHandler = (choices)=>{
-        console.log(choices.target.value);
-        console.log(choices);
+        //console.log(choices.target.value);
+        //console.log(choices);
         setUserCoice(choices.target.value);
-        console.log(userCoice);
+        //console.log(userCoice);
         const payload={
             "book_state": choices.target.value,
         }
@@ -120,7 +122,7 @@ function BookView(props) {
 
             }else console.log(response.data);
 
-            console.log(response);
+            //console.log(response);
         })
         .catch(function (error) {
            console.log(error);
@@ -146,14 +148,6 @@ function BookView(props) {
                 <h2 style={{fontFamily:'Morvarid'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
-                    {/* <tr >
-                        <th >
-                            نام کتاب
-                        </th>
-                        <td>
-                            {state.title}
-                        </td>
-                    </tr> */}
                     <tr>
                         <th style={{fontFamily:'Morvarid'}}>
                             نام نویسنده
@@ -179,7 +173,7 @@ function BookView(props) {
                     </svg> */}
 
                     <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-                    <select className="form-control mr-4 col-6" id="bookMood"onChange={ addBookToMineHandler}>
+                    <select className="form-control mr-4 col-6" id="bookMood" onChange={ addBookToMineHandler} >
                         <option id="none" value="none">هیچکدام</option>
 
                         <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
@@ -233,6 +227,10 @@ function BookView(props) {
                     <br></br>
                 </p>
             </div> */}
+             <div className="Tab">
+                <Tabs/>
+            </div>
+
 
 
 
