@@ -12,6 +12,7 @@ import {
   } from "react-router-dom";
 import './bookView.css';
 import Cookies from 'js-cookie';
+import { ajax } from 'jquery';
 //import { data } from 'jquery';
 
 function BookView(props) {
@@ -19,8 +20,8 @@ function BookView(props) {
 
     //const bookId= props.match.params.id;
     console.log(bookId);
-    console.log(bookId.name);
-    const [userCoice, setUserCoice]= useState();
+    //console.log(bookId.name);
+    const [userCoice, setUserCoice]= useState("");
 
     const [selectMassage, setSelectMassage]= useState(<br></br>);
 
@@ -61,6 +62,27 @@ function BookView(props) {
                     smallimgurl: response.data.smallimgurl,
                     title:response.data.title
                     });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    
+                });
+            axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId+'/getstate',
+            {headers:{
+
+                "Content-Type":"application/json",
+                "Authorization":"Token "+Cookies.get("userToken")}
+                 }
+                 )
+                 .then(function (response) {
+                    console.log(response);
+                    setUserCoice(response.data.book_state);
+                    console.log(response.data.book_state);
+                    document.getElementById(response.data.book_state).selected=true;
+                 })
+                 .catch(function (error) {
+                    console.log(error);
+                    
                 });
 
         }
@@ -158,11 +180,11 @@ function BookView(props) {
 
                     <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
                     <select className="form-control mr-4 col-6" id="bookMood"onChange={ addBookToMineHandler}>
-                        <option value="none">هیچکدام</option>
+                        <option id="none" value="none">هیچکدام</option>
 
-                        <option value="ToRead">می‌خواهم بخوانم</option>
-                        <option value="Reading">دارم می‌خوانم</option>
-                        <option value="Read">خوانده‌ام</option>
+                        <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+                        <option id="Reading" value="Reading">دارم می‌خوانم</option>
+                        <option id="Read" value="Read">خوانده‌ام</option>
                     </select>
 
                 <small className="col-12 text-muted mt-2">{selectMassage}</small>
