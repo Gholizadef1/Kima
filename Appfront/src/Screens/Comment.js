@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View ,Image} from 'react-native';
+import { StyleSheet, Text, View ,Image,ScrollView} from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
@@ -70,10 +70,14 @@ const Groups = () => {
           }
     return(
         <View style={styles.container}>
+        <ScrollView>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
+           <Commentcard></Commentcard>
            <Commentcard></Commentcard>
    
       
-         
+           </ScrollView>
            
            <BottomSheet
              snapPoints={[380, 0, 0]}
