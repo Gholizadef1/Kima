@@ -71,6 +71,10 @@ const Groups = () => {
     return(
         <View style={styles.container}>
            <Commentcard></Commentcard>
+   
+      
+         
+           
            <BottomSheet
              snapPoints={[380, 0, 0]}
             ref={bs}
@@ -84,7 +88,17 @@ const Groups = () => {
             backgroundColor={'white'}
         
        />
-       <View></View>
+
+       <View style={{position:'absolute',marginTop:'175%',width:'100%'}}>
+
+       <Button style={styles.addcomment}>
+
+       <Text style={styles.nazar}>نظر شما چیست؟</Text>
+
+       </Button>
+
+       </View>
+
         </View>
     );
 }
@@ -95,5 +109,18 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       marginTop:38
     }, 
+    addcomment:{
+    
+        width:'70%',
+        marginHorizontal:'15%',
+        
+        borderRadius:17,
+        backgroundColor:'#1F7A8C'
+    },
+    nazar:{
+        marginLeft:'33%',
+        fontWeight:'bold',
+        color:'#ffff'
+    }
   });
   export default Groups;
