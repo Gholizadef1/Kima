@@ -34,6 +34,11 @@ background-color: #9dc3e9;
 
 .cardp{
    left: 63rem;
+   border:2px solid #fff;
+   box-shadow: 10px 10px 5px #ccc;
+   -moz-box-shadow: 10px 10px 5px #ccc;
+   -webkit-box-shadow: 10px 10px 5px #ccc;
+   -khtml-box-shadow: 10px 10px 5px #ccc;
 }
 .Tab{
     margin-left: 100px;
