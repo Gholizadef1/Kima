@@ -36,7 +36,7 @@ const Groups = () => {
                source={require('../../assets/line3.png')}
                style={{width:100,height:5,marginLeft:155}}
                ></Image>
-                  <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:15,fontSize:16 }}>انتخاب عکس</Text>
+                   <Text style={{marginLeft:'41.5%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما؟</Text>
                   </View>
               </View>
       
@@ -69,7 +69,7 @@ const Groups = () => {
 
                 
 
-                 <Textarea style={{backgroundColor:''}} multiline={true} style={styles.Input} autoCapitalize='words' autoCorrect={true}
+                 <Textarea style={{backgroundColor:'',borderColor:'black'}} rounded multiline={true} style={styles.Input} autoCapitalize='words' autoCorrect={true}
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
