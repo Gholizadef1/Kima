@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Image,ScrollView} from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
-import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
+import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea} from 'native-base';
 import { TextInput } from 'react-native-paper';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
@@ -11,7 +11,7 @@ import * as yup from 'yup';
 const commentschema=yup.object({
 
   comment:yup.string()
-  .required("نظر شما نمیتوناد خالی باشد")
+  .required("نظر شما نمیتواند خالی باشد")
 })
 
 const Groups = () => {
@@ -46,7 +46,7 @@ const Groups = () => {
          const renderInner=()=>{
             return(
               // console.log('inner');
-            <View style={{backgroundColor:'gray'}}>
+            <View style={{backgroundColor:'white'}}>
       
       <Formik style={{}}
                 initialValues={{comment:''}}
@@ -69,13 +69,13 @@ const Groups = () => {
 
                 
 
-                 <TextInput multiline={true} style={styles.Input} autoCapitalize='words' autoCorrect={true}
+                 <Textarea style={{backgroundColor:''}} multiline={true} style={styles.Input} autoCapitalize='words' autoCorrect={true}
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
-                placeholder={'سلااااام'} placeholderTextColor='gray' style={{}}>
+                placeholder={'نظر شما چیست؟'} placeholderTextColor='gray' style={{}}>
               
-                </TextInput>
+                </Textarea>
            
         
        
