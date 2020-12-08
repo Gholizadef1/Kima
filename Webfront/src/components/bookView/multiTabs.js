@@ -96,12 +96,36 @@ export default function FullWidthTabs(props) {
           {props.bookdescription}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <div>
-            <List >
-              
-              
+          <div style={{direction:"rtl"}}>
+            <div className="">
 
-              <div className="" style={{direction:"rtl"}}>
+              <h3>نظر شما چیست؟</h3>
+              <div className="d-flex m-2">
+                <Avatar className="m-2" alt="فاطمه" src="" style={{width:40, height:40}} />
+                <div className="flex-fill form-group m-2">
+                   <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
+                </div>
+                
+              </div>
+              <div className="d-flex justify-content-end">
+              <button type="submit" className="btn mx-3 btn-success ">ثبت</button>
+
+              </div>
+             
+              <Divider className="mt-3" variant="fullWidth" />
+
+
+
+
+
+            </div>
+
+
+
+
+
+            <List >
+               <div className="" style={{direction:"rtl"}}>
                 {/* {customElements.map((current)=>( */}
                   <div className="d-flex p-3">
                     <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
@@ -132,23 +156,13 @@ export default function FullWidthTabs(props) {
                       <small className="mr-3">
                         10-
                       </small>
-
                     </div>
-
-
-
-
                   </div>
                   <p className="px-3">
                   من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر م که  نظر من ایی
                   </p>
                   <Divider variant="middle" component="li" />
-
-
-
-
                 {/* ))} */}
-
               </div>
             </List>
 
