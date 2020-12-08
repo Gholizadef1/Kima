@@ -26,7 +26,6 @@ function NavBar (props){
   const [search,setSearch] = useState([]);
   // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
-  const [pic,setPic]=useState("");
 
 
 
@@ -64,7 +63,7 @@ useEffect(() => {
   .then(function (response){
     //console.log(response);
     //console.log(response.data);
-    setPic("http://127.0.0.1:8000"+response.data.profile_photo);
+    Cookies.set('userPic',"http://127.0.0.1:8000"+response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {
@@ -162,7 +161,7 @@ useEffect(() => {
     {/* <CgProfile size="40" vertical-align='center' color="black"
     //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
      />  */}
-     <Avatar alt="" src={pic} className="mr-2" />
+     <Avatar alt="" src={Cookies.get('userPic')} className="mr-2" />
      </a>
   </Navbar.Collapse>
 </Navbar>

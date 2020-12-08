@@ -24,6 +24,7 @@ function ProFile (props){
         Cookies.remove('userToken');
         Cookies.remove('userName');
         Cookies.remove('userId');
+        Cookies.remove('userPic');
         props.history.push('/login');
     }
     const [user , setUser] = useState({

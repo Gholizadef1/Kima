@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import Cookies from 'js-cookie';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -101,16 +102,17 @@ export default function FullWidthTabs(props) {
 
               <h3>نظر شما چیست؟</h3>
               <div className="d-flex m-2">
-                <Avatar className="m-2" alt="فاطمه" src="" style={{width:40, height:40}} />
+                <Avatar className="m-2" alt="فاطمه" src={Cookies.get('userPic')} style={{width:40, height:40}} />
                 <div className="flex-fill form-group m-2">
                    <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
                 </div>
+                <button type="submit" className="btn btn-success my-auto">ثبت</button>
                 
               </div>
-              <div className="d-flex justify-content-end">
+              {/* <div className="d-flex justify-content-end">
               <button type="submit" className="btn mx-3 btn-success ">ثبت</button>
 
-              </div>
+              </div> */}
              
               <Divider className="mt-3" variant="fullWidth" />
 
