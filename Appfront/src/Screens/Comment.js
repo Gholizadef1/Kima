@@ -20,27 +20,20 @@ const Groups = () => {
          const renderHeader=()=>{
             console.log('header')
             return(
-          
-            
-              <View style={{backgroundColor:'white',flex:1
-              }}
-              
-              >
-              <View style={{}}>
-                  <View style={{}}>
-                  {/* <Image
-               source={require('../../assets/line3.png')}
-               style={{width:300,height:3}}
-               ></Image> */}
-                  <Image
+              <View style={styles.header}>
+              <View style={styles.panelHeader}>
+                <View style={styles.panelHandle} >
+                <Image
                source={require('../../assets/line3.png')}
                style={{width:100,height:5,marginLeft:155}}
                ></Image>
                    <Text style={{marginLeft:'36%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما چیست؟</Text>
-                  </View>
+                </View>
               </View>
-      
-              </View>
+            </View>
+          
+           
+            
               )
           }
          const renderInner=()=>{
@@ -109,7 +102,7 @@ const Groups = () => {
       <View style={styles.container}>
       <BottomSheet style={{position:''}}
       
-     snapPoints={['35%', 0, 0]}
+     snapPoints={['33%', 0, 0]}
     ref={bs}
     initialSnap={1}
     callbackNode={fall}
@@ -123,8 +116,10 @@ const Groups = () => {
 
 />
 <Animated.View style={{
-     opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+  
+     opacity: Animated.add(1.0, Animated.multiply(fall, 1.0)),
  }}>
+
      <ScrollView   showsVerticalScrollIndicator={false}>
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
@@ -181,6 +176,30 @@ const styles = StyleSheet.create({
         marginLeft:'33%',
         fontWeight:'bold',
         color:'#ffff'
-    }
+    },
+    panel: {
+      padding: 20,
+      backgroundColor: 'white',
+      paddingTop: 20,
+      shadowColor: 'black',
+      borderTopColor:'black',
+      shadowOpacity: 0.5,
+    
+    },
+    header: {
+      backgroundColor: 'white',
+      shadowColor: 'black',
+      shadowOffset: {width: -1, height: -3},
+      shadowRadius: 20,
+      shadowOpacity: 0.5,
+      // elevation: 5,
+      paddingTop: 20,
+      borderTopLeftRadius: 20,
+      borderTopColor:'black',
+      borderTopRightRadius: 20,
+    },
+    panelHeader: {
+      borderTopColor:'black'
+    },
   });
   export default Groups;
