@@ -86,6 +86,8 @@ class MyComment(models.Model):
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
     comment_text=models.TextField()
     sendtime = models.DateTimeField(auto_now_add=True)
+    like = models.BooleanField()
+    dislike = models.BooleanField()
 
     def __str__(self):
         return self.comment_text
