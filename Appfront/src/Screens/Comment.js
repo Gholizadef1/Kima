@@ -25,9 +25,9 @@ const Groups = () => {
                 <View style={styles.panelHandle} >
                 <Image
                source={require('../../assets/line3.png')}
-               style={{width:100,height:5,marginLeft:155}}
+               style={{width:100,height:4,marginLeft:155}}
                ></Image>
-                   <Text style={{marginLeft:'36%',fontWeight:'bold',color:'#2b2d42',marginTop:'5%',fontSize:16 }}>نظر شما چیست؟</Text>
+                   <Text style={{marginLeft:'36%',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',fontSize:16 }}>نظر شما چیست؟</Text>
                 </View>
               </View>
             </View>
@@ -39,7 +39,7 @@ const Groups = () => {
          const renderInner=()=>{
             return(
               // console.log('inner');
-            <View style={{backgroundColor:'white'}}>
+            <View style={{backgroundColor:'#EDF2F4'}}>
       
       <Formik style={{}}
                 initialValues={{comment:''}}
@@ -62,12 +62,12 @@ const Groups = () => {
             <View>
 
                 
-              <View style={{marginHorizontal:30,borderColor:'red',marginTop:'5%'}}>
-            <Textarea rowSpan={6} bordered borderRadius={20} 
+              <View style={{marginHorizontal:30,borderColor:'red',marginTop:10}}>
+            <Textarea rowSpan={7.5} bordered borderRadius={8} 
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
-                placeholder={'نظر شما ...    '} placeholderTextColor='lightgray' fontSize={16} style={{}}>
+                placeholder={'  نظر شما ...    '} placeholderTextColor='black' fontSize={16} style={{backgroundColor:'white'}}>
               
                 </Textarea>
                 </View>
@@ -80,7 +80,7 @@ const Groups = () => {
     
           
    
-     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'3%'}}
+     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'0.5%'}}
        onPress={props.handleSubmit}
        >
          <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:'85%',width:'100%'}}>ثبت</Text>
@@ -114,7 +114,7 @@ const Groups = () => {
     renderContent={renderInner}
     renderHeader={renderHeader}            
        // style={{position:'absolute',height:200,width:250,marginTop:400}}
-    backgroundColor={'white'}
+    backgroundColor={'#edf2f4'}
 
 />
 <Animated.View style={{
@@ -163,7 +163,7 @@ const Groups = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#edf2f4',
       marginTop:35
     }, 
     addcomment:{
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     },
     panel: {
       padding: 20,
-      backgroundColor: 'white',
+      backgroundColor: '#edf2f4',
       paddingTop: 20,
       shadowColor: 'black',
       borderTopColor:'black',
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     
     },
     header: {
-      backgroundColor: 'white',
+      backgroundColor: '#EDF2F4',
       shadowColor: 'black',
       shadowOffset: {width: -1, height: -3},
       shadowRadius: 20,
