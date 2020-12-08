@@ -13,7 +13,10 @@ const Commentcard = () => {
         <View style={styles.container}>
         <LinearGradient
         // Background Linear Gradient
-        colors={['#ffff','#EDF5FD']}
+        //'#E9E9E9','#d8d8d8'
+        // '#EDF5FD','#EEF9FB','#F1F3F9','#E2E7F3','#E1E5F2'
+        //'#EFF9FB','#E2E7F3'
+        colors={['#EDF5FD','#E1E5F2']}
         style={{
          position:'absolute',
           height:'100%',
