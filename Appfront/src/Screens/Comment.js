@@ -62,27 +62,27 @@ const Groups = () => {
 
                 
               <View style={{marginHorizontal:30,borderColor:'red',marginTop:'5%'}}>
-            <Textarea rowSpan={5} bordered borderRadius={20}
+            <Textarea rowSpan={6} bordered borderRadius={20}
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
-                placeholder={'نظر شما چیست؟'} placeholderTextColor='gray' style={{}}>
+                placeholder={'نظر شما ...    '} placeholderTextColor='lightgray' fontSize={16} style={{}}>
               
                 </Textarea>
                 </View>
         
        
-           <Text style={{fontSize:10, color:'red'}}>{props.touched.comment&&props.errors.comment}</Text>
+           <Text style={{fontSize:10, color:'red',marginLeft:'10%'}}>{props.touched.comment&&props.errors.comment}</Text>
       
-            <View style={{flexDirection:'row',width:400,marginRight:20,marginLeft:10}}>
+            <View style={{flexDirection:'row',width:'100%',marginRight:20,marginLeft:10}}>
        
     
           
    
-     <Button bordered rounded style={{borderColor:'green',backgroundColor:'lightgreen'}}
+     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'3%'}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:70}}>ثبت</Text>
         </Button>
       
      </View>
@@ -102,7 +102,7 @@ const Groups = () => {
       <View style={styles.container}>
       <BottomSheet style={{position:''}}
       
-     snapPoints={['33%', 0, 0]}
+     snapPoints={['40%', 0, 0]}
     ref={bs}
     initialSnap={1}
     callbackNode={fall}
@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
       borderTopRightRadius: 20,
     },
     panelHeader: {
-      borderTopColor:'black'
+      borderTopColor:'black',
+  
     },
   });
   export default Groups;

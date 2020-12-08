@@ -12,7 +12,7 @@ const Commentcard = () => {
     console.log('comment')
     return(
         <View style={styles.container}>
-        {/* <LinearGradient
+        <LinearGradient
         // Background Linear Gradient
         //'#E9E9E9','#d8d8d8'
         // '#EDF5FD','#EEF9FB','#F1F3F9','#E2E7F3','#E1E5F2'
@@ -24,8 +24,7 @@ const Commentcard = () => {
           width:'100%',
         
         }}
-      /> */}
-     
+      />
         {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
             {/* <Avatar.Image size={30} style={styles.avatar}></Avatar.Image> */}
@@ -53,7 +52,7 @@ const Commentcard = () => {
             <Text style={styles.likenumber}>100</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
             <Text style={styles.dislikenumber}>100</Text>
-          
+            
             </View>
             <Image
          source={require('../../assets/line2.png')}
