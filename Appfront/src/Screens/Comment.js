@@ -106,41 +106,60 @@ const Groups = () => {
             )
           }
     return(
-        <View style={styles.container}>
-        <ScrollView>
-           <Commentcard></Commentcard>
-          
-         
-        
-   
+      <View style={styles.container}>
+      <BottomSheet style={{position:''}}
       
-           </ScrollView>
-           
-           <BottomSheet
-             snapPoints={[380, 0, 0]}
-            ref={bs}
-            initialSnap={1}
-            callbackNode={fall}
-            enabledGestureInteraction={true}
-            enabledContentTapInteraction={false}
-            renderContent={renderInner}
-            renderHeader={renderHeader}            
-               // style={{position:'absolute',height:200,width:250,marginTop:400}}
-            backgroundColor={'white'}
+     snapPoints={['35%', 0, 0]}
+    ref={bs}
+    initialSnap={1}
+    callbackNode={fall}
+    enabledGestureInteraction={true}
+    enabledContentTapInteraction={false}
+   //  isBackDropDismisByPress={true}
+    renderContent={renderInner}
+    renderHeader={renderHeader}            
+       // style={{position:'absolute',height:200,width:250,marginTop:400}}
+    backgroundColor={'white'}
+
+/>
+<Animated.View style={{
+     opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+ }}>
+     <ScrollView   showsVerticalScrollIndicator={false}>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+        <Commentcard></Commentcard>
+  
+   
+        </ScrollView>
         
-       />
+      
 
-       <View style={{position:'absolute',marginTop:'175%',width:'100%'}}>
+    <View style={{position:'absolute',marginTop:'175%',width:'100%'}}>
+   
 
-       <Button onPress={()=>bs.current.snapTo(0)} style={styles.addcomment}>
+    <Button style={styles.addcomment}
+    onPress={()=>bs.current.snapTo(0)}
+    >
 
-       <Text style={styles.nazar}>نظر شما چیست؟</Text>
+    <Text style={styles.nazar}>نظر شما چیست؟</Text>
 
-       </Button>
+    </Button>
 
-       </View>
+    </View>
+    </Animated.View>
 
-        </View>
+     </View>
     );
 }
 
