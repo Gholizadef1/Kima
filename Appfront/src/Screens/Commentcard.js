@@ -16,7 +16,7 @@ const Commentcard = () => {
         //'#E9E9E9','#d8d8d8'
         // '#EDF5FD','#EEF9FB','#F1F3F9','#E2E7F3','#E1E5F2'
         //'#EFF9FB','#E2E7F3'
-        colors={['#EDF5FD','#E1E5F2']}
+        colors={['#F1F3F9','#e1e5f2']}
         style={{
          position:'absolute',
           height:'100%',
@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
         fontSize:12,
     },
     likenumber:{
-    
-    marginLeft:50,
-    marginTop:'5%',
+    fontSize:12,
+    marginLeft:'11%',
+    marginTop:'6%',
     position:'absolute'
      
     },
