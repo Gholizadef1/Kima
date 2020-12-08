@@ -102,6 +102,7 @@ function ProFile (props){
                         ...prevState,
                         backError : 'نام کاربری با موفقیت عوض شد'
                     }))
+                    Cookies.set('userName',user.userName);
 
                     
                 }
@@ -203,6 +204,7 @@ function ProFile (props){
         ...prevState,
         backError : 'عکس با موفقیت عوض شد'
     }))
+    Cookies.set('userName',user.picture);
   })
   .catch(function(res){
     console.log(res);
