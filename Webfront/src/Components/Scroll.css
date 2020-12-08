@@ -1,10 +1,17 @@
 .car:hover{
-    box-shadow: 1px 5px 30px 1px rgb(55, 26, 100) !important; 
+    box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
 }
 
-.card-titl1{
-    font-size: 10px;
-    color: black;
+    .card-title3{
+        font-family: 'Mitra';
+        color: #000000;
+        font-size: 1px;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+        direction: rtl;
+        padding-left: 20px;
+        padding-top: 5px;
     
 }.card-titl0{
     
@@ -13,16 +20,15 @@
 }
 
 .car{
-    
+  
     padding-top: 10px;
-    opacity: 1;
     width: 120px;
     height: 144px;
-   
+    padding-right: 10px;
  
 }
 .col-xl-8-gholi{
-   margin-left: -200px;
+   left: 120px;
 }
 
 .squer{
@@ -31,11 +37,10 @@
     height: 80px;
     padding-top:5px;
     padding-left:17px;
-
-   
 }
 .slid{
-   margin-left: 300px;
+    margin-left: -110px;
+    margin-right: -110px;
 }
 .slick-prev:before, .slick-next:before {
     color: black !important;
