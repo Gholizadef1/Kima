@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Image,ScrollView} from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
-import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea} from 'native-base';
+import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
 import { TextInput } from 'react-native-paper';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
@@ -36,7 +36,7 @@ const Groups = () => {
                source={require('../../assets/line3.png')}
                style={{width:100,height:5,marginLeft:155}}
                ></Image>
-                   <Text style={{marginLeft:'41.5%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما؟</Text>
+                   <Text style={{marginLeft:'36%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما چیست؟</Text>
                   </View>
               </View>
       
@@ -68,15 +68,15 @@ const Groups = () => {
             <View>
 
                 
-
-                 <Textarea style={{backgroundColor:'',borderColor:'black'}} rounded multiline={true} style={styles.Input} autoCapitalize='words' autoCorrect={true}
+              <View style={{marginHorizontal:30,borderColor:'red',marginTop:'5%'}}>
+            <Textarea rowSpan={5} bordered borderRadius={20}
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
                 placeholder={'نظر شما چیست؟'} placeholderTextColor='gray' style={{}}>
               
                 </Textarea>
-           
+                </View>
         
        
            <Text style={{fontSize:10, color:'red'}}>{props.touched.comment&&props.errors.comment}</Text>
@@ -109,9 +109,9 @@ const Groups = () => {
         <View style={styles.container}>
         <ScrollView>
            <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
-           <Commentcard></Commentcard>
+          
+         
+        
    
       
            </ScrollView>
