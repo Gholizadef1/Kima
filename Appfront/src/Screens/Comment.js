@@ -27,7 +27,7 @@ const Groups = () => {
                source={require('../../assets/line3.png')}
                style={{width:100,height:5,marginLeft:155}}
                ></Image>
-                   <Text style={{marginLeft:'36%',fontWeight:'bold',color:'black',marginTop:'5%',fontSize:16 }}>نظر شما چیست؟</Text>
+                   <Text style={{marginLeft:'36%',fontWeight:'bold',color:'#2b2d42',marginTop:'5%',fontSize:16 }}>نظر شما چیست؟</Text>
                 </View>
               </View>
             </View>
@@ -45,6 +45,7 @@ const Groups = () => {
                 initialValues={{comment:''}}
                 validationSchema={commentschema}
                 onSubmit={async(values,actions)=>{
+                 actions.resetForm();
                   console.log('sumbit')
                 const back={
                  username:values.comment,
@@ -62,7 +63,7 @@ const Groups = () => {
 
                 
               <View style={{marginHorizontal:30,borderColor:'red',marginTop:'5%'}}>
-            <Textarea rowSpan={6} bordered borderRadius={20}
+            <Textarea rowSpan={6} bordered borderRadius={20} 
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
@@ -82,7 +83,7 @@ const Groups = () => {
      <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'3%'}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:70}}>ثبت</Text>
+         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:'85%',width:'100%'}}>ثبت</Text>
         </Button>
       
      </View>
@@ -108,6 +109,7 @@ const Groups = () => {
     callbackNode={fall}
     enabledGestureInteraction={true}
     enabledContentTapInteraction={false}
+    onCloseEnd={()=>{}}
    //  isBackDropDismisByPress={true}
     renderContent={renderInner}
     renderHeader={renderHeader}            
@@ -117,7 +119,7 @@ const Groups = () => {
 />
 <Animated.View style={{
   
-     opacity: Animated.add(1.0, Animated.multiply(fall, 1.0)),
+     opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
 
      <ScrollView   showsVerticalScrollIndicator={false}>
