@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Commentcard = () => {
     const [like,setlike]=useState('lightblue')
+    const [dislike,setdislike]=useState('lightblue')
     console.log('comment')
     return(
         <View style={styles.container}>
@@ -49,7 +50,7 @@ const Commentcard = () => {
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
             <Text style={styles.likenumber}>100</Text>
-            <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="dislike1" size={20} color={like} style={styles.dislike} />
+            <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
             <Text style={styles.dislikenumber}>100</Text>
             
             </View>
@@ -118,14 +119,14 @@ const styles = StyleSheet.create({
     },
     likenumber:{
     fontSize:12,
-    marginLeft:'11%',
+    marginLeft:45,
     marginTop:'6%',
     position:'absolute'
      
     },
     dislikenumber:{
         fontSize:12,
-        marginLeft:'24%',
+        marginLeft:97,
         marginTop:'6%',
         position:'absolute'
          
