@@ -99,25 +99,19 @@ export default function FullWidthTabs(props) {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div style={{direction:"rtl"}}>
             <div className="">
-
-              <h3>نظر شما چیست؟</h3>
-              <div className="d-flex m-2">
-                <Avatar className="m-2" alt="فاطمه" src={Cookies.get('userPic')} style={{width:40, height:40}} />
-                <div className="flex-fill form-group m-2">
-                   <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
-                </div>
-                <button type="submit" className="btn btn-success my-auto">ثبت</button>
-                
+            <h3>نظر شما چیست؟</h3>
+              <div className="d-flex p-3">
+                <Avatar className="" alt="فاطمه" src={Cookies.get('userPic')} style={{width:60, height:60}} />
+                <h5 className="mr-3">
+                  fateme
+                </h5>
+                <button type="submit" className="btn btn-success mr-auto my-auto">ثبت</button>
               </div>
-              {/* <div className="d-flex justify-content-end">
-              <button type="submit" className="btn mx-3 btn-success ">ثبت</button>
-
-              </div> */}
+              <div className="flex-fill form-group mx-3">
+                <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
+              </div>
              
               <Divider className="mt-3" variant="fullWidth" />
-
-
-
 
 
             </div>
