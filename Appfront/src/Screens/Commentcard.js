@@ -50,6 +50,7 @@ const Commentcard = () => {
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
             <Text style={styles.likenumber}>100</Text>
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="dislike1" size={20} color={like} style={styles.dislike} />
+            <Text style={styles.dislikenumber}>100</Text>
             
             </View>
         
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },
     dislike:{
        marginTop:'6.5%',
-       marginLeft:'10%'
+       marginLeft:'8%'
       
     },
     date:{
@@ -122,5 +123,12 @@ const styles = StyleSheet.create({
     position:'absolute'
      
     },
+    dislikenumber:{
+        fontSize:12,
+        marginLeft:'24%',
+        marginTop:'6%',
+        position:'absolute'
+         
+        },
   });
   export default Commentcard;
