@@ -58,17 +58,17 @@ const EditProfile = () => {
     const id=await AsyncStorage.getItem('id');
     // console.log(id)
     try{
-    const response = await axiosinst.get("http://f44235d04e8a.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("/api/user-profile/"+id)
         
     
   //  console.log(response)
   console.log('*****')
-        console.log(`http://f44235d04e8a.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://f44235d04e8a.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://aef3d2c5594f.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://aef3d2c5594f.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://f44235d04e8a.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://aef3d2c5594f.ngrok.io/media/default.jpg"))
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
   setname(response.data.username);
@@ -120,7 +120,7 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-          const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('/api/update-profile/',formdata,{
             headers:{
               "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -208,7 +208,7 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-          const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('/api/update-profile/',formdata,{
             headers:{
               "Content-Type":"application/json",
               "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -351,7 +351,7 @@ useFocusEffect(
         <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
-      {picture==='http://1168ebafd8e4.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://aef3d2c5594f.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
         source={require('../../assets/avatar.png')}
         style={{height:150,width:150,borderRadius:100}}
@@ -393,7 +393,7 @@ useFocusEffect(
         // await console.log(await AsyncStorage.getItem('token'))
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
-        const response=await axiosinst.put('http://f44235d04e8a.ngrok.io/api/update-profile/',backk,{
+        const response=await axiosinst.put('/api/update-profile/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -489,7 +489,7 @@ useFocusEffect(
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('http://f44235d04e8a.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
