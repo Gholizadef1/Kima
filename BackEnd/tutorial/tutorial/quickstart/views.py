@@ -222,3 +222,8 @@ class QuoteView(APIView):
             return Response(response)
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk,comment_id):
+        comment = self.get_object(comment_id)
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
