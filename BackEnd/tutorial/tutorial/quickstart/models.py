@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
-from django.contrib.postgres.fields import ArrayField
+from django.utils import timezone
 
 
 
@@ -79,3 +79,13 @@ class MyBook(models.Model):
     def __str__(self):
         return self.state
 
+
+
+class MyComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    comment_text=models.TextField()
+    sendtime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment_text
