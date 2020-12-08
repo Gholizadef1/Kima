@@ -15,12 +15,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
-
-
+from rest_framework.parsers import JSONParser
 from .serializers import * 
 
 @api_view(['POST','GET'])
@@ -183,3 +182,48 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
+
+
+
+class CommentView(APIView):
+
+    model = MyComment
+    parser_classes = [JSONParser]
+
+    def get_object(self, pk):
+        try:
+            return MyComment.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=this_book).exists():
+            comment_list = MyComment.objects.filter(current_book=this_book)
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+    def post(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            comment_text = serializer.data.get("textquote")
+            new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
+            new_comment.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Comment Saved!!',
+                'data' : [comment_text,],
+            }
+            return Response(response)
+        return Response({'error': 'failed'},
+                        status=HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk,comment_id):
+        comment = self.get_object(comment_id)
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT) 
