@@ -254,7 +254,7 @@ useEffect(() => {
                                      aria-expanded="false"
                                      variant="gray"
                                      onClick={handleShow}
-                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
                                         ویرایش
                                     </StyledButton>
                                 </div>
@@ -300,13 +300,13 @@ useEffect(() => {
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">
-                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20}}>ثبت عکس</StyledButton>
+                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20,color:"white"}}>ثبت عکس</StyledButton>
                 <input class="form-control" 
                 type="file" accept="image/*" 
                 onChange={handleImageUpload} 
                 ref={imageUploader} 
-                style={{ display: "none", }} />
-              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15}}
+                style={{ display: "none",color:"white" }} />
+              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15,color:"white"}}
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
                             </StyledButton>
@@ -331,7 +331,7 @@ useEffect(() => {
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
-                                                style={{fontFamily:'Mitra'}}
+                                                style={{fontFamily:'Mitra',color:"white"}}
                                                 >ذخیره</StyledButton>
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
@@ -352,9 +352,9 @@ useEffect(() => {
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row "
+                                                className="btn color5 d-flex flex-row"
                                                 onClick={handleChangePassClick}
-                                                style={{fontFamily:'Mitra'}}
+                                                style={{fontFamily:'Mitra',color:"white"}}
                                                
                                                 >ذخیره </StyledButton>
                                             </div>
@@ -365,7 +365,7 @@ useEffect(() => {
                                             </div>
         </Modal.Body>
         <Modal.Footer>
-          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10}}>
+          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10,color:"white"}}>
             بستن
           </StyledButton>
         </Modal.Footer>
