@@ -62,16 +62,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['username','profile_photo','email']
 
-class PostCommentSerializer(serializers.Serializer):
+# class PostCommentSerializer(serializers.Serializer):
     
-    textcomment = serializers.CharField(required=True)
+#     textcomment = serializers.CharField(required=True)
 
-class CommentSerializer(serializers.ModelSerializer):
+# class CommentSerializer(serializers.ModelSerializer):
 
-    account = UserProfileSerializer(read_only=True)
+#     account = UserProfileSerializer(read_only=True)
     
-    class Meta:
-        model = MyComment
-        fields = "__all__"
+#     class Meta:
+#         model = MyComment
+#         fields = "__all__"
 
 
