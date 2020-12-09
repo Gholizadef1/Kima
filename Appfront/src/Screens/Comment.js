@@ -131,6 +131,8 @@ const Comment = (prop) => {
         <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
         <Commentcard  name={'ee'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
         <Commentcard  name={'mmmmm'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود  بود'} ></Commentcard>
+        <Commentcard name={'bbbbb'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
+        <Commentcard  name={'ss'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' ددددددددددددددددددددددددددددددددددددددددخوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
       
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>

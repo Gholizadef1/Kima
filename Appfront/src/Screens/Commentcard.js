@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Commentcard = (prop) => {
      const[more,setmore]=useState(false);
-    const[showmore,setshowmore]=useState('بیشتر');
+    const[showmore,setshowmore]=useState('بیشتر...');
     // console.log((prop.comment.toString().split('\n').lenght===1))
     const commentt=`${prop.comment}`.toString();
     const linenumber=(commentt.split(' ').length)
@@ -79,10 +79,10 @@ const Commentcard = (prop) => {
             }
             else{
                 setmore(false)
-                setshowmore('بیشتر')
+                setshowmore('بیشتر...')
                 }}}
             style={{marginLeft:'60%',marginTop:'6%'}}
-            ><Text>{showmore}</Text>
+            ><Text style={{color:'#1f7a8c'}}>{showmore}</Text>
             </TouchableOpacity>:null}
             
             </View>
