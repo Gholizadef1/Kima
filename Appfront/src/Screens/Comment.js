@@ -15,6 +15,7 @@ const commentschema=yup.object({
 })
 
 const Groups = () => {
+  const[reset,setreset]=useState(false);
     const bs = React.createRef()
          const fall=new Animated.Value(1);
          const renderHeader=()=>{
