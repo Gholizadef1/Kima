@@ -75,6 +75,11 @@ useEffect(() => {
   const routeToProfile = ()=>{
     props.history.push('/profile');
   }
+
+  const routeToHome = ()=>{
+    props.history.push('/home');
+  }
+
   const accent= { backgroundColor: purple[500], color: '#000' }
 
   const bookSelectedHandler = ( b ) => {
@@ -89,14 +94,14 @@ useEffect(() => {
         </h1>
         <b className="btn" 
          style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
-        //  onClick=""
+          onClick={routeToHome}
         >کیما</b> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav  d-flex">
+          <ul class="navbar-nav ">
             <li class="nav-item" href="groups"
                style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>
               <a class="nav-link" href="#">گروه‌ها</a>
@@ -105,7 +110,8 @@ useEffect(() => {
                style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>
               <a class="nav-link" href="#">آزمونک</a>
             </li>
-          <div className="mr-3 d-flex justify-content-between">
+          </ul>
+          <div className="mr-3 d-flex ml-auto justify-content-between ">
             <div>
               <input className="rounded-pill text-right" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
                style={{fontFamily:'Morvarid'}}
@@ -162,7 +168,7 @@ useEffect(() => {
         </Modal.Footer>
       </Modal>
 
-          </ul>
+          
         </div>
 
 
