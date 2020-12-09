@@ -16,6 +16,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
 
+import Button from '@material-ui/core/Button';
+import {withStyles } from '@material-ui/core/styles';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -74,7 +77,7 @@ export default function FullWidthTabs(props) {
 
 
   const[userComment,setUserComment]=useState({
-    text:"نیظیر",
+    text:"",
     date:"",
     userName:""
   })
@@ -104,6 +107,21 @@ export default function FullWidthTabs(props) {
     // .catch();
 
   }
+
+
+  const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'black',
+      boxShadow: '0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
+
 
 
 
@@ -136,16 +154,24 @@ export default function FullWidthTabs(props) {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div style={{direction:"rtl"}}>
             <div className="">
-            <h3 className="text-center">نظر شما چیست؟</h3>
+              <h3 className="text-center">نظر شما چیست؟</h3>
               <div className="d-flex p-3">
                 <Avatar className="" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
-                <h5 className="mr-3">
+                <div className="d-flex flex-column flex-fill">
+                <h5 className="mr-3 ">
                   {Cookies.get('userName')}
                 </h5>
-                <button type="submit" className="btn shadow btn-success mr-auto my-auto">ثبت</button>
-              </div>
-              <div className="flex-fill form-group mx-3">
-                <textarea className="form-control" rows="1" id="comment" name="text" value={userComment.text}></textarea>
+                <div className="d-flex">
+                <div className="flex-fill form-group mx-3">
+                  <textarea className="form-control" rows="1" id="comment" name="text" value={userComment.text}></textarea>
+                </div>
+                
+                <StyledButton type="submit" className="btn shadow  align-self-start">ثبت</StyledButton>
+                </div>
+                </div>
+                
+                
+                
               </div>
               <Divider className="mt-3" variant="fullWidth" />
             </div>
@@ -212,7 +238,7 @@ export default function FullWidthTabs(props) {
                       </svg>
                     </div>
                     <div className="flex-fill  form-group mx-3">
-                <textarea className="text-center form-control" rows="1" id="comment" name="text"></textarea>
+                <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
               </div>
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
@@ -253,7 +279,7 @@ export default function FullWidthTabs(props) {
                         <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
                       </svg>
                     </div>
-                    <p className="text-center mx-3">
+                    <p className="text-right mx-3">
                       نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که 
                     </p>
                     <div>
