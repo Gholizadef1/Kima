@@ -14,7 +14,8 @@ const commentschema=yup.object({
   .required("نظر شما نمیتواند خالی باشد")
 })
 
-const Groups = () => {
+const Comment = (prop) => {
+  console.log(prop.route.params.title)
   const[reset,setreset]=useState(false);
     const bs = React.createRef()
          const fall=new Animated.Value(1);
@@ -206,4 +207,4 @@ const styles = StyleSheet.create({
   
     },
   });
-  export default Groups;
+  export default Comment;
