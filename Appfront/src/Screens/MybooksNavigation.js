@@ -7,6 +7,7 @@ import IsReading from './IsReading'
 import Bookview from './Bookview'
 import Commentcard from './Commentcard';
 import Comment from './Comment';
+import Quote from './Quote';
 
 const Mybooknav = createStackNavigator();
 
@@ -20,6 +21,10 @@ const MybooksNavigation = () => {
       <Mybooknav.Screen name = "ShowRead" component={IsRead} options={{headerShown: false}} />
       <Mybooknav.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></Mybooknav.Screen>
       <Mybooknav.Screen name="comment"   component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}></Mybooknav.Screen>
+       <Mybooknav.Screen name="quote"   component={Quote}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
       ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4'}
       })}></Mybooknav.Screen>
