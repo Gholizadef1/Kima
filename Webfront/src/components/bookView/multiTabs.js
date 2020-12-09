@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -71,6 +71,34 @@ export default function FullWidthTabs(props) {
     setValue(index);
   };
 
+  const[userComment,setUserComment]=useState({
+    text:"نیظیر",
+    date:"",
+    userName:""
+  })
+
+  // const[userQuote,setUserQuote]=useState({
+  //   text:"",
+  //   date:"",
+  //   userName:""
+  // })
+
+  const handleChangeComment = (e) => {
+    const {id , value} = e.target   
+    setUserComment(prevState => ({
+        ...prevState,
+        [id] : value
+    }))
+  }
+
+  const handleSubmitCommentClick = (e) => {
+
+
+
+  }
+
+
+
   return (
     <div  >
       <AppBar position="static" color="default"  >
@@ -102,14 +130,14 @@ export default function FullWidthTabs(props) {
             <div className="">
             <h3 className="text-center">نظر شما چیست؟</h3>
               <div className="d-flex p-3">
-                <Avatar className="" alt="فاطمه" src={Cookies.get('userPic')} style={{width:60, height:60}} />
+                <Avatar className="" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                 <h5 className="mr-3">
-                  fateme
+                  {Cookies.get('userName')}
                 </h5>
                 <button type="submit" className="btn shadow btn-success mr-auto my-auto">ثبت</button>
               </div>
               <div className="flex-fill form-group mx-3">
-                <textarea className="form-control" rows="1" id="comment" name="text"></textarea>
+                <textarea className="form-control" rows="1" id="comment" name="text" value={userComment.text}></textarea>
               </div>
               <Divider className="mt-3" variant="fullWidth" />
             </div>
@@ -117,10 +145,10 @@ export default function FullWidthTabs(props) {
                <div className="" style={{direction:"rtl"}}>
                 {/* {customElements.map((current)=>( */}
                   <div className="d-flex p-3">
-                    <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
+                    <Avatar alt="ali" src="" style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
-                        fateme
+                        ali
                       </h5>
                       <small>
                       2020-02-20   10:30
@@ -161,7 +189,7 @@ export default function FullWidthTabs(props) {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <div style={{direction:"rtl"}}>
             <div className="">
-            <h3  className="text-center">نقل قول کنید:</h3>
+            <h3  className="text-center">بریده ای از کتاب بنویسید :</h3>
               <div className="d-flex p-3">
                 <Avatar className="" alt="فاطمه" src={Cookies.get('userPic')} style={{width:60, height:60}} />
                 <h5 className="mr-3">
