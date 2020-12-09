@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
- import "./HelpingNavbar";
+// import "./HelpingNavbar";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import teal from '@material-ui/core/colors/purple';
@@ -41,29 +41,16 @@ function NavBar (props){
     setUser({ user: event.target.value });
   }
 
-const searchUsers = async () => {
-try {setError(null);
-const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
- ).then((res)=> {
-   if(res.data.count == 0){
-     setError(' ): نتیجه‌ای یافت نشد');
-   }
-   else{
-    setSearch(res.data.results);
-      }
- 
-}).catch ((err)=> {console.log(err)});
- 
+  const searchUsers = async () => {
 
-if (search == [null]) {
-setSearch([]);
-} else {
-setSearch(result.data);
-}
-}
-catch (err) {console.log(err)}
+    const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+     ).then((res)=> {
+     setSearch(res.data.results)
+      
+    });
+    }
 
-};
+
 
 useEffect(() => {
   axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
@@ -78,10 +65,9 @@ useEffect(() => {
       
   });
 
-
-
   searchUsers();
   }, [user]);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -90,6 +76,11 @@ useEffect(() => {
     props.history.push('/profile');
   }
   const accent= { backgroundColor: purple[500], color: '#000' }
+
+  const bookSelectedHandler = ( b ) => {
+    console.log(b);
+    props.history.push( '/book/' + b.id );
+  }
 
     return(   
 <Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar" style={{backgroundColor: teal[500], color: '#000'}}>
@@ -125,9 +116,12 @@ useEffect(() => {
           </div>
         </Modal.Header>
         <Modal.Body>
-    <p style={{textAlign:"center",fontFamily:'Morvarid'}}>{error}</p>
+           {search != 0 ?
+          <div>
+      
+      
        {search.map((item) => (
-     <div className="out1" key={item.id}>
+     <div className="out1" key={item.id} onClick={() => bookSelectedHandler( item)} >
        <div className="card cat1">
          <img
            className="squere1"
@@ -140,6 +134,12 @@ useEffect(() => {
           </div>
        </div>
        ))}
+         </div>
+       :
+       <div className="not found text-center"> ): نتیجه‌ای یافت نشد</div>
+}
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
