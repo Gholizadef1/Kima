@@ -26,7 +26,10 @@ const Searchnavigation=()=>{
     <SNavigation.Navigator initialRouteName={'Search'}>
       <SNavigation.Screen name='Search' component={Search} options={{headerShown: false}} ></SNavigation.Screen>
       <SNavigation.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></SNavigation.Screen>
-      <SNavigation.Screen name="comment"   component={Comment} options={({route}) => ({title: route.params.title})}></SNavigation.Screen>
+      <SNavigation.Screen name="comment"   component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}></SNavigation.Screen>
 
     </SNavigation.Navigator>
   

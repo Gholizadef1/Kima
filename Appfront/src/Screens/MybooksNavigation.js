@@ -19,7 +19,10 @@ const MybooksNavigation = () => {
       <Mybooknav.Screen name = "ShowReading" component={IsReading} options={{headerShown: false}} />
       <Mybooknav.Screen name = "ShowRead" component={IsRead} options={{headerShown: false}} />
       <Mybooknav.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></Mybooknav.Screen>
-      <Mybooknav.Screen name="comment"   component={Comment} options={({route}) => ({title: route.params.title})}></Mybooknav.Screen>
+      <Mybooknav.Screen name="comment"   component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}></Mybooknav.Screen>
 
       </Mybooknav.Navigator>
   );

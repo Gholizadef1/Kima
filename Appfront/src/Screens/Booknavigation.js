@@ -16,7 +16,10 @@ const Booknavigation = () => {
       <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen name = 'Home' component={Home} options={{headerShown: false}} ></Stack.Screen>
       <Stack.Screen name = 'Showbookview' component={Bookview} options={{headerShown: false}} />
-      <Stack.Screen name = 'comment' component={Comment}  options={({route}) => ({title: route.params.title})}/>
+      <Stack.Screen name = 'comment' component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}/>
       </Stack.Navigator>
   );
 }
