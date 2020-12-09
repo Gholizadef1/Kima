@@ -68,9 +68,8 @@ export default function FullWidthTabs() {
     },
   }));
   
-  function renderRow(props) {
+  function renderRowComment(props) {
     const { index, style } = props;
-  
     return (
       <div>
         <ListItem alignItems="flex-start">
@@ -79,10 +78,10 @@ export default function FullWidthTabs() {
           style={{direction:"rtl"}}
          >
           <ListItemText style={{textAlign:"right"}}
-            primary="فاطمه"
+            primary="کتاب ایکس"
             secondary={
             <React.Fragment  >
-              {"  kz vlkdkleiljdjینثاثینبزدزتباعباتبتبازنسپkuhjdbckedhddhkejhdhkeudheukdhjujfhudehfkudfhjkudjfhudjhfuejkhdfbujhfujdehcdujhcdjبثباعثنباعتباتعیلازعثتیلتثغسلایزتثلیتثغلیتثغنظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که "}
+              {"نظر من اینکه نظر من ای نظر من اینه که  نظر من اینه که "}
             </React.Fragment>
             }
           />
@@ -93,7 +92,34 @@ export default function FullWidthTabs() {
     );
   }
   
-  renderRow.propTypes = {
+  function renderRowQuote(props) {
+    const { index, style } = props;
+    return (
+      <div>
+        <ListItem alignItems="flex-start">
+        <ListItem
+          alignItems="flex-start"
+          style={{direction:"rtl"}}
+         >
+          <ListItemText style={{textAlign:"right"}}
+            primary="کتاب ایکس"
+            secondary={
+            <React.Fragment  >
+              {" اثینبزدزتباعjhdhkeudheukdhjujfhudehfkudfhjkudjfhudjhfuejkhdfbujhfujdehcdujhcdjبثباعثنباعتباتعیلازعثتیلتثغسلایزتثلیتثغلیتثغنظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که "}
+            </React.Fragment>
+            }
+          />
+        </ListItem>
+      </ListItem>
+  
+      </div>
+    );
+  }
+  renderRowComment.propTypes = {
+    index: PropTypes.number.isRequired,
+    style: PropTypes.object.isRequired,
+  };
+  renderRowQuote.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.object.isRequired,
   };
@@ -120,13 +146,17 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          
+          <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
+      
+        {renderRowQuote}
+        
+      </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
         <div className={classes.root}>
       <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
       
-        {renderRow}
+        {renderRowComment}
         
       </FixedSizeList>
     </div>
