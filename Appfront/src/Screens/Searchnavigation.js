@@ -26,7 +26,7 @@ const Searchnavigation=()=>{
     <SNavigation.Navigator initialRouteName={'Search'}>
       <SNavigation.Screen name='Search' component={Search} options={{headerShown: false}} ></SNavigation.Screen>
       <SNavigation.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></SNavigation.Screen>
-      <SNavigation.Screen name="comment"   component={Comment} options={{headerShown: false}}></SNavigation.Screen>
+      <SNavigation.Screen name="comment"   component={Comment} options={({route}) => ({title: route.params.title})}></SNavigation.Screen>
 
     </SNavigation.Navigator>
   
