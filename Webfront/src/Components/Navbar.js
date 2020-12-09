@@ -12,9 +12,19 @@ import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
+import {FaHome} from 'react-icons/fa';
 // import {MdGroup} from 'react-icons/md';
 // import UserList from './UsersList';
-import { Route,withRouter } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+  useRouteMatch,
+  useParams,
+  withRouter
+} from "react-router-dom";
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
 //import ReactNavbar from "react-responsive-animate-navbar";
@@ -27,15 +37,12 @@ function NavBar (props){
   // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
 
-
-
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
 
 const searchUsers = async () => {
-try {
- setError(null);
+try {setError(null);
 const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
    if(res.data.count == 0){
@@ -88,19 +95,15 @@ useEffect(() => {
 <Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar" style={{backgroundColor: teal[500], color: '#000'}}>
             <h1>  
              <GiBookshelf color="black"
-            //  style = {{padding:4, height:100,width:40}}
              />
              </h1>
              <b className=""
             
             style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
              >کیما</b>     
-  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+
   <Navbar.Collapse id="basic-navbar-nav ">
     <Nav className="mr-auto pt-2">
-      <Nav.Link className="nav-link2 h4 ml-3" href="topics"
-        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
-       >عناوین</Nav.Link>
       <Nav.Link className="nav-link2 h4" href="groups"
         style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
        >گروه‌ها</Nav.Link>
@@ -109,15 +112,8 @@ useEffect(() => {
        >آزمونک</Nav.Link>
     </Nav> 
     <>
-      {/* <div
-        // className="d-flex align-items-center justify-content-center"
-        // style={{ height: "100vh" }}
-      >
-    
-      </div> */}
       <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
       style={{fontFamily:'Morvarid'}}
-      // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
     <GoSearch size="30" color="black" />
@@ -153,16 +149,22 @@ useEffect(() => {
       </Modal>
     </>
   
+    <a class="nav-item1 mr-2" href="home" >
+       <small className="name" style={{fontFamily:'Morvarid',color:'black',margin:15,fontSize:20}} >
+      خانه
+    </small>
+
+    <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
+     </a>
        <a class="nav-item1 row"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
        <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
     </small>
+    
 
-    {/* <CgProfile size="40" vertical-align='center' color="black"
-    //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
-     />  */}
      <Avatar alt="" src={Cookies.get('userPic')} className="mr-2" />
      </a>
+
   </Navbar.Collapse>
 </Navbar>
 
