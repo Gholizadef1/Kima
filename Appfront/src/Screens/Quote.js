@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Quote = () => {
+const Quote = (prop) => {
     return(
         <View style={styles.container}>
             <Text>
