@@ -7,6 +7,7 @@ import Home from './Home';
 import Bookview from './Bookview';
 import Commentcard from './Commentcard';
 import Comment from './Comment';
+import Quote from './Quote';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,13 @@ const Booknavigation = () => {
       ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4'}
       })}/>
+      <Stack.Screen name = 'quote' component={Quote}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}/>
       </Stack.Navigator>
+      
+
   );
 }
 export default Booknavigation;
