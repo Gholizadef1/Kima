@@ -12,10 +12,11 @@ const Stack = createStackNavigator();
 
 const Booknavigation = () => {
   return (
+    // options={({navigation})=>({headerTitle:navigation.getParam()})}
       <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen name = 'Home' component={Home} options={{headerShown: false}} ></Stack.Screen>
       <Stack.Screen name = 'Showbookview' component={Bookview} options={{headerShown: false}} />
-      <Stack.Screen name = 'comment' component={Comment} options={{headerShown: false}} />
+      <Stack.Screen name = 'comment' component={Comment} options={{headerShown: false}}/>
       </Stack.Navigator>
   );
 }
