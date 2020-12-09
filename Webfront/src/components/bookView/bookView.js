@@ -11,8 +11,12 @@ import {
     withRouter
   } from "react-router-dom";
 import './bookView.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
 import RatingStars from "../../Components/RatingStars";
+import { data, event } from 'jquery';
 //import { data } from 'jquery';
 
 function BookView(props) {
@@ -20,7 +24,8 @@ function BookView(props) {
 
     //const bookId= props.match.params.id;
     console.log(bookId);
-    console.log(bookId.name);
+    //console.log(bookId.name);
+    
     const [userCoice, setUserCoice]= useState();
 
     const [selectMassage, setSelectMassage]= useState(<br></br>);
@@ -40,6 +45,39 @@ function BookView(props) {
         title:""
     }
     );
+    const [current , setCurrent] = useState(
+        { 
+           rate:"",
+        });
+
+const labels = {
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
+  };
+  
+  const useStyles = makeStyles({
+    root: {
+      width: 200,
+      display: 'flex',
+      paddingLeft:59,
+      height:22,
+      alignItems: 'center',
+      direction:"ltr",
+    },
+  });
+
+  const [value, setValue] = React.useState();
+  const [hover, setHover] = React.useState(-1);
+  const classes = useStyles();  
+  
     //console.log(useParams);
     //onsole.log(props);
     //const {bookId} = props.match.params;
@@ -78,7 +116,6 @@ function BookView(props) {
         axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
         back,{
             headers:{
-
            "Content-Type":"application/json",
            "Authorization":"Token "+Cookies.get("userToken")}
             })
@@ -110,7 +147,42 @@ function BookView(props) {
     //console.log(state.id);
     //console.log(state.title);
     //console.log(response.data.title);
+    const bo = Number.isInteger(value);
+    console.log(bo);
+    const Setval = (event, newValue) => {
+        setValue(newValue);
+    }
+    const store={
+        "rate": value,
+    }
+    const rating= JSON.stringify();
 
+    useEffect(() => {
+        axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+        rating,{
+            headers:{
+         "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
+            console.log(typeof(value));
+    },[] );
+        useEffect(() => {
+            if (props.match.params.bookId) {       
+                axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+                ,{
+                headers:{
+            "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+                    })
+                    .then(data => {
+                      setCurrent({ 
+                        rate:data[0],
+                    });
+                    console.log(data);
+                    
+                });
+        }
+    },[] );
 
 
     return(
@@ -154,7 +226,7 @@ function BookView(props) {
                     امتیاز این کتاب: 
                         </th>
                         <th style={{fontFamily:'Mitra'}}>
-                            فلان از ۵ در فلان رای
+                        {current.rate}  
                         </th>
                        
                     </tr>
@@ -164,7 +236,19 @@ function BookView(props) {
 
                         </th>
                         <th>
-                        <RatingStars/> 
+                        
+    <div className={classes.root}>
+      <Rating
+        name="hover-feedback"
+        value={value}
+        precision={0.5}
+        size="large"
+        onChange={Setval}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
+      />
+    </div>
                         </th>
                     </tr>
                   </tbody>
@@ -234,20 +318,9 @@ function BookView(props) {
 
         </div>
 
-
-
-
-
     )
+        }
 
-
-
-
-
-
-
-
-}
 
 
 export default withRouter(BookView);
