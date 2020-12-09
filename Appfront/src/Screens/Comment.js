@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#edf2f4',
-      marginTop:0
+      marginTop:2
     }, 
     addcomment:{
     

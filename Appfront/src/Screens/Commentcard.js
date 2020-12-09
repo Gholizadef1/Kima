@@ -25,6 +25,7 @@ const Commentcard = () => {
         
         }}
       /> */}
+      <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}>
         {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
             {/* <Avatar.Image size={30} style={styles.avatar}></Avatar.Image> */}
@@ -58,8 +59,9 @@ const Commentcard = () => {
          source={require('../../assets/line2.png')}
          style={{width:1000,height:1}}
          ></Image>
-        
+        </Card>
         </View>
+      
     );
 }
 
