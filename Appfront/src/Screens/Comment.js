@@ -125,7 +125,7 @@ const Comment = (prop) => {
      opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
 
-     <ScrollView   showsVerticalScrollIndicator={false}>
+     <ScrollView  style={{position:'absolute'}} showsVerticalScrollIndicator={false}>
         <Commentcard name={'سارا'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
         <Commentcard name={'آیدا'} date={'1/1/99'} likenumber={50} dislikenumber={10} comment={'خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بودخوب بود'}></Commentcard>
         <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
@@ -144,12 +144,13 @@ const Comment = (prop) => {
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
   
+  
    
         </ScrollView>
         
-      
+        {/* <View style={{position:'absolute',marginTop:'160%',width:'100%'}}></View> */}
 
-    <View style={{position:'absolute',marginTop:'160%',width:'100%'}}>
+    
    
 
     <Button style={styles.addcomment}
@@ -160,7 +161,7 @@ const Comment = (prop) => {
 
     </Button>
 
-    </View>
+    
     </Animated.View>
 
      </View>
@@ -170,14 +171,16 @@ const Comment = (prop) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#edf2f4',
+      // backgroundColor: '#B8B8B8',
+      backgroundColor:'#ffff',
       marginTop:2
     }, 
     addcomment:{
     
         width:'70%',
         marginHorizontal:'15%',
-       
+        marginTop:'160%',
+      
         borderRadius:17,
         backgroundColor:'#1F7A8C'
     },
