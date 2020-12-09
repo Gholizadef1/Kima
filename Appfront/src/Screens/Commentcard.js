@@ -7,6 +7,25 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const Commentcard = (prop) => {
+     const[more,setmore]=useState(false);
+    const[showmore,setshowmore]=useState('بیشتر');
+    // console.log((prop.comment.toString().split('\n').lenght===1))
+    const commentt=`${prop.comment}`.toString();
+    const linenumber=(commentt.split(' ').length)
+    const commenttt=`${prop.comment}`.toString().split(' ');
+    let comment4='';
+    if(linenumber>40){
+        for(let i=0;i<40;i++)
+         comment4 += commenttt[i]+' '
+       
+    }
+    else
+    {
+        comment4=prop.comment
+    }
+    
+  
+    
     const [like,setlike]=useState('lightblue')
     const [dislike,setdislike]=useState('lightblue')
     console.log('comment')
@@ -28,7 +47,6 @@ const Commentcard = (prop) => {
       {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
         {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
-            {/* <Avatar.Image size={30} style={styles.avatar}></Avatar.Image> */}
             <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>
              <ImageBackground borderRadius={100}
@@ -46,13 +64,26 @@ const Commentcard = (prop) => {
             </View>
             <View style={styles.comment}>
 
-                <Text>{prop.comment}</Text>
+                {!more?<Text>{comment4}</Text>:<Text>{prop.comment}</Text>}
             </View>
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
             <Text style={styles.likenumber}>{prop.likenumber}</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
             <Text style={styles.dislikenumber}>{prop.dislikenumber}</Text>
+            {`${prop.comment}`.toString().split(' ').length>=40?<TouchableOpacity
+            onPress={()=>{if(more===false)
+            {setmore(true)
+                setshowmore('کم تر')
+            
+            }
+            else{
+                setmore(false)
+                setshowmore('بیشتر')
+                }}}
+            style={{marginLeft:'60%',marginTop:'6%'}}
+            ><Text>{showmore}</Text>
+            </TouchableOpacity>:null}
             
             </View>
             <Image
