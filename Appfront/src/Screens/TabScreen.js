@@ -45,7 +45,7 @@ const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
       // <NavigationContainer options={{}} >
-          <Tab.Navigator
+          <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c'}}
           initialRoute={{
             headerShown: false
           }}
@@ -53,6 +53,7 @@ const TabSreen = () => {
              <Tab.Screen  name="خانه"  component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="home" size={size} color={color}  />
               ),
+              
               }}/>
                <Tab.Screen name="کتاب های من" component={MybooksNavigation} options={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="book" size={size} color={color} />
