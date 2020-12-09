@@ -63,12 +63,12 @@ const EditProfile = () => {
     
   //  console.log(response)
   console.log('*****')
-        console.log(`http://c5b7f755d88e.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://c5b7f755d88e.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://0a4a2f54bcab.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://0a4a2f54bcab.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://c5b7f755d88e.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://0a4a2f54bcab.ngrok.io/media/default.jpg"))
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
   setname(response.data.username);
@@ -351,7 +351,7 @@ useFocusEffect(
         <View style={{position:'absolute',height:150,width:150,marginTop:30,marginLeft:128,borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
-      {picture==='http://c5b7f755d88e.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://0a4a2f54bcab.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
         source={require('../../assets/avatar.png')}
         style={{height:150,width:150,borderRadius:100}}
