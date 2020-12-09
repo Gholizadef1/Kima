@@ -126,10 +126,11 @@ const Comment = (prop) => {
  }}>
 
      <ScrollView   showsVerticalScrollIndicator={false}>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
+        <Commentcard name={'سارا'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
+        <Commentcard name={'سارا'} date={'1/1/99'} likenumber={50} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بودخوب بود'}></Commentcard>
+        <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
+        <Commentcard  name={'ee'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
+      
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     nazar:{
         marginLeft:'33%',
         fontWeight:'bold',
-        color:'#ffff'
+        color:'#EDF2F4'
     },
     panel: {
       padding: 20,

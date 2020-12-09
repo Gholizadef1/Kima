@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const Commentcard = () => {
+const Commentcard = (prop) => {
     const [like,setlike]=useState('lightblue')
     const [dislike,setdislike]=useState('lightblue')
     console.log('comment')
@@ -41,18 +41,18 @@ const Commentcard = () => {
 
             </ImageBackground>
         </TouchableOpacity>
-            <Text style={styles.username}>سلام </Text>
-            <Text style={styles.date}>1/1/99</Text>
+            <Text style={styles.username}>{prop.name} </Text>
+            <Text style={styles.date}>{prop.date}</Text>
             </View>
             <View style={styles.comment}>
 
-                <Text>نظررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررررر</Text>
+                <Text>{prop.comment}</Text>
             </View>
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
-            <Text style={styles.likenumber}>100</Text>
+            <Text style={styles.likenumber}>{prop.likenumber}</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
-            <Text style={styles.dislikenumber}>100</Text>
+            <Text style={styles.dislikenumber}>{prop.dislikenumber}</Text>
             
             </View>
             <Image
