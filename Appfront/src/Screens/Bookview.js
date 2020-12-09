@@ -13,6 +13,7 @@ import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import PickerScreen from './PickerScreen';
+import StarScreen from './StarScreen';
 
 const Bookview = (prop) => {
 
@@ -25,9 +26,9 @@ const Bookview = (prop) => {
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
   setResult(response.data);
-  console.log(response.data.description)
-  console.log(response.data)
-  console.log(id);
+  // console.log(response.data.description)
+  // console.log(response.data)
+  // console.log(id);
   };
   useEffect(() =>{
     getResult(id);
@@ -49,9 +50,9 @@ const Bookview = (prop) => {
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
 
-                  
-
+                  <StarScreen/>
                   <PickerScreen style={{}} bookid={id} /> 
+
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
                     درباره کتاب :</Text>
                   <Content style={{}}>
