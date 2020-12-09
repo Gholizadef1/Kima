@@ -13,6 +13,8 @@ import {
 import './bookView.css';
 import Cookies from 'js-cookie';
 import Tabs from "./multiTabs"
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 //import { ajax } from 'jquery';
 //import { data } from 'jquery';
 
@@ -42,6 +44,8 @@ function BookView(props) {
         title:""
     }
     );
+
+    const[openSnack,setOpenSnack]=useState(false);
     //console.log(useParams);
     //onsole.log(props);
     //const {bookId} = props.match.params;
@@ -122,6 +126,7 @@ function BookView(props) {
 
             }else console.log(response.data);
 
+            setOpenSnack(true);
             //console.log(response);
         })
         .catch(function (error) {
@@ -130,6 +135,14 @@ function BookView(props) {
     
 
     }
+
+    const handleCloseSnack = () => {
+        setOpenSnack(false);
+      };
+
+    // const handleClickSnack = () => {
+    //     setOpenSnack(true);
+    //   };
     //console.log(state.id);
     //console.log(state.title);
     //console.log(response.data.title);
@@ -173,7 +186,16 @@ function BookView(props) {
                         <option id="Reading" value="Reading">دارم می‌خوانم</option>
                         <option id="Read" value="Read">خوانده‌ام</option>
                     </select>
-                    <small className="col-12 text-muted mt-2 mr-2">{selectMassage}</small>
+                    <div>
+                        {/* <Button onClick={handleClickSnack}>Top-Center</Button> */}
+                        <Snackbar
+                            anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
+                            open={openSnack}
+                            onClose={handleCloseSnack}
+                            message={selectMassage}
+                          />
+                    </div>
+                   
                     </div>
                 </div> 
             </div>
@@ -182,19 +204,7 @@ function BookView(props) {
             </div>
         </div>
       </div>
-
-
-
-
     )
-
-
-
-
-
-
-
-
 }
 
 
