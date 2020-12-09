@@ -83,33 +83,47 @@ useEffect(() => {
   }
 
     return(   
-<Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar" style={{backgroundColor: teal[500], color: '#000'}}>
-            <h1>  
-             <GiBookshelf color="black"
-             />
-             </h1>
-             <b className=""
-            
-            style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
-             >کیما</b>     
+      <nav class="navbar navbar-expand-lg navbar-light color4">
+        <h1>  
+          <GiBookshelf color="black" />
+        </h1>
+        <b className="btn" 
+         style = {{fontSize:35,fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}
+        //  onClick=""
+        >کیما</b> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <Navbar.Collapse id="basic-navbar-nav ">
-    <Nav className="mr-auto pt-2">
-      <Nav.Link className="nav-link2 h4" href="groups"
-        style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
-       >گروه‌ها</Nav.Link>
-      <Nav.Link className="nav-link2 h4" href="quize"
-       style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}
-       >آزمونک</Nav.Link>
-    </Nav> 
-    <>
-      <input className="inputNavbar col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
-      style={{fontFamily:'Morvarid'}}
-      />
-    <Button variant="gray" onClick={handleShow}>
-    <GoSearch size="30" color="black" />
-        </Button>
-      <Modal show={show} onHide={handleClose} className="maodal">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  d-flex">
+            <li class="nav-item" href="groups"
+               style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>
+              <a class="nav-link" href="#">گروه‌ها</a>
+            </li>
+            <li class="nav-item" href="quize"
+               style = {{fontFamily: 'Morvarid',fontSize:25,fontWeight:"bold",color:"black"}}>
+              <a class="nav-link" href="#">آزمونک</a>
+            </li>
+          <div className="mr-3 d-flex justify-content-between">
+            <div>
+              <input className="rounded-pill text-right" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+               style={{fontFamily:'Morvarid'}}
+               />             
+                <Button variant="gray" className="" onClick={handleShow}>
+                  <GoSearch size="30" color="black" />
+                </Button>
+                </div>
+              <a className="row mt-1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
+               <small className="" size="50" style={{padding:10,fontSize:20}}>
+                {Cookies.get('userName')}
+               </small>
+                <Avatar alt="" src={Cookies.get('userPic')} className="" />
+              </a>
+          </div>
+
+
+            <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
            <div className="header"style={{fontFamily:'Morvarid'}}>
           نتایج
@@ -147,28 +161,20 @@ useEffect(() => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
-  
-    <a class="nav-item1 mr-2" href="home" >
-       <small className="name" style={{fontFamily:'Morvarid',color:'black',margin:15,fontSize:20}} >
-      خانه
-    </small>
 
-    <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"black"}}/> 
-     </a>
-       <a class="nav-item1 row"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
-       <small className="name" size="50" style={{padding:10,fontSize:20}}>
-      {Cookies.get('userName')}
-    </small>
-    
+          </ul>
+        </div>
 
-     <Avatar alt="" src={Cookies.get('userPic')} className="mr-2" />
-     </a>
 
-  </Navbar.Collapse>
-</Navbar>
 
+      </nav>
+
+
+      
     );
     }
 
     export default withRouter( NavBar);
+
+
+
