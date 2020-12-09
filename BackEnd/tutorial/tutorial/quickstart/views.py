@@ -201,7 +201,7 @@ class UserRatingview(APIView):
         if Ratinguser.objects.filter(account=user,current_book=this_book).exists():
             wantedbookrate = get_object_or_404(Ratinguser.objects.all(),account=user,current_book=this_book)
             response = {
-                'data' : [wantedbookrate.userrate,],
+                'data' : wantedbookrate.userrate ,
             }
             return Response(response)
         response = {'message' : 'No User Rating!',}
@@ -229,7 +229,7 @@ class UserRatingview(APIView):
                 'status' : 'success',
                 'code' : 'status.HTTP_200_OK',
                 'message' : 'BookRate is updated!',
-                'data' : [postrate.data.get("rate"),],
+                'data' : postrate.data.get("rate"),
             }
             return Response(response)
         return Response(postrate.errors, status=status.HTTP_400_BAD_REQUEST)
