@@ -45,7 +45,7 @@ const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
       // <NavigationContainer options={{}} >
-          <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c'}}
+          <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c',activeBackgroundColor:'#EDF2F4'}}
           initialRoute={{
             headerShown: false
           }}
