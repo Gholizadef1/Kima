@@ -4,6 +4,7 @@ import axios from 'axios';
 import { View, ActivityIndicator, Text } from 'react-native';
 import Bookview from './Bookview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axiosinst from '../api/axiosinst';
 
 const PickerScreen = (props) => {
    const [loading, setLoading] = useState(false);
@@ -16,13 +17,13 @@ const PickerScreen = (props) => {
   });
 
   const onChangeValue = (value) => {
-    PostData();
+    PostData(value);
   };
 
 
   const getData = async () => {
     try {
-      axios.get('http://dbe797f728d2.ngrok.io/bookdetail/' + props.bookid + '/getstate', {
+      axiosinst.get('/bookdetail/' + props.bookid + '/getstate', {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -50,7 +51,7 @@ const PickerScreen = (props) => {
         "book_state": selectedValue,
       }
       const back = JSON.stringify(payload);
-      axios.post('http://92a8f1ce7b76.ngrok.io/bookdetail/' + props.bookid, back, {
+      axiosinst.post('/bookdetail/' + props.bookid, back, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()

@@ -21,7 +21,7 @@ const IsRead = ({navigation}) => {
     async function getredImageFromAPI1(){
 
     const id=await AsyncStorage.getItem('id');    
-    axiosinst.get('http://dbe797f728d2.ngrok.io/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
+    axiosinst.get('/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
     }})
     .then(function(response){

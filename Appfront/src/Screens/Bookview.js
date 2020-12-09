@@ -17,10 +17,6 @@ import StarScreen from './StarScreen';
 
 const Bookview = (prop) => {
 
-  // ratingCompleted(rating) {
-  //   console.log("Rating is: " + rating)
-  // }  
-
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
@@ -50,7 +46,7 @@ const Bookview = (prop) => {
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
 
-                  <StarScreen/>
+                  <StarScreen style={{marginBottom:10}}/>
                   <PickerScreen style={{}} bookid={id} /> 
 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
@@ -59,7 +55,7 @@ const Bookview = (prop) => {
                     <Card style={{}}>
                     
                  
-                    <Text style={{marginTop:15 , marginRight:20 , 
+                    <Text style={{marginTop:10 , marginRight:20 , 
                       textAlign:'right' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
                   </Content>
