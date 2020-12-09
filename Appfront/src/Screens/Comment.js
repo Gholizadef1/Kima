@@ -15,6 +15,7 @@ const commentschema=yup.object({
 })
 
 const Comment = (prop) => {
+ 
   console.log(prop.route.params.title)
   const[reset,setreset]=useState(false);
     const bs = React.createRef()
@@ -144,7 +145,7 @@ const Comment = (prop) => {
         
       
 
-    <View style={{position:'absolute',marginTop:'175%',width:'100%'}}>
+    <View style={{position:'absolute',marginTop:'160%',width:'100%'}}>
    
 
     <Button style={styles.addcomment}
@@ -166,13 +167,13 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#edf2f4',
-      marginTop:35
+      marginTop:0
     }, 
     addcomment:{
     
         width:'70%',
         marginHorizontal:'15%',
-        
+       
         borderRadius:17,
         backgroundColor:'#1F7A8C'
     },
