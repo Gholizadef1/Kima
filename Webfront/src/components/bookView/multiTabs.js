@@ -49,19 +49,9 @@ function a11yProps(index) {
   };
 }
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     backgroundColor: theme.palette.background.paper,
-//    //direction:"rtl",
-
-//   },
-// }));
-
 export default function FullWidthTabs(props) {
-    //console.log(props);
-  //const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,6 +60,18 @@ export default function FullWidthTabs(props) {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  const [comments, setComments] = useState([]);
+
+  // useEffect(()=>{
+  //   axis.get()
+  //   .then()
+  //   .catch();
+
+  // },[]);
+
+
+
 
   const[userComment,setUserComment]=useState({
     text:"نیظیر",
@@ -92,8 +94,14 @@ export default function FullWidthTabs(props) {
   }
 
   const handleSubmitCommentClick = (e) => {
-
-
+    // const payload={
+    //   "comment": userComment.text,
+    //   "date": userComment.date,
+    // }
+    // const back= JSON.stringify(payload);
+    // axios.post()
+    // .then()
+    // .catch();
 
   }
 
@@ -176,7 +184,7 @@ export default function FullWidthTabs(props) {
                     </div>
                   </div>
                   <p className="px-3">
-                  من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر م که  نظر من ایی
+                  من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ایی
                   </p>
                   <Divider variant="middle" component="li" />
                 {/* ))} */}
