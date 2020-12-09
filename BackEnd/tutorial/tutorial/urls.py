@@ -37,6 +37,7 @@ urlpatterns = [
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
+    path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),

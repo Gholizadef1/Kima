@@ -185,10 +185,24 @@ class UserProfileView(APIView):
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
 
+
+class MyQuoteView(generics.ListAPIView):
+    serializer_class=QuoteSerializer
+
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return MyQuote.objects.filter(account=user)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = QuoteSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+
 class QuoteView(APIView):
 
     model = MyQuote
-    parser_classes = [JSONParser]
 
     def get_object(self, pk):
         try:
@@ -208,7 +222,7 @@ class QuoteView(APIView):
     def post(self,request,pk):
         user=request.user
         this_book=book.objects.get(id=pk)
-        serializer = QuoteSerializer(data=request.data)
+        serializer = PostQuoteSerializer(data=request.data)
         if serializer.is_valid():
             quote_text = serializer.data.get("textquote")
             new_quote = MyQuote(account=user,current_book=this_book,quote_text=quote_text)
@@ -220,10 +234,7 @@ class QuoteView(APIView):
                 'data' : [quote_text,],
             }
             return Response(response)
-        return Response({'error': 'failed'},
+        return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
 
-    def delete(self, request, pk,comment_id):
-        comment = self.get_object(comment_id)
-        comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT) 
+

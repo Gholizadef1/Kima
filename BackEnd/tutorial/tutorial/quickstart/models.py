@@ -7,6 +7,8 @@ from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+from django.utils.timezone import now
+
 
 
 
@@ -84,7 +86,7 @@ class MyQuote(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
     quote_text=models.TextField()
-    sendtime = models.DateTimeField(auto_now_add=True)
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return self.quote_text
