@@ -38,8 +38,9 @@ const Quotecard = (prop) => {
          </View>
             </Card>
             
-          
+            <Text style={styles.heartnumber}>100</Text>
             <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
+           
           
           
         </View>
@@ -78,7 +79,14 @@ const styles = StyleSheet.create({
     heart:{
         position:'absolute',
         marginTop:'81%',
-        left:'80%'
+        left:'82%'
+    },
+    heartnumber:{
+        position:'absolute',
+        marginTop:'81.5%',
+        left:'88%',
+        fontSize:12,
+        color:'gray'
     }
 
   });
