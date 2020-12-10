@@ -81,13 +81,21 @@ class MyBook(models.Model):
 
 
 
-# class MyComment(models.Model):
-#     account=models.ForeignKey(Account,on_delete=models.CASCADE)
-#     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
-#     comment_text=models.TextField()
-#     sendtime = models.DateTimeField(auto_now_add=True)
-#     like = models.BooleanField()
-#     dislike = models.BooleanField()
+class MyComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    comment_text=models.TextField()
+    sendtime = models.DateTimeField(auto_now_add=True)
 
-#     def __str__(self):
-#         return self.comment_text
+    def __str__(self):
+        return self.comment_text
+
+
+class LikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    liketime = models.DateTimeField(auto_now_add=True)
+    state=models.CharField(max_length=7)
+
+    def __str__(self):
+        return self.state

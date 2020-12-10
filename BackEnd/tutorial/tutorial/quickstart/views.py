@@ -185,45 +185,44 @@ class UserProfileView(APIView):
 
 
 
-# class CommentView(APIView):
+class CommentView(APIView):
 
-#     model = MyComment
-#     parser_classes = [JSONParser]
+    model = MyComment
+    parser_classes = [JSONParser]
 
-#     def get_object(self, pk):
-#         try:
-#             return MyComment.objects.get(pk=pk)
-#         except MyComment.DoesNotExist:
-#             raise Http404
+    def get_object(self, pk):
+        try:
+            return MyComment.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
 
-#     def get(self,request,pk):
-#         this_book=book.objects.get(id=pk)
-#         if MyComment.objects.filter(current_book=this_book).exists():
-#             comment_list = MyComment.objects.filter(current_book=this_book)
-#             serilalizer = CommentSerializer(comment_list,many=True)
-#             return Response(serilalizer.data)
-#         response = {'message' : 'No Comment!',}
-#         return Response(response)
+    def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=this_book).exists():
+            comment_list = MyComment.objects.filter(current_book=this_book)
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
 
-#     def post(self,request,pk):
-#         user=request.user
-#         this_book=book.objects.get(id=pk)
-#         serializer = CommentSerializer(data=request.data)
-#         if serializer.is_valid():
-#             comment_text = serializer.data.get("textquote")
-#             new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
-#             new_comment.save()
-#             response = {
-#                 'status' : 'success',
-#                 'code' : 'status.HTTP_200_OK',
-#                 'message' : 'Comment Saved!!',
-#                 'data' : [comment_text,],
-#             }
-#             return Response(response)
-#         return Response({'error': 'failed'},
-#                         status=HTTP_404_NOT_FOUND)
+    def post(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        comment_text=request.data.get("textcomment")
+        new_comment=MyComment(account=user,current_book=this_book,comment_text=comment_text)
+        new_comment.save()
+        response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Comment Saved!!',
+                'data' : [comment_text,],
+        }
+        return Response(response)
 
-#     def delete(self, request, pk,comment_id):
-#         comment = self.get_object(comment_id)
-#         comment.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT) 
+
+#     # def delete(self, request, pk,comment_id):
+#     #     comment = self.get_object(comment_id)
+#     #     comment.delete()
+#     #     return Response(status=status.HTTP_204_NO_CONTENT) 
+
+
