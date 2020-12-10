@@ -241,7 +241,7 @@ const labels = {
                         </th>
                         <th>
                         
-    <div className={classes.root}onClick={Sendrequest}>
+    <div className={classes.root}>
       <Rating
        value={value}
         name="hover-feedback"
@@ -252,7 +252,7 @@ const labels = {
         }}
             
       />
-     
+      <button onClick={Sendrequest}></button>
      
     </div>
                         </th>
