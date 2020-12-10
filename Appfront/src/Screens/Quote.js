@@ -9,6 +9,9 @@ const Quote = (prop) => {
         <ScrollView>
            <Quotecrad></Quotecrad>
            <Quotecrad></Quotecrad>
+          
+        
+      
            </ScrollView>
         </View>
     );
