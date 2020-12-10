@@ -226,3 +226,28 @@ class CommentView(APIView):
 #     #     return Response(status=status.HTTP_204_NO_CONTENT) 
 
 
+class CommentProfileView(APIView):
+
+    model = MyComment
+    parser_classes = [JSONParser]
+
+    def get_object(self, pk):
+        try:
+            return MyComment.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=this_book).exists():
+            comment_list = MyComment.objects.filter(current_book=this_book)
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+
+
+
+
+    
