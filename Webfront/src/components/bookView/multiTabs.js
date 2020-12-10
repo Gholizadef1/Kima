@@ -18,6 +18,7 @@ import Cookies from 'js-cookie';
 
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,12 +57,21 @@ export default function FullWidthTabs(props) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChangeTab = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleChangeIndex = (index) => {
     setValue(index);
+  };
+
+  const [massage,setMassage]=useState("");
+  const[openSnack,setOpenSnack]=useState(false);
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+      }
+    setOpenSnack(false);
   };
 
   const [comments, setComments] = useState([]);
@@ -82,11 +92,7 @@ export default function FullWidthTabs(props) {
     userName:""
   })
 
-  // const[userQuote,setUserQuote]=useState({
-  //   text:"",
-  //   date:"",
-  //   userName:""
-  // })
+  const[userQuote,setUserQuote]=useState("")
 
   const handleChangeComment = (e) => {
     const {id , value} = e.target   
@@ -108,6 +114,42 @@ export default function FullWidthTabs(props) {
 
   }
 
+  // const handleChangeQuote = (e) => {
+  //   const {id , value} = e.target   
+  //   setUserQuote(prevState => ({
+  //       ...prevState,
+  //       [id] : value
+  //   }))
+  // }
+
+  const handleSubmitQuoteClick = (e) => {
+   if(userquote.length){
+    const payload={
+      "textquote": userquote
+    }
+    const back= JSON.stringify(payload);
+    axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
+    back
+    ,{
+     headers:{
+    "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    })
+    .then(response=>{
+      console.log(response);
+      if(response.status=="success"){
+        setOpenSnack(true);
+        setMassage("نقل قول شما با موفقیت ثبت شد")
+        setUserQuote("");
+
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+
+  }}
+
 
   const StyledButton = withStyles({
     root: {
@@ -127,10 +169,19 @@ export default function FullWidthTabs(props) {
 
   return (
     <div  >
+      <div>
+         <Snackbar
+              anchorOrigin={{ vertical:'top', horizontal:'center'}}
+              open={openSnack}
+              autoHideDuration={3000}
+              onClose={handleCloseSnack}
+              message={massage}
+            />
+      </div>
       <AppBar position="static" color="default"  >
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={handleChangeTab}
            indicatorColor="primary"
           // textColor="primary"
            variant="fullWidth"
@@ -217,16 +268,18 @@ export default function FullWidthTabs(props) {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <div style={{direction:"rtl"}}>
             <div className="">
-              <h3 className="text-center">نظر شما چیست؟</h3>
+              <h3 className="text-center">بریده ای از کتاب بنویسید :</h3>
               <div className="d-flex p-3">
                 <Avatar className="" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                 <div className="d-flex flex-column mt-2 flex-fill">
                 <div className="d-flex">
                 <div className="flex-fill form-group mx-3">
-                  <textarea className="form-control" rows="1" id="comment" name="text" value={userComment.text}></textarea>
+                  <textarea className="form-control" rows="1" id="comment" name="text" value={userQuote.text}></textarea>
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow  align-self-start">ثبت</StyledButton>
+                <StyledButton type="submit" className="btn shadow  align-self-start"
+                onClick="handleSubmitQuoteClick"
+                >ثبت</StyledButton>
                 </div>
                 </div>
               </div>
