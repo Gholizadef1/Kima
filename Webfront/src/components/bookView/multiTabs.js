@@ -94,25 +94,13 @@ export default function FullWidthTabs(props) {
 
   const[userQuote,setUserQuote]=useState("")
 
-  const handleChangeComment = (e) => {
-    const {id , value} = e.target   
-    setUserComment(prevState => ({
-        ...prevState,
-        [id] : value
-    }))
-  }
-
-  const handleSubmitCommentClick = (e) => {
-    // const payload={
-    //   "comment": userComment.text,
-    //   "date": userComment.date,
-    // }
-    // const back= JSON.stringify(payload);
-    // axios.post()
-    // .then()
-    // .catch();
-
-  }
+  // const handleChangeComment = (e) => {
+  //   const {id , value} = e.target   
+  //   setUserComment(prevState => ({
+  //       ...prevState,
+  //       [id] : value
+  //   }))
+  // }
 
   // const handleChangeQuote = (e) => {
   //   const {id , value} = e.target   
@@ -122,10 +110,39 @@ export default function FullWidthTabs(props) {
   //   }))
   // }
 
+  const handleSubmitCommentClick = (e) => {
+    if(userComment.length){
+      const payload={
+        "textquote": userComment
+      }
+      const back= JSON.stringify(payload);
+      axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
+      back
+      ,{
+       headers:{
+      "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then(response=>{
+        console.log(response);
+        if(response.status=="success"){
+          setOpenSnack(true);
+          setMassage("نظر شما با موفقیت ثبت شد")
+          setUserComment("");
+  
+        }
+      })
+      .catch(error=>{
+        console.log(error);
+      });
+  
+    }
+  }
+
   const handleSubmitQuoteClick = (e) => {
-   if(userquote.length){
+   if(userQuote.length){
     const payload={
-      "textquote": userquote
+      "textquote": userQuote
     }
     const back= JSON.stringify(payload);
     axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
@@ -211,10 +228,12 @@ export default function FullWidthTabs(props) {
                 <div className="d-flex flex-column mt-2 flex-fill">
                 <div className="d-flex">
                 <div className="flex-fill form-group mx-3">
-                  <textarea className="form-control" rows="1" id="comment" name="text" value={userComment.text}></textarea>
+                  <textarea className="form-control" rows="1" id="comment" name="text" value={userComment}></textarea>
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow  align-self-start">ثبت</StyledButton>
+                <StyledButton type="submit" className="btn shadow  align-self-start"
+                onClick={handleSubmitCommentClick}
+                >ثبت</StyledButton>
                 </div>
                 </div>
               </div>
@@ -274,11 +293,11 @@ export default function FullWidthTabs(props) {
                 <div className="d-flex flex-column mt-2 flex-fill">
                 <div className="d-flex">
                 <div className="flex-fill form-group mx-3">
-                  <textarea className="form-control" rows="1" id="comment" name="text" value={userQuote.text}></textarea>
+                  <textarea className="form-control" rows="1" id="quote" name="text" value={userQuote}></textarea>
                 </div>
                 
                 <StyledButton type="submit" className="btn shadow  align-self-start"
-                onClick="handleSubmitQuoteClick"
+                onClick={handleSubmitQuoteClick}
                 >ثبت</StyledButton>
                 </div>
                 </div>
