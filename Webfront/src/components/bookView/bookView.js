@@ -136,7 +136,10 @@ function BookView(props) {
 
     }
 
-    const handleCloseSnack = () => {
+    const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+          }
         setOpenSnack(false);
       };
 
@@ -191,6 +194,7 @@ function BookView(props) {
                         <Snackbar
                             anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
                             open={openSnack}
+                            autoHideDuration={3000}
                             onClose={handleCloseSnack}
                             message={selectMassage}
                           />
