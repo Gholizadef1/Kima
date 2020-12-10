@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Quotecrad from './Quotecard';
 
 const Quote = (prop) => {
     return(
         <View style={styles.container}>
-            <Text>
-                Quotes
-            </Text>
+           <Quotecrad></Quotecrad>
         </View>
     );
 }
