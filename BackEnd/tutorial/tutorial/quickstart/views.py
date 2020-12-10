@@ -238,9 +238,9 @@ class CommentProfileView(APIView):
             raise Http404
 
     def get(self,request,pk):
-        this_book=book.objects.get(id=pk)
-        if MyComment.objects.filter(current_book=this_book).exists():
-            comment_list = MyComment.objects.filter(current_book=this_book)
+        user=Account.objects.get(pk=pk)
+        if MyComment.objects.filter(account=user).exists():
+            comment_list = MyComment.objects.filter(account=user)
             serilalizer = CommentSerializer(comment_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}

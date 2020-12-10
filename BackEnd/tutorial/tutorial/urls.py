@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
+    path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
     path('bookdetail/<int:pk>/comment',quickstart.views.CommentView.as_view()),
     path('bookdetail/<int:pk>/getstate',get_bookstate,name="get_state"),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
