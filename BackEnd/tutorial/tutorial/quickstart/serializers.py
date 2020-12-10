@@ -69,6 +69,7 @@ class PostQuoteSerializer(serializers.Serializer):
 class QuoteSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
     
     class Meta:
         model = MyQuote

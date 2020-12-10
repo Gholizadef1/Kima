@@ -87,7 +87,10 @@ class MyQuote(models.Model):
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
     quote_text=models.TextField()
     sendtime = models.DateTimeField(default=timezone.now, editable=False)
+    Likes = models.IntegerField()
 
-    def __str__(self):
-        return self.quote_text
+class LikeQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    quote = models.ForeignKey(MyQuote,on_delete=models.CASCADE)
 
+    

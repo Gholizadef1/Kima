@@ -231,10 +231,34 @@ class QuoteView(APIView):
                 'status' : 'success',
                 'code' : 'status.HTTP_200_OK',
                 'message' : 'Quote Saved!!',
-                'data' : [quote_text,],
+                'data' : quote_text,
             }
             return Response(response)
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
+
+
+class LikeQuoteView(APIView):
+
+
+    def post(self,request,pk):
+        user=request.user
+        quote = MyQuote.objects.get(id=pk)
+        if LikeQuote.objects.filter(account=user,quote=quote).exists():
+            userlike = LikeQuote.objects.filter(account=user,quote=quote)
+            userlike.delete()
+            quote.Likes-=1
+            quote.save()
+            return Response({'message':"unlike success!",
+                             'data':quote.Likes,})
+        else:
+            newlike = LikeQuote(account=user,quote=quote)
+            newlike.save()
+            quote.Likes+=1
+            quote.save()
+            return Response({'message':"like success!",
+                            'data':quote.Likes,})
+
+
 
 
