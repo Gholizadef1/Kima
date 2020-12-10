@@ -13,7 +13,7 @@ const Quotecard = (prop) => {
     console.log('comment')
     return(
         <View style={styles.container}>
-     
+        <Card style={{marginLeft:'4%',marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
             <View style={styles.avatarname}>
             <TouchableOpacity   style={styles.avatar}
               onPress={()=>{}}>
@@ -27,9 +27,11 @@ const Quotecard = (prop) => {
 
             </ImageBackground>
         </TouchableOpacity>
+       
          
           
             </View>
+            </Card>
           
           
           
@@ -42,8 +44,7 @@ const styles = StyleSheet.create({
     container: {
     
       backgroundColor: '#fff',
-    
-    
+     
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
         height:65,
         width:65,
         borderRadius:100,
-        position:'absolute'    
+          
     
     },
   
