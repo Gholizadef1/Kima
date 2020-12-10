@@ -7,7 +7,7 @@ const Quote = (prop) => {
     return(
         <View style={styles.container}>
         <ScrollView>
-           <Quotecrad></Quotecrad>
+           <Quotecrad hieght={300}></Quotecrad>
            <Quotecrad></Quotecrad>
           
         

@@ -13,7 +13,7 @@ const Quotecard = (prop) => {
     console.log('comment')
     return(
         <View style={styles.container}>
-        <Card style={{marginLeft:'4%',marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
+        <Card style={{marginLeft:'4%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
             <View style={styles.avatarname}>
             <TouchableOpacity   style={styles.avatar}
               onPress={()=>{}}>
