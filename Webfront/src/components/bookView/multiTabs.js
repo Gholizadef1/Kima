@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
+import axios from 'axios';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -75,6 +75,8 @@ export default function FullWidthTabs(props) {
   };
 
   const [comments, setComments] = useState([]);
+  
+  const [quotes, setQuotes] = useState([]);
 
   // useEffect(()=>{
   //   axis.get()
@@ -86,11 +88,7 @@ export default function FullWidthTabs(props) {
 
 
 
-  const[userComment,setUserComment]=useState({
-    text:"",
-    date:"",
-    userName:""
-  })
+  const[userComment,setUserComment]=useState("")
 
   const[userQuote,setUserQuote]=useState("")
 
@@ -113,10 +111,10 @@ export default function FullWidthTabs(props) {
   const handleSubmitCommentClick = (e) => {
     if(userComment.length){
       const payload={
-        "textquote": userComment
+        "textcomment": userComment
       }
       const back= JSON.stringify(payload);
-      axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
+      axios.post('http://127.0.0.1:8000/api/comments/'+props.book,
       back
       ,{
        headers:{
@@ -239,6 +237,16 @@ export default function FullWidthTabs(props) {
               </div>
               <Divider className="mt-3" variant="fullWidth" />
             </div>
+
+            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
+              <label className="ml-2 mt-1">براساس:</label>
+              <select className="form-control rounded-pill" style={{width:120}} id="" onChange="" >
+                  <option id="rateBase" value="none">محبوب‌ترین</option>
+                  <option id="timeBase" value="ToRead">جدید‌ترین</option>
+              </select>
+            </div>
+
+
             <List >
                <div className="" style={{direction:"rtl"}}>
                 {/* {customElements.map((current)=>( */}
@@ -304,6 +312,15 @@ export default function FullWidthTabs(props) {
               </div>
               <Divider className="mt-3" variant="fullWidth" />
             </div>
+
+            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
+              <label className="ml-2 mt-1">براساس:</label>
+              <select className="form-control rounded-pill" style={{width:120}} id="" onChange="" >
+                  <option id="rateBase" value="none">محبوب‌ترین</option>
+                  <option id="timeBase" value="ToRead">جدید‌ترین</option>
+              </select>
+            </div>
+
             <List >
                <div className="" style={{direction:"rtl"}}>
                 {/* {customElements.map((current)=>( */}
@@ -335,8 +352,50 @@ export default function FullWidthTabs(props) {
                         <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
                       </svg>
                     </div>
-                    <p className="text-right mx-3">
+                    <p className="text-right col-11 mx-3">
                       نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که 
+                    </p>
+                    <div>
+                      <svg style={{width:24,height:24}} viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M11 18V10H9.12L11.12 6H5.38L3 10.76V18M9 16H5V11.24L6.62 8H7.88L5.88 12H9M21 18V10H19.12L21.12 6H15.38L13 10.76V18M19 16H15V11.24L16.62 8H17.88L15.88 12H19Z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <Divider variant="middle" component="li" />
+                {/* ))} */}
+              </div>
+              <div className="" style={{direction:"rtl"}}>
+                {/* {customElements.map((current)=>( */}
+                  <div className="d-flex p-3">
+                    <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
+                    <div className="ml-auto mr-3">
+                      <h5>
+                        fateme
+                      </h5>
+                      <small>
+                      2020-02-20   10:30
+                      </small>
+                    </div>
+                    <div className="d-flex">
+                    <small className=" mt-3">
+                        10
+                      </small>
+                      <div className="btn "> 
+                        <svg width="2em" height="2em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div className="px-3 d-flex justify-content-center align-items-center text-center mx-3">
+                    <div>
+                      <svg style={{width:24,height:24}} viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
+                      </svg>
+                    </div>
+                    <p className="text-right col-11 mx-3">
+                      نقل قول اینی که نقل قول اینیل اینی که نقل قول اینی که 
                     </p>
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
