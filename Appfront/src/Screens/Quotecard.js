@@ -32,14 +32,14 @@ const Quotecard = (prop) => {
          </ImageBackground>
      </TouchableOpacity>
      <Text style={styles.date}>1/1/99</Text>
-     <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={50} color={like} />
+    
       
        
          </View>
             </Card>
             
           
-          
+            <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
           
           
         </View>
@@ -76,7 +76,9 @@ const styles = StyleSheet.create({
         position:'absolute',marginTop:'73%',marginHorizontal:119,marginBottom:50
     },
     heart:{
-     
+        position:'absolute',
+        marginTop:'81%',
+        left:'80%'
     }
 
   });
