@@ -46,8 +46,8 @@ import { useFocusEffect } from '@react-navigation/native';
        setemail(response.data.email)
        console.log('*****')
        console.log(response.data.profile_photo)
-            console.log(`http://1168ebafd8e4.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://1168ebafd8e4.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://76d7329b4537.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://76d7329b4537.ngrok.io${response.data.profile_photo}`)
             console.log(';;;;;')
             console.log(picture);
             console.log(picture)
@@ -138,7 +138,7 @@ import { useFocusEffect } from '@react-navigation/native';
          style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         
-        {picture==='http://1168ebafd8e4.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+        {picture==='http://76d7329b4537.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
