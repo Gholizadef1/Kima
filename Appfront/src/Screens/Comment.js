@@ -15,7 +15,7 @@ const commentschema=yup.object({
 })
 
 const Comment = (prop) => {
- 
+  const [showbutton,setshowbutton]=useState(true);
   console.log(prop.route.params.title)
   const[reset,setreset]=useState(false);
     const bs = React.createRef()
@@ -112,7 +112,7 @@ const Comment = (prop) => {
     callbackNode={fall}
     enabledGestureInteraction={true}
     enabledContentTapInteraction={false}
-    onCloseEnd={()=>{}}
+    onCloseEnd={()=>{setshowbutton(true) }}
    //  isBackDropDismisByPress={true}
     renderContent={renderInner}
     renderHeader={renderHeader}            
@@ -125,7 +125,7 @@ const Comment = (prop) => {
      opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
 
-     <ScrollView  style={{position:'absolute'}} showsVerticalScrollIndicator={false}>
+     <ScrollView  style={{}} showsVerticalScrollIndicator={false}>
         <Commentcard name={'سارا'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
         <Commentcard name={'آیدا'} date={'1/1/99'} likenumber={50} dislikenumber={10} comment={'خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بودخوب بود'}></Commentcard>
         <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
@@ -143,6 +143,7 @@ const Comment = (prop) => {
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
+     
   
   
    
@@ -153,16 +154,24 @@ const Comment = (prop) => {
     
    
 
-    <Button style={styles.addcomment}
-    onPress={()=>bs.current.snapTo(0)}
+   
+
+    
+    </Animated.View>
+   
+
+    {showbutton?<Button style={styles.addcomment}
+    onPress={()=>{
+     setshowbutton(false) 
+      bs.current.snapTo(0)
+      }}
     >
 
     <Text style={styles.nazar}>نظر شما چیست؟</Text>
 
     </Button>
-
-    
-    </Animated.View>
+    :null}
+  
 
      </View>
     );
@@ -180,7 +189,7 @@ const styles = StyleSheet.create({
         width:'70%',
         marginHorizontal:'15%',
         marginTop:'160%',
-      
+        position:'absolute',
         borderRadius:17,
         backgroundColor:'#1F7A8C'
     },
