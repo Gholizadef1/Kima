@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import axiosinst from '../api/axiosinst'
 
 export default class StarScreen extends Component {
 
@@ -30,7 +31,7 @@ UpdateRating(key){
         <TouchableOpacity
           key={i}
           activeOpacity={0.7}
-          onPress={this.UpdateRating.bind(this,i)}
+          onPress={this.UpdateRating.bind(this,i) , PostRating(this.state.Default_Rating)}
           >
           <Image
             style={styles.ImageStyle}
@@ -39,7 +40,34 @@ UpdateRating(key){
         </TouchableOpacity>
       )
     }
+
+    const PostRating = async(value)=>{
+      console.log(value);
+      console.log(value==="");
+      
+      console.log(value)
+      if(value!=""){
+      const payload={
+          "data": value,
+      }
+      const back= JSON.stringify(payload);
+      axiosinst.post('/api/bookrating/'+this.props.bookid,back,{
+        "headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }
+                })
+      .then(async function(response){
+        console.log(response.data)
+        console.log('\n'+'++++++++'+'\n')
+      })
+      .catch(function (error) {
+         console.log(error);
+      });
+    }
+}
     return (
+      
+
       <View style={styles.container}>
         <View style={styles.childView}>
           {React_Native_Rating_Bar}
