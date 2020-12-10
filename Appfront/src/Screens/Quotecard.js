@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
@@ -10,6 +5,7 @@ import { Avatar } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+// import { Ionicons } from '@expo/vector-icons';
 
 const Quotecard = (prop) => {
 
@@ -24,6 +20,7 @@ const Quotecard = (prop) => {
         <View style={{}}>
        
         <Text style={styles.date}>1/1/99</Text>
+        <AntDesign  style={styles.heart}name="heart" size={20} color="gray" />
          <TouchableOpacity  style={styles.avatar}
            onPress={()=>{}}>
 
@@ -74,6 +71,11 @@ const styles = StyleSheet.create({
     },
     avatarname:{
         position:'absolute',marginTop:'73%',marginHorizontal:119,marginBottom:50
+    },
+    heart:{
+        position:'absolute',
+        marginTop:'81%',
+        left:'80%'
     }
 
   });
