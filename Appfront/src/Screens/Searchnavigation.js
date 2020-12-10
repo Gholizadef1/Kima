@@ -12,8 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Bookresult from './Bookresult';
 import Search from './Search';
 import Bookview from './Bookview';
-import Commentcard from './Commentcard';
-import Comment from './Comment';
+
 import Quote from './Quote';
 
 // import TabScreen from './TabScreen';
@@ -28,11 +27,7 @@ const Searchnavigation=()=>{
     <SNavigation.Navigator initialRouteName={'Search'}>
       <SNavigation.Screen name='Search' component={Search} options={{headerShown: false}} ></SNavigation.Screen>
       <SNavigation.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></SNavigation.Screen>
-      <SNavigation.Screen name="comment"   component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
-      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
-      },headerStyle:{backgroundColor:'#EDF2F4'}
-      })}></SNavigation.Screen>
-
+    
 <SNavigation.Screen name="quote"   component={Quote}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
       ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4'}
