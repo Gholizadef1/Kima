@@ -74,8 +74,8 @@ const labels = {
     },
   });
 
-  const [value, setValue] = React.useState();
-  const [hover, setHover] = React.useState(-1);
+  const [value, setValue] = useState();
+  const [hover, setHover] = useState(-1);
   const classes = useStyles();  
   
     //console.log(useParams);
@@ -90,6 +90,8 @@ const labels = {
                   //console.log(response.data.title);
                   setState({ 
                     author: response.data.author,
+                    average_rating_count:response.data.average_rating_count,
+                    average_rating:response.data.average_rating,
                     avgrating: response.data.avgrating,
                     description: response.data.description,
                     id: response.data.id,
@@ -144,30 +146,29 @@ const labels = {
     
 
     }
-    //console.log(state.id);
-    //console.log(state.title);
-    //console.log(response.data.title);
     const bo = Number.isInteger(value);
     console.log(bo);
-    const Setval = (event, newValue) => {
-        setValue(newValue);
+    console.log(value);
+    async function Sendrequest (e) {
+        //console.log(event);
+    await setValue(e.target.value);
+        console.log(e.target.value);
+    const payload={
+        "rate":value,
     }
-    const store={
-        "rate": value,
-    }
-    const rating= JSON.stringify();
-
-    useEffect(() => {
+    console.log(payload);
+  let back= JSON.stringify(payload);
+    console.log(back);
         axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
-        rating,{
+        back,{
             headers:{
-         "Content-Type":"application/json",
+           "Content-Type":"application/json",
            "Authorization":"Token "+Cookies.get("userToken")}
-            })
-            console.log(typeof(value));
-    },[] );
+            },)
+   
+    }
         useEffect(() => {
-            if (props.match.params.bookId) {       
+            
                 axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
                 ,{
                 headers:{
@@ -175,13 +176,15 @@ const labels = {
            "Authorization":"Token "+Cookies.get("userToken")}
                     })
                     .then(data => {
-                      setCurrent({ 
-                        rate:data[0],
-                    });
-                    console.log(data);
-                    
+                      
+                      setValue(data);
+                      console.log(data.data);
+                      console.log(setValue(data));
+                    //   console.log(setValue(data))
+                }).catch(error =>{
+                    console.log(error)
                 });
-        }
+            
     },[] );
 
 
@@ -226,7 +229,8 @@ const labels = {
                     امتیاز این کتاب: 
                         </th>
                         <th style={{fontFamily:'Mitra'}}>
-                        {current.rate}  
+                       
+                        {state.average_rating_count}
                         </th>
                        
                     </tr>
@@ -237,17 +241,19 @@ const labels = {
                         </th>
                         <th>
                         
-    <div className={classes.root}>
+    <div className={classes.root}onClick={Sendrequest}>
       <Rating
+       value={value}
         name="hover-feedback"
-        value={value}
-        precision={0.5}
+        precision={1}
         size="large"
-        onChange={Setval}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
+        onChange={(event,newValue)=>{
+            setValue(newValue)
         }}
+            
       />
+     
+     
     </div>
                         </th>
                     </tr>
