@@ -9,8 +9,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Quotecard = (prop) => {
 
-    const [like,setlike]=useState('lightblue')
+    const [like,setlike]=useState('gray')
     const [dislike,setdislike]=useState('lightblue')
+
     console.log('comment')
     return(
         <View style={styles.container}>
@@ -19,8 +20,7 @@ const Quotecard = (prop) => {
      
         <View style={{}}>
        
-        <Text style={styles.date}>1/1/99</Text>
-        <AntDesign  style={styles.heart}name="heart" size={20} color="gray" />
+      
          <TouchableOpacity  style={styles.avatar}
            onPress={()=>{}}>
 
@@ -31,6 +31,9 @@ const Quotecard = (prop) => {
               >
          </ImageBackground>
      </TouchableOpacity>
+     <Text style={styles.date}>1/1/99</Text>
+     <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={50} color={like} />
+      
        
          </View>
             </Card>
@@ -73,9 +76,7 @@ const styles = StyleSheet.create({
         position:'absolute',marginTop:'73%',marginHorizontal:119,marginBottom:50
     },
     heart:{
-        position:'absolute',
-        marginTop:'81%',
-        left:'80%'
+     
     }
 
   });
