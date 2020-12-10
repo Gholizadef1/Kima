@@ -13,25 +13,26 @@ const Quotecard = (prop) => {
     console.log('comment')
     return(
         <View style={styles.container}>
-        <Card style={{marginLeft:'4%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
-            <View style={styles.avatarname}>
-            <TouchableOpacity   style={styles.avatar}
-              onPress={()=>{}}>
-             <ImageBackground borderRadius={100}
-      
-               source={require('../../assets/avatar.png')}
-               
-               style={styles.avatar}
         
-                 >
+        <Card style={{marginLeft:'4%',height:prop.height,marginRight:'4%',borderRadius:10,marginBottom:'15%' ,backgroundColor:'#EDF2F4'}}>
 
-            </ImageBackground>
-        </TouchableOpacity>
+        <View style={{}}>
+
+         <TouchableOpacity  style={styles.avatar}
+           onPress={()=>{}}>
+
+          <ImageBackground borderRadius={100}
+
+            source={require('../../assets/avatar.png')}
+            style={styles.avatar}
+              >
+         </ImageBackground>
+     </TouchableOpacity>
        
-         
-          
-            </View>
+         </View>
             </Card>
+            
+          
           
           
           
@@ -52,7 +53,9 @@ const styles = StyleSheet.create({
         height:65,
         width:65,
         borderRadius:100,
-          
+        position:'absolute',marginTop:'60%',
+        left:'35%'
+    
     
     },
   
@@ -62,6 +65,9 @@ const styles = StyleSheet.create({
         left:80,
         fontSize:12,
     },
+    avatarname:{
+        position:'absolute',marginTop:'73%',marginHorizontal:119,marginBottom:50
+    }
 
   });
   export default Quotecard;
