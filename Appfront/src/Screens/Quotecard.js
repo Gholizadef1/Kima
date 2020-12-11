@@ -38,7 +38,7 @@ const Quotecard = (prop) => {
    
         
             </Card>
-          <View style={{marginBottom:100}}>
+          <View style={{marginBottom:'15%'}}>
           
    
      <Text style={styles.date}>1/1/99</Text>
@@ -85,19 +85,20 @@ const styles = StyleSheet.create({
     heart:{
       position:'absolute',
     
-      right:'12%'     
+      right:'14%'     
       
     },
     heartnumber:{   
       position:'absolute',
     
-        left:'88%',
+        right:'6%',
         fontSize:12,
         color:'gray'
     },
     naghlghol:{
-        position:'absolute',
+    
         marginTop:'8%',
+        marginBottom:100,
         marginHorizontal:'6%',
         fontSize:14,
         
