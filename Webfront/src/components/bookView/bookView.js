@@ -232,11 +232,11 @@ const labels = {
     return(
       <div>
         <div className="container-fluid col-8 rTOl text-right " >
-            <div className="d-flex flex-row shadow color1 table-borderless my-1">
-                <div className="col-3">
-                    <img src={state.imgurl} className="m-3 img-fluid shadow float-right" alt=""  style={{width:'100%',height:'auto'}} />
+            <div className="row no-gutters position-relative shadow color1 table-borderless my-1">
+                <div className="col-md-4 mb-md-0 p-md-4 p-sm-4">
+                    <img src={state.imgurl} className=" img-fluid shadow float-right" alt=""  style={{width:'100%',height:'auto'}} />
                 </div>
-                <div className="d-flex col-6 flex-column p-3">
+                <div className="col-md-8 position-static p-4 pl-md-0 d-flex flex-column p-3">
 
                 <h2 style={{fontFamily:'Mitra'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
@@ -273,21 +273,18 @@ const labels = {
 
                         </th>
                         <th>
-                        
-    <div className={classes.root}>
-      <Rating
-       value={value}
-        name="hover-feedback"
-        precision={1}
-        size="large"
-        onChange={(event,newValue)=>{
-            setValue(newValue)
-        }}
-            
-      />
-      <button onClick={Sendrequest}></button>
-     
-    </div>
+                            <div className={classes.root}>
+                              <Rating
+                               value={value}
+                                name="hover-feedback"
+                                precision={1}
+                                size="large"
+                                onChange={(event,newValue)=>{
+                                    setValue(newValue)
+                                }}
+                              />
+                              <button onClick={Sendrequest}></button>
+                            </div>
                         </th>
                     </tr>
                   </tbody>
@@ -301,7 +298,6 @@ const labels = {
                         <option id="Read" value="Read">خوانده‌ام</option>
                     </select>
                     <div>
-                        {/* <Button onClick={handleClickSnack}>Top-Center</Button> */}
                         <Snackbar
                             anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
                             open={openSnack}

@@ -389,7 +389,7 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
-                            <div className="Tab">
+                            <div className="Tabz">
                               <Tabs/>
                               </div>
                             </div>
