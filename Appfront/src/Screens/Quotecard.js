@@ -16,32 +16,37 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,marginBottom:'11%' ,backgroundColor:'#EDF2F4'}}>
-     
-        <View style={{}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
+        <Text style={styles.naghlghol}>سلااااااا           ااااا                      اااااا     اااااا                                                                                                                           k                               ه                                       z
+      ن
+      k    ااااا      تتت    اام</Text>
+      <View style={{position:'absolute',marginTop:prop.height-30,marginLeft:'27%'}}>
        
-      <Text style={styles.naghlghol}>سلااااااا           ااااا                      اااااا     اااااا               ااااا      تتت    اام</Text>
-         <TouchableOpacity  style={styles.avatar}
-           onPress={()=>{}}>
+  
+       <TouchableOpacity  style={styles.avatar}
+         onPress={()=>{}}>
 
-          <ImageBackground borderRadius={100}
+        <ImageBackground borderRadius={100}
 
-            source={require('../../assets/avatar.png')}
-            style={styles.avatar}
-              >
-         </ImageBackground>
-     </TouchableOpacity>
+          source={require('../../assets/avatar.png')}
+          style={styles.avatar}
+            >
+       </ImageBackground>
+   </TouchableOpacity>
+   </View>
+           
+   
+        
+            </Card>
+          <View style={{marginBottom:100}}>
+          
+   
      <Text style={styles.date}>1/1/99</Text>
     
-      
-       
-         </View>
-            </Card>
-            
-            <Text style={styles.heartnumber}>100</Text>
-            <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
+     <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
+     <Text style={styles.heartnumber}>100</Text>
            
-          
+     </View>
           
         </View>
       
@@ -60,30 +65,32 @@ const styles = StyleSheet.create({
         height:65,
         width:65,
         borderRadius:100,
-      marginTop:'60%',
-        left:'35%'
+        position:'absolute',
+        left:'35%',
+         
     
     
     },
   
     date:{
-        position:'absolute',
-        marginTop:'81%',
-        left:'2%',
+      position:'absolute',
+        top:'4%',
+        left:'6%',
         fontSize:12,
         color:'gray'
     },
     avatarname:{
-        position:'absolute',marginTop:'73%',marginHorizontal:119,marginBottom:50
+   marginHorizontal:119,marginBottom:50
     },
     heart:{
-        position:'absolute',
-        marginTop:'81%',
-        left:'82%'
+      position:'absolute',
+    
+      right:'12%'     
+      
     },
-    heartnumber:{
-        position:'absolute',
-        marginTop:'81.5%',
+    heartnumber:{   
+      position:'absolute',
+    
         left:'88%',
         fontSize:12,
         color:'gray'
