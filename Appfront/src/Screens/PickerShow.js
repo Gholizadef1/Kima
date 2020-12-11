@@ -31,10 +31,10 @@ export default class PickerShow extends Component {
   render() {
     console.log(this.props.bookid);    
     const addBookToMineHandler = async(getValue)=>{
-      console.log(getValue);
-      console.log(getValue==="");
+      // console.log(getValue);
+      // console.log(getValue==="");
       
-      console.log(getValue)
+      // console.log(getValue)
       if(getValue!=""){
       const payload={
           "book_state": getValue,

@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import axiosinst from '../api/axiosinst'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class StarScreen extends Component {
 
@@ -24,6 +25,30 @@ UpdateRating(key){
   this.setState({Default_Rating:key})
 }
   render() {
+
+    console.log(this.props.bookid +'****')
+
+    const PostRating = async(value)=>{
+
+      if(value!=""){
+      const payload={
+          "Rate": value,
+      }
+      const back= JSON.stringify(payload);
+      axios.post('http://f9878e5c6e68.ngrok.io/api/bookrating/'+this.props.bookid,back,{
+        "headers":{"content-type":"application/json",
+        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+                }
+                })
+      .then(async function(response){
+        console.log(response.data+'@@@')
+        console.log('\n'+'++++++++'+'\n')
+      })
+      .catch(function (error) {
+         console.log(error);
+      });
+    }
+}
     let React_Native_Rating_Bar=[];
     for(var i=1;i<=this.state.Max_rating;i++)
     {
@@ -31,7 +56,8 @@ UpdateRating(key){
         <TouchableOpacity
           key={i}
           activeOpacity={0.7}
-          onPress={this.UpdateRating.bind(this,i) , PostRating(this.state.Default_Rating)}
+          onPress={this.UpdateRating.bind(this,i)}
+          
           >
           <Image
             style={styles.ImageStyle}
@@ -41,34 +67,14 @@ UpdateRating(key){
       )
     }
 
-    const PostRating = async(value)=>{
-      console.log(value);
-      console.log(value==="");
-      
-      console.log(value)
-      if(value!=""){
-      const payload={
-          "data": value,
-      }
-      const back= JSON.stringify(payload);
-      axiosinst.post('/api/bookrating/'+this.props.bookid,back,{
-        "headers":{"content-type":"application/json",
-        "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-                }
-                })
-      .then(async function(response){
-        console.log(response.data)
-        console.log('\n'+'++++++++'+'\n')
-      })
-      .catch(function (error) {
-         console.log(error);
-      });
-    }
-}
+    console.log(this.state.Default_Rating+'--------')
+
+
     return (
       
 
       <View style={styles.container}>
+
         <View style={styles.childView}>
           {React_Native_Rating_Bar}
         </View>

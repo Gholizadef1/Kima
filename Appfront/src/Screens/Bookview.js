@@ -47,7 +47,7 @@ const Bookview = (prop) => {
                   <Text style={{marginTop:5}}>{result.author}</Text>
 
                   <StarScreen style={{marginBottom:10}} bookid={id}/>
-                  <PickerScreen style={{}} bookid={id} /> 
+                  {/* <PickerScreen style={{}} bookid={id} />  */}
 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
                     درباره کتاب :</Text>

@@ -18,12 +18,12 @@ const PickerScreen = (props) => {
 
   const onChangeValue = (value) => {
     PostData(value);
+    // console.log(onChangeValue)
   };
-
 
   const getData = async () => {
     try {
-      axiosinst.get('/bookdetail/' + props.bookid + '/getstate', {
+      axios.get('http://f9878e5c6e68.ngrok.io/bookdetail/' + props.bookid + '/getstate', {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -44,14 +44,14 @@ const PickerScreen = (props) => {
     }
   };
 
-  const PostData = async () => {
-    console.log(selectedValue);
+  const PostData = async (value) => {
+//    console.log(value);
     if (value != "") {
       const payload = {
-        "book_state": selectedValue,
+        "book_state": value,
       }
       const back = JSON.stringify(payload);
-      axiosinst.post('/bookdetail/' + props.bookid, back, {
+      axios.post('http://f9878e5c6e68.ngrok.io/bookdetail/' + props.bookid, back, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -60,15 +60,15 @@ const PickerScreen = (props) => {
         .then(async function (response) {
           console.log(response.data)
 
-          console.log('\n' + '++++++++' + '\n')
+//          console.log('\n' + '++++++++' + '\n')
         })
         .catch(function (error) {
           console.log(error);
         });
     }
   }
-  console.log('********')
-  console.log(selectedValue)
+//  console.log('********')
+//  console.log(selectedValue)
 
 
   if (loading) {
@@ -92,9 +92,11 @@ const PickerScreen = (props) => {
               mode="dropdown"
               iosIcon={<Icon name="arrow-down" />}
               headerTitleStyle={{ color: "#fff" }}
+              
               selectedValue={selectedValue}
               onChangeValue={(value) => {
-                onChangeValue(value);
+//                onChangeValue(value);
+//                 console.log(value)
               }}
             >
               <Picker.Item label="اضافه کنید" value="null" />
