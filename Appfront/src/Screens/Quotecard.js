@@ -16,11 +16,11 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height+30,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
         <Text style={styles.naghlghol}>سلااااااا           ااااا                      اااااا     اااااا                                                                                                                           k                               ه                                       z
       ن
       k    ااااا      تتت    اام</Text>
-      <View style={{position:'absolute',marginTop:prop.height-30,marginLeft:'27%'}}>
+      <View style={{position:'absolute',marginTop:prop.height,marginLeft:'27%'}}>
        
   
        <TouchableOpacity  style={styles.avatar}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     naghlghol:{
     
         marginTop:'8%',
-        marginBottom:100,
+        
         marginHorizontal:'6%',
         fontSize:14,
         

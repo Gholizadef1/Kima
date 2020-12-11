@@ -6,7 +6,7 @@ import Quotecrad from './Quotecard';
 const Quote = (prop) => {
     return(
         <View style={styles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350}></Quotecrad>
            <Quotecrad height={300}></Quotecrad>
           
