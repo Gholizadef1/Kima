@@ -8,7 +8,7 @@ import {CgProfile} from 'react-icons/cg';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
-import "./HelpingNav.css";
+//import "./HelpingNav.css";
 import {GoSearch} from 'react-icons/go';
 import {FaHome} from 'react-icons/fa';
 import {MdGroup} from 'react-icons/md';
