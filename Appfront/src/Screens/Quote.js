@@ -13,6 +13,17 @@ const commentschema=yup.object({
   .required("نظر شما نمیتواند خالی باشد")
 })
 const Quote = (prop) => {
+    const renderInner=()=>{
+        return(
+          // console.log('inner');
+        <View style={{backgroundColor:'#EDF2F4'}}>
+  
+  
+  
+        
+          </View>
+        )
+      }
     const bs = React.createRef()
     const fall=new Animated.Value(1);
     const [showbutton,setshowbutton]=useState(true);
@@ -47,7 +58,7 @@ const Quote = (prop) => {
      enabledContentTapInteraction={false}
      onCloseEnd={()=>{setshowbutton(true) }}
     //  isBackDropDismisByPress={true}
-    //  renderContent={renderInner}
+      renderContent={renderInner}
       renderHeader={renderHeader}            
         // style={{position:'absolute',height:200,width:250,marginTop:400}}
      backgroundColor={'#edf2f4'}
