@@ -43,7 +43,7 @@ const Bookview = (prop) => {
   const postRate = async(rate)=>{
     if(rate!=""){
     const payload={
-        "Rate": rate,
+        "rate": rate,
     }
     const back= JSON.stringify(payload);
     axios.post('http://f9878e5c6e68.ngrok.io/api/bookrating/'+id ,back,{
