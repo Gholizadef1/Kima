@@ -53,7 +53,11 @@ const Quote = (prop) => {
     
           
    
-     
+     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'0.5%'}}
+       onPress={props.handleSubmit}
+       >
+         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:'85%',width:'100%'}}>ثبت</Text>
+        </Button>
       
      </View>
     
