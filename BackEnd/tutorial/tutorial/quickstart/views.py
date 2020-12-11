@@ -237,6 +237,16 @@ class QuoteView(APIView):
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
 
+    def delete(self,request,pk):
+        current_quote = MyQuote.objects.get(id=pk)
+        current_user = request.user
+        quote_user = current_quote.account
+        if quote_user == current_user:
+            current_quote.delete()
+            return Response({'message':'Your Quote successfully delleted!'})
+        else:
+            return Response({'message':'You dont have permission to delete this quote!'})
+
 
 class LikeQuoteView(APIView):
 

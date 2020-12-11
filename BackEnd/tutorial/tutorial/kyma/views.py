@@ -7,6 +7,7 @@ from . models import book
 from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
+from django.conf import settings
 from tutorial.quickstart.models import MyBook
 from django.shortcuts import render, get_object_or_404, redirect
 

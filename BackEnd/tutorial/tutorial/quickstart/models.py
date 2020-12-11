@@ -88,6 +88,7 @@ class MyQuote(models.Model):
     quote_text=models.TextField()
     sendtime = models.DateTimeField(default=timezone.now, editable=False)
     Likes = models.IntegerField()
+    Dislike = models.IntegerField()
 
 class LikeQuote(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
