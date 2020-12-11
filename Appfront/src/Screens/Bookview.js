@@ -14,6 +14,9 @@ import { StatusBar } from 'expo-status-bar';
 import PickerScreen from './PickerScreen';
 import StarScreen from './StarScreen';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FAB } from 'react-native-paper';
+import axios from 'axios'
 
 const Bookview = (prop) => {
 
@@ -35,6 +38,29 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+  console.log('**' +rate)
+
+  const postRate = async(rate)=>{
+    if(rate!=""){
+    const payload={
+        "Rate": rate,
+    }
+    const back= JSON.stringify(payload);
+    axios.post('http://f9878e5c6e68.ngrok.io/api/bookrating/'+id ,back,{
+      "headers":{"content-type":"application/json",
+      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+              }
+              })
+    .then(async function(response){
+      console.log(response.data)
+      console.log('\n'+'++++++++'+'\n')
+    })
+    .catch(function (error) {
+       console.log(error);
+    });
+  }
+}
+
   
     return(
       <Container>
@@ -53,7 +79,7 @@ const Bookview = (prop) => {
                   showRating={false}
                   defaultRating={ratenum}
                   ratingBackgroundColor='red'
-                  onFinishRating={(rating) => console.log(rating)}
+                  onFinishRating={(rating) => postRate(rating)}
                   size={25}
                   />
 {/* 
