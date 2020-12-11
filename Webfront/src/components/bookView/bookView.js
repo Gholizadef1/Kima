@@ -11,7 +11,12 @@ import {
     withRouter
   } from "react-router-dom";
 import './bookView.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
+import RatingStars from "../../Components/RatingStars";
+import { data, event } from 'jquery';
 import Tabs from "./multiTabs"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -22,8 +27,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 function BookView(props) {
     let { bookId } = useParams();
 
-    //const bookId= props.match.params.id;
-    //console.log(bookId);
+    //const bookId= props.match.params.id;    //console.log(bookId);
     //console.log(bookId.name);
     const [userCoice, setUserCoice]= useState("");
 
@@ -46,6 +50,39 @@ function BookView(props) {
     );
 
     const[openSnack,setOpenSnack]=useState(false);
+    const [current , setCurrent] = useState(
+        { 
+           rate:"",
+        });
+
+const labels = {
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
+  };
+  
+  const useStyles = makeStyles({
+    root: {
+      width: 200,
+      display: 'flex',
+      paddingLeft:59,
+      height:22,
+      alignItems: 'center',
+      direction:"ltr",
+    },
+  });
+
+  const [value, setValue] = useState();
+  const [hover, setHover] = useState(-1);
+  const classes = useStyles();  
+  
     //console.log(useParams);
     //onsole.log(props);
     //const {bookId} = props.match.params;
@@ -58,6 +95,8 @@ function BookView(props) {
                   //console.log(response.data.title);
                   setState({ 
                     author: response.data.author,
+                    average_rating_count:response.data.average_rating_count,
+                    average_rating:response.data.average_rating,
                     avgrating: response.data.avgrating,
                     description: response.data.description,
                     id: response.data.id,
@@ -105,7 +144,6 @@ function BookView(props) {
         axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
         back,{
             headers:{
-
            "Content-Type":"application/json",
            "Authorization":"Token "+Cookies.get("userToken")}
             })
@@ -150,6 +188,45 @@ function BookView(props) {
     //console.log(state.title);
     //console.log(response.data.title);
 
+    const bo = Number.isInteger(value);
+    console.log(bo);
+    console.log(value);
+    async function Sendrequest (e) {
+        //console.log(event);
+    await setValue(e.target.value);
+        console.log(e.target.value);
+    const payload={
+        "rate":value,
+    }
+    console.log(payload);
+  let back= JSON.stringify(payload);
+    console.log(back);
+        axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+        back,{
+            headers:{
+           "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+            },)
+   
+    }
+        useEffect(() => {
+                axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+                ,{
+                headers:{
+            "Content-Type":"application/json",
+           "Authorization":"Token "+Cookies.get("userToken")}
+                    })
+                    .then(data => {
+                      
+                      setValue(data);
+                      console.log(data.data);
+                      console.log(setValue(data));
+                    //   console.log(setValue(data))
+                }).catch(error =>{
+                    console.log(error)
+                });
+            
+    },[] );
 
 
     return(
@@ -160,24 +237,58 @@ function BookView(props) {
                     <img src={state.imgurl} className="m-3 img-fluid shadow float-right" alt=""  style={{width:'100%',height:'auto'}} />
                 </div>
                 <div className="d-flex col-6 flex-column p-3">
-                <h2 style={{fontFamily:'Morvarid'}}>{state.title}</h2>
+
+                <h2 style={{fontFamily:'Mitra'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
                     <tr>
-                        <th style={{fontFamily:'Morvarid'}}>
+                        <th style={{fontFamily:'Mitra'}}>
                             نام نویسنده
                         </th>
-                        <td>
+                        <th style={{fontFamily:'Mitra'}}>
                             {state.author}
-                        </td>
+                        </th>
                     </tr>
                     <tr>
-                        <th style={{fontFamily:'Morvarid'}}>
+                        <th style={{fontFamily:'Mitra'}}>
                             نام ناشر
                         </th>
-                        <td>
+                        <th style={{fontFamily:'Mitra'}}>
                             {state.publisher}
-                        </td>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style={{fontFamily:'Mitra'}}>
+                    امتیاز این کتاب: 
+                        </th>
+                        <th style={{fontFamily:'Mitra'}}>
+                       
+                        {state.average_rating_count}
+                        </th>
+                       
+                    </tr>
+                    <tr>
+                        <th style={{fontFamily:'Mitra'}}>
+                        به این کتاب رای دهید
+
+                        </th>
+                        <th>
+                        
+    <div className={classes.root}>
+      <Rating
+       value={value}
+        name="hover-feedback"
+        precision={1}
+        size="large"
+        onChange={(event,newValue)=>{
+            setValue(newValue)
+        }}
+            
+      />
+      <button onClick={Sendrequest}></button>
+     
+    </div>
+                        </th>
                     </tr>
                   </tbody>
                 </table>
