@@ -92,7 +92,7 @@ const Quote = (prop) => {
            source={require('../../assets/line3.png')}
            style={{width:100,height:4,marginLeft:155}}
            ></Image>
-               <Text style={{marginLeft:'36%',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',fontSize:16 }}>نظر شما چیست؟</Text>
+               <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',marginBottom:'4%',fontSize:16 }}>نقل قول شما چیست؟</Text>
             </View>
           </View>
         </View>
