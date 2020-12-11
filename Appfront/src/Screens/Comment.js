@@ -7,6 +7,7 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, Actio
 import { TextInput } from 'react-native-paper';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
+import { useFocusEffect } from '@react-navigation/native';
 
 const commentschema=yup.object({
 
@@ -15,6 +16,15 @@ const commentschema=yup.object({
 })
 
 const Comment = (prop) => {
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log('comment')
+        //   console.log('Listenn')
+        alert('in')
+          return() => alert('lost')
+    },[])
+   
+    )
   const [showbutton,setshowbutton]=useState(true);
   console.log(prop.route.params.title)
   const[reset,setreset]=useState(false);
