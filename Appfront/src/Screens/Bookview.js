@@ -11,9 +11,12 @@ import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+
 
 const Bookview = (prop) => {
-
+  const [rate , setrate] = useState(true);
+  const [ratenum , setratenum] = useState(0);
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
@@ -34,6 +37,21 @@ const Bookview = (prop) => {
       <Container>
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:35}}/>
             <Body style={{marginTop:35}}>
+    
+            {/* <Rating
+  type='heart'
+  ratingCount={3}
+  imageSize={60}
+  showRating
+  onFinishRating={console.log('finsihed')}
+/>
+<AirbnbRating
+  count={5}
+  showRating={false}
+  defaultRating={ratenum}
+  onFinishRating={(rating)=>(console.log(rating))}
+  size={25}
+/> */}
                   <Image source={{uri : result.imgurl}} style={{marginTop:5, height:180 ,
                      width:120 , borderRadius:10}} />
 
