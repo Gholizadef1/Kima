@@ -16,7 +16,7 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#F1F3F9'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#F1F3F9'}}>
     
         <Text style={{  
          textAlignVertical:'center',
@@ -36,7 +36,7 @@ const Quotecard = (prop) => {
        <TouchableOpacity  style={styles.avatar}
          onPress={()=>{}}>
       
-        <ImageBackground borderRadius={100}
+        <ImageBackground  borderRadius={100}
 
           source={require('../../assets/avatar.png')}
           style={styles.avatar}
@@ -77,8 +77,11 @@ const styles = StyleSheet.create({
         width:65,
         borderRadius:100,
         alignSelf:'center',
-        position:'absolute'
-         
+        position:'absolute',
+        shadowColor:'black',shadowOpacity:10,
+        elevation:3,
+        
+        
     
     
     },
