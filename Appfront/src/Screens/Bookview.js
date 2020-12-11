@@ -53,10 +53,10 @@ const Bookview = (prop) => {
                     </Card>
                   </Content>
             </Body>
-            <Button onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl})&& prop.navigation.setOptions({
+            <Button onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
       title: response.data.title,
     });}}><Text>صفحه نظرات</Text></Button>
-           <Button onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl})&& prop.navigation.setOptions({
+           <Button onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
       title: response.data.title,
     });}}><Text>صفحه نقل قول ها</Text></Button>
             <StatusBar backgroundColor='#BFDBF7' style='light' />

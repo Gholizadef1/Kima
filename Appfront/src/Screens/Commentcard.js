@@ -28,7 +28,7 @@ const Commentcard = (prop) => {
     
     const [like,setlike]=useState('lightblue')
     const [dislike,setdislike]=useState('lightblue')
-    console.log('commentcard')
+    // console.log('commentcard')
     return(
         <View style={styles.container}>
         {/* <LinearGradient

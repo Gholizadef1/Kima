@@ -16,9 +16,15 @@ const commentschema=yup.object({
 })
 
 const Comment = (prop) => {
+
+  const response=async (searchTerm)=>{
+    const id=prop.route.params.id
+    console.log(id)
+  
+  }
   useFocusEffect(
     React.useCallback(() => {
-      console.log('comment')
+      response();
         //   console.log('Listenn')
         alert('in')
           return() => alert('lost')
