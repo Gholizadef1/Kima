@@ -16,7 +16,7 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,justifyContent:'center',marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,justifyContent:'center',marginRight:'4%',borderRadius:10 ,backgroundColor:'#F1F3F9'}}>
       
         <Text style={{  
         // textAlignVertical:'center',
@@ -55,7 +55,7 @@ const Quotecard = (prop) => {
      <Text style={styles.heartnumber}>100</Text>
            
      </View>
-          <View style={{backgroundColor:'green',alignItems:'center',justifyContent:'center',height:100,width:400}}><Text style={{}}>adsfaf</Text></View>
+ 
         </View>
   
       
