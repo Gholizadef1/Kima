@@ -17,16 +17,17 @@ import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
 import RatingStars from "../../Components/RatingStars";
 import { data, event } from 'jquery';
+import Tabs from "./multiTabs"
+//import { ajax } from 'jquery';
 //import { data } from 'jquery';
+
 
 function BookView(props) {
     let { bookId } = useParams();
 
-    //const bookId= props.match.params.id;
-    console.log(bookId);
+    //const bookId= props.match.params.id;    //console.log(bookId);
     //console.log(bookId.name);
-    
-    const [userCoice, setUserCoice]= useState();
+    const [userCoice, setUserCoice]= useState("");
 
     const [selectMassage, setSelectMassage]= useState(<br></br>);
 
@@ -102,15 +103,36 @@ const labels = {
                     smallimgurl: response.data.smallimgurl,
                     title:response.data.title
                     });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    
+                });
+            axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId+'/getstate',
+            {headers:{
+
+                "Content-Type":"application/json",
+                "Authorization":"Token "+Cookies.get("userToken")}
+                 }
+                 )
+                 .then(function (response) {
+                    //console.log(response);
+                    setUserCoice(response.data.book_state);
+                    //console.log(response.data.book_state);
+                    document.getElementById(response.data.book_state).selected=true;
+                 })
+                 .catch(function (error) {
+                    console.log(error);
+                    
                 });
 
         }
     },[] );
     const addBookToMineHandler = (choices)=>{
-        console.log(choices.target.value);
-        console.log(choices);
+        //console.log(choices.target.value);
+        //console.log(choices);
         setUserCoice(choices.target.value);
-        console.log(userCoice);
+        //console.log(userCoice);
         const payload={
             "book_state": choices.target.value,
         }
@@ -138,7 +160,7 @@ const labels = {
 
             }else console.log(response.data);
 
-            console.log(response);
+            //console.log(response);
         })
         .catch(function (error) {
            console.log(error);
@@ -168,7 +190,6 @@ const labels = {
    
     }
         useEffect(() => {
-            
                 axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
                 ,{
                 headers:{
@@ -189,7 +210,7 @@ const labels = {
 
 
     return(
-        
+      <div>
         <div className="container-fluid col-8 rTOl text-right " >
             <div className="d-flex flex-row shadow color1 table-borderless my-1">
                 
@@ -200,14 +221,6 @@ const labels = {
                 <h2 style={{fontFamily:'Mitra'}}>{state.title}</h2>
                 <table className="mt-auto table table-hover text-right" >
                   <tbody >
-                    {/* <tr >
-                        <th >
-                            نام کتاب
-                        </th>
-                        <td>
-                            {state.title}
-                        </td>
-                    </tr> */}
                     <tr>
                         <th style={{fontFamily:'Mitra'}}>
                             نام نویسنده
@@ -259,14 +272,19 @@ const labels = {
                     </tr>
                   </tbody>
                 </table>
-                <div className="row" style={{fontFamily:'Mitra'}}>
-                    <label className="col-10 mr-2" style={{fontFamily:"Mitra"}}>به کتاب‌های خود اضافه کنید:</label>
-                    <select className="form-control mr-4 col-6" id="bookMood"onChange={ addBookToMineHandler}>
-                        <option value="none"style={{fontFamily:"Mitra"}}>هیچکدام</option>
+                <div className="row" style={{fontFamily:'Morvarid'}}>
+                    
+                    {/* <svg width="3.5em" height="3.5em" viewBox="0 0 16 16" className="btn bi bi-bookmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+                    </svg> */}
 
-                        <option value="ToRead"style={{fontFamily:"Mitra"}}>می‌خواهم بخوانم</option>
-                        <option value="Reading"style={{fontFamily:"Mitra"}}>دارم می‌خوانم</option>
-                        <option value="Read"style={{fontFamily:"Mitra"}}>خوانده‌ام</option>
+                    <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
+                    <select className="form-control mr-4 col-6" id="bookMood" onChange={ addBookToMineHandler} >
+                        <option id="none" value="none">هیچکدام</option>
+
+                        <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+                        <option id="Reading" value="Reading">دارم می‌خوانم</option>
+                        <option id="Read" value="Read">خوانده‌ام</option>
                     </select>
 
                 <small className="col-12 text-muted mt-2">{selectMassage}</small>
@@ -285,14 +303,11 @@ const labels = {
             </div> 
         </div>
 
-            <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
+            {/* <nav className="shadow navbar navbar-expand-sm navbar-light color3">  
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <a className="nav-link" href="#bookDescription" style={{fontFamily:"Mitra"}}>توضیح</a>
                     </li>
-                    {/* <li className="nav-item">
-                        <a className="nav-link" href="#bookCriticism">نقد</a>
-                     </li> */}
     
                 </ul>
             </nav>
@@ -305,24 +320,17 @@ const labels = {
                     {state.description}
                     <br></br>
                 </p>
-            </div>
-            {/* <div id="bookCriticism" className="color1 p-2">
-                <br></br>
-                <h3>نقد کتاب {state.title}</h3>
-                <br></br>
-                <p>
-
-
-                    <br></br>
-                </p>
             </div> */}
 
+             <div className="Tab color1 my-3 mb-5">
+                <Tabs book={state.id} bookdescription={state.description}/>
+            </div>
 
-
-
-
+            
 
         </div>
+
+      </div>
 
     )
         }
