@@ -16,14 +16,20 @@ import {GoSearch} from 'react-icons/go';
  import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Avatar from '@material-ui/core/Avatar';
 //import ReactNavbar from "react-responsive-animate-navbar";
 //import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-   //const [users,setUsers] = useState([]);
- const[error,setError] = useState("");
+  // const [users,setUsers] = useState([]);
+  const [error,setError] = useState("");
+  const [pic,setPic]=useState("");
+
+
+
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
@@ -38,6 +44,20 @@ const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${us
 }
 
 useEffect(() => {
+  axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+  .then(function (response){
+    //console.log(response);
+    //console.log(response.data);
+    setPic("http://127.0.0.1:8000"+response.data.profile_photo);
+      //console.log(user);
+  })
+  .catch(function (error) {
+      console.log(error);
+      
+  });
+
+
+
   searchUsers();
   }, [user]);
   const [show, setShow] = useState(false);
@@ -120,14 +140,16 @@ useEffect(() => {
         </Modal.Footer>
       </Modal>
     </>
-       <a class="nav-item1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Mitra'}} >
+  
+       <a class="nav-item1 row"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
        <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
     </small>
 
-    <CgProfile size="40" vertical-align='center' color="white"
+    {/* <CgProfile size="40" vertical-align='center' color="black"
     //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
-     /> 
+     />  */}
+     <Avatar alt="" src={pic} className="mr-2" />
      </a>
   </Navbar.Collapse>
 </Navbar>

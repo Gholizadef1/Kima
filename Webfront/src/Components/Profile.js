@@ -51,7 +51,7 @@ function ProFile (props){
                   setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
-                    email: response.data.email,
+                    //email: response.data.email,
                     picture : "http://127.0.0.1:8000"+response.data.profile_photo
                     }));
                     console.log(user);
@@ -125,7 +125,8 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put('http://127.0.0.1:8000/api/update-profile/'
+            axios.put('http://127.0.0.1:8000/api/change-password/',
+             back
              ,{
               headers:{
              "Content-Type":"application/json",
@@ -336,19 +337,27 @@ useEffect(() => {
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
-                                                  id="userName"
+                                                  class="form-control"
+                                                  id="oldPass"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
-                                                  id="userName"
+                                                  class="form-control"
+                                                  id="newPass"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
+                                            {/* <div class="my-1">
+                                                <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
+                                                <input type="text"
+                                                  class="form-control"
+                                                  id="newPass2"
+                                                  value={user.newPass2}
+                                                  onChange={handleChange}/>
+                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
