@@ -102,31 +102,37 @@ const Quote = (prop) => {
       }
     return(
         <View style={styles.container}>
-         <BottomSheet style={{}}
-      
-      snapPoints={['40%', 0, 0]}
-     ref={bs}
-     initialSnap={1}
-     callbackNode={fall}
-     enabledGestureInteraction={true}
-     enabledContentTapInteraction={false}
-     onCloseEnd={()=>{setshowbutton(true) }}
-    //  isBackDropDismisByPress={true}
+        <BottomSheet style={{position:''}}
+        
+       snapPoints={['40%', 0, 0]}
+      ref={bs}
+      initialSnap={1}
+      callbackNode={fall}
+      enabledGestureInteraction={true}
+      enabledContentTapInteraction={false}
+      onCloseEnd={()=>{setshowbutton(true) }}
+     //  isBackDropDismisByPress={true}
       renderContent={renderInner}
       renderHeader={renderHeader}            
-        // style={{position:'absolute',height:200,width:250,marginTop:400}}
-     backgroundColor={'#edf2f4'}
- 
- />
+         // style={{position:'absolute',height:200,width:250,marginTop:400}}
+      backgroundColor={'#edf2f4'}
+  
+  />
+  <Animated.View style={{
+    
+       opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
+   }}>
         <ScrollView showsVerticalScrollIndicator={false}>
-           <Quotecrad height={350}></Quotecrad>
-           <Quotecrad height={350}></Quotecrad>
-           <Quotecrad height={350}></Quotecrad>
-           <Quotecrad height={350}></Quotecrad>
+           <Quotecrad height={350} ></Quotecrad>
+           
+           
+         
           
         
       
            </ScrollView>
+           </Animated.View>
+   
            {showbutton?<Button style={styles.addcomment}
     onPress={()=>{
      setshowbutton(false) 
@@ -134,11 +140,13 @@ const Quote = (prop) => {
       }}
     >
 
-    <Text style={styles.nazar}>نظر شما چیست؟</Text>
+    <Text style={styles.nazar}>نقل قول شما شما چیست؟</Text>
 
     </Button>
     :null}
-        </View>
+  
+
+     </View>
     );
 }
 
@@ -148,7 +156,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor: '#B8B8B8',
         backgroundColor:'#ffff',
-        marginTop:1
+        marginTop:2
     },
     header: {
         backgroundColor: '#EDF2F4',
