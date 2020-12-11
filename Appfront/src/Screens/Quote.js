@@ -6,6 +6,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
 import * as yup from 'yup';
+import {Formik,formik} from 'formik';
 
 const commentschema=yup.object({
 
@@ -19,7 +20,49 @@ const Quote = (prop) => {
         <View style={{backgroundColor:'#EDF2F4'}}>
   
   
-  
+  <Formik style={{}}
+                initialValues={{comment:''}}
+                validationSchema={commentschema}
+                onSubmit={async(values,actions)=>{
+                 actions.resetForm();
+                  console.log('sumbit')
+                const back={
+                 username:values.comment,
+        
+                }
+                
+
+                const backk=JSON.stringify(back);
+                const params=JSON.stringify({username:'Hi'});
+         
+                }}
+                 >
+            {(props)=>(
+            <View>
+
+                
+              <View style={{marginHorizontal:30,borderColor:'red',marginTop:10}}>
+        
+                </View>
+        
+       
+           <Text style={{fontSize:10, color:'red',marginLeft:'10%'}}>{props.touched.comment&&props.errors.comment}</Text>
+      
+            <View style={{flexDirection:'row',width:'100%',marginRight:20,marginLeft:10}}>
+       
+    
+          
+   
+     
+      
+     </View>
+    
+     </View>
+       
+       
+     )}
+
+     </Formik>  
         
           </View>
         )
