@@ -11,12 +11,14 @@ import ActionButton from 'react-native-action-button';
 import { HeaderBackground } from '@react-navigation/stack';
 import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
-import { Rating, AirbnbRating } from 'react-native-ratings';
 import PickerScreen from './PickerScreen';
 import StarScreen from './StarScreen';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
 const Bookview = (prop) => {
 
+  const [rate , setrate] = useState(true);
+  const [ratenum , setratenum] = useState(0);
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
@@ -45,9 +47,17 @@ const Bookview = (prop) => {
                       fontSize:25 }}>{result.title}</Text>
 
                   <Text style={{marginTop:5}}>{result.author}</Text>
-
-                  <StarScreen style={{marginBottom:10}} bookid={id}/>
-                  {/* <PickerScreen style={{}} bookid={id} />  */}
+                  
+                  <AirbnbRating style={{marginBottom:5 , marginTop:20}}
+                  count={5}
+                  showRating={false}
+                  defaultRating={ratenum}
+                  ratingBackgroundColor='red'
+                  onFinishRating={(rating) => console.log(rating)}
+                  size={25}
+                  />
+{/* 
+                  <PickerScreen style={{}} bookid={id} />  */}
 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
                     درباره کتاب :</Text>

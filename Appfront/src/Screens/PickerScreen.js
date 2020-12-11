@@ -92,7 +92,6 @@ const PickerScreen = (props) => {
               mode="dropdown"
               iosIcon={<Icon name="arrow-down" />}
               headerTitleStyle={{ color: "#fff" }}
-              
               selectedValue={selectedValue}
               onChangeValue={(value) => {
 //                onChangeValue(value);
