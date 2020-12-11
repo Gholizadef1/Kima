@@ -8,6 +8,8 @@ import { TextInput } from 'react-native-paper';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
 import { useFocusEffect } from '@react-navigation/native';
+import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const commentschema=yup.object({
 
@@ -20,19 +22,21 @@ const Comment = (prop) => {
   const response=async (searchTerm)=>{
     const id=prop.route.params.id
     console.log(id)
-  //   try{
-  //   const response = await axiosinst.get("/api/user-profile/"+id)
-   
-  //   }
-  // catch(err){
-  //     // console.log(response)
-  //   // console.log(err);
-  //     Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+    try{
+    const response = await axiosinst.get("bookdetail/"+id+'/comment')
+    console.log('alakkii')
+    console.log(response);
+    }
+  catch(err){
+      // console.log(response)
+     console.log(err);
+    //   Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
         
 
-  //           Title:'فهمیدم',onPress:()=>console.log('alert closed')
-  //           }])
-  //   }
+    //         Title:'فهمیدم',onPress:()=>console.log('alert closed')
+    //         }])
+    // }
+  }
   }
   useFocusEffect(
     React.useCallback(() => {
@@ -76,28 +80,26 @@ const Comment = (prop) => {
                 initialValues={{comment:''}}
                 validationSchema={commentschema}
                 onSubmit={async(values,actions)=>{
+                  console.log(await AsyncStorage.getItem('token'));
                  actions.resetForm();
                   console.log('sumbit')
                 const back={
-                 comment:values.comment,
+                 textcomment:values.comment,
         
                 }
                 const backk=JSON.stringify(back);
                 
-              axios.post('',backk,{"headers":
+                axiosinst.post("bookdetail/"+prop.route.params.id+'/comment',backk,{"headers":
                {
                 "Content-Type":"application/json",
                 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
                }})
               .then(async function(response){
-    
+                  console.log(response);
          
                 })
               .catch(function(error){
-              Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
-                  Title:'فهمیدم',onPress:()=>console.log('alert closed')
-                  }])
-        
+            console.log(error);
          
         })
                
