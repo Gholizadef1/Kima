@@ -8,6 +8,25 @@ import Animated from 'react-native-reanimated';
 const Quote = (prop) => {
     const bs = React.createRef()
     const fall=new Animated.Value(1);
+    const renderHeader=()=>{
+        console.log('header')
+        return(
+          <View style={styles.header}>
+          <View style={styles.panelHeader}>
+            <View style={styles.panelHandle} >
+            <Image
+           source={require('../../assets/line3.png')}
+           style={{width:100,height:4,marginLeft:155}}
+           ></Image>
+               <Text style={{marginLeft:'36%',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',fontSize:16 }}>نظر شما چیست؟</Text>
+            </View>
+          </View>
+        </View>
+      
+       
+        
+          )
+      }
     return(
         <View style={styles.container}>
          <BottomSheet style={{position:''}}
@@ -47,5 +66,21 @@ const styles = StyleSheet.create({
         backgroundColor:'#ffff',
         marginTop:1
     },
+    header: {
+        backgroundColor: '#EDF2F4',
+        shadowColor: 'black',
+        shadowOffset: {width: -1, height: -3},
+        shadowRadius: 20,
+        shadowOpacity: 0.5,
+        // elevation: 5,
+        paddingTop: 20,
+        borderTopLeftRadius: 20,
+        borderTopColor:'black',
+        borderTopRightRadius: 20,
+      },
+      panelHeader: {
+        borderTopColor:'black',
+    
+      },
   });
   export default Quote;
