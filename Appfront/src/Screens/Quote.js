@@ -124,6 +124,8 @@ const Quote = (prop) => {
    }}>
         <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350} ></Quotecrad>
+           <Quotecrad height={350} ></Quotecrad>
+           <Quotecrad height={350} ></Quotecrad>
            
            
          
@@ -140,7 +142,7 @@ const Quote = (prop) => {
       }}
     >
 
-    <Text style={styles.nazar}>نقل قول شما شما چیست؟</Text>
+    <Text style={styles.nazar}>نقل قول شما چیست؟</Text>
 
     </Button>
     :null}
@@ -158,6 +160,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#ffff',
         marginTop:2
     },
+    nazar:{
+        marginLeft:'29%',
+        fontWeight:'bold',
+        color:'#EDF2F4'
+    },
     header: {
         backgroundColor: '#EDF2F4',
         shadowColor: 'black',
@@ -173,6 +180,15 @@ const styles = StyleSheet.create({
       panelHeader: {
         borderTopColor:'black',
     
-      },
+      },  
+       addcomment:{
+    
+        width:'70%',
+        marginHorizontal:'15%',
+        marginTop:'160%',
+        position:'absolute',
+        borderRadius:17,
+        backgroundColor:'#1F7A8C'
+    },
   });
   export default Quote;
