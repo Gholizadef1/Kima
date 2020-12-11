@@ -47,7 +47,7 @@ const Quote = (prop) => {
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
-                placeholder={'  نقل قول شما ...    '} placeholderTextColor='black' fontSize={16} style={{backgroundColor:'white'}}>
+                placeholder={'  نقل قول شما ...    '} placeholderTextColor='lightgray' fontSize={16} style={{backgroundColor:'white'}}>
               
                 </Textarea>
                 </View>
@@ -60,7 +60,7 @@ const Quote = (prop) => {
     
           
    
-     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%',marginTop:'0.5%'}}
+     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%'}}
        onPress={props.handleSubmit}
        >
          <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:'85%',width:'100%'}}>ثبت</Text>
@@ -92,7 +92,7 @@ const Quote = (prop) => {
            source={require('../../assets/line3.png')}
            style={{width:100,height:4,marginLeft:155}}
            ></Image>
-               <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',marginBottom:'4%',fontSize:16 }}>نقل قول شما چیست؟</Text>
+               <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',marginBottom:5,fontSize:16 }}>نقل قول شما چیست؟</Text>
             </View>
           </View>
         </View>
