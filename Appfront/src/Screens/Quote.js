@@ -1,13 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useState} from 'react';
+import { StyleSheet, Text, View ,Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
+import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
 
 const Quote = (prop) => {
     const bs = React.createRef()
     const fall=new Animated.Value(1);
+    const [showbutton,setshowbutton]=useState(true);
     const renderHeader=()=>{
         console.log('header')
         return(
@@ -29,7 +31,7 @@ const Quote = (prop) => {
       }
     return(
         <View style={styles.container}>
-         <BottomSheet style={{position:''}}
+         <BottomSheet style={{}}
       
       snapPoints={['40%', 0, 0]}
      ref={bs}
@@ -37,10 +39,10 @@ const Quote = (prop) => {
      callbackNode={fall}
      enabledGestureInteraction={true}
      enabledContentTapInteraction={false}
-    
+     onCloseEnd={()=>{setshowbutton(true) }}
     //  isBackDropDismisByPress={true}
     //  renderContent={renderInner}
-    //  renderHeader={renderHeader}            
+      renderHeader={renderHeader}            
         // style={{position:'absolute',height:200,width:250,marginTop:400}}
      backgroundColor={'#edf2f4'}
  
@@ -54,6 +56,17 @@ const Quote = (prop) => {
         
       
            </ScrollView>
+           {showbutton?<Button style={styles.addcomment}
+    onPress={()=>{
+     setshowbutton(false) 
+      bs.current.snapTo(0)
+      }}
+    >
+
+    <Text style={styles.nazar}>نظر شما چیست؟</Text>
+
+    </Button>
+    :null}
         </View>
     );
 }
