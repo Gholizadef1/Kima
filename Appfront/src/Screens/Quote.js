@@ -11,7 +11,7 @@ import {Formik,formik} from 'formik';
 const commentschema=yup.object({
 
   comment:yup.string()
-  .required("نظر شما نمیتواند خالی باشد")
+  .required("نقل قول شما نمیتواند خالی باشد")
 })
 const Quote = (prop) => {
     const renderInner=()=>{
@@ -37,12 +37,18 @@ const Quote = (prop) => {
          
                 }}
                  >
-            {(props)=>(
+              {(props)=>(
             <View>
 
                 
               <View style={{marginHorizontal:30,borderColor:'red',marginTop:10}}>
-        
+            <Textarea rowSpan={7.5} bordered borderRadius={8} 
+                onChangeText={props.handleChange('comment')}
+                onBlur={props.handleBlur('comment')}
+                value={props.values.comment}
+                placeholder={'  نقل قول شما ...    '} placeholderTextColor='black' fontSize={16} style={{backgroundColor:'white'}}>
+              
+                </Textarea>
                 </View>
         
        
@@ -67,10 +73,11 @@ const Quote = (prop) => {
      )}
 
      </Formik>  
-        
-          </View>
-        )
-      }
+      
+            
+              </View>
+            )
+          }
     const bs = React.createRef()
     const fall=new Animated.Value(1);
     const [showbutton,setshowbutton]=useState(true);
