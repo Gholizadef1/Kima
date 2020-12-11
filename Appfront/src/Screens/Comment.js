@@ -79,12 +79,28 @@ const Comment = (prop) => {
                  actions.resetForm();
                   console.log('sumbit')
                 const back={
-                 username:values.comment,
+                 comment:values.comment,
         
                 }
-                
-
                 const backk=JSON.stringify(back);
+                
+              axios.post('',backk,{"headers":
+               {
+                "Content-Type":"application/json",
+                "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+               }})
+              .then(async function(response){
+    
+         
+                })
+              .catch(function(error){
+              Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+                  Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                  }])
+        
+         
+        })
+               
                 const params=JSON.stringify({username:'Hi'});
          
                 }}
