@@ -27,9 +27,6 @@ const Bookview = (prop) => {
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
   setResult(response.data);
-  // console.log(response.data.description)
-  // console.log(response.data)
-  // console.log(id);
   };
   useEffect(() =>{
     getResult(id);
@@ -38,6 +35,32 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+
+  const getRate = async(data)=>{
+    axios.get('http://f9878e5c6e68.ngrok.io/api/bookrating/'+id, {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('**'+response.data)
+      setratenum(response.data)
+      
+  })
+  .catch(function(error){
+      console.log(error)
+  })
+  }
+  useEffect(() =>{
+    getRate(data)
+},[])
+
+if(!ratenum){
+  return null
+}
+//getRate();
+
   console.log('**' +rate)
 
   const postRate = async(rate)=>{
@@ -60,6 +83,7 @@ const Bookview = (prop) => {
     });
   }
 }
+
 
   
     return(
