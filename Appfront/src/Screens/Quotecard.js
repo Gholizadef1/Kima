@@ -16,17 +16,19 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,justifyContent:'center',marginRight:'4%',borderRadius:10 ,backgroundColor:'#F1F3F9'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10 ,backgroundColor:'#F1F3F9'}}>
     
         <Text style={{  
-        // textAlignVertical:'center',
+         textAlignVertical:'center',
         // alignContent:'center',
         // alignItems:'center',
-        marginBottom:'10%',
-    
+        
+        marginBottom:'11%',
+        marginTop:'8%',
         marginHorizontal:'6%',
         fontSize:14,
-        }}>{'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+        }}>{'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+        <View style={{position:'absolute',marginTop:prop.height-65,alignSelf:'center'}}>
       <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>روحی</Text>
       <View style={{}}>
        
@@ -44,7 +46,7 @@ const Quotecard = (prop) => {
    </View>
            
    
-        
+   </View>
             </Card>
           <View style={{marginBottom:'15%'}}>
           
@@ -74,8 +76,8 @@ const styles = StyleSheet.create({
         height:65,
         width:65,
         borderRadius:100,
-        position:'absolute',
-        left:'35%',
+        alignSelf:'center',
+        position:'absolute'
          
     
     
