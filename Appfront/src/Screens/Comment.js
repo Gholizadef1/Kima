@@ -20,7 +20,19 @@ const Comment = (prop) => {
   const response=async (searchTerm)=>{
     const id=prop.route.params.id
     console.log(id)
-  
+  //   try{
+  //   const response = await axiosinst.get("/api/user-profile/"+id)
+   
+  //   }
+  // catch(err){
+  //     // console.log(response)
+  //   // console.log(err);
+  //     Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
+        
+
+  //           Title:'فهمیدم',onPress:()=>console.log('alert closed')
+  //           }])
+  //   }
   }
   useFocusEffect(
     React.useCallback(() => {
