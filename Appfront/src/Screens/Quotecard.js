@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
 
 const Quotecard = (prop) => {
-
+    const hieght=prop.height
     const [like,setlike]=useState('gray')
     const [dislike,setdislike]=useState('lightblue')
 
@@ -16,11 +16,19 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height+30,marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
-        <Text style={styles.naghlghol}>سلااااااا           ااااا                      اااااا     اااااا                                                                                                                           k                               ه                                       z
-      ن
-      k    ااااا      تتت    اام</Text>
-      <View style={{position:'absolute',marginTop:prop.height,marginLeft:'27%'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,justifyContent:'center',marginRight:'4%',borderRadius:10 ,backgroundColor:'#EDF2F4'}}>
+      
+        <Text style={{  
+        // textAlignVertical:'center',
+        // alignContent:'center',
+        // alignItems:'center',
+        marginBottom:'5%',
+      
+        marginHorizontal:'6%',
+        fontSize:14,
+        }}>{'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+     
+      <View style={{}}>
        
   
        <TouchableOpacity  style={styles.avatar}
@@ -47,8 +55,9 @@ const Quotecard = (prop) => {
      <Text style={styles.heartnumber}>100</Text>
            
      </View>
-          
+          <View style={{backgroundColor:'green',alignItems:'center',justifyContent:'center',height:100,width:400}}><Text style={{}}>adsfaf</Text></View>
         </View>
+  
       
     );
 }
@@ -97,8 +106,11 @@ const styles = StyleSheet.create({
     },
     naghlghol:{
     
-        marginTop:'8%',
-        
+      
+        // textAlignVertical:'center',
+        // alignContent:'center',
+        // alignItems:'center',
+        // textAlignVertical:
         marginHorizontal:'6%',
         fontSize:14,
         
