@@ -37,9 +37,9 @@ const Comment = (prop) => {
   useFocusEffect(
     React.useCallback(() => {
       response();
-        //   console.log('Listenn')
-        alert('in')
-          return() => alert('lost')
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
     },[])
    
     )
