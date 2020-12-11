@@ -27,7 +27,7 @@ const Quotecard = (prop) => {
         marginTop:'8%',
         marginHorizontal:'6%',
         fontSize:14,
-        }}>{'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+        }}>{'سلام'+'\n'+'\n'+'\n'+'sghl'+'\n'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
         <View style={{position:'absolute',marginTop:prop.height-65,alignSelf:'center'}}>
       <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>روحی</Text>
       <View style={{}}>

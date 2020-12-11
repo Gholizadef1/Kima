@@ -12,7 +12,7 @@ const commentschema=yup.object({
 
   comment:yup.string()
   .required("نقل قول شما نمیتواند خالی باشد")
-  .test('line',"حداکثر تعداد خط مجاز 10 خط است",(val=>val.toString().split('\n').length<=10))
+  .test('line',"حداکثر تعداد خط مجاز 11 خط است",(val=>val.toString().split('\n').length<=11))
 })
 const Quote = (prop) => {
     const renderInner=()=>{
