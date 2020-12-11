@@ -134,8 +134,8 @@ import { useFocusEffect } from '@react-navigation/native';
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
         <Text style={styles.kima}>کیما</Text>
         <Image
-         source={require('../../assets/backprof4.jpeg')}
-         style={{marginTop:37,width:350,height:300,position:'absolute',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
+         source={require('../../assets/backprof3.jpeg')}
+         style={{marginTop:37,width:350,height:300,position:'absolute',alignSelf:'flex-end',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
          ></Image>
         
         {picture==='http://627023d2cc8e.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
@@ -144,11 +144,11 @@ import { useFocusEffect } from '@react-navigation/native';
         source={{uri:picture}}
         ></Avatar.Image>}
 
-        <Text style={{marginTop:200,marginRight:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
+        <Text style={{marginTop:200,marginLeft:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
-        <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, marginLeft:375}} />
+        <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, left:10}} />
 
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
@@ -163,18 +163,18 @@ import { useFocusEffect } from '@react-navigation/native';
          source={require('../../assets/line3.png')}
          style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:310}}
          ></Image>
-         <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginRight:20,color:"gray"}}>فعالیت ها</Text>
+         <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginLeft:20,color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:600,width:80,height:2,position:'absolute'}}
+         style={{marginTop:600,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
          ></Image>
           <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:700,width:80,height:2,position:'absolute'}}
+         style={{marginTop:700,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
          ></Image>
            <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:800,width:80,height:2,position:'absolute'}}
+         style={{marginTop:800,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
          ></Image>
          
 
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     kima:{
         color:'#1F7A8C',
         marginTop:50,
-        marginRight:20,
+        marginLeft:20,
         fontSize:20,
         fontWeight:'bold'
         
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         
     },
     info:{
-        marginRight:45,
+        marginLeft:45,
         marginTop:45,
         color:"#1F7A8C"
     },
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
     
       
         marginTop:280,
-        marginLeft:375
+        left:10
     },
     avatar:{
         position:'absolute',
-        marginTop:190,
-        marginLeft:40,
+        marginTop:180,
+        marginLeft:240,
         
     },
     edit:{
