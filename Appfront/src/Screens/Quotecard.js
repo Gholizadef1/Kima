@@ -17,23 +17,23 @@ const Quotecard = (prop) => {
         <View style={styles.container}>
         
         <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,justifyContent:'center',marginRight:'4%',borderRadius:10 ,backgroundColor:'#F1F3F9'}}>
-      
+    
         <Text style={{  
         // textAlignVertical:'center',
         // alignContent:'center',
         // alignItems:'center',
-        marginBottom:'5%',
-      
+        marginBottom:'10%',
+    
         marginHorizontal:'6%',
         fontSize:14,
-        }}>{'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
-     
+        }}>{'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+      <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>روحی</Text>
       <View style={{}}>
        
-  
+     
        <TouchableOpacity  style={styles.avatar}
          onPress={()=>{}}>
-
+      
         <ImageBackground borderRadius={100}
 
           source={require('../../assets/avatar.png')}
