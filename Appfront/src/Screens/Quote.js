@@ -5,7 +5,13 @@ import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
+import * as yup from 'yup';
 
+const commentschema=yup.object({
+
+  comment:yup.string()
+  .required("نظر شما نمیتواند خالی باشد")
+})
 const Quote = (prop) => {
     const bs = React.createRef()
     const fall=new Animated.Value(1);
