@@ -202,7 +202,7 @@ const labels = {
   let back= JSON.stringify(payload);
     console.log(back);
         axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
-        back,{
+        payload,{
             headers:{
            "Content-Type":"application/json",
            "Authorization":"Token "+Cookies.get("userToken")}
@@ -217,15 +217,17 @@ const labels = {
            "Authorization":"Token "+Cookies.get("userToken")}
                     })
                     .then(data => {
-                      
-                      setValue(data);
+                        
+                      setValue(data.data);
+                      console.log(setValue(data.data));
+                
                       console.log(data.data);
-                      console.log(setValue(data));
-                    //   console.log(setValue(data))
+                      console.log(data);
+                      const b = typeof((parseInt(data.data,10)));
+                        console.log(b);
                 }).catch(error =>{
                     console.log(error)
                 });
-            
     },[] );
 
 
