@@ -16,6 +16,7 @@ import StarScreen from './StarScreen';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
 
 const Bookview = (prop) => {
@@ -36,29 +37,26 @@ const Bookview = (prop) => {
     return null;
   }
 
-  const getRate = async(data)=>{
-    axios.get('http://f9878e5c6e68.ngrok.io/api/bookrating/'+id, {
-      "headers": {
-        "content-type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-    .then(function(response){
-      console.log('**'+response.data)
-      setratenum(response.data)
+//   const getRate = async(data)=>{
+//     axios.get('http://8b592bb1a53c.ngrok.io/api/bookrating/'+id, {
+//       "headers": {
+//         "content-type": "application/json",
+//         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+//       }
+//     })
+//     .then(function(response){
+//       console.log('**'+response.data)
+//       setratenum(response.data)
       
-  })
-  .catch(function(error){
-      console.log(error)
-  })
-  }
-  useEffect(() =>{
-    getRate(data)
-},[])
+//   })
+//   .catch(function(error){
+//       console.log(error)
+//   })
+//   }
 
-if(!ratenum){
-  return null
-}
+// if(!ratenum){
+//   return null
+// }
 //getRate();
 
   console.log('**' +rate)
@@ -69,7 +67,7 @@ if(!ratenum){
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://f9878e5c6e68.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://2a70f9d05fdb.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -77,12 +75,20 @@ if(!ratenum){
     .then(async function(response){
       console.log(response.data)
       console.log('\n'+'++++++++'+'\n')
+      setrate(false)
     })
     .catch(function (error) {
        console.log(error);
     });
   }
 }
+
+// useFocusEffect(
+//   React.useCallback((ratenum) => {
+//       response();
+//   },[])
+ 
+//   )
 
 
   
@@ -91,7 +97,7 @@ if(!ratenum){
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:90}}/>
             <Body style={{marginTop:35}}>
                   <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
-                     width:160 , borderRadius:10}} />
+                     width:160 , borderRadius:10 }} />
 
                   <Text style={{marginTop:10 , fontWeight:'bold',
                       fontSize:25 }}>{result.title}</Text>
