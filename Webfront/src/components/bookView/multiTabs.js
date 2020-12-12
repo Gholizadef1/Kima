@@ -80,10 +80,14 @@ export default function FullWidthTabs(props) {
 
   useEffect(()=>{
     console.log(props.book)
-    //const id=props.book;
     axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     .then(response=>{
+      setComments(response.data);
+      console.log(response.data);
       console.log(response);
+      console.log(response.data.message);
+      console.log(comments)
+
 
     })
     .catch(error=>{
@@ -203,7 +207,6 @@ export default function FullWidthTabs(props) {
 
 
 
-
   return (
     <div  >
       <div>
@@ -270,16 +273,28 @@ export default function FullWidthTabs(props) {
 
 
             <List >
+              {comments.message === "No Comment!" ? (
+                 
+
+                 <p>هیچ نظری ثبت نشده</p>
+
+                ) : (
+                  <div>
+
+                  {comments.map ((current) => (
+                    
                <div className="" style={{direction:"rtl"}}>
-                {/* {customElements.map((current)=>( */}
+
+               
+                
                   <div className="d-flex p-3">
-                    <Avatar alt="ali" src="" style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
-                        ali
+                        {current.account.username}
                       </h5>
                       <small>
-                      2020-02-20   10:30
+                      {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
                       </small>
                     </div>
                     <div className="d-flex flex-column">
@@ -304,11 +319,16 @@ export default function FullWidthTabs(props) {
                     </div>
                   </div>
                   <p className="px-3">
-                  من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ای من اینه که  نظر من اینه که  نظر من اینه که  نظر من ایی
+                    {current.comment_text}  
                   </p>
                   <Divider variant="middle" component="li" />
-                {/* ))} */}
+                  
+
               </div>
+               ))}
+               </div>
+
+                   )}
             </List>
 
           </div>
@@ -344,50 +364,9 @@ export default function FullWidthTabs(props) {
             </div>
 
             <List >
-               <div className="" style={{direction:"rtl"}}>
-                {/* {customElements.map((current)=>( */}
-                  <div className="d-flex p-3">
-                    <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
-                    <div className="ml-auto mr-3">
-                      <h5>
-                        fateme
-                      </h5>
-                      <small>
-                      2020-02-20   10:30
-                      </small>
-                    </div>
-                    <div className="d-flex">
-                    <small className=" mt-3">
-                        10
-                      </small>
-                      <div className="btn "> 
-                        <svg width="2em" height="2em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  <div className="px-3 d-flex justify-content-center align-items-center text-center mx-3">
-                    <div>
-                      <svg style={{width:24,height:24}} viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
-                      </svg>
-                    </div>
-                    <p className="text-right col-11 mx-3">
-                      نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که نقل قول اینی که 
-                    </p>
-                    <div>
-                      <svg style={{width:24,height:24}} viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M11 18V10H9.12L11.12 6H5.38L3 10.76V18M9 16H5V11.24L6.62 8H7.88L5.88 12H9M21 18V10H19.12L21.12 6H15.38L13 10.76V18M19 16H15V11.24L16.62 8H17.88L15.88 12H19Z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <Divider variant="middle" component="li" />
-                {/* ))} */}
-              </div>
+              
               <div className="" style={{direction:"rtl"}}>
-                {/* {customElements.map((current)=>( */}
+                
                   <div className="d-flex p-3">
                     <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
@@ -426,7 +405,7 @@ export default function FullWidthTabs(props) {
                     </div>
                   </div>
                   <Divider variant="middle" component="li" />
-                {/* ))} */}
+                
               </div>
             </List>
 
