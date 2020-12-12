@@ -8,6 +8,7 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, Actio
 import * as yup from 'yup';
 import {Formik,formik} from 'formik';
 import { useFocusEffect } from '@react-navigation/native';
+import axiosinst from '../api/axiosinst';
 
 const commentschema=yup.object({
 
@@ -22,7 +23,7 @@ const Quote = (prop) => {
      console.log(id) 
      try{
  
-     const response = await axiosinst.get("bookdetail/"+id+'/comment')
+     const response = await axiosinst.get('api/quotes/' + id)
       console.log(response.data)
      //  for(let i=0;response.data[i]!=null;i++){
      //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
@@ -37,10 +38,19 @@ const Quote = (prop) => {
       console.log(err);
     
    }
+//    try{
+//     const response = await axiosinst.get('api/quotes/like/' + id)
+//     console.log(response.data)
+//    }
+//  catch(err){
+  
+//     console.log(err);
+  
+//  }
    }
   useFocusEffect(
     React.useCallback(() => {
-        //response()
+        response()
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
@@ -65,7 +75,7 @@ const Quote = (prop) => {
 
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
-                axiosinst.post("bookdetail/"+prop.route.params.id+'/comment',backk,{"headers":
+                axiosinst.post('api/quotes/'+id,backk,{"headers":
                {
                 "Content-Type":"application/json",
                 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -236,3 +246,4 @@ const styles = StyleSheet.create({
     },
   });
   export default Quote;
+
