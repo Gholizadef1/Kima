@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,ScrollView} from 'react-native';
+import { StyleSheet, Text, View ,Image,ScrollView,FlatList} from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
@@ -23,20 +23,23 @@ const Comment = (prop) => {
   
   console.log('AVAL')
   const response=async (searchTerm)=>{
+
    console.log('DOVOM')
-    let lenghtt=0
+    
     const id=prop.route.params.id
     console.log(id)
+
     try{
+
     const response = await axiosinst.get("bookdetail/"+id+'/comment')
+     console.log(response.data)
+    //  for(let i=0;response.data[i]!=null;i++){
+    //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
+    //    }
      
-     for(let i=0;response.data[i]!=null;i++){
-        setinformation([... information ,(<Commentcard
-         name={response.data[i].account.username} date={response.data[i].sendtime} likenumber={1000} dislikenumber={10} comment={response.data[i].comment_text}
-         ></Commentcard>)  ])
-      
-       }
-     
+    //   }
+    setinformation(response.data)
+    console.log(information[0])
     }
   catch(err){
    
@@ -179,32 +182,17 @@ const Comment = (prop) => {
   
      opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
+     <FlatList
+     keyExtractor={(item)=>item.id}
+     data={information}
+    renderItem={({item})=>(<Commentcard   name={item.account.username} 
 
-     <ScrollView  style={{}} showsVerticalScrollIndicator={false}>
-        {information}
-        {/* <Commentcard name={';dakjf'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
-        <Commentcard name={'آیدا'} date={'1/1/99'} likenumber={50} dislikenumber={10} comment={'خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بودخوب بود'}></Commentcard>
-        <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
-        <Commentcard  name={'ee'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
-        <Commentcard  name={'mmmmm'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود  بود'} ></Commentcard>
-        <Commentcard name={'bbbbb'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
-        <Commentcard  name={'ss'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' ددددددددددددددددددددددددددددددددددددددددخوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
-      
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
-        <Commentcard></Commentcard>
+    date={item.sendtime} likenumber={100} dislikenumber={10} comment={item.comment_text} ></Commentcard>)}
+    >
+
+    </FlatList>
+
      
-   */}
-  
-   
-        </ScrollView>
-        
         {/* <View style={{position:'absolute',marginTop:'160%',width:'100%'}}></View> */}
 
     
