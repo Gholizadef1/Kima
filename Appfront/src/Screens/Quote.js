@@ -17,7 +17,11 @@ const commentschema=yup.object({
   .required("نقل قول شما نمیتواند خالی باشد")
   .test('line',"حداکثر تعداد خط مجاز 11 خط است",(val=>val.toString().split('\n').length<=11))
 })
+
 const Quote = (prop) => {
+
+  const [information,setinformation]=useState([]);
+
   const response=async ()=>{
     console.log('DOVOM')
      const id=prop.route.params.id
@@ -26,12 +30,8 @@ const Quote = (prop) => {
  
      const response = await axiosinst.get('api/quotes/' + id)
       console.log(response.data)
-     //  for(let i=0;response.data[i]!=null;i++){
-     //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
-     //    }
-      
-     //   }
-    //  setinformation(response.data)
+    
+      setinformation(response.data)
     //  console.log(information[0])
      }
    catch(err){
