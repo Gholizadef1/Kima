@@ -183,10 +183,10 @@ const Comment = (prop) => {
      opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
      <FlatList
+     showsVerticalScrollIndicator={false}
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-
     date={item.sendtime} likenumber={100} dislikenumber={10} comment={item.comment_text} ></Commentcard>)}
     >
 
@@ -194,12 +194,6 @@ const Comment = (prop) => {
 
      
         {/* <View style={{position:'absolute',marginTop:'160%',width:'100%'}}></View> */}
-
-    
-   
-
-   
-
     
     </Animated.View>
    
