@@ -22,7 +22,7 @@ import axios from 'axios'
 const Bookview = (prop) => {
 
   const [rate , setrate] = useState(true);
-  const [ratenum , setratenum] = useState(0);
+  const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
@@ -37,27 +37,29 @@ const Bookview = (prop) => {
     return null;
   }
 
-//   const getRate = async(data)=>{
-//     axios.get('http://8b592bb1a53c.ngrok.io/api/bookrating/'+id, {
-//       "headers": {
-//         "content-type": "application/json",
-//         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-//       }
-//     })
-//     .then(function(response){
-//       console.log('**'+response.data)
-//       setratenum(response.data)
-      
-//   })
-//   .catch(function(error){
-//       console.log(error)
-//   })
-//   }
+  const getRate = async()=>{
+    axios.get('http://2a70f9d05fdb.ngrok.io/api/bookrating/'+id, {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('response data : ', response.data)
+      console.log(response.message)
+      console.log('$$$$'+response.data.data)
+      setratenum(response.data.data)   
+  })
+  .catch(function(error){
+      console.log(error)
+  })
+  }
+  getRate();
 
 // if(!ratenum){
 //   return null
 // }
-//getRate();
+
 
   console.log('**' +rate)
 
@@ -75,7 +77,15 @@ const Bookview = (prop) => {
     .then(async function(response){
       console.log(response.data)
       console.log('\n'+'++++++++'+'\n')
-      setrate(false)
+      setratenum(rate);
+      console.log('&&'+rate);
+      getRate();
+      // if (rate===true){
+      //   setrate(false)
+      // }
+      // else{
+      //   setrate(true)
+      // }
     })
     .catch(function (error) {
        console.log(error);
@@ -84,8 +94,9 @@ const Bookview = (prop) => {
 }
 
 // useFocusEffect(
-//   React.useCallback((ratenum) => {
-//       response();
+//   React.useCallback(() => {
+//     getResult(id);
+//       getRate();
 //   },[])
  
 //   )
