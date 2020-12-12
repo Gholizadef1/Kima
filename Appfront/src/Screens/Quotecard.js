@@ -16,7 +16,7 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#F1F3F9'}}>
+        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
     
         <Text style={{  
          textAlignVertical:'center',
@@ -67,7 +67,7 @@ const Quotecard = (prop) => {
 const styles = StyleSheet.create({
     container: {
     
-      backgroundColor: '#fff',
+      backgroundColor: '#ffff',
      marginTop:'2%'
     //   alignItems: 'center',
     //   justifyContent: 'center',
