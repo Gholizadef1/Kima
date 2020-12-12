@@ -65,6 +65,19 @@ const Quote = (prop) => {
 
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
+                axiosinst.post("bookdetail/"+prop.route.params.id+'/comment',backk,{"headers":
+               {
+                "Content-Type":"application/json",
+                "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+               }})
+              .then(async function(response){
+                  console.log(response);
+         
+                })
+              .catch(function(error){
+              console.log(error);
+         
+               })
          
                 }}
                  >
