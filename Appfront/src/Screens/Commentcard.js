@@ -12,13 +12,13 @@ const Commentcard = (prop) => {
     const[showmore,setshowmore]=useState('بیشتر...');
     // console.log((prop.comment.toString().split('\n').lenght===1))
     const commentt=`${prop.comment}`.toString();
-    const linenumber=(commentt.split(' ').length)
-    const commenttt=`${prop.comment}`.toString().split(' ');
+    const linenumber=(commentt.split('\n').length)
+    const commenttt=`${prop.comment}`.toString().split('\n');
     let comment4='';
-    if(linenumber>40){
-        for(let i=0;i<40;i++)
-         comment4 += commenttt[i]+' '
-       
+    if(linenumber>5){
+        for(let i=0;i<4;i++)
+         comment4 += commenttt[i]+'\n'
+       comment4+=commenttt[4]
     }
     else
     {
@@ -78,7 +78,7 @@ const Commentcard = (prop) => {
             <Text style={styles.likenumber}>{prop.likenumber}</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
             <Text style={styles.dislikenumber}>{prop.dislikenumber}</Text>
-            {`${prop.comment}`.toString().split(' ').length>=40?<TouchableOpacity
+            {`${prop.comment}`.toString().split('\n').length>=5?<TouchableOpacity
             onPress={()=>{if(more===false)
             {setmore(true)
                 setshowmore('کم تر')
