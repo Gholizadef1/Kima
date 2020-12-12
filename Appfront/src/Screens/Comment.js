@@ -187,7 +187,7 @@ const Comment = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} likenumber={100} dislikenumber={10} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} likenumber={100} dislikenumber={10} picture={item.account.profile_photo} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>
