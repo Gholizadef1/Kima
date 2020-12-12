@@ -17,7 +17,7 @@ const Bookview = (prop) => {
   const [rate , setrate] = useState(true);
   const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
-  const [value, setValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('null');
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
@@ -30,6 +30,43 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+
+  // const getPicker = async () => {
+  //   axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
+  //     "headers": {
+  //       "content-type": "application/json",
+  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //     }
+  //   })
+  //   .then(function(response){
+  //     console.log('Pickerr'+response.data.book_state)
+  //     setSelectedValue(response.data.book_state)   
+  // })
+  // .catch(function(error){
+  //     console.log(error)
+  // })
+  // };
+
+  const PostPicker = async (value) => {
+        if (value != "") {
+          const payload = {
+            "book_state": value,
+          }
+          const back = JSON.stringify(payload);
+          axios.post('http://2a70f9d05fdb.ngrok.io/bookdetail/' +id, back, {
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              console.log(response.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      }
 
 
   const getRate = async()=>{
@@ -50,11 +87,6 @@ const Bookview = (prop) => {
   })
   }
   getRate();
-
-// if(!ratenum){
-//   return null
-// }
-
 
   console.log('**' +rate)
 
@@ -109,14 +141,14 @@ const Bookview = (prop) => {
                           {label: 'میخواهم بخوانم', value: 'ToRead'},
                           {label: 'در حال خواندن', value: 'Read'},
                       ]}
-                      defaultValue={'null'}
+                      defaultValue={selectedValue}
                       containerStyle={{height: 40 , width:220}}
                       style={{backgroundColor: '#fafafa'}}
                       itemStyle={{
                           justifyContent: 'flex-start'
                       }}
                       dropDownStyle={{backgroundColor: '#fafafa'}}
-                      onChangeItem={(item) => (console.log('finished'))}
+                      onChangeItem={(item) => (PostPicker(item))}
                   />
  
 
