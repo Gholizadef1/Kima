@@ -7,6 +7,7 @@ import Animated from 'react-native-reanimated';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
 import * as yup from 'yup';
 import {Formik,formik} from 'formik';
+import { useFocusEffect } from '@react-navigation/native';
 
 const commentschema=yup.object({
 
@@ -15,6 +16,13 @@ const commentschema=yup.object({
   .test('line',"حداکثر تعداد خط مجاز 11 خط است",(val=>val.toString().split('\n').length<=11))
 })
 const Quote = (prop) => {
+  useFocusEffect(
+    React.useCallback(() => {
+        //response()
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
+    },[]))
     const renderInner=()=>{
         return(
           // console.log('inner');
