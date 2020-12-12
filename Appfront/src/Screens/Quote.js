@@ -178,9 +178,9 @@ const Quote = (prop) => {
        opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
    }}>
         <ScrollView showsVerticalScrollIndicator={false}>
-           <Quotecrad height={350} ></Quotecrad>
-           <Quotecrad height={350} ></Quotecrad>
-           <Quotecrad height={350} ></Quotecrad>
+           <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>
+           <Quotecrad height={350} name={'عرفان'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100} ></Quotecrad>
+           <Quotecrad height={350} name={'bb'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100}></Quotecrad>
            
            
          

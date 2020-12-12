@@ -27,9 +27,9 @@ const Quotecard = (prop) => {
         marginTop:'8%',
         marginHorizontal:'6%',
         fontSize:14,
-        }}>{'سلام'+'\n'+'\n'+'\n'+'sghl'+'\n'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'+'\n'+'سلام'+'\n'+'خوبی'}</Text>
+        }}>{prop.naghlghol}</Text>
         <View style={{position:'absolute',marginTop:prop.height-65,alignSelf:'center'}}>
-      <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>روحی</Text>
+      <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>{prop.name}</Text>
       <View style={{}}>
        
      
@@ -51,10 +51,10 @@ const Quotecard = (prop) => {
           <View style={{marginBottom:'15%'}}>
           
    
-     <Text style={styles.date}>1/1/99</Text>
+     <Text style={styles.date}>{prop.date}</Text>
     
      <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
-     <Text style={styles.heartnumber}>100</Text>
+     <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
            
      </View>
  
