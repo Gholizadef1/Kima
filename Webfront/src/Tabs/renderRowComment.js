@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
     const { index, style } = props;
     const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/bookdetail/",{
+      fetch(`api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
         headers:{
     "Content-Type":"application/json",
    "Authorization":"Token "+Cookies.get("userToken")}
