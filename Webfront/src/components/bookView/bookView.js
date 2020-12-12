@@ -290,8 +290,8 @@ const labels = {
                   </tbody>
                 </table>
                     <div className="row" style={{fontFamily:'Morvarid'}}>
-                    <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-                    <select className="form-control mr-4 rounded-pill col-6" id="bookMood" onChange={ addBookToMineHandler} >
+                    <label className="col-10 mr-2" >به کتاب‌های خود اضافه کنید:</label>
+                    <select className="form-control mr-4 rounded-pill" style={{width:150}} id="bookMood" onChange={ addBookToMineHandler} >
                         <option id="none" value="none">هیچکدام</option>
                         <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
                         <option id="Reading" value="Reading">دارم می‌خوانم</option>

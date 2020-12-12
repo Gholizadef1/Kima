@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -92,29 +92,33 @@ export default function FullWidthTabs(props) {
 
   const[userQuote,setUserQuote]=useState("")
 
-  // const handleChangeComment = (e) => {
-  //   const {id , value} = e.target   
-  //   setUserComment(prevState => ({
-  //       ...prevState,
-  //       [id] : value
-  //   }))
-  // }
+  const handleChangeComment = (e) => {
+    const {value} = e.target   
+    setUserComment(value);
+    console.log(e);
+    console.log(userComment);
+  }
 
-  // const handleChangeQuote = (e) => {
-  //   const {id , value} = e.target   
-  //   setUserQuote(prevState => ({
-  //       ...prevState,
-  //       [id] : value
-  //   }))
-  // }
+  const handleChangeQuote = (e) => {
+    const { value} = e.target   
+    setUserQuote( value)
+    console.log(e);
+    console.log(userQuote);
+  }
 
   const handleSubmitCommentClick = (e) => {
-    if(userComment.length){
+    e.preventDefault();
+    console.log(userComment);
+    // if(userComment.length){
       const payload={
         "textcomment": userComment
       }
+      console.log(payload);
       const back= JSON.stringify(payload);
-      axios.post('http://127.0.0.1:8000/api/comments/'+props.book,
+      console.log(back);
+      axios.post(
+        // 'http://127.0.0.1:8000/api/comments/'+props.book,
+        "http://127.0.0.1:8000/bookdetail/"+props.book+'/comment',
       back
       ,{
        headers:{
@@ -134,7 +138,7 @@ export default function FullWidthTabs(props) {
         console.log(error);
       });
   
-    }
+    // }
   }
 
   const handleSubmitQuoteClick = (e) => {
@@ -226,7 +230,7 @@ export default function FullWidthTabs(props) {
                 <div className="d-flex flex-column mt-2 flex-fill">
                 <div className="d-flex">
                 <div className="flex-fill form-group mx-3">
-                  <textarea className="form-control" rows="1" id="comment" name="text" value={userComment}></textarea>
+                  <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>
                 </div>
                 
                 <StyledButton type="submit" className="btn shadow  align-self-start"
@@ -301,7 +305,7 @@ export default function FullWidthTabs(props) {
                 <div className="d-flex flex-column mt-2 flex-fill">
                 <div className="d-flex">
                 <div className="flex-fill form-group mx-3">
-                  <textarea className="form-control" rows="1" id="quote" name="text" value={userQuote}></textarea>
+                  <textarea className="form-control" rows="1" id="quote" name="text" value={userQuote} onChange={handleChangeQuote}></textarea>
                 </div>
                 
                 <StyledButton type="submit" className="btn shadow  align-self-start"
