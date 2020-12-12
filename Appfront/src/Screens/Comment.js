@@ -19,6 +19,7 @@ const commentschema=yup.object({
 
 
 const Comment = (prop) => {
+  const [closed,setclosed]=useState(false);
   const [information,setinformation]=useState([]);
   
   console.log('AVAL')
@@ -170,7 +171,15 @@ const Comment = (prop) => {
     callbackNode={fall}
     enabledGestureInteraction={true}
     enabledContentTapInteraction={false}
-    onCloseEnd={()=>{setshowbutton(true) }}
+    onCloseEnd={()=>{
+      setshowbutton(true)
+      // if(closed===true)
+      // setclosed(false)
+      // else
+      // setclosed(true)
+      response()
+      
+     }}
    //  isBackDropDismisByPress={true}
     renderContent={renderInner}
     renderHeader={renderHeader}            
