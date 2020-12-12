@@ -7,42 +7,37 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosinst from '../api/axiosinst';
 
 const PickerScreen = (props) => {
-   const [loading, setLoading] = useState(false);
-   const [selectedValue, setSelectedValue] = useState('');
 
-  useEffect(() => {
+   const [selectedValue, setSelectedValue] = useState('ToRead');
 
-    console.log(props)
-    getData();
-  });
+  // useEffect(() => {
+  //   console.log(props)
+  //   getData();
+  // });
 
   const onChangeValue = (value) => {
     PostData(value);
     // console.log(onChangeValue)
   };
+  console.log('***nowhi'+props.bookid)
 
-  const getData = async () => {
-    try {
-      axios.get('http://f9878e5c6e68.ngrok.io/bookdetail/' + props.bookid + '/getstate', {
-        "headers": {
-          "content-type": "application/json",
-          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-        }
-      })
-        .then(function (response) {
-          console.log('response data : ', response.data)
-          setSelectedValue(response.data.book_state);
-        })
-        .catch(function (error) {
+  // const getData = async () => {
+  //   axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
+  //     "headers": {
+  //       "content-type": "application/json",
+  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //     }
+  //   })
+  //   .then(function(response){
+  //     console.log('Pickerr'+response.data.book_state)
+  //     setSelectedValue(response.data.book_state)   
+  // })
+  // .catch(function(error){
+  //     console.log(error)
+  // })
+  // };
 
-          console.log('error get data : ', error)
-        })
-      setSelectedValue(response.data.book_state);
-      setLoading(false);
-    } catch (e) {
-      console.log('error', e);
-    }
-  };
+//  getData();
 
   const PostData = async (value) => {
 //    console.log(value);
@@ -51,7 +46,7 @@ const PickerScreen = (props) => {
         "book_state": value,
       }
       const back = JSON.stringify(payload);
-      axios.post('http://f9878e5c6e68.ngrok.io/bookdetail/' + props.bookid, back, {
+      axios.post('http://2a70f9d05fdb.ngrok.io/bookdetail/' + props.bookid, back, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -59,6 +54,7 @@ const PickerScreen = (props) => {
       })
         .then(async function (response) {
           console.log(response.data)
+//          getData();
 
 //          console.log('\n' + '++++++++' + '\n')
         })
@@ -71,14 +67,7 @@ const PickerScreen = (props) => {
 //  console.log(selectedValue)
 
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />ّّ
-        <Text>hi</Text>
-      </View>
-    );
-  } else {
+
     return (
       <Container >
         <Content>
@@ -94,8 +83,8 @@ const PickerScreen = (props) => {
               headerTitleStyle={{ color: "#fff" }}
               selectedValue={selectedValue}
               onChangeValue={(value) => {
-//                onChangeValue(value);
-//                 console.log(value)
+               onChangeValue(value);
+                console.log(value)
               }}
             >
               <Picker.Item label="اضافه کنید" value="null" />
@@ -108,7 +97,7 @@ const PickerScreen = (props) => {
         </Content>
       </Container>
     );
-  }
+
 };
 
 export default PickerScreen;

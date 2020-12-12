@@ -4,19 +4,12 @@ TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
    Right, Left , Picker, Form } from 'native-base';
 import {withNavigation} from 'react-navigation'
-import Home from './Home';
-import PickerShow from './PickerShow'
 import axiosinst from '../api/axiosinst'
-import ActionButton from 'react-native-action-button';
-import { HeaderBackground } from '@react-navigation/stack';
-import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
-import PickerScreen from './PickerScreen';
-import StarScreen from './StarScreen';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FAB } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native'
+import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios'
 
 const Bookview = (prop) => {
@@ -24,6 +17,7 @@ const Bookview = (prop) => {
   const [rate , setrate] = useState(true);
   const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
+  const [value, setValue] = useState(null);
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
@@ -36,6 +30,7 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+
 
   const getRate = async()=>{
     axios.get('http://2a70f9d05fdb.ngrok.io/api/bookrating/'+id, {
@@ -80,28 +75,12 @@ const Bookview = (prop) => {
       setratenum(rate);
       console.log('&&'+rate);
       getRate();
-      // if (rate===true){
-      //   setrate(false)
-      // }
-      // else{
-      //   setrate(true)
-      // }
     })
     .catch(function (error) {
        console.log(error);
     });
   }
 }
-
-// useFocusEffect(
-//   React.useCallback(() => {
-//     getResult(id);
-//       getRate();
-//   },[])
- 
-//   )
-
-
   
     return(
       <Container>
@@ -123,8 +102,23 @@ const Bookview = (prop) => {
                   onFinishRating={(rating) => postRate(rating)}
                   size={25}
                   />
-{/* 
-                  <PickerScreen style={{}} bookid={id} />  */}
+
+                  <DropDownPicker
+                      items={[
+                          {label: 'اضافه کنید', value: 'null'},
+                          {label: 'میخواهم بخوانم', value: 'ToRead'},
+                          {label: 'در حال خواندن', value: 'Read'},
+                      ]}
+                      defaultValue={'null'}
+                      containerStyle={{height: 40 , width:220}}
+                      style={{backgroundColor: '#fafafa'}}
+                      itemStyle={{
+                          justifyContent: 'flex-start'
+                      }}
+                      dropDownStyle={{backgroundColor: '#fafafa'}}
+                      onChangeItem={(item) => (console.log('finished'))}
+                  />
+ 
 
                   <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
                     درباره کتاب :</Text>
