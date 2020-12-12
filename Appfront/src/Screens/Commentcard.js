@@ -5,6 +5,7 @@ import { Avatar } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { color } from 'react-native-reanimated';
 
 const Commentcard = (prop) => {
      const[more,setmore]=useState(false);
@@ -156,22 +157,26 @@ const styles = StyleSheet.create({
     },
     date:{
         position:'absolute',
-        marginTop:'16%',
+        marginTop:'17%',
         left:80,
         fontSize:12,
+        color:'gray'
     },
     likenumber:{
     fontSize:12,
     marginLeft:45,
     marginTop:'6%',
-    position:'absolute'
+    position:'absolute',
+    color:'gray'
      
     },
     dislikenumber:{
         fontSize:12,
         marginLeft:97,
         marginTop:'6%',
-        position:'absolute'
+        position:'absolute',
+        color:'gray'
+        
          
         },
   });
