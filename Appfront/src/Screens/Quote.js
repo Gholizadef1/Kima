@@ -16,6 +16,28 @@ const commentschema=yup.object({
   .test('line',"حداکثر تعداد خط مجاز 11 خط است",(val=>val.toString().split('\n').length<=11))
 })
 const Quote = (prop) => {
+  const response=async ()=>{
+    console.log('DOVOM')
+     const id=prop.route.params.id
+     console.log(id) 
+     try{
+ 
+     const response = await axiosinst.get("bookdetail/"+id+'/comment')
+      console.log(response.data)
+     //  for(let i=0;response.data[i]!=null;i++){
+     //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
+     //    }
+      
+     //   }
+    //  setinformation(response.data)
+    //  console.log(information[0])
+     }
+   catch(err){
+    
+      console.log(err);
+    
+   }
+   }
   useFocusEffect(
     React.useCallback(() => {
         //response()
