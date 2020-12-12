@@ -183,6 +183,7 @@ const Comment = (prop) => {
      opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
  }}>
      <FlatList
+     style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
      keyExtractor={(item)=>item.id}
      data={information}
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
     
         width:'70%',
         marginHorizontal:'15%',
-        marginTop:'160%',
+        marginTop:'162%',
         position:'absolute',
         borderRadius:17,
         backgroundColor:'#1F7A8C'
