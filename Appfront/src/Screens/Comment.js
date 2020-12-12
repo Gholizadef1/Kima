@@ -17,30 +17,39 @@ const commentschema=yup.object({
   .required("نظر شما نمیتواند خالی باشد")
 })
 
-const Comment = (prop) => {
 
+const Comment = (prop) => {
+  const [information,setinformation]=useState([]);
+  
+  console.log('AVAL')
   const response=async (searchTerm)=>{
+   console.log('DOVOM')
+    let lenghtt=0
     const id=prop.route.params.id
     console.log(id)
     try{
     const response = await axiosinst.get("bookdetail/"+id+'/comment')
-    console.log('alakkii')
-    console.log(response);
+     
+     for(let i=0;response.data[i]!=null;i++){
+        setinformation([... information ,(<Commentcard
+         name={response.data[i].account.username} date={response.data[i].sendtime} likenumber={1000} dislikenumber={10} comment={response.data[i].comment_text}
+         ></Commentcard>)  ])
+      
+       }
+     
     }
   catch(err){
-      // console.log(response)
+   
      console.log(err);
-    //   Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
-        
-
-    //         Title:'فهمیدم',onPress:()=>console.log('alert closed')
-    //         }])
-    // }
+   
   }
   }
   useFocusEffect(
     React.useCallback(() => {
+ 
+      console.log('++++++++++'+ information +'**********')
       response();
+      console.log('++++++++++'+ information +'**********')
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
@@ -172,7 +181,8 @@ const Comment = (prop) => {
  }}>
 
      <ScrollView  style={{}} showsVerticalScrollIndicator={false}>
-        <Commentcard name={'سارا'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
+        {information}
+        {/* <Commentcard name={';dakjf'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'خوب بود'}></Commentcard>
         <Commentcard name={'آیدا'} date={'1/1/99'} likenumber={50} dislikenumber={10} comment={'خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بودخوب بود'}></Commentcard>
         <Commentcard name={'sssss'} date={'1/1/99'} likenumber={1000} dislikenumber={10} comment={'awesommmmmmmmmmme'}></Commentcard>
         <Commentcard  name={'ee'} date={'1/1/99'} likenumber={ 10} dislikenumber={10} comment={' خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود د خوب بود خوب بود خوب بود خوب بود خوب بود خوب بودخوب بود خوب بود خوب بود خوب بود eeeeeخوب بود'} ></Commentcard>
@@ -190,7 +200,7 @@ const Comment = (prop) => {
         <Commentcard></Commentcard>
         <Commentcard></Commentcard>
      
-  
+   */}
   
    
         </ScrollView>
@@ -259,7 +269,7 @@ const styles = StyleSheet.create({
       shadowOffset: {width: -1, height: -3},
       shadowRadius: 20,
       shadowOpacity: 0.5,
-      // elevation: 5,
+      // elevation: 5
       paddingTop: 20,
       borderTopLeftRadius: 20,
       borderTopColor:'black',
