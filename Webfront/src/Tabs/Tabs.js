@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -12,9 +11,10 @@ import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import React, { useState, useEffect } from "react";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ 
   return (
     <div
       role="tabpanel"
@@ -68,30 +68,6 @@ export default function FullWidthTabs() {
     },
   }));
   
-  function renderRowComment(props) {
-    const { index, style } = props;
-    return (
-      <div>
-        <ListItem alignItems="flex-start">
-        <ListItem
-          alignItems="flex-start"
-          style={{direction:"rtl"}}
-         >
-          <ListItemText style={{textAlign:"right"}}
-            primary="کتاب ایکس"
-            secondary={
-            <React.Fragment  >
-              {"نظر من اینکه نظر من ای نظر من اینه که  نظر من اینه که "}
-            </React.Fragment>
-            }
-          />
-        </ListItem>
-      </ListItem>
-  
-      </div>
-    );
-  }
-  
   function renderRowQuote(props) {
     const { index, style } = props;
     return (
@@ -115,10 +91,7 @@ export default function FullWidthTabs() {
       </div>
     );
   }
-  renderRowComment.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+ 
   renderRowQuote.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.object.isRequired,
@@ -148,15 +121,16 @@ export default function FullWidthTabs() {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
       
-        {renderRowQuote}
+          {renderRowQuote}
         
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
         <div className={classes.root}>
-      <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
+      <FixedSizeList height={400} width={700} itemSize={150} itemCount={200}>
       
-        {renderRowComment}
+     
+        {RenderRowComment}
         
       </FixedSizeList>
     </div>
