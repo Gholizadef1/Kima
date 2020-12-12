@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import {Formik,formik} from 'formik';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const commentschema=yup.object({
 
@@ -68,14 +69,14 @@ const Quote = (prop) => {
                  actions.resetForm();
                   console.log('sumbit')
                 const back={
-                 username:values.comment,
+                 textquote:values.comment,
         
                 }
                 
-
+                console.log((await AsyncStorage.getItem('token')).toString())
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
-                axiosinst.post('api/quotes/'+id,backk,{"headers":
+                axiosinst.post('api/quotes/'+prop.route.params.id,backk,{"headers":
                {
                 "Content-Type":"application/json",
                 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
