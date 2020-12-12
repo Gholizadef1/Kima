@@ -252,3 +252,15 @@ class UserRatingview(APIView):
 
     
 
+class BookRateView(generics.ListAPIView):
+    serializer_class=BookrateSerializer
+
+    def get_queryset(self,pk):
+        this_book=book.objects.get(pk=pk)
+        return Ratinguser.objects.filter(current_book=this_book)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = BookrateSerializer(queryset, many=True)
+        return Response(serializer.data)

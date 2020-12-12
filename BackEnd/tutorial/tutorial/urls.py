@@ -34,6 +34,7 @@ urlpatterns = [
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
     path('api/bookrating/<int:pk>',UserRatingview.as_view()),
+    path('api/rateperbook/<int:pk>',BookRateView.as_view()),
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
