@@ -9,13 +9,15 @@ from rest_framework import filters
 from rest_framework import generics
 from django.conf import settings
 from tutorial.quickstart.models import MyBook
+from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-class BookView(APIView):
+class BookView(APIView,PageNumberPagination):
     """
     A view that can accept GET requests with JSON content.
     """
+    #pagination_class = PageNumberPagination
 
     def get(self, request, format=None):
         
