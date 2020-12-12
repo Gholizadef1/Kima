@@ -78,12 +78,27 @@ export default function FullWidthTabs(props) {
   
   const [quotes, setQuotes] = useState([]);
 
-  // useEffect(()=>{
-  //   axis.get()
-  //   .then()
-  //   .catch();
+  useEffect(()=>{
+    console.log(props.book)
+    //const id=props.book;
+    axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    .then(response=>{
+      console.log(response);
 
-  // },[]);
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+    // fetch("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    // .then((res) => res.json())
+    // .then((data) => {
+    //    console.log(data);
+    //   setComments(data);
+    // });
+
+    
+
+  },[props.book]);
 
 
 
@@ -109,7 +124,7 @@ export default function FullWidthTabs(props) {
   const handleSubmitCommentClick = (e) => {
     e.preventDefault();
     console.log(userComment);
-    // if(userComment.length){
+    if(userComment.length){
       const payload={
         "textcomment": userComment
       }
@@ -117,7 +132,6 @@ export default function FullWidthTabs(props) {
       const back= JSON.stringify(payload);
       console.log(back);
       axios.post(
-        // 'http://127.0.0.1:8000/api/comments/'+props.book,
         "http://127.0.0.1:8000/bookdetail/"+props.book+'/comment',
       back
       ,{
@@ -127,10 +141,11 @@ export default function FullWidthTabs(props) {
       })
       .then(response=>{
         console.log(response);
-        if(response.status=="success"){
+        if(response.data.status=="success"){
           setOpenSnack(true);
           setMassage("نظر شما با موفقیت ثبت شد")
           setUserComment("");
+          
   
         }
       })
@@ -138,7 +153,10 @@ export default function FullWidthTabs(props) {
         console.log(error);
       });
   
-    // }
+     }else{
+      setOpenSnack(true);
+      setMassage("نظر خالی ثبت نشد")
+     }
   }
 
   const handleSubmitQuoteClick = (e) => {
