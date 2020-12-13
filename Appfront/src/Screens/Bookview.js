@@ -2,7 +2,7 @@ import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
-   Right, Left , Picker, Form } from 'native-base';
+   Right, Left , Picker, Form, Item } from 'native-base';
 import {withNavigation} from 'react-navigation'
 import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
@@ -15,9 +15,10 @@ import axios from 'axios'
 const Bookview = (prop) => {
 
   const [rate , setrate] = useState(true);
+  const [test , settest] = useState(null);
   const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
-  const [selectedValue, setSelectedValue] = useState('null');
+  const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
@@ -32,7 +33,7 @@ const Bookview = (prop) => {
   }
 
   const getPicker = async () => {
-    axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://359016142cdc.ngrok.io/bookdetail/'+id +'/getstate/', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -54,7 +55,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://2a70f9d05fdb.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://359016142cdc.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -72,7 +73,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://2a70f9d05fdb.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://359016142cdc.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -98,7 +99,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://2a70f9d05fdb.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://359016142cdc.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -115,6 +116,7 @@ const Bookview = (prop) => {
     });
   }
 }
+//this.state = {}
   
     return(
       <Container>
@@ -139,9 +141,10 @@ const Bookview = (prop) => {
 
                   <DropDownPicker
                       items={[
-                          {label: 'اضافه کنید', value: 'null'},
+                          {label: 'اضافه کنید', value: 'none'},
                           {label: 'میخواهم بخوانم', value: 'ToRead'},
-                          {label: 'در حال خواندن', value: 'Read'},
+                          {label: 'در حال خواندن', value: 'Reading'},
+                          {label: 'قبلا خوانده ام', value: 'Read'},
                       ]}
                       defaultValue={selectedValue}
                       containerStyle={{height: 40 , width:220}}
@@ -150,7 +153,8 @@ const Bookview = (prop) => {
                           justifyContent: 'flex-start'
                       }}
                       dropDownStyle={{backgroundColor: '#fafafa'}}
-                      onChangeItem={(item) => (PostPicker(item))}
+                      onChangeItem={(item) => PostPicker(item.value)}
+                      
                   />
  
 

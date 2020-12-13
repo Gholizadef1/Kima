@@ -21,21 +21,21 @@ const PickerScreen = (props) => {
   };
   console.log('***nowhi'+props.bookid)
 
-  // const getData = async () => {
-  //   axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
-  //     "headers": {
-  //       "content-type": "application/json",
-  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-  //     }
-  //   })
-  //   .then(function(response){
-  //     console.log('Pickerr'+response.data.book_state)
-  //     setSelectedValue(response.data.book_state)   
-  // })
-  // .catch(function(error){
-  //     console.log(error)
-  // })
-  // };
+  const getData = async () => {
+    axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('Pickerr'+response.data.book_state)
+      setSelectedValue(response.data.book_state)   
+  })
+  .catch(function(error){
+      console.log(error)
+  })
+  };
 
 //  getData();
 
