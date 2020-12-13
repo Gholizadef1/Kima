@@ -93,12 +93,17 @@ export default function FullWidthTabs(props) {
     .catch(error=>{
       console.log(error);
     });
-    // fetch("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
-    // .then((res) => res.json())
-    // .then((data) => {
-    //    console.log(data);
-    //   setComments(data);
-    // });
+
+
+    axios.get("http://127.0.0.1:8000/api/quotes/"+props.book)
+    .then(response=>{
+     setQuotes(response.data);
+      console.log(response.data);
+      console.log(response);
+    })
+    .catch(error=>{
+      console.log(error);
+    });
 
     
 
@@ -284,9 +289,6 @@ export default function FullWidthTabs(props) {
                   {comments.map ((current) => (
                     
                <div className="" style={{direction:"rtl"}}>
-
-               
-                
                   <div className="d-flex p-3">
                     <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
@@ -364,17 +366,25 @@ export default function FullWidthTabs(props) {
             </div>
 
             <List >
+            {quotes.message === "No quote!" ? (
+                 
+
+                 <p>هیچ نقل قولی ثبت نشده</p>
+
+                ) : (
+                  <div>
+
+                  {quotes.map ((current) => (
               
               <div className="" style={{direction:"rtl"}}>
-                
                   <div className="d-flex p-3">
-                    <Avatar alt="فاطمه" src="" style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
-                        fateme
+                        {current.account.username}
                       </h5>
                       <small>
-                      2020-02-20   10:30
+                      {`${current.sendtime.toString().split('|')[0]}  ${current.sendtime.toString().split('.')[0].split('|')[1]}`}
                       </small>
                     </div>
                     <div className="d-flex">
@@ -396,7 +406,7 @@ export default function FullWidthTabs(props) {
                       </svg>
                     </div>
                     <p className="text-right col-11 mx-3">
-                      نقل قول اینی که نقل قول اینیل اینی که نقل قول اینی که 
+                    {current.quote_text}
                     </p>
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
@@ -405,8 +415,11 @@ export default function FullWidthTabs(props) {
                     </div>
                   </div>
                   <Divider variant="middle" component="li" />
-                
-              </div>
+                  </div>
+               ))}
+               </div>
+
+                   )}
             </List>
 
           </div>
