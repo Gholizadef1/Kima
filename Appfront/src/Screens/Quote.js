@@ -192,7 +192,8 @@ const Quote = (prop) => {
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
-      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/likes/'+prop.route.params.id,{"headers":
+      console.log(item.id)
+      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/like/'+item.id,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
