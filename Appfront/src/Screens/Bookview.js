@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios'
+import QuoteBookview from './QuoteBookview';
 
 const Bookview = (prop) => {
 
@@ -122,7 +123,7 @@ const Bookview = (prop) => {
       <Container>
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:90}}/>
             <Body style={{marginTop:35}}>
-                  <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
+                  {/* <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
                      width:160 , borderRadius:10 }} />
 
                   <Text style={{marginTop:10 , fontWeight:'bold',
@@ -167,7 +168,8 @@ const Bookview = (prop) => {
                     <Text style={{marginTop:10 , marginRight:20 , 
                       textAlign:'right' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
-                  </Content>
+                  </Content> */}
+                  <QuoteBookview/>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
