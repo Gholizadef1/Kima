@@ -29,6 +29,12 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
+      {quote.length===0 ? (
+                 
+        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
         {quote.map((current) => (
         <ListItem alignItems="flex-start" key={current.id}>
         <ListItem
@@ -65,6 +71,8 @@ import { red } from "@material-ui/core/colors";
       </ListItem>
         ))}
       </div>
+       )}
+       </div>
     );
     
         }

@@ -1,4 +1,3 @@
-
 import {
     withRouter
   } from "react-router-dom";
@@ -29,6 +28,12 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
+      {comment.message === "No Comment!" ? (
+                 
+        <p>هیچ نظری ثبت نشده</p>
+
+       ) : (
+         <div>
         {comment.map((current) => (
         <ListItem alignItems="flex-start" key={current.id}>
         <ListItem
@@ -65,6 +70,8 @@ import { red } from "@material-ui/core/colors";
       </ListItem>
         ))}
       </div>
+       )}
+       </div>
     );
     
         }
