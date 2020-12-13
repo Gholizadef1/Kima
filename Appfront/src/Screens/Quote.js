@@ -233,7 +233,10 @@ const Quote = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
+
     date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://53d9727d06d4.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+
+
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
      
@@ -255,7 +258,7 @@ const Quote = (prop) => {
          getlike(item);
      
 
-
+         response();
         }} size={20} color={like} />
         { IDD===item.account.id.toString() ?<AntDesign name="delete"
         size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
