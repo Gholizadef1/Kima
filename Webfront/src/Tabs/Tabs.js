@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "./Tabs.css";
-import RenderRowComment from"./renderRowComment";
+import RenderRowquote from"./renderRowQuote";
 import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -69,7 +69,7 @@ export default function FullWidthTabs() {
     },
   }));
   
-  function renderRowQuote(props) {
+  function renderRowComment(props) {
     const { index, style } = props;
     return (
       <div>
@@ -93,7 +93,7 @@ export default function FullWidthTabs() {
     );
   }
  
-  renderRowQuote.propTypes = {
+  renderRowComment.propTypes = {
     index: PropTypes.number.isRequired,
     style: PropTypes.object.isRequired,
   };
@@ -122,16 +122,15 @@ export default function FullWidthTabs() {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
       
-      
-          {renderRowQuote}
+          {RenderRowquote}
+         
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
         <div className={classes.root}>
       <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
-      
-       
-        {RenderRowComment}
+      {renderRowComment}
+        
         
       </FixedSizeList>
     </div>
