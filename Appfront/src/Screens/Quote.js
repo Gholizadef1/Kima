@@ -12,6 +12,7 @@ import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { BlurView, VibrancyView } from "@react-native-community/blur";
 
 const commentschema=yup.object({
 
@@ -22,7 +23,7 @@ const commentschema=yup.object({
 
 const Quote = (prop) => {
   const [like,setlike]=useState('gray')
-
+  const [close,setclose]=useState(false);
   const [information,setinformation]=useState([]);
 
   // const getid=async()=>(await AsyncStorage.getItem('id'));
@@ -89,7 +90,7 @@ const Quote = (prop) => {
                }})
               .then(async function(response){
                   console.log(response);
-         
+                   setclose(true);
                 })
               .catch(function(error){
               console.log(error);
@@ -177,6 +178,7 @@ const Quote = (prop) => {
         setshowbutton(true) 
         response();
       }}
+      
      //  isBackDropDismisByPress={true}
       renderContent={renderInner}
       renderHeader={renderHeader}            
@@ -187,7 +189,7 @@ const Quote = (prop) => {
 
   <Animated.View style={{
     
-       opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
+       opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
       <FlatList
      style={{marginBottom:'17%'}}
@@ -195,12 +197,12 @@ const Quote = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://2e04b8a2bf25.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
       console.log(item.id)
-      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/like/1',{"headers":
+      axiosinst.post('http://2e04b8a2bf25.ngrok.io/api/quotes/like/1',{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -249,7 +251,13 @@ const Quote = (prop) => {
 
     </Button>
     :null}
-  
+    {/* <Text>blur</Text> */}
+    {/* <BlurView
+          // style={styles.absolute}
+          // blurType="light"
+          // blurAmount={10}
+          // reducedTransparencyFallbackColor="white"
+        /> */}
 
      </View>
     );
