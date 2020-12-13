@@ -25,6 +25,11 @@ from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
 from .serializers import * 
 
+
+
+class BasicPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+
 @api_view(['POST','GET'])
 def registration_view(request):
     
@@ -187,8 +192,9 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
 
-class MyQuoteView(generics.ListAPIView):
+class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
     serializer_class=QuoteSerializer
+    pagination_class = BasicPagination
 
     def get_queryset(self,pk):
         user=Account.objects.get(pk=pk)
@@ -198,11 +204,9 @@ class MyQuoteView(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
-        return Response(serializer.data)
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
 
-
-class BasicPagination(PageNumberPagination):
-    page_size_query_param = 'page_size'
     
 
 class QuoteView(APIView,PaginationHandlerMixin):
