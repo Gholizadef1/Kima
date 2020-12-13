@@ -2,9 +2,16 @@
     box-shadow: 1px 5px 30px 1px rgb(55, 26, 100) !important; 
 }
 
-.card-titl1{
-    font-size: 10px;
-    color: black;
+    .card-title3{
+        font-family: 'Morvarid';
+        color: #000000;
+        font-size: 1px;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+        direction: rtl;
+        padding-left: 20px;
+        padding-top: 5px;
     
 }.card-titl0{
     

@@ -29,8 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = env("SECRET_KEY")
-SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
+SECRET_KEY = env("SECRET_KEY")
+#SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -92,22 +93,25 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': env("DATABASE_NAME"),
-    #     'USER': env("DATABASE_USER"),
-    #     'PASSWORD': env("DATABASE_PASSWORD"),
-    #     'HOST': env("DATABASE_HOST"),
-    #     'PORT': env("DATABASE_PORT"),
-    # }
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'hope', 
-       'USER': 'postgres', 
-       'PASSWORD': 'melika55540430',
-      'HOST': 'localhost', 
-       'PORT': '',
-   }
+
+    #'default': {
+     #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      # 'NAME': 'hope', 
+      # 'USER': 'postgres', 
+     #  'PASSWORD': 'melika55540430',
+     # 'HOST': 'localhost', 
+     #  'PORT': '',
+  # }
+
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': env("DATABASE_NAME"),
+         'USER': env("DATABASE_USER"),
+         'PASSWORD': env("DATABASE_PASSWORD"),
+         'HOST': env("DATABASE_HOST"),
+         'PORT': env("DATABASE_PORT"),
+     }
+
 }
 
 
@@ -152,8 +156,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'tutorial/media')
 
 STATIC_URL = '/static/'
-
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

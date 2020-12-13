@@ -13,8 +13,27 @@ import {
   // useParams,
   withRouter
 } from "react-router-dom";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles
+} from "@material-ui/core/styles";
 //import BookView from "../components/bookView/bookView";
 
+import Tooltip from '@material-ui/core/Tooltip';
+const BlueOnGreenTooltip = withStyles({
+  tooltip: {
+    color: "black",
+    fontFamily:"Morvarid",
+    fontSize:20,
+    backgroundColor: "lightblue",
+    width:170,
+    height:80,
+    textAlign:"center",
+    marginLeft:20,
+    paddingTop:20,
+  }
+})(Tooltip);
 function Slide(props) {
   console.log(props);
   const [suggestions, setSuggestions] = useState([]);
@@ -94,9 +113,14 @@ function Slide(props) {
                   height={56}
                   width={56}
                 />
-
+      {current.title.length >17 ?
+<BlueOnGreenTooltip title={current.title}>
+<div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      </BlueOnGreenTooltip>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      
+} 
                 <small className= "title">
-                  <b className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</b>
                    <h5 className="card-title2"style={{fontWeight:"bold",color:"black"}}>{current.author}</h5>
 
                    </small>

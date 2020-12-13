@@ -12,8 +12,8 @@ import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
+ import {MdGroup} from 'react-icons/md';
+ import UserList from './UsersList';
 import { Route,withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 //import ReactNavbar from "react-responsive-animate-navbar";
@@ -22,36 +22,20 @@ import Cookies from 'js-cookie';
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-  // const [users,setUsers] = useState([]);
-  const [error,setError] = useState("");
+   //const [users,setUsers] = useState([]);
+ const[error,setError] = useState("");
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
 
 const searchUsers = async () => {
-try {
- setError(null);
+
 const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
-   if(res.data.count == 0){
-     setError(' ): نتیجه‌ای یافت نشد');
-   }
-   else{
-    setSearch(res.data.results);
-      }
- 
-}).catch ((err)=> {console.log(err)});
- 
-
-if (search == [null]) {
-setSearch([]);
-} else {
-setSearch(result.data);
+ setSearch(res.data.results)
+  
+});
 }
-}
-catch (err) {console.log(err)}
-
-};
 
 useEffect(() => {
   searchUsers();
@@ -101,7 +85,7 @@ useEffect(() => {
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />
     <Button variant="gray" onClick={handleShow}>
-    <GoSearch size="30" color="black" />
+    <GoSearch size="30" color="black"/>
         </Button>
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
@@ -110,7 +94,8 @@ useEffect(() => {
           </div>
         </Modal.Header>
         <Modal.Body>
-    <p style={{textAlign:"center",fontFamily:'Morvarid'}}>{error}</p>
+          {search != 0 ?
+          <div>
        {search.map((item) => (
      <div className="out1" key={item.id}>
        <div className="card cat1">
@@ -121,10 +106,15 @@ useEffect(() => {
          <small className= "title">
          <h5 className="card-title3" style={{fontFamily:'Morvarid'}}>{item.title}</h5>
          <h5 className="card-title4" style={{fontFamily:'Morvarid'}}>{item.author}</h5>
+
           </small>
           </div>
        </div>
        ))}
+       </div>
+       :
+       <div className="not found text-center"> ): نتیجه‌ای یافت نشد</div>
+}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleClose} style={{fontFamily:'Morvarid'}}>
@@ -133,7 +123,6 @@ useEffect(() => {
         </Modal.Footer>
       </Modal>
     </>
-  
        <a class="nav-item1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
        <small className="name" size="50" style={{padding:10,fontSize:20}}>
       {Cookies.get('userName')}
@@ -148,5 +137,4 @@ useEffect(() => {
 
     );
     }
-
     export default withRouter( NavBar);

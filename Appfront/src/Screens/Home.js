@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
 
     function getImageFromAPI(){
 
-        axiosinst.get('http://7aec6b76c62d.ngrok.io/bookdetail')
+        axiosinst.get('http://1168ebafd8e4.ngrok.io/bookdetail')
 
         .then(function(response){
             setImage(response.data)

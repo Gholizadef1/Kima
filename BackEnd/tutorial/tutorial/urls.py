@@ -21,10 +21,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
 from .quickstart import views
 from . import kyma , quickstart
-from .quickstart.views import registration_view,UpdateUserProfileView
-from .quickstart.views import ChangePasswordView
-from .quickstart.views import *
-from .kyma.views import *
+from tutorial.quickstart.views import *
+from tutorial.kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -38,6 +36,7 @@ urlpatterns = [
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
+    path('bookdetail/<int:pk>/getstate',get_bookstate,name="get_state"),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),

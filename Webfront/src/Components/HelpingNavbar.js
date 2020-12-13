@@ -27,31 +27,12 @@ function NavBar (props){
   }
 
 const searchUsers = async () => {
-try { setError(null);
+
   const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
   ).then((res)=> {
-    if(res.data.count == 0){
-      setError('): نتیجه‌ای یافت نشد');
-    }
-    else{
   setSearch(res.data.results);
-    }
-  
- }).catch ((err)=> {console.log(err)});
-  
- 
- if (search == [null]) {
- setSearch([]);
- } else {
- setSearch(result.data);
- }
- }
- catch (err) {console.log(err)}
- 
- };
-
-
-
+ });
+}
 useEffect(() => {
   searchUsers();
   }, [user]);
@@ -108,7 +89,8 @@ useEffect(() => {
           </div>
         </Modal.Header>
         <Modal.Body>
-        <p style={{textAlign:"center",fontFamily:'Morvarid'}}>{error}</p>
+        {search != 0 ?
+          <div>
        {search.map((item) => (
      <div className="out1" key={item.id}>
        <div className="card cat1">
@@ -124,6 +106,11 @@ useEffect(() => {
           </div>
        </div>
        ))}
+       </div>
+       :
+       <div className="not found text-center"> ): نتیجه‌ای یافت نشد</div>
+}
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleClose}style={{fontFamily:'Morvarid'}}>
