@@ -36,12 +36,24 @@ const Quotecard = (prop) => {
        <TouchableOpacity  style={styles.avatar}
          onPress={()=>{}}>
       
-        <ImageBackground  borderRadius={100}
-
-          source={require('../../assets/avatar.png')}
-          style={styles.avatar}
+      <TouchableOpacity style={styles.avatar}
+              onPress={()=>{}}>
+           {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      
+             source={require('../../assets/avatar.png')}
+            style={styles.avatar}
+      
             >
-       </ImageBackground>
+
+            </ImageBackground>:<ImageBackground borderRadius={100}
+    
+          source={{uri:prop.picture}}
+            style={styles.avatar}
+    
+            >
+
+    </ImageBackground>}
+        </TouchableOpacity>
    </TouchableOpacity>
    </View>
            

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image} from 'react-native';
+import { StyleSheet, Text, View ,Image,FlatList} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -177,7 +177,17 @@ const Quote = (prop) => {
     
        opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
    }}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <FlatList
+     style={{marginBottom:'17%'}}
+     showsVerticalScrollIndicator={false}
+     keyExtractor={(item)=>item.id}
+     data={information}
+    renderItem={({item})=>(<Quotecrad   name={item.account.username} 
+    date={item.sendtime.toString().split('T')[0]} heartnumber={item.Likes} height={350} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>)}
+    >
+
+    </FlatList>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>
            <Quotecrad height={350} name={'عرفان'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100} ></Quotecrad>
            <Quotecrad height={350} name={'bb'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100}></Quotecrad>
@@ -187,7 +197,7 @@ const Quote = (prop) => {
           
         
       
-           </ScrollView>
+           </ScrollView> */}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
