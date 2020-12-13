@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated, { set } from 'react-native-reanimated';
-import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
+import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content,Fab} from 'native-base';
 import * as yup from 'yup';
 import {Formik,formik} from 'formik';
 import { useFocusEffect } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { BlurView, VibrancyView } from "@react-native-community/blur";
+import { FAB } from 'react-native-paper';
 
 
 
@@ -200,6 +201,12 @@ const Quote = (prop) => {
         
           )
       }
+      const renderinnder1=()=>(
+        <View borderRadius={100}
+        >
+        <AntDesign name="delete" size={24} color="black" />
+        </View>
+      )
     return(
         <View style={styles.container}>
         <BottomSheet style={{position:''}}
@@ -222,6 +229,22 @@ const Quote = (prop) => {
       backgroundColor={'#edf2f4'}
   
   />
+       <BottomSheet style={{position:''}}
+        
+        snapPoints={[hp('40%'), 0, 0]}
+       ref={bs}
+       initialSnap={1}
+       callbackNode={fall}
+       enabledGestureInteraction={true}
+       enabledContentTapInteraction={false}
+       onCloseEnd={()=>{
+         setshowbutton(true) 
+         response();
+       }}
+       renderContent={renderinnder1} 
+       backgroundColor={'#edf2f4'}
+   
+   />
 
   <Animated.View style={{
     
@@ -287,19 +310,23 @@ const Quote = (prop) => {
     )}
     >
     
+   
 
+   
     </FlatList>
+    {/* <AntDesign style={{top:400,bottom:100,position:'absolute'}} name="arrowdown" size={24} color="black" />
+     */}
         {/* <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>
            <Quotecrad height={350} name={'عرفان'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100} ></Quotecrad>
            <Quotecrad height={350} name={'bb'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100}></Quotecrad>
            
            
-         
-          
+          <Fab></Fab>
         
       
            </ScrollView> */}
+           {/* <FAB style={{position:'absolute'}}></FAB> */}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
