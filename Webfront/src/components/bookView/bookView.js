@@ -16,7 +16,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
 import RatingStars from "../../Components/RatingStars";
-import { data, event } from 'jquery';
+import { data, event, noConflict } from 'jquery';
 import Tabs from "./multiTabs"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -209,28 +209,17 @@ headers:{
 "Authorization":"Token "+Cookies.get("userToken")}
 },)
 .then(()=>{
-axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
-,{
+axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+,payload,{
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Token "+Cookies.get("userToken")}
 })
-.then(data => {
-
-setValue(data.data.data);
-console.log(data.data.data);
-console.log(data);
-const b = typeof(data.data);
-console.log(b);
-}).catch(error =>{
-console.log(error)
-});
 
 })
 
 }
 useEffect(() => {
-
     axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
     ,{
     headers:{
@@ -283,10 +272,12 @@ return(
 امتیاز این کتاب:
 </th>
 <th style={{fontFamily:'Mitra'}}>
+    {state.average_rating}
+   از ۵ در
+    {state.average_rating_count}
 
-{state.average_rating_count}
+رای
 </th>
-
 </tr>
 <tr>
 <th style={{fontFamily:'Mitra'}}>
