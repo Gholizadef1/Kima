@@ -17,18 +17,29 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
-    
+        <Card style={{ marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
+        <View style={{flex:1,
+        flexDirection:'row',
+        alignItems:'center',
+       }}>
         <Text style={{  
-         textAlignVertical:'center',
+        // textAlignVertical:'center',
         // alignContent:'center',
         // alignItems:'center',
-        
+
+        color:'black',
+        //flexDirection:'row-reverse',
+        //alignSelf:'center',
+       // textAlign:'right',
+        // alignSelf:'center',
+     
+      
         marginBottom:'11%',
         marginTop:'8%',
         marginHorizontal:'6%',
-        fontSize:14,
+        fontSize:14
         }}>{prop.naghlghol}</Text>
+        </View>
         <View style={{position:'absolute',marginTop:prop.height-65,alignSelf:'center'}}>
       <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>{prop.name}</Text>
       <View style={{}}>
