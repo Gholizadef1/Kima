@@ -53,8 +53,7 @@ import { red } from "@material-ui/core/colors";
          <ListItemText style={{textAlign:"left",fontFamily:"Mitra",fontWeight:"bold"}}
          secondary={
            <React.Fragment>
-             
-             {current.sendtime}
+             {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
              <GoHeart color="red" size="25"/>
              </React.Fragment>
           }
