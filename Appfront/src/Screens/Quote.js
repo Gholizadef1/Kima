@@ -24,6 +24,9 @@ const Quote = (prop) => {
 
   const [information,setinformation]=useState([]);
 
+  // const getid=async()=>(await AsyncStorage.getItem('id'));
+  // const ID=getid();
+  // console.log(ID);
   const response=async ()=>{
     console.log('DOVOM')
      const id=prop.route.params.id
@@ -210,6 +213,8 @@ const Quote = (prop) => {
 
 }} size={20} color={like} />
 <Text style={styles.heartnumber}>{item.Likes}</Text>
+{item.account.username==='Erfan'?(<AntDesign name="delete" size={18} style={{position:'absolute',marginTop:'12%',marginLeft:'70%'}} color="#e56b6f" />):null}
+
 </>
     )}
     >
