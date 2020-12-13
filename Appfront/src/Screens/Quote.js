@@ -167,7 +167,10 @@ const Quote = (prop) => {
       callbackNode={fall}
       enabledGestureInteraction={true}
       enabledContentTapInteraction={false}
-      onCloseEnd={()=>{setshowbutton(true) }}
+      onCloseEnd={()=>{
+        setshowbutton(true) 
+        response();
+      }}
      //  isBackDropDismisByPress={true}
       renderContent={renderInner}
       renderHeader={renderHeader}            
@@ -187,21 +190,21 @@ const Quote = (prop) => {
     renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
     date={item.sendtime.toString().split('T')[0]}  height={350} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
-
-if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
-//  axiosinst.post('api/quotes/likes'+prop.route.params.id,backk,{"headers":
-//          {
-//           "Content-Type":"application/json",
-//           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-//          }})
-//         .then(async function(response){
-//             console.log(response);
+      console.log((await AsyncStorage.getItem('token')).toString());
+      if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
+      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/likes/'+prop.route.params.id,{"headers":
+         {
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+         }})
+        .then(async function(response){
+            console.log(response);
   
-//           })
-//         .catch(function(error){
-//         console.log(error);
+          })
+        .catch(function(error){
+        console.log(error);
   
-//          })
+         })
 
 
 }} size={20} color={like} />
