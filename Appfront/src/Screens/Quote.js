@@ -26,6 +26,23 @@ const commentschema=yup.object({
 })
 
 const Quote = (prop) => {
+
+  const getlike=async(item)=>{
+    axiosinst.get('http://53d9727d06d4.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    {
+     "Content-Type":"application/json",
+     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+    }})
+   .then(async function(response){
+        console.log(response);
+        if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
+     })
+   .catch(function(error){
+   console.log(error);
+
+    })
+  }
+  const [liked,setliked]=useState(false);
   const [like,setlike]=useState('gray')
   const [close,setclose]=useState(false);
   const [information,setinformation]=useState([]);
@@ -61,6 +78,7 @@ const Quote = (prop) => {
       console.log(err);
     
    }
+  //  getlike();
 //    try{
 //     const response = await axiosinst.get('api/quotes/like/' + id)
 //     console.log(response.data)
@@ -73,8 +91,10 @@ const Quote = (prop) => {
    }
   useFocusEffect(
     React.useCallback(() => {
+      // getlike()
         response()
      console.log(IDD+'IDD')
+    
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
@@ -216,7 +236,7 @@ const Quote = (prop) => {
     date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://53d9727d06d4.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
-      if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
+     
       console.log(item.id)
       console.log(item.account.id);
       axiosinst.post('http://53d9727d06d4.ngrok.io/api/quotes/like/'+item.id,{"headers":
@@ -232,14 +252,16 @@ const Quote = (prop) => {
         console.log(error);
   
          })
+         getlike(item);
+     
 
 
-}} size={20} color={like} />
-{ IDD===item.account.id.toString() ?<AntDesign name="delete"
- size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
- onPress={async()=>{
+        }} size={20} color={like} />
+        { IDD===item.account.id.toString() ?<AntDesign name="delete"
+        size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
+        onPress={async()=>{
  
-  axiosinst.delete('api/quotes/'+item.id,{"headers":
+        axiosinst.delete('api/quotes/'+item.id,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
