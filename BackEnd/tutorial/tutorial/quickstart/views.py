@@ -220,10 +220,17 @@ class CommentView(APIView):
         return Response(response)
 
 
-#     # def delete(self, request, pk,comment_id):
-#     #     comment = self.get_object(comment_id)
-#     #     comment.delete()
-#     #     return Response(status=status.HTTP_204_NO_CONTENT) 
+class DeleteCommentView(APIView):
+
+    def delete(self,request,pk):
+        current_comment = MyComment.objects.get(id=pk)
+        current_user = request.user
+        comment_user = current_comment.account
+        if comment_user == current_user:
+            current_comment.delete()
+            return Response({'message':'Your Comment successfully deleted!'})
+        else:
+            return Response({'message':'You dont have permission to delete this comment!'})
 
 
 class CommentProfileView(APIView):
@@ -245,6 +252,62 @@ class CommentProfileView(APIView):
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
+
+class LikeCommentView(APIView):
+    
+    def post(self,request,pk):
+        user=request.user
+        comment = MyComment.objects.get(id=pk)
+        like=request.data.get("like")
+        dislike=request.data.get("dislike")
+        if (LikeComment.objects.filter(account=user,comment=comment).exists()):
+            userlike = LikeComment.objects.get(account=user,comment=comment)
+            if ((like==True)&(dislike==False)):
+                if((userlike.like==like)&(userlike.dislike==dislike)):
+                    userlike.delete()
+                    comment.LikeCount-=1
+                    comment.save()
+                    return Response({'message':'successfully unlike comment',})
+                elif((userlike.like==dislike)&(userlike.dislike==like)):
+                    userlike.like=like
+                    userlike.dislike=dislike
+                    userlike.save()
+                    comment.LikeCount+=1
+                    comment.DislikeCount-=1
+                    comment.save()
+                    
+                    return Response({'message': 'change dislike to like',})
+            elif((like==False)&(dislike==True)):
+                if((userlike.like==like)&(userlike.dislike==dislike)):
+                    userlike.delete()
+                    comment.DislikeCount-=1
+                    comment.save()
+                    return Response({'message':'successfully undislike comment',})
+                elif((userlike.like==dislike)&(userlike.dislike==like)):
+                    userlike.like=like
+                    userlike.dislike=dislike
+                    userlike.save()
+                    comment.LikeCount-=1
+                    comment.DislikeCount+=1
+                    comment.save()
+                    
+                    return Response({'message': 'change like to dislike',})
+        else:
+            newlike = LikeComment(account=user,comment=comment,like=request.data.get("like"),dislike=request.data.get("dislike"))
+            newlike.save()
+            if(newlike.like==True):
+                comment.LikeCount+=1
+                return Response({'message':'successfully liked!',})
+            elif(newlike.dislike==True):
+                comment.DislikeCount+=1
+                return Response({'message':'successfully disliked!',})
+
+    # def get(self,request,pk):
+    #     comment = MyComment.objects.get(id=pk)
+    #     if LikeComment.objects.filter(comment=comment).exists():
+    #         return Response({'LikeCount':comment.LikeCount ,'DislikeCount' : comment.DislikeCount})
+    #     else:
+    #         return Response({'LikeCount': 0 ,'DislikeCount' : 0})
 
 
 
