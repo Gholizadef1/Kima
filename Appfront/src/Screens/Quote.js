@@ -219,7 +219,7 @@ const Quote = (prop) => {
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
       console.log(item.id)
       console.log(item.account.id);
-      axiosinst.post('http://53d9727d06d4.ngrok.io/api/quotes/like/1',{"headers":
+      axiosinst.post('http://53d9727d06d4.ngrok.io/api/quotes/like/'+item.id,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -235,8 +235,28 @@ const Quote = (prop) => {
 
 
 }} size={20} color={like} />
+{ IDD===item.account.id.toString() ?<AntDesign name="delete"
+ size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
+ onPress={async()=>{
+ 
+  axiosinst.delete('api/quotes/'+item.id,{"headers":
+         {
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+         }})
+        .then(async function(response){
+             console.log(response);
+           
+          })
+        .catch(function(error){
+        console.log(error);
+  
+         })
+         response();
+ }}
+  color="#e56b6f" />:null}
+
 <Text style={styles.heartnumber}>{item.Likes}</Text>
-{ IDD===item.account.id.toString() ?<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />:null}
 
 </>
     )}
