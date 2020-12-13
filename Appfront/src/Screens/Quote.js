@@ -14,18 +14,25 @@ import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 
+
+
+
 const commentschema=yup.object({
 
   comment:yup.string()
   .required("نقل قول شما نمیتواند خالی باشد")
-  .test('line',"متن نوشته شده ربای اشتراک طولانی تر از حد مجاز است",(val=>{if(!val===''){return(val.toString().split('').length<=500)}}))
+  .max(500,"متن نوشته شده برای اشتراک طولانی تر از حد مجاز است")
+  // .test('line',"متن نوشته شده برای اشتراک طولانی تر از حد مجاز است",(val=>(val.toString().split().length<=500)))
 })
 
 const Quote = (prop) => {
   const [like,setlike]=useState('gray')
   const [close,setclose]=useState(false);
   const [information,setinformation]=useState([]);
-
+  let IDD=0;
+//   const getid=async()=>{
+    
+//  }
   // const getid=async()=>(await AsyncStorage.getItem('id'));
   // const ID=getid();
   // console.log(ID);
@@ -34,9 +41,10 @@ const Quote = (prop) => {
      const id=prop.route.params.id
      console.log(id) 
      try{
- 
+    IDD=await AsyncStorage.getItem('id')
      const response = await axiosinst.get('api/quotes/' + id)
-      console.log(response.data)
+     console.log(IDD);
+      // console.log(response.data)
     
       setinformation(response.data)
     //  console.log(information[0])
@@ -59,6 +67,7 @@ const Quote = (prop) => {
   useFocusEffect(
     React.useCallback(() => {
         response()
+     console.log(IDD)
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
@@ -197,18 +206,19 @@ const Quote = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://2e04b8a2bf25.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://53d9727d06d4.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
       console.log(item.id)
-      axiosinst.post('http://2e04b8a2bf25.ngrok.io/api/quotes/like/1',{"headers":
+      console.log(item.account.id);
+      axiosinst.post('http://53d9727d06d4.ngrok.io/api/quotes/like/1',{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
          }})
         .then(async function(response){
-            console.log(response);
+             console.log(response);
   
           })
         .catch(function(error){
@@ -219,7 +229,7 @@ const Quote = (prop) => {
 
 }} size={20} color={like} />
 <Text style={styles.heartnumber}>{item.Likes}</Text>
-{item.account.username==='Erfan'?(<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />):null}
+{item.account.id===IDD?(<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />):null}
 
 </>
     )}
