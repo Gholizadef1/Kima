@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "./Tabs.css";
 import RenderRowquote from"./renderRowQuote";
+import RenderRowcomment from "./renderRowComment";
 import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -68,35 +69,7 @@ export default function FullWidthTabs() {
       backgroundColor: theme.palette.background.paper,
     },
   }));
-  
-  function renderRowComment(props) {
-    const { index, style } = props;
-    return (
-      <div>
-        <ListItem alignItems="flex-start">
-        <ListItem
-          alignItems="flex-start"
-          style={{direction:"rtl"}}
-         >
-          <ListItemText style={{textAlign:"right"}}
-            primary="کتاب ایکس"
-            secondary={
-            <React.Fragment  >
-              {" اثینبزدزتباعjhdhkeudheukdhjujfhudehfkudfhjkudjfhudjhfuejkhdfbujhfujdehcdujhcdjبثباعثنباعتباتعیلازعثتیلتثغسلایزتثلیتثغلیتثغنظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که  نظر من اینه که "}
-            </React.Fragment>
-            }
-          />
-        </ListItem>
-      </ListItem>
-  
-      </div>
-    );
-  }
  
-  renderRowComment.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-  };
     const classes = useStyles();
   return (
     <div className="root">
@@ -121,19 +94,13 @@ export default function FullWidthTabs() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
-      
           {RenderRowquote}
-         
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-        <div className={classes.root}>
-      <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
-      {renderRowComment}
-        
-        
+      <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
+      {RenderRowcomment}
       </FixedSizeList>
-    </div>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         <Scroll/>

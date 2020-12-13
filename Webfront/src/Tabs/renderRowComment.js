@@ -1,4 +1,4 @@
-import "./Tabs.css";
+
 import {
     withRouter
   } from "react-router-dom";
@@ -12,11 +12,11 @@ import Cookies from 'js-cookie';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { red } from "@material-ui/core/colors";
- export function RenderRowquote(props) {
+ export function RenderRowcomment(props) {
     const { index, style } = props;
-    const [quote, setQuote] = useState([]);
+    const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
+      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/mycomments`,{
         headers:{
     "Content-Type":"application/json",
    }
@@ -24,12 +24,12 @@ import { red } from "@material-ui/core/colors";
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
-          setQuote(data);
+          setComment(data);
         });
     }, []);
     return (
       <div>
-        {quote.map((current) => (
+        {comment.map((current) => (
         <ListItem alignItems="flex-start" key={current.id}>
         <ListItem
           alignItems="flex-start"
@@ -69,5 +69,5 @@ import { red } from "@material-ui/core/colors";
     
         }
 
-  export default withRouter(RenderRowquote);
+  export default withRouter(RenderRowcomment);
   
