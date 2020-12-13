@@ -78,18 +78,21 @@ export default function FullWidthTabs(props) {
   
   const [quotes, setQuotes] = useState([]);
 
+  const [add,setAdd] = useState("");
+
   useEffect(()=>{
     console.log(props.book)
     axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     .then(response=>{
       setComments(response.data);
       console.log(response);
+      setAdd("");
     })
     .catch(error=>{
       console.log(error);
     });
 
-  },[props.book]);
+  },[props.book,add]);
 
 
   useEffect(()=>{
@@ -98,6 +101,7 @@ export default function FullWidthTabs(props) {
     .then(response=>{
      setQuotes(response.data);
       console.log(response);
+      setAdd("");
     })
     .catch(error=>{
       console.log(error);
@@ -105,7 +109,7 @@ export default function FullWidthTabs(props) {
 
     
 
-  },[props.book]);
+  },[props.book,add]);
 
 
 
@@ -152,8 +156,7 @@ export default function FullWidthTabs(props) {
           setOpenSnack(true);
           setMassage("نظر شما با موفقیت ثبت شد")
           setUserComment("");
-          
-  
+          setAdd("added");
         }
       })
       .catch(error=>{
@@ -185,14 +188,19 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         setMassage("نقل قول شما با موفقیت ثبت شد")
         setUserQuote("");
-
-      }
-    })
+        setAdd("added");
+    }})
     .catch(error=>{
       console.log(error);
     });
 
-  }}
+  }else{
+    setOpenSnack(true);
+    setMassage("نقل قول خالی ثبت نشد")
+   }
+
+
+}
 
   const handleLikeClick = (e) => {
     e.preventDefault();
