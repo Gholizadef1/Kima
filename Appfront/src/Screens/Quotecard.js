@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     heartnumber:{   
       position:'absolute',
     
-        right:'6%',
+        left:'88%',  
         fontSize:12,
         color:'gray'
     },
