@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
+import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView , FlatList} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { Avatar } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
@@ -14,65 +14,85 @@ const QuoteBookview = () => {
     const [like,setlike]=useState('gray')
     const [dislike,setdislike]=useState('lightblue')
     const [heart, setheart]= useState(false);
-
-    console.log('comment')
+    const [quote , setquote] = useState(null);
     return(
         <View style={styles.container}>
-        
-        <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:120, width:180, marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
-        <View style={{flex:1,
-        flexDirection:'row',
-        alignItems:'center',
-       }}>
-        <Text style={{  
-        color:'black',      
-        marginBottom:hp('6.5%'),
-        marginTop:hp('3.5%'),
-        marginHorizontal:hp('3%'),
-        fontSize:hp('1.7%')
-        }}>سلااااااااممممممم سلااااااااااااااااااااممممم سلاااااااااااااااااااامممممممممممممممم سلااااااااااااااااااممممممممممممممممم</Text>
-        </View>
-        <View style={{position:'absolute',alignSelf:'center'}}>
-      <Text style={{marginBottom:hp('0.9%'),alignSelf:'center',color:'gray'}}>زهراا</Text>
-      {/* <View style={{}}>
-       
-     
-       <TouchableOpacity  style={styles.avatar}
-         onPress={()=>{}}>
-      
-      <TouchableOpacity style={styles.avatar}
-              onPress={()=>{}}>
-           {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
-      
-             source={require('../../assets/avatar.png')}
-            style={styles.avatar}
-      
-            >
 
-            </ImageBackground>:<ImageBackground borderRadius={100}
-    
-          source={{uri:prop.picture}}
-            style={styles.avatar}
-    
-            >
+            <ScrollView>
+                <View style={{padding: 50 , marginRight: 50}}>
+                    </View>
+                        <View>
+                            <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
+                                marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                                    <FlatList
+                                    showsHorizontalScrollIndicator={false}
+                                    horizontal={true}
+                                    data={image}
+                                    renderItem= {({item}) =>{
+                                        return(
+                                            <View style={{paddingVertical: 15 , paddingLeft: 8}}>
+                                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                                    <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:120, width:180, marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
+                                                        <View style={{flex:1,
+                                                          flexDirection:'row',
+                                                          alignItems:'center',
+                                                            }}>
+                        <Text style={{  
+                        color:'black',      
+                        marginBottom:hp('6.5%'),
+                        marginTop:hp('3.5%'),
+                        marginHorizontal:hp('3%'),
+                        fontSize:hp('1.7%')
+                        }}>سلااااااااممممممم سلااااااااااااااااااااممممم سلاااااااااااااااااااامممممممممممممممم سلااااااااااااااااااممممممممممممممممم</Text>
+                        </View>
+                        <View style={{position:'absolute',alignSelf:'center'}}>
+                    <Text style={{marginBottom:hp('0.9%'),alignSelf:'center',color:'gray'}}>زهراا</Text>
+                    {/* <View style={{}}>
+                    
+                    
+                    <TouchableOpacity  style={styles.avatar}
+                        onPress={()=>{}}>
+                    
+                    <TouchableOpacity style={styles.avatar}
+                            onPress={()=>{}}>
+                        {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+                    
+                            source={require('../../assets/avatar.png')}
+                            style={styles.avatar}
+                    
+                            >
 
-    </ImageBackground>}
-        </TouchableOpacity>
-   </TouchableOpacity>
-   </View> */}
-           
-   
-   </View>
-            </Card>
-          <View style={{marginBottom:hp('9%')}}>
-          
-   
-     <Text style={styles.date}>3 بهمن 56</Text>
-    
-    
-           
-     </View>
- 
+                            </ImageBackground>:<ImageBackground borderRadius={100}
+                    
+                        source={{uri:prop.picture}}
+                            style={styles.avatar}
+                    
+                            >
+
+                    </ImageBackground>}
+                        </TouchableOpacity>
+                </TouchableOpacity>
+                </View> */}
+                        
+                
+                </View>
+                            </Card>
+                        <View style={{marginBottom:hp('9%')}}>
+                        
+                
+                    <Text style={styles.date}>3 بهمن 56</Text>
+                    
+                    
+                        
+                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    } 
+                }
+                    />
+                 </View>
+             </ScrollView>   
         </View>
   
       
