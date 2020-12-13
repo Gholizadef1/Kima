@@ -60,7 +60,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['username','profile_photo','email']
+        fields = ['username','profile_photo','email','id']
 
 class PostQuoteSerializer(serializers.Serializer):
     
