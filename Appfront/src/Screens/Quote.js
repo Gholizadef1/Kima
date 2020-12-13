@@ -213,7 +213,7 @@ const Quote = (prop) => {
 
 }} size={20} color={like} />
 <Text style={styles.heartnumber}>{item.Likes}</Text>
-{item.account.username==='Erfan'?(<AntDesign name="delete" size={18} style={{position:'absolute',marginTop:'12%',marginLeft:'70%'}} color="#e56b6f" />):null}
+{item.account.username==='Erfan'?(<AntDesign name="delete" size={18} style={{position:'absolute',marginTop:'12%',right:'6.5%'}} color="#e56b6f" />):null}
 
 </>
     )}
@@ -292,13 +292,13 @@ const styles = StyleSheet.create({
     heart:{
       position:'absolute',
       marginTop:392,
-      right:'14%'     
+      right:'6.5%'     
       
     },
     heartnumber:{   
       position:'absolute',
       marginTop:392,
-        left:'88%',  
+        left:'85%',  
         fontSize:12,
         color:'gray'
     },
