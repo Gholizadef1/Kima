@@ -340,7 +340,7 @@ useEffect(() => {
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="oldPass"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
@@ -348,7 +348,7 @@ useEffect(() => {
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control rounded-pill"
                                                   id="newPass"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
