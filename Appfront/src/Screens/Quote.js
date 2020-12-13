@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,FlatList} from 'react-native';
+import { StyleSheet, Text, View ,Image,FlatList, ImageBackground} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -11,12 +11,13 @@ import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const commentschema=yup.object({
 
   comment:yup.string()
   .required("نقل قول شما نمیتواند خالی باشد")
-  .test('line',"متن نوشته شده ربای اشتراک طولانی تر از حد مجاز است",(val=>val.toString().split('').length<=545))
+  .test('line',"متن نوشته شده ربای اشتراک طولانی تر از حد مجاز است",(val=>{if(!val===''){return(val.toString().split('').length<=500)}}))
 })
 
 const Quote = (prop) => {
@@ -101,28 +102,28 @@ const Quote = (prop) => {
             <View>
 
                 
-              <View style={{marginHorizontal:30,borderColor:'red',marginTop:10}}>
+              <View style={{marginHorizontal:wp('7%'),borderColor:'red',marginTop:hp('1%')}}>
             <Textarea rowSpan={7.5} bordered borderRadius={8} 
                 onChangeText={props.handleChange('comment')}
                 onBlur={props.handleBlur('comment')}
                 value={props.values.comment}
-                placeholder={'  نقل قول شما ...    '} placeholderTextColor='lightgray' fontSize={16} style={{backgroundColor:'white'}}>
+                placeholder={'  نقل قول شما ...    '} placeholderTextColor='lightgray' fontSize={hp('1.8%')} style={{backgroundColor:'white'}}>
               
                 </Textarea>
                 </View>
         
        
-           <Text style={{fontSize:10, color:'red',marginLeft:'10%'}}>{props.touched.comment&&props.errors.comment}</Text>
+           <Text style={{fontSize:wp('2%'), color:'red',marginLeft:('10%')}}>{props.touched.comment&&props.errors.comment}</Text>
       
-            <View style={{flexDirection:'row',width:'100%',marginRight:20,marginLeft:10}}>
+            <View style={{flexDirection:'row',width:'100%',marginRight:wp('3%'),marginLeft:wp('3%')}}>
        
     
           
    
-     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:'50%',width:'40%',marginLeft:'28%',marginBottom:'8%'}}
+     <Button bordered rounded style={{backgroundColor:'#1F7A8C',borderRadius:18,height:hp('4%'),width:wp('40%'),marginLeft:wp('28%'),marginBottom:hp('2%')}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:'85%',width:'100%'}}>ثبت</Text>
+         <Text style={{color:'#ffff', fontSize:15,fontWeight:'bold',marginLeft:wp('32%'),width:'100%'}}>ثبت</Text>
         </Button>
       
      </View>
@@ -147,11 +148,13 @@ const Quote = (prop) => {
           <View style={styles.header}>
           <View style={styles.panelHeader}>
             <View style={styles.panelHandle} >
-            <Image
-           source={require('../../assets/line3.png')}
-           style={{width:100,height:4,marginLeft:155}}
-           ></Image>
-               <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1f7a8c',marginTop:'3%',marginBottom:5,fontSize:16 }}>نقل قول شما چیست؟</Text>
+            {/* <View style={{borderRadius:100}}> */}
+            <ImageBackground borderRadius={100}
+           source={require('../../assets/line5.png')}
+           style={{width:wp('21%'),height:hp('0.3%'),alignSelf:'center',borderRadius:100}}
+           ></ImageBackground>
+           {/* </View> */}
+               <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1f7a8c',marginTop:hp('1.3%'),marginBottom:hp('1.3%'),fontSize:wp('4%') }}>نقل قول شما چیست؟</Text>
             </View>
           </View>
         </View>
@@ -164,7 +167,7 @@ const Quote = (prop) => {
         <View style={styles.container}>
         <BottomSheet style={{position:''}}
         
-       snapPoints={['40%', 0, 0]}
+       snapPoints={[hp('40%'), 0, 0]}
       ref={bs}
       initialSnap={1}
       callbackNode={fall}
@@ -191,7 +194,7 @@ const Quote = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]}  height={350} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
      <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       console.log((await AsyncStorage.getItem('token')).toString());
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
@@ -213,7 +216,7 @@ const Quote = (prop) => {
 
 }} size={20} color={like} />
 <Text style={styles.heartnumber}>{item.Likes}</Text>
-{item.account.username==='Erfan'?(<AntDesign name="delete" size={18} style={{position:'absolute',marginTop:'12%',right:'6.5%'}} color="#e56b6f" />):null}
+{item.account.username==='Erfan'?(<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />):null}
 
 </>
     )}
@@ -257,10 +260,10 @@ const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor: '#B8B8B8',
         backgroundColor:'#ffff',
-        marginTop:2
+        marginTop:hp('0%')
     },
     nazar:{
-        marginLeft:'29%',
+        marginLeft:wp('20%'),
         fontWeight:'bold',
         color:'#EDF2F4'
     },
@@ -282,24 +285,24 @@ const styles = StyleSheet.create({
       },  
        addcomment:{
     
-        width:'70%',
+        width:wp('70%'),
         marginHorizontal:'15%',
-        marginTop:'162%',
+        marginTop:hp('80.1%'),
         position:'absolute',
         borderRadius:17,
         backgroundColor:'#1F7A8C'
     },
     heart:{
       position:'absolute',
-      marginTop:392,
-      right:'6.5%'     
+      marginTop:hp('47.5%'),
+      right:wp('6.5%')     
       
     },
     heartnumber:{   
       position:'absolute',
-      marginTop:392,
-        left:'85%',  
-        fontSize:12,
+      marginTop:hp('47.6%'),
+        left:wp('85%'),  
+        fontSize:hp('1.5%'),
         color:'gray'
     },
   });
