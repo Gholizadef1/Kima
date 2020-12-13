@@ -34,8 +34,8 @@ const Quotecard = (prop) => {
         // alignSelf:'center',
      
       
-        marginBottom:'11%',
-        marginTop:'8%',
+        marginBottom:'15%',
+        marginTop:'7%',
         marginHorizontal:'6%',
         fontSize:14
         }}>{prop.naghlghol}</Text>
