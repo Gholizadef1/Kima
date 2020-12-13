@@ -90,10 +90,10 @@ useEffect(() => {
     return(   
       <nav class="navbar navbar-expand-lg navbar-light color4">
         <h1>  
-          <GiBookshelf color="black" />
+          <GiBookshelf color="white" />
         </h1>
         <b className="btn" 
-         style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}
+         style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
           onClick={routeToHome}
         >کیما</b> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,12 +103,12 @@ useEffect(() => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ">
             <li class="nav-item" href="groups"
-               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"black"}}>
-              <a class="nav-link" href="#">گروه‌ها</a>
+               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold"}}>
+              <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
             </li>
             <li class="nav-item" href="quize"
-               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"black"}}>
-              <a class="nav-link" href="#">آزمونک</a>
+               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
+              <a class="nav-link" href="#" style={{color:"white"}}>آزمونک</a>
             </li>
           </ul>
           <div className="mr-3 d-flex ml-auto justify-content-between ">
@@ -117,10 +117,10 @@ useEffect(() => {
                style={{fontFamily:'Mitra'}}
                />             
                 <Button variant="gray" className="" onClick={handleShow}>
-                  <GoSearch size="30" color="black" />
+                  <GoSearch size="30" color="white" />
                 </Button>
                 </div>
-              <a className="row mt-1"  onClick={routeToProfile} style={{color:"black",fontFamily:'Morvarid'}} >
+              <a className="row mt-1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Mitra'}} >
                <small className="" size="50" style={{padding:10,fontSize:20}}>
                 {Cookies.get('userName')}
                </small>
