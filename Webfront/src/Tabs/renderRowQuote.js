@@ -3,22 +3,27 @@ import {
     withRouter
   } from "react-router-dom";
 import PropTypes from 'prop-types';
+import {GoHeart} from 'react-icons/go';
+import {AiOutlineLike} from 'react-icons/ai';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import { red } from "@material-ui/core/colors";
  export function RenderRowquote(props) {
     const { index, style } = props;
     const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch(`api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
+      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
         headers:{
     "Content-Type":"application/json",
-   "Authorization":"Token "+Cookies.get("userToken")}
+   }
             })
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
+           console.log(data);
           setComment(data);
         });
     }, []);
@@ -30,14 +35,33 @@ import Cookies from 'js-cookie';
           alignItems="flex-start"
           style={{direction:"rtl"}}
          >
+           <ListItemAvatar>
+              <Avatar
+                
+                src={current.current_book.smallimgurl}
+              />
+            </ListItemAvatar>
           <ListItemText style={{textAlign:"right"}}
-            primary={current.title}
+            primary={current.current_book.title}
             secondary={
             <React.Fragment  >
-              {current.author}
+              {current.quote_text}
             </React.Fragment>
             }
           />
+         
+         <ListItemText style={{textAlign:"left",fontFamily:"Mitra",fontWeight:"bold"}}
+         secondary={
+           <React.Fragment>
+             
+             {current.sendtime}
+             <GoHeart color="red" size="25"/>
+             </React.Fragment>
+          }
+        />
+          
+
+ 
         </ListItem>
       </ListItem>
         ))}

@@ -120,7 +120,7 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <FixedSizeList height={400} width={700} itemSize={150} itemCount={20}>
+          <FixedSizeList height={400} width={700} itemSize={150} itemCount={3}>
       
           {RenderRowquote}
          
