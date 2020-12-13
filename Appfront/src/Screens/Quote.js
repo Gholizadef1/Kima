@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Image,FlatList, ImageBackground} from 'react-na
 import { ScrollView } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
-import Animated from 'react-native-reanimated';
+import Animated, { set } from 'react-native-reanimated';
 import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet,Textarea, Content} from 'native-base';
 import * as yup from 'yup';
 import {Formik,formik} from 'formik';
@@ -29,7 +29,14 @@ const Quote = (prop) => {
   const [like,setlike]=useState('gray')
   const [close,setclose]=useState(false);
   const [information,setinformation]=useState([]);
-  let IDD=0;
+  const[IDD,setIDD]=useState('');
+  const equal=async(item)=>{
+    // console.log(item.account.id)
+    setIDD(await AsyncStorage.getItem('id').toString());
+    // console.log(await AsyncStorage.getItem('id'))
+    //  console.log(item.account.id.toString()===await (await AsyncStorage.getItem('id')).toString())
+    // return(item.account.id.toString()===await (await AsyncStorage.getItem('id')).toString())
+  }
 //   const getid=async()=>{
     
 //  }
@@ -41,10 +48,10 @@ const Quote = (prop) => {
      const id=prop.route.params.id
      console.log(id) 
      try{
-    IDD=await AsyncStorage.getItem('id')
+    setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('api/quotes/' + id)
-     console.log(IDD);
-      // console.log(response.data)
+     console.log(IDD+'IDDresponse');
+       console.log(response.data)
     
       setinformation(response.data)
     //  console.log(information[0])
@@ -67,7 +74,7 @@ const Quote = (prop) => {
   useFocusEffect(
     React.useCallback(() => {
         response()
-     console.log(IDD)
+     console.log(IDD+'IDD')
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
@@ -229,7 +236,7 @@ const Quote = (prop) => {
 
 }} size={20} color={like} />
 <Text style={styles.heartnumber}>{item.Likes}</Text>
-{item.account.id===IDD?(<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />):null}
+{ IDD===item.account.id.toString() ?<AntDesign name="delete" size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}} color="#e56b6f" />:null}
 
 </>
     )}
