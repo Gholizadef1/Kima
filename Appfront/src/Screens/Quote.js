@@ -199,7 +199,7 @@ const Quote = (prop) => {
       console.log((await AsyncStorage.getItem('token')).toString());
       if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
       console.log(item.id)
-      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/like/'+item.id,{"headers":
+      axiosinst.post('http://e80ca9693f07.ngrok.io/api/quotes/like/1',{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
