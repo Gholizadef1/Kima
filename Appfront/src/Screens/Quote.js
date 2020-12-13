@@ -184,6 +184,7 @@ const Quote = (prop) => {
       backgroundColor={'#edf2f4'}
   
   />
+
   <Animated.View style={{
     
        opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
@@ -307,4 +308,3 @@ const styles = StyleSheet.create({
     },
   });
   export default Quote;
-

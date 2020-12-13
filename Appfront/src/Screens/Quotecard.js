@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
