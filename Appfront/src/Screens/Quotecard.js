@@ -6,11 +6,12 @@ import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
-
+import axiosinst from '../api/axiosinst';
 const Quotecard = (prop) => {
     const hieght=prop.height
     const [like,setlike]=useState('gray')
     const [dislike,setdislike]=useState('lightblue')
+    const [heart, setheart]= useState(false);
 
     console.log('comment')
     return(
@@ -65,8 +66,7 @@ const Quotecard = (prop) => {
    
      <Text style={styles.date}>{prop.date}</Text>
     
-     <AntDesign  style={styles.heart} name="heart"  onPress={()=>{if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}}} size={20} color={like} />
-     <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
+    
            
      </View>
  

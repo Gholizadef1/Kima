@@ -10,6 +10,7 @@ import {Formik,formik} from 'formik';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AntDesign } from '@expo/vector-icons';
 
 const commentschema=yup.object({
 
@@ -19,6 +20,7 @@ const commentschema=yup.object({
 })
 
 const Quote = (prop) => {
+  const [like,setlike]=useState('gray')
 
   const [information,setinformation]=useState([]);
 
@@ -182,9 +184,32 @@ const Quote = (prop) => {
      showsVerticalScrollIndicator={false}
      keyExtractor={(item)=>item.id}
      data={information}
-    renderItem={({item})=>(<Quotecrad   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} heartnumber={item.Likes} height={350} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>)}
+    renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
+    date={item.sendtime.toString().split('T')[0]}  height={350} picture={`http://e80ca9693f07.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+     <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
+
+if(like==='gray'){setlike('#1F7A8C')}else{setlike('gray')}
+//  axiosinst.post('api/quotes/likes'+prop.route.params.id,backk,{"headers":
+//          {
+//           "Content-Type":"application/json",
+//           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+//          }})
+//         .then(async function(response){
+//             console.log(response);
+  
+//           })
+//         .catch(function(error){
+//         console.log(error);
+  
+//          })
+
+
+}} size={20} color={like} />
+<Text style={styles.heartnumber}>{item.Likes}</Text>
+</>
+    )}
     >
+    
 
     </FlatList>
         {/* <ScrollView showsVerticalScrollIndicator={false}>
@@ -254,6 +279,19 @@ const styles = StyleSheet.create({
         position:'absolute',
         borderRadius:17,
         backgroundColor:'#1F7A8C'
+    },
+    heart:{
+      position:'absolute',
+      marginTop:392,
+      right:'14%'     
+      
+    },
+    heartnumber:{   
+      position:'absolute',
+      marginTop:392,
+        left:'88%',  
+        fontSize:12,
+        color:'gray'
     },
   });
   export default Quote;
