@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
@@ -7,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
     const hieght=prop.height
     const [like,setlike]=useState('gray')
@@ -17,7 +19,7 @@ const Quotecard = (prop) => {
     return(
         <View style={styles.container}>
         
-        <Card style={{ marginLeft:'4%',marginTop:'7%',height:prop.height,marginRight:'4%',borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
+        <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:prop.height,marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
         <View style={{flex:1,
         flexDirection:'row',
         alignItems:'center',
@@ -34,14 +36,14 @@ const Quotecard = (prop) => {
         // alignSelf:'center',
      
       
-        marginBottom:'15%',
-        marginTop:'7%',
-        marginHorizontal:'6%',
-        fontSize:14
+        marginBottom:hp('6.5%'),
+        marginTop:hp('3.5%'),
+        marginHorizontal:hp('3%'),
+        fontSize:hp('1.7%')
         }}>{prop.naghlghol}</Text>
         </View>
-        <View style={{position:'absolute',marginTop:prop.height-65,alignSelf:'center'}}>
-      <Text style={{marginBottom:8,alignSelf:'center',color:'gray'}}>{prop.name}</Text>
+        <View style={{position:'absolute',marginTop:prop.height-hp('7.8%'),alignSelf:'center'}}>
+      <Text style={{marginBottom:hp('0.9%'),alignSelf:'center',color:'gray'}}>{prop.name}</Text>
       <View style={{}}>
        
      
@@ -72,7 +74,7 @@ const Quotecard = (prop) => {
    
    </View>
             </Card>
-          <View style={{marginBottom:'15%'}}>
+          <View style={{marginBottom:hp('9%')}}>
           
    
      <Text style={styles.date}>{prop.date}</Text>
@@ -91,13 +93,13 @@ const styles = StyleSheet.create({
     container: {
     
       backgroundColor: '#ffff',
-     marginTop:'2%'
+     marginTop:hp('1%')
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
     avatar:{
-        height:65,
-        width:65,
+        height:hp('7.8%'),
+        width:hp('7.8%'),
         borderRadius:100,
         alignSelf:'center',
         position:'absolute',
@@ -122,14 +124,14 @@ const styles = StyleSheet.create({
     heart:{
       position:'absolute',
     
-      right:'14%'     
+      right:wp('14%')     
       
     },
     heartnumber:{   
       position:'absolute',
     
-        left:'88%',  
-        fontSize:12,
+        left:wp('88%'),  
+        fontSize:wp('1%'),
         color:'gray'
     },
     naghlghol:{
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
         // alignContent:'center',
         // alignItems:'center',
         // textAlignVertical:
-        marginHorizontal:'6%',
+        marginHorizontal:wp('6%'),
         fontSize:14,
         
     }
