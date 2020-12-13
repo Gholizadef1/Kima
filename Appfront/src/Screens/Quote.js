@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Image,FlatList, ImageBackground} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated, { set } from 'react-native-reanimated';
@@ -18,6 +18,8 @@ import { FAB } from 'react-native-paper';
 
 
 
+
+
 const commentschema=yup.object({
 
   comment:yup.string()
@@ -29,7 +31,7 @@ const commentschema=yup.object({
 const Quote = (prop) => {
 
   const getlike=async(item)=>{
-    axiosinst.get('http://53d9727d06d4.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://25aadf96386a.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -43,6 +45,9 @@ const Quote = (prop) => {
 
     })
   }
+  const [selectedIndex, setSelectedIndex] = useState([]);
+  const[loading ,setloading]=useState(false);
+  const[page,setpage]=useState(1);
   const [liked,setliked]=useState(false);
   const [like,setlike]=useState('gray')
   const [close,setclose]=useState(false);
@@ -62,16 +67,22 @@ const Quote = (prop) => {
   // const ID=getid();
   // console.log(ID);
   const response=async ()=>{
+    setloading(true);
     console.log('DOVOM')
      const id=prop.route.params.id
      console.log(id) 
+     console.log(page)
      try{
     setIDD(await (await AsyncStorage.getItem('id')).toString())
-     const response = await axiosinst.get('api/quotes/' + id)
+     const response = await axiosinst.get('api/quotes/'+id,{ params:{
+     page:page
+     }
+  })
      console.log(IDD+'IDDresponse');
        console.log(response.data)
-    
-      setinformation(response.data)
+      
+      setinformation(information=>(response.data))
+      setloading(false);
     //  console.log(information[0])
      }
    catch(err){
@@ -90,6 +101,10 @@ const Quote = (prop) => {
   
 //  }
    }
+  //  const handleend=()=>{
+  //    console.log('handleend')
+  //    setpage(page=>(page+1),()=>response())
+  //  }
   useFocusEffect(
     React.useCallback(() => {
       // getlike()
@@ -201,12 +216,6 @@ const Quote = (prop) => {
         
           )
       }
-      const renderinnder1=()=>(
-        <View borderRadius={100}
-        >
-        <AntDesign name="delete" size={24} color="black" />
-        </View>
-      )
     return(
         <View style={styles.container}>
         <BottomSheet style={{position:''}}
@@ -229,22 +238,6 @@ const Quote = (prop) => {
       backgroundColor={'#edf2f4'}
   
   />
-       <BottomSheet style={{position:''}}
-        
-        snapPoints={[hp('40%'), 0, 0]}
-       ref={bs}
-       initialSnap={1}
-       callbackNode={fall}
-       enabledGestureInteraction={true}
-       enabledContentTapInteraction={false}
-       onCloseEnd={()=>{
-         setshowbutton(true) 
-         response();
-       }}
-       renderContent={renderinnder1} 
-       backgroundColor={'#edf2f4'}
-   
-   />
 
   <Animated.View style={{
     
@@ -253,36 +246,14 @@ const Quote = (prop) => {
       <FlatList
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
+     onEndReached={console.log('endreach')}
+     onEndReachedThreshold={0.5}
      keyExtractor={(item)=>item.id}
      data={information}
-    renderItem={({item})=>(<><Quotecrad   name={item.account.username} 
+    renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://53d9727d06d4.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
-
-
-     <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
-      console.log((await AsyncStorage.getItem('token')).toString());
-     
-      console.log(item.id)
-      console.log(item.account.id);
-      axiosinst.post('http://53d9727d06d4.ngrok.io/api/quotes/like/'+item.id,{"headers":
-         {
-          "Content-Type":"application/json",
-          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-         }})
-        .then(async function(response){
-             console.log(response);
-  
-          })
-        .catch(function(error){
-        console.log(error);
-  
-         })
-         getlike(item);
-     
-
-         response();
-        }} size={20} color={like} />
+    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://25aadf96386a.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    
         { IDD===item.account.id.toString() ?<AntDesign name="delete"
         size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
         onPress={async()=>{
@@ -303,6 +274,45 @@ const Quote = (prop) => {
          response();
  }}
   color="#e56b6f" />:null}
+  {/* <View style={{position:'absolute',backgroundColor:'green',
+     height:hp('2%'),width:wp('5%'),marginTop:hp('47.5%'),
+      right:wp('6.5%')   
+      }}>
+  <TouchableOpacity style={{position:'absolute',backgroundColor:'green',
+   height:hp('2%'),width:wp('5%')  
+      }}> */}
+   <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
+      //  console.log(item.account.id)
+      setSelectedIndex(item.id)
+      //  console.log(item.id)
+      //  if(item.id===)
+      // if(like==='blue')setlike('gray')
+      // else
+      // setlike('blue')
+      // console.log((await AsyncStorage.getItem('token')).toString());
+     
+       console.log(item.id)
+      // // console.log(item.account.id);
+      axiosinst.post('http://25aadf96386a.ngrok.io/api/quotes/like/'+item.id,{"headers":
+         {
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+         }})
+        .then(async function(response){
+             console.log(response);
+  
+          })
+        .catch(function(error){
+        console.log(error);
+  
+         })
+        //  getlike(item);
+     
+
+        //  response();
+        }} size={20} color={like} />
+        {/* </TouchableOpacity>
+        </View> */}
 
 <Text style={styles.heartnumber}>{item.Likes}</Text>
 
@@ -310,23 +320,22 @@ const Quote = (prop) => {
     )}
     >
     
-   
 
-   
     </FlatList>
-    {/* <AntDesign style={{top:400,bottom:100,position:'absolute'}} name="arrowdown" size={24} color="black" />
-     */}
         {/* <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>
            <Quotecrad height={350} name={'عرفان'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100} ></Quotecrad>
            <Quotecrad height={350} name={'bb'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100}></Quotecrad>
            
            
-          <Fab></Fab>
+         
+          
         
       
            </ScrollView> */}
-           {/* <FAB style={{position:'absolute'}}></FAB> */}
+               {/* <FAB style={{position:'absolute'}}></FAB> */}
+                {/* <AntDesign style={{top:400,bottom:100,position:'absolute'}} name="arrowdown" size={24} color="black" />
+     */}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}

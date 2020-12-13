@@ -10,11 +10,11 @@ import axiosinst from '../api/axiosinst';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
     const hieght=prop.height
-    const [like,setlike]=useState('gray')
-    const [dislike,setdislike]=useState('lightblue')
+    // const [like,setlike]=useState('gray')
+    // const [dislike,setdislike]=useState('lightblue')
     const [heart, setheart]= useState(false);
 
-    console.log('comment')
+    console.log('quotecard')
     return(
         <View style={styles.container}>
         
