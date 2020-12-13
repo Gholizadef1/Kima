@@ -13,11 +13,10 @@ from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-class BookView(APIView,PageNumberPagination):
+class BookView(APIView):
     """
     A view that can accept GET requests with JSON content.
     """
-    #pagination_class = PageNumberPagination
 
     def get(self, request, format=None):
         

@@ -1,4 +1,5 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
@@ -17,11 +18,11 @@ from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import *
+from .pagination import PaginationHandlerMixin
+from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
-
-
 from .serializers import * 
 
 @api_view(['POST','GET'])
@@ -198,11 +199,16 @@ class MyQuoteView(generics.ListAPIView):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class BasicPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
     
 
-class QuoteView(APIView):
+class QuoteView(APIView,PaginationHandlerMixin):
 
     model = MyQuote
+    pagination_class = BasicPagination
 
     def get_object(self, pk):
         try:
@@ -213,7 +219,7 @@ class QuoteView(APIView):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
-            quote_list = MyQuote.objects.filter(current_book=this_book)
+            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
             serilalizer = QuoteSerializer(quote_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
