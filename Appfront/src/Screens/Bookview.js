@@ -56,7 +56,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://70ad80b7620f.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://1a063c3b068b.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -74,7 +74,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://70ad80b7620f.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://1a063c3b068b.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -100,7 +100,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://70ad80b7620f.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://1a063c3b068b.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
