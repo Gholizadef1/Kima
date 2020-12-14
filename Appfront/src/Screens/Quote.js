@@ -110,7 +110,7 @@ const Quote = (prop) => {
       // setpage(1);
       // setloading(false)
       // settheend(false);
-      setinformation([]);
+      // setinformation([]);
       // getlike()
         response(page)
      console.log(IDD+'IDD');
@@ -240,9 +240,7 @@ const Quote = (prop) => {
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
       <FlatList
-      ListFooterComponent={(theend===false?loading===false?<View style={styles.loader}>
-      <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
-      </View>:<View style={{alignItems:'center',marginTop:hp('30%')}}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'black',alignSelf:'center'}}>  پایان کوت ها</Text></View>)}
+      ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={{marginTop:hp('4%'),bottom:hp('2.5%'),marginBottom:hp('3%')}}><Text style={{color:'gray',alignSelf:'center'}}> نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
      onEndReached={()=>handleLoadMore()}
