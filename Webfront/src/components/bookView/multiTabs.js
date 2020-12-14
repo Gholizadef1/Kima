@@ -66,6 +66,8 @@ export default function FullWidthTabs(props) {
   };
 
   const [massage,setMassage]=useState("");
+  const [endQuote,setEndQuote] = useState("");
+  const [endComment,setEndComment] = useState("");
   const[openSnack,setOpenSnack]=useState(false);
   const handleCloseSnack = (event, reason) => {
     if (reason === 'clickaway') {
@@ -77,6 +79,7 @@ export default function FullWidthTabs(props) {
   const [comments, setComments] = useState([]);
   
   const [quotes, setQuotes] = useState([]);
+  const [quotesPage, setQuotesPage] = useState(1);
 
   const [add,setAdd] = useState("");
 
@@ -97,19 +100,22 @@ export default function FullWidthTabs(props) {
 
   useEffect(()=>{
     console.log(props.book)
-    axios.get("http://127.0.0.1:8000/api/quotes/"+props.book)
+    console.log(quotesPage);
+    axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
     .then(response=>{
-     setQuotes(response.data);
+     setQuotes(quotes.concat(response.data));
       console.log(response);
       setAdd("");
+      setEndQuote("")
     })
     .catch(error=>{
       console.log(error);
+      setEndQuote("نقل قول دیگری وجود ندارد")
     });
 
     
 
-  },[props.book,add]);
+  },[props.book,add,quotesPage]);
 
 
 
@@ -243,10 +249,11 @@ export default function FullWidthTabs(props) {
   
    }
 
-   const handleLoveClick=(e)=>{
-
-    axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
-    // back,
+   const handleLoveClick=(id)=>{
+     console.log(id);
+     //const back= JSON.stringify(id);
+    axios.post('http://127.0.0.1:8000/api/quotes/like/'+id,
+    
     {
      headers:{
     "Content-Type":"application/json",
@@ -258,6 +265,7 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         setMassage("نقل قول شما با موفقیت ثبت شد")
         setUserQuote("");
+        setAdd("added");
 
       }
     })
@@ -461,7 +469,7 @@ export default function FullWidthTabs(props) {
                     <small className=" mt-3">
                         {current.Likes}
                       </small>
-                      <div className="btn "> 
+                      <div className="btn" onClick={()=> handleLoveClick(current.id)}> 
                         <svg width="2em" height="2em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
@@ -491,6 +499,17 @@ export default function FullWidthTabs(props) {
 
                    )}
             </List>
+            <p>
+              {endQuote}
+            </p>
+
+            <button type="button" className="btn btn-light col-12"
+              onClick={()=>{setQuotesPage(quotesPage+1)}}
+             >
+              بیشتر
+            </button>
+
+           
 
           </div>
           
