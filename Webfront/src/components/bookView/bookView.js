@@ -37,6 +37,8 @@ const [state , setState] = useState(
 {
 //bookId:props.match.params.id,
 author: "",
+average_rating:"",
+average_rating_count:"",
 avgrating: "",
 description: "",
 id: "",
@@ -97,6 +99,7 @@ setState({
 author: response.data.author,
 average_rating_count:response.data.average_rating_count,
 average_rating:response.data.average_rating,
+
 avgrating: response.data.avgrating,
 description: response.data.description,
 id: response.data.id,
@@ -107,6 +110,7 @@ ratecount: response.data.ratecount,
 smallimgurl: response.data.smallimgurl,
 title:response.data.title
 });
+
 })
 .catch(function (error) {
 console.log(error);
@@ -272,7 +276,8 @@ return(
 امتیاز این کتاب:
 </th>
 <th style={{fontFamily:'Mitra'}}>
-    {state.average_rating}
+    {parseFloat(state.average_rating).toFixed(1)}
+    
    از ۵ در
     {state.average_rating_count}
 
