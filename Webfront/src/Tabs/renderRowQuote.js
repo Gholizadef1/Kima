@@ -2,6 +2,9 @@ import "./Tabs.css";
 import {
     withRouter
   } from "react-router-dom";
+  import List from '@material-ui/core/List';
+  import "./renderRowQuote.css";
+import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
 import {GoHeart} from 'react-icons/go';
 import {AiOutlineLike} from 'react-icons/ai';
@@ -44,7 +47,9 @@ import { red } from "@material-ui/core/colors";
         
           <ListItemText style={{textAlign:"right"}}
             primary={
-              <div className="d-flex p-3">
+              <List >
+            <div className="" style={{direction:"rtl"}}>
+              <div className="d-flex p-3 mt-n4">
               <Avatar  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
               <div className="ml-auto mr-3">
                 <h5>
@@ -56,16 +61,21 @@ import { red } from "@material-ui/core/colors";
               </div>
               <div className="d-flex flex-column">
                 <small className="mr-3">
+                {current.Likes}
                 <GoHeart color="red" size="25"/>
+                
                 </small>
               </div>
              </div>
+ 
+             <p>
+            {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
+
+             </p>
+             <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
+              </div>
+            </List>
              }
-            secondary={
-            <React.Fragment  >
-              {current.quote_text}
-            </React.Fragment>
-            }
             />
             </ListItem>
             </ListItem>

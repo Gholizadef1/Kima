@@ -272,7 +272,7 @@ useEffect(() => {
                             <div className="card-body pt-0">
                                 <div className="row">
                                     <div className="col">
-                                <hr style={{width:"90%",height:1,color:"#333",backgroundColor:"#333"}}></hr>
+                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
                                         <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
