@@ -53,6 +53,8 @@ const Quote = (prop) => {
   const [close,setclose]=useState(false);
   const [information,setinformation]=useState([]);
   const[IDD,setIDD]=useState('');
+  const [delet,setdelet]=useState(false)
+  const[finfo,setfinfo]=useState(0)
   const equal=async(item)=>{
     // console.log(item.account.id)
     setIDD(await AsyncStorage.getItem('id').toString());
@@ -250,9 +252,10 @@ const Quote = (prop) => {
      onEndReachedThreshold={0.5}
      keyExtractor={(item)=>item.id}
      data={information}
+     
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
     
         {/* </TouchableOpacity>
@@ -262,9 +265,10 @@ const Quote = (prop) => {
 
 </>
     )}
+      extraData={finfo}
     >
     
-
+  
     </FlatList>
         {/* <ScrollView showsVerticalScrollIndicator={false}>
            <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>

@@ -30,6 +30,7 @@ const Quotecard = (prop) => {
     //    console.log(prop.quoteid+'propquoteid')
     //    console.log(IDD);
     //   },[])
+    // setdele(prop.delet)
     console.log('quotecard')
     return(
         <View style={styles.container}>
@@ -39,7 +40,10 @@ const Quotecard = (prop) => {
         { prop.IDD===prop.id.toString() ?<AntDesign name="delete"
         size={hp('2.2%')} style={{position:'absolute',marginTop:hp('1.5%'),right:wp('3%')}}
         onPress={async()=>{
- 
+           console.log(prop.lastinfo);
+        prop.INFO(prop.quoteid)
+        console.log(prop.INFO)
+        console.log(prop.lastinfo);
         axiosinst.delete('api/quotes/'+prop.quoteid,{"headers":
          {
           "Content-Type":"application/json",
@@ -119,11 +123,15 @@ const Quotecard = (prop) => {
    <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
       //  console.log(item.account.id)
       // setSelectedIndex(item.id)
-     
+     if(like==='gray')
+     setlike('#1f7a8c')
+     else
+     setlike('gray')
      
       // console.log((await AsyncStorage.getItem('token')).toString());
-      alert(prop.quoteid)
-   
+      // alert(prop.quoteid)
+      console.log((await AsyncStorage.getItem('token')).toString())
+    console.log(prop.quoteid +'PROP QUOTE ID');
       // // console.log(item.account.id);
       axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
          {
