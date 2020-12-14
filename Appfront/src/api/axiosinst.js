@@ -3,6 +3,6 @@ import axios from 'axios';
 
 
 export default axios.create({
-    baseURL:'http://359016142cdc.ngrok.io/'
+    baseURL:'http://d52febb351b7.ngrok.io/'
 
 })

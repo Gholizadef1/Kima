@@ -11,7 +11,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios'
-import QuoteBookview from './QuoteBookview';
 
 const Bookview = (prop) => {
 
@@ -34,7 +33,7 @@ const Bookview = (prop) => {
   }
 
   const getPicker = async () => {
-    axios.get('http://359016142cdc.ngrok.io/bookdetail/'+id +'/getstate/', {
+    axios.get('http://d52febb351b7.ngrok.io/bookdetail/'+id +'/getstate/', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -56,7 +55,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://359016142cdc.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://d52febb351b7.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -74,7 +73,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://359016142cdc.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://d52febb351b7.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -100,7 +99,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://359016142cdc.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://d52febb351b7.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -123,7 +122,7 @@ const Bookview = (prop) => {
       <Container>
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:90}}/>
             <Body style={{marginTop:35}}>
-                  {/* <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
+                  <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
                      width:160 , borderRadius:10 }} />
 
                   <Text style={{marginTop:10 , fontWeight:'bold',
@@ -168,8 +167,7 @@ const Bookview = (prop) => {
                     <Text style={{marginTop:10 , marginRight:20 , 
                       textAlign:'right' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
-                  </Content> */}
-                  <QuoteBookview/>
+                  </Content>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
