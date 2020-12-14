@@ -1,5 +1,6 @@
 import React, {useState,useEffect, Children} from 'react';
 import axios from 'axios';
+import Tooltip from '@material-ui/core/Tooltip';
 //import {API_BASE_URL} from '../../constants/apiContants';
 import {
 //BrowserRouter as Router,
@@ -10,6 +11,8 @@ import {
 useParams,
 withRouter
 } from "react-router-dom";
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
+import {withStyles } from '@material-ui/core/styles';
 import './bookView.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
@@ -136,6 +139,32 @@ console.log(error);
 
 }
 },[] );
+
+const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      borderRadius: 10,
+      border: 10,
+      color: 'black',
+      height: 10,
+      padding: '0 30px',
+      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+
+    },
+  })(Button);
+  const BlueOnGreenTooltip = withStyles({
+    tooltip: {
+      color: "black",
+      fontFamily:"Mitra",
+      fontSize:15,
+      backgroundColor: "lightblue",
+      width:100,
+      height:50,
+      textAlign:"center",
+      marginLeft:20,
+      paddingTop:10,
+    }
+  })(Tooltip);
 const addBookToMineHandler = (choices)=>{
 //console.log(choices.target.value);
 //console.log(choices);
@@ -275,12 +304,11 @@ return(
 <th style={{fontFamily:'Mitra'}}>
 امتیاز این کتاب:
 </th>
+
 <th style={{fontFamily:'Mitra'}}>
     {parseFloat(state.average_rating).toFixed(1)}
-    
-   از ۵ در
+   از 5 در
     {state.average_rating_count}
-
 رای
 </th>
 </tr>
@@ -305,20 +333,26 @@ setHover(newHover);
 value={value}
 
 />
-<button onClick={Sendrequest}></button>
+<BlueOnGreenTooltip title="ثبت یا تغییر رای">
+  <div>
+<button onClick={Sendrequest} style={{background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:25,width:25,marginBottom:8}}>
+  
+</button>
+</div>
 
+</BlueOnGreenTooltip>
 </div>
 </th>
 </tr>
 </tbody>
 </table>
-<div className="row" style={{fontFamily:'Morvarid'}}>
-<label className="col-10 mr-2">به کتابهای خود اضافه کنید:</label>
+<div className="row" style={{fontFamily:'Mitra'}}>
+<label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
 <select className="form-control mr-4 rounded-pill col-6" id="bookMood" onChange={ addBookToMineHandler} >
 <option id="none" value="none">هیچکدام</option>
-<option id="ToRead" value="ToRead">میخواهم بخوانم</option>
-<option id="Reading" value="Reading">دارم میخوانم</option>
-<option id="Read" value="Read">خواندهام</option>
+<option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+<option id="Reading" value="Reading">دارم می‌خوانم</option>
+<option id="Read" value="Read">خوانده‌ام</option>
 </select>
 <div>
 {/* {/ <Button onClick={handleClickSnack}>Top-Center</Button> /} */}
