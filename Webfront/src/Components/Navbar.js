@@ -92,9 +92,9 @@ useEffect(() => {
         <h1>  
           <GiBookshelf color="white" />
         </h1>
-        <b className="btn" 
+        <b 
          style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
-          onClick={routeToHome}
+         
         >کیما</b> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -109,6 +109,10 @@ useEffect(() => {
             <li class="nav-item" href="quize"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a class="nav-link" href="#" style={{color:"white"}}>آزمونک</a>
+            </li>
+            <li class="btn"
+               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
+              <a class="nav-link" style={{color:"white"}}  onClick={routeToHome}>خانه</a>
             </li>
           </ul>
           <div className="mr-3 d-flex ml-auto justify-content-between ">
