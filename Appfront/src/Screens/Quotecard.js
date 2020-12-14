@@ -133,7 +133,7 @@ const Quotecard = (prop) => {
       console.log((await AsyncStorage.getItem('token')).toString())
     console.log(prop.quoteid +'PROP QUOTE ID');
       // // console.log(item.account.id);
-      axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
+      axiosinst.post('http://c0658d1a4d49.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()

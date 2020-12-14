@@ -16,10 +16,6 @@ import { BlurView, VibrancyView } from "@react-native-community/blur";
 import { FAB } from 'react-native-paper';
 
 
-
-
-
-
 const commentschema=yup.object({
 
   comment:yup.string()
@@ -45,10 +41,10 @@ const Quote = (prop) => {
 
     })
   }
-  const handleLoadMore = () => {
+  const handleLoadMore = async() => {
    console.log('END OF THE LIST')
-    setpage(page+1) 
-    response();
+  
+    response(page+1);
    };
   const [theend,settheend]=useState(false)
   const [selectedIndex, setSelectedIndex] = useState([]);
@@ -62,26 +58,23 @@ const Quote = (prop) => {
   const [delet,setdelet]=useState(false)
   const[finfo,setfinfo]=useState(0)
   const equal=async(item)=>{
-    // console.log(item.account.id)
+   
     setIDD(await AsyncStorage.getItem('id').toString());
-    // console.log(await AsyncStorage.getItem('id'))
-    //  console.log(item.account.id.toString()===await (await AsyncStorage.getItem('id')).toString())
-    // return(item.account.id.toString()===await (await AsyncStorage.getItem('id')).toString())
-  }
-//   const getid=async()=>{
     
-//  }
-  // const getid=async()=>(await AsyncStorage.getItem('id'));
-  // const ID=getid();
-  // console.log(ID);
-  const response=async ()=>{
-    setloading(true);
+  }
+
+  const response=async (page)=>{
+    await setpage(page)
+    if(page===1)
+     setloading(true);
+     else
+     setloading(false)
     console.log('DOVOM')
      const id=prop.route.params.id
      console.log(id) 
-     console.log(page)
+     console.log(page+'PAGE')
      try{
-    setIDD(await (await AsyncStorage.getItem('id')).toString())
+    setIDD(await AsyncStorage.getItem('id').toString())
      const response = await axiosinst.get('api/quotes/'+id,{ params:{
      page:page
      }
@@ -89,43 +82,39 @@ const Quote = (prop) => {
   if(response.data.detail==='Invalid page.')
   settheend(true);
   else{
+    settheend(false)
      console.log(IDD+'IDDresponse');
-       console.log(response.data)
-      page===1?setinformation(response.data):setinformation([...information,...response.data])
+      //  console.log(response.data)
+      setinformation(information.concat(response.data))
+      console.log('++++INFO++++'+information+"++++INFO++++")
      
-      setloading(false);
-  }
+  //     setloading(false);
+     }
     //  console.log(information[0])
      }
    catch(err){
-    
+     console.log(err.toString().split('\n')[0])
+    if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
+    settheend(true);
+    // else if(theend===true)
+    // settheend(false)
+    console.log(theend+'THE END')
       console.log(err);
     
    }
-  //  getlike();
-//    try{
-//     const response = await axiosinst.get('api/quotes/like/' + id)
-//     console.log(response.data)
-//    }
-//  catch(err){
-  
-//     console.log(err);
-  
-//  }
+ 
    }
-  //  const handleend=()=>{
-  //    console.log('handleend')
-  //    setpage(page=>(page+1),()=>response())
-  //  }
+ 
   useFocusEffect(
     React.useCallback(() => {
+      // setpage(1);
+      // setloading(false)
+      // settheend(false);
+      setinformation([]);
       // getlike()
-        response()
-     console.log(IDD+'IDD')
+        response(page)
+     console.log(IDD+'IDD');
     
-        // //   console.log('Listenn')
-        // alert('in')
-        //   return() => alert('lost')
     },[]))
     const renderInner=()=>{
         return(
@@ -192,16 +181,12 @@ const Quote = (prop) => {
         </Button>
       
      </View>
-    
-     </View>
-       
+     </View>    
        
      )}
 
      </Formik>  
-      
-            
-              </View>
+          </View>
             )
           }
         
@@ -225,13 +210,13 @@ const Quote = (prop) => {
             </View>
           </View>
         </View>
-      
-       
-        
+   
           )
       }
     return(
+
         <View style={styles.container}>
+
         <BottomSheet style={{position:''}}
         
        snapPoints={[hp('40%'), 0, 0]}
@@ -244,11 +229,8 @@ const Quote = (prop) => {
         setshowbutton(true) 
         response();
       }}
-      
-     //  isBackDropDismisByPress={true}
       renderContent={renderInner}
       renderHeader={renderHeader}            
-         // style={{position:'absolute',height:200,width:250,marginTop:400}}
       backgroundColor={'#edf2f4'}
   
   />
@@ -258,35 +240,28 @@ const Quote = (prop) => {
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
       <FlatList
-      ListFooterComponent={(<View style={styles.loader}>
-      <ActivityIndicator color={'gray'} size={"large"}></ActivityIndicator>
-      </View>)}
+      ListFooterComponent={(theend===false?loading===false?<View style={styles.loader}>
+      <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+      </View>:<View style={{alignItems:'center',marginTop:hp('30%')}}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'black',alignSelf:'center'}}>  پایان کوت ها</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
      onEndReached={()=>handleLoadMore()}
-     onEndReachedThreshold={0.8}
+     onEndReachedThreshold={0}
      keyExtractor={(item)=>item.id}
      data={information}
-     onEndTresh
+     onEndReachedThreshold={0.5}
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
     date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://c0658d1a4d49.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
-    
-        {/* </TouchableOpacity>
-        </View> */}
-
 <Text style={styles.heartnumber}>{item.Likes}</Text>
 
 </>
     )}
       extraData={finfo}
     >
-    
-  
     </FlatList>
-    
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
@@ -300,14 +275,6 @@ const Quote = (prop) => {
 
     </Button>
     :null}
-    {/* <Text>blur</Text> */}
-    {/* <BlurView
-          // style={styles.absolute}
-          // blurType="light"
-          // blurAmount={10}
-          // reducedTransparencyFallbackColor="white"
-        /> */}
-
      </View>
     );
 }
@@ -364,9 +331,12 @@ const styles = StyleSheet.create({
         color:'gray'
     },
     loader:{
-      marginTop:hp('1%'),
+
       alignItems:'center',
-      marginBottom:hp('2%')
+      marginBottom:hp('5%'),
+      justifyContent:'center',
+      alignSelf:'center',
+      marginTop:hp('10%')
     }
   });
   export default Quote;
