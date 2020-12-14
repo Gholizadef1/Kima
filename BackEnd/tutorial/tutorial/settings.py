@@ -15,11 +15,11 @@ from pathlib import Path
 from corsheaders.defaults import default_headers
 from . import quickstart
 import os
-#import environ
+import environ
 
-#env = environ.Env()
+env = environ.Env()
 # reading .env file
-#environ.Env.read_env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +37,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['40ebeeed9c68.ngrok.io']
+ALLOWED_HOSTS = ['70ad80b7620f.ngrok.io']
 
 
 # Application definition

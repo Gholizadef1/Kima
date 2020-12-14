@@ -10,6 +10,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios'
 
 const Bookview = (prop) => {
@@ -32,22 +33,22 @@ const Bookview = (prop) => {
     return null;
   }
 
-  const getPicker = async () => {
-    axios.get('http://d52febb351b7.ngrok.io/bookdetail/'+id +'/getstate/', {
-      "headers": {
-        "content-type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-    .then(function(response){
-      console.log('Pickerr'+response.data.book_state)
-      setSelectedValue(response.data.book_state)   
-  })
-  .catch(function(error){
-      console.log(error)
-  })
-  };
-  getPicker();
+  // const getPicker = async () => {
+  //   axios.get('http://70ad80b7620f.ngrok.io/bookdetail/'+id +'/getstate/', {
+  //     "headers": {
+  //       "content-type": "application/json",
+  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //     }
+  //   })
+  //   .then(function(response){
+  //     console.log('Pickerr'+response.data.book_state)
+  //     setSelectedValue(response.data.book_state)   
+  // })
+  // .catch(function(error){
+  //     console.log(error)
+  // })
+  // };
+  // getPicker();
 
   const PostPicker = async (value) => {
         if (value != "") {
@@ -55,7 +56,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://d52febb351b7.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://70ad80b7620f.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -63,7 +64,7 @@ const Bookview = (prop) => {
           })
             .then(async function (response) {
               console.log(response.data)
-              getPicker();
+//              getPicker();
             })
             .catch(function (error) {
               console.log(error);
@@ -73,7 +74,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://d52febb351b7.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://70ad80b7620f.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -99,7 +100,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://d52febb351b7.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://70ad80b7620f.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -120,17 +121,18 @@ const Bookview = (prop) => {
   
     return(
       <Container>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:90}}/>
-            <Body style={{marginTop:35}}>
-                  <Image source={{uri : result.imgurl}} style={{marginTop:-100, height:220 ,
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('20%')}}/>
+            <Body style={{}}>
+                  <Image source={{uri : result.imgurl}} style={{marginTop:hp('-15%'), height:220 ,
                      width:160 , borderRadius:10 }} />
 
-                  <Text style={{marginTop:10 , fontWeight:'bold',
+                  <Text style={{marginTop:hp('1.5%') , fontWeight:'bold',
                       fontSize:25 }}>{result.title}</Text>
 
-                  <Text style={{marginTop:5}}>{result.author}</Text>
-                  
-                  <AirbnbRating style={{marginBottom:5 , marginTop:20}}
+                  <Text style={{marginTop:hp('0.5%')}}>{result.author}</Text>
+
+                  <Text style={{marginTop:hp('0.5%')}}>به این کتاب امتیاز دهید</Text>
+                  <AirbnbRating style={{marginTop:hp('4%')}}
                   count={5}
                   showRating={false}
                   defaultRating={ratenum}
@@ -148,7 +150,7 @@ const Bookview = (prop) => {
                       ]}
                       defaultValue={selectedValue}
                       containerStyle={{height: 40 , width:220}}
-                      style={{backgroundColor: '#fafafa'}}
+                      style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
                       itemStyle={{
                           justifyContent: 'flex-start'
                       }}
@@ -158,14 +160,14 @@ const Bookview = (prop) => {
                   />
  
 
-                  <Text style={{fontWeight:'bold' , fontSize:20 ,marginRight:230 , marginBottom:5}}>
+                  <Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
                     درباره کتاب :</Text>
                   <Content style={{}}>
                     <Card style={{}}>
                     
                  
-                    <Text style={{marginTop:10 , marginRight:20 , 
-                      textAlign:'right' , alignSelf:'stretch' }}>{result.description}</Text>
+                    <Text style={{marginTop:hp('2%') , marginLeft:wp('2%') , 
+                      textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
                   </Content>
             </Body>
