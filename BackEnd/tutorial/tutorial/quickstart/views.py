@@ -254,7 +254,9 @@ class CommentProfileView(APIView):
         return Response(response)
 
 class LikeCommentView(APIView):
-    
+    model=LikeComment
+    parser_classes = [JSONParser]
+
     def post(self,request,pk):
         user=request.user
         comment = MyComment.objects.get(id=pk)
@@ -262,52 +264,104 @@ class LikeCommentView(APIView):
         dislike=request.data.get("dislike")
         if (LikeComment.objects.filter(account=user,comment=comment).exists()):
             userlike = LikeComment.objects.get(account=user,comment=comment)
-            if ((like==True)&(dislike==False)):
-                if((userlike.like==like)&(userlike.dislike==dislike)):
+            print(like)
+            if (like==True)&(dislike==False):
+                if((userlike.like==True)&(userlike.dislike==False)):
                     userlike.delete()
                     comment.LikeCount-=1
                     comment.save()
-                    return Response({'message':'successfully unlike comment',})
-                elif((userlike.like==dislike)&(userlike.dislike==like)):
+                    response = {'message' : 'successfully unlike comment',}
+                elif(userlike.like==False)&(userlike.dislike==True):
                     userlike.like=like
                     userlike.dislike=dislike
                     userlike.save()
                     comment.LikeCount+=1
                     comment.DislikeCount-=1
                     comment.save()
-                    
-                    return Response({'message': 'change dislike to like',})
-            elif((like==False)&(dislike==True)):
-                if((userlike.like==like)&(userlike.dislike==dislike)):
+                    response = {'message' : 'change dislike to like',}
+            elif(like==False)&(dislike==True):
+                if(userlike.like==False)&(userlike.dislike==True):
                     userlike.delete()
                     comment.DislikeCount-=1
                     comment.save()
-                    return Response({'message':'successfully undislike comment',})
-                elif((userlike.like==dislike)&(userlike.dislike==like)):
+                    response = {'message' : 'successfully undislike comment',} 
+                elif(userlike.like==True)&(userlike.dislike==False):
                     userlike.like=like
                     userlike.dislike=dislike
                     userlike.save()
                     comment.LikeCount-=1
                     comment.DislikeCount+=1
                     comment.save()
-                    
-                    return Response({'message': 'change like to dislike',})
+                    response = {'message' : 'change like to dislike',}
+
+            return Response(response)
         else:
             newlike = LikeComment(account=user,comment=comment,like=request.data.get("like"),dislike=request.data.get("dislike"))
             newlike.save()
-            if(newlike.like==True):
+            if newlike.like==True:
                 comment.LikeCount+=1
-                return Response({'message':'successfully liked!',})
-            elif(newlike.dislike==True):
+                comment.save()
+                #response = {'message' : 'successfully liked!'}
+                return Response("success")
+            elif newlike.dislike==True:
                 comment.DislikeCount+=1
-                return Response({'message':'successfully disliked!',})
+                comment.save()
+                response = {'message' : 'successfully disliked!',}
+                return Response(response)
+            
+            
 
-    # def get(self,request,pk):
-    #     comment = MyComment.objects.get(id=pk)
-    #     if LikeComment.objects.filter(comment=comment).exists():
-    #         return Response({'LikeCount':comment.LikeCount ,'DislikeCount' : comment.DislikeCount})
-    #     else:
-    #         return Response({'LikeCount': 0 ,'DislikeCount' : 0})
+    def get(self,request,pk):
+        comment = MyComment.objects.get(id=pk)
+        if LikeComment.objects.filter(comment=comment).exists():
+            return Response({'LikeCount':comment.LikeCount ,'DislikeCount' : comment.DislikeCount})
+        else:
+            return Response({'LikeCount': 0 ,'DislikeCount' : 0})
+
+class FilterCommentbyTime(APIView):
+
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=bk).exists():
+            comment_list = MyComment.objects.filter(current_book=bk).order_by('sendtime')
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+class FilterCommentbyLike(APIView):
+
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=bk).exists():
+            comment_list = MyComment.objects.filter(current_book=bk).order_by('LikeCount')
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+# class FilterQuotebyTime(APIView):
+
+#     def get(self,request,pk):
+#         bk=book.objects.get(id=pk)
+#         if MyQuote.objects.filter(current_book=bk).exists():
+#             comment_list = MyComment.objects.filter(current_book=bk).order_by('sendtime')
+#             serilalizer = CommentSerializer(comment_list,many=True)
+#             return Response(serilalizer.data)
+#         response = {'message' : 'No Comment!',}
+#         return Response(response)
+
+# class FilterQuotebyLike(APIView):
+
+#     def get(self,request,pk):
+#         bk=book.objects.get(id=pk)
+#         if MyQuote.objects.filter(current_book=bk).exists():
+#             comment_list = MyComment.objects.filter(current_book=bk).order_by('LikeCount')
+#             serilalizer = CommentSerializer(comment_list,many=True)
+#             return Response(serilalizer.data)
+#         response = {'message' : 'No Comment!',}
+#         return Response(response)
+
 
 
 

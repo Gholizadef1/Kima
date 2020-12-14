@@ -38,6 +38,7 @@ urlpatterns = [
     path('comment/<int:pk>/delete',DeleteCommentView.as_view()),
     path('comment/<int:pk>/like',LikeCommentView.as_view()),
     path('bookdetail/<int:pk>/comment',CommentView.as_view()),
+    path('bookdetail/<int:pk>/comment-filter-time',FilterCommentbyTime.as_view()),
     path('bookdetail/<int:pk>/getstate',get_bookstate,name="get_state"),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
