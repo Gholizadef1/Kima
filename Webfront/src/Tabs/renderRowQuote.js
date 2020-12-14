@@ -48,10 +48,20 @@ import { red } from "@material-ui/core/colors";
               />
             </ListItemAvatar>
           <ListItemText style={{textAlign:"right"}}
-            primary={current.current_book.title}
+            primary={
+              <div>
+              <React.Fragment>
+            {current.current_book.title}
+              </React.Fragment>
+              <p >
+                          {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                          </p>
+                          </div>
+            }
             secondary={
             <React.Fragment  >
               {current.quote_text}
+              
             </React.Fragment>
             }
           />
@@ -59,7 +69,6 @@ import { red } from "@material-ui/core/colors";
          <ListItemText style={{textAlign:"left",fontFamily:"Mitra",fontWeight:"bold"}}
          secondary={
            <React.Fragment>
-             {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
              <GoHeart color="red" size="25"/>
              </React.Fragment>
           }
