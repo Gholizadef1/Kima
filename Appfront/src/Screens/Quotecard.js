@@ -11,7 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
-
+  console.log(prop.IDD+'PROP IDD')
+     console.log(prop.id +'PROP ACCOUNT ID')
   // const[IDD,setIDD]=useState('');
 
   // const equal=async(item)=>{
@@ -37,7 +38,7 @@ const Quotecard = (prop) => {
         
         <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:prop.height,marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
         
-        { prop.IDD===prop.id.toString() ?<AntDesign name="delete"
+        { prop.IDD.toString()===prop.id.toString() ?<AntDesign name="delete"
         size={hp('2.2%')} style={{position:'absolute',marginTop:hp('1.5%'),right:wp('3%')}}
         onPress={async()=>{
            console.log(prop.lastinfo);

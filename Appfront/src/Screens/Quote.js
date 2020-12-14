@@ -43,7 +43,7 @@ const Quote = (prop) => {
   }
   const handleLoadMore = async() => {
    console.log('END OF THE LIST')
-  
+    if(theend===false)
     response(page+1);
    };
   const [theend,settheend]=useState(false)
@@ -57,6 +57,8 @@ const Quote = (prop) => {
   const[IDD,setIDD]=useState('');
   const [delet,setdelet]=useState(false)
   const[finfo,setfinfo]=useState(0)
+  const [refresh,setrefresh]=useState(false);
+  const [forrefresh,setforrefresh]=useState(false);
   const equal=async(item)=>{
    
     setIDD(await AsyncStorage.getItem('id').toString());
@@ -65,27 +67,34 @@ const Quote = (prop) => {
 
   const response=async (page)=>{
     await setpage(page)
-    if(page===1)
-     setloading(true);
-     else
-     setloading(false)
+    if(page===1){
+      console.log('PAGE 111')
+    await settheend(false)
+    await setinformation([])
+
+    console.log('IT IS HEAR SET INFO []')
+    console.log(information)
+    
+    }
+    
     console.log('DOVOM')
      const id=prop.route.params.id
      console.log(id) 
      console.log(page+'PAGE')
      try{
-    setIDD(await AsyncStorage.getItem('id').toString())
+      setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('api/quotes/'+id,{ params:{
      page:page
      }
   })
+  setrefresh(false)
   if(response.data.detail==='Invalid page.')
   settheend(true);
   else{
     settheend(false)
      console.log(IDD+'IDDresponse');
       //  console.log(response.data)
-      setinformation(information.concat(response.data))
+      page===1?setinformation(response.data):setinformation(information.concat(response.data))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
   //     setloading(false);
@@ -93,6 +102,7 @@ const Quote = (prop) => {
     //  console.log(information[0])
      }
    catch(err){
+     setrefresh(false)
      console.log(err.toString().split('\n')[0])
     if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
     settheend(true);
@@ -110,9 +120,10 @@ const Quote = (prop) => {
       // setpage(1);
       // setloading(false)
       // settheend(false);
-      // setinformation([]);
+    
       // getlike()
-        response(page)
+         
+        response(1)
      console.log(IDD+'IDD');
     
     },[]))
@@ -227,7 +238,7 @@ const Quote = (prop) => {
       enabledContentTapInteraction={false}
       onCloseEnd={()=>{
         setshowbutton(true) 
-        response();
+        response(1);
       }}
       renderContent={renderInner}
       renderHeader={renderHeader}            
@@ -240,12 +251,20 @@ const Quote = (prop) => {
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
       <FlatList
-      ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={{marginTop:hp('4%'),bottom:hp('2.5%'),marginBottom:hp('3%')}}><Text style={{color:'gray',alignSelf:'center'}}> نقل قول دیگری وجود ندارد</Text></View>)}
+      ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
      onEndReached={()=>handleLoadMore()}
      onEndReachedThreshold={0}
      keyExtractor={(item)=>item.id}
+     refreshing={refresh}
+     onRefresh={async()=>{
+        await setrefresh(true)
+    
+      response(1)
+       
+     }}
+     
      data={information}
      onEndReachedThreshold={0.5}
      
