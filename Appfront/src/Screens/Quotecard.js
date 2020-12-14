@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { Avatar } from 'react-native-paper';
@@ -7,18 +7,57 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
+
+  // const[IDD,setIDD]=useState('');
+
+  // const equal=async(item)=>{
+  //   setIDD(await AsyncStorage.getItem('id').toString());
+  //   console.log('useEFFECTQUOTECARD')
+  //   console.log(IDD)
+  // }
+
     const hieght=prop.height
-    // const [like,setlike]=useState('gray')
+     const [like,setlike]=useState('gray')
     // const [dislike,setdislike]=useState('lightblue')
     const [heart, setheart]= useState(false);
-
+    // useEffect(()=>{
+    //    equal();
+    //    console.log(prop.id+'propaccountid')
+    //    console.log(prop.quoteid+'propquoteid')
+    //    console.log(IDD);
+    //   },[])
     console.log('quotecard')
     return(
         <View style={styles.container}>
         
         <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:prop.height,marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
+        
+        { prop.IDD===prop.id.toString() ?<AntDesign name="delete"
+        size={hp('2.2%')} style={{position:'absolute',marginTop:hp('1.5%'),right:wp('3%')}}
+        onPress={async()=>{
+ 
+        axiosinst.delete('api/quotes/'+prop.quoteid,{"headers":
+         {
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+         }})
+        .then(async function(response){
+             console.log(response);
+
+           
+          })
+        .catch(function(error){
+        console.log(error);
+        console.log('delete error ||||||||||||')
+  
+         })
+        //  response();
+ }}
+  color="#e56b6f" />:null}
         <View style={{flex:1,
         flexDirection:'row',
         alignItems:'center',
@@ -75,7 +114,36 @@ const Quotecard = (prop) => {
             </Card>
           <View style={{marginBottom:hp('9%')}}>
           
+       
+ 
+   <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
+      //  console.log(item.account.id)
+      // setSelectedIndex(item.id)
+     
+     
+      // console.log((await AsyncStorage.getItem('token')).toString());
+      alert(prop.quoteid)
    
+      // // console.log(item.account.id);
+      axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
+         {
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+         }})
+        .then(async function(response){
+             console.log(response);
+  
+          })
+        .catch(function(error){
+        console.log(error);
+        console.log('like error ||||||||||||')
+  
+         })
+        //  getlike(item);
+     
+
+        //  response();
+        }} size={20} color={like} />
      <Text style={styles.date}>{prop.date}</Text>
     
     
@@ -121,9 +189,9 @@ const styles = StyleSheet.create({
    marginHorizontal:119,marginBottom:50
     },
     heart:{
-      position:'absolute',
-    
-      right:wp('14%')     
+      position:'absolute',      
+ 
+      right:wp('6.5%')     
       
     },
     heartnumber:{   

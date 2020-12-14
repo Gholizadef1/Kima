@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,FlatList, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -252,65 +252,9 @@ const Quote = (prop) => {
      data={information}
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
-        { IDD===item.account.id.toString() ?<AntDesign name="delete"
-        size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
-        onPress={async()=>{
- 
-        axiosinst.delete('api/quotes/'+item.id,{"headers":
-         {
-          "Content-Type":"application/json",
-          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-         }})
-        .then(async function(response){
-             console.log(response);
-           
-          })
-        .catch(function(error){
-        console.log(error);
-  
-         })
-         response();
- }}
-  color="#e56b6f" />:null}
-  {/* <View style={{position:'absolute',backgroundColor:'green',
-     height:hp('2%'),width:wp('5%'),marginTop:hp('47.5%'),
-      right:wp('6.5%')   
-      }}>
-  <TouchableOpacity style={{position:'absolute',backgroundColor:'green',
-   height:hp('2%'),width:wp('5%')  
-      }}> */}
-   <AntDesign  style={styles.heart} name="heart"  onPress={async()=>{
-      //  console.log(item.account.id)
-      setSelectedIndex(item.id)
-      //  console.log(item.id)
-      //  if(item.id===)
-      // if(like==='blue')setlike('gray')
-      // else
-      // setlike('blue')
-      // console.log((await AsyncStorage.getItem('token')).toString());
-     
-       console.log(item.id)
-      // // console.log(item.account.id);
-      axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+item.id,{"headers":
-         {
-          "Content-Type":"application/json",
-          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-         }})
-        .then(async function(response){
-             console.log(response);
-  
-          })
-        .catch(function(error){
-        console.log(error);
-  
-         })
-        //  getlike(item);
-     
-
-        //  response();
-        }} size={20} color={like} />
+    
         {/* </TouchableOpacity>
         </View> */}
 
