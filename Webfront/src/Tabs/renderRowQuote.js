@@ -2,8 +2,7 @@ import "./Tabs.css";
 import {
     withRouter
   } from "react-router-dom";
-  import List from '@material-ui/core/List';
-  import "./renderRowQuote.css";
+import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
 import {GoHeart} from 'react-icons/go';
@@ -34,7 +33,7 @@ import { red } from "@material-ui/core/colors";
       <div>
       {quote.length===0 ? (
                  
-        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
