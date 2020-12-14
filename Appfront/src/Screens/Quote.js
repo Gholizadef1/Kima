@@ -31,7 +31,7 @@ const commentschema=yup.object({
 const Quote = (prop) => {
 
   const getlike=async(item)=>{
-    axiosinst.get('http://25aadf96386a.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://dd0613066c67.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -252,7 +252,7 @@ const Quote = (prop) => {
      data={information}
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://25aadf96386a.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]}  height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
         { IDD===item.account.id.toString() ?<AntDesign name="delete"
         size={hp('2.2%')} style={{position:'absolute',marginTop:hp('5.1%'),right:'6.5%'}}
@@ -293,7 +293,7 @@ const Quote = (prop) => {
      
        console.log(item.id)
       // // console.log(item.account.id);
-      axiosinst.post('http://25aadf96386a.ngrok.io/api/quotes/like/'+item.id,{"headers":
+      axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+item.id,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
