@@ -320,6 +320,12 @@ return(
 <th>
 
 <div className={classes.root}>
+      
+<button onClick={Sendrequest} style={{background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:35,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
+    <div style={{marginLeft:-3, color:"white",fontFamily:"Mitra",fontWeight:"bold"}}>
+    ثبت
+    </div>
+</button>
 <Rating
 name="hover-feedback"
 precision={1}
@@ -333,14 +339,8 @@ setHover(newHover);
 value={value}
 
 />
-<BlueOnGreenTooltip title="ثبت یا تغییر رای">
-  <div>
-<button onClick={Sendrequest} style={{background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:25,width:25,marginBottom:8}}>
-  
-</button>
-</div>
 
-</BlueOnGreenTooltip>
+
 </div>
 </th>
 </tr>
