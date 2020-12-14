@@ -41,50 +41,42 @@ import { red } from "@material-ui/core/colors";
           alignItems="flex-start"
           style={{direction:"rtl"}}
          >
-           <ListItemAvatar>
-              <Avatar
-                
-                src={current.current_book.smallimgurl}
-              />
-            </ListItemAvatar>
+        
           <ListItemText style={{textAlign:"right"}}
             primary={
-              <div>
-              <React.Fragment>
-            {current.current_book.title}
-              </React.Fragment>
-              <p >
-                          {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
-                          </p>
-                          </div>
-            }
+              <div className="d-flex p-3">
+              <Avatar  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
+              <div className="ml-auto mr-3">
+                <h5>
+                {current.current_book.title}
+                </h5>
+                <small>
+                {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                </small>
+              </div>
+              <div className="d-flex flex-column">
+                <small className="mr-3">
+                <GoHeart color="red" size="25"/>
+                </small>
+              </div>
+             </div>
+             }
             secondary={
             <React.Fragment  >
               {current.quote_text}
-              
             </React.Fragment>
             }
-          />
-         
-         <ListItemText style={{textAlign:"left",fontFamily:"Mitra",fontWeight:"bold"}}
-         secondary={
-           <React.Fragment>
-             <GoHeart color="red" size="25"/>
-             </React.Fragment>
-          }
-        />
-          
-
- 
-        </ListItem>
-      </ListItem>
+            />
+            </ListItem>
+            </ListItem>
         ))}
-      </div>
+        </div>
        )}
        </div>
     );
+          }
     
-        }
+        
 
   export default withRouter(RenderRowquote);
   
