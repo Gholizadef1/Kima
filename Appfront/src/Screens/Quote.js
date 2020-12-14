@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert} from 'react-native';
+import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -45,6 +45,12 @@ const Quote = (prop) => {
 
     })
   }
+  const handleLoadMore = () => {
+   console.log('END OF THE LIST')
+    setpage(page+1) 
+    response();
+   };
+  const [theend,settheend]=useState(false)
   const [selectedIndex, setSelectedIndex] = useState([]);
   const[loading ,setloading]=useState(false);
   const[page,setpage]=useState(1);
@@ -80,11 +86,15 @@ const Quote = (prop) => {
      page:page
      }
   })
+  if(response.data.detail==='Invalid page.')
+  settheend(true);
+  else{
      console.log(IDD+'IDDresponse');
        console.log(response.data)
-      
-      setinformation(information=>(response.data))
+      page===1?setinformation(response.data):setinformation([...information,...response.data])
+     
       setloading(false);
+  }
     //  console.log(information[0])
      }
    catch(err){
@@ -194,6 +204,8 @@ const Quote = (prop) => {
               </View>
             )
           }
+        
+        
     const bs = React.createRef()
     const fall=new Animated.Value(1);
     const [showbutton,setshowbutton]=useState(true);
@@ -246,12 +258,16 @@ const Quote = (prop) => {
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
       <FlatList
+      ListFooterComponent={(<View style={styles.loader}>
+      <ActivityIndicator color={'gray'} size={"large"}></ActivityIndicator>
+      </View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
-     onEndReached={console.log('endreach')}
-     onEndReachedThreshold={0.5}
+     onEndReached={()=>handleLoadMore()}
+     onEndReachedThreshold={0.8}
      keyExtractor={(item)=>item.id}
      data={information}
+     onEndTresh
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
@@ -270,20 +286,7 @@ const Quote = (prop) => {
     
   
     </FlatList>
-        {/* <ScrollView showsVerticalScrollIndicator={false}>
-           <Quotecrad height={350} name={'روحی'} naghlghol={'naghlghol man'} date={'1/1/99'} heartnumber={100}></Quotecrad>
-           <Quotecrad height={350} name={'عرفان'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100} ></Quotecrad>
-           <Quotecrad height={350} name={'bb'} naghlghol={'naghlghol man'}  date={'1/1/99'} heartnumber={100}></Quotecrad>
-           
-           
-         
-          
-        
-      
-           </ScrollView> */}
-               {/* <FAB style={{position:'absolute'}}></FAB> */}
-                {/* <AntDesign style={{top:400,bottom:100,position:'absolute'}} name="arrowdown" size={24} color="black" />
-     */}
+    
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
@@ -360,5 +363,10 @@ const styles = StyleSheet.create({
         fontSize:hp('1.5%'),
         color:'gray'
     },
+    loader:{
+      marginTop:hp('1%'),
+      alignItems:'center',
+      marginBottom:hp('2%')
+    }
   });
   export default Quote;
