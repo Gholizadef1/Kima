@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.serializers import bookSerializer
 from tutorial.kyma.models import book
 
@@ -61,6 +61,22 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['username','profile_photo','email']
+
+class RateByUserSerializer(serializers.Serializer):
+
+    rate = serializers.IntegerField(required=True,min_value=1,max_value=5)
+
+class BookrateSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Ratinguser
+        fields = fields = "__all__"
+
+
+
+    
 
 
 
