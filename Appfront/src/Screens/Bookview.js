@@ -19,7 +19,35 @@ const Bookview = (prop) => {
   const [test , settest] = useState(null);
   const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
+  const [information,setinformation]=useState([]);
   const [selectedValue, setSelectedValue] = useState('none');
+  const[loading ,setloading]=useState(false);
+  const[IDD,setIDD]=useState('');
+  const equal=async(item)=>{
+    setIDD(await AsyncStorage.getItem('id').toString());
+  }  
+  const response=async ()=>{
+    setloading(true);
+    console.log('DOVOM')
+     const id=prop.route.params.id
+     console.log(id) 
+     console.log(page)
+     try{
+    setIDD(await (await AsyncStorage.getItem('id')).toString())
+     const response = await axiosinst.get('api/quotes/'+id
+    )
+     console.log(IDD+'IDDresponse');
+       console.log(response.data)
+      
+      setinformation(information=>(response.data))
+      setloading(false);
+     }
+   catch(err){
+    
+      console.log(err);
+    
+   }
+
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
@@ -170,6 +198,26 @@ const Bookview = (prop) => {
                       textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
                   </Content>
+                <Animated.View style={{
+                        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+                    }}>
+                    <FlatList
+                    style={{marginBottom:'17%'}}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    onEndReached={console.log('endreach')}
+                    onEndReachedThreshold={0.5}
+                    keyExtractor={(item)=>item.id}
+                    data={information}                    
+                    renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
+                    date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+                  <Text style={styles.heartnumber}>{item.Likes}</Text>
+                  </>
+                  )}
+                    extraData={finfo}
+                  >
+                  </FlatList>
+        </Animated.View>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
@@ -182,43 +230,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    // image:{
-    //   height:220,
+    heartnumber:{   
+      position:'absolute',
+      marginTop:hp('47.6%'),
+        left:wp('85%'),  
+        fontSize:hp('1.5%'),
+        color:'gray'
+    }
+});
+}
 
-    //   }
-    // bookname: {
-    //   alignContent:'center',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    //   marginRight:10,
-    //   marginLeft:350,
-    //   fontSize:20,
-    //   width:500,
-    //   fontWeight:'bold'
-    // },
-    // author: {
-    //   right:20,
-    //   marginRight:20,
-    //   marginLeft:30,
-    //   color:'#1F7A8C',
-    //   fontSize:17
-    // },
-    // publisher:{
-    //   marginRight:105,
-    //   color:'#1F7A8C',
-    //   fontSize:15
-    // },
-    // description:{
-    //   marginRight:20,
-    //   fontSize:15
-    // },
-    //    Picker: {
-    //   top:'100 px !important',
-    //   right:20,
-    //   marginRight:20,
-    //   color:'#1F7A8C',
-    //   fontSize:15
-    // }
-    });
-
-export default Bookview;
+  export default Bookview;
