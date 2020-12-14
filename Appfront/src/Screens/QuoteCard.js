@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Animated, { set } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
 
@@ -18,47 +19,12 @@ const Quotecard = (prop) => {
         
         <Card style={{ marginLeft:wp('5%'),marginTop:hp('3.3%'),height:prop.height,marginRight:wp('5%'),borderRadius:10,elevation:4 ,backgroundColor:'#EDF2F4'}}>
         
-        { prop.IDD===prop.id.toString() ?<AntDesign name="delete"
-        size={hp('2.2%')} style={{position:'absolute',marginTop:hp('1.5%'),right:wp('3%')}}
-        onPress={async()=>{
-           console.log(prop.lastinfo);
-        prop.INFO(prop.quoteid)
-        console.log(prop.INFO)
-        console.log(prop.lastinfo);
-        axiosinst.delete('api/quotes/'+prop.quoteid,{"headers":
-         {
-          "Content-Type":"application/json",
-          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-         }})
-        .then(async function(response){
-             console.log(response);
-
-           
-          })
-        .catch(function(error){
-        console.log(error);
-        console.log('delete error ||||||||||||')
-  
-         })
-        //  response();
- }}
-  color="#e56b6f" />:null}
         <View style={{flex:1,
         flexDirection:'row',
         alignItems:'center',
        }}>
         <Text style={{  
-        // textAlignVertical:'center',
-        // alignContent:'center',
-        // alignItems:'center',
-
-        color:'black',
-        //flexDirection:'row-reverse',
-        //alignSelf:'center',
-       // textAlign:'right',
-        // alignSelf:'center',
-     
-      
+        color:'black',      
         marginBottom:hp('6.5%'),
         marginTop:hp('3.5%'),
         marginHorizontal:hp('3%'),
@@ -78,17 +44,12 @@ const Quotecard = (prop) => {
            {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
              source={require('../../assets/avatar.png')}
-            style={styles.avatar}
-      
+            style={styles.avatar}      
             >
-
-            </ImageBackground>:<ImageBackground borderRadius={100}
-    
+            </ImageBackground>:<ImageBackground borderRadius={100}    
           source={{uri:prop.picture}}
-            style={styles.avatar}
-    
+            style={styles.avatar}    
             >
-
     </ImageBackground>}
         </TouchableOpacity>
    </TouchableOpacity>
@@ -128,20 +89,10 @@ const Quotecard = (prop) => {
         console.log('like error ||||||||||||')
   
          })
-        //  getlike(item);
-     
-
-        //  response();
         }} size={20} color={like} />
-     <Text style={styles.date}>{prop.date}</Text>
-    
-    
-           
+     <Text style={styles.date}>{prop.date}</Text>        
      </View>
- 
-        </View>
-  
-      
+        </View>      
     );
 }
 
@@ -150,8 +101,6 @@ const styles = StyleSheet.create({
     
       backgroundColor: '#ffff',
      marginTop:hp('1%')
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
     },
     avatar:{
         height:hp('7.8%'),
@@ -160,13 +109,8 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         position:'absolute',
         shadowColor:'black',shadowOpacity:10,
-        elevation:3,
-        
-        
-    
-    
+        elevation:3,    
     },
-  
     date:{
       position:'absolute',
         top:'4%',
@@ -191,17 +135,9 @@ const styles = StyleSheet.create({
         color:'gray'
     },
     naghlghol:{
-    
-      
-        // textAlignVertical:'center',
-        // alignContent:'center',
-        // alignItems:'center',
-        // textAlignVertical:
         marginHorizontal:wp('6%'),
-        fontSize:14,
-        
+        fontSize:14,   
     }
-
   });
   export default Quotecard;
 

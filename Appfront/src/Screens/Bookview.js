@@ -47,8 +47,6 @@ const Bookview = (prop) => {
       console.log(err);
     
    }
-
-  const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
   setResult(response.data);
