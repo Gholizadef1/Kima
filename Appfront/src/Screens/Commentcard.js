@@ -48,6 +48,53 @@ const Commentcard = (prop) => {
       {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
         {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
+            {prop.IDD.toString() === prop.id.toString() ? <AntDesign name="delete"
+          size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
+          onPress={async () => {
+            await Alert.alert(
+              'از حذف این نقل قول اطمینان دارید؟',
+              
+              '',
+              [
+                {
+                  text: 'انصراف',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style:'default'
+                },
+                {
+                  text: 'حذف', onPress: async() => {
+                    // console.log(prop.lastinfo);
+                    // prop.INFO(prop.quoteid)
+                    // console.log(prop.INFO)
+                    // console.log(prop.lastinfo);
+                    axiosinst.delete('api/quotes/' + prop.commentid, {
+                      "headers":
+                      {
+                        "Content-Type": "application/json",
+                        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                      }
+                    })
+                      .then(async function (response) {
+                        console.log(response);
+                        // prop.INFO(prop.quoteid);
+                        // await(prop.DELETE(true))
+                     
+
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                        console.log('delete error ||||||||||||')
+
+                      })
+                  }
+                }
+              ],
+              { cancelable: false }
+            );
+
+            //  response();
+          }}
+          color="#e56b6f" /> : null}
             <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>
            {prop.picture==='http://7714cae02459.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}

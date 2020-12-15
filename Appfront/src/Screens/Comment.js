@@ -19,6 +19,13 @@ const commentschema=yup.object({
 
 
 const Comment = (prop) => {
+
+  const[IDD,setIDD]=useState('');
+  const equal=async(item)=>{
+   
+    setIDD(await AsyncStorage.getItem('id').toString());
+    
+  }
   const [closed,setclosed]=useState(false);
   const [information,setinformation]=useState([]);
   
@@ -31,7 +38,7 @@ const Comment = (prop) => {
     console.log(id)
 
     try{
-
+      setIDD(await (await AsyncStorage.getItem('id')).toString())
     const response = await axiosinst.get("bookdetail/"+id+'/comment')
      console.log(response.data)
     //  for(let i=0;response.data[i]!=null;i++){
@@ -39,6 +46,7 @@ const Comment = (prop) => {
     //    }
      
     //   }
+    
     setinformation(response.data)
     console.log(information[0])
     }
@@ -197,7 +205,7 @@ const Comment = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} likenumber={100} dislikenumber={10} picture={`http://7714cae02459.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} id={item.account.id} likenumber={100} commentid={item.id} IDD={IDD} dislikenumber={10} picture={`http://7714cae02459.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>
