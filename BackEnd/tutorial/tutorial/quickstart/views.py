@@ -15,12 +15,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
-
-
+from rest_framework.parsers import JSONParser
 from .serializers import * 
 
 @api_view(['POST','GET'])
@@ -183,3 +182,186 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
+
+
+
+class CommentView(APIView):
+
+    model = MyComment
+    parser_classes = [JSONParser]
+
+    def get_object(self, pk):
+        try:
+            return MyComment.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=this_book).exists():
+            comment_list = MyComment.objects.filter(current_book=this_book)
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+    def post(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        comment_text=request.data.get("textcomment")
+        new_comment=MyComment(account=user,current_book=this_book,comment_text=comment_text)
+        new_comment.save()
+        response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Comment Saved!!',
+                'data' : [comment_text,],
+        }
+        return Response(response)
+
+
+class DeleteCommentView(APIView):
+
+    def delete(self,request,pk):
+        current_comment = MyComment.objects.get(id=pk)
+        current_user = request.user
+        comment_user = current_comment.account
+        if comment_user == current_user:
+            current_comment.delete()
+            return Response({'message':'Your Comment successfully deleted!'})
+        else:
+            return Response({'message':'You dont have permission to delete this comment!'})
+
+
+class CommentProfileView(APIView):
+
+    model = MyComment
+    parser_classes = [JSONParser]
+
+    def get_object(self, pk):
+        try:
+            return MyComment.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
+        user=Account.objects.get(pk=pk)
+        if MyComment.objects.filter(account=user).exists():
+            comment_list = MyComment.objects.filter(account=user)
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+class LikeCommentView(APIView):
+
+    def post(self,request,pk):
+        user=request.user
+        comment = MyComment.objects.get(id=pk)
+        if LikeComment.objects.filter(account=user,comment=comment).exists():
+            userlike=LikeComment.objects.get(account=user,comment=comment)
+            userlike.delete()
+            comment.LikeCount-=1
+            comment.save()
+            return Response({'message':"successfully unliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
+        else:
+            newlike = LikeComment(account=user,comment=comment)
+            
+            comment.LikeCount+=1
+            comment.save()
+            newlike.save()
+            return Response({'message':"successfully liked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
+
+    def get(self,request,pk):
+        user=self.request.user
+        comment = MyComment.objects.get(id=pk)
+        if LikeComment.objects.filter(account=user,comment=comment).exists():
+            return Response({'message' : "True",})
+        return Response({'message' : "False",})
+        
+        
+
+class DislikeCommentView(APIView):
+
+    def post(self,request,pk):
+        user=request.user
+        comment = MyComment.objects.get(id=pk)
+        if (DislikeComment.objects.filter(account=user,comment=comment).exists()):
+            userlike=DislikeComment.objects.get(account=user,comment=comment)
+            userlike.delete()
+            comment.DislikeCount-=1
+            comment.save()
+            return Response({'message':"successfully undisliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
+        else:
+            newlike = DislikeComment(account=user,comment=comment)
+            
+            comment.DislikeCount+=1
+            comment.save()
+            newlike.save()
+            return Response({'message':"successfully disliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
+
+    def get(self,request,pk):
+        user=self.request.user
+        comment = MyComment.objects.get(id=pk)
+        if DislikeComment.objects.filter(account=user,comment=comment).exists():
+            return Response({'message' : "True",})
+        return Response({'message' : "False",})
+
+class FilterCommentbyTime(APIView):
+
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=bk).exists():
+            comment_list = MyComment.objects.filter(current_book=bk).order_by('sendtime')
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+class FilterCommentbyLike(APIView):
+
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyComment.objects.filter(current_book=bk).exists():
+            comment_list = MyComment.objects.filter(current_book=bk).order_by('LikeCount')
+            serilalizer = CommentSerializer(comment_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Comment!',}
+        return Response(response)
+
+# class FilterQuotebyTime(APIView):
+
+#     def get(self,request,pk):
+#         bk=book.objects.get(id=pk)
+#         if MyQuote.objects.filter(current_book=bk).exists():
+#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
+#             serilalizer = QuoteSerializer(comment_list,many=True)
+#             return Response(serilalizer.data)
+#         response = {'message' : 'No Quote!',}
+#         return Response(response)
+
+# class FilterQuotebyLike(APIView):
+
+#     def get(self,request,pk):
+#         bk=book.objects.get(id=pk)
+#         if MyQuote.objects.filter(current_book=bk).exists():
+#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
+#             serilalizer = QuoteSerializer(comment_list,many=True)
+#             return Response(serilalizer.data)
+#         response = {'message' : 'No Quote!',}
+#         return Response(response)
+
+
+
+
+
+
+    

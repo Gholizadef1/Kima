@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Account,MyBook
+from .models import *
 from tutorial.kyma.serializers import bookSerializer
 from tutorial.kyma.models import book
 
@@ -60,7 +60,19 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['username','profile_photo','email']
+        fields = ['username','profile_photo','email','id']
 
+class PostCommentSerializer(serializers.Serializer):
+    
+    textcomment = serializers.CharField(required=True)
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    
+    class Meta:
+        model = MyComment
+        fields = "__all__"
 
 
