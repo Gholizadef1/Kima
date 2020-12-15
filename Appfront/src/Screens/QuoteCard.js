@@ -29,7 +29,7 @@ const Quotecard = (prop) => {
         marginTop:hp('3.5%'),
         marginHorizontal:hp('3%'),
         fontSize:hp('1.7%')
-        }}>{prop.naghlghol}</Text>
+        }}>salamm</Text>
         </View>
         <View style={{position:'absolute',marginTop:prop.height-hp('7.8%'),alignSelf:'center'}}>
       <Text style={{marginBottom:hp('0.9%'),alignSelf:'center',color:'gray'}}>{prop.name}</Text>
@@ -41,7 +41,7 @@ const Quotecard = (prop) => {
       
       <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>
-           {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+           {prop.picture==='http://1a063c3b068b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
              source={require('../../assets/avatar.png')}
             style={styles.avatar}      
@@ -75,7 +75,7 @@ const Quotecard = (prop) => {
       console.log((await AsyncStorage.getItem('token')).toString())
     console.log(prop.quoteid +'PROP QUOTE ID');
       // // console.log(item.account.id);
-      axiosinst.post('http://dd0613066c67.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
+      axiosinst.post('http://1a063c3b068b.ngrok.io/api/quotes/like/'+prop.quoteid,{"headers":
          {
           "Content-Type":"application/json",
           "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -90,7 +90,7 @@ const Quotecard = (prop) => {
   
          })
         }} size={20} color={like} />
-     <Text style={styles.date}>{prop.date}</Text>        
+     <Text style={styles.date}>today</Text>        
      </View>
         </View>      
     );

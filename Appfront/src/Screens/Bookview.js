@@ -10,6 +10,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
+import Animated, { set } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios'
 
@@ -18,7 +19,7 @@ const Bookview = (prop) => {
   const [rate , setrate] = useState(true);
   const [test , settest] = useState(null);
   const [ratenum , setratenum] = useState(null);
-  const [result , setResult] = useState(null);
+  const [result , setResult] = useState('');
   const [information,setinformation]=useState([]);
   const [selectedValue, setSelectedValue] = useState('none');
   const[loading ,setloading]=useState(false);
@@ -45,11 +46,12 @@ const Bookview = (prop) => {
    catch(err){
     
       console.log(err);
-    
    }
+   console.log('Say something')
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
   setResult(response.data);
+  console.log('checkk'+ response.data)
   };
   useEffect(() =>{
     getResult(id);
@@ -58,6 +60,7 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+}
 
   // const getPicker = async () => {
   //   axios.get('http://70ad80b7620f.ngrok.io/bookdetail/'+id +'/getstate/', {
@@ -82,7 +85,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://1a063c3b068b.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://253541b1c0cd.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -100,7 +103,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://1a063c3b068b.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://253541b1c0cd.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -126,7 +129,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://1a063c3b068b.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://253541b1c0cd.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -185,19 +188,17 @@ const Bookview = (prop) => {
                       
                   />
  
-
+                    <Content style={{}}>
                   <Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
                     درباره کتاب :</Text>
-                  <Content style={{}}>
+                 
                     <Card style={{}}>
                     
                  
                     <Text style={{marginTop:hp('2%') , marginLeft:wp('2%') , 
                       textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
-                  </Content>
                 <Animated.View style={{
-                        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
                     }}>
                     <FlatList
                     style={{marginBottom:'17%'}}
@@ -207,20 +208,26 @@ const Bookview = (prop) => {
                     onEndReachedThreshold={0.5}
                     keyExtractor={(item)=>item.id}
                     data={information}                    
-                    renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
-                    date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dd0613066c67.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
-                  <Text style={styles.heartnumber}>{item.Likes}</Text>
-                  </>
-                  )}
-                    extraData={finfo}
+                    renderItem={({item})=>{
+                      return(
+                        <View>
+                        (<><QuoteCard  name={item.account.username} 
+                          date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></QuoteCard>
+                        <Text style={styles.heartnumber}>{item.Likes}</Text>
+                        </>
+                        )
+                        </View>
+                      )
+                    }}
                   >
                   </FlatList>
         </Animated.View>
+                </Content>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
-};
+}
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -236,6 +243,6 @@ const styles = StyleSheet.create({
         color:'gray'
     }
 });
-}
+
 
   export default Bookview;
