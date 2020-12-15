@@ -5,7 +5,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+from django.utils.timezone import now
+
 
 
 
@@ -80,6 +83,18 @@ class MyBook(models.Model):
         return self.state
 
 
+class MyQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    quote_text=models.TextField()
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
+    Likes = models.IntegerField(default=0)
+    
+
+class LikeQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    quote = models.ForeignKey(MyQuote,on_delete=models.CASCADE)
+
 
 class MyComment(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
@@ -108,3 +123,4 @@ class DislikeComment(models.Model):
 
     def __str__(self):
         return self.comment.comment_text
+

@@ -1,5 +1,7 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -16,11 +18,19 @@ from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import *
+from .pagination import PaginationHandlerMixin
+from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
-from rest_framework.parsers import JSONParser
 from .serializers import * 
+from rest_framework.parsers import JSONParser
+
+
+class BasicPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+
+
 
 @api_view(['POST','GET'])
 def registration_view(request):
@@ -185,6 +195,102 @@ class UserProfileView(APIView):
 
 
 
+class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
+    serializer_class=QuoteSerializer
+    pagination_class = BasicPagination
+
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return MyQuote.objects.filter(account=user)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = QuoteSerializer(queryset, many=True)
+        page = self.paginate_queryset(serializer.data)
+        print(page.count)
+        return self.get_paginated_response(page)
+
+    
+
+class QuoteView(APIView,PaginationHandlerMixin):
+
+    model = MyQuote
+    pagination_class = BasicPagination
+
+    def get_object(self, pk):
+        try:
+            return MyQuote.objects.get(pk=pk)
+        except MyQuote.DoesNotExist:
+          raise Http404
+          
+     def get(self,request,pk):
+        this_book=book.objects.get(id=pk)
+        if MyQuote.objects.filter(current_book=this_book).exists():
+            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
+            serilalizer = QuoteSerializer(quote_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Quote!',}
+        
+      def post(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        serializer = PostQuoteSerializer(data=request.data)
+        if serializer.is_valid():
+            quote_text = serializer.data.get("textquote")
+            new_quote = MyQuote(account=user,current_book=this_book,quote_text=quote_text)
+            new_quote.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'Quote Saved!!',
+                'data' : quote_text,
+            }
+            return Response(response)
+        return Response(serializer.errors,
+                        status=HTTP_404_NOT_FOUND)
+
+    def delete(self,request,pk):
+        current_quote = MyQuote.objects.get(id=pk)
+        current_user = request.user
+        quote_user = current_quote.account
+        if quote_user == current_user:
+            current_quote.delete()
+            return Response({'message':'Your Quote successfully delleted!'})
+        else:
+            return Response({'message':'You dont have permission to delete this quote!'})
+
+
+class LikeQuoteView(APIView):
+
+    def get(self, request, pk):
+        user=self.request.user
+        quote = MyQuote.objects.get(id=pk)
+        if LikeQuote.objects.filter(account=user,quote=quote).exists():
+            return Response({'message' : "True",})
+        return Response({'message' : "False",})
+
+
+    def post(self,request,pk):
+        user=self.request.user
+        quote = MyQuote.objects.get(id=pk)
+        if LikeQuote.objects.filter(account=user,quote=quote).exists():
+            userlike = LikeQuote.objects.filter(account=user,quote=quote)
+            userlike.delete()
+            quote.Likes-=1
+            quote.save()
+            return Response({'message':"unlike success!",
+                             'data':quote.Likes,})
+        else:
+            newlike = LikeQuote(account=user,quote=quote)
+            newlike.save()
+            quote.Likes+=1
+            quote.save()
+            return Response({'message':"like success!",
+                            'data':quote.Likes,})
+
+
+
 class CommentView(APIView):
 
     model = MyComment
@@ -337,27 +443,27 @@ class FilterCommentbyLike(APIView):
         response = {'message' : 'No Comment!',}
         return Response(response)
 
-# class FilterQuotebyTime(APIView):
+ class FilterQuotebyTime(APIView):
 
-#     def get(self,request,pk):
-#         bk=book.objects.get(id=pk)
-#         if MyQuote.objects.filter(current_book=bk).exists():
-#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
-#             serilalizer = QuoteSerializer(comment_list,many=True)
-#             return Response(serilalizer.data)
-#         response = {'message' : 'No Quote!',}
-#         return Response(response)
+     def get(self,request,pk):
+         bk=book.objects.get(id=pk)
+         if MyQuote.objects.filter(current_book=bk).exists():
+             quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
+             serilalizer = QuoteSerializer(comment_list,many=True)
+             return Response(serilalizer.data)
+         response = {'message' : 'No Quote!',}
+         return Response(response)
 
-# class FilterQuotebyLike(APIView):
+ class FilterQuotebyLike(APIView):
 
-#     def get(self,request,pk):
-#         bk=book.objects.get(id=pk)
-#         if MyQuote.objects.filter(current_book=bk).exists():
-#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
-#             serilalizer = QuoteSerializer(comment_list,many=True)
-#             return Response(serilalizer.data)
-#         response = {'message' : 'No Quote!',}
-#         return Response(response)
+     def get(self,request,pk):
+         bk=book.objects.get(id=pk)
+         if MyQuote.objects.filter(current_book=bk).exists():
+             quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
+             serilalizer = QuoteSerializer(comment_list,many=True)
+             return Response(serilalizer.data)
+         response = {'message' : 'No Quote!',}
+         return Response(response)
 
 
 
@@ -365,3 +471,4 @@ class FilterCommentbyLike(APIView):
 
 
     
+
