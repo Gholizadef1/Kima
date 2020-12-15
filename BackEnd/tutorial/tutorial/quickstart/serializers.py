@@ -62,6 +62,22 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['username','profile_photo','email','id']
 
+class RateByUserSerializer(serializers.Serializer):
+
+    rate = serializers.IntegerField(required=True,min_value=1,max_value=5)
+
+class BookrateSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Ratinguser
+        fields = fields = "__all__"
+
+
+
+    
+
 
 class PostQuoteSerializer(serializers.Serializer):
     

@@ -32,7 +32,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-
             name='MyComment',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -54,7 +53,6 @@ class Migration(migrations.Migration):
                 ('book1', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='kyma.book')),
             ],
         ),
-
         migrations.CreateModel(
             name='LikeComment',
             fields=[
@@ -66,5 +64,4 @@ class Migration(migrations.Migration):
                 ('comment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='quickstart.mycomment')),
             ],
         ),
-
     ]

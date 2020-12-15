@@ -15,11 +15,11 @@ from pathlib import Path
 from corsheaders.defaults import default_headers
 from . import quickstart
 import os
-import environ
+#import environ
 
-env = environ.Env()
+#env = environ.Env()
 # reading .env file
-environ.Env.read_env()
+#environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,6 +94,16 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+
+    #'default': {
+     #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      # 'NAME': 'hope', 
+      # 'USER': 'postgres', 
+     #  'PASSWORD': 'melika55540430',
+     # 'HOST': 'localhost', 
+     #  'PORT': '',
+  # }
+
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME': env("DATABASE_NAME"),
@@ -102,6 +112,7 @@ DATABASES = {
          'HOST': env("DATABASE_HOST"),
          'PORT': env("DATABASE_PORT"),
      }
+
 }
 
 

@@ -15,6 +15,7 @@ from rest_framework.status import (
 )
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import status
+from .serializers import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import *
@@ -193,6 +194,86 @@ class UserProfileView(APIView):
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
 
+
+class UserRatingview(APIView):
+
+    model = Ratinguser
+
+    def get_object(self, pk):
+        try:
+            return Ratinguser.objects.get(pk=pk)
+        except Ratinguser.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        if Ratinguser.objects.filter(account=user,current_book=this_book).exists():
+            wantedbookrate = get_object_or_404(Ratinguser.objects.all(),account=user,current_book=this_book)
+            response = {
+                'data' : wantedbookrate.userrate ,
+            }
+            return Response(response)
+        response = {'message' : 'No User Rating!',}
+        return Response(response)
+
+
+    def post(self,request,pk):
+
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        if Ratinguser.objects.filter(account=user,current_book=this_book).exists():
+            response = {
+                'status' : 'failure',
+                'code' : 'HTTP_400_BAD_REQUEST',
+                'message' : 'You rated this book already!!',
+                'data' : [],
+            }
+            return Response(response)
+
+        postrate = RateByUserSerializer(data=request.data)
+        if postrate.is_valid():
+            new_rating = Ratinguser(account=user,current_book=this_book,userrate=postrate.data.get("rate"))
+            new_rating.save()
+            response = {
+                'status' : 'success',
+                'code' : 'status.HTTP_200_OK',
+                'message' : 'BookRate is updated!',
+                'data' : postrate.data.get("rate"),
+            }
+            return Response(response)
+        return Response(postrate.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self,request,pk):
+        user=request.user
+        this_book=book.objects.get(id=pk)
+        wantedbookrate = get_object_or_404(Ratinguser.objects.all(),account=user,current_book=this_book)
+        postrate = RateByUserSerializer(data=request.data)
+        if postrate.is_valid():
+            newrate = postrate.data.get("rate")
+            wantedbookrate.userrate = newrate
+            wantedbookrate.save()
+            return Response(postrate.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'failed'},
+                        status=HTTP_404_NOT_FOUND)
+
+
+
+
+    
+
+class BookRateView(generics.ListAPIView):
+    serializer_class=BookrateSerializer
+
+    def get_queryset(self,pk):
+        this_book=book.objects.get(pk=pk)
+        return Ratinguser.objects.filter(current_book=this_book)
+
+
+    def list(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = BookrateSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
@@ -465,10 +546,4 @@ class FilterCommentbyLike(APIView):
          response = {'message' : 'No Quote!',}
          return Response(response)
 
-
-
-
-
-
-    
 

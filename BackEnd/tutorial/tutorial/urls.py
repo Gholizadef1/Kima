@@ -31,6 +31,8 @@ urlpatterns = [
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
+    path('api/bookrating/<int:pk>',UserRatingview.as_view()),
+    path('api/rateperbook/<int:pk>',BookRateView.as_view()),
     path('api/quotes/<int:pk>',QuoteView.as_view()),
     path('api/quotes/like/<int:pk>',LikeQuoteView.as_view()),
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
