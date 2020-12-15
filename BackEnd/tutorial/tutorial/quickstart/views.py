@@ -262,7 +262,7 @@ class QuoteView(APIView,PaginationHandlerMixin):
 class LikeQuoteView(APIView):
 
     def get(self, request, pk):
-        user=request.user
+        user=self.request.user
         quote = MyQuote.objects.get(id=pk)
         if LikeQuote.objects.filter(account=user,quote=quote).exists():
             return Response({'message' : "True",})
@@ -270,7 +270,7 @@ class LikeQuoteView(APIView):
 
 
     def post(self,request,pk):
-        user=request.user
+        user=self.request.user
         quote = MyQuote.objects.get(id=pk)
         if LikeQuote.objects.filter(account=user,quote=quote).exists():
             userlike = LikeQuote.objects.filter(account=user,quote=quote)
