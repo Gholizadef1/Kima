@@ -40,7 +40,7 @@ urlpatterns = [
     path('comment/<int:pk>/dislike',DislikeCommentView.as_view()),
     path('bookdetail/<int:pk>/comment',CommentView.as_view()),
     path('bookdetail/<int:pk>/comment-filter-time',FilterCommentbyTime.as_view()),
-    path('bookdetail/<int:pk>/getstate',get_bookstate,name="get_state"),
+    path('bookdetail/<int:pk>/getstate',BookState.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
