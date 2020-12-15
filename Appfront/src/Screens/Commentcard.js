@@ -50,7 +50,7 @@ const Commentcard = (prop) => {
             <View style={styles.avatarname}>
             <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>
-           {prop.picture==='http://e80ca9693f07.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+           {prop.picture==='http://7714cae02459.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
              source={require('../../assets/avatar.png')}
             style={styles.avatar}
