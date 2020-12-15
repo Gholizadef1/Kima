@@ -7,7 +7,9 @@ from . models import book
 from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
+from django.conf import settings
 from tutorial.quickstart.models import MyBook
+from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -94,6 +96,8 @@ class BookViewPage(APIView):
         if serializer.is_valid(raise_exception=True):
             newratingbook = serializer.save()
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
+
+
 
 
   
