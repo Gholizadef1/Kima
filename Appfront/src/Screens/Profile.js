@@ -47,8 +47,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
        setemail(response.data.email)
        console.log('*****')
        console.log(response.data.profile_photo)
-            console.log(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://7714cae02459.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://7714cae02459.ngrok.io${response.data.profile_photo}`)
             console.log(';;;;;')
             console.log(picture);
             console.log(picture)
@@ -152,7 +152,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          </View>
          
         
-        {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+        {picture==='http://7714cae02459.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}

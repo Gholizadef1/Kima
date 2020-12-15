@@ -488,7 +488,7 @@ useFocusEffect(
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-        const response=axiosinst.put('http://eb506fafbc32.ngrok.io/api/change-password/',backk,{
+        const response=axiosinst.put('http://7714cae02459.ngrok.io/api/change-password/',backk,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
