@@ -254,69 +254,66 @@ class CommentProfileView(APIView):
         return Response(response)
 
 class LikeCommentView(APIView):
-    model=LikeComment
-    parser_classes = [JSONParser]
 
     def post(self,request,pk):
         user=request.user
         comment = MyComment.objects.get(id=pk)
-        like=request.data.get("like")
-        dislike=request.data.get("dislike")
-        if (LikeComment.objects.filter(account=user,comment=comment).exists()):
-            userlike = LikeComment.objects.get(account=user,comment=comment)
-            print(like)
-            if (like==True)&(dislike==False):
-                if((userlike.like==True)&(userlike.dislike==False)):
-                    userlike.delete()
-                    comment.LikeCount-=1
-                    comment.save()
-                    response = {'message' : 'successfully unlike comment',}
-                elif(userlike.like==False)&(userlike.dislike==True):
-                    userlike.like=like
-                    userlike.dislike=dislike
-                    userlike.save()
-                    comment.LikeCount+=1
-                    comment.DislikeCount-=1
-                    comment.save()
-                    response = {'message' : 'change dislike to like',}
-            elif(like==False)&(dislike==True):
-                if(userlike.like==False)&(userlike.dislike==True):
-                    userlike.delete()
-                    comment.DislikeCount-=1
-                    comment.save()
-                    response = {'message' : 'successfully undislike comment',} 
-                elif(userlike.like==True)&(userlike.dislike==False):
-                    userlike.like=like
-                    userlike.dislike=dislike
-                    userlike.save()
-                    comment.LikeCount-=1
-                    comment.DislikeCount+=1
-                    comment.save()
-                    response = {'message' : 'change like to dislike',}
-
-            return Response(response)
+        if LikeComment.objects.filter(account=user,comment=comment).exists():
+            userlike=LikeComment.objects.get(account=user,comment=comment)
+            userlike.delete()
+            comment.LikeCount-=1
+            comment.save()
+            return Response({'message':"successfully unliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
         else:
-            newlike = LikeComment(account=user,comment=comment,like=request.data.get("like"),dislike=request.data.get("dislike"))
+            newlike = LikeComment(account=user,comment=comment)
+            
+            comment.LikeCount+=1
+            comment.save()
             newlike.save()
-            if newlike.like==True:
-                comment.LikeCount+=1
-                comment.save()
-                #response = {'message' : 'successfully liked!'}
-                return Response("success")
-            elif newlike.dislike==True:
-                comment.DislikeCount+=1
-                comment.save()
-                response = {'message' : 'successfully disliked!',}
-                return Response(response)
-            
-            
+            return Response({'message':"successfully liked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
 
     def get(self,request,pk):
+        user=self.request.user
         comment = MyComment.objects.get(id=pk)
-        if LikeComment.objects.filter(comment=comment).exists():
-            return Response({'LikeCount':comment.LikeCount ,'DislikeCount' : comment.DislikeCount})
+        if LikeComment.objects.filter(account=user,comment=comment).exists():
+            return Response({'message' : "True",})
+        return Response({'message' : "False",})
+        
+        
+
+class DislikeCommentView(APIView):
+
+    def post(self,request,pk):
+        user=request.user
+        comment = MyComment.objects.get(id=pk)
+        if (DislikeComment.objects.filter(account=user,comment=comment).exists()):
+            userlike=DislikeComment.objects.get(account=user,comment=comment)
+            userlike.delete()
+            comment.DislikeCount-=1
+            comment.save()
+            return Response({'message':"successfully undisliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
         else:
-            return Response({'LikeCount': 0 ,'DislikeCount' : 0})
+            newlike = DislikeComment(account=user,comment=comment)
+            
+            comment.DislikeCount+=1
+            comment.save()
+            newlike.save()
+            return Response({'message':"successfully disliked!",
+                             'LikeCount':comment.LikeCount,
+                             'DislikeCount':comment.DislikeCount})
+
+    def get(self,request,pk):
+        user=self.request.user
+        comment = MyComment.objects.get(id=pk)
+        if DislikeComment.objects.filter(account=user,comment=comment).exists():
+            return Response({'message' : "True",})
+        return Response({'message' : "False",})
 
 class FilterCommentbyTime(APIView):
 

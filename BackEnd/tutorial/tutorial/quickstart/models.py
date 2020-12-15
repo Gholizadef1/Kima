@@ -85,7 +85,7 @@ class MyComment(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
     comment_text=models.TextField()
-    sendtime = models.DateTimeField(auto_now_add=True)
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
     LikeCount=models.IntegerField(default=0)
     DislikeCount=models.IntegerField(default=0)
 
@@ -96,9 +96,15 @@ class MyComment(models.Model):
 class LikeComment(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
-    liketime = models.DateTimeField(auto_now_add=True)
-    like=models.BooleanField(default=False)
-    dislike=models.BooleanField(default=False)
+    liketime = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.comment.comment_text
+
+class DislikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    disliketime = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return self.comment.comment_text
