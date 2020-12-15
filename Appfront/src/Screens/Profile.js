@@ -21,6 +21,7 @@ import { StatusBar } from 'expo-status-bar';
 import axiosinst from '../api/axiosinst';
 import Profilenavigation from './Profilenavigation';
 import { useFocusEffect } from '@react-navigation/native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 
@@ -106,8 +107,8 @@ import { useFocusEffect } from '@react-navigation/native';
         React.useCallback((name,picture,email) => {
             response();
             //   console.log('Listenn')
-            alert('in')
-              return() => alert('lost')
+            // alert('in')
+            //   return() => alert('lost')
         },[])
        
         )
@@ -135,8 +136,9 @@ import { useFocusEffect } from '@react-navigation/native';
         <Text style={styles.kima}>کیما</Text>
         <Image
          source={require('../../assets/backprof3.jpeg')}
-         style={{marginTop:37,width:350,height:300,position:'absolute',alignSelf:'flex-end',borderBottomRightRadius:300,borderBottomLeftRadius:50}}
+         style={styles.backpic}
          ></Image>
+         {/* <View style={styles.view}> */}
         
         {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
@@ -144,37 +146,38 @@ import { useFocusEffect } from '@react-navigation/native';
         source={{uri:picture}}
         ></Avatar.Image>}
 
-        <Text style={{marginTop:200,marginLeft:42,color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
+        <Text style={{marginTop:hp('0%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
-        <Feather name="mail" size={20} color="#BFDBF7" style={{ position:'absolute', height:20, marginTop:347, left:10}} />
+        <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('45.5%'),
+        alignSelf:'flex-start',left:wp('3%')}} />
 
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
         >
-            <Text style={{marginLeft:54,color:'#1f7a8c',fontWeight:'bold'}}>ویرایش پروفایل</Text>
+            <Text style={{marginLeft:wp('12%'),color:'#1f7a8c',fontWeight:'bold'}}>ویرایش پروفایل</Text>
         </Button>
         <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:45}}
+         style={{marginTop:hp('59%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),left:wp('10%')}}
          ></Image>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:472,marginHorizontal:10,width:50,height:1,position:'absolute',marginLeft:310}}
+         style={{marginTop:hp('59%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
          ></Image>
-         <Text style={{fontSize:15,fontWeight:'bold',marginTop:30,marginLeft:20,color:"gray"}}>فعالیت ها</Text>
+         <Text style={{fontSize:15,fontWeight:'bold',marginTop:hp('5%'),alignSelf:'flex-start',left:wp('8%'),color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:600,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
+         style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
           <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:700,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
+         style={{marginTop:hp('14%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
            <Image
          source={require('../../assets/Line.png')}
-         style={{marginTop:800,width:80,height:2,position:'absolute',alignSelf:'flex-end'}}
+         style={{marginTop:hp('14%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
          
 
@@ -191,7 +194,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
           <Text style={{marginLeft:80}}>logout</Text>
       </Button> 
-
+      {/* </View> */}
     
     </ScrollView>
      
@@ -206,60 +209,85 @@ import { useFocusEffect } from '@react-navigation/native';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      
+   
       backgroundColor: '#fff',
+      width:wp('100%'),
+    //   borderTopStartRadius:100
+      
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
+    // view:{
+    //     backgroundColor:'#ffff',
+    //     marginTop:hp('28%'),
+        
+    // },
     kima:{
         color:'#1F7A8C',
-        marginTop:50,
-        marginLeft:20,
+        marginTop:hp('7%'),
+        marginLeft:wp('5%'),
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        position:'absolute'
+       
         
         
     },
     logout:{
         
-        marginTop:800,
+        marginTop:hp('40%'),
         marginBottom:30,
         width:210,
         backgroundColor:'#E1E5F2',
         borderColor:'#BFDBF7',
-        marginLeft:98,
+        // marginLeft:98,
+        alignSelf:'center',
         height:43,
         // fontSize:20
         
     },
     info:{
-        marginLeft:45,
-        marginTop:45,
+        marginLeft:wp('10%'),
+        marginTop:hp('3%'),
         color:"#1F7A8C"
     },
+
     donoghte:{
-        color:"black",marginLeft:100,position:'absolute'
+        color:"black",
+        marginLeft:wp('1%'),
+        position:'absolute'
     },
+
     Icon:{
-        position:'absolute',
-    
-      
-        marginTop:280,
-        left:10
+
+         position:'absolute',
+        marginTop:hp('39.5%'),
+        alignSelf:'flex-start',left:wp('3%')
     },
     avatar:{
         position:'absolute',
-        marginTop:180,
-        marginLeft:240,
+        marginTop:hp('28%'),
+        alignSelf:'center'
         
     },
     edit:{
         height:45,
         width:200,
         backgroundColor:'#EDF2F4',
-        borderRadius:17,
+        borderRadius:20,
         marginLeft:105,
-        marginTop:80
+        marginTop:hp('8%')
+    },
+    backpic:{
+       
+        width:wp('80%'),
+        alignSelf:'flex-end',
+        height:hp('40%'),
+       
+        
+         
+        borderBottomRightRadius:300,
+        borderBottomLeftRadius:50
     }
   });
   export default Profile;

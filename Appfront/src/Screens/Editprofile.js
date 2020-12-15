@@ -87,8 +87,8 @@ useFocusEffect(
   React.useCallback((picture) => {
       photoresponse();
       //   console.log('Listenn')
-      alert('in')
-        return() => alert('lost')
+      // alert('in')
+      //   return() => alert('lost')
   },[])
  
   )
