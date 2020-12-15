@@ -270,13 +270,13 @@ const Quote = (prop) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 <Text style={styles.heartnumber}>{item.Likes}</Text>
 
 </>
     )}
-      extraData={finfo}
+      extraData={response}
     >
     </FlatList>
            </Animated.View>
