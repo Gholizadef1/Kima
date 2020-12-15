@@ -60,7 +60,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['username','profile_photo','email']
+        fields = ['username','profile_photo','email','id']
 
 class PostCommentSerializer(serializers.Serializer):
     
@@ -69,6 +69,7 @@ class PostCommentSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
     
     class Meta:
         model = MyComment
