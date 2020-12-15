@@ -24,8 +24,26 @@ const commentschema=yup.object({
   // .test('line',"متن نوشته شده برای اشتراک طولانی تر از حد مجاز است",(val=>(val.toString().split().length<=500)))
 })
 
+
 const Quote = (prop) => {
 
+const callbackFunction = async(childData) => {
+  if(childData===true){
+    // await setrefresh(childData)
+    console.log('TRUE')
+    await response(1)
+    // if(finfo===true)
+    // await setfinfo(false);
+    // else
+    // await setfinfo(true);
+  }
+  // console.log(refresh)
+  //  await setrefresh(childData)
+  //  console.log(yup.refresh)
+  //  if(refresh===true)
+  //  await response(1);
+}
+  
   const getlike=async(item)=>{
     axiosinst.get('http://1c53ec0001dc.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
@@ -56,7 +74,7 @@ const Quote = (prop) => {
   const [information,setinformation]=useState([]);
   const[IDD,setIDD]=useState('');
   const [delet,setdelet]=useState(false)
-  const[finfo,setfinfo]=useState(0)
+  const[finfo,setfinfo]=useState(true)
   const [refresh,setrefresh]=useState(false);
   const [forrefresh,setforrefresh]=useState(false);
   const equal=async(item)=>{
@@ -270,13 +288,13 @@ const Quote = (prop) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 <Text style={styles.heartnumber}>{item.Likes}</Text>
 
 </>
     )}
-      extraData={response}
+      // extraData={finfo}
     >
     </FlatList>
            </Animated.View>

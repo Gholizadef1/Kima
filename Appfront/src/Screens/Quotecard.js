@@ -67,6 +67,8 @@ const Quotecard = (prop) => {
                       .then(async function (response) {
                         console.log(response);
                         prop.INFO(prop.quoteid);
+                        await(prop.DELETE(true))
+                     
 
                       })
                       .catch(function (error) {
