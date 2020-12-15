@@ -8,7 +8,9 @@ from . models import book
 from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
+from django.conf import settings
 from tutorial.quickstart.models import MyBook
+from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -97,17 +99,25 @@ class BookViewPage(APIView):
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
 
-@api_view(["GET"])
-@permission_classes([AllowAny],)
-@permission_classes([IsAuthenticated])
-def get_bookstate(request,pk):
-    user=request.user
-    bk=book.objects.get(pk=pk)
+
+
+
+class BookState(APIView):
     
-    if((MyBook.objects.get(account=user,book1=bk))==None):
-        return Response({'book_state': 'none'})
-    else:
-        my_bk=MyBook.objects.get(account=user,book1=bk)
-        return Response({'book_state': my_bk.state})
+    def get(self, request, pk, format=None):
+        user=request.user
+        bk=book.objects.get(pk=pk)
+        bookcheck=self.checkbook(user,bk)
+        if(bookcheck==None):
+            return Response({'book_state': 'none'})
+        else:
+            return Response({'book_state': bookcheck.state})
+
+    def checkbook(self,user,book2):
+        try:
+            return MyBook.objects.get(account=user,book1=book2)
+        except MyBook.DoesNotExist:
+            return None
+
 
   
