@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-=======
->>>>>>> Feature/Activity-webfront
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -11,12 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "./Tabs.css";
-<<<<<<< HEAD
-import Scroll from "../Components/Scroll";
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-=======
 import RenderRowquote from"./renderRowQuote";
 import RenderRowcomment from "./renderRowComment";
 import Scroll from "../Components/Scroll";
@@ -27,7 +17,6 @@ import React, { useState, useEffect } from "react";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
  
->>>>>>> Feature/Activity-webfront
   return (
     <div
       role="tabpanel"
@@ -72,9 +61,6 @@ export default function FullWidthTabs() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-<<<<<<< HEAD
-
-=======
   const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
@@ -85,7 +71,6 @@ export default function FullWidthTabs() {
   }));
  
     const classes = useStyles();
->>>>>>> Feature/Activity-webfront
   return (
     <div className="root">
       <AppBar position="static" color="default">
@@ -108,12 +93,6 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-<<<<<<< HEAD
-          
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
-=======
           <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
           {RenderRowquote}
       </FixedSizeList>
@@ -122,7 +101,6 @@ export default function FullWidthTabs() {
       <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
       {RenderRowcomment}
       </FixedSizeList>
->>>>>>> Feature/Activity-webfront
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         <Scroll/>
