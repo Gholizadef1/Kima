@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator,Keyboard} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Quotecrad from './Quotecard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -173,7 +173,10 @@ const callbackFunction = async(childData) => {
                }})
               .then(async function(response){
                   console.log(response);
-                  await bs.current.snapTo(1)
+                  // await bs.current.snapTo(1)
+
+                  // await Keyboard.dismiss();
+                 
                    setclose(true);
                    actions.resetForm();
                    
