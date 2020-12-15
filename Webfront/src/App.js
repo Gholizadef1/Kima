@@ -74,7 +74,7 @@ function App(props) {
               </Route>
             
             <Route path="/book/:bookId">
-              <NavBar/>
+              <HelpingNavBook/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="*">

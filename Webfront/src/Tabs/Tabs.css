@@ -2,6 +2,14 @@
     height: 600px;
     background-color: white;
     position: fixed;
+<<<<<<< HEAD
+=======
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+>>>>>>> Feature/Activity-webfront
     
 }
 @media (min-width :360px) 
