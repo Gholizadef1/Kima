@@ -205,6 +205,7 @@ class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
         page = self.paginate_queryset(serializer.data)
+        print(page.count)
         return self.get_paginated_response(page)
 
     
