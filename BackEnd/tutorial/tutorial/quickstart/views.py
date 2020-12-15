@@ -342,10 +342,10 @@ class FilterCommentbyLike(APIView):
 #     def get(self,request,pk):
 #         bk=book.objects.get(id=pk)
 #         if MyQuote.objects.filter(current_book=bk).exists():
-#             comment_list = MyComment.objects.filter(current_book=bk).order_by('sendtime')
-#             serilalizer = CommentSerializer(comment_list,many=True)
+#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
+#             serilalizer = QuoteSerializer(comment_list,many=True)
 #             return Response(serilalizer.data)
-#         response = {'message' : 'No Comment!',}
+#         response = {'message' : 'No Quote!',}
 #         return Response(response)
 
 # class FilterQuotebyLike(APIView):
@@ -353,10 +353,10 @@ class FilterCommentbyLike(APIView):
 #     def get(self,request,pk):
 #         bk=book.objects.get(id=pk)
 #         if MyQuote.objects.filter(current_book=bk).exists():
-#             comment_list = MyComment.objects.filter(current_book=bk).order_by('LikeCount')
-#             serilalizer = CommentSerializer(comment_list,many=True)
+#             quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
+#             serilalizer = QuoteSerializer(comment_list,many=True)
 #             return Response(serilalizer.data)
-#         response = {'message' : 'No Comment!',}
+#         response = {'message' : 'No Quote!',}
 #         return Response(response)
 
 
