@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     edit:{
         height:45,
         width:200,
-        backgroundColor:'lightgray',
+        backgroundColor:'#EDF2F4',
         borderRadius:17,
         marginLeft:105,
         marginTop:80
