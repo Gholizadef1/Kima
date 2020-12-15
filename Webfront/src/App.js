@@ -11,8 +11,9 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
+import HelpingNavBook from "./Components/HelpingNavBook";
 import Scroll from "./Components/Scroll";
-
+import Tabs from "./Tabs/Tabs";
 import LoginForm from './components/loginForm/loginForm';
 import AlertComponent from './components/alertComponent/alertComponent.js';  
 import Avatar from "./Components/Avatar";
@@ -69,10 +70,11 @@ function App(props) {
             <Route path="/profile">
               <HelpingNavbar/>
               <Profile/>
+              
               </Route>
             
             <Route path="/book/:bookId">
-              <NavBar/>
+              <HelpingNavBook/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="*">

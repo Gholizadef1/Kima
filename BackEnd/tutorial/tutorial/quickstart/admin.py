@@ -4,3 +4,6 @@ from.models import *
 admin.site.register(Account)
 admin.site.register(MyBook)
 admin.site.register(MyQuote)
+admin.site.register(MyComment)
+admin.site.register(LikeComment)
+
