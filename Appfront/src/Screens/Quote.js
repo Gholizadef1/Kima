@@ -84,6 +84,7 @@ const callbackFunction = async(childData) => {
   }
 
   const response=async (page)=>{
+    //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
     await setpage(page)
     if(page===1){
       console.log('PAGE 111')
@@ -155,7 +156,7 @@ const callbackFunction = async(childData) => {
                 initialValues={{comment:''}}
                 validationSchema={commentschema}
                 onSubmit={async(values,actions)=>{
-                 actions.resetForm();
+              
                   console.log('sumbit')
                 const back={
                  textquote:values.comment,
@@ -172,7 +173,10 @@ const callbackFunction = async(childData) => {
                }})
               .then(async function(response){
                   console.log(response);
+                  await bs.current.snapTo(1)
                    setclose(true);
+                   actions.resetForm();
+                   
                 })
               .catch(function(error){
               console.log(error);
@@ -256,7 +260,10 @@ const callbackFunction = async(childData) => {
       enabledContentTapInteraction={false}
       onCloseEnd={()=>{
         setshowbutton(true) 
-        response(1);
+        response(1)
+        // if(theend===true)
+       
+        // response(page-1)
       }}
       renderContent={renderInner}
       renderHeader={renderHeader}            
