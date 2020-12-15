@@ -21,6 +21,8 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useFocusEffect } from '@react-navigation/native';
 import { EvilIcons } from '@expo/vector-icons';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 
@@ -265,21 +267,18 @@ useFocusEffect(
       return(
     
       
-        <View style={{backgroundColor:'white',flex:1
-        }}
-        
-        >
-        <View style={{}}>
-            <View style={{}}>
+        <View style={styles.header}>
+        <View style={styles.panelHeader}>
+          <View style={styles.panelHandle} >
             {/* <Image
          source={require('../../assets/line3.png')}
          style={{width:300,height:3}}
          ></Image> */}
             <Image
          source={require('../../assets/line3.png')}
-         style={{width:100,height:5,marginLeft:155}}
+         style={{width:wp('25%'),height:hp('0.8%'),alignSelf:'center'}}
          ></Image>
-            <Text style={{marginLeft:150,width:100,fontWeight:'bold',color:'#1F7A8C',marginTop:15,fontSize:16 }}>انتخاب عکس</Text>
+            <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1F7A8C',marginTop:hp('1.8%'),fontSize:hp('2%') }}>انتخاب عکس</Text>
             </View>
         </View>
 
@@ -290,31 +289,31 @@ useFocusEffect(
      const renderInner=()=>{
       return(
         // console.log('inner');
-      <View style={{backgroundColor:'gray'}}>
+      <View style={{backgroundColor:'#EDF2F4'}}>
 
          <Image
          source={require('../../assets/bottomsheet.jpeg')}
-         style={{width:420,height:300,position:'absolute'}}
+         style={{width:wp('100%'),height:hp('38%'),position:'absolute'}}
          ></Image>
 
          <Button
          bordered rounded style={styles.button}
         
         onPress={async()=>await pickfromcamera()}
-        style={{marginLeft:86,marginTop:50,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+        style={{alignSelf:'center',marginTop:hp('4.5%'),borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
-         <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:84}
+         <Text style={{color:'white', fontSize:hp('1.8%'),fontWeight:'bold', alignItems:'center',marginHorizontal:wp('20.5%')}
          }>گرفتن عکس</Text>
         </Button>
 
         <Button
          bordered rounded style={styles.button}
         onPress={async()=>await pickfromgallery()}
-        style={{marginLeft:86,marginTop:30,borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+        style={{alignSelf:'center',marginTop:hp('3%'),borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
         >
 
-         <Text style={{color:'white', fontSize:15,fontWeight:'bold', alignItems:'center',marginHorizontal:72}
+         <Text style={{color:'white', fontSize:hp('1.8%'),fontWeight:'bold', alignItems:'center',marginHorizontal:wp('17.7%')}
          }>انتخاب از گالری</Text>
         </Button>
       
@@ -332,7 +331,7 @@ useFocusEffect(
         <View style={styles.container}>
       
         <BottomSheet
-             snapPoints={[380, 0, 0]}
+             snapPoints={[hp('46.5%'), 0, 0]}
             ref={bs}
             initialSnap={1}
             callbackNode={fall}
@@ -348,13 +347,13 @@ useFocusEffect(
         opacity: Animated.add(0.4, Animated.multiply(fall, 1.0)),
     }}>
         
-        <View style={{position:'absolute',height:150,width:150,marginTop:30,alignSelf:"center",borderRadius:100}}>
+        <View style={{position:'absolute',height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
       {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
         source={require('../../assets/avatar.png')}
-        style={{height:150,width:150,borderRadius:100}}
+        style={{height:hp('20%'),width:wp('30%'),borderRadius:100}}
         
         >
 
@@ -438,7 +437,7 @@ useFocusEffect(
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:215,marginHorizontal:40}}>
+     <View style={{ marginTop:hp('25.5%'),marginHorizontal:wp('10%')}}>
 
      <Item style={styles.input}>
 
@@ -448,12 +447,12 @@ useFocusEffect(
          value={props.values.Username}
          placeholder={name} placeholderTextColor='gray' style={{}}>
          </Input>
-         <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
+         <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
         
        </Item>
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
+       <Text style={{fontSize:hp('1.5%'), color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
       
-       <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
+       <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
        
     
           
@@ -461,7 +460,7 @@ useFocusEffect(
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
         </Button>
       
      </View>
@@ -545,7 +544,7 @@ useFocusEffect(
          value={props.values.Password}
          placeholder="رمز خود را وارد کنید  ..." placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
+         <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
        
         
        </Item>
@@ -559,7 +558,7 @@ useFocusEffect(
          onBlur={props.handleBlur('newPassword')}
          placeholder="رمز جدید خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="lock" size={24} color="#BFDBF7"  style={styles.Icon}/>
+         <AntDesign name="lock" size={hp('2.8%')} color="#BFDBF7"  style={styles.Icon}/>
        </Item>
 
     
@@ -576,7 +575,7 @@ useFocusEffect(
           onBlur={props.handleBlur('repeatnewPassword')}
           placeholder="رمز جدید خود را تکرار کنید" placeholderTextColor='lightgray'>
          </Input>
-         <Feather name="check" size={24} color="#BFDBF7" style={styles.Icon} />
+         <Feather name="check" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
        <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
@@ -587,17 +586,24 @@ useFocusEffect(
   
 
       
-       <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
+       <View style={{flexDirection:'row',width:wp('98%')}}>
        
        
        
     
           
    
-     <Button bordered rounded style={styles.button}
+     <Button bordered rounded style={{ position:'absolute',
+        marginTop:hp('3.5%'),
+       
+        width:wp('41%'),
+        backgroundColor:'#1f7a8c',
+        borderColor:'#BFDBF7',
+        marginLeft:wp('29.5%'),
+        borderRadius:17}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:15,fontWeight:'bold', marginHorizontal:60,marginLeft:70}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
         </Button>
       
      </View>
@@ -660,7 +666,7 @@ const styles = StyleSheet.create({
     },
     info:{
         marginRight:45,
-        marginTop:45,
+        marginTop:hp('5%'),
         color:"#1F7A8C"
     },
     donoghte:{
@@ -675,13 +681,13 @@ const styles = StyleSheet.create({
     },
     avatar:{
         position:'absolute',
-        marginTop:190,
+        marginTop:hp('10%'),
         marginLeft:50,
     
         
     },
     edit:{
-        height:50,
+        height:hp('5%'),
         width:200,
         backgroundColor:'#E1E5F2',
         borderRadius:25,
@@ -691,22 +697,38 @@ const styles = StyleSheet.create({
     },
     button:{
         position:'absolute',
-        marginTop:30,
-        marginLeft:10,
-        width:170,
+        marginTop:hp('3.5%'),
+        marginLeft:wp('20%'),
+        width:wp('41%'),
         backgroundColor:'#1f7a8c',
         borderColor:'#BFDBF7',
-        marginLeft:112,
+        marginLeft:wp('18%'),
         borderRadius:17
         
       },
       Input:{
-        fontSize:15,
+        fontSize:hp('1.8%'),
         fontStyle:'normal',
-        marginLeft:20
+        marginLeft:wp('1%')
         
         
       },
+      header: {
+        backgroundColor: 'white',
+        shadowColor: 'black',
+        shadowOffset: {width: -1, height: -3},
+        shadowRadius: 20,
+        shadowOpacity: 0.5,
+        // elevation: 5,
+        paddingTop: 20,
+        borderTopLeftRadius: 20,
+        borderTopColor:'black',
+        borderTopRightRadius: 20,
+      },
+      panelHeader: {
+        borderTopColor:'black',
+    
+      },  
 //         input:{
 //      marginTop:5,
 //      marginLeft:5,

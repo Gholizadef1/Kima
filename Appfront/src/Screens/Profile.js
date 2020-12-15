@@ -143,7 +143,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         
        }}
          ></Image>
-         <View style={{position:'absolute',backgroundColor:'white',height:100,width:wp('100%'),marginTop:hp('30%'),borderTopStartRadius:50,borderTopEndRadius:50}}>
+         <View style={{position:'absolute',backgroundColor:'white',height:100,width:wp('100%'),marginTop:hp('30%'),borderTopStartRadius:30,borderTopEndRadius:30}}>
 
          </View>
          {/* <View style={styles.view}> */}
