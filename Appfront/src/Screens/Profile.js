@@ -135,10 +135,22 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
         <Text style={styles.kima}>کیما</Text>
         <Image
-         source={require('../../assets/backprof3.jpeg')}
-         style={styles.backpic}
+         source={require('../../assets/backprof4.jpeg')}
+         style={{   width:wp('100%'),
+        height:hp('35%'),
+        position:'absolute',
+        
+        
+       }}
          ></Image>
+         <View style={{position:'absolute',backgroundColor:'white',height:100,width:wp('100%'),marginTop:hp('30%'),borderTopStartRadius:50,borderTopEndRadius:50}}>
+
+         </View>
          {/* <View style={styles.view}> */}
+         <View style={styles.backpic}>
+
+         </View>
+         
         
         {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
@@ -146,11 +158,11 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         source={{uri:picture}}
         ></Avatar.Image>}
 
-        <Text style={{marginTop:hp('0%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
+        <Text style={{marginTop:hp('6%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
-        <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('45.5%'),
+        <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('43.5%'),
         alignSelf:'flex-start',left:wp('3%')}} />
 
         <Button style={styles.edit}
@@ -160,13 +172,13 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         </Button>
         <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:hp('59%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),left:wp('10%')}}
+         style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),left:wp('10%')}}
          ></Image>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:hp('59%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
+         style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
          ></Image>
-         <Text style={{fontSize:15,fontWeight:'bold',marginTop:hp('5%'),alignSelf:'flex-start',left:wp('8%'),color:"gray"}}>فعالیت ها</Text>
+         <Text style={{fontSize:15,fontWeight:'bold',marginTop:hp('10%'),alignSelf:'flex-start',left:wp('10%'),color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}
@@ -224,7 +236,7 @@ const styles = StyleSheet.create({
     // },
     kima:{
         color:'#1F7A8C',
-        marginTop:hp('7%'),
+        marginTop:hp('8%'),
         marginLeft:wp('5%'),
         fontSize:20,
         fontWeight:'bold',
@@ -261,12 +273,12 @@ const styles = StyleSheet.create({
     Icon:{
 
          position:'absolute',
-        marginTop:hp('39.5%'),
+        marginTop:hp('37.5%'),
         alignSelf:'flex-start',left:wp('3%')
     },
     avatar:{
         position:'absolute',
-        marginTop:hp('28%'),
+        marginTop:hp('25%'),
         alignSelf:'center'
         
     },
@@ -280,13 +292,12 @@ const styles = StyleSheet.create({
     },
     backpic:{
        
-        width:wp('80%'),
-        alignSelf:'flex-end',
-        height:hp('40%'),
+        width:wp('100%'),
+        height:hp('32%'),
        
         
          
-        borderBottomRightRadius:300,
+        borderBottomRightRadius:50,
         borderBottomLeftRadius:50
     }
   });
