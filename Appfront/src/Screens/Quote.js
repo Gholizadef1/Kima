@@ -27,7 +27,7 @@ const commentschema=yup.object({
 const Quote = (prop) => {
 
   const getlike=async(item)=>{
-    axiosinst.get('http://c0658d1a4d49.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://1c53ec0001dc.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -270,7 +270,7 @@ const Quote = (prop) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://c0658d1a4d49.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 <Text style={styles.heartnumber}>{item.Likes}</Text>
 
