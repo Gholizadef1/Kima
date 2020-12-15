@@ -353,14 +353,14 @@ useFocusEffect(
       {picture==='http://7714cae02459.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
         source={require('../../assets/avatar.png')}
-        style={{height:hp('20%'),width:wp('40%'),borderRadius:100}}
+        style={{height:hp('20%'),width:wp('30%'),borderRadius:100}}
         
         >
 
         </ImageBackground>:<ImageBackground borderRadius={100}
       
       source={{uri:picture}}
-      style={{height:150,width:150,borderRadius:100}}
+      style={{height:hp('18.2%'),width:wp('36.7%'),borderRadius:100}}
       
       >
 
