@@ -46,7 +46,6 @@ const CommentCard = (prop) => {
         }}
       /> */}
       <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}>
-        <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground>
             <View style={styles.avatarname}>
             <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>

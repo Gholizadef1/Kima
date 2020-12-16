@@ -8,6 +8,7 @@ import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import BottomSheet from 'reanimated-bottom-sheet';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
 import Animated, { set } from 'react-native-reanimated';
@@ -31,11 +32,24 @@ const Bookview = (prop) => {
     setIDD(await AsyncStorage.getItem('id').toString());
   }  
   const response=async ()=>{
+    const getResult = async (id) => {
+      const response = await axiosinst.get('/bookdetail/'+id);
+      setResult(response.data);
+      console.log('checkk'+ response.data)
+      };
+      useEffect(() =>{
+        getResult(id);
+      }, []);
+    
+      if (!result) {
+        return null;
+      }
+    }
     setloading(true);
     console.log('DOVOM')
      const id=prop.route.params.id
+     console.log('id**************' +id);
      console.log(id) 
-     console.log(page)
      try{
     setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('api/quotes/'+id
@@ -64,39 +78,26 @@ const Bookview = (prop) => {
      console.log(err);
    
   }
-}
-   
-   console.log('Say something')
-  const getResult = async (id) => {
-  const response = await axiosinst.get('/bookdetail/'+id);
-  setResult(response.data);
-  console.log('checkk'+ response.data)
+}   
+
+
+
+  const getPicker = async () => {
+    axios.get('http://d6c2c14e372f.ngrok.io/bookdetail/'+id +'/getstate', {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('Pickerr'+response.data.book_state)
+      setSelectedValue(response.data.book_state)   
+  })
+  .catch(function(error){
+      console.log(error)
+  })
   };
-  useEffect(() =>{
-    getResult(id);
-  }, []);
-
-  if (!result) {
-    return null;
-  }
-}
-
-  // const getPicker = async () => {
-  //   axios.get('http://70ad80b7620f.ngrok.io/bookdetail/'+id +'/getstate/', {
-  //     "headers": {
-  //       "content-type": "application/json",
-  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-  //     }
-  //   })
-  //   .then(function(response){
-  //     console.log('Pickerr'+response.data.book_state)
-  //     setSelectedValue(response.data.book_state)   
-  // })
-  // .catch(function(error){
-  //     console.log(error)
-  // })
-  // };
-  // getPicker();
+  getPicker();
 
   const PostPicker = async (value) => {
         if (value != "") {
@@ -104,7 +105,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://253541b1c0cd.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://d6c2c14e372f.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -112,7 +113,7 @@ const Bookview = (prop) => {
           })
             .then(async function (response) {
               console.log(response.data)
-//              getPicker();
+              getPicker();
             })
             .catch(function (error) {
               console.log(error);
@@ -122,7 +123,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://253541b1c0cd.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://d6c2c14e372f.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -148,7 +149,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://253541b1c0cd.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://d6c2c14e372f.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -267,7 +268,22 @@ const Bookview = (prop) => {
                   </FlatList>
                 </Animated.View>
 
-
+                {/* <View>
+                <BottomSheet style={{position:''}}
+                  snapPoints={['40%', 0, 0]}
+                ref={bs}
+                initialSnap={1}
+                callbackNode={fall}
+                enabledGestureInteraction={true}
+                enabledContentTapInteraction={false}
+                onCloseEnd={()=>{
+                  setshowbutton(true)
+                  response()
+                  
+                  }}
+                backgroundColor={'#edf2f4'}
+                />
+                </View> */}
                 </Content>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
