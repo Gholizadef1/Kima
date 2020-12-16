@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -8,10 +7,16 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import "./Tabs.css";
+import RenderRowquote from"./renderRowQuote";
+import RenderRowcomment from "./renderRowComment";
 import Scroll from "../Components/Scroll";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { FixedSizeList } from 'react-window';
+import React, { useState, useEffect } from "react";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ 
   return (
     <div
       role="tabpanel"
@@ -56,7 +61,16 @@ export default function FullWidthTabs() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      height: 400,
+      maxWidth: 300,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }));
+ 
+    const classes = useStyles();
   return (
     <div className="root">
       <AppBar position="static" color="default">
@@ -79,10 +93,14 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          
+          <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
+          {RenderRowquote}
+      </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+      <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
+      {RenderRowcomment}
+      </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         <Scroll/>

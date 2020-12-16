@@ -20,18 +20,28 @@ background-color: #9dc3e9;
     
 } */
 .rounded-circle{
-   margin-top: -10px;
+   
    margin-bottom: 15px;
    margin-left: 10px;
-}
-.profile{
-    margin-top: 3.5rem;
+
+    margin-top: 2rem;
     margin-right: 3rem;
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
 }
 
 .cardp{
    left: 63rem;
+   border:2px solid #fff;
+   box-shadow: 10px 10px 5px #ccc;
+   -moz-box-shadow: 10px 10px 5px #ccc;
+   -webkit-box-shadow: 10px 10px 5px #ccc;
+   -khtml-box-shadow: 10px 10px 5px #ccc;
 }
+
 .Tab{
     margin-left: 100px;
     margin-top: -21rem;
