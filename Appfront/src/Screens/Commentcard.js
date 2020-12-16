@@ -11,6 +11,29 @@ import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Commentcard = (prop) => {
+
+    const getdislike=async()=>{
+      const back2={  }
+      const backk2=JSON.stringify(back2);
+      axiosinst.get('comment/' + prop.commentid+'/dislike',backk2, {
+        "headers":
+           {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+      })
+        .then(async function (response) {
+          setnumlike(response.data.LikeCount)
+          console.log(response);
+          setdislike('lightblue')
+
+        })
+        .catch(function (error) {
+          console.log(error);
+          console.log('like error ||||||||||||')
+
+        })
+    }
      const[more,setmore]=useState(false);
     const[showmore,setshowmore]=useState('بیشتر...');
     const[numlike,setnumlike]=useState(prop.likenumber);
@@ -128,6 +151,7 @@ const Commentcard = (prop) => {
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={async () => {
                if(dislike==='#1f7a8c'){
+                const back2={  }
               const backk2=JSON.stringify(back2);
               axiosinst.post('comment/' + prop.commentid+'/dislike',backk2, {
             "headers":
