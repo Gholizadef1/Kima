@@ -9,10 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+//import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+//import ListItemText from '@material-ui/core/ListItemText';
+//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
@@ -102,6 +102,7 @@ export default function FullWidthTabs(props) {
 
 //for quote
   useEffect(()=>{
+    setEndQuote("");
     console.log(props.book)
     console.log(quotesPage);
     axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
@@ -114,7 +115,7 @@ export default function FullWidthTabs(props) {
     .catch(error=>{
       console.log(error);
       //setMassage("نقل قول دیگری وجود ندارد");
-      setEndQuote("نقل قول دیگری وجود ندارد")
+      setEndQuote("نقل قول دیگری وجود ندارد");
     });
   },[props.book,quoteAgain,quotesPage]);
 
@@ -128,15 +129,15 @@ export default function FullWidthTabs(props) {
   const handleChangeComment = (e) => {
     const {value} = e.target   
     setUserComment(value);
-    console.log(e);
-    console.log(userComment);
+    //console.log(e);
+    //console.log(userComment);
   }
 
   const handleChangeQuote = (e) => {
     const { value} = e.target   
     setUserQuote( value)
-    console.log(e);
-    console.log(userQuote);
+    //console.log(e);
+    //console.log(userQuote);
   }
 
   const handleSubmitCommentClick = (e) => {
@@ -159,7 +160,7 @@ export default function FullWidthTabs(props) {
       })
       .then(response=>{
         console.log(response);
-        if(response.data.status=="success"){
+        if(response.data.status==="success"){
           setOpenSnack(true);
           setMassage("نظر شما با موفقیت ثبت شد")
           setUserComment("");
@@ -191,7 +192,7 @@ export default function FullWidthTabs(props) {
     })
     .then(response=>{
       console.log(response);
-      if(response.data.status=="success"){
+      if(response.data.status==="success"){
         setOpenSnack(true);
         setMassage("نقل قول شما با موفقیت ثبت شد")
         setUserQuote("");
@@ -207,7 +208,6 @@ export default function FullWidthTabs(props) {
    }
 }
 
-
   const handleDeleteQuote = (id) => {
     axios.delete('http://127.0.0.1:8000/api/quotes/'+id,
     {
@@ -219,6 +219,23 @@ export default function FullWidthTabs(props) {
     .then(response=>{
       console.log(response);
       setquoteAgain(quoteAgain+1);
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+  }
+
+  const handleDeleteComment = (id) => {
+    axios.delete("http://127.0.0.1:8000/comment/"+id+'/delete',
+    {
+      headers:{
+     "Content-Type":"application/json",
+    "Authorization":"Token "+Cookies.get("userToken")}
+     }
+    )
+    .then(response=>{
+      console.log(response);
+      setcommentAgain(commentAgain+1);
     })
     .catch(error=>{
       console.log(error);
@@ -240,7 +257,7 @@ export default function FullWidthTabs(props) {
       .then(response=>{
         console.log(response);
         setOpenSnack(true);
-        if(response.data.message=="successfully liked!"){
+        if(response.data.message==="successfully liked!"){
           setMassage("لایک نظر شما با موفقیت ثبت شد");
         }else setMassage("لایک نظر شما با موفقیت برداشته شد");
           setcommentAgain(commentAgain+1);
@@ -264,7 +281,7 @@ export default function FullWidthTabs(props) {
       .then(response=>{
         console.log(response);
         setOpenSnack(true);
-        if(response.data.message=="successfully disliked!"){
+        if(response.data.message==="successfully disliked!"){
           setMassage("دیسلایک نظر شما با موفقیت ثبت شد");
         }else setMassage("دیسلایک نظر شما با موفقیت برداشته شد");
           setcommentAgain(commentAgain+1);
@@ -292,7 +309,7 @@ export default function FullWidthTabs(props) {
     .then(response=>{
       console.log(response);
       setOpenSnack(true);
-      if(response.status=="like success!"){
+      if(response.data.message==="like success!"){
         setMassage("لایک نقل قول شما با موفقیت ثبت شد");
       }else setMassage("لایک نقل قول شما با موفقیت برداشته شد");
         setquoteAgain(quoteAgain+1);
@@ -325,7 +342,7 @@ export default function FullWidthTabs(props) {
          <Snackbar
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
               open={openSnack}
-              autoHideDuration={3000}
+              autoHideDuration={2000}
               onClose={handleCloseSnack}
               message={massage}
             />
@@ -406,6 +423,21 @@ export default function FullWidthTabs(props) {
                       {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
                       </small>
                     </div>
+
+
+                    {current.account.id != Cookies.get("userId") ?(
+                      <div></div>
+                    ):(
+                      <div className="btn" onClick={()=> handleDeleteComment(current.id)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg>
+                      </div>
+                    )
+                  }
+
+
+                    
                     <div className="d-flex flex-column">
                       <div className="btn " onClick={()=> handleLikeClick(current.id)}> 
                         <svg className="bi bi-hand-thumbs-up" style={{color:"green"}} width="1.5em" height="1.5em" viewBox="0 0 16 16"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
