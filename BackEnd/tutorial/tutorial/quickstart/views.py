@@ -195,7 +195,8 @@ class UserProfileView(APIView):
 
 
 
-class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
+class MyQuoteView(generics.ListAPIView):
+
     serializer_class=QuoteSerializer
 
     def get_queryset(self,pk):
