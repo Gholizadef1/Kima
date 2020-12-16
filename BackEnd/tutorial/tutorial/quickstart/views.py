@@ -305,15 +305,16 @@ class QuoteView(APIView,PaginationHandlerMixin):
         except MyQuote.DoesNotExist:
           raise Http404
           
-     def get(self,request,pk):
+    def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
             serilalizer = QuoteSerializer(quote_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
+        return Response(response)
         
-      def post(self,request,pk):
+    def post(self,request,pk):
         user=request.user
         this_book=book.objects.get(id=pk)
         serializer = PostQuoteSerializer(data=request.data)
@@ -524,24 +525,24 @@ class FilterCommentbyLike(APIView):
         response = {'message' : 'No Comment!',}
         return Response(response)
 
- class FilterQuotebyTime(APIView):
+class FilterQuotebyTime(APIView):
 
      def get(self,request,pk):
          bk=book.objects.get(id=pk)
          if MyQuote.objects.filter(current_book=bk).exists():
              quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
-             serilalizer = QuoteSerializer(comment_list,many=True)
+             serilalizer = QuoteSerializer(quote_list,many=True)
              return Response(serilalizer.data)
          response = {'message' : 'No Quote!',}
          return Response(response)
 
- class FilterQuotebyLike(APIView):
+class FilterQuotebyLike(APIView):
 
      def get(self,request,pk):
          bk=book.objects.get(id=pk)
          if MyQuote.objects.filter(current_book=bk).exists():
              quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
-             serilalizer = QuoteSerializer(comment_list,many=True)
+             serilalizer = QuoteSerializer(quote_list,many=True)
              return Response(serilalizer.data)
          response = {'message' : 'No Quote!',}
          return Response(response)
