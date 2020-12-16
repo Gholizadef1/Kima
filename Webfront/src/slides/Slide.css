@@ -3,25 +3,28 @@
     background: radial-gradient#e5e5e5;
 }*/
 .cat:hover{
-    box-shadow: 1px 5px 30px 1px rgb(116, 116, 225) !important; 
+    box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
 }
 
 .card-title2{
     font-size: 15px;
     color: black;
 
-    font-family: 'Morvarid';  
+    font-family: 'Mitra';  
 
 }.card-title1{
-    font-family: 'Morvarid';
-    color: black;
- font-size: 20px;
+    font-family: 'Mitra';
+    color: #000000;
+    padding-top: 10px;
+    font-size: 20px;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+    width: 180px;
+    direction: rtl;
+    padding-left: 20px;
 }
 
-.title{
-    color: black;
-
-}
 
 .cat{
     
@@ -55,7 +58,7 @@
    margin-bottom: 10px;
     font-weight: bold;
     font-size: 25px;
-font-family: 'Morvarid';
+font-family: 'Mitra';
 
 }
 .sr-only{

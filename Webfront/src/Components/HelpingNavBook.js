@@ -1,13 +1,15 @@
+
 import React, { Component } from 'react';
 //import {NavLink} from 'react-router-dom';
 import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 // import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
+import {CgProfile} from 'react-icons/cg';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
-import "./HelpingNav.css";
+//import "./HelpingNav.css";
 import {GoSearch} from 'react-icons/go';
 import {FaHome} from 'react-icons/fa';
 import {MdGroup} from 'react-icons/md';
@@ -110,7 +112,7 @@ useEffect(() => {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}style={{fontFamily:'Morvarid'}}>
+          <Button variant="info" onClick={handleClose}style={{fontFamily:'Mitra'}}>
             بستن
           </Button>
         </Modal.Footer>
@@ -118,11 +120,20 @@ useEffect(() => {
     </>
   
        <a class="nav-item1" href="home" >
-       <small className="name" style={{fontFamily:'Morvarid',color:'white',margin:15,fontSize:20}} >
+       <small className="name" style={{fontFamily:'Mitra',color:'white',margin:15,fontSize:20}} >
       خانه
     </small>
 
     <FaHome size="40" vertical-align='center' style={{fontWeight:"bold",color:"white"}}/> 
+     </a>
+     <a class="nav-item1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
+       <small className="name" size="50" style={{padding:10,fontSize:20}}>
+      {Cookies.get('userName')}
+    </small>
+
+    <CgProfile size="40" vertical-align='center' color="white"
+    //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
+     /> 
      </a>
   </Navbar.Collapse>
 </Navbar>
@@ -130,3 +141,5 @@ useEffect(() => {
     }
 
     export default withRouter( NavBar);
+
+    

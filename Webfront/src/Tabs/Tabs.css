@@ -1,0 +1,33 @@
+.root{
+    height: 600px;
+    background-color: white;
+    position: fixed;
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+    
+}
+@media (min-width :360px) 
+{
+    .root{
+    width: 340px;
+    
+    }
+   
+  }
+  @media (min-width :768px) 
+{
+    .root{
+    width: 700px;
+    }
+   
+  }
+  @media (min-width :800px) 
+  {
+      .root{
+      width: 750px;
+      }
+     
+    }

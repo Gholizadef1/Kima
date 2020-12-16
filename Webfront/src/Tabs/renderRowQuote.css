@@ -1,0 +1,17 @@
+
+@media (max-width :500px) 
+{
+    .booktitle{
+        font-size: 14px;
+    }
+    .date{
+        font-size: 12px;
+    }
+    .like{
+        padding-left: 350px;
+    }
+    .quote{
+        width: 300px;
+    }
+   
+  }

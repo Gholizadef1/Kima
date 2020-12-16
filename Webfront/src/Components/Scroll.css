@@ -1,10 +1,16 @@
 .car:hover{
-    box-shadow: 1px 5px 30px 1px rgb(55, 26, 100) !important; 
+    box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
 }
-
-.card-titl1{
-    font-size: 10px;
-    color: black;
+.card-title3{
+        font-family: 'Mitra';
+        color: #000000;
+        font-size: 1px;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow: ellipsis;
+        direction: rtl;
+        padding-left: 20px;
+        padding-top: 5px;
     
 }.card-titl0{
     
@@ -13,16 +19,15 @@
 }
 
 .car{
-    
+  
     padding-top: 10px;
-    opacity: 1;
     width: 120px;
     height: 144px;
-   
+    padding-right: 10px;
  
 }
 .col-xl-8-gholi{
-   margin-left: -200px;
+   left: 120px;
 }
 
 .squer{
@@ -31,11 +36,10 @@
     height: 80px;
     padding-top:5px;
     padding-left:17px;
-
-   
 }
 .slid{
-   margin-left: 300px;
+    margin-left: -110px;
+    margin-right: -110px;
 }
 .slick-prev:before, .slick-next:before {
     color: black !important;
@@ -45,18 +49,54 @@
     margin-left: 500px;
     color: black;
 }
-@media (max-width :420px) 
+
+.brand1{
+    margin-left: 7px;
+    font-size: 25px;
+}
+.subbrand1{
+    margin-top: -150px;
+}
+.brand2{
+    margin-left: -10px;
+    padding-top: 50px;
+    font-size: 25px;
+}
+.subbrand2{
+    margin-left: -10px;
+}
+.brand3{
+    margin-left: -10px;
+    padding-top: 50px;
+    font-size: 25px;
+
+}
+.subbrand3{
+    margin-left: -10px;
+}
+@media (max-width :400px) 
 {
     .col-xl-8-gholi{
         margin-left: 19px;
     }
+    .brand2{
+        margin-left: 100px;
+        padding-top: 10px;
+        font-size: 19px;
+        
+      }
+      .brand1{
+          font-size: 19px;
+      }
+      .brand3{
+          margin-top: -180px;
+          font-size: 19px;
+      }
     
     .slid{
         margin-right: -140px;
     }
-     .brand1{
-       margin-left: -10px;
-     }
+     
     
   }
 
@@ -72,9 +112,7 @@
     height: 144px;
     margin-left: -300px;
  }
- .brand1{
-   margin-left: -10px;
- }
+
     
     }
   @media (max-width :800px) 

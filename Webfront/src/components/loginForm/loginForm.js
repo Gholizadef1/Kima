@@ -59,27 +59,12 @@ function LoginForm(props) {
                     redirectToHome();
                     props.showError(null)
                 }
-                // else if(response.status === 404){
-                //     props.showError("رمز یا ایمیل اشتباه است.")
-                //     setState(prevState => ({
-                //         ...prevState,
-                //         backError : "رمز یا ایمیل اشتباه است."
-                //     })); 
-
-                // }
-                // else{
-                //     props.showError("ایمیل وجود ندارد.");
-                //     setState(prevState => ({
-                //         ...prevState,
-                //         backError : "ایمیل وجود ندارد."
-                //     })); 
-                // }
             })
             .catch(function (error) {
-                    props.showError("رمز یا ایمیل اشتباه است.")
+                    props.showError("رمز یا ایمیل اشتباه است")
                     setState(prevState => ({
                         ...prevState,
-                        backError : "رمز یا ایمیل اشتباه است."
+                        backError : "رمز یا ایمیل اشتباه است"
                     })); 
             });
             //console.log(state);
@@ -111,17 +96,17 @@ function LoginForm(props) {
         <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
             <div className="card color2 " >
                 <br></br>
-                <h1 style={{fontFamily:'Morvarid'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Morvarid'}}>"کتاب یار مهربان است"</p>
-                <p style={{fontFamily:'Morvarid'}}>خوشحالیم امروز می‌بینیمت</p>
+                <h1 style={{fontFamily:'Mitra'}}>به کیما خوش‌آمدی</h1>
+                <p style={{fontFamily:'Mitra'}}>"کتاب یار مهربان است"</p>
+                <p style={{fontFamily:'Mitra'}}>خوشحالیم امروز می‌بینیمت</p>
                 <img src="people&books.png" className="col-12" alt=""/> 
             </div>
             <div className="card color2 p-2">
             <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Morvarid'}}>ورود</h1>
+                <h1 style={{fontFamily:'Mitra'}}>ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Morvarid'}}>ایمیل</label>
+                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Mitra'}}>ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -138,7 +123,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Morvarid'}}>رمز</label>
+                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Mitra'}}>رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -153,7 +138,7 @@ function LoginForm(props) {
                 </div>
                 <p className="loginText"> {state.backError} </p>
                 <StyledButton 
-                style={{fontFamily:'Morvarid'}}
+                style={{fontFamily:'Mitra'}}
                     type="submit" 
                     className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
                     onClick={handleSubmitClick}
@@ -165,8 +150,8 @@ function LoginForm(props) {
             </div>
             
             <div className="registerMessage">
-                <span style={{fontFamily:'Morvarid'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
-                <span className="loginText" style={{fontFamily:'Morvarid'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
+                <span style={{fontFamily:'Mitra'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
+                <span className="loginText" style={{fontFamily:'Mitra'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
         </div>
