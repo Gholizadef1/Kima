@@ -14,9 +14,27 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Animated, { set } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios'
-import Commentcard from './CommentCard';
+import CommentCard from './CommentCard';
 
 const Bookview = (prop) => {
+  useFocusEffect(
+    React.useCallback(() => {
+    console.log('USE EFFECT')
+    getResult(id)
+    getComments();
+    getQuote();
+    getPicker();
+    getRate();
+    // // console.log('Listenn')
+    // alert('in')
+    // return() => alert('lost')
+    }, [])
+  )
+  const getResult = async (id) => {
+    const response = await axiosinst.get('/bookdetail/'+id);
+    setResult(response.data);
+    console.log('checkk'+ response.data)
+    };
 
   const [rate , setrate] = useState(true);
   const [test , settest] = useState(null);
@@ -47,14 +65,18 @@ const Bookview = (prop) => {
       
       setinformation(information=>(response.data))
       setloading(false);
+      console.log('GET QUOTE TRY')
      }
    catch(err){
     
       console.log(err);
+      console.log('GET QUOTE CATCH')
    }
+   console.log('AKHAR GET QUOTE')
   }
   
    const getComments = async () => {
+     console.log('GET COMMENTS')
 
     try{
     const response = await axiosinst.get("bookdetail/"+id+'/comment')
@@ -62,28 +84,28 @@ const Bookview = (prop) => {
     setrefresh(false)
     setcinformation(response.data)
     console.log(cinformation[0])
+    console.log('GET COMMENT TRY')
     }
   catch(err){
     setrefresh(false)
      console.log(err);
+     console.log('GET COMMENT catch')
+     
    
   }
+  console.log('AKHAR GET COMMENT')
 }  
  
 
-  const getResult = async (id) => {
-  const response = await axiosinst.get('/bookdetail/'+id);
-  setResult(response.data);
-  console.log('checkk'+ response.data)
-  };
+  
 
 
-  if (!result) {
-    return null;
-  }
+  // if (!result) {
+  //   return null;
+  // }
 
   const getPicker = async () => {
-    axios.get('http://35754d23b2f7.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://d30e06d5c109.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -97,7 +119,7 @@ const Bookview = (prop) => {
       console.log(error)
   })
   };
-  getPicker();
+  
 
   const PostPicker = async (value) => {
         if (value != "") {
@@ -105,7 +127,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://35754d23b2f7.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://d30e06d5c109.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -113,7 +135,7 @@ const Bookview = (prop) => {
           })
             .then(async function (response) {
               console.log(response.data)
-              getPicker();
+               getPicker();
             })
             .catch(function (error) {
               console.log(error);
@@ -123,7 +145,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://35754d23b2f7.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://d30e06d5c109.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -141,7 +163,7 @@ const Bookview = (prop) => {
   })
   }
 
-  getRate();
+
 
   console.log('**' +rate)
 
@@ -151,7 +173,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://35754d23b2f7.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://d30e06d5c109.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -168,12 +190,7 @@ const Bookview = (prop) => {
     });
   }
 }
-useFocusEffect(
-  React.useCallback(() => {
-    getResult(id);
-    getQuote();
-    getComments();
-  }, []))
+
   
     return(
       <Container>
@@ -227,7 +244,8 @@ useFocusEffect(
                     </Card>
                 <Animated.View style={{
                     }}>
-                    <FlatList
+                    
+                    {information.message==='No Quote!'?<FlatList
                     style={{marginBottom:'17%'}}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
@@ -247,12 +265,12 @@ useFocusEffect(
                       )
                     }}
                   >
-                  </FlatList>
+                  </FlatList>:null}
                 </Animated.View>
 
-                <Animated.View style={{
-                    }}>
-                    <FlatList
+                <Animated.View style={{ }}>
+
+                   {cinformation.message==='No User Rating!'? <FlatList
                     style={{marginBottom:'17%'}}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
@@ -260,19 +278,11 @@ useFocusEffect(
                     onEndReachedThreshold={0.5}
                     keyExtractor={(item)=>item.id}
                     data={cinformation}                    
-                    renderItem={({item})=>{
-                      return(
-                        <View>
-                        (<><CommentCard  name={item.account.username} 
-                          date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></CommentCard>
-                        <Text style={styles.heartnumber}>{item.Likes}</Text>
-                        </>
-                        )
-                        </View>
-                      )
-                    }}
-                  >
-                  </FlatList>
+                    renderItem={({ item }) => ( 
+                    <CommentCard name={item.account.username} date={item.sendtime.toString().split('T')[0]}  IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text}/>
+                    )}
+                    ></FlatList>:null}
+               
                 </Animated.View>
 
                 {/* <View>
