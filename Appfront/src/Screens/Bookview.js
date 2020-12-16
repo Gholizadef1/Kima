@@ -13,6 +13,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Animated, { set } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios'
+import Commentcard from './CommentCard';
 
 const Bookview = (prop) => {
 
@@ -20,7 +21,9 @@ const Bookview = (prop) => {
   const [test , settest] = useState(null);
   const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState('');
+  const [refresh,setrefresh]=useState(false);
   const [information,setinformation]=useState([]);
+  const [cinformation,setcinformation]=useState([]);
   const [selectedValue, setSelectedValue] = useState('none');
   const[loading ,setloading]=useState(false);
   const[IDD,setIDD]=useState('');
@@ -47,6 +50,22 @@ const Bookview = (prop) => {
     
       console.log(err);
    }
+
+   const getComments = async () => {
+    try{
+    const response = await axiosinst.get("bookdetail/"+id+'/comment')
+     console.log(response.data)
+    setrefresh(false)
+    setcinformation(response.data)
+    console.log(cinformation[0])
+    }
+  catch(err){
+    setrefresh(false)
+     console.log(err);
+   
+  }
+}
+   
    console.log('Say something')
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
@@ -221,7 +240,34 @@ const Bookview = (prop) => {
                     }}
                   >
                   </FlatList>
-        </Animated.View>
+                </Animated.View>
+
+                <Animated.View style={{
+                    }}>
+                    <FlatList
+                    style={{marginBottom:'17%'}}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    onEndReached={console.log('endreach')}
+                    onEndReachedThreshold={0.5}
+                    keyExtractor={(item)=>item.id}
+                    data={cinformation}                    
+                    renderItem={({item})=>{
+                      return(
+                        <View>
+                        (<><CommentCard  name={item.account.username} 
+                          date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></CommentCard>
+                        <Text style={styles.heartnumber}>{item.Likes}</Text>
+                        </>
+                        )
+                        </View>
+                      )
+                    }}
+                  >
+                  </FlatList>
+                </Animated.View>
+
+
                 </Content>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
