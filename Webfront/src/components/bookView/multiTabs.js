@@ -84,9 +84,13 @@ export default function FullWidthTabs(props) {
   const [endQuote,setEndQuote] = useState("");
   const [endComment,setEndComment] = useState("");
 
+  const [filterBaseComment,setFilterBaseComment]= useState("time");
+  const [filterBaseQuote,setFilterBaseQuote]= useState("time");
+  
 
   //for comment
   useEffect(()=>{
+    setEndQuote("");
     console.log(props.book)
     axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     .then(response=>{
@@ -96,6 +100,7 @@ export default function FullWidthTabs(props) {
     })
     .catch(error=>{
       console.log(error);
+      setEndComment("نظر دیگری وجود ندارد");
     });
 
   },[props.book,commentAgain]);
@@ -110,14 +115,36 @@ export default function FullWidthTabs(props) {
      //setQuotes(quotes.concat(response.data));
      setQuotes(response.data);
       console.log(response);
-      //setquoteAgain("");
     })
     .catch(error=>{
       console.log(error);
-      //setMassage("نقل قول دیگری وجود ندارد");
       setEndQuote("نقل قول دیگری وجود ندارد");
     });
-  },[props.book,quoteAgain,quotesPage]);
+
+    // if(filterBaseQuote==="time"){
+    //   axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"quote-filter-time"+"?page="+quotesPage)
+    // .then(response=>{
+    //  //setQuotes(quotes.concat(response.data));
+    //  setQuotes(response.data);
+    //   console.log(response);
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndQuote("نقل قول دیگری وجود ندارد");
+    // });
+    // }else if(filterBaseQuote==="like"){
+    //   axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"quote-filter-like"+"?page="+quotesPage)
+    // .then(response=>{
+    //  //setQuotes(quotes.concat(response.data));
+    //  setQuotes(response.data);
+    //   console.log(response);
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndQuote("نقل قول دیگری وجود ندارد");
+    // });
+    // }else{console.log(filterBaseQuote);}
+  },[props.book,quoteAgain,quotesPage,filterBaseQuote]);
 
 
 
@@ -141,8 +168,8 @@ export default function FullWidthTabs(props) {
   }
 
   const handleSubmitCommentClick = (e) => {
-    e.preventDefault();
-    console.log(userComment);
+    //e.preventDefault();
+    //console.log(userComment);
     if(userComment.length){
       const payload={
         "textcomment": userComment
@@ -164,7 +191,7 @@ export default function FullWidthTabs(props) {
           setOpenSnack(true);
           setMassage("نظر شما با موفقیت ثبت شد")
           setUserComment("");
-          setcommentAgain("added");
+          setcommentAgain(commentAgain+1);
         }
       })
       .catch(error=>{
@@ -320,6 +347,16 @@ export default function FullWidthTabs(props) {
     });
    }
 
+   const handleCommentFilter=(e)=>{
+     setFilterBaseComment(e.target.value);
+     console.log(e.target.value);
+   }
+
+   const handleQuoteFilter=(e)=>{
+    setFilterBaseQuote(e.target.value);
+    console.log(e.target.value);
+  }
+
 
   const StyledButton = withStyles({
     root: {
@@ -394,9 +431,10 @@ export default function FullWidthTabs(props) {
 
             <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
               <label className="ml-2 mt-1">براساس:</label>
-              <select className="form-control rounded-pill" style={{width:120}} id="" onChange="" >
-                  <option id="rateBase" value="none">محبوب‌ترین</option>
-                  <option id="timeBase" value="ToRead">جدید‌ترین</option>
+              <select className="form-control rounded-pill" style={{width:120}} id=""  onChange={handleCommentFilter} >
+                  
+                <option id="timeBase" value="time">جدید‌ترین</option>
+                <option id="rateBase" value="like">محبوب‌ترین</option>
               </select>
             </div>
 
@@ -498,9 +536,9 @@ export default function FullWidthTabs(props) {
 
             <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
               <label className="ml-2 mt-1">براساس:</label>
-              <select className="form-control rounded-pill" style={{width:120}} id="" onChange="" >
-                  <option id="rateBase" value="none">محبوب‌ترین</option>
-                  <option id="timeBase" value="ToRead">جدید‌ترین</option>
+              <select className="form-control rounded-pill" style={{width:120}} id="" onChange={handleQuoteFilter} >
+                  <option id="timeBase" value="time">جدید‌ترین</option>
+                  <option id="rateBase" value="like">محبوب‌ترین</option>
               </select>
             </div>
 
@@ -579,13 +617,18 @@ export default function FullWidthTabs(props) {
               {endQuote}
             </p>
 
-            <button type="button" className="btn btn-light col-12"
-              onClick={()=>{setQuotesPage(quotesPage+1)}}
-             >
-              بیشتر
-            </button>
-
-           
+            <div className="d-flex justify-content-center">
+              <button type="button" className="btn btn-light "
+                onClick={()=>{setQuotesPage(quotesPage-1)}}
+               >
+                 صفحه قبلی 
+              </button>
+              <button type="button" className="btn btn-light"
+                onClick={()=>{setQuotesPage(quotesPage+1)}}
+               >
+                صفحه بعدی
+              </button>
+            </div>
 
           </div>
           
