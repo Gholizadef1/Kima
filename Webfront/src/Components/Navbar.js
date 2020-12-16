@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 //import {NavLink} from 'react-router-dom';
 import {Navbar,Nav,Button} from 'react-bootstrap';
@@ -12,6 +13,7 @@ import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
+
 import {FaHome} from 'react-icons/fa';
 // import {MdGroup} from 'react-icons/md';
 // import UserList from './UsersList';
@@ -27,6 +29,7 @@ import {
 } from "react-router-dom";
  import {MdGroup} from 'react-icons/md';
  import UserList from './UsersList';
+
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
 //import ReactNavbar from "react-responsive-animate-navbar";
@@ -36,8 +39,13 @@ import Avatar from '@material-ui/core/Avatar';
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
+
+
   // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
+
+
+
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
@@ -163,6 +171,7 @@ useEffect(() => {
           </Button>
         </Modal.Footer>
       </Modal>
+
 
           
         </div>
