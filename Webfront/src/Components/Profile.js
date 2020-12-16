@@ -211,8 +211,6 @@ function ProFile (props){
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 10,
-      border: 10,
       color: 'black',
       height: 50,
       padding: '0 30px',
@@ -234,8 +232,6 @@ useEffect(() => {
 
     return(
         <div className="main-content">
-            
-           
             <div class="container-fluid">
                 <div className="row">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
@@ -421,7 +417,9 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
+
                             <div className="Tabz">
+
                               <Tabs/>
                               </div>
                             </div>
