@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Image,ScrollView,FlatList} from 'react-native';
+import { StyleSheet, Text, View ,Image,ScrollView,FlatList,ActivityIndicator} from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
@@ -21,6 +21,7 @@ const commentschema=yup.object({
 
 const Comment = (prop) => {
 
+  const [refresh,setrefresh]=useState(false);
   const[IDD,setIDD]=useState('');
   const equal=async(item)=>{
    
@@ -47,12 +48,12 @@ const Comment = (prop) => {
     //    }
      
     //   }
-    
+    setrefresh(false)
     setinformation(response.data)
     console.log(information[0])
     }
   catch(err){
-   
+    setrefresh(false)
      console.log(err);
    
   }
@@ -205,6 +206,13 @@ const Comment = (prop) => {
      showsVerticalScrollIndicator={false}
      keyExtractor={(item)=>item.id}
      data={information}
+     refreshing={refresh}
+     onRefresh={async()=>{
+      await setrefresh(true)
+    
+      response();
+       
+     }}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
     date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} likenumber={100} commentid={item.id} IDD={IDD} dislikenumber={10} picture={`http://7714cae02459.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
