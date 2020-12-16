@@ -1,7 +1,8 @@
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework import status
 from . models import book
 from . serializers import *
@@ -98,6 +99,25 @@ class BookViewPage(APIView):
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
 
+
+
+
+class BookState(APIView):
+    
+    def get(self, request, pk, format=None):
+        user=request.user
+        bk=book.objects.get(pk=pk)
+        bookcheck=self.checkbook(user,bk)
+        if(bookcheck==None):
+            return Response({'book_state': 'none'})
+        else:
+            return Response({'book_state': bookcheck.state})
+
+    def checkbook(self,user,book2):
+        try:
+            return MyBook.objects.get(account=user,book1=book2)
+        except MyBook.DoesNotExist:
+            return None
 
 
   

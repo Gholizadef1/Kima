@@ -82,6 +82,7 @@ class MyBook(models.Model):
     def __str__(self):
         return self.state
 
+
 class MyQuote(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     current_book=models.ForeignKey(book,on_delete=models.CASCADE)
@@ -94,4 +95,32 @@ class LikeQuote(models.Model):
     account=models.ForeignKey(Account,on_delete=models.CASCADE)
     quote = models.ForeignKey(MyQuote,on_delete=models.CASCADE)
 
-    
+
+class MyComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    comment_text=models.TextField()
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
+    LikeCount=models.IntegerField(default=0)
+    DislikeCount=models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.comment_text
+
+
+class LikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    liketime = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.comment.comment_text
+
+class DislikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    disliketime = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.comment.comment_text
+

@@ -62,6 +62,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['username','profile_photo','email','id']
 
+
 class PostQuoteSerializer(serializers.Serializer):
     
     textquote = serializers.CharField(required=True)
@@ -75,5 +76,18 @@ class QuoteSerializer(serializers.ModelSerializer):
         model = MyQuote
         fields = "__all__"
 
+
+class PostCommentSerializer(serializers.Serializer):
+    
+    textcomment = serializers.CharField(required=True)
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    
+    class Meta:
+        model = MyComment
+        fields = "__all__"
 
 
