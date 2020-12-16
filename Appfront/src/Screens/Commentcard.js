@@ -127,6 +127,27 @@ const Commentcard = (prop) => {
             </View>
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={async () => {
+               if(dislike==='#1f7a8c'){
+              const backk2=JSON.stringify(back2);
+              axiosinst.post('comment/' + prop.commentid+'/dislike',backk2, {
+            "headers":
+               {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumlike(response.data.LikeCount)
+              console.log(response);
+              setdislike('lightblue')
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('like error ||||||||||||')
+
+            })
+        }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
           if (like === 'lightblue')
