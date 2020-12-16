@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 import { FAB } from 'react-native-paper';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 
 
@@ -31,7 +32,7 @@ const commentschema=yup.object({
 const Quote = (prop) => {
 
   const getlike=async(item)=>{
-    axiosinst.get('http://25aadf96386a.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://a6cf0ecdd61a.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -217,7 +218,25 @@ const Quote = (prop) => {
           )
       }
     return(
+
+
         <View style={styles.container}>
+
+        <DropDownPicker
+            items={[
+                {label: 'مرتب شده بر اساس:', value: 'none'},
+                {label: 'جدیدترین ها', value: 'history'},
+                {label: 'بیشترین پسند ها', value: 'like'},
+            ]}
+            defaultValue={'none'}
+            containerStyle={{height: 40}}
+            style={{backgroundColor: '#fafafa'}}
+            itemStyle={{
+                justifyContent: 'flex-start'
+            }}
+            dropDownStyle={{backgroundColor: '#fafafa'}}
+            onChangeItem={(item) => console.log(item.value)}
+        />
         <BottomSheet style={{position:''}}
         
        snapPoints={[hp('40%'), 0, 0]}
