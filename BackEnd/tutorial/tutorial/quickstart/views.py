@@ -371,10 +371,11 @@ class LikeQuoteView(APIView):
 
 
 
-class CommentView(APIView):
+class CommentView(APIView,PaginationHandlerMixin):
 
     model = MyComment
     parser_classes = [JSONParser]
+    pagination_class = BasicPagination
 
     def get_object(self, pk):
         try:
@@ -385,7 +386,7 @@ class CommentView(APIView):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
-            comment_list = MyComment.objects.filter(current_book=this_book)
+            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
             serilalizer = CommentSerializer(comment_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
@@ -394,16 +395,20 @@ class CommentView(APIView):
     def post(self,request,pk):
         user=request.user
         this_book=book.objects.get(id=pk)
-        comment_text=request.data.get("textcomment")
-        new_comment=MyComment(account=user,current_book=this_book,comment_text=comment_text)
-        new_comment.save()
-        response = {
+        serializer = PostCommentSerializer(data=request.data)
+        if serializer.is_valid():
+            comment_text = serializer.data.get("textcomment")
+            new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
+            new_comment.save()
+            response = {
                 'status' : 'success',
                 'code' : 'status.HTTP_200_OK',
                 'message' : 'Comment Saved!!',
-                'data' : [comment_text,],
-        }
-        return Response(response)
+                'data' : comment_text,
+            }
+            return Response(response)
+        return Response(serializer.errors,
+                        status=HTTP_404_NOT_FOUND)
 
 
 class DeleteCommentView(APIView):
@@ -501,48 +506,52 @@ class DislikeCommentView(APIView):
             return Response({'message' : "True",})
         return Response({'message' : "False",})
 
-class FilterCommentbyTime(APIView):
+class FilterCommentbyTime(APIView,PaginationHandlerMixin):
 
+    pagination_class = BasicPagination
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = MyComment.objects.filter(current_book=bk).order_by('sendtime')
+            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-sendtime'))
             serilalizer = CommentSerializer(comment_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
-class FilterCommentbyLike(APIView):
-
+class FilterCommentbyLike(APIView,PaginationHandlerMixin):
+    
+    pagination_class = BasicPagination
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = MyComment.objects.filter(current_book=bk).order_by('LikeCount')
+            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-LikeCount'))
             serilalizer = CommentSerializer(comment_list,many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
-class FilterQuotebyTime(APIView):
+class FilterQuotebyTime(APIView,PaginationHandlerMixin):
 
-     def get(self,request,pk):
-         bk=book.objects.get(id=pk)
-         if MyQuote.objects.filter(current_book=bk).exists():
-             quote_list = MyQuote.objects.filter(current_book=bk).order_by('sendtime')
-             serilalizer = QuoteSerializer(quote_list,many=True)
-             return Response(serilalizer.data)
-         response = {'message' : 'No Quote!',}
-         return Response(response)
+    pagination_class = BasicPagination
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyQuote.objects.filter(current_book=bk).exists():
+            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-sendtime'))
+            serilalizer = QuoteSerializer(quote_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Quote!',}
+        return Response(response)
 
-class FilterQuotebyLike(APIView):
+class FilterQuotebyLike(APIView,PaginationHandlerMixin):
 
-     def get(self,request,pk):
-         bk=book.objects.get(id=pk)
-         if MyQuote.objects.filter(current_book=bk).exists():
-             quote_list = MyQuote.objects.filter(current_book=bk).order_by('Likes')
-             serilalizer = QuoteSerializer(quote_list,many=True)
-             return Response(serilalizer.data)
-         response = {'message' : 'No Quote!',}
-         return Response(response)
+    pagination_class = BasicPagination
+    def get(self,request,pk):
+        bk=book.objects.get(id=pk)
+        if MyQuote.objects.filter(current_book=bk).exists():
+            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-Likes'))
+            serilalizer = QuoteSerializer(quote_list,many=True)
+            return Response(serilalizer.data)
+        response = {'message' : 'No Quote!',}
+        return Response(response)
 
 
