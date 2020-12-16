@@ -30,26 +30,14 @@ const Bookview = (prop) => {
   const[IDD,setIDD]=useState('');
   const equal=async(item)=>{
     setIDD(await AsyncStorage.getItem('id').toString());
-  }  
-  const response=async ()=>{
-    const getResult = async (id) => {
-      const response = await axiosinst.get('/bookdetail/'+id);
-      setResult(response.data);
-      console.log('checkk'+ response.data)
-      };
-      useEffect(() =>{
-        getResult(id);
-      }, []);
-    
-      if (!result) {
-        return null;
-      }
-    }
+  } 
+  const id=prop.route.params.id 
+  const getQuote=async ()=>{
     setloading(true);
     console.log('DOVOM')
-     const id=prop.route.params.id
      console.log('id**************' +id);
      console.log(id) 
+
      try{
     setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('api/quotes/'+id
@@ -64,8 +52,10 @@ const Bookview = (prop) => {
     
       console.log(err);
    }
-
+  }
+  
    const getComments = async () => {
+
     try{
     const response = await axiosinst.get("bookdetail/"+id+'/comment')
      console.log(response.data)
@@ -78,12 +68,22 @@ const Bookview = (prop) => {
      console.log(err);
    
   }
-}   
+}  
+ 
+
+  const getResult = async (id) => {
+  const response = await axiosinst.get('/bookdetail/'+id);
+  setResult(response.data);
+  console.log('checkk'+ response.data)
+  };
 
 
+  if (!result) {
+    return null;
+  }
 
   const getPicker = async () => {
-    axios.get('http://d6c2c14e372f.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://35754d23b2f7.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -105,7 +105,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://d6c2c14e372f.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://35754d23b2f7.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -123,7 +123,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://d6c2c14e372f.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://35754d23b2f7.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -135,10 +135,12 @@ const Bookview = (prop) => {
       console.log('$$$$'+response.data.data)
       setratenum(response.data.data)   
   })
-  .catch(function(error){
+  .catch(async function(error){
       console.log(error)
+      console.log(await AsyncStorage.getItem('token')).toString();
   })
   }
+
   getRate();
 
   console.log('**' +rate)
@@ -149,7 +151,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://d6c2c14e372f.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://35754d23b2f7.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -166,7 +168,12 @@ const Bookview = (prop) => {
     });
   }
 }
-//this.state = {}
+useFocusEffect(
+  React.useCallback(() => {
+    getResult(id);
+    getQuote();
+    getComments();
+  }, []))
   
     return(
       <Container>
