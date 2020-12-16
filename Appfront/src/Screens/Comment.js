@@ -20,6 +20,7 @@ const commentschema=yup.object({
 
 
 const Comment = (prop) => {
+  console.log('COMMENT')
 
   const [refresh,setrefresh]=useState(false);
   const[IDD,setIDD]=useState('');
@@ -38,6 +39,7 @@ const Comment = (prop) => {
     
     const id=prop.route.params.id
     console.log(id)
+    console.log(await (await AsyncStorage.getItem('id')).toString())
 
     try{
       setIDD(await (await AsyncStorage.getItem('id')).toString())
@@ -214,7 +216,7 @@ const Comment = (prop) => {
        
      }}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} likenumber={item.DislikeCount} commentid={item.id} IDD={IDD} dislikenumber={item.LikeCount} picture={`http://936c83e74843.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://d30e06d5c109.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>

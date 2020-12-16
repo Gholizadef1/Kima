@@ -9,63 +9,131 @@ import { color } from 'react-native-reanimated';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 const Commentcard = (prop) => {
+  console.log('COMMENT CARD')
+  const [like, setlike] = useState('lightblue')
+  const [dislike, setdislike] = useState('lightblue')
+// const[commentID,setcommentID]=useState();
+//  setcommentID(prop.commentid)
+const getlike=async()=>{
+  const back2 = {
 
-  const getdislike = async () => {
-    const back2 = {}
-    const backk2 = JSON.stringify(back2);
-    axiosinst.get('comment/' + prop.commentid + '/dislike', backk2, {
-      "headers":
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-      .then(async function (response) {
-
-        console.log(response);
-        if (response.data === 'True')
-          setdislike('#1f7a8c')
-        else
-          setdislike('lightblue')
-
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log('like error ||||||||||||')
-
-      })
   }
-  const getlike = async () => {
-    const back2 = {}
     const backk2 = JSON.stringify(back2);
-    axiosinst.get('comment/' + prop.commentid + '/like', backk2, {
-      "headers":
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-      .then(async function (response) {
-
-        console.log(response);
-        if (response.data === 'True')
+    console.log((await AsyncStorage.getItem('token')).toString())
+    
+      axiosinst.get('comment/' + prop.commentid + '/like', {
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+      })
+        .then(async function (response) {
+          // setnumlike(response.data.LikeCount)
+          if (response.data.message === 'True')
           setlike('#1f7a8c')
         else
           setlike('lightblue')
+          console.log(response);
 
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log('like error ||||||||||||')
+        })
+        .catch(function (error) {
+          console.log(error);
+          console.log('like error ||||||||||||')
 
-      })
+        })
+}
+
+
+const getdislike=async()=>{
+  const back2 = {
+
   }
-  useEffect(()=>{
-    getdislike()
-    getlike()
-  }, [])
+    const backk2 = JSON.stringify(back2);
+    console.log((await AsyncStorage.getItem('token')).toString())
+    
+      axiosinst.get('comment/' + prop.commentid + '/dislike', {
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+      })
+        .then(async function (response) {
+          // setnumlike(response.data.LikeCount)
+          if (response.data.message === 'True')
+          setdislike('#1f7a8c')
+        else
+          setdislike('lightblue')
+          // console.log(response);
+
+        })
+        .catch(function (error) {
+          console.log(error);
+          console.log('dislike error ||||||||||||')
+
+        })
+}
+
+  //  async function getdislike(){
+  //   const back2 = {}
+  //   const backk2 = JSON.stringify(back2);
+  //   axiosinst.get('comment/' + prop.commentid + '/dislike', backk2, {
+  //     "headers":
+  //     {
+  //       "Content-Type": "application/json",
+  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //     }
+  //   })
+  //     .then(async function (response) {
+
+  //       console.log(response);
+  //       if (response.data === 'True')
+  //         setdislike('#1f7a8c')
+  //       else
+  //         setdislike('lightblue')
+
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       console.log('like error ||||||||||||')
+
+  //     })
+  // }
+  // async function getlike() {
+  //   const back2 = {}
+  //   const backk2 = JSON.stringify(back2);
+  //   axiosinst.get('comment/' + prop.commentid + '/like', backk2, {
+  //     "headers":
+  //     {
+  //       "Content-Type": "application/json",
+  //       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //     }
+  //   })
+  //     .then(async function (response) {
+
+  //       console.log(response);
+  //       if (response.data === 'True')
+  //         setlike('#1f7a8c')
+  //       else
+  //         setlike('lightblue')
+
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       console.log('like error ||||||||||||')
+
+  //     })
+  // }
+  // getlike();
+  // getdislike();
+  // useEffect(()=>{
+  //   // getdislike()
+  //   getlike(prop.commentid)
+  // }, [])
   const [more, setmore] = useState(false);
   const [showmore, setshowmore] = useState('بیشتر...');
   const [numlike, setnumlike] = useState(prop.likenumber);
@@ -86,8 +154,10 @@ const Commentcard = (prop) => {
 
 
 
-  const [like, setlike] = useState('lightblue')
-  const [dislike, setdislike] = useState('lightblue')
+   useEffect(()=>{
+     getdislike()
+     getlike()
+  }, [])
   // console.log('commentcard')
   return (
     <View style={styles.container}>
@@ -134,7 +204,7 @@ const Commentcard = (prop) => {
                       }
                     })
                       .then(async function (response) {
-                        console.log(response);
+                        // console.log(response);
                         // prop.INFO(prop.quoteid);
                         // await(prop.DELETE(true))
 
@@ -156,7 +226,7 @@ const Commentcard = (prop) => {
           color="#e56b6f" /> : null}
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === 'http://936c83e74843.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+          {prop.picture === 'http://d30e06d5c109.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/avatar.png')}
             style={styles.avatar}
@@ -180,8 +250,10 @@ const Commentcard = (prop) => {
         {!more ? <Text>{comment4}</Text> : <Text>{prop.comment}</Text>}
       </View>
       <View style={{ flexDirection: 'row' }}>
+      {/* like */}
         <AntDesign onPress={async () => {
           if (dislike === '#1f7a8c') {
+            console.log('DISLIKEDOROSTHAZFMISHE')
             const back2 = {}
             const backk2 = JSON.stringify(back2);
             axiosinst.post('comment/' + prop.commentid + '/dislike', backk2, {
@@ -192,8 +264,8 @@ const Commentcard = (prop) => {
               }
             })
               .then(async function (response) {
-                setnumlike(response.data.LikeCount)
-                console.log(response);
+                setnumdislike(response.data.DislikeCount)
+                // console.log(response);
                 setdislike('lightblue')
 
               })
@@ -228,7 +300,7 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumlike(response.data.LikeCount)
-              console.log(response);
+              // console.log(response);
 
             })
             .catch(function (error) {
@@ -252,6 +324,7 @@ const Commentcard = (prop) => {
 
           }
           if (like === '#1f7a8c') {
+            console.log('DARE LIKE RO AVAZ MIKONE BEKHATER DISLIKE')
             const backk2 = JSON.stringify(back2);
             axiosinst.post('comment/' + prop.commentid + '/like', backk2, {
               "headers":
@@ -261,8 +334,9 @@ const Commentcard = (prop) => {
               }
             })
               .then(async function (response) {
+                console.log('MIKHAD LIKE RO BARAYE DISLIKE BARDARE')
                 setnumlike(response.data.LikeCount)
-                console.log(response);
+                // console.log(response);
                 setlike('lightblue')
 
               })
@@ -288,7 +362,7 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('comment/' + prop.commentid + '/like', backk, {
+          axiosinst.post('comment/' + prop.commentid + '/dislike', backk, {
             "headers":
             {
               "Content-Type": "application/json",
@@ -296,8 +370,8 @@ const Commentcard = (prop) => {
             }
           })
             .then(async function (response) {
-              setnumdislike(response.data.LikeCount)
-              console.log(response);
+              setnumdislike(response.data.DislikeCount)
+              // console.log(response);
 
             })
             .catch(function (error) {
