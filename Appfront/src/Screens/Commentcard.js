@@ -165,8 +165,37 @@ const Commentcard = (prop) => {
 
           //  response();
         }}  name="like1" size={20} color={like} style={styles.like} />
+
             <Text style={styles.likenumber}>{numlike}</Text>
+
+
+
+
             <AntDesign onPress={async () => {
+               const back2={   
+          
+        }
+        if(like==='#1f7a8c'){
+         const backk2=JSON.stringify(back2);
+          axiosinst.post('comment/' + prop.commentid+'/like',backk2, {
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumlike(response.data.LikeCount)
+              console.log(response);
+              setlike('lightblue')
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('like error ||||||||||||')
+
+            })
+        }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
           if (dislike === 'lightblue')

@@ -214,7 +214,7 @@ const Comment = (prop) => {
        
      }}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} likenumber={100} commentid={item.id} IDD={IDD} dislikenumber={10} picture={`http://936c83e74843.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} likenumber={item.DislikeCount} commentid={item.id} IDD={IDD} dislikenumber={item.LikeCount} picture={`http://936c83e74843.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>
