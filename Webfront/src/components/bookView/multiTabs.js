@@ -15,7 +15,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
-
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -75,8 +74,8 @@ export default function FullWidthTabs(props) {
   };
 
   const [comments, setComments] = useState([]);
-  
   const [quotes, setQuotes] = useState([]);
+
   const [quotesPage, setQuotesPage] = useState(1);
 
   const [quoteAgain,setquoteAgain] = useState(0);
@@ -84,6 +83,7 @@ export default function FullWidthTabs(props) {
 
   const [endQuote,setEndQuote] = useState("");
   const [endComment,setEndComment] = useState("");
+
 
   //for comment
   useEffect(()=>{
@@ -486,12 +486,14 @@ export default function FullWidthTabs(props) {
                     </div>
                     
 
-                    {current.account.id === Cookies.get("userId") ?(
+                    {current.account.id != Cookies.get("userId") ?(
                       <div></div>
                     ):(
-                      <button className="btn btn-dark mt-1 mb-4 ml-4" onClick={()=> handleDeleteQuote(current.id)}>
-                        پاک کنید
-                      </button>
+                      <div className="btn" onClick={()=> handleDeleteQuote(current.id)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg>
+                      </div>
                     )
                   }
 
