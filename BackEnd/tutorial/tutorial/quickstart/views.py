@@ -197,7 +197,6 @@ class UserProfileView(APIView):
 
 class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
     serializer_class=QuoteSerializer
-    pagination_class = BasicPagination
 
     def get_queryset(self,pk):
         user=Account.objects.get(pk=pk)
@@ -207,9 +206,7 @@ class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
-        page = self.paginate_queryset(serializer.data)
-        print(page.count)
-        return self.get_paginated_response(page)
+        return Response(serializer.data)
 
     
 
@@ -264,7 +261,7 @@ class QuoteView(APIView,PaginationHandlerMixin):
 class LikeQuoteView(APIView):
 
     def get(self, request, pk):
-        user=self.request.user
+        user=request.user
         quote = MyQuote.objects.get(id=pk)
         if LikeQuote.objects.filter(account=user,quote=quote).exists():
             return Response({'message' : "True",})
@@ -272,7 +269,7 @@ class LikeQuoteView(APIView):
 
 
     def post(self,request,pk):
-        user=self.request.user
+        user=request.user
         quote = MyQuote.objects.get(id=pk)
         if LikeQuote.objects.filter(account=user,quote=quote).exists():
             userlike = LikeQuote.objects.filter(account=user,quote=quote)
