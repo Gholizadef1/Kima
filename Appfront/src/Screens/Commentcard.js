@@ -9,7 +9,7 @@ import { color } from 'react-native-reanimated';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+
 
 const Commentcard = (prop) => {
   console.log('COMMENT CARD')
