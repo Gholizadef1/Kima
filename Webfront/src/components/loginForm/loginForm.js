@@ -59,27 +59,12 @@ function LoginForm(props) {
                     redirectToHome();
                     props.showError(null)
                 }
-                // else if(response.status === 404){
-                //     props.showError("رمز یا ایمیل اشتباه است.")
-                //     setState(prevState => ({
-                //         ...prevState,
-                //         backError : "رمز یا ایمیل اشتباه است."
-                //     })); 
-
-                // }
-                // else{
-                //     props.showError("ایمیل وجود ندارد.");
-                //     setState(prevState => ({
-                //         ...prevState,
-                //         backError : "ایمیل وجود ندارد."
-                //     })); 
-                // }
             })
             .catch(function (error) {
-                    props.showError("رمز یا ایمیل اشتباه است.")
+                    props.showError("رمز یا ایمیل اشتباه است")
                     setState(prevState => ({
                         ...prevState,
-                        backError : "رمز یا ایمیل اشتباه است."
+                        backError : "رمز یا ایمیل اشتباه است"
                     })); 
             });
             //console.log(state);

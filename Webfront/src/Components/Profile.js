@@ -21,6 +21,7 @@ function ProFile (props){
         Cookies.remove('userToken');
         Cookies.remove('userName');
         Cookies.remove('userId');
+        Cookies.remove('userPic');
         props.history.push('/login');
     }
     const [user , setUser] = useState({
@@ -51,7 +52,7 @@ function ProFile (props){
                   setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
-                    email: response.data.email,
+                    //email: response.data.email,
                     picture : "http://127.0.0.1:8000"+response.data.profile_photo
                     }));
                     console.log(user);
@@ -98,6 +99,7 @@ function ProFile (props){
                         ...prevState,
                         backError : 'نام کاربری با موفقیت عوض شد'
                     }))
+                    Cookies.set('userName',user.userName);
 
                     
                 }
@@ -125,7 +127,8 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put('http://127.0.0.1:8000/api/update-profile/'
+            axios.put('http://127.0.0.1:8000/api/change-password/',
+             back
              ,{
               headers:{
              "Content-Type":"application/json",
@@ -198,6 +201,7 @@ function ProFile (props){
         ...prevState,
         backError : 'عکس با موفقیت عوض شد'
     }))
+    Cookies.set('userName',user.picture);
   })
   .catch(function(res){
     console.log(res);
@@ -254,15 +258,15 @@ useEffect(() => {
                                      aria-expanded="false"
                                      variant="gray"
                                      onClick={handleShow}
-                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra'}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
                                         ویرایش
                                     </StyledButton>
                                 </div>
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
-                                                                        
-                                                                         width: 120,
-                                                                         height: 120,
+                                      
+                                                                         width: 140,
+                                                                         height: 140,
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
@@ -300,13 +304,15 @@ useEffect(() => {
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">
-                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20}}>ثبت عکس</StyledButton>
+                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20,color:"white"}}>ثبت عکس</StyledButton>
+
                 <input class="form-control" 
                 type="file" accept="image/*" 
                 onChange={handleImageUpload} 
                 ref={imageUploader} 
-                style={{ display: "none", }} />
-              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15}}
+                style={{ display: "none",color:"white" }} />
+              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15,color:"white"}}
+
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
                             </StyledButton>
@@ -331,30 +337,38 @@ useEffect(() => {
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
-                                                style={{fontFamily:'Mitra'}}
+                                                style={{fontFamily:'Mitra',color:"white"}}
                                                 >ذخیره</StyledButton>
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
-                                                  id="userName"
+                                                  class="form-control"
+                                                  id="oldPass"
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
-                                                  id="userName"
+                                                  class="form-control"
+                                                  id="newPass"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
                                             </div>
+                                            {/* <div class="my-1">
+                                                <label for="password"style={{fontFamily:'Morvarid'}}>تایید رمز جدید</label>
+                                                <input type="text"
+                                                  class="form-control"
+                                                  id="newPass2"
+                                                  value={user.newPass2}
+                                                  onChange={handleChange}/>
+                                            </div> */}
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row "
+                                                className="btn color5 d-flex flex-row"
                                                 onClick={handleChangePassClick}
-                                                style={{fontFamily:'Mitra'}}
+                                                style={{fontFamily:'Mitra',color:"white"}}
                                                
                                                 >ذخیره </StyledButton>
                                             </div>
@@ -365,7 +379,7 @@ useEffect(() => {
                                             </div>
         </Modal.Body>
         <Modal.Footer>
-          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10}}>
+          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10,color:"white"}}>
             بستن
           </StyledButton>
         </Modal.Footer>
@@ -377,7 +391,7 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
-                            <div className="Tab">
+                            <div className="Tabz">
                               <Tabs/>
                               </div>
                             </div>
