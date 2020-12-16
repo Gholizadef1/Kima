@@ -23,6 +23,7 @@ background-color: #9dc3e9;
    
    margin-bottom: 15px;
    margin-left: 10px;
+
     margin-top: 2rem;
     margin-right: 3rem;
     border:2px solid #fff;
@@ -40,6 +41,7 @@ background-color: #9dc3e9;
    -webkit-box-shadow: 10px 10px 5px #ccc;
    -khtml-box-shadow: 10px 10px 5px #ccc;
 }
+
 .Tab{
     margin-left: 100px;
     margin-top: -21rem;
