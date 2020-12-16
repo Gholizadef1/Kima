@@ -61,7 +61,7 @@ import { red } from "@material-ui/core/colors";
               <div className="d-flex flex-column">
                 <small className=" dislike mr-3">
                 {current.Likes}
-                <AiOutlineDislike color="blue" size="25"/>
+                <AiOutlineDislike color="red" size="25"/>
                 </small>
               </div>
               <div className="d-flex flex-column">
@@ -73,7 +73,7 @@ import { red } from "@material-ui/core/colors";
              </div>
  
              <p  className="quote">
-            {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
+            {current.comment_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>
              <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>

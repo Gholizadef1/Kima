@@ -15,6 +15,7 @@ import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
 
 import {FaHome} from 'react-icons/fa';
+import {withStyles } from '@material-ui/core/styles';
 // import {MdGroup} from 'react-icons/md';
 // import UserList from './UsersList';
 import {
@@ -93,6 +94,27 @@ useEffect(() => {
     console.log(b);
     props.history.push( '/book/' + b.id );
   }
+  const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      color: 'black',
+      height: 50,
+      padding: '0 30px',
+      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
+  const logout = () =>{
+        
+    //localStorage.clear("token");
+    Cookies.remove('userToken');
+    Cookies.remove('userName');
+    Cookies.remove('userId');
+    props.history.push('/login');
+}
 
     return(   
       <nav class="navbar navbar-expand-lg navbar-light color4">
@@ -103,8 +125,8 @@ useEffect(() => {
          style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon "></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -121,16 +143,23 @@ useEffect(() => {
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
+           
+            <li type="button" className="col-4 btn btn-sm" onClick = {logout}style={{fontFamily:'Mitra',color:'white'}} >
+                                        خروج ازحساب
+                                    </li>
           </ul>
           <div className="mr-3 d-flex ml-auto justify-content-between ">
             <div>
+           
               <input className="rounded-pill text-right" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
                style={{fontFamily:'Mitra'}}
-               />             
+               />  
+
                 <Button variant="gray" className="" onClick={handleShow}>
                   <GoSearch size="30" color="white" />
                 </Button>
                 </div>
+                
               <a className="row mt-1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
                <small className="" size="50" style={{padding:10,fontSize:20}}>
                 {Cookies.get('userName')}

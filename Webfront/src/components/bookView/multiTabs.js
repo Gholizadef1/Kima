@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React, { useState, useEffect } from "react";
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -216,7 +216,7 @@ export default function FullWidthTabs(props) {
 
      }else{
       setOpenSnack(true);
-      setMassage("نظر خالی ثبت نشد")
+      setMassage("نظر خالی است لطفاً چیزی بنویسید")
      }
 
   }
@@ -239,7 +239,7 @@ export default function FullWidthTabs(props) {
 
       if(response.data.status==="success"){
         setOpenSnack(true);
-        setMassage("نقل قول شما با موفقیت ثبت شد")
+        setMassage("نقل‌قول شما با موفقیت ثبت شد")
         setUserQuote("");
         setquoteAgain(quoteAgain+1);
     }})
@@ -249,7 +249,7 @@ export default function FullWidthTabs(props) {
 
   }else{
     setOpenSnack(true);
-    setMassage("نقل قول خالی ثبت نشد")
+    setMassage("نقل‌قول خالی است لطفاً چیزی بنویسید")
    }
 }
 
@@ -305,8 +305,8 @@ export default function FullWidthTabs(props) {
         console.log(response);
         setOpenSnack(true);
         if(response.data.message==="successfully liked!"){
-          setMassage("لایک نظر شما با موفقیت ثبت شد");
-        }else setMassage("لایک نظر شما با موفقیت برداشته شد");
+          setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("عمل با موفقیت انجام شد");
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
       })
@@ -329,8 +329,8 @@ export default function FullWidthTabs(props) {
         console.log(response);
         setOpenSnack(true);
         if(response.data.message==="successfully disliked!"){
-          setMassage("دیسلایک نظر شما با موفقیت ثبت شد");
-        }else setMassage("دیسلایک نظر شما با موفقیت برداشته شد");
+          setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("عمل با موفقیت انجام شد");
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
         
@@ -357,8 +357,8 @@ export default function FullWidthTabs(props) {
       console.log(response);
       setOpenSnack(true);
       if(response.data.message==="like success!"){
-        setMassage("لایک نقل قول شما با موفقیت ثبت شد");
-      }else setMassage("لایک نقل قول شما با موفقیت برداشته شد");
+        setMassage("عمل با موفقیت انجام شد");
+      }else setMassage("عمل با موفقیت انحام شد");
         setquoteAgain(quoteAgain+1);
         console.log(response.data.data);
     })
@@ -454,7 +454,7 @@ export default function FullWidthTabs(props) {
               <Divider className="mt-3" variant="fullWidth" />
             </div>
 
-            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
+            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Mitra'}}>
               <label className="ml-2 mt-1">براساس:</label>
 
               <select className="form-control rounded-pill" style={{width:120}} id=""  onChange={handleCommentFilter} >
@@ -471,7 +471,7 @@ export default function FullWidthTabs(props) {
               {comments.message === "No Comment!" ? (
                  
 
-                 <p>هیچ نظری ثبت نشده</p>
+                 <p style={{fontFamily:'Mitra',color:'red'}}>نطری برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div>
@@ -486,7 +486,7 @@ export default function FullWidthTabs(props) {
                         {current.account.username}
                       </h5>
                       <small>
-                      {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                      {`${current.sendtime.toString().split('T')[0]}`}
                       </small>
                     </div>
 
@@ -584,7 +584,7 @@ export default function FullWidthTabs(props) {
             {quotes.message === "No Quote!" ? (
                  
 
-                 <p>هیچ نقل قولی ثبت نشده</p>
+                 <p style={{fontFamily:'Mitra',color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
                   <div>
@@ -599,7 +599,7 @@ export default function FullWidthTabs(props) {
                         {current.account.username}
                       </h5>
                       <small>
-                      {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                      {`${current.sendtime.toString().split('T')[0]}`}
                       </small>
                     </div>
 
