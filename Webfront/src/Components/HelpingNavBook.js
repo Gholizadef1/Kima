@@ -9,7 +9,9 @@ import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
 
+
 //import "./HelpingNav.css";
+
 
 import {GoSearch} from 'react-icons/go';
 import {FaHome} from 'react-icons/fa';
@@ -51,15 +53,19 @@ useEffect(() => {
 <Navbar className= "navbarMain navbar navbar-expand color4 flex-column flex-md-row bd-navbar">
             <h1>  
 
+
              <GiBookshelf color="white"
+
 
             //  style = {{padding:4, height:100,width:40}}
              />
              </h1>
              <b className=""
+
             
 
             style = {{fontSize:35,fontFamily:'Mitra',fontWeight:"bold",color:"white"}}
+
 
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
@@ -109,8 +115,10 @@ useEffect(() => {
          /> 
          <small className= "title">
 
+
          <h5 className="card-title3"style={{fontFamily:'Mitra'}}>{item.title}</h5>
          <h5 className="card-title4"style={{fontFamily:'Mitra'}}>{item.author}</h5>
+
 
           </small>
           </div>
@@ -124,7 +132,9 @@ useEffect(() => {
         </Modal.Body>
         <Modal.Footer>
 
+
           <Button variant="info" onClick={handleClose}style={{fontFamily:'Mitra'}}>
+
 
             بستن
           </Button>
@@ -147,7 +157,9 @@ useEffect(() => {
     </small>
 
 
+
     <CgProfile size="40" vertical-align='center' color="white"
+
 
     //  style={{fontFamily: 'Roboto',fontWeight:"bold",color:"black"}}
      /> 

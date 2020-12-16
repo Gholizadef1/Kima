@@ -259,15 +259,19 @@ useEffect(() => {
                                      variant="gray"
                                      onClick={handleShow}
 
+
                                      aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
                   ویرایش
+
                                     </StyledButton>
                                 </div>
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
+
                                                                          width: 140,
                                                                          height: 140,
+
 
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
@@ -344,15 +348,19 @@ useEffect(() => {
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
 
+
                                                 style={{fontFamily:'Mitra',color:"white"}}
+
 
                                                 >ذخیره</StyledButton>
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
+
                                                   class="form-control rounded-pill"
 
                                                   id="oldPass"
+
 
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
@@ -360,7 +368,9 @@ useEffect(() => {
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
+
                                                   class="form-control rounded-pill"
+
 
                                                   id="newPass"
                                                   value={user.newPass}
@@ -374,14 +384,16 @@ useEffect(() => {
                                                   value={user.newPass2}
                                                   onChange={handleChange}/>
                                             </div> */}
-=
+
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row"
                                                 onClick={handleChangePassClick}
 
+
                                                 style={{fontFamily:'Mitra',color:"white"}}
+
 
                                                
                                                 >ذخیره </StyledButton>
@@ -394,7 +406,9 @@ useEffect(() => {
         </Modal.Body>
         <Modal.Footer>
 
+
           <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10,color:"white"}}>
+
 
             بستن
           </StyledButton>
@@ -407,7 +421,7 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
-                            <div className="Tab">
+                            <div className="Tabz">
                               <Tabs/>
                               </div>
                             </div>

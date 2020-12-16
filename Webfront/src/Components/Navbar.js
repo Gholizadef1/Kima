@@ -40,8 +40,10 @@ function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
 
+
   // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
+
 
 
  const handleChange = event => {
@@ -169,7 +171,6 @@ useEffect(() => {
           </Button>
         </Modal.Footer>
       </Modal>
-
 
 
           
