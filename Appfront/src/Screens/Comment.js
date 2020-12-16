@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const commentschema=yup.object({
 
