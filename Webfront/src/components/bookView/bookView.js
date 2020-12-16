@@ -19,7 +19,9 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
 import RatingStars from "../../Components/RatingStars";
+
 import { data, event, noConflict } from 'jquery';
+
 import Tabs from "./multiTabs"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -28,6 +30,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 
 function BookView(props) {
+
 let { bookId } = useParams();
 
 //const bookId= props.match.params.id; //console.log(bookId);
@@ -137,6 +140,7 @@ console.log(error);
 
 });
 
+
 }
 },[] );
 
@@ -164,6 +168,7 @@ const StyledButton = withStyles({
       marginLeft:20,
       paddingTop:10,
     }
+
   })(Tooltip);
 const addBookToMineHandler = (choices)=>{
 //console.log(choices.target.value);
@@ -250,6 +255,7 @@ headers:{
 })
 
 })
+
 
 }
 useEffect(() => {

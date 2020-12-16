@@ -110,7 +110,9 @@ function Slide(props) {
               <div className="brand1 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
 
       {bookRead.length === 0 ? (
+
         <div className="subbrand1" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+
       ) : (
        <div className = "slid">
         <Slider {...settings}>
@@ -141,6 +143,7 @@ function Slide(props) {
     <div className="brand2 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
         <div className="subbrand2" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+
       ) : (
        <div className = "slid">
 
@@ -173,6 +176,7 @@ function Slide(props) {
 
       {bookWantto.length === 0 ? (
           <div className="subbrand3" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+
       ) : (
        <div className = "slid">
         <Slider {...settings}>
