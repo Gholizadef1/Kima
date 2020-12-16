@@ -166,7 +166,45 @@ const Commentcard = (prop) => {
           //  response();
         }}  name="like1" size={20} color={like} style={styles.like} />
             <Text style={styles.likenumber}>{numlike}</Text>
-            <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
+            <AntDesign onPress={async () => {
+          //  console.log(item.account.id)
+          // setSelectedIndex(item.id)
+          if (dislike === 'lightblue')
+            setdislike('#1f7a8c')
+          else
+            setdislike('lightblue')
+
+          // console.log((await AsyncStorage.getItem('token')).toString());
+          // alert(prop.quoteid)
+          console.log((await AsyncStorage.getItem('token')).toString())
+          console.log(prop.commentid + 'PROP QUOTE ID');
+          // // console.log(item.account.id);
+          const back={   
+          
+        }
+         const backk=JSON.stringify(back);
+          axiosinst.post('comment/' + prop.commentid+'/like',backk, {
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumdislike(response.data.LikeCount)
+              console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('dislike error ||||||||||||')
+
+            })
+          //  getlike(item);
+
+
+          //  response();
+        }}name="dislike1" size={20} color={dislike} style={styles.dislike} />
             <Text style={styles.dislikenumber}>{numdislike}</Text>
             {`${prop.comment}`.toString().split('\n').length>=5?<TouchableOpacity
             onPress={()=>{if(more===false)
