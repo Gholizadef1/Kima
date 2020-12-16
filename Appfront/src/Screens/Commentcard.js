@@ -13,8 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Commentcard = (prop) => {
      const[more,setmore]=useState(false);
     const[showmore,setshowmore]=useState('بیشتر...');
-    const[numlike,setnumlike]=useState(0);
-    const[numdislike,setnumdislike]=useState(0);
+    const[numlike,setnumlike]=useState(prop.likenumber);
+    const[numdislike,setnumdislike]=useState(prop.dislikenumber);
     // console.log((prop.comment.toString().split('\n').lenght===1))
     const commentt=`${prop.comment}`.toString();
     const linenumber=(commentt.split('\n').length)
@@ -126,10 +126,48 @@ const Commentcard = (prop) => {
                 {!more?<Text>{comment4}</Text>:<Text>{prop.comment}</Text>}
             </View>
             <View style={{flexDirection:'row'}}>
-            <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
-            <Text style={styles.likenumber}>{prop.likenumber+numlike}</Text>
+            <AntDesign onPress={async () => {
+          //  console.log(item.account.id)
+          // setSelectedIndex(item.id)
+          if (like === 'lightblue')
+            setlike('#1f7a8c')
+          else
+            setlike('lightblue')
+
+          // console.log((await AsyncStorage.getItem('token')).toString());
+          // alert(prop.quoteid)
+          console.log((await AsyncStorage.getItem('token')).toString())
+          console.log(prop.commentid + 'PROP QUOTE ID');
+          // // console.log(item.account.id);
+          const back={   
+          
+        }
+         const backk=JSON.stringify(back);
+          axiosinst.post('comment/' + prop.commentid+'/like',backk, {
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumlike(response.data.LikeCount)
+              console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('like error ||||||||||||')
+
+            })
+          //  getlike(item);
+
+
+          //  response();
+        }}  name="like1" size={20} color={like} style={styles.like} />
+            <Text style={styles.likenumber}>{numlike}</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
-            <Text style={styles.dislikenumber}>{prop.dislikenumber+numdislike}</Text>
+            <Text style={styles.dislikenumber}>{numdislike}</Text>
             {`${prop.comment}`.toString().split('\n').length>=5?<TouchableOpacity
             onPress={()=>{if(more===false)
             {setmore(true)
