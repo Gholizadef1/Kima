@@ -21,7 +21,18 @@ const commentschema=yup.object({
 
 const Comment = (prop) => {
   console.log('COMMENT')
-
+  const callbackFunction = async(childData) => {
+    if(childData===true){
+      // await setrefresh(childData)
+      console.log('TRUE')
+      await response(1)
+      // if(finfo===true)
+      // await setfinfo(false);
+      // else
+      // await setfinfo(true);
+    }
+  }
+  const [delet,setdelet]=useState(false)
   const [refresh,setrefresh]=useState(false);
   const[IDD,setIDD]=useState('');
   const equal=async(item)=>{
@@ -216,7 +227,7 @@ const Comment = (prop) => {
        
      }}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://d30e06d5c109.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount}  DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://d30e06d5c109.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>

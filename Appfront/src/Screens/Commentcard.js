@@ -161,24 +161,8 @@ const getdislike=async()=>{
   // console.log('commentcard')
   return (
     <View style={styles.container}>
-      {/* <LinearGradient
-        // Background Linear Gradient
-        //'#E9E9E9','#d8d8d8'
-        // '#EDF5FD','#EEF9FB','#F1F3F9','#E2E7F3','#E1E5F2'
-        //'#EFF9FB','#E2E7F3'
-        colors={['#F1F3F9','#e1e5f2']}
-        style={{
-         position:'absolute',
-          height:'100%',
-          width:'100%',
-        
-        }}
-      /> */}
-      {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
-      {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
-      <View style={styles.avatarname}>
-        {prop.IDD.toString() === prop.accountid.toString() ? <AntDesign name="delete"
-          size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
+       {prop.IDD.toString() === prop.accountid.toString() ? <AntDesign name="delete"
+          size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('4%'), right: wp('5%') }}
           onPress={async () => {
             await Alert.alert(
               'از حذف این نظر اطمینان دارید؟',
@@ -206,7 +190,7 @@ const getdislike=async()=>{
                       .then(async function (response) {
                         // console.log(response);
                         // prop.INFO(prop.quoteid);
-                        // await(prop.DELETE(true))
+                         await(prop.DELETE(true))
 
 
                       })
@@ -224,6 +208,23 @@ const getdislike=async()=>{
             //  response();
           }}
           color="#e56b6f" /> : null}
+      {/* <LinearGradient
+        // Background Linear Gradient
+        //'#E9E9E9','#d8d8d8'
+        // '#EDF5FD','#EEF9FB','#F1F3F9','#E2E7F3','#E1E5F2'
+        //'#EFF9FB','#E2E7F3'
+        colors={['#F1F3F9','#e1e5f2']}
+        style={{
+         position:'absolute',
+          height:'100%',
+          width:'100%',
+        
+        }}
+      /> */}
+      {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
+      {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
+      <View style={styles.avatarname}>
+     
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
           {prop.picture === 'http://d30e06d5c109.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
