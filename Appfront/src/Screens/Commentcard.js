@@ -7,6 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { color } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Commentcard = (prop) => {
      const[more,setmore]=useState(false);
@@ -55,7 +57,7 @@ const Commentcard = (prop) => {
           size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
           onPress={async () => {
             await Alert.alert(
-              'از حذف این نقل قول اطمینان دارید؟',
+              'از حذف این نظر اطمینان دارید؟',
               
               '',
               [
@@ -70,7 +72,7 @@ const Commentcard = (prop) => {
                     // prop.INFO(prop.quoteid)
                     // console.log(prop.INFO)
                     // console.log(prop.lastinfo);
-                    axiosinst.delete('api/quotes/' + prop.commentid, {
+                    axiosinst.delete('comment/' + prop.commentid+'/delete', {
                       "headers":
                       {
                         "Content-Type": "application/json",
