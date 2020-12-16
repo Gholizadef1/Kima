@@ -264,7 +264,7 @@ useEffect(() => {
                                 </div>
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
-                                                                        
+                                      
                                                                          width: 140,
                                                                          height: 140,
                                                                          display: "block"}}/>
@@ -305,12 +305,14 @@ useEffect(() => {
              display: "block"}}/>
             <div className="d-flex justify-content-between">
                  <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20,color:"white"}}>ثبت عکس</StyledButton>
+
                 <input class="form-control" 
                 type="file" accept="image/*" 
                 onChange={handleImageUpload} 
                 ref={imageUploader} 
                 style={{ display: "none",color:"white" }} />
               <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15,color:"white"}}
+
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
                             </StyledButton>

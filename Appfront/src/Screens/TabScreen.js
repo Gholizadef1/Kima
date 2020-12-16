@@ -45,11 +45,11 @@ const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
       // <NavigationContainer options={{}} >
-          <Tab.Navigator
-          initialRoute={{
-            headerShown: false
-          }}
-          >
+      <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c',activeBackgroundColor:'#EDF2F4'}}
+      initialRoute={{
+        headerShown: false
+      }}
+      >
              <Tab.Screen  name="خانه"  component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="home" size={size} color={color}  />
               ),

@@ -53,7 +53,6 @@ useEffect(() => {
              />
              </h1>
              <b className=""
-            
             style = {{fontSize:35,fontFamily:'Mitra',fontWeight:"bold",color:"white"}}
              >کیما</b>     
   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
@@ -74,6 +73,7 @@ useEffect(() => {
     
       </div> */}
       <input className="rounded-pill col-3 p-1 text-right"type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+
       style={{fontFamily:'Mitra'}}
       // style={{position:"absolute",left:1000,top:18,textAlign:"right"}}
       />

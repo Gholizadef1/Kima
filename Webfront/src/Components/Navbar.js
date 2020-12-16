@@ -38,7 +38,6 @@ function NavBar (props){
   const [search,setSearch] = useState([]);
   // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
-
  const handleChange = event => {
     setUser({ user: event.target.value });
   }
@@ -178,6 +177,3 @@ useEffect(() => {
     }
 
     export default withRouter( NavBar);
-
-
-

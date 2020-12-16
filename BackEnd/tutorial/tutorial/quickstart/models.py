@@ -6,6 +6,11 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from tutorial.kyma.models import book
 from django.contrib.postgres.fields import ArrayField
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
+from django.utils.timezone import now
+
+
 
 
 
@@ -45,7 +50,6 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    #myshelf=models.ManyToManyField(book,through='MyBook',default=False)
 
 
     USERNAME_FIELD = 'email'
@@ -78,4 +82,56 @@ class MyBook(models.Model):
 
     def __str__(self):
         return self.state
+
+
+
+class Ratinguser(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    userrate=models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    def __str__(self):
+        return self.userrate
+
+class MyQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    quote_text=models.TextField()
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
+    Likes = models.IntegerField(default=0)
+    
+
+class LikeQuote(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    quote = models.ForeignKey(MyQuote,on_delete=models.CASCADE)
+
+
+class MyComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    current_book=models.ForeignKey(book,on_delete=models.CASCADE)
+    comment_text=models.TextField()
+    sendtime = models.DateTimeField(default=timezone.now, editable=False)
+    LikeCount=models.IntegerField(default=0)
+    DislikeCount=models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.comment_text
+
+
+class LikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    liketime = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.comment.comment_text
+
+class DislikeComment(models.Model):
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    comment=models.ForeignKey(MyComment,on_delete=models.CASCADE)
+    disliketime = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.comment.comment_text
+
 
