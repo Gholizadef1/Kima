@@ -10,6 +10,8 @@ import { color } from 'react-native-reanimated';
 const Commentcard = (prop) => {
      const[more,setmore]=useState(false);
     const[showmore,setshowmore]=useState('بیشتر...');
+    const[numlike,setnumlike]=useState(0);
+    const[numdislike,setnumdislike]=useState(0);
     // console.log((prop.comment.toString().split('\n').lenght===1))
     const commentt=`${prop.comment}`.toString();
     const linenumber=(commentt.split('\n').length)
@@ -48,7 +50,7 @@ const Commentcard = (prop) => {
       {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
         {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
             <View style={styles.avatarname}>
-            {prop.IDD.toString() === prop.id.toString() ? <AntDesign name="delete"
+            {prop.IDD.toString() === prop.accountid.toString() ? <AntDesign name="delete"
           size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
           onPress={async () => {
             await Alert.alert(
@@ -97,7 +99,7 @@ const Commentcard = (prop) => {
           color="#e56b6f" /> : null}
             <TouchableOpacity style={styles.avatar}
               onPress={()=>{}}>
-           {prop.picture==='http://7714cae02459.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+           {prop.picture==='http://936c83e74843.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
       
              source={require('../../assets/avatar.png')}
             style={styles.avatar}
@@ -122,9 +124,9 @@ const Commentcard = (prop) => {
             </View>
             <View style={{flexDirection:'row'}}>
             <AntDesign onPress={()=>{if(like==='lightblue'){setlike('#1F7A8C')}else{setlike('lightblue')}}} name="like1" size={20} color={like} style={styles.like} />
-            <Text style={styles.likenumber}>{prop.likenumber}</Text>
+            <Text style={styles.likenumber}>{prop.likenumber+numlike}</Text>
             <AntDesign onPress={()=>{if(dislike==='lightblue'){setdislike('#1F7A8C')}else{setdislike('lightblue')}}} name="dislike1" size={20} color={dislike} style={styles.dislike} />
-            <Text style={styles.dislikenumber}>{prop.dislikenumber}</Text>
+            <Text style={styles.dislikenumber}>{prop.dislikenumber+numdislike}</Text>
             {`${prop.comment}`.toString().split('\n').length>=5?<TouchableOpacity
             onPress={()=>{if(more===false)
             {setmore(true)

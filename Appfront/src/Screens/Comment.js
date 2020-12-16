@@ -205,7 +205,7 @@ const Comment = (prop) => {
      keyExtractor={(item)=>item.id}
      data={information}
     renderItem={({item})=>(<Commentcard   name={item.account.username} 
-    date={item.sendtime.toString().split('T')[0]} id={item.account.id} likenumber={100} commentid={item.id} IDD={IDD} dislikenumber={10} picture={`http://7714cae02459.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+    date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} likenumber={100} commentid={item.id} IDD={IDD} dislikenumber={10} picture={`http://7714cae02459.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
     >
 
     </FlatList>
