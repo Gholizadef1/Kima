@@ -19,17 +19,22 @@ import CommentCard from './CommentCard';
 const Bookview = (prop) => {
   useFocusEffect(
     React.useCallback(() => {
+      console.log(ratenum+'RATE NUM')
+      setratenum(0)
+      console.log(ratenum+'RATE NUM')
     console.log('USE EFFECT')
     getResult(id)
     getComments();
     getQuote();
     getPicker();
     getRate();
+   
     // // console.log('Listenn')
     // alert('in')
     // return() => alert('lost')
     }, [])
   )
+  console.log(ratenum + 'RATE NUM')
   const getResult = async (id) => {
     const response = await axiosinst.get('/bookdetail/'+id);
     setResult(response.data);
@@ -38,7 +43,7 @@ const Bookview = (prop) => {
 
   const [rate , setrate] = useState(true);
   const [test , settest] = useState(null);
-  const [ratenum , setratenum] = useState(null);
+  const [ratenum , setratenum] = useState(0);
   const [result , setResult] = useState('');
   const [refresh,setrefresh]=useState(false);
   const [information,setinformation]=useState([]);
@@ -105,6 +110,8 @@ const Bookview = (prop) => {
   // }
 
   const getPicker = async () => {
+    console.log((await AsyncStorage.getItem('token')).toString())
+    console.log('GET PICKERRRR')
     axios.get('http://d30e06d5c109.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
@@ -112,16 +119,19 @@ const Bookview = (prop) => {
       }
     })
     .then(function(response){
+      console.log('GET PICKER OK')
       console.log('Pickerr'+response.data.book_state)
       setSelectedValue(response.data.book_state)   
   })
   .catch(function(error){
       console.log(error)
+      console.log('GET PICKER NOTOK')
   })
   };
   
 
   const PostPicker = async (value) => {
+   
         if (value != "") {
           const payload = {
             "book_state": value,
@@ -134,11 +144,14 @@ const Bookview = (prop) => {
             }
           })
             .then(async function (response) {
+
+              console.log('POST PICKER OK')
               console.log(response.data)
                getPicker();
             })
             .catch(function (error) {
               console.log(error);
+              console.log('POST PICKER NOTOK')
             });
         }
       }
@@ -154,6 +167,8 @@ const Bookview = (prop) => {
     .then(function(response){
       console.log('response data : ', response.data)
       console.log(response.message)
+      console.log(response)
+      console.log(ratenum+' RATE NUM')
       console.log('$$$$'+response.data.data)
       setratenum(response.data.data)   
   })
@@ -165,14 +180,17 @@ const Bookview = (prop) => {
 
 
 
-  console.log('**' +rate)
+  console.log('**' +rate+'RATE')
 
   const postRate = async(rate)=>{
+    console.log((await AsyncStorage.getItem('token')).toString())
+    console.log('POST RATE')
     if(rate!=""){
     const payload={
         "rate": rate,
     }
     const back= JSON.stringify(payload);
+    if(!ratenum===0)
     axios.post('http://d30e06d5c109.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -186,6 +204,7 @@ const Bookview = (prop) => {
       getRate();
     })
     .catch(function (error) {
+      console.log('POST RATE EROR')
        console.log(error);
     });
   }
