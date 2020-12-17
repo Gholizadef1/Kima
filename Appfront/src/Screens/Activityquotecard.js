@@ -4,7 +4,7 @@ import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'nat
 import { Avatar } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+// import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
