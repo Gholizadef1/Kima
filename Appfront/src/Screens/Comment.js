@@ -86,6 +86,8 @@ const Comment = (prop) => {
         //  console.log(response.data)
          console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
          console.log(information)
+         console.log('RESPONSE DATE')
+         console.log(response.date)
        await(  page === 1 ? setinformation(response.data) : setinformation(information.concat(response.data)))
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         console.log(information)
@@ -325,12 +327,13 @@ const Comment = (prop) => {
         />
         <FlatList
           style={{ marginBottom: '17%' }}
+          removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           data={information}
           refreshing={refresh}
           onEndReached={() => handleLoadMore()}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.7}
           ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
           style={{ marginBottom: hp('15.5%') }}
           onRefresh={async () => {

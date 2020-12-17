@@ -37,7 +37,7 @@ const getlike=async()=>{
           setlike('#1f7a8c')
         else
           setlike('lightblue')
-        //   console.log(response);
+          console.log(response);
 
         })
         .catch(function (error) {
@@ -63,6 +63,7 @@ const getdislike=async()=>{
         }
       })
         .then(async function (response) {
+            console.log(response)
           // setnumlike(response.data.LikeCount)
           if (response.data.message === 'True')
           setdislike('#1f7a8c')
@@ -152,12 +153,16 @@ const getdislike=async()=>{
     comment4 = prop.comment
   }
 
-
+//   React.usallback(() => {
+//         getdislike()
+//          getlike()
+   
+//   }, [])
 
    useEffect(()=>{
      getdislike()
      getlike()
-  }, [])
+  }, [like,dislike])
   // console.log('commentcard')
   return (
     <View style={styles.container}>
