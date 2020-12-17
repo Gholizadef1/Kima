@@ -142,7 +142,7 @@ console.log(error);
 
 
 }
-},[] );
+},[props.match.params.bookId] );
 
 // const StyledButton = withStyles({
 //     root: {
