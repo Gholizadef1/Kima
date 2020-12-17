@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { FAB } from 'react-native-paper';
-import DropDownPicker from 'react-native-dropdown-picker';
+ import DropDownPicker from 'react-native-dropdown-picker';
 
 
 
@@ -156,10 +156,7 @@ const callbackFunction = async(childData) => {
         />
         
 
-  <Animated.View style={{
-    
-       opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
-   }}>
+  <View>
       <FlatList
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
@@ -189,7 +186,7 @@ const callbackFunction = async(childData) => {
       // extraData={finfo}
     >
     </FlatList>
-           </Animated.View>
+           </View>
    
         
      </View>
