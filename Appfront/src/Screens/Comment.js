@@ -45,6 +45,7 @@ const Comment = (prop) => {
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
   const[likeotime,setlikeotime]=useState('/comment-filter-time');
+  const [theend,settheend]=useState(false)
 
   console.log('AVAL')
   const response = async (searchTerm) => {
@@ -289,6 +290,7 @@ const Comment = (prop) => {
           keyExtractor={(item) => item.id}
           data={information}
           refreshing={refresh}
+          ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نظر دیگری وجود ندارد</Text></View>)}
           style={{marginBottom:hp('15.5%')}}
           onRefresh={async () => {
             await setrefresh(true)
@@ -376,5 +378,13 @@ const styles = StyleSheet.create({
     borderTopColor: 'black',
 
   },
+  loader:{
+
+    alignItems:'center',
+    marginBottom:hp('5%'),
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:hp('10%')
+  }
 });
 export default Comment;
