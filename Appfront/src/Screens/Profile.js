@@ -1,6 +1,6 @@
 import React,{useContext, useEffect, useState} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEditor} from 'react-native';
-import {Container,Header,Title,Button,Form,Item,Input, Icon} from 'native-base';
+import {Container,Header,Title,Button,Form,Item,Input, Icon,Card} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Avatar } from 'react-native-paper';
@@ -22,6 +22,7 @@ import axiosinst from '../api/axiosinst';
 import Profilenavigation from './Profilenavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { Entypo } from '@expo/vector-icons'; 
 
 
 
@@ -47,8 +48,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
        setemail(response.data.email)
        console.log('*****')
        console.log(response.data.profile_photo)
-            console.log(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
             console.log(';;;;;')
             console.log(picture);
             console.log(picture)
@@ -152,7 +153,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          </View>
          
         
-        {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+        {picture==='http://1244af18f7bf.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
@@ -178,8 +179,33 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          source={require('../../assets/line3.png')}
          style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
          ></Image>
-         <Text style={{fontSize:15,fontWeight:'bold',marginTop:hp('10%'),alignSelf:'flex-start',left:wp('10%'),color:"gray"}}>فعالیت ها</Text>
-         <Image
+         <Card style={{backgroundColor:'#F8F8F8',marginTop:hp('8%'),marginLeft:wp('3%'),marginRight:wp('3%'),borderRadius:10}}>
+         <Text style={{fontSize:15,fontWeight:'bold',alignSelf:'flex-start',marginBottom:hp('2%'),marginTop:hp('1%'),left:wp('3%'),color:"#1f7a8c"}}>فعالیت های من</Text>
+      
+         <TouchableOpacity>
+             <Button style={styles.lastquote}>
+                 <Text style={styles.lastquotetext}>
+                     نظر های من
+                 </Text>
+                 <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
+             </Button>
+             </TouchableOpacity>
+             <Image
+         source={require('../../assets/line3.png')}
+         style={{height:hp('0.1%'),marginRight:wp('10%'),width:wp('94%')}}
+         ></Image>
+         <TouchableOpacity
+         onPress={()=>navigation.navigate('myquote')}
+         >
+             <Button style={styles.lastquote}>
+                 <Text style={styles.lastquotetext}>
+                     نقل قول های من
+                 </Text>
+                 <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
+             </Button>
+         </TouchableOpacity>
+         </Card>
+         {/* <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
@@ -191,9 +217,9 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('14%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
-         
+          */}
 
-        <Button style={styles.logout} title='logout'
+        <TouchableOpacity style={styles.logout} title='logout'
             onPress={()=>{
                 // console.log(navigation);
                 // navigation.navigate('loginFlow')}}
@@ -204,8 +230,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
             }}
       >
 
-          <Text style={{marginLeft:80}}>logout</Text>
-      </Button> 
+          <Text style={{alignSelf:'center',color:'#1f7a8c',fontWeight:'bold'}}>خروج از حسب کاربری</Text>
+      </TouchableOpacity> 
       {/* </View> */}
     
     </ScrollView>
@@ -219,6 +245,17 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 }
 
 const styles = StyleSheet.create({
+    lastquote:{
+        width:wp('100%'),
+        backgroundColor:'#F8F8F8'
+    },
+    quotecomment:{
+        marginRight:wp('8%')
+    },
+    lastquotetext:{
+        color:'gray',
+        marginLeft:wp('3%')
+    },
     container: {
       flex: 1,
    
@@ -247,14 +284,15 @@ const styles = StyleSheet.create({
     },
     logout:{
         
-        marginTop:hp('40%'),
+        marginTop:hp('7%'),
         marginBottom:30,
-        width:210,
-        backgroundColor:'#E1E5F2',
+        
+       
+        backgroundColor:'white',
         borderColor:'#BFDBF7',
         // marginLeft:98,
-        alignSelf:'center',
-        height:43,
+        
+       
         // fontSize:20
         
     },
@@ -299,6 +337,7 @@ const styles = StyleSheet.create({
          
         borderBottomRightRadius:50,
         borderBottomLeftRadius:50
-    }
+    },
+   
   });
   export default Profile;
