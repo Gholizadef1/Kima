@@ -10,6 +10,7 @@ import AuthContext,{AuthProvider} from './src/context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loadingscreen from './src/Screens/Loadingscreen';
 import {NavigationContainer} from '@react-navigation/native';
+import { I18nManager } from 'react-native';
 
 // import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
 // import {Context as AuthContext} from './src/context/Authcontext'
@@ -52,7 +53,7 @@ import {NavigationContainer} from '@react-navigation/native';
 const a=true;
 
 const SwitchNavigatorr=(prop)=>{
-
+  I18nManager.forceRTL(true);
   const value=useContext(AuthContext);
   const [done,setdone]=useState(false);
   console.log(value);
@@ -95,6 +96,7 @@ const SwitchNavigatorr=(prop)=>{
 
 
 export default()=>{
+  I18nManager.forceRTL(true);
  return(
    <AuthProvider>
 

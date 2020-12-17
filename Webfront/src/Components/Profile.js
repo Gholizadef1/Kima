@@ -211,8 +211,6 @@ function ProFile (props){
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 10,
-      border: 10,
       color: 'black',
       height: 50,
       padding: '0 30px',
@@ -234,8 +232,6 @@ useEffect(() => {
 
     return(
         <div className="main-content">
-            
-           
             <div class="container-fluid">
                 <div className="row">
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
@@ -258,15 +254,21 @@ useEffect(() => {
                                      aria-expanded="false"
                                      variant="gray"
                                      onClick={handleShow}
+
+
                                      aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
-                                        ویرایش
+                  ویرایش
+
                                     </StyledButton>
                                 </div>
                                     <div className="profile">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
-                                      
+
+
                                                                          width: 140,
                                                                          height: 140,
+
+
                                                                          display: "block"}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
@@ -276,7 +278,9 @@ useEffect(() => {
                             <div className="card-body pt-0">
                                 <div className="row">
                                     <div className="col">
-                                <hr style={{width:"90%",height:1,color:"#333",backgroundColor:"#333"}}></hr>
+
+                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
+
                                         <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
@@ -304,12 +308,14 @@ useEffect(() => {
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">
+
                  <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20,color:"white"}}>ثبت عکس</StyledButton>
 
                 <input class="form-control" 
                 type="file" accept="image/*" 
                 onChange={handleImageUpload} 
                 ref={imageUploader} 
+
                 style={{ display: "none",color:"white" }} />
               <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15,color:"white"}}
 
@@ -337,20 +343,31 @@ useEffect(() => {
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row "
                                                 onClick={handleChangeInfosClick}
+
+
                                                 style={{fontFamily:'Mitra',color:"white"}}
+
+
                                                 >ذخیره</StyledButton>
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
-                                                  class="form-control"
+
+                                                  class="form-control rounded-pill"
+
                                                   id="oldPass"
+
+
                                                   value={user.oldPass}
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
                                                 <input type="text"
-                                                  class="form-control"
+
+                                                  class="form-control rounded-pill"
+
+
                                                   id="newPass"
                                                   value={user.newPass}
                                                   onChange={handleChange}/>
@@ -363,12 +380,17 @@ useEffect(() => {
                                                   value={user.newPass2}
                                                   onChange={handleChange}/>
                                             </div> */}
+
                                             <div class=" my-2">
                                                 <StyledButton 
                                                 type="submit" 
                                                 className="btn color5 d-flex flex-row"
                                                 onClick={handleChangePassClick}
+
+
                                                 style={{fontFamily:'Mitra',color:"white"}}
+
+
                                                
                                                 >ذخیره </StyledButton>
                                             </div>
@@ -379,7 +401,11 @@ useEffect(() => {
                                             </div>
         </Modal.Body>
         <Modal.Footer>
+
+
           <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10,color:"white"}}>
+
+
             بستن
           </StyledButton>
         </Modal.Footer>
@@ -391,7 +417,9 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
+
                             <div className="Tabz">
+
                               <Tabs/>
                               </div>
                             </div>

@@ -23,6 +23,7 @@ background-color: #9dc3e9;
    
    margin-bottom: 15px;
    margin-left: 10px;
+
     margin-top: 2rem;
     margin-right: 3rem;
     border:2px solid #fff;
@@ -35,12 +36,15 @@ background-color: #9dc3e9;
 .cardp{
    left: 63rem;
    border:2px solid #fff;
+
     box-shadow: 20px 10px 5px #ccc;
     -moz-box-shadow: 10px 10px 5px #ccc;
     -webkit-box-shadow: 10px 10px 5px #ccc;
     -khtml-box-shadow: 10px 10px 5px #ccc;
 }
+
 .Tabz{
+
     margin-left: 100px;
     margin-top: -21rem;
 }
@@ -48,24 +52,27 @@ background-color: #9dc3e9;
 {
     .cardp{
         left: -7px;
+
     }
     .Tabz{
+
         margin-left: 10px;
         margin-top: -1rem;
     }
     .description{
         margin-left: 35px;
         font-size: 20px;
-        
-       
     }
+    
   }
   @media (max-width :780px) 
 {
     .cardp{
         left: -7px;
     } 
+
     .Tabz{
+
         margin-left: 10px;
         margin-top: -1rem;
     }
@@ -76,7 +83,9 @@ background-color: #9dc3e9;
     .cardp{
         left: -7px;
     } 
+
     .Tabz{
+
         margin-left: 10px;
         margin-top: -1rem;
     }
