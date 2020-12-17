@@ -11,6 +11,37 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
+  const getlike=async()=>{
+    const back2 = {
+  
+    }
+      const backk2 = JSON.stringify(back2);
+      console.log((await AsyncStorage.getItem('token')).toString())
+      
+        axiosinst.get('http://1244af18f7bf.ngrok.io/api/quotes/like/' + prop.quoteid , {
+          "headers":
+          {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+          }
+        })
+          .then(async function (response) {
+            console.log(response)
+            // setnumlike(response.data.LikeCount)
+            if (response.data.message === 'True')
+            setheart('#1f7a8c')
+          else
+            setheart('lightblue')
+          //   console.log(response);
+  
+          })
+          .catch(function (error) {
+            console.log(error);
+            console.log('like error ||||||||||||')
+  
+          })
+  }
+  
   console.log(prop.IDD + 'PROP IDD')
   console.log(prop.id + 'PROP ACCOUNT ID')
   // const[IDD,setIDD]=useState('');
@@ -27,6 +58,9 @@ const Quotecard = (prop) => {
 
   // const [dislike,setdislike]=useState('lightblue')
   const [heart, setheart] = useState(false);
+  useEffect(()=>{
+    getlike();
+  },[])
   // useEffect(()=>{
   //    equal();
   //    console.log(prop.id+'propaccountid')
@@ -176,8 +210,12 @@ const Quotecard = (prop) => {
             .then(async function (response) {
               console.log(response);
               console.log(response.date)
-              console.log(response.date.date+'.DATA .DATA')
-              setnumheart(response.data.toString())
+              console.log(response.data.data+'.DATA .DATA')
+              if(heart==='lightblue')
+              setheart('#1f7a8c')
+              else
+              setheart('lightblue')
+              setnumheart(response.data.data)
 
             })
             .catch(function (error) {
@@ -189,7 +227,7 @@ const Quotecard = (prop) => {
 
 
           //  response();
-        }} size={20} color={like} />
+        }} size={20} color={heart} />
         <Text style={styles.heartnumber}>{numheart}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 
