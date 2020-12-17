@@ -1,8 +1,7 @@
 .car:hover{
     box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
 }
-
-    .card-title3{
+.card-title3{
         font-family: 'Mitra';
         color: #000000;
         font-size: 1px;
@@ -50,18 +49,54 @@
     margin-left: 500px;
     color: black;
 }
-@media (max-width :420px) 
+
+.brand1{
+    margin-left: 7px;
+    font-size: 25px;
+}
+.subbrand1{
+    margin-top: -150px;
+}
+.brand2{
+    margin-left: -10px;
+    padding-top: 50px;
+    font-size: 25px;
+}
+.subbrand2{
+    margin-left: -10px;
+}
+.brand3{
+    margin-left: -10px;
+    padding-top: 50px;
+    font-size: 25px;
+
+}
+.subbrand3{
+    margin-left: -10px;
+}
+@media (max-width :400px) 
 {
     .col-xl-8-gholi{
         margin-left: 19px;
     }
+    .brand2{
+        margin-left: 100px;
+        padding-top: 10px;
+        font-size: 19px;
+        
+      }
+      .brand1{
+          font-size: 19px;
+      }
+      .brand3{
+          margin-top: -180px;
+          font-size: 19px;
+      }
     
     .slid{
         margin-right: -140px;
     }
-     .brand1{
-       margin-left: -10px;
-     }
+     
     
   }
 
@@ -77,9 +112,7 @@
     height: 144px;
     margin-left: -300px;
  }
- .brand1{
-   margin-left: -10px;
- }
+
     
     }
   @media (max-width :800px) 

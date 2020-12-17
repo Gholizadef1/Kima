@@ -2,6 +2,7 @@ import "./Tabs.css";
 import {
     withRouter
   } from "react-router-dom";
+  import "./renderRowQuote.css";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
@@ -31,7 +32,7 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
-      {quote.length===0 ? (
+      {quote.message==='No Quote!' ? (
                  
         <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
@@ -48,26 +49,25 @@ import { red } from "@material-ui/core/colors";
             primary={
               <List >
             <div className="" style={{direction:"rtl"}}>
-              <div className="d-flex p-3 mt-n4">
-              <Avatar  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
-              <div className="ml-auto mr-3">
-                <h5>
+              <div className="d-flex p-n1 pb-2 mt-n4">
+              <img  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
+              <div className="  ml-auto mr-3">
+                <h5 className="booktitle">
                 {current.current_book.title}
                 </h5>
-                <small>
-                {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                <small className="date">
+                {`${current.sendtime.toString().split('T')[0]}`}
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className="mr-3">
+                <small className=" like mr-3">
                 {current.Likes}
                 <GoHeart color="red" size="25"/>
-                
                 </small>
               </div>
              </div>
  
-             <p>
+             <p className="quote">
             {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>

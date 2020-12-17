@@ -19,6 +19,7 @@ const Home = ({navigation}) => {
 
     function getImageFromAPI(){
 
+
         axiosinst.get('/bookdetail')
 
 

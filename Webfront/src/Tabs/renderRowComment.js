@@ -4,6 +4,7 @@ import {
 import PropTypes from 'prop-types';
 import {GoHeart} from 'react-icons/go';
 import {AiOutlineLike} from 'react-icons/ai';
+import "./renderRowQuote.css";
 import {AiOutlineDislike} from 'react-icons/ai';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,7 +18,7 @@ import { red } from "@material-ui/core/colors";
     const { index, style } = props;
     const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
+      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/mycomments`,{
         headers:{
     "Content-Type":"application/json",
    }
@@ -30,7 +31,7 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
-      {comment.message === "No Comment!" ? (                   
+      {comment.message==='No Comment!' ? (                   
       <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
 
         
@@ -47,31 +48,31 @@ import { red } from "@material-ui/core/colors";
             primary={
               <List >
             <div className="" style={{direction:"rtl"}}>
-              <div className="d-flex p-3 mt-n4">
-              <Avatar  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
-              <div className="ml-auto mr-3">
+              <div className="d-flex p-n1 pb-2 mt-n4">
+              <img  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
+              <div className="booktitle ml-auto mr-3">
                 <h5>
                 {current.current_book.title}
                 </h5>
-                <small>
-                {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                <small className="date">
+                {`${current.sendtime.toString().split('T')[0]}`}
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className="mr-3">
+                <small className=" dislike mr-3">
                 {current.Likes}
                 <AiOutlineDislike color="blue" size="25"/>
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className="mr-4">
+                <small className=" like mr-4">
                 {current.Likes}
                 <AiOutlineLike  color="blue" size="25"/>
                 </small>
               </div>
              </div>
  
-             <p>
+             <p  className="quote">
             {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>
