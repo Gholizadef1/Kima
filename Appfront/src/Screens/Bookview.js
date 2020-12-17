@@ -2,25 +2,29 @@ import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
-   Right, Left , Picker, Form } from 'native-base';
+   Right, Left , Picker, Form, Item } from 'native-base';
 import {withNavigation} from 'react-navigation'
-import Home from './Home';
-import PickerShow from './PickerShow'
 import axiosinst from '../api/axiosinst'
-import ActionButton from 'react-native-action-button';
-import { HeaderBackground } from '@react-navigation/stack';
-import { HeaderHeightContext } from 'react-navigation-stack';
 import { StatusBar } from 'expo-status-bar';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native'
+import DropDownPicker from 'react-native-dropdown-picker';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import axios from 'axios'
 
 const Bookview = (prop) => {
 
+  console.log('BOOKVIEW')
+  const [rate , setrate] = useState(true);
+  const [test , settest] = useState(null);
+  const [ratenum , setratenum] = useState(null);
   const [result , setResult] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
   setResult(response.data);
-  console.log(response.data.description)
-  console.log(id);
   };
   useEffect(() =>{
     getResult(id);
@@ -29,27 +33,142 @@ const Bookview = (prop) => {
   if (!result) {
     return null;
   }
+
+  const getPicker = async () => {
+    axios.get('http://3a16020b9175.ngrok.io/bookdetail/'+id +'/getstate', {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('Pickerr'+response.data.book_state)
+      setSelectedValue(response.data.book_state)   
+  })
+  .catch(function(error){
+      console.log(error)
+  })
+  };
+  getPicker();
+
+  const PostPicker = async (value) => {
+        if (value != "") {
+          const payload = {
+            "book_state": value,
+          }
+          const back = JSON.stringify(payload);
+          axios.post('http://3a16020b9175.ngrok.io/bookdetail/' +id, back, {
+            "headers": {
+              "content-type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              console.log(response.data)
+              getPicker();
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      }
+
+
+  const getRate = async()=>{
+    axios.get('http://3a16020b9175.ngrok.io/api/bookrating/'+id, {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('response data : ', response.data)
+      console.log(response.message)
+      console.log('$$$$'+response.data.data)
+      setratenum(response.data.data)   
+  })
+  .catch(function(error){
+      console.log(error)
+  })
+  }
+  getRate();
+
+  console.log('**' +rate)
+
+  const postRate = async(rate)=>{
+    if(rate!=""){
+    const payload={
+        "rate": rate,
+    }
+    const back= JSON.stringify(payload);
+    axios.post('http://3a16020b9175.ngrok.io/api/bookrating/'+id ,back,{
+      "headers":{"content-type":"application/json",
+      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+              }
+              })
+    .then(async function(response){
+      console.log(response.data)
+      console.log('\n'+'++++++++'+'\n')
+      setratenum(rate);
+      console.log('&&'+rate);
+//      getRate();
+    })
+    .catch(function (error) {
+       console.log(error);
+    });
+  }
+}
+//this.state = {}
   
     return(
       <Container>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:35}}/>
-            <Body style={{marginTop:35}}>
-                  <Image source={{uri : result.imgurl}} style={{marginTop:5, height:180 ,
-                     width:120 , borderRadius:10}} />
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('20%')}}/>
+            <Body style={{}}>
+                  <Image source={{uri : result.imgurl}} style={{marginTop:hp('-15%'), height:220 ,
+                     width:160 , borderRadius:10 }} />
 
-                  <Text style={{marginTop:10 , fontWeight:'bold',
+                  <Text style={{marginTop:hp('1.5%') , fontWeight:'bold',
                       fontSize:25 }}>{result.title}</Text>
 
-                  <Text style={{marginTop:5}}>{result.author}</Text>
+                  <Text style={{marginTop:hp('0.5%')}}>{result.author}</Text>
 
-                  <PickerShow style={{}} bookid={id} /> 
-                  <Text style={{fontWeight:'bold' , fontSize:20 ,marginLeft:240 , marginBottom:5}}>
+                  <Text style={{marginTop:hp('0.5%')}}>به این کتاب امتیاز دهید</Text>
+                  <AirbnbRating style={{marginTop:hp('4%')}}
+                  count={5}
+                  showRating={false}
+                  defaultRating={ratenum}
+                  ratingBackgroundColor='red'
+                  onFinishRating={(rating) => postRate(rating)}
+                  size={25}
+                  />
+
+                  <DropDownPicker
+                      items={[
+                          {label: 'اضافه کنید', value: 'none'},
+                          {label: 'میخواهم بخوانم', value: 'ToRead'},
+                          {label: 'در حال خواندن', value: 'Reading'},
+                          {label: 'قبلا خوانده ام', value: 'Read'},
+                      ]}
+                      defaultValue={selectedValue}
+                      containerStyle={{height: 40 , width:220}}
+                      style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
+                      itemStyle={{
+                          justifyContent: 'flex-start'
+                      }}
+                      dropDownStyle={{backgroundColor: '#fafafa'}}
+                      onChangeItem={(item) => PostPicker(item.value)}
+                      
+                  />
+ 
+
+                  <Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
                     درباره کتاب :</Text>
                   <Content style={{}}>
                     <Card style={{}}>
                     
                  
-                    <Text style={{marginTop:15 , marginHorizontal:15}}>{result.description}</Text>
+                    <Text style={{marginTop:hp('2%') , marginLeft:wp('2%') , 
+                      textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
                   </Content>
             </Body>
@@ -104,3 +223,4 @@ const styles = StyleSheet.create({
     });
 
 export default Bookview;
+

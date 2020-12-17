@@ -10,16 +10,17 @@ const Mybooks = ({navigation}) => {
       <Container style={{marginTop:35}}>
         <Header style={{backgroundColor:'#1F7A8C' ,marginTop:0}} />
         <Content>
-            <Text style={{marginRight:150,marginTop:50,marginBottom:20}} >دسته بندی ها</Text>
+            <Text style={{right:-120,marginTop:35,marginBottom:20 
+              ,fontWeight:'bold' , fontSize:20}} >دسته بندی ها</Text>
           
             <View
                     style={{
                       top:0,
                       width:240,
                       right:0,
-                      left:90,
+                      left:60,
                       borderBottomColor: 'black',
-                      borderBottomWidth: 1,
+                      borderBottomWidth: 2,
                       fontWeight:'bold'
                     }}
                     />

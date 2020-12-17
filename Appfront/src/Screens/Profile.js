@@ -20,8 +20,10 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import axiosinst from '../api/axiosinst';
 import Profilenavigation from './Profilenavigation';
+
 import { useFocusEffect } from '@react-navigation/native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 
 
@@ -37,14 +39,14 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("/api/user-profile/"+id)
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
-        console.log('.....')
-         console.log('in')
-         console.log('.....')
+        
+        // console.log(response)
        setname(response.data.username)
     //    console.log(name)
        setemail(response.data.email)
+
        console.log('*****')
        console.log(response.data.profile_photo)
             console.log(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
@@ -55,6 +57,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
             console.log(';;;;;')
           
        console.log(response.data.profile_photo)
+
     
        
     }
@@ -74,35 +77,36 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
     //    response()
     //    console.log('akdfsj;lskafd')
     // });
-    // const photoresponse=async ()=>{
-    //     console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
-    //     const id=await AsyncStorage.getItem('id');
-    //     // console.log(id)
-    //     try{
-    //     const response = await axiosinst.get("http://eb506fafbc32.ngrok.io/api/user-profile/"+id)
+    const photoresponse=async ()=>{
+        console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
+        const id=await AsyncStorage.getItem('id');
+        // console.log(id)
+        try{
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
         
-    //   //  console.log(response)
-    // //   console.log('*****')
-    // //         console.log(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
-    // //         setpicture(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
-    // //         console.log(picture);
+      //  console.log(response)
+      console.log('*****')
+            console.log(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            console.log(picture);
           
-    // //    console.log(response.data.profile_photo)
-    //   //  setimage(require(response.data.profile_photo))
+       console.log(response.data.profile_photo)
+      //  setimage(require(response.data.profile_photo))
       
-    // }
-    // catch(err){
-    //      console.log(err);
-    //     Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
+    }
+    catch(err){
+         console.log(err);
+        Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
             
     
-    //             Title:'فهمیدم',onPress:()=>console.log('alert closed')
-    //             }])
-    // }
-    // }
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
  
     let a=0;
+
     useFocusEffect(
         React.useCallback((name,picture,email) => {
             response();
@@ -122,8 +126,9 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
     //         //   console.log('\n'+'-----'+Profilenavigation+'-----')
     //         });
         
+
        
-    //   }, []);
+      }, [Profilenavigation,a]);
      
 
       
@@ -152,10 +157,14 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          </View>
          
         
+
         {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
+
         source={{uri:picture}}
+        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
+        source={require('../../assets/avatar.png')}
         ></Avatar.Image>}
 
         <Text style={{marginTop:hp('6%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>

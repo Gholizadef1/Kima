@@ -21,7 +21,7 @@ const IsRead = ({navigation}) => {
     async function getredImageFromAPI1(){
 
     const id=await AsyncStorage.getItem('id');    
-    axiosinst.get('http://1168ebafd8e4.ngrok.io/api/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
+    axiosinst.get('/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
     }})
     .then(function(response){
@@ -47,7 +47,7 @@ const IsRead = ({navigation}) => {
           <Left/>
           <Body>
             <Title style={{fontSize:22 , fontWeight:'bold',color:'#E1E5F2' , marginRight: 40, marginLeft: 10 
-            , left: 255,top:2}}>کیما</Title>
+            , right: 55,top:2}}>کیما</Title>
           </Body>
           <Right />
         </Header>
@@ -57,7 +57,7 @@ const IsRead = ({navigation}) => {
              <ScrollView style={{marginTop:100}}>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>قبلا خوانده ام</Text>
+                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>قبلا خوانده ام</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     data={redimage}
