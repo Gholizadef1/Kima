@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 import { FAB } from 'react-native-paper';
+import { getPendingResultAsync } from 'expo-image-picker';
 
 
 const commentschema=yup.object({
@@ -278,7 +279,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-      <FlatList
+     { information.length!=0 ?<FlatList
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
@@ -306,7 +307,7 @@ const callbackFunction = async(childData) => {
     )}
       // extraData={finfo}
     >
-    </FlatList>
+    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>نقل قولی وجود ندارد</Text>}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
