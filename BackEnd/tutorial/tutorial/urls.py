@@ -21,10 +21,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .kyma import views
 from .quickstart import views
 from . import kyma , quickstart
-from .quickstart.views import registration_view,UpdateUserProfileView
-from .quickstart.views import ChangePasswordView
-from .quickstart.views import *
-from .kyma.views import *
+from tutorial.quickstart.views import *
+from tutorial.kyma.views import *
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -33,9 +31,24 @@ urlpatterns = [
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('bookinfo/', kyma.views.BookListView.as_view()),
     path('bookdetail/<int:pk>',kyma.views.BookViewPage.as_view()),
+    path('api/bookrating/<int:pk>',UserRatingview.as_view()),
+    path('api/rateperbook/<int:pk>',BookRateView.as_view()),
+    path('api/quotes/<int:pk>',QuoteView.as_view()),
+    path('api/quotes/like/<int:pk>',LikeQuoteView.as_view()),
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),
     path('api/user-profile/<int:pk>/Read',Readcollec.as_view()),
     path('api/user-profile/<int:pk>/Reading',Readingcollec.as_view()),
+    path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
+    path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
+    path('comment/<int:pk>/delete',DeleteCommentView.as_view()),
+    path('comment/<int:pk>/like',LikeCommentView.as_view()),
+    path('comment/<int:pk>/dislike',DislikeCommentView.as_view()),
+    path('bookdetail/<int:pk>/comment',CommentView.as_view()),
+    path('bookdetail/<int:pk>/comment-filter-time',FilterCommentbyTime.as_view()),
+    path('bookdetail/<int:pk>/comment-filter-like',FilterCommentbyLike.as_view()),
+    path('bookdetail/<int:pk>/quote-filter-time',FilterQuotebyTime.as_view()),
+    path('bookdetail/<int:pk>/quote-filter-like',FilterQuotebyLike.as_view()),
+    path('bookdetail/<int:pk>/getstate',BookState.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
