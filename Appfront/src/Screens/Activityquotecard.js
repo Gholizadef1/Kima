@@ -35,9 +35,9 @@ const Quotecard = (prop) => {
   console.log('quotecard')
   return (
     <View style={styles.container}>
-
-      <Card style={{ marginLeft: wp('5%'), marginTop: hp('3.3%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
-
+    
+      <Card style={{ marginLeft: wp('5%'), marginTop: hp('14%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
+    
         {prop.IDD.toString() === prop.id.toString() ? <AntDesign name="delete"
           size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
           onPress={async () => {
@@ -90,6 +90,7 @@ const Quotecard = (prop) => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
+       
           <Text style={{
             // textAlignVertical:'center',
             // alignContent:'center',
@@ -109,31 +110,24 @@ const Quotecard = (prop) => {
           }}>{prop.naghlghol}</Text>
         </View>
         <View style={{ position: 'absolute', marginTop: prop.height - hp('7.8%'), alignSelf: 'center' }}>
-          <Text style={{ marginBottom: hp('0.9%'), alignSelf: 'center', color: 'gray' }}>{prop.name}</Text>
+          {/* <Text style={{ marginBottom: hp('0.9%'), alignSelf: 'center', color: 'gray' }}>{prop.name}</Text> */}
           <View style={{}}>
 
 
-            <TouchableOpacity style={styles.avatar}
+            <TouchableOpacity style={styles.bookpic}
               onPress={() => { }}>
 
-              <TouchableOpacity style={styles.avatar}
-                onPress={() => { }}>
-                {prop.picture === 'http://1c53ec0001dc.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+            <Image source={{uri:prop.book}} style={styles.bookpic}>
 
-                  source={require('../../assets/avatar.png')}
-                  style={styles.avatar}
+            </Image>
+            <View style={{flexDirection:'row',alignSelf:'center', bottom:hp('31%') }}>
+            <Text style={{color:'gray',fontSize:12,fontWeight:'bold',borderLeftColor:'black'}}>{prop.booktitle+' | '}</Text>
+            <Text style={{color:'gray',fontSize:12,fontWeight:'bold'}}>{prop.bookauthor}</Text>
+            {/* <Image source={require('../../assets/line3.png')}></Image> */}
+           
+            </View>
 
-                >
 
-                </ImageBackground> : <ImageBackground borderRadius={100}
-
-                  source={{ uri: prop.picture }}
-                  style={styles.avatar}
-
-                >
-
-                  </ImageBackground>}
-              </TouchableOpacity>
             </TouchableOpacity>
           </View>
 
@@ -197,6 +191,16 @@ const styles = StyleSheet.create({
     marginTop: hp('1%')
     //   alignItems: 'center',
     //   justifyContent: 'center',
+  },
+  bookpic:{
+    height:135,
+    width:90,
+    position:'absolute',
+    bottom:hp('49%') ,
+    alignSelf:'center' ,
+    borderRadius:5,
+
+    
   },
   avatar: {
     height: hp('7.8%'),
