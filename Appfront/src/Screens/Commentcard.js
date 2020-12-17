@@ -37,7 +37,7 @@ const getlike=async()=>{
           setlike('#1f7a8c')
         else
           setlike('lightblue')
-          console.log(response);
+        //   console.log(response);
 
         })
         .catch(function (error) {

@@ -58,7 +58,7 @@ const Comment = (prop) => {
     try {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime)
-      console.log(response.data)
+      // console.log(response.data)
       //  for(let i=0;response.data[i]!=null;i++){
       //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
       //    }
@@ -136,7 +136,7 @@ const Comment = (prop) => {
               }
             })
               .then(async function (response) {
-                console.log(response);
+                // console.log(response);
 
               })
               .catch(function (error) {
@@ -227,7 +227,7 @@ const Comment = (prop) => {
           defaultValue={selectedValue}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
           style={{
-            backgroundColor: '#fafafa', marginTop: hp('1%'), marginBottom: hp('-2.5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            backgroundColor: '#fafafa', marginTop: hp('1%'), width:220,marginBottom: hp('-3%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
             borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('1%')
           }}
           itemStyle={{
@@ -236,9 +236,11 @@ const Comment = (prop) => {
           dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
           onChangeItem={async(item) => {
 
-            if (item.value === 'like') {
-              setlikeotime('/comment-filter-like')
-              response();
+            if (item.value === 'none') {
+              console.log(item.value+'VALUE')
+              console.log('to none')
+              await setlikeotime('/comment-filter-time')
+              await response();
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
               //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-like')
@@ -255,9 +257,11 @@ const Comment = (prop) => {
 
               // }
             }
-            else {
-              setlikeotime('/comment-filter-time')
-              response();
+            else if(item.value === 'like') {
+              console.log('tolike')
+              console.log(item.value +'VALUE')
+              await setlikeotime('/comment-filter-like')
+              await response();
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
               //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-time')
@@ -285,6 +289,7 @@ const Comment = (prop) => {
           keyExtractor={(item) => item.id}
           data={information}
           refreshing={refresh}
+          style={{marginBottom:hp('15.5%')}}
           onRefresh={async () => {
             await setrefresh(true)
 
@@ -302,7 +307,12 @@ const Comment = (prop) => {
 
       </Animated.View>
 
-
+    {/* <View style={{ width:wp('70%'),
+    marginHorizontal:'15%',
+    marginTop:hp('80.1%'),
+    position:'absolute',
+    borderRadius:17,
+    backgroundColor:'white'}}> */}
       {showbutton ? <Button style={styles.addcomment}
         onPress={() => {
           setshowbutton(false)
@@ -314,7 +324,7 @@ const Comment = (prop) => {
 
       </Button>
         : null}
-
+{/* // </View> */}
 
     </View>
   );
@@ -329,12 +339,12 @@ const styles = StyleSheet.create({
   },
   addcomment: {
 
-    width: '70%',
-    marginHorizontal: '15%',
-    marginTop: '162%',
-    position: 'absolute',
-    borderRadius: 17,
-    backgroundColor: '#1F7A8C'
+    width:wp('70%'),
+    marginHorizontal:'15%',
+    marginTop:hp('80.1%'),
+    position:'absolute',
+    borderRadius:17,
+    backgroundColor:'#1F7A8C'
   },
   nazar: {
     marginLeft: '33%',
