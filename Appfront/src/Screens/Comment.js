@@ -44,33 +44,67 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
-  const[likeotime,setlikeotime]=useState('/comment-filter-time');
-  const [theend,settheend]=useState(false)
+  const [likeotime, setlikeotime] = useState('/comment-filter-time');
+  const [theend, settheend] = useState(false)
+  const [page, setpage] = useState(1);
 
   console.log('AVAL')
-  const response = async (searchTerm) => {
-
+  const response = async (page) => {
+    console.log('PAGEEEE'+ page)
     console.log('DOVOM')
+    await setpage(page)
+    console.log('PAGEEEE'+ page)
+    if (page === 1) {
+      console.log('PAGE 111')
+      await settheend(false)
+      await setinformation([])
 
+      console.log('IT IS HEAR SET INFO []')
+      console.log(information)
+
+    }
+    await settheend(false)
+    await setinformation([])
     const id = prop.route.params.id
     console.log(id)
     console.log(await (await AsyncStorage.getItem('id')).toString())
 
     try {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-      const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime)
+      const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime, {
+        params: {
+          page: page
+        }
+      })
       // console.log(response.data)
-      //  for(let i=0;response.data[i]!=null;i++){
-      //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
-      //    }
-
-      //   }
-      setrefresh(false)
-      setinformation(response.data)
-      console.log(information[0])
+    
+      if (response.data.detail === 'Invalid page.')
+        settheend(true);
+      else {
+        settheend(false)
+        console.log(IDD + 'IDDresponse');
+        //  console.log(response.data)
+         console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
+         console.log(information)
+       await(  page === 1 ? setinformation(response.data) : setinformation(information.concat(response.data)))
+        console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
+        console.log(information)
+        setrefresh(false)
+        //     setloading(false);
+      }
+      //  console.log(information[0])
     }
     catch (err) {
+
+      // else if(theend===true)
+      // settheend(false)
       setrefresh(false)
+      console.log(err.toString().split('\n')[0])
+      if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
+        settheend(true);
+      // else if(theend===true)
+      // settheend(false)
+      console.log(theend + 'THE ENDDD')
       console.log(err);
 
     }
@@ -79,7 +113,7 @@ const Comment = (prop) => {
     React.useCallback(() => {
 
       console.log('++++++++++' + information + '**********')
-      response();
+      response(1);
       console.log('++++++++++' + information + '**********')
       // //   console.log('Listenn')
       // alert('in')
@@ -87,6 +121,11 @@ const Comment = (prop) => {
     }, [])
 
   )
+  const handleLoadMore = async() => {
+    console.log('END OF THE LIST')
+     if(theend===false)
+     response(page+1);
+    };
   const [showbutton, setshowbutton] = useState(true);
   console.log(prop.route.params.title)
   const [reset, setreset] = useState(false);
@@ -206,7 +245,7 @@ const Comment = (prop) => {
           // setclosed(false)
           // else
           // setclosed(true)
-          response()
+          response(1)
 
         }}
         //  isBackDropDismisByPress={true}
@@ -228,20 +267,20 @@ const Comment = (prop) => {
           defaultValue={selectedValue}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
           style={{
-            backgroundColor: '#fafafa', marginTop: hp('1%'), width:220,marginBottom: hp('-3%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            backgroundColor: '#fafafa', marginTop: hp('1%'), width: 220, marginBottom: hp('-3%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
             borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('1%')
           }}
           itemStyle={{
             justifyContent: 'flex-start'
           }}
           dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
-          onChangeItem={async(item) => {
+          onChangeItem={async (item) => {
 
             if (item.value === 'none') {
-              console.log(item.value+'VALUE')
+              console.log(item.value + 'VALUE')
               console.log('to none')
               await setlikeotime('/comment-filter-time')
-              await response();
+              // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
               //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-like')
@@ -258,11 +297,11 @@ const Comment = (prop) => {
 
               // }
             }
-            else if(item.value === 'like') {
+            else if (item.value === 'like') {
               console.log('tolike')
-              console.log(item.value +'VALUE')
+              console.log(item.value + 'VALUE')
               await setlikeotime('/comment-filter-like')
-              await response();
+              // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
               //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-time')
@@ -290,12 +329,14 @@ const Comment = (prop) => {
           keyExtractor={(item) => item.id}
           data={information}
           refreshing={refresh}
-          ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نظر دیگری وجود ندارد</Text></View>)}
-          style={{marginBottom:hp('15.5%')}}
+          onEndReached={() => handleLoadMore()}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+          style={{ marginBottom: hp('15.5%') }}
           onRefresh={async () => {
             await setrefresh(true)
 
-            response();
+            response(1);
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
@@ -309,7 +350,7 @@ const Comment = (prop) => {
 
       </Animated.View>
 
-    {/* <View style={{ width:wp('70%'),
+      {/* <View style={{ width:wp('70%'),
     marginHorizontal:'15%',
     marginTop:hp('80.1%'),
     position:'absolute',
@@ -326,7 +367,7 @@ const Comment = (prop) => {
 
       </Button>
         : null}
-{/* // </View> */}
+      {/* // </View> */}
 
     </View>
   );
@@ -341,12 +382,12 @@ const styles = StyleSheet.create({
   },
   addcomment: {
 
-    width:wp('70%'),
-    marginHorizontal:'15%',
-    marginTop:hp('80.1%'),
-    position:'absolute',
-    borderRadius:17,
-    backgroundColor:'#1F7A8C'
+    width: wp('70%'),
+    marginHorizontal: '15%',
+    marginTop: hp('80.1%'),
+    position: 'absolute',
+    borderRadius: 17,
+    backgroundColor: '#1F7A8C'
   },
   nazar: {
     marginLeft: '33%',
@@ -378,13 +419,13 @@ const styles = StyleSheet.create({
     borderTopColor: 'black',
 
   },
-  loader:{
+  loader: {
 
-    alignItems:'center',
-    marginBottom:hp('5%'),
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop:hp('10%')
+    alignItems: 'center',
+    marginBottom: hp('5%'),
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: hp('10%')
   }
 });
 export default Comment;
