@@ -146,8 +146,8 @@ useEffect(() => {
            
             
           </ul>
-          <div className="mx-auto">
-              <input className="rounded-pill text-right ml-4" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+          <div className="d-flex flex-grow-1 mx-md-5">
+              <input className="rounded-pill text-right ml-4 flex-fill my-1" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
                style={{fontFamily:'Mitra'}}
                />  
               <Button variant="gray" className="" onClick={handleShow}>
