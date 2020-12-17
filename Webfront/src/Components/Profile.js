@@ -52,7 +52,7 @@ function ProFile (props){
                   setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
-                    //email: response.data.email,
+                    email: response.data.email,
                     picture : "http://127.0.0.1:8000"+response.data.profile_photo
                     }));
                     console.log(user);
@@ -261,9 +261,8 @@ useEffect(() => {
 
                                     </StyledButton>
                                 </div>
-                                    <div className="profile">
+                                    <div className="profile col-md-5 pl-1 mr-2 ml-1 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
-
 
                                                                          width: 140,
                                                                          height: 140,
@@ -281,7 +280,7 @@ useEffect(() => {
 
                                 <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
+                                        <div className="d-flex justify-content-between text-center mt-md-2 ml-5 mr-5">
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
