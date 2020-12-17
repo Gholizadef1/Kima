@@ -279,7 +279,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     { information.length!=0 ?<FlatList
+     { (information.length>=0) ?<FlatList
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
@@ -368,6 +368,13 @@ const styles = StyleSheet.create({
       marginTop:hp('47.5%'),
       right:wp('6.5%')     
       
+    },
+    heartnumber:{   
+      position:'absolute',
+      marginTop:hp('47.6%'),
+        left:wp('85%'),  
+        fontSize:hp('1.5%'),
+        color:'gray'
     },
  
     loader:{
