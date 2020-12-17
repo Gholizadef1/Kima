@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { Component } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -45,14 +46,17 @@ const Tab = createBottomTabNavigator();
 const TabSreen = () => {
     return (
       // <NavigationContainer options={{}} >
-      <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c',activeBackgroundColor:'#EDF2F4'}}
-      initialRoute={{
-        headerShown: false
-      }}
-      >
+
+          <Tab.Navigator tabBarOptions={{activeTintColor:'#1f7a8c',activeBackgroundColor:'#EDF2F4'}}
+          initialRoute={{
+            headerShown: false
+          }}
+          >
+
              <Tab.Screen  name="خانه"  component={Booknavigation} options ={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="home" size={size} color={color}  />
               ),
+              
               }}/>
                <Tab.Screen name="کتاب های من" component={MybooksNavigation} options={{tabBarIcon: ({ color, size }) => (
                 <AntDesign name="book" size={size} color={color} />
