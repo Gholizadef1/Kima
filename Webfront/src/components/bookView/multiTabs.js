@@ -100,25 +100,59 @@ export default function FullWidthTabs(props) {
   useEffect(()=>{
     setEndQuote("");
     console.log(props.book)
-    axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    // .then(response=>{
+    //   setComments(response.data);
+    //   console.log(response);
+    //   //setcommentAgain("");
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndComment("نظر دیگری وجود ندارد");
+    // });
+
+    if(filterBaseComment==="time"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time")
     .then(response=>{
-      setComments(response.data);
+     setComments(response.data);
       console.log(response);
-      //setcommentAgain("");
     })
     .catch(error=>{
       console.log(error);
       setEndComment("نظر دیگری وجود ندارد");
     });
+    }else if(filterBaseComment==="like"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like")
+      .then(response=>{
+        setComments(response.data);
+         console.log(response);
+       })
+       .catch(error=>{
+         console.log(error);
+         setEndComment("نظر دیگری وجود ندارد");
+       });
+    }else{console.log(filterBaseComment);}
 
-  },[props.book,commentAgain]);
+  },[props.book,commentAgain,filterBaseComment]);
 
 //for quote
   useEffect(()=>{
     setEndQuote("");
     console.log(props.book)
     console.log(quotesPage);
-    axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
+    // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
+    // .then(response=>{
+    //  //setQuotes(quotes.concat(response.data));
+    //  setQuotes(response.data);
+    //   console.log(response);
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndQuote("نقل قول دیگری وجود ندارد");
+    // });
+
+    if(filterBaseQuote==="time"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-time"+"?page="+quotesPage)
     .then(response=>{
      //setQuotes(quotes.concat(response.data));
      setQuotes(response.data);
@@ -128,30 +162,18 @@ export default function FullWidthTabs(props) {
       console.log(error);
       setEndQuote("نقل قول دیگری وجود ندارد");
     });
-
-    // if(filterBaseQuote==="time"){
-    //   axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"quote-filter-time"+"?page="+quotesPage)
-    // .then(response=>{
-    //  //setQuotes(quotes.concat(response.data));
-    //  setQuotes(response.data);
-    //   console.log(response);
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndQuote("نقل قول دیگری وجود ندارد");
-    // });
-    // }else if(filterBaseQuote==="like"){
-    //   axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"quote-filter-like"+"?page="+quotesPage)
-    // .then(response=>{
-    //  //setQuotes(quotes.concat(response.data));
-    //  setQuotes(response.data);
-    //   console.log(response);
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndQuote("نقل قول دیگری وجود ندارد");
-    // });
-    // }else{console.log(filterBaseQuote);}
+    }else if(filterBaseQuote==="like"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-like"+"?page="+quotesPage)
+    .then(response=>{
+     //setQuotes(quotes.concat(response.data));
+     setQuotes(response.data);
+      console.log(response);
+    })
+    .catch(error=>{
+      console.log(error);
+      setEndQuote("نقل قول دیگری وجود ندارد");
+    });
+    }else{console.log(filterBaseQuote);}
   },[props.book,quoteAgain,quotesPage,filterBaseQuote]);
 
 
