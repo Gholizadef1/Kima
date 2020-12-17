@@ -14,10 +14,10 @@ import {AiOutlineLike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
 
-import ListItem from '@material-ui/core/ListItem';
+//import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+//import ListItemText from '@material-ui/core/ListItemText';
+//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
 
@@ -81,10 +81,10 @@ export default function FullWidthTabs(props) {
   };
 
   const [comments, setComments] = useState([]);
-
   const [quotes, setQuotes] = useState([]);
 
   const [quotesPage, setQuotesPage] = useState(1);
+  const [commentsPage, setCommentsPage] = useState(1);
 
   const [quoteAgain,setquoteAgain] = useState(0);
   const [commentAgain,setcommentAgain] = useState(0);
@@ -98,7 +98,7 @@ export default function FullWidthTabs(props) {
 
   //for comment
   useEffect(()=>{
-    setEndQuote("");
+    setEndComment("");
     console.log(props.book)
     // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     // .then(response=>{
@@ -112,7 +112,7 @@ export default function FullWidthTabs(props) {
     // });
 
     if(filterBaseComment==="time"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time")
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time"+"?page="+commentsPage)
     .then(response=>{
      setComments(response.data);
       console.log(response);
@@ -122,7 +122,7 @@ export default function FullWidthTabs(props) {
       setEndComment("نظر دیگری وجود ندارد");
     });
     }else if(filterBaseComment==="like"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like")
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like"+"?page="+commentsPage)
       .then(response=>{
         setComments(response.data);
          console.log(response);
@@ -133,7 +133,7 @@ export default function FullWidthTabs(props) {
        });
     }else{console.log(filterBaseComment);}
 
-  },[props.book,commentAgain,filterBaseComment]);
+  },[props.book,commentAgain,commentsPage,filterBaseComment]);
 
 //for quote
   useEffect(()=>{
@@ -564,6 +564,25 @@ export default function FullWidthTabs(props) {
                    )}
 
             </List>
+
+            <p>
+              {endComment}
+            </p>
+
+            <div className="d-flex justify-content-center">
+              <button type="button" className="btn btn-light "
+                onClick={()=>{setCommentsPage(commentsPage-1)}}
+               >
+                 صفحه قبلی 
+              </button>
+              <button type="button" className="btn btn-light"
+                onClick={()=>{setCommentsPage(commentsPage+1)}}
+               >
+                صفحه بعدی
+              </button>
+            </div>
+
+
 
           </div>
         </TabPanel>
