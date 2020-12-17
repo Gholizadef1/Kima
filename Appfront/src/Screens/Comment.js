@@ -21,7 +21,7 @@ const commentschema = yup.object({
 
 
 const Comment = (prop) => {
-  const [selectedValue,setselectedValue]=useState('none')
+  const [selectedValue, setselectedValue] = useState('none')
   console.log('COMMENT')
   const callbackFunction = async (childData) => {
     if (childData === true) {
@@ -44,6 +44,7 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
+  const[likeotime,setlikeotime]=useState('/comment-filter-time');
 
   console.log('AVAL')
   const response = async (searchTerm) => {
@@ -56,7 +57,7 @@ const Comment = (prop) => {
 
     try {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-      const response = await axiosinst.get("bookdetail/" + id + '/comment')
+      const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime)
       console.log(response.data)
       //  for(let i=0;response.data[i]!=null;i++){
       //     setinformation([... information ,{name:response.data[i].account.username, date:response.data[i].sendtime, likenumber:1000, dislikenumber:10 ,comment:response.data[i].comment_text ,id:response.data[i].id}])
@@ -220,18 +221,62 @@ const Comment = (prop) => {
       }}>
         <DropDownPicker
           items={[
-            { label:'فیلتر بر اساس تاریخ', value: 'none' },
-            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'ToRead' },
+            { label: 'فیلتر بر اساس تاریخ', value: 'none' },
+            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
-          containerStyle={{ height: 40, width: 220 ,marginBottom:hp('2%')}}
-          style={{ backgroundColor: '#fafafa', marginTop: hp('1%'), marginBottom: hp('-2.5%'),position:'absolute',  borderTopLeftRadius: 17, borderTopRightRadius: 17,
-    borderBottomLeftRadius: 17, borderBottomRightRadius: 17,marginLeft:wp('1%')}}
+          containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
+          style={{
+            backgroundColor: '#fafafa', marginTop: hp('1%'), marginBottom: hp('-2.5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('1%')
+          }}
           itemStyle={{
             justifyContent: 'flex-start'
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa',marginLeft:wp('1%'),width:220,position:'absolute',marginBottom:hp('10%') }}
-          onChangeItem={(item)=>console.log(item.value)}
+          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
+          onChangeItem={async(item) => {
+
+            if (item.value === 'like') {
+              setlikeotime('/comment-filter-like')
+              response();
+              // try {
+              //   setIDD(await(await AsyncStorage.getItem('id')).toString())
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-like')
+              //   console.log(response.data)
+
+              //   setrefresh(false)
+              //   setinformation(response.data)
+              //   console.log(information[0])
+              //   console.log('FILETER LIKE')
+              // }
+              // catch (err) {
+              //   setrefresh(false)
+              //   console.log(err);
+
+              // }
+            }
+            else {
+              setlikeotime('/comment-filter-time')
+              response();
+              // try {
+              //   setIDD(await(await AsyncStorage.getItem('id')).toString())
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-time')
+              //   console.log(response.data)
+              //   console.log('FILTER TIME')
+              //   setrefresh(false)
+              //   setinformation(response.data)
+              //   console.log(information[0])
+              // }
+              // catch (err) {
+              //   setrefresh(false)
+              //   console.log(err);
+
+              // }
+            }
+
+
+
+          }}
 
         />
         <FlatList
