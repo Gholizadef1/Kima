@@ -20,9 +20,11 @@ import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import axiosinst from '../api/axiosinst';
 import Profilenavigation from './Profilenavigation';
+
 import { useFocusEffect } from '@react-navigation/native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Entypo } from '@expo/vector-icons'; 
+
 
 
 
@@ -38,14 +40,14 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("/api/user-profile/"+id)
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
-        console.log('.....')
-         console.log('in')
-         console.log('.....')
+        
+        // console.log(response)
        setname(response.data.username)
     //    console.log(name)
        setemail(response.data.email)
+
        console.log('*****')
        console.log(response.data.profile_photo)
 
@@ -58,6 +60,7 @@ import { Entypo } from '@expo/vector-icons';
             console.log(';;;;;')
           
        console.log(response.data.profile_photo)
+
     
        
     }
@@ -77,35 +80,36 @@ import { Entypo } from '@expo/vector-icons';
     //    response()
     //    console.log('akdfsj;lskafd')
     // });
-    // const photoresponse=async ()=>{
-    //     console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
-    //     const id=await AsyncStorage.getItem('id');
-    //     // console.log(id)
-    //     try{
-    //     const response = await axiosinst.get("http://eb506fafbc32.ngrok.io/api/user-profile/"+id)
+    const photoresponse=async ()=>{
+        console.log('**'+'\n'+'PHOTORESPONSE'+'\n'+'**')
+        const id=await AsyncStorage.getItem('id');
+        // console.log(id)
+        try{
+        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
             
         
-    //   //  console.log(response)
-    // //   console.log('*****')
-    // //         console.log(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
-    // //         setpicture(`http://eb506fafbc32.ngrok.io${response.data.profile_photo}`)
-    // //         console.log(picture);
+      //  console.log(response)
+      console.log('*****')
+            console.log(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            console.log(picture);
           
-    // //    console.log(response.data.profile_photo)
-    //   //  setimage(require(response.data.profile_photo))
+       console.log(response.data.profile_photo)
+      //  setimage(require(response.data.profile_photo))
       
-    // }
-    // catch(err){
-    //      console.log(err);
-    //     Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
+    }
+    catch(err){
+         console.log(err);
+        Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
             
     
-    //             Title:'فهمیدم',onPress:()=>console.log('alert closed')
-    //             }])
-    // }
-    // }
+                Title:'فهمیدم',onPress:()=>console.log('alert closed')
+                }])
+    }
+    }
  
     let a=0;
+
     useFocusEffect(
         React.useCallback((name,picture,email) => {
             response();
@@ -125,8 +129,9 @@ import { Entypo } from '@expo/vector-icons';
     //         //   console.log('\n'+'-----'+Profilenavigation+'-----')
     //         });
         
+
        
-    //   }, []);
+      }, [Profilenavigation,a]);
      
 
       
@@ -158,11 +163,16 @@ import { Entypo } from '@expo/vector-icons';
          
         
 
+
         {picture==='http://1244af18f7bf.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+
 
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
+
         source={{uri:picture}}
+        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
+        source={require('../../assets/avatar.png')}
         ></Avatar.Image>}
 
 

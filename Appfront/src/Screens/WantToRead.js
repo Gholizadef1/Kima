@@ -45,7 +45,7 @@ const WantToRead = ({navigation}) => {
           <Left/>
           <Body>
             <Title style={{fontSize:22 , fontWeight:'bold',color:'#E1E5F2' , marginRight: 40, marginLeft: 10 
-            , left: 255,top:2}}>کیما</Title>
+            , right:55,top:2}}>کیما</Title>
           </Body>
           <Right />
         </Header>
@@ -55,7 +55,7 @@ const WantToRead = ({navigation}) => {
              <ScrollView style={{marginTop:100}}>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,marginRight:20,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
+                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>می خواهم بخوانم</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     data={wanttoreadimage}
