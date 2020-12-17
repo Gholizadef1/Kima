@@ -8,157 +8,74 @@ import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import BottomSheet from 'reanimated-bottom-sheet';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
-import Animated, { set } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axios from 'axios'
-import CommentCard from './CommentCard';
 
 const Bookview = (prop) => {
-  useFocusEffect(
-    React.useCallback(() => {
-      console.log(ratenum+'RATE NUM')
-      setratenum(0)
-      console.log(ratenum+'RATE NUM')
-    console.log('USE EFFECT')
-    getResult(id)
-    getComments();
-    getQuote();
-    getPicker();
-    getRate();
-   
-    // // console.log('Listenn')
-    // alert('in')
-    // return() => alert('lost')
-    }, [])
-  )
-  console.log(ratenum + 'RATE NUM')
-  const getResult = async (id) => {
-    const response = await axiosinst.get('/bookdetail/'+id);
-    setResult(response.data);
-    console.log('checkk'+ response.data)
-    };
 
+  console.log('BOOKVIEW')
   const [rate , setrate] = useState(true);
   const [test , settest] = useState(null);
-  const [ratenum , setratenum] = useState(0);
-  const [result , setResult] = useState('');
-  const [refresh,setrefresh]=useState(false);
-  const [information,setinformation]=useState([]);
-  const [cinformation,setcinformation]=useState([]);
+  const [ratenum , setratenum] = useState(null);
+  const [result , setResult] = useState(null);
   const [selectedValue, setSelectedValue] = useState('none');
-  const[loading ,setloading]=useState(false);
-  const[IDD,setIDD]=useState('');
-  const equal=async(item)=>{
-    setIDD(await AsyncStorage.getItem('id').toString());
-  } 
-  const id=prop.route.params.id 
-  const getQuote=async ()=>{
-    setloading(true);
-    console.log('DOVOM')
-     console.log('id**************' +id);
-     console.log(id) 
+  const id = prop.route.params.id;
+  const getResult = async (id) => {
+  const response = await axiosinst.get('/bookdetail/'+id);
+  setResult(response.data);
+  };
+  useEffect(() =>{
+    getResult(id);
+  }, []);
 
-     try{
-    setIDD(await (await AsyncStorage.getItem('id')).toString())
-     const response = await axiosinst.get('api/quotes/'+id
-    )
-     console.log(IDD+'IDDresponse');
-       console.log(response.data)
-      
-      setinformation(information=>(response.data))
-      setloading(false);
-      console.log('GET QUOTE TRY')
-     }
-   catch(err){
-    
-      console.log(err);
-      console.log('GET QUOTE CATCH')
-   }
-   console.log('AKHAR GET QUOTE')
+  if (!result) {
+    return null;
   }
-  
-   const getComments = async () => {
-     console.log('GET COMMENTS')
-
-    try{
-    const response = await axiosinst.get("bookdetail/"+id+'/comment')
-     console.log(response.data)
-    setrefresh(false)
-    setcinformation(response.data)
-    console.log(cinformation[0])
-    console.log('GET COMMENT TRY')
-    }
-  catch(err){
-    setrefresh(false)
-     console.log(err);
-     console.log('GET COMMENT catch')
-     
-   
-  }
-  console.log('AKHAR GET COMMENT')
-}  
- 
-
-  
-
-
-  // if (!result) {
-  //   return null;
-  // }
 
   const getPicker = async () => {
-    console.log((await AsyncStorage.getItem('token')).toString())
-    console.log('GET PICKERRRR')
-    axios.get('http://d30e06d5c109.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://3a16020b9175.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
       }
     })
     .then(function(response){
-      console.log('GET PICKER OK')
       console.log('Pickerr'+response.data.book_state)
       setSelectedValue(response.data.book_state)   
   })
   .catch(function(error){
       console.log(error)
-      console.log('GET PICKER NOTOK')
   })
   };
-  
+  getPicker();
 
   const PostPicker = async (value) => {
-   
         if (value != "") {
           const payload = {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://d30e06d5c109.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://3a16020b9175.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
             }
           })
             .then(async function (response) {
-
-              console.log('POST PICKER OK')
               console.log(response.data)
-               getPicker();
+              getPicker();
             })
             .catch(function (error) {
               console.log(error);
-              console.log('POST PICKER NOTOK')
             });
         }
       }
 
 
   const getRate = async()=>{
-    axios.get('http://d30e06d5c109.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://3a16020b9175.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -167,31 +84,24 @@ const Bookview = (prop) => {
     .then(function(response){
       console.log('response data : ', response.data)
       console.log(response.message)
-      console.log(response)
-      console.log(ratenum+' RATE NUM')
       console.log('$$$$'+response.data.data)
       setratenum(response.data.data)   
   })
-  .catch(async function(error){
+  .catch(function(error){
       console.log(error)
-      console.log(await AsyncStorage.getItem('token')).toString();
   })
   }
+  getRate();
 
-
-
-  console.log('**' +rate+'RATE')
+  console.log('**' +rate)
 
   const postRate = async(rate)=>{
-    console.log((await AsyncStorage.getItem('token')).toString())
-    console.log('POST RATE')
     if(rate!=""){
     const payload={
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    if(!ratenum===0)
-    axios.post('http://d30e06d5c109.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://3a16020b9175.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -201,15 +111,14 @@ const Bookview = (prop) => {
       console.log('\n'+'++++++++'+'\n')
       setratenum(rate);
       console.log('&&'+rate);
-      getRate();
+//      getRate();
     })
     .catch(function (error) {
-      console.log('POST RATE EROR')
        console.log(error);
     });
   }
 }
-
+//this.state = {}
   
     return(
       <Container>
@@ -251,81 +160,22 @@ const Bookview = (prop) => {
                       
                   />
  
-                    <Content style={{}}>
+
                   <Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
                     درباره کتاب :</Text>
-                 
+                  <Content style={{}}>
                     <Card style={{}}>
                     
                  
                     <Text style={{marginTop:hp('2%') , marginLeft:wp('2%') , 
                       textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     </Card>
-                <Animated.View style={{
-                    }}>
-                    
-                    {information.message==='No Quote!'?<FlatList
-                    style={{marginBottom:'17%'}}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    onEndReached={console.log('endreach')}
-                    onEndReachedThreshold={0.5}
-                    keyExtractor={(item)=>item.id}
-                    data={information}                    
-                    renderItem={({item})=>{
-                      return(
-                        <View>
-                        (<><QuoteCard  name={item.account.username} 
-                          date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></QuoteCard>
-                        <Text style={styles.heartnumber}>{item.Likes}</Text>
-                        </>
-                        )
-                        </View>
-                      )
-                    }}
-                  >
-                  </FlatList>:null}
-                </Animated.View>
-
-                <Animated.View style={{ }}>
-
-                   {cinformation.message==='No User Rating!'? <FlatList
-                    style={{marginBottom:'17%'}}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    onEndReached={console.log('endreach')}
-                    onEndReachedThreshold={0.5}
-                    keyExtractor={(item)=>item.id}
-                    data={cinformation}                    
-                    renderItem={({ item }) => ( 
-                    <CommentCard name={item.account.username} date={item.sendtime.toString().split('T')[0]}  IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text}/>
-                    )}
-                    ></FlatList>:null}
-               
-                </Animated.View>
-
-                {/* <View>
-                <BottomSheet style={{position:''}}
-                  snapPoints={['40%', 0, 0]}
-                ref={bs}
-                initialSnap={1}
-                callbackNode={fall}
-                enabledGestureInteraction={true}
-                enabledContentTapInteraction={false}
-                onCloseEnd={()=>{
-                  setshowbutton(true)
-                  response()
-                  
-                  }}
-                backgroundColor={'#edf2f4'}
-                />
-                </View> */}
-                </Content>
+                  </Content>
             </Body>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );
-}
+};
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -333,14 +183,44 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    heartnumber:{   
-      position:'absolute',
-      marginTop:hp('47.6%'),
-        left:wp('85%'),  
-        fontSize:hp('1.5%'),
-        color:'gray'
-    }
-});
+    // image:{
+    //   height:220,
 
+    //   }
+    // bookname: {
+    //   alignContent:'center',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   marginRight:10,
+    //   marginLeft:350,
+    //   fontSize:20,
+    //   width:500,
+    //   fontWeight:'bold'
+    // },
+    // author: {
+    //   right:20,
+    //   marginRight:20,
+    //   marginLeft:30,
+    //   color:'#1F7A8C',
+    //   fontSize:17
+    // },
+    // publisher:{
+    //   marginRight:105,
+    //   color:'#1F7A8C',
+    //   fontSize:15
+    // },
+    // description:{
+    //   marginRight:20,
+    //   fontSize:15
+    // },
+    //    Picker: {
+    //   top:'100 px !important',
+    //   right:20,
+    //   marginRight:20,
+    //   color:'#1F7A8C',
+    //   fontSize:15
+    // }
+    });
 
-  export default Bookview;
+export default Bookview;
+
