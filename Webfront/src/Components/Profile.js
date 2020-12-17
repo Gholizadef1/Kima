@@ -261,7 +261,7 @@ useEffect(() => {
 
                                     </StyledButton>
                                 </div>
-                                    <div className="profile col-md-5 pl-1 mr-2 ml-1 ">
+                                    <div className="profile col-md-5 pl-1 mr-2 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
                                                                          width: 140,
@@ -280,16 +280,16 @@ useEffect(() => {
 
                                 <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-center mt-md-2 ml-5 mr-5">
-                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
-                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
+                                        <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.toRead}</b>
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.reading}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between text-right mt-md-2">
+                                        <div className="d-flex justify-content-between ourfont text-right mt-md-2">
 
-                                        <span className="description ml-4"style={{fontFamily:'Mitra',fontSize:18}}>  می‌خواهم بخوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  دارم می‌خوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  خوانده‌ام</span>
+                                        <b className="description decsciptionmine ml-4">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine mr-4">دارم می‌خوانم</b>
+                                        <b className="description decsciptionmine mr-4 ml-1">خوانده‌ام</b>
                                         </div>   {/* < FaRegSmileBeam/> */}
                                     </div>
                                 </div>

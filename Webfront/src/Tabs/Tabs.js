@@ -81,8 +81,8 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="آخرین نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
-          <Tab label="آخرین نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label=" نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label=" نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
           <Tab label="کتاب‌های من" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
         </Tabs>
       </AppBar>

@@ -42,7 +42,9 @@ background-color: #9dc3e9;
     -webkit-box-shadow: 10px 10px 5px #ccc;
     -khtml-box-shadow: 10px 10px 5px #ccc;
 }
-
+.decsciptionmine{
+    font-size: 18px;
+}
 .Tabz{
 
     margin-left: 100px;
@@ -59,9 +61,10 @@ background-color: #9dc3e9;
         margin-left: 10px;
         margin-top: -1rem;
     }
-    .description{
-        margin-left: 35px;
-        font-size: 20px;
+    .decsciptionmine{
+        margin-left: 30px;
+        font-size: 12px;
+       
     }
     
   }
