@@ -20,7 +20,7 @@
 
 .car{
   
-    padding-top: 10px;
+    
     width: 120px;
     height: 144px;
     padding-right: 10px;
@@ -34,7 +34,7 @@
   
     width: 100px;
     height: 80px;
-    padding-top:5px;
+    padding-top:17px;
     padding-left:17px;
 }
 .slid{
@@ -51,10 +51,9 @@
 }
 
 .brand1{
- font-size: 25px;
-  
-    font-size: 2px;
-    
+    margin-left: 7px;
+    font-size: 25px;
+   
 }
 .subbrand1{
     margin-top: -150px;

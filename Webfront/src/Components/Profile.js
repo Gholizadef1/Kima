@@ -241,11 +241,11 @@ useEffect(() => {
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h5 className="mt-5" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h6 className="mt-3" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
@@ -262,11 +262,11 @@ useEffect(() => {
 
                                     </StyledButton>
                                 </div>
-                                    <div className="profile col-md-5 pl-1 mr-2 ">
+                                    <div className="profile col-md-5 pl-1 mr-2 mt-5 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
-                                                                         width: 140,
-                                                                         height: 140,
+                                                                         width: 145,
+                                                                         height: 145,
 
 
                                                                          display: "block"}}/>
@@ -279,7 +279,7 @@ useEffect(() => {
                                 <div className="row">
                                     <div className="col">
 
-                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333",marginTop:90}}></hr>
+                                <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
                                         <div className="d-flex justify-content-between text-right mt-md-5 ml-5 mr-5">
                                         <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.toRead}</b>
@@ -304,7 +304,7 @@ useEffect(() => {
          <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle gholi img-fluid" style={{
            width: 120,
              height: 120,
-             marginLeft:300,
+             marginLeft:180,
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">

@@ -37,6 +37,7 @@ background-color: #9dc3e9;
    left: 63rem;
    border:2px solid #fff;
     height: 550px;
+    border-radius: 5%;
     box-shadow: 20px 10px 5px #ccc;
     -moz-box-shadow: 10px 10px 5px #ccc;
     -webkit-box-shadow: 10px 10px 5px #ccc;
@@ -45,27 +46,34 @@ background-color: #9dc3e9;
 .decsciptionmine{
     font-size: 18px;
 }
+
 .Tabz{
 
     margin-left: 100px;
     margin-top: -21rem;
 }
-@media (max-width :400px) 
+.line{
+    margin-top:60px;
+}
+@media (max-width :415px) 
 {
     .cardp{
         left: -7px;
-        height: 500px;
+        height: 400px;
 
     }
     .Tabz{
 
         margin-left: 10px;
-        margin-top: -1rem;
+        top:100px
     }
     .decsciptionmine{
         margin-left: 30px;
         font-size: 12px;
        
+    }
+    .line{
+        margin-top: 35px;
     }
     
   }
@@ -73,12 +81,16 @@ background-color: #9dc3e9;
 {
     .cardp{
         left: -7px;
+        height: 400px;
     } 
 
     .Tabz{
 
         margin-left: 10px;
         margin-top: -1rem;
+    }
+    .line{
+        margin-top: 40px;
     }
    
   }
