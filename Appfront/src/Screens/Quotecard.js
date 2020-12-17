@@ -23,6 +23,8 @@ const Quotecard = (prop) => {
 
   const hieght = prop.height
   const [like, setlike] = useState('gray')
+  const [numheart, setnumheart] = useState(prop.heartnumber);
+
   // const [dislike,setdislike]=useState('lightblue')
   const [heart, setheart] = useState(false);
   // useEffect(()=>{
@@ -151,7 +153,7 @@ const Quotecard = (prop) => {
             setlike('#1f7a8c')
           else
             setlike('gray')
-
+        
           // console.log((await AsyncStorage.getItem('token')).toString());
           // alert(prop.quoteid)
           console.log((await AsyncStorage.getItem('token')).toString())
@@ -173,6 +175,7 @@ const Quotecard = (prop) => {
           })
             .then(async function (response) {
               console.log(response);
+              setnumheart(response.data.date)
 
             })
             .catch(function (error) {
@@ -185,6 +188,7 @@ const Quotecard = (prop) => {
 
           //  response();
         }} size={20} color={like} />
+        <Text style={styles.heartnumber}>{numheart}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 
 
@@ -218,7 +222,7 @@ const styles = StyleSheet.create({
 
 
   },
-
+  
   date: {
     position: 'absolute',
     top: '4%',
@@ -237,10 +241,10 @@ const styles = StyleSheet.create({
   },
   heartnumber: {
     position: 'absolute',
-
-    left: wp('88%'),
-    fontSize: wp('1%'),
-    color: 'gray'
+    right: wp('14%'),
+    color:'gray',
+    fontSize:hp('1.5%'),
+   
   },
   naghlghol: {
 

@@ -299,9 +299,9 @@ const callbackFunction = async(childData) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1244af18f7bf.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1244af18f7bf.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
-<Text style={styles.heartnumber}>{item.Likes}</Text>
+
 
 </>
     )}
@@ -369,13 +369,7 @@ const styles = StyleSheet.create({
       right:wp('6.5%')     
       
     },
-    heartnumber:{   
-      position:'absolute',
-      marginTop:hp('47.6%'),
-        left:wp('85%'),  
-        fontSize:hp('1.5%'),
-        color:'gray'
-    },
+ 
     loader:{
 
       alignItems:'center',
