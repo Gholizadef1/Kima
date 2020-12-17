@@ -3,7 +3,7 @@ import { StyleSheet, View , Image , ImageBackground , ScrollView ,
 TouchableOpacity , FlatList , TextInput } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
    Right, Left , Picker, Form } from 'native-base';
-import {withNavigation} from 'react-navigation'
+import Quote from './Quote';
 import Home from './Home';
 import PickerShow from './PickerShow'
 import axiosinst from '../api/axiosinst'
@@ -53,6 +53,12 @@ const Bookview = (prop) => {
                     </Card>
                   </Content>
             </Body>
+            <Button onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
+      title: response.data.title,
+    });}}><Text>صفحه نظرات</Text></Button>
+           <Button onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
+      title: response.data.title,
+    });}}><Text>صفحه نقل قول ها</Text></Button>
             <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
     );

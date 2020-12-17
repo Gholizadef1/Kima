@@ -47,8 +47,10 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
        setemail(response.data.email)
        console.log('*****')
        console.log(response.data.profile_photo)
-            console.log(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://1c53ec0001dc.ngrok.io${response.data.profile_photo}`)
+
+            console.log(`http://d30e06d5c109.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://d30e06d5c109.ngrok.io${response.data.profile_photo}`)
+
             console.log(';;;;;')
             console.log(picture);
             console.log(picture)
@@ -135,13 +137,15 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
         <Text style={styles.kima}>کیما</Text>
         <Image
+
          source={require('../../assets/backprof4.jpeg')}
          style={{   width:wp('100%'),
         height:hp('35%'),
         position:'absolute',
         
-        
+       
        }}
+
          ></Image>
          <View style={{position:'absolute',backgroundColor:'white',height:100,width:wp('100%'),marginTop:hp('30%'),borderTopStartRadius:30,borderTopEndRadius:30}}>
 
@@ -152,11 +156,14 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          </View>
          
         
-        {picture==='http://1c53ec0001dc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+
+        {picture==='http://d30e06d5c109.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
+
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
         source={{uri:picture}}
         ></Avatar.Image>}
+
 
         <Text style={{marginTop:hp('6%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
@@ -164,6 +171,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
         <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('43.5%'),
         alignSelf:'flex-start',left:wp('3%')}} />
+
 
         <Button style={styles.edit}
         onPress={()=>{navigation.navigate('Editprofile')}}
@@ -178,6 +186,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
          source={require('../../assets/line3.png')}
          style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
          ></Image>
+
          <Text style={{fontSize:15,fontWeight:'bold',marginTop:hp('10%'),alignSelf:'flex-start',left:wp('10%'),color:"gray"}}>فعالیت ها</Text>
          <Image
          source={require('../../assets/Line.png')}
@@ -190,6 +199,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
            <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('14%'),width:80,height:2,alignSelf:'flex-end'}}
+
          ></Image>
          
 
@@ -236,8 +246,10 @@ const styles = StyleSheet.create({
     // },
     kima:{
         color:'#1F7A8C',
+
         marginTop:hp('8%'),
         marginLeft:wp('5%'),
+
         fontSize:20,
         fontWeight:'bold',
         position:'absolute'
@@ -259,8 +271,10 @@ const styles = StyleSheet.create({
         
     },
     info:{
+
         marginLeft:wp('10%'),
         marginTop:hp('3%'),
+
         color:"#1F7A8C"
     },
 
@@ -272,6 +286,7 @@ const styles = StyleSheet.create({
 
     Icon:{
 
+
          position:'absolute',
         marginTop:hp('37.5%'),
         alignSelf:'flex-start',left:wp('3%')
@@ -280,6 +295,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         marginTop:hp('25%'),
         alignSelf:'center'
+
         
     },
     edit:{
