@@ -23,7 +23,6 @@ background-color: #9dc3e9;
    
    margin-bottom: 15px;
    margin-left: 10px;
-
     margin-top: 2rem;
     margin-right: 3rem;
     border:2px solid #fff;
@@ -55,18 +54,14 @@ background-color: #9dc3e9;
 .line{
     margin-top:60px;
 }
-@media (max-width :415px) 
+@media (max-width :400px) 
 {
     .cardp{
         left: -7px;
         height: 400px;
 
     }
-    .Tabz{
-
-        margin-left: 10px;
-        top:100px
-    }
+  
     .decsciptionmine{
         margin-left: 30px;
         font-size: 12px;
@@ -81,7 +76,8 @@ background-color: #9dc3e9;
 {
     .cardp{
         left: -7px;
-        height: 400px;
+        height: 300px;
+       
     } 
 
     .Tabz{
@@ -98,11 +94,13 @@ background-color: #9dc3e9;
 {
     .cardp{
         left: -7px;
+        height: 450px;
+       
     } 
 
     .Tabz{
 
         margin-left: 10px;
-        margin-top: -1rem;
+        margin-top: 12rem;
     }
   }

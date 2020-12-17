@@ -63,7 +63,7 @@ export default function FullWidthTabs() {
   };
   const useStyles = makeStyles((theme) => ({
     root: {
-      width: '90%',
+      
       height: 100,
       backgroundColor: theme.palette.background.paper,
     },

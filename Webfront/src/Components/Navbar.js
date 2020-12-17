@@ -139,7 +139,7 @@ useEffect(() => {
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
             </li>
-            <li class=" nav-item btn"
+            <li class=" nav-item mr-md-5 btn"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
@@ -147,16 +147,16 @@ useEffect(() => {
             
           </ul>
           <div className="d-flex flex-grow-1 mx-md-5">
-              <input className="rounded-pill text-right ml-4 flex-fill my-1" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
                style={{fontFamily:'Mitra'}}
                />  
-              <Button variant="gray" className="" onClick={handleShow}>
+              <Button variant="gray" className="mr-md-5" onClick={handleShow}>
                 <GoSearch size="30" color="white" />
               </Button>
           </div>
           <div className="d-flex justify-content-between flex-wrap">
             
-            <div className="d-flex mx-auto">
+            <div className="d-flex mx-auto ml-md-5">
               <a className="row ml-2"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
                <small className="" size="50" style={{padding:10,fontSize:20}}>
                 {Cookies.get('userName')}
