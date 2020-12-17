@@ -15,6 +15,7 @@ import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Profile from './Profile';
 import Editprofile from './Editprofile';
+import Activityquote from './Activityquote';
 
 
 
