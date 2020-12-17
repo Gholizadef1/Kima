@@ -46,7 +46,7 @@ const callbackFunction = async(childData) => {
 }
   
   const getlike=async(item)=>{
-    axiosinst.get('http://a6cf0ecdd61a.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://1244af18f7bf.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -255,7 +255,7 @@ const callbackFunction = async(childData) => {
 
         <View style={styles.container}>
 
-        <DropDownPicker
+        {/* <DropDownPicker
             items={[
                 {label: 'مرتب شده بر اساس:', value: 'none'},
                 {label: 'جدیدترین ها', value: 'history'},
@@ -269,7 +269,7 @@ const callbackFunction = async(childData) => {
             }}
             dropDownStyle={{backgroundColor: '#fafafa'}}
             onChangeItem={(item) => console.log(item.value)}
-        />
+        /> */}
         <BottomSheet style={{position:''}}
         
        snapPoints={[hp('40%'), 0, 0]}
@@ -295,7 +295,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-      <FlatList
+      {!information===[]?<FlatList
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
@@ -323,7 +323,7 @@ const callbackFunction = async(childData) => {
     )}
       // extraData={finfo}
     >
-    </FlatList>
+    </FlatList>:null}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}

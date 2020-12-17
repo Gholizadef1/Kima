@@ -118,7 +118,7 @@ const Quotecard = (prop) => {
 
               <TouchableOpacity style={styles.avatar}
                 onPress={() => { }}>
-                {prop.picture === 'http://1c53ec0001dc.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+                {prop.picture === 'http://1244af18f7bf.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
                   source={require('../../assets/avatar.png')}
                   style={styles.avatar}
@@ -157,7 +157,7 @@ const Quotecard = (prop) => {
           console.log((await AsyncStorage.getItem('token')).toString())
           console.log(prop.quoteid + 'PROP QUOTE ID');
           // // console.log(item.account.id);
-          axiosinst.post('http://1c53ec0001dc.ngrok.io/api/quotes/like/' + prop.quoteid, {
+          axiosinst.post('http://1244af18f7bf.ngrok.io/api/quotes/like/' + prop.quoteid, {
             "headers":
             {
               "Content-Type": "application/json",
