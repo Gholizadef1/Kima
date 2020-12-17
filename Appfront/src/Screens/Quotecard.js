@@ -176,7 +176,8 @@ const Quotecard = (prop) => {
             .then(async function (response) {
               console.log(response);
               console.log(response.date)
-              setnumheart(response.data)
+              console.log(response.date.date+'.DATA .DATA')
+              setnumheart(response.data.toString())
 
             })
             .catch(function (error) {

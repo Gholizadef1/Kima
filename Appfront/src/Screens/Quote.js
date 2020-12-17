@@ -15,6 +15,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 import { FAB } from 'react-native-paper';
 import { getPendingResultAsync } from 'expo-image-picker';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 
 
 const commentschema=yup.object({
@@ -66,6 +68,7 @@ const callbackFunction = async(childData) => {
     response(page+1);
    };
   const [theend,settheend]=useState(false)
+  const [selectedValue, setselectedValue] = useState('none')
   const [selectedIndex, setSelectedIndex] = useState([]);
   const[loading ,setloading]=useState(false);
   const[page,setpage]=useState(1);
@@ -279,7 +282,44 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     { (information.length>=0) ?<FlatList
+     <DropDownPicker
+          items={[
+            { label: 'فیلتر بر اساس تاریخ', value: 'none' },
+            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
+          ]}
+          defaultValue={selectedValue}
+          containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
+          style={{
+            backgroundColor: '#fafafa', marginTop: hp('1.5%'), width: wp('45%'), marginBottom: hp('-4%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
+          }}
+          itemStyle={{
+            justifyContent: 'flex-start'
+          }}
+          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
+          onChangeItem={async (item) => {
+
+            if (item.value === 'none') {
+              console.log(item.value + 'VALUE')
+              console.log('to none')
+              await setlikeotime('/comment-filter-time')
+           
+            }
+            else if (item.value === 'like') {
+              console.log('tolike')
+              console.log(item.value + 'VALUE')
+              await setlikeotime('/comment-filter-like')
+      
+            }
+
+
+
+          }}
+
+        />
+     { (information.length>=0) ?
+     
+     <FlatList
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
      style={{marginBottom:'17%'}}
      showsVerticalScrollIndicator={false}
