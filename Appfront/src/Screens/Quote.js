@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator,Keyboard} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -404,11 +405,13 @@ const callbackFunction = async(childData) => {
     </Button>
     :null}
      </View>
+
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+
     
         flex: 1,
         // backgroundColor: '#B8B8B8',
@@ -467,5 +470,6 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       marginTop:hp('10%')
     }
+
   });
   export default Quote;
