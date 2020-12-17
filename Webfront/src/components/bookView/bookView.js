@@ -281,12 +281,13 @@ useEffect(() => {
 return(
 <div className="mx-md-5 px-md-5">
   <div className="container-fluid rTOl text-right px-md-5" >
+    <div className="mx-md-5 ">
     <div className="row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 ">
-      <div className="col-md-4 mb-md-0 p-md-4 p-sm-4">
+      <div className="col-md-4 mb-md-0 p-4">
         <img src={state.imgurl} className="img-fluid shadow float-right" alt="" style={{width:'100%',height:'auto'}} />
       </div>
-      <div className="col-md-8 position-static pl-md-0 d-flex flex-column mb-3 ">
-        <h2 className="p-3" style={{fontFamily:'Mitra'}}>{state.title}</h2>
+      <div className="col-md-8 position-static pl-md-0 d-flex flex-column mb-4 ">
+        <h2 className="p-3 mt-2" style={{fontFamily:'Mitra'}}>{state.title}</h2>
           <table className="mt-auto table table-hover text-right" >
             <tbody className="">
               <tr>
@@ -369,6 +370,7 @@ return(
 </div>
 <div className="Tab color1 my-3 mb-5 mx-md-5">
 <Tabs book={state.id} bookdescription={state.description}/>
+</div>
 </div>
 </div>
 </div>
