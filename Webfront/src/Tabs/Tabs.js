@@ -63,7 +63,7 @@ export default function FullWidthTabs() {
   };
   const useStyles = makeStyles((theme) => ({
     root: {
-      width: '90%',
+      
       height: 100,
       backgroundColor: theme.palette.background.paper,
     },
@@ -81,8 +81,8 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="آخرین نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
-          <Tab label="آخرین نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label=" نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
+          <Tab label=" نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
           <Tab label="کتاب‌های من" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Mitra",color:"black"}} />
         </Tabs>
       </AppBar>
@@ -92,16 +92,16 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <FixedSizeList className="fixedlist" height={400} width={700} itemSize={150} itemCount={1}>
+          <FixedSizeList className="fixedlist" height={400} width={650} itemSize={150} itemCount={1}>
           {RenderRowquote}
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-      <FixedSizeList height={400} width={700} itemSize={150} itemCount={1}>
+      <FixedSizeList height={400} width={650} itemSize={150} itemCount={1}>
       {RenderRowcomment}
       </FixedSizeList>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={2} dir={theme.direction} height={400}>
         <Scroll/>
         </TabPanel>
       </SwipeableViews>

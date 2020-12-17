@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React, { useState, useEffect } from "react";
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -14,10 +14,10 @@ import {AiOutlineLike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
 
-import ListItem from '@material-ui/core/ListItem';
+//import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+//import ListItemText from '@material-ui/core/ListItemText';
+//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
 
@@ -81,10 +81,10 @@ export default function FullWidthTabs(props) {
   };
 
   const [comments, setComments] = useState([]);
-
   const [quotes, setQuotes] = useState([]);
 
   const [quotesPage, setQuotesPage] = useState(1);
+  const [commentsPage, setCommentsPage] = useState(1);
 
   const [quoteAgain,setquoteAgain] = useState(0);
   const [commentAgain,setcommentAgain] = useState(0);
@@ -98,27 +98,61 @@ export default function FullWidthTabs(props) {
 
   //for comment
   useEffect(()=>{
-    setEndQuote("");
+    setEndComment("");
     console.log(props.book)
-    axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
+    // .then(response=>{
+    //   setComments(response.data);
+    //   console.log(response);
+    //   //setcommentAgain("");
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndComment("نظر دیگری وجود ندارد");
+    // });
+
+    if(filterBaseComment==="time"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time"+"?page="+commentsPage)
     .then(response=>{
-      setComments(response.data);
+     setComments(response.data);
       console.log(response);
-      //setcommentAgain("");
     })
     .catch(error=>{
       console.log(error);
       setEndComment("نظر دیگری وجود ندارد");
     });
+    }else if(filterBaseComment==="like"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like"+"?page="+commentsPage)
+      .then(response=>{
+        setComments(response.data);
+         console.log(response);
+       })
+       .catch(error=>{
+         console.log(error);
+         setEndComment("نظر دیگری وجود ندارد");
+       });
+    }else{console.log(filterBaseComment);}
 
-  },[props.book,commentAgain]);
+  },[props.book,commentAgain,commentsPage,filterBaseComment]);
 
 //for quote
   useEffect(()=>{
     setEndQuote("");
     console.log(props.book)
     console.log(quotesPage);
-    axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
+    // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
+    // .then(response=>{
+    //  //setQuotes(quotes.concat(response.data));
+    //  setQuotes(response.data);
+    //   console.log(response);
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   setEndQuote("نقل قول دیگری وجود ندارد");
+    // });
+
+    if(filterBaseQuote==="time"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-time"+"?page="+quotesPage)
     .then(response=>{
      //setQuotes(quotes.concat(response.data));
      setQuotes(response.data);
@@ -128,30 +162,18 @@ export default function FullWidthTabs(props) {
       console.log(error);
       setEndQuote("نقل قول دیگری وجود ندارد");
     });
-
-    // if(filterBaseQuote==="time"){
-    //   axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"quote-filter-time"+"?page="+quotesPage)
-    // .then(response=>{
-    //  //setQuotes(quotes.concat(response.data));
-    //  setQuotes(response.data);
-    //   console.log(response);
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndQuote("نقل قول دیگری وجود ندارد");
-    // });
-    // }else if(filterBaseQuote==="like"){
-    //   axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"quote-filter-like"+"?page="+quotesPage)
-    // .then(response=>{
-    //  //setQuotes(quotes.concat(response.data));
-    //  setQuotes(response.data);
-    //   console.log(response);
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndQuote("نقل قول دیگری وجود ندارد");
-    // });
-    // }else{console.log(filterBaseQuote);}
+    }else if(filterBaseQuote==="like"){
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-like"+"?page="+quotesPage)
+    .then(response=>{
+     //setQuotes(quotes.concat(response.data));
+     setQuotes(response.data);
+      console.log(response);
+    })
+    .catch(error=>{
+      console.log(error);
+      setEndQuote("نقل قول دیگری وجود ندارد");
+    });
+    }else{console.log(filterBaseQuote);}
   },[props.book,quoteAgain,quotesPage,filterBaseQuote]);
 
 
@@ -216,7 +238,7 @@ export default function FullWidthTabs(props) {
 
      }else{
       setOpenSnack(true);
-      setMassage("نظر خالی ثبت نشد")
+      setMassage("نظر خالی است لطفاً چیزی بنویسید")
      }
 
   }
@@ -239,7 +261,7 @@ export default function FullWidthTabs(props) {
 
       if(response.data.status==="success"){
         setOpenSnack(true);
-        setMassage("نقل قول شما با موفقیت ثبت شد")
+        setMassage("نقل‌قول شما با موفقیت ثبت شد")
         setUserQuote("");
         setquoteAgain(quoteAgain+1);
     }})
@@ -249,7 +271,7 @@ export default function FullWidthTabs(props) {
 
   }else{
     setOpenSnack(true);
-    setMassage("نقل قول خالی ثبت نشد")
+    setMassage("نقل‌قول خالی است لطفاً چیزی بنویسید")
    }
 }
 
@@ -305,8 +327,8 @@ export default function FullWidthTabs(props) {
         console.log(response);
         setOpenSnack(true);
         if(response.data.message==="successfully liked!"){
-          setMassage("لایک نظر شما با موفقیت ثبت شد");
-        }else setMassage("لایک نظر شما با موفقیت برداشته شد");
+          setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("عمل با موفقیت انجام شد");
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
       })
@@ -329,8 +351,8 @@ export default function FullWidthTabs(props) {
         console.log(response);
         setOpenSnack(true);
         if(response.data.message==="successfully disliked!"){
-          setMassage("دیسلایک نظر شما با موفقیت ثبت شد");
-        }else setMassage("دیسلایک نظر شما با موفقیت برداشته شد");
+          setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("عمل با موفقیت انجام شد");
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
         
@@ -357,8 +379,8 @@ export default function FullWidthTabs(props) {
       console.log(response);
       setOpenSnack(true);
       if(response.data.message==="like success!"){
-        setMassage("لایک نقل قول شما با موفقیت ثبت شد");
-      }else setMassage("لایک نقل قول شما با موفقیت برداشته شد");
+        setMassage("عمل با موفقیت انجام شد");
+      }else setMassage("عمل با موفقیت انحام شد");
         setquoteAgain(quoteAgain+1);
         console.log(response.data.data);
     })
@@ -435,17 +457,17 @@ export default function FullWidthTabs(props) {
           <div style={{direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">نظر شما چیست؟</h3>
-              <div className="d-flex p-3">
-                <Avatar className="" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
-                <div className="d-flex flex-column mt-2 flex-fill">
-                <div className="d-flex">
+              <div className="d-flex flex-wrap p-3  ">
+                <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
+                <div className="d-flex  flex-column mt-2 flex-fill">
+                <div className="d-flex flex-wrap">
                 <div className="flex-fill form-group mx-3">
 
                   <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow  align-self-start"
+                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
                 onClick={handleSubmitCommentClick}style={{color:"white",fontFamily:"Mitra",fontWeight:"bold"}}
                 >ثبت</StyledButton>
                 </div>
@@ -454,7 +476,7 @@ export default function FullWidthTabs(props) {
               <Divider className="mt-3" variant="fullWidth" />
             </div>
 
-            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Morvarid'}}>
+            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Mitra'}}>
               <label className="ml-2 mt-1">براساس:</label>
 
               <select className="form-control rounded-pill" style={{width:120}} id=""  onChange={handleCommentFilter} >
@@ -471,7 +493,7 @@ export default function FullWidthTabs(props) {
               {comments.message === "No Comment!" ? (
                  
 
-                 <p>هیچ نظری ثبت نشده</p>
+                 <p style={{fontFamily:'Mitra',color:'red'}}>نطری برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div>
@@ -479,14 +501,14 @@ export default function FullWidthTabs(props) {
                   {comments.map ((current) => (
                     
                <div className="" style={{direction:"rtl"}}>
-                  <div className="d-flex p-3">
+                  <div className="d-flex px-md-3 py-3">
                     <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
                       </h5>
                       <small>
-                      {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                      {`${current.sendtime.toString().split('T')[0]}`}
                       </small>
                     </div>
 
@@ -494,7 +516,7 @@ export default function FullWidthTabs(props) {
                     {current.account.id != Cookies.get("userId") ?(
                       <div></div>
                     ):(
-                      <div className="btn" onClick={()=> handleDeleteComment(current.id)}>
+                      <div className="btn m-n1" onClick={()=> handleDeleteComment(current.id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                         </svg>
@@ -504,7 +526,7 @@ export default function FullWidthTabs(props) {
 
 
                     
-                    <div className="d-flex flex-column">
+                    <div className="d-flex flex-column m-n1">
 
                       <div className="btn "> 
                       <AiOutlineLike  color="blue" size="25" onClick={()=> handleLikeClick(current.id)}/>
@@ -512,10 +534,10 @@ export default function FullWidthTabs(props) {
                       </div>
                       <small className="mr-3">
 
-                        {current.LikeCount}+
+                        {current.LikeCount}
                       </small>
                     </div>
-                    <div className=" d-flex flex-column">
+                    <div className=" d-flex flex-column m-n1">
 
                       <div className="btn ">
                       <AiOutlineDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
@@ -523,12 +545,12 @@ export default function FullWidthTabs(props) {
                       </div>
                       <small className="mr-3">
 
-                        {current.DislikeCount}-
+                        {current.DislikeCount}
 
                       </small>
                     </div>
                   </div>
-                  <p className="px-3">
+                  <p className="px-md-3">
 
                     {current.comment_text}  
                   </p>
@@ -543,6 +565,25 @@ export default function FullWidthTabs(props) {
 
             </List>
 
+            <p>
+              {endComment}
+            </p>
+
+            <div className="d-flex justify-content-center">
+              <button type="button" className="btn btn-light "
+                onClick={()=>{setCommentsPage(commentsPage-1)}}
+               >
+                 صفحه قبلی 
+              </button>
+              <button type="button" className="btn btn-light"
+                onClick={()=>{setCommentsPage(commentsPage+1)}}
+               >
+                صفحه بعدی
+              </button>
+            </div>
+
+
+
           </div>
         </TabPanel>
 
@@ -550,17 +591,17 @@ export default function FullWidthTabs(props) {
           <div style={{direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">بریده ای از کتاب بنویسید :</h3>
-              <div className="d-flex p-3">
-                <Avatar className="" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
+              <div className="d-flex flex-wrap p-3">
+                <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                 <div className="d-flex flex-column mt-2 flex-fill">
-                <div className="d-flex">
+                <div className="d-flex flex-wrap">
                 <div className="flex-fill form-group mx-3">
 
                   <textarea className="form-control" rows="1" id="quote" name="text" value={userQuote} onChange={handleChangeQuote}></textarea>
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow  align-self-start"
+                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
                 onClick={handleSubmitQuoteClick} style={{color:"white",fontFamily:"Mitra",fontWeight:"bold"}}
                 >ثبت</StyledButton>
                 </div>
@@ -584,7 +625,7 @@ export default function FullWidthTabs(props) {
             {quotes.message === "No Quote!" ? (
                  
 
-                 <p>هیچ نقل قولی ثبت نشده</p>
+                 <p style={{fontFamily:'Mitra',color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
                   <div>
@@ -592,14 +633,14 @@ export default function FullWidthTabs(props) {
                   {quotes.map ((current) => (
               
               <div className="" style={{direction:"rtl"}}>
-                  <div className="d-flex p-3">
+                  <div className="d-flex px-md-3 py-3">
                     <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
                       </h5>
                       <small>
-                      {`${current.sendtime.toString().split('T')[0]}  ${current.sendtime.toString().split('.')[0].split('T')[1]}`}
+                      {`${current.sendtime.toString().split('T')[0]}`}
                       </small>
                     </div>
 
@@ -625,20 +666,20 @@ export default function FullWidthTabs(props) {
                       </small>
                       <div className="btn" onClick={()=> handleLoveClick(current.id)}> 
 
-                        <svg width="2em" height="2em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="1.6em" height="1.6em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
                       </div>
 
                     </div>
                   </div>
-                  <div className="px-3 d-flex justify-content-center align-items-center text-center mx-3">
+                  <div className="px-md-3 d-flex justify-content-center align-items-center text-center mx-3">
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
                         <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
                       </svg>
                     </div>
-                    <p className="text-right col-11 mx-3">
+                    <p className="text-right col-11 mx-md-3">
 
                     {current.quote_text}
 

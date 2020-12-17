@@ -20,7 +20,7 @@
 
 .car{
   
-    padding-top: 10px;
+
     width: 120px;
     height: 144px;
     padding-right: 10px;
@@ -34,7 +34,7 @@
   
     width: 100px;
     height: 80px;
-    padding-top:5px;
+    padding-top:17px;
     padding-left:17px;
 }
 .slid{
@@ -53,6 +53,7 @@
 .brand1{
     margin-left: 7px;
     font-size: 25px;
+   
 }
 .subbrand1{
     margin-top: -150px;
@@ -74,33 +75,36 @@
 .subbrand3{
     margin-left: -10px;
 }
-@media (max-width :400px) 
+@media (max-width :414px) 
 {
     .col-xl-8-gholi{
         margin-left: 19px;
     }
-    .brand2{
-        margin-left: 100px;
-        padding-top: 10px;
-        font-size: 19px;
-        
-      }
-      .brand1{
-          font-size: 19px;
-      }
-      .brand3{
-          margin-top: -180px;
-          font-size: 19px;
-      }
-    
-    .slid{
-        margin-right: -140px;
+    .car{
+       width: 120px;
+       height: 144px;
+   
     }
-     
-    
-  }
-
-@media (max-width :768px) 
+    .slid{
+        margin-right: 10px;
+        margin-left: 140px;
+    }
+    .brand1{
+       
+       font-size: 20px;
+    }
+    .brand2{
+       margin-left: 80px;
+       padding-top: 50px;
+       font-size: 20px;
+    }
+    .brand3{
+       margin-left: 80px;
+       padding-top: 50px;
+       font-size: 20px;
+    }
+}
+@media (max-width :769px) 
 {
     .col-xl-8-gholi{
     margin-left: 290px;
@@ -111,6 +115,20 @@
     width: 120px;
     height: 144px;
     margin-left: -300px;
+ }
+ .brand1{
+        
+    font-size: 20px;
+ }
+ .brand2{
+    margin-left: 80px;
+    padding-top: 50px;
+    font-size: 20px;
+ }
+ .brand3{
+    margin-left: 80px;
+    padding-top: 90px;
+    font-size: 20px;
  }
 
     
@@ -125,10 +143,25 @@
      .car{
         width: 120px;
         height: 144px;
-        margin-left: -300px;
+    
+     }
+     .slid{
+         margin-right: 10px;
+         margin-left: 140px;
      }
      .brand1{
-       margin-left: -10px;
+        
+        font-size: 20px;
+     }
+     .brand2{
+        margin-left: 80px;
+        padding-top: 50px;
+        font-size: 20px;
+     }
+     .brand3{
+        margin-left: 80px;
+        padding-top: 50px;
+        font-size: 20px;
      }
 
   

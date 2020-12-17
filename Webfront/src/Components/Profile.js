@@ -52,7 +52,7 @@ function ProFile (props){
                   setUser(prevState => ({ 
                     ...prevState,
                     userName: response.data.username,
-                    //email: response.data.email,
+                    email: response.data.email,
                     picture : "http://127.0.0.1:8000"+response.data.profile_photo
                     }));
                     console.log(user);
@@ -234,17 +234,18 @@ useEffect(() => {
         <div className="main-content">
             <div class="container-fluid">
                 <div className="row">
+
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
                         <div className="card cardp">
                             <div className=" d-flex justify-content-end">
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h5 className="mt-5" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h6 className="mt-3" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
                                     <StyledButton type="button" className="col-4 btn btn-sm btn-info"
@@ -261,12 +262,11 @@ useEffect(() => {
 
                                     </StyledButton>
                                 </div>
-                                    <div className="profile">
+                                    <div className="profile col-md-5 pl-1 mr-2 mt-5 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
-
-                                                                         width: 140,
-                                                                         height: 140,
+                                                                         width: 145,
+                                                                         height: 145,
 
 
                                                                          display: "block"}}/>
@@ -279,18 +279,18 @@ useEffect(() => {
                                 <div className="row">
                                     <div className="col">
 
-                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
+                                <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
-                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.toRead}</b>
-                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.reading}</b>
+                                        <div className="d-flex justify-content-between text-right mt-md-5 ml-5 mr-5">
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.toRead}</b>
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.reading}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between text-right mt-md-2">
+                                        <div className="d-flex justify-content-between ourfont text-right mt-md-3">
 
-                                        <span className="description ml-4"style={{fontFamily:'Mitra',fontSize:18}}>  می‌خواهم بخوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  دارم می‌خوانم</span>
-                                        <span className="description mr-4"style={{fontFamily:'Mitra',fontSize:18}}>  خوانده‌ام</span>
+                                        <b className="description decsciptionmine ml-4">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine mr-4">دارم می‌خوانم</b>
+                                        <b className="description decsciptionmine mr-4 ml-1">خوانده‌ام</b>
                                         </div>   {/* < FaRegSmileBeam/> */}
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@ useEffect(() => {
          <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle gholi img-fluid" style={{
            width: 120,
              height: 120,
-             marginLeft:300,
+             marginLeft:180,
             marginTop:-5,
              display: "block"}}/>
             <div className="d-flex justify-content-between">

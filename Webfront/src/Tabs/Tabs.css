@@ -1,9 +1,11 @@
 .root{
-    height: 600px;
+    height: 630px;
+    width: 90%;
     background-color: white;
     position: fixed;
-
-    border:2px solid #fff;
+    margin-top: -210px;
+    border:16px solid #fff;
+    border-radius: 5%;
     box-shadow: 10px 10px 5px #ccc;
     -moz-box-shadow: 10px 10px 5px #ccc;
     -webkit-box-shadow: 10px 10px 5px #ccc;
@@ -11,18 +13,20 @@
 
     
 }
-@media (min-width :360px) 
+@media (max-width :414px) 
 {
     .root{
-    width: 340px;
+    width:300px;
+    margin-left: -100px;
     
     }
    
   }
-  @media (min-width :768px) 
+  @media (max-width :769px) 
 {
     .root{
     width: 700px;
+    height: 500px;
     }
    
   }

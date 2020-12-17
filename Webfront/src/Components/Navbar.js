@@ -11,10 +11,11 @@ import{ useState, useEffect } from "react";
 // import "./HelpingNavbar";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
-import teal from '@material-ui/core/colors/purple';
+//import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
 
-import {FaHome} from 'react-icons/fa';
+//import {FaHome} from 'react-icons/fa';
+import {withStyles } from '@material-ui/core/styles';
 // import {MdGroup} from 'react-icons/md';
 // import UserList from './UsersList';
 import {
@@ -27,8 +28,8 @@ import {
   useParams,
   withRouter
 } from "react-router-dom";
- import {MdGroup} from 'react-icons/md';
- import UserList from './UsersList';
+ //import {MdGroup} from 'react-icons/md';
+// import UserList from './UsersList';
 
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
@@ -93,9 +94,30 @@ useEffect(() => {
     console.log(b);
     props.history.push( '/book/' + b.id );
   }
+  const StyledButton = withStyles({
+    root: {
+      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      color: 'black',
+      height: 50,
+      padding: '0 30px',
+      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
+  const logout = () =>{
+        
+    //localStorage.clear("token");
+    Cookies.remove('userToken');
+    Cookies.remove('userName');
+    Cookies.remove('userId');
+    props.history.push('/login');
+}
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light color4">
+      <nav class="navbar navbar-expand-lg navbar-light px-4 color4">
         <h1>  
           <GiBookshelf color="white" />
         </h1>
@@ -103,11 +125,11 @@ useEffect(() => {
          style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav ">
             <li class="nav-item" href="groups"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold"}}>
@@ -117,26 +139,34 @@ useEffect(() => {
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
             </li>
-            <li class=" nav-item btn"
+            <li class=" nav-item mr-md-5 btn"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
+           
+            
           </ul>
-          <div className="mr-3 d-flex ml-auto justify-content-between ">
-            <div>
-              <input className="rounded-pill text-right" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
+          <div className="d-flex flex-grow-1 mx-md-5">
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
                style={{fontFamily:'Mitra'}}
-               />             
-                <Button variant="gray" className="" onClick={handleShow}>
-                  <GoSearch size="30" color="white" />
-                </Button>
-                </div>
-              <a className="row mt-1"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
+               />  
+              <Button variant="gray" className="mr-md-5" onClick={handleShow}>
+                <GoSearch size="30" color="white" />
+              </Button>
+          </div>
+          <div className="d-flex justify-content-between flex-wrap">
+            
+            <div className="d-flex mx-auto ml-md-5">
+              <a className="row ml-2"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
                <small className="" size="50" style={{padding:10,fontSize:20}}>
                 {Cookies.get('userName')}
                </small>
                 <Avatar alt="" src={Cookies.get('userPic')} className="" />
               </a>
+              <li type="button" className="btn btn-sm mt-1 ml-2" onClick = {logout} style={{fontFamily:'Mitra',color:'white'}} >
+                  خروج ازحساب
+              </li>
+            </div>
           </div>
 
 
