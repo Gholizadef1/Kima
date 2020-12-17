@@ -282,7 +282,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     <DropDownPicker
+     {/* <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -291,7 +291,7 @@ const callbackFunction = async(childData) => {
           containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
           style={{
             
-            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('1.7%'), width: wp('45%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('1.%'), width: wp('45%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
             borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
           }}
           itemStyle={{
@@ -318,12 +318,49 @@ const callbackFunction = async(childData) => {
 
           }}
 
-        />
+        /> */}
      { (information.length>=0) ?
      
      <FlatList
+     ListHeaderComponent={ <DropDownPicker
+          items={[
+            { label: 'فیلتر بر اساس تاریخ', value: 'none' },
+            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
+          ]}
+          defaultValue={selectedValue}
+          containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
+          style={{
+            
+            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2.7%'), width: wp('45%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
+          }}
+          itemStyle={{
+          
+            justifyContent: 'flex-start'
+          }}
+          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('45%'), position: 'absolute', marginBottom: hp('10%') }}
+          onChangeItem={async (item) => {
+
+            if (item.value === 'none') {
+              console.log(item.value + 'VALUE')
+              console.log('to none')
+              await setlikeotime('/comment-filter-time')
+           
+            }
+            else if (item.value === 'like') {
+              console.log('tolike')
+              console.log(item.value + 'VALUE')
+              await setlikeotime('/comment-filter-like')
+      
+            }
+
+
+
+          }}
+
+        />}
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
-     style={{marginBottom:hp('17.5%')}}
+     style={{marginBottom:hp('9%')}}
      showsVerticalScrollIndicator={false}
      onEndReached={()=>handleLoadMore()}
      onEndReachedThreshold={0}
