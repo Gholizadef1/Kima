@@ -77,6 +77,7 @@ const Activityquote = (prop) => {
             console.log(id)
                  try{
                  const response = await axiosinst.get('api/user-profile/' + id+'/MyQuotes')
+                 console.log(response)
                  if(response.data+'RESPONSE'==='RESPONSE'){
                  console.log('quote nadare')
                  setinformation()
@@ -184,7 +185,7 @@ const Activityquote = (prop) => {
 
             <View style={styles.container}>
 
-               { (information.length>=0) ? <DropDownPicker
+               {/* { (information.length>=0) ? <DropDownPicker
                     items={[
                         { label: 'مرتب شده بر اساس:', value: 'none' },
                         { label: 'جدیدترین ها', value: 'history' },
@@ -198,13 +199,13 @@ const Activityquote = (prop) => {
                     }}
                     dropDownStyle={{ backgroundColor: '#fafafa' }}
                     onChangeItem={(item) => console.log(item.value)}
-                />:null}
+                />:null} */}
 
 
                 <View>
                    { (information.length>=0) ? <FlatList
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
-                        style={{ marginBottom: '17%' }}
+                        style={{ marginBottom: '0%' }}
                         showsVerticalScrollIndicator={false}
                         onEndReached={() => handleLoadMore()}
                         onEndReachedThreshold={0}
@@ -222,7 +223,7 @@ const Activityquote = (prop) => {
 
                         renderItem={({ item }) => (<><Activityquotecard name={item.account.username}
 
-                            date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1c53ec0001dc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
+                            date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} DELETE={callbackFunction} booktitle={item.current_book.Title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1244af18f7bf.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
 
                             <Text style={styles.heartnumber}>{item.Likes}</Text>
 
