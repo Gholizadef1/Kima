@@ -194,7 +194,9 @@ import { Entypo } from '@expo/vector-icons';
          source={require('../../assets/line3.png')}
          style={{height:hp('0.1%'),marginRight:wp('10%'),width:wp('94%')}}
          ></Image>
-         <TouchableOpacity>
+         <TouchableOpacity
+         onPress={()=>navigation.navigate('myquote')}
+         >
              <Button style={styles.lastquote}>
                  <Text style={styles.lastquotetext}>
                      نقل قول های من
