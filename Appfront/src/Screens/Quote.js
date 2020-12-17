@@ -68,6 +68,7 @@ const callbackFunction = async(childData) => {
     response(page+1);
    };
   const [theend,settheend]=useState(false)
+  const [likeotime, setlikeotime] = useState('/quote-filter-time');
   const [selectedValue, setselectedValue] = useState('none')
   const [selectedIndex, setSelectedIndex] = useState([]);
   const[loading ,setloading]=useState(false);
@@ -106,7 +107,7 @@ const callbackFunction = async(childData) => {
      console.log(page+'PAGE')
      try{
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-     const response = await axiosinst.get('api/quotes/'+id,{ params:{
+     const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
      page:page
      }
   })
@@ -282,23 +283,23 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     {/* <DropDownPicker
+     <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
-          containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
+          containerStyle={{ height: 40, width: wp('50%'), marginBottom: hp('4%') }}
           style={{
             
-            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('1.%'), width: wp('45%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
             borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
           }}
           itemStyle={{
           
             justifyContent: 'flex-start'
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('45%'), position: 'absolute', marginBottom: hp('10%') }}
+          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%') }}
           onChangeItem={async (item) => {
 
             if (item.value === 'none') {
@@ -318,49 +319,51 @@ const callbackFunction = async(childData) => {
 
           }}
 
-        /> */}
+        />
      { (information.length>=0) ?
      
      <FlatList
-     ListHeaderComponent={ <DropDownPicker
-          items={[
-            { label: 'فیلتر بر اساس تاریخ', value: 'none' },
-            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
-          ]}
-          defaultValue={selectedValue}
-          containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
-          style={{
+    //  ListHeaderComponent={ <DropDownPicker
+    //       items={[
+    //         { label: 'فیلتر بر اساس تاریخ', value: 'none' },
+    //         { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
+    //       ]}
+    //       defaultValue={selectedValue}
+    //       containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
+    //       style={{
             
-            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2.7%'), width: wp('45%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
-            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
-          }}
-          itemStyle={{
+    //         borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2.7%'), width: wp('45%'), marginBottom:-300, position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
+    //         borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
+    //       }}
+    //       itemStyle={{
           
-            justifyContent: 'flex-start'
-          }}
-          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('45%'), position: 'absolute', marginBottom: hp('10%') }}
-          onChangeItem={async (item) => {
+    //         justifyContent: 'flex-start'
+    //       }}
+    //       dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('45%'), position: 'absolute', marginBottom: hp('10%') }}
+    //       onChangeItem={async (item) => {
 
-            if (item.value === 'none') {
-              console.log(item.value + 'VALUE')
-              console.log('to none')
-              await setlikeotime('/comment-filter-time')
+    //         if (item.value === 'none') {
+    //           console.log(item.value + 'VALUE')
+    //           console.log('to none')
+    //           await setlikeotime('/quote-filter-time')
+    //           response(1)
            
-            }
-            else if (item.value === 'like') {
-              console.log('tolike')
-              console.log(item.value + 'VALUE')
-              await setlikeotime('/comment-filter-like')
+    //         }
+    //         else if (item.value === 'like') {
+    //           console.log('tolike')
+    //           console.log(item.value + 'VALUE')
+    //           await setlikeotime('/quote-filter-like')
+    //           response(1)
       
-            }
+    //         }
 
 
 
-          }}
+    //       }}
 
-        />}
+    //     />}
       ListFooterComponent={(theend===false?<View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View>:<View style={styles.loader}><Text style={{color:'gray',alignSelf:'center'}}>نقل قول دیگری وجود ندارد</Text></View>)}
-     style={{marginBottom:hp('9%')}}
+     style={{marginBottom:hp('18%')}}
      showsVerticalScrollIndicator={false}
      onEndReached={()=>handleLoadMore()}
      onEndReachedThreshold={0}
