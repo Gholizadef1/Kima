@@ -234,6 +234,7 @@ useEffect(() => {
         <div className="main-content">
             <div class="container-fluid">
                 <div className="row">
+
                     <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
                         <div className="card cardp">
                             <div className=" d-flex justify-content-end">
@@ -278,14 +279,14 @@ useEffect(() => {
                                 <div className="row">
                                     <div className="col">
 
-                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
+                                <hr style={{width:"100%",color:"#333",backgroundColor:"#333",marginTop:90}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-2 ml-5 mr-5">
+                                        <div className="d-flex justify-content-between text-right mt-md-5 ml-5 mr-5">
                                         <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.toRead}</b>
                                         <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.reading}</b>
                                         <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between ourfont text-right mt-md-2">
+                                        <div className="d-flex justify-content-between ourfont text-right mt-md-3">
 
                                         <b className="description decsciptionmine ml-4">می‌خواهم بخوانم</b>
                                         <b className="description decsciptionmine mr-4">دارم می‌خوانم</b>

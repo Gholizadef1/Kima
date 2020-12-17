@@ -101,7 +101,7 @@ export default function FullWidthTabs() {
       {RenderRowcomment}
       </FixedSizeList>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={2} dir={theme.direction} height={400}>
         <Scroll/>
         </TabPanel>
       </SwipeableViews>
