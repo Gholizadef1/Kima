@@ -21,6 +21,7 @@ const Home = ({navigation}) => {
 
         axiosinst.get('/bookdetail')
 
+
         .then(function(response){
             setImage(response.data)
             // console.log(response)

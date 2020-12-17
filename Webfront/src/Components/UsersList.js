@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import Horizontal from 'react-scroll-horizontal';
  import "./UsersList.css";
- import "./HelpingNavbar";
+ //import "./HelpingNavbar";
+ 
 function UsersList() {
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
