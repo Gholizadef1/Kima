@@ -172,6 +172,7 @@ const Quotecard = (prop) => {
 
           //  response();
         }} size={20} color={like} />
+         <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 
 
@@ -235,8 +236,8 @@ const styles = StyleSheet.create({
   heartnumber: {
     position: 'absolute',
 
-    left: wp('88%'),
-    fontSize: wp('1%'),
+    left: wp('84%'),
+    fontSize: hp('1.4%'),
     color: 'gray'
   },
   naghlghol: {
