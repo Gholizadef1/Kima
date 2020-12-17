@@ -305,13 +305,13 @@ const callbackFunction = async(childData) => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/comment-filter-time')
+              await setlikeotime('/quote-filter-time')
            
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/comment-filter-like')
+              await setlikeotime('/quote-filter-like')
       
             }
 
