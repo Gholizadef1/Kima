@@ -27,7 +27,7 @@ const Profilenavigation=(prop)=>{
    <profilenav.Navigator initialRouteName={'Profile'}>
      <profilenav.Screen name='Profile' component={Profile} options={{headerShown:false}} ></profilenav.Screen>
      <profilenav.Screen name="Editprofile"   component={Editprofile}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
-     <profilenav.Screen name="myquote"   component={Activityquote}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
+     <profilenav.Screen name="myquote"   component={Activityquote}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'نقل قول های من',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',fontSize:17}}}></profilenav.Screen>
 
    </profilenav.Navigator>
  
