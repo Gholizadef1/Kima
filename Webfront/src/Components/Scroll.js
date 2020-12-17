@@ -106,9 +106,8 @@ function Slide(props) {
 
   
   return (
-    <div className="con col-xl-8 col-xl-8-gholi">
-              <div className="brand1 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
-
+    <div className="con text-center col-xl-8 col-xl-8-gholi">
+      <div className="brand1 ml-3 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
       {bookRead.length === 0 ? (
 
         <div className="subbrand1" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>

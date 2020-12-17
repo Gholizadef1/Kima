@@ -11,16 +11,16 @@ import {
 useParams,
 withRouter
 } from "react-router-dom";
-import {IoMdCheckmarkCircleOutline} from "react-icons/io";
+//import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 import {withStyles } from '@material-ui/core/styles';
 import './bookView.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
+//import Box from '@material-ui/core/Box';
 import Cookies from 'js-cookie';
-import RatingStars from "../../Components/RatingStars";
+//import RatingStars from "../../Components/RatingStars";
 
-import { data, event, noConflict } from 'jquery';
+//import { data, event, noConflict } from 'jquery';
 
 import Tabs from "./multiTabs"
 import Button from '@material-ui/core/Button';
@@ -80,7 +80,7 @@ const useStyles = makeStyles({
 root: {
 width: 200,
 display: 'flex',
-paddingLeft:59,
+paddingLeft:15,
 height:22,
 alignItems: 'center',
 direction:"ltr",
@@ -142,20 +142,20 @@ console.log(error);
 
 
 }
-},[] );
+},[props.match.params.bookId] );
 
-const StyledButton = withStyles({
-    root: {
-      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 10,
-      border: 10,
-      color: 'black',
-      height: 10,
-      padding: '0 30px',
-      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+// const StyledButton = withStyles({
+//     root: {
+//       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+//       borderRadius: 10,
+//       border: 10,
+//       color: 'black',
+//       height: 10,
+//       padding: '0 30px',
+//       boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
 
-    },
-  })(Button);
+//     },
+//   })(Button);
   const BlueOnGreenTooltip = withStyles({
     tooltip: {
       color: "black",
@@ -279,105 +279,98 @@ useEffect(() => {
 
 
 return(
-<div>
-<div className="container-fluid col-8 rTOl text-right " >
-<div className="d-flex flex-row shadow color1 table-borderless my-1">
-<div className="col-3">
-<img src={state.imgurl} className="m-3 img-fluid shadow float-right" alt="" style={{width:'100%',height:'auto'}} />
-</div>
-<div className="d-flex col-6 flex-column p-3">
-
-<h2 style={{fontFamily:'Mitra'}}>{state.title}</h2>
-<table className="mt-auto table table-hover text-right" >
-<tbody >
-<tr>
-<th style={{fontFamily:'Mitra'}}>
-نام نویسنده
-</th>
-<th style={{fontFamily:'Mitra'}}>
-{state.author}
-</th>
-</tr>
-<tr>
-<th style={{fontFamily:'Mitra'}}>
-نام ناشر
-</th>
-<th style={{fontFamily:'Mitra'}}>
-{state.publisher}
-</th>
-</tr>
-<tr>
-<th style={{fontFamily:'Mitra'}}>
-امتیاز این کتاب:
-</th>
-
-<th style={{fontFamily:'Mitra'}}>
-    {parseFloat(state.average_rating).toFixed(1)}
-   از 5 در
-    {state.average_rating_count}
-رای
-</th>
-</tr>
-<tr>
-<th style={{fontFamily:'Mitra'}}>
-به این کتاب رای دهید
-
-</th>
-<th>
-
-<div className={classes.root}>
-      
-<button onClick={Sendrequest}  style={{boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:35,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
-    <div style={{marginLeft:-3, color:"white",fontFamily:"Mitra",fontWeight:"bold"}}>
-    ثبت
+<div className="mx-md-5 px-md-5">
+  <div className="container-fluid rTOl text-right px-md-5" >
+    <div className="mx-md-5 ">
+    <div className="row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 ">
+      <div className="col-md-4 mb-md-0 p-4">
+        <img src={state.imgurl} className="img-fluid shadow float-right" alt="" style={{width:'100%',height:'auto'}} />
+      </div>
+      <div className="col-md-8 position-static pl-md-0 d-flex flex-column mb-4 ">
+        <h2 className="p-3 mt-2" style={{fontFamily:'Mitra'}}>{state.title}</h2>
+          <table className="mt-auto table table-hover text-right" >
+            <tbody className="">
+              <tr>
+              <th style={{fontFamily:'Mitra'}}>
+              نام نویسنده:
+              </th>
+              <th style={{fontFamily:'Mitra'}}>
+              {state.author}
+              </th>
+              </tr>
+              <tr>
+              <th style={{fontFamily:'Mitra'}}>
+              نام ناشر:
+              </th>
+              <th style={{fontFamily:'Mitra'}}>
+              {state.publisher}
+              </th>
+              </tr>
+              <tr>
+              <th style={{fontFamily:'Mitra'}}>
+              امتیاز کتاب:
+              </th>
+                 <th style={{fontFamily:'Mitra'}}>
+                  {parseFloat(state.average_rating).toFixed(1)}
+                 از 5 در
+                  {state.average_rating_count}
+              رای
+              </th>
+              </tr>
+              <tr>
+              <th className="" style={{fontFamily:'Mitra'}}>
+              به این کتاب رای دهید
+                 </th>
+              <th className="">
+                 <div className={classes.root}>
+                 <button onClick={Sendrequest}  style={{boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+              background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:35,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
+                  <div style={{marginLeft:-3, color:"white",fontFamily:"Mitra",fontWeight:"bold"}}>
+                  ثبت
+                  </div>
+                 </button>
+              <Rating
+              className=""
+              name="hover-feedback"
+              precision={1}
+              size="large"
+              onChange={(event,newValue)=>{
+              setValue(event.target.value)
+              }}
+              onChangeActive={(event, newHover) => {
+              setHover(newHover);
+              }}
+              value={value}
+                         />
+                             </div>
+              </th>
+              </tr>
+            </tbody>
+          </table>
+          <div className="row" style={{fontFamily:'Mitra'}}>
+          <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
+          <select className="form-control mr-4 rounded-pill" style={{width:170}} id="bookMood" onChange={ addBookToMineHandler} >
+          <option id="none" value="none">هیچکدام</option>
+          <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+          <option id="Reading" value="Reading">دارم می‌خوانم</option>
+          <option id="Read" value="Read">خوانده‌ام</option>
+          </select>
+          <div>
+          {/* {/ <Button onClick={handleClickSnack}>Top-Center</Button> /} */}
+          <Snackbar
+          anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
+          open={openSnack}
+          autoHideDuration={3000}
+          onClose={handleCloseSnack}
+          message={selectMassage}
+          />
+      </div>
     </div>
-    
-</button>
-<Rating
-name="hover-feedback"
-precision={1}
-size="large"
-onChange={(event,newValue)=>{
-setValue(event.target.value)
-}}
-onChangeActive={(event, newHover) => {
-setHover(newHover);
-}}
-value={value}
-
-/>
-
-
+  </div>
 </div>
-</th>
-</tr>
-</tbody>
-</table>
-<div className="row" style={{fontFamily:'Mitra'}}>
-<label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-<select className="form-control mr-4 rounded-pill col-6" id="bookMood" onChange={ addBookToMineHandler} >
-<option id="none" value="none">هیچکدام</option>
-<option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
-<option id="Reading" value="Reading">دارم می‌خوانم</option>
-<option id="Read" value="Read">خوانده‌ام</option>
-</select>
-<div>
-{/* {/ <Button onClick={handleClickSnack}>Top-Center</Button> /} */}
-<Snackbar
-anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
-open={openSnack}
-autoHideDuration={3000}
-onClose={handleCloseSnack}
-message={selectMassage}
-/>
-</div>
-
-</div>
-</div>
-</div>
-<div className="Tab color1 my-3 mb-5">
+<div className="Tab color1 my-3 mb-5 mx-md-5">
 <Tabs book={state.id} bookdescription={state.description}/>
+</div>
 </div>
 </div>
 </div>

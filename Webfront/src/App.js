@@ -11,12 +11,12 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
-import HelpingNavBook from "./Components/HelpingNavBook";
-import Scroll from "./Components/Scroll";
-import Tabs from "./Tabs/Tabs";
+//import HelpingNavBook from "./Components/HelpingNavBook";
+//import Scroll from "./Components/Scroll";
+//import Tabs from "./Tabs/Tabs";
 import LoginForm from './components/loginForm/loginForm';
-import AlertComponent from './components/alertComponent/alertComponent.js';  
-import Avatar from "./Components/Avatar";
+//import AlertComponent from './components/alertComponent/alertComponent.js';  
+//import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
 //import HelpingNavbar from"./Components/HelpingNavbar";
@@ -27,8 +27,8 @@ import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
 //import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
-import { render } from '@testing-library/react';
-import { components } from 'react-select';
+//import { render } from '@testing-library/react';
+//import { components } from 'react-select';
 //import protectedRoute from './components/protect';
 
 function App(props) {
@@ -74,7 +74,7 @@ function App(props) {
               </Route>
             
             <Route path="/book/:bookId">
-              <HelpingNavBook/>
+              <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
             <Route path="*">
