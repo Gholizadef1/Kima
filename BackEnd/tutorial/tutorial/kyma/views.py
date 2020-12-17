@@ -8,7 +8,9 @@ from . models import book
 from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
+from django.conf import settings
 from tutorial.quickstart.models import MyBook
+from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -99,6 +101,7 @@ class BookViewPage(APIView):
 
 
 
+
 class BookState(APIView):
     
     def get(self, request, pk, format=None):
@@ -115,5 +118,6 @@ class BookState(APIView):
             return MyBook.objects.get(account=user,book1=book2)
         except MyBook.DoesNotExist:
             return None
+
 
   
