@@ -184,7 +184,7 @@ const Activityquote = (prop) => {
 
             <View style={styles.container}>
 
-                <DropDownPicker
+               {!information===[]? <DropDownPicker
                     items={[
                         { label: 'مرتب شده بر اساس:', value: 'none' },
                         { label: 'جدیدترین ها', value: 'history' },
@@ -198,7 +198,7 @@ const Activityquote = (prop) => {
                     }}
                     dropDownStyle={{ backgroundColor: '#fafafa' }}
                     onChangeItem={(item) => console.log(item.value)}
-                />
+                />:null}
 
 
                 <View>
@@ -230,7 +230,7 @@ const Activityquote = (prop) => {
                         )}
                     // extraData={finfo}
                     >
-                    </FlatList>:<Text >نقل قولی ندارید</Text>}
+                    </FlatList>:<Text style={{alignSelf:'center',marginTop:'70%',color:'gray',fontWeight:'bold'}} >نقل قولی ندارید</Text>}
                 </View>
 
 
