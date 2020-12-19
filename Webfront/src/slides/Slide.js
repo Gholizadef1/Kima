@@ -91,7 +91,7 @@ function Slide(props) {
 
   
   return (
-    <div className="container">
+    <div className="container shadow  pb-3 bg-lightblue">
 
       <div class="brand" style={{fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
@@ -105,15 +105,15 @@ function Slide(props) {
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
-
               <div className="card cat"onClick={() => bookSelectedHandler( current )}>
+                
                 <img
                   className="squere" 
                   src={current.imgurl}
                   height={56}
                   width={56}
                 />
-      {current.title.length >19 ?
+      {current.title.length >20 ?
 <BlueOnGreenTooltip title={current.title}>
 <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       </BlueOnGreenTooltip>
@@ -141,7 +141,6 @@ function Slide(props) {
           <h3>Please select a topic.</h3>
         </Route>
       </Switch> */}
-
     </div>
   );
 }

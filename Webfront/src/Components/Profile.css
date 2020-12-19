@@ -1,10 +1,11 @@
 
-/* .btn-default
+/* /* .btn-default
  
 {
  margin-top: 100px;
 background-color: #9dc3e9;
-}
+} */
+
 .head{
     margin-top: 400px;
 }
@@ -45,7 +46,16 @@ background-color: #9dc3e9;
 .decsciptionmine{
     font-size: 18px;
 }
-
+.custom-btn{
+    max-width: 80%;
+    padding-left:8px;
+    padding-right:10px;
+}
+.custom-btn1 {
+    max-width: 80%;
+    padding-left:3px;
+    padding-right:4px;
+}
 .Tabz{
 
     margin-left: 100px;

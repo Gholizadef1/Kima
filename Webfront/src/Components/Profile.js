@@ -210,11 +210,12 @@ function ProFile (props){
 
 const StyledButton = withStyles({
     root: {
-      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+      background: 'linear-gradient(45deg, #a0a0a0 30%, #a0a0a0 90%)',
       color: 'black',
       height: 50,
       padding: '0 30px',
       boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
+      fontWeight:'bolder',
 
     },
     label: {
@@ -248,7 +249,7 @@ useEffect(() => {
                                     <h6 className="mt-3" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
                                        {user.email}
                                     </h6>
-                                    <StyledButton type="button" className="col-4 btn btn-sm btn-info"
+                                    <button type="button" className="btn btn-primary"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -260,7 +261,7 @@ useEffect(() => {
                                      aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
                   ویرایش
 
-                                    </StyledButton>
+                                    </button>
                                 </div>
                                     <div className="profile col-md-5 pl-1 mr-2 mt-5 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
@@ -307,9 +308,9 @@ useEffect(() => {
              marginLeft:180,
             marginTop:-5,
              display: "block"}}/>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between p-4">
 
-                 <StyledButton className="btn1" type="button"onClick={handleUpload}style={{fontFamily:'Mitra',left:20,color:"white"}}>ثبت عکس</StyledButton>
+                 <button className="btn custom-btn bg-primary" type="submit"onClick={handleUpload}style={{fontFamily:'Mitra',color:"white"}}>ثبت عکس</button>
 
                 <input class="form-control" 
                 type="file" accept="image/*" 
@@ -317,11 +318,11 @@ useEffect(() => {
                 ref={imageUploader} 
 
                 style={{ display: "none",color:"white" }} />
-              <StyledButton className="btn1" type="button" style={{fontFamily:'Mitra',left:-15,color:"white"}}
+              <button className="btn custom-btn1 bg-primary" type="submit" style={{fontFamily:'Mitra',color:"white"}}
 
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
-                            </StyledButton>
+                            </button>
                             </div>
                             <div class=" p-4">
                                     <form>
@@ -339,16 +340,16 @@ useEffect(() => {
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class=" my-2">
-                                                <StyledButton 
+                                                <button
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row "
+                                                className="btn d-flex flex-row bg-primary "
                                                 onClick={handleChangeInfosClick}
 
 
                                                 style={{fontFamily:'Mitra',color:"white"}}
 
 
-                                                >ذخیره</StyledButton>
+                                                >ذخیره</button>
                                                 <div class="my-1">
                                                 <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
                                                 <input type="text"
@@ -382,9 +383,9 @@ useEffect(() => {
                                             </div> */}
 
                                             <div class=" my-2">
-                                                <StyledButton 
+                                                <button
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row"
+                                                className="btn color5 d-flex flex-row bg-primary"
                                                 onClick={handleChangePassClick}
 
 
@@ -392,7 +393,7 @@ useEffect(() => {
 
 
                                                
-                                                >ذخیره </StyledButton>
+                                                >ذخیره </button>
                                             </div>
                                                 
                                             </div>
@@ -402,12 +403,12 @@ useEffect(() => {
         </Modal.Body>
         <Modal.Footer>
 
-
-          <StyledButton variant="info" onClick={handleClose} style={{fontFamily:'Mitra',right:10,color:"white"}}>
-
+        
+          <button className="btn bg-primary mx-4"  onClick={handleClose} style={{fontFamily:'Mitra',color:"white"}}>
 
             بستن
-          </StyledButton>
+          </button>
+          
         </Modal.Footer>
       </Modal>
                                    

@@ -2,9 +2,7 @@
 
     background: radial-gradient#e5e5e5;
 }*/
-.cat:hover{
-    box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
-}
+
 
 .card-title2{
     font-size: 15px;
@@ -29,7 +27,9 @@
 .cat{
     
     padding-top: 10px;
-    opacity: 1;
+    margin-left: 10px;
+   border-color: lightslategrey;
+    display: flex;
     width: 200px;
     height: 280px;
 
@@ -80,7 +80,7 @@ font-family: 'Mitra';
 @media (max-width :768px) 
 {
     .container{
-        width: 220PX;
+        width: 620PX;
     }
     .slide{
         margin-left: -230px;
@@ -91,7 +91,7 @@ font-family: 'Mitra';
   @media (max-width :800px) 
   {
       .container{
-        width: 220PX;
+        width: 620PX;
         
       }
       .slide{
