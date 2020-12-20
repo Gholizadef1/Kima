@@ -91,9 +91,9 @@ function Slide(props) {
 
   
   return (
-    <div className="container shadow  pb-3 bg-lightblue">
+    <div className="container" id="i-container">
 
-      <div class="brand" style={{fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
+      <div class="brand mr-n4">کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -101,19 +101,20 @@ function Slide(props) {
         
       ) : (
         
-       <div className = "slide">
+       <div className = "row">
+         <div className="col-md-12">
         <Slider {...settings}>
           {suggestions.map((current) => (
             <div className="out" key={current.id}>
-              <div className="card cat"onClick={() => bookSelectedHandler( current )}>
-                
                 <img
-                  className="squere" 
+                  className=" squre img-responsive rounded " 
                   src={current.imgurl}
-                  height={56}
-                  width={56}
+             
+             
+                  onClick={() => bookSelectedHandler( current )}
+                  
                 />
-      {current.title.length >20 ?
+      {current.title.length >19 ?
 <BlueOnGreenTooltip title={current.title}>
 <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       </BlueOnGreenTooltip>
@@ -126,21 +127,13 @@ function Slide(props) {
                    </small>
 
               </div>
-            </div>
+          
+            
           ))}
         </Slider>
         </div>
+        </div>
       )}
-
-{/* 
-      <Switch>
-        <Route path={`${match.path}/:bookId`}>
-          <BookView/>
-        </Route>
-        <Route path={match.path}>
-          <h3>Please select a topic.</h3>
-        </Route>
-      </Switch> */}
     </div>
   );
 }
