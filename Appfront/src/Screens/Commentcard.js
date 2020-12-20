@@ -9,15 +9,18 @@ import { color } from 'react-native-reanimated';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const Commentcard = (prop) => {
   console.log('COMMENT CARD')
   const [like, setlike] = useState('lightblue')
   const [dislike, setdislike] = useState('lightblue')
+  const[likeshode,setlikeshode]=useState(false);
 // const[commentID,setcommentID]=useState();
 //  setcommentID(prop.commentid)
 const getlike=async()=>{
+  await setTimeout(() => {  console.log("World!"); }, 800);
   const back2 = {
 
   }
@@ -34,9 +37,9 @@ const getlike=async()=>{
         .then(async function (response) {
           // setnumlike(response.data.LikeCount)
           if (response.data.message === 'True')
-          setlike('#1f7a8c')
+          await setlike('#1f7a8c')
         else
-          setlike('lightblue')
+          await setlike('lightblue')
           console.log(response);
 
         })
@@ -49,6 +52,7 @@ const getlike=async()=>{
 
 
 const getdislike=async()=>{
+  // await   setTimeout(() => {  console.log("World!"); }, 500);
   const back2 = {
 
   }
@@ -66,9 +70,9 @@ const getdislike=async()=>{
             console.log(response)
           // setnumlike(response.data.LikeCount)
           if (response.data.message === 'True')
-          setdislike('#1f7a8c')
+         await  setdislike('#1f7a8c')
         else
-          setdislike('lightblue')
+         await setdislike('lightblue')
           // console.log(response);
 
         })
@@ -131,6 +135,14 @@ const getdislike=async()=>{
   // }
   // getlike();
   // getdislike();
+  useFocusEffect(
+    React.useCallback(() => {
+       getdislike()
+       getlike(prop.commentid)
+    }, [])
+    // [likeshode]
+
+  )
   // useEffect(()=>{
   //   // getdislike()
   //   getlike(prop.commentid)
@@ -159,10 +171,11 @@ const getdislike=async()=>{
    
 //   }, [])
 
-   useEffect(()=>{
-     getdislike()
-     getlike()
-  }, [like,dislike])
+  //  useEffect(()=>{
+   
+  //    getdislike()
+  //    getlike()
+  // }, [like,dislike])
   // console.log('commentcard')
   return (
     <View style={styles.container}>
@@ -232,7 +245,7 @@ const getdislike=async()=>{
      
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === 'http://1244af18f7bf.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+          {prop.picture === 'http://9fce63f3f8de.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/avatar.png')}
             style={styles.avatar}
@@ -258,6 +271,10 @@ const getdislike=async()=>{
       <View style={{ flexDirection: 'row' }}>
       {/* like */}
         <AntDesign onPress={async () => {
+          if(likeshode===true)
+          await setlikeshode(false)
+          else
+          await setlikeshode(true)
           if (dislike === '#1f7a8c') {
             console.log('DISLIKEDOROSTHAZFMISHE')
             const back2 = {}
@@ -283,10 +300,10 @@ const getdislike=async()=>{
           }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
-          if (like === 'lightblue')
-            setlike('#1f7a8c')
-          else
-            setlike('lightblue')
+          // if (like === 'lightblue')
+          
+          // else
+          //   setlike('lightblue')
 
           // console.log((await AsyncStorage.getItem('token')).toString());
           // alert(prop.quoteid)
@@ -306,6 +323,10 @@ const getdislike=async()=>{
           })
             .then(async function (response) {
               setnumlike(response.data.LikeCount)
+              if(like==='lightblue')
+              setlike('#1f7a8c')
+              else
+              setlike('lightblue')
               // console.log(response);
 
             })
@@ -354,10 +375,10 @@ const getdislike=async()=>{
           }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
-          if (dislike === 'lightblue')
-            setdislike('#1f7a8c')
-          else
-            setdislike('lightblue')
+          // if (dislike === 'lightblue')
+            // setdislike('#1f7a8c')
+          // else
+          //   setdislike('lightblue')
 
           // console.log((await AsyncStorage.getItem('token')).toString());
           // alert(prop.quoteid)
@@ -377,6 +398,10 @@ const getdislike=async()=>{
           })
             .then(async function (response) {
               setnumdislike(response.data.DislikeCount)
+              if(dislike==='lightblue')
+              setdislike('#1f7a8c')
+              else
+              setdislike('lightblue')
               // console.log(response);
 
             })
@@ -392,7 +417,11 @@ const getdislike=async()=>{
         }} name="dislike1" size={20} color={dislike} style={styles.dislike} />
         <Text style={styles.dislikenumber}>{numdislike}</Text>
         {`${prop.comment}`.toString().split('\n').length >= 5 ? <TouchableOpacity
-          onPress={() => {
+          onPress={async() => {
+            if(likeshode===true)
+            await setlikeshode(false)
+            else
+            await setlikeshode(true)
             if (more === false) {
               setmore(true)
               setshowmore('کم تر')

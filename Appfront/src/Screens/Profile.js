@@ -40,7 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://dc39baf075fd.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -51,8 +51,8 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
 
             console.log(';;;;;')
             console.log(picture);
@@ -85,13 +85,13 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://376934692f88.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://dc39baf075fd.ngrok.io/api/user-profile/"+id)
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://376934692f88.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
             console.log(picture);
           
        console.log(response.data.profile_photo)
@@ -131,7 +131,7 @@ import { Entypo } from '@expo/vector-icons';
         
 
        
-      }, [Profilenavigation,a]);
+    //   }, [Profilenavigation,a]);
      
 
       
@@ -164,23 +164,18 @@ import { Entypo } from '@expo/vector-icons';
         
 
 
-        {picture==='http://1244af18f7bf.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={100}
-
-
-        source={require('../../assets/avatar.png')}
-        ></Avatar.Image>:<Avatar.Image style={styles.avatar} size={100}
-
+        {picture!='http://dc39baf075fd.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
         source={{uri:picture}}
-        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={100}
+        ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
         source={require('../../assets/avatar.png')}
         ></Avatar.Image>}
 
 
-        <Text style={{marginTop:hp('6%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
+        <Text style={{marginTop:hp('8%'),alignSelf:'flex-start',left:wp('10%'),color:"#1F7A8C"}}>نام کاربری <Text style={styles.donoghte}>:  </Text><Text style={{color:'black',width:100}}>{name}</Text></Text>
         <AntDesign name="user" size={24} color="#BFDBF7"  style={styles.Icon}/>
     
         <Text style={styles.info}>ایمیل <Text style={styles.donoghte}>:</Text><Text style={{color:'black',width:100}}>{email}</Text></Text>
-        <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('43.5%'),
+        <Feather name="mail" size={20} color="#BFDBF7" style={{  position:'absolute',  marginTop:hp('45.5%'),
         alignSelf:'flex-start',left:wp('3%')}} />
 
 
@@ -191,11 +186,11 @@ import { Entypo } from '@expo/vector-icons';
         </Button>
         <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),left:wp('10%')}}
+         style={{marginTop:hp('56%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),left:wp('10%')}}
          ></Image>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:hp('57%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
+         style={{marginTop:hp('56%'),position:'absolute',width:wp('14%'),height:hp('0.2%'),right:wp('10%')}}
          ></Image>
 
          <Card style={{backgroundColor:'#F8F8F8',marginTop:hp('8%'),marginLeft:wp('3%'),marginRight:wp('3%'),borderRadius:10}}>
@@ -337,12 +332,12 @@ const styles = StyleSheet.create({
 
 
          position:'absolute',
-        marginTop:hp('37.5%'),
+        marginTop:hp('39.5%'),
         alignSelf:'flex-start',left:wp('3%')
     },
     avatar:{
         position:'absolute',
-        marginTop:hp('25%'),
+        marginTop:hp('24%'),
         alignSelf:'center'
 
         
@@ -353,7 +348,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#EDF2F4',
         borderRadius:20,
         marginLeft:105,
-        marginTop:hp('8%')
+        marginTop:hp('5.5%')
     },
     backpic:{
        

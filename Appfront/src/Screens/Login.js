@@ -23,13 +23,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const logschema=yup.object({
   Email:yup.string()
-  .required()
-  .min(8)
-  .email('invalid email format'),
+  .required("ایمیل شما نمیتواند خالی باشد")
+  .min(8,"ایمیل شما باید حداقل 8 کاراکتر باشد")
+  .email('فورمت ایمیل شما نادرست است'),
 
   Password:yup.string()
-  .required()
-  .min(5),
+  .required("رمز عبور شما نمیتواند خالی باشد")
+  .min(5,"رمز شما باید حداقل به طول 5 باشد"),
 
 })
 
@@ -65,7 +65,7 @@ const logschema=yup.object({
 
 
 
-         axios.post('http://1244af18f7bf.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axios.post('http://dc39baf075fd.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
 
 
         .then(async function(response){
@@ -139,8 +139,8 @@ const logschema=yup.object({
         
          onPress={() =>{pro.navigation.navigate('Sign')}} 
          >
-         <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'300',width:140,marginTop:15,marginLeft:235,position:'absolute'}}>هنوز ثبت نام نکرده اید؟</Text>
-         <Text style={{color:'#1F7A8C', fontSize:14,fontWeight:'bold',marginTop:15,marginLeft:205}}>ثبت نام</Text>
+         <Text style={{color:'#1F7A8C', fontSize:13,fontWeight:'300',width:140,marginTop:15,marginRight:25,marginLeft:25,position:'absolute'}}>هنوز ثبت نام نکرده اید؟</Text>
+         <Text style={{color:'#1F7A8C', fontSize:14,fontWeight:'bold',marginTop:15,marginLeft:157}}>ثبت نام</Text>
          
         </TouchableOpacity>
         <Button
