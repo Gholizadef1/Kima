@@ -22,22 +22,22 @@ import axiosinst from '../api/axiosinst';
 const signschema=yup.object({
 
   Username:yup.string()
-  .required()
-  .min(4),
+  .required("نام کاربری شما نمیتواند خالی باشد")
+  .min(4,"نام کاربری شما باید حداقل به طول 4 کاراکتر باشد"),
 
   Email:yup.string()
-  .required()
-  .min(8)
-  .email('invalid email format'),
+  .required("ایمیل شما نمیتواند خالی باشد")
+  .min(8,"امیل شما باید حداقل به طول 8 کاراکتر باشد")
+  .email('فورمت ایمیل شما نادرست است '),
 
   Password:yup.string()
-  .required()
-  .min(5),
+  .required("رمز عبور شما نمیتواند خالی باشد")
+  .min(5,"رمز عبور شما باید حداقل به طول 5 باشد"),
 
   repeatPassword:yup.string()
-  .required()
-  .min(5)
-  .oneOf([yup.ref('Password'),''],'Password must match')
+  .required("رمز عبور شما نمیتواند خالی باشد")
+  .min(5,"رمز شما باید حداقل به طول 5 کاراکتر باشد")
+  .oneOf([yup.ref('Password'),''],'رمز های شما باید با هم بخواند')
   // .test('equaltopass','this should be the same as your password',(val)=>{
   //   return repeatPassword.string()===repeatPassword.string();
   // })
@@ -89,7 +89,7 @@ const signschema=yup.object({
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
 
 
-        axios.post('http://1244af18f7bf.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+        axios.post('http://dc39baf075fd.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
 
 
         .then(async function(response){

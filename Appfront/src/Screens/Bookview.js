@@ -43,7 +43,7 @@ const Bookview = (prop) => {
   }
 
   const getPicker = async () => {
-    axios.get('http://3a16020b9175.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://9fce63f3f8de.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -65,7 +65,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://3a16020b9175.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://9fce63f3f8de.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -77,13 +77,15 @@ const Bookview = (prop) => {
             })
             .catch(function (error) {
               console.log(error);
+              
+              
             });
         }
       }
 
 
   const getRate = async()=>{
-    axios.get('http://3a16020b9175.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -94,10 +96,16 @@ const Bookview = (prop) => {
       console.log(response.message)
       console.log('$$$$'+response.data.data)
       setratenum(response.data.data)   
+      console.log(response.data.code+'NEMIAD')
+     
   })
-  .catch(function(error){
-      console.log(error)
-  })
+  
+    .catch( async function (error) {
+      console.log(error);
+      console.log(error.code+'ERROR CODE')
+      
+      
+    });
   }
   getRate();
 
@@ -109,7 +117,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://3a16020b9175.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -119,10 +127,33 @@ const Bookview = (prop) => {
       console.log('\n'+'++++++++'+'\n')
       setratenum(rate);
       console.log('&&'+rate);
+      if(response.data.message==="You rated this book already!!"){
+        console.log('TOYE PUTTTTT')
+        axios.put('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id, back, {
+          "headers": {
+            "content-type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+          }
+        })
+          .then(async function (response) {
+            console.log(response.data)
+              getRate()
+          })
+          .catch(function (error) {
+            console.log(error)})}
+
 //      getRate();
     })
     .catch(function (error) {
        console.log(error);
+
+
+   
+
+
+
+
+
     });
   }
 }
@@ -133,8 +164,8 @@ const Bookview = (prop) => {
 
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('20%')}}/>
             <Body style={{}}>
-                  <Image source={{uri : result.imgurl}} style={{marginTop:hp('-15%'), height:220 ,
-                     width:160 , borderRadius:10 }} />
+                  <Image source={{uri : result.imgurl}} style={{marginTop:hp('-10%'), height:198 ,marginBottom:hp('1.5%'),
+                     width:132 , borderRadius:10 }} />
 
 
                   <Text style={{marginTop:hp('1.5%') , fontWeight:'bold',
@@ -183,11 +214,11 @@ const Bookview = (prop) => {
                   </Content>
             </Body>
 
-            <Button onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
+            <Button style={{borderRadius:16,backgroundColor:'#1f7a8c'}}  onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
       title: response.data.title,
     });}}><Text>صفحه نظرات</Text></Button>
 
-           <Button onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
+           <Button  style={{borderRadius:16,backgroundColor:'#1f7a8c'}} onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
       title: response.data.title,
     });}}><Text>صفحه نقل قول ها</Text></Button>
             <StatusBar backgroundColor='#BFDBF7' style='light' />

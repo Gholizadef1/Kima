@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 // import { Ionicons } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
   console.log(prop.IDD + 'PROP IDD')
@@ -20,7 +20,43 @@ const Quotecard = (prop) => {
   //   console.log('useEFFECTQUOTECARD')
   //   console.log(IDD)
   // }
+  const getlike=async()=>{
+    const back2 = {
+  
+    }
+      const backk2 = JSON.stringify(back2);
+      console.log((await AsyncStorage.getItem('token')).toString())
+      // await setTimeout(() => {  console.log("World!"); }, 5000);
+        axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid , {
+          "headers":
+          {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+          }
+        })
+          .then(async function (response) {
+            
+            console.log(response)
+            // setnumlike(response.data.LikeCount)
+            if (response.data.message === 'True')
+            setheart('#1f7a8c')
+          else
+            setheart('lightblue')
+          //   console.log(response);
+  
+          })
+          .catch(function (error) {
+            console.log(error);
+            console.log('like error ||||||||||||')
+  
+          })
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getlike();
+    }, [])
 
+  )
   const hieght = prop.height
   const [like, setlike] = useState('gray')
   // const [dislike,setdislike]=useState('lightblue')
@@ -120,9 +156,12 @@ const Quotecard = (prop) => {
             <Image source={{uri:prop.book}} style={styles.bookpic}>
 
             </Image>
-            <View style={{flexDirection:'row',alignSelf:'center', bottom:hp('31%') }}>
-            <Text style={{color:'gray',fontSize:12,fontWeight:'bold',borderLeftColor:'black'}}>{prop.booktitle+' | '}</Text>
-            <Text style={{color:'gray',fontSize:12,fontWeight:'bold'}}>{prop.bookauthor}</Text>
+            <View style={{bottom:hp('27%'),width:wp('40%'),right:wp('30%') }}>
+            <Text style={{color:'#1f7a8c',fontSize:12,fontWeight:'bold',borderLeftColor:'black'}}>{ prop.booktitle }</Text>
+            </View>
+            <View style={{alignSelf:'center', bottom:hp('-3%'),width:wp('40%')}}>
+         
+            <Text style={{color:'gray',fontSize:12,fontWeight:'bold',alignSelf:'center'}}>{prop.bookauthor}</Text>
             {/* <Image source={require('../../assets/line3.png')}></Image> */}
            
             </View>
@@ -151,7 +190,7 @@ const Quotecard = (prop) => {
           console.log((await AsyncStorage.getItem('token')).toString())
           console.log(prop.quoteid + 'PROP QUOTE ID');
           // // console.log(item.account.id);
-          axiosinst.post('http://1c53ec0001dc.ngrok.io/api/quotes/like/' + prop.quoteid, {
+          axiosinst.post('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid, {
             "headers":
             {
               "Content-Type": "application/json",
@@ -171,7 +210,7 @@ const Quotecard = (prop) => {
 
 
           //  response();
-        }} size={20} color={like} />
+        }} size={20} color={heart} />
          <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 
@@ -194,10 +233,10 @@ const styles = StyleSheet.create({
     //   justifyContent: 'center',
   },
   bookpic:{
-    height:135,
-    width:90,
+    height:112.5,
+    width:75,
     position:'absolute',
-    bottom:hp('49%') ,
+    bottom:hp('-8.5%') ,
     alignSelf:'center' ,
     borderRadius:5,
 
