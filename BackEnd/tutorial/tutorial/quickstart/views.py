@@ -26,6 +26,7 @@ from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
 from .serializers import * 
 from rest_framework.parsers import JSONParser
+from django.core.paginator import Paginator
 
 
 class BasicPagination(PageNumberPagination):
@@ -276,9 +277,10 @@ class BookRateView(generics.ListAPIView):
         return Response(serializer.data)
 
 
-class MyQuoteView(generics.ListAPIView):
+class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
 
     serializer_class=QuoteSerializer
+    pagination_class = BasicPagination
 
     def get_queryset(self,pk):
         user=Account.objects.get(pk=pk)
@@ -288,7 +290,8 @@ class MyQuoteView(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
-        return Response(serializer.data)
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
 
     
 
@@ -306,9 +309,11 @@ class QuoteView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
+            mquote = MyQuote.objects.filter(current_book=this_book)
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
             serilalizer = QuoteSerializer(quote_list,many=True)
-            return Response(serilalizer.data)
+            count = Paginator(mquote,10).num_pages
+            return Response({ "quotes" :serilalizer.data , "count" : count})
         response = {'message' : 'No Quote!',}
         return Response(response)
         
@@ -386,9 +391,11 @@ class CommentView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
+            mcomment = MyComment.objects.filter(current_book=this_book)
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
             serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            count = Paginator(mcomment,10).num_pages
+            return Response({"comment" :serilalizer.data , "count":count})
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -424,9 +431,10 @@ class DeleteCommentView(APIView):
             return Response({'message':'You dont have permission to delete this comment!'})
 
 
-class CommentProfileView(APIView):
+class CommentProfileView(APIView,PaginationHandlerMixin):
 
     model = MyComment
+    pagination_class = BasicPagination
     parser_classes = [JSONParser]
 
     def get_object(self, pk):
@@ -439,8 +447,10 @@ class CommentProfileView(APIView):
         user=Account.objects.get(pk=pk)
         if MyComment.objects.filter(account=user).exists():
             comment_list = MyComment.objects.filter(account=user)
-            serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            pcomment = self.paginate_queryset(comment_list)
+            serilalizer = CommentSerializer(pcomment,many=True)
+            count = Paginator(comment_list,10).num_pages
+            return Response({"comments" : serilalizer.data, "count": count})
         response = {'message' : 'No Comment!',}
         return Response(response)
 
