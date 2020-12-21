@@ -41,7 +41,7 @@ return null;
 }
 
 const getPicker = async () => {
-axios.get('http://7895db46b776.ngrok.io/bookdetail/'+id +'/getstate', {
+axiosinst.get('/bookdetail/'+id +'/getstate', {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -63,7 +63,7 @@ const payload = {
 "book_state": value,
 }
 const back = JSON.stringify(payload);
-axios.post('http://7895db46b776.ngrok.io/bookdetail/' +id, back, {
+axiosinst.post('/bookdetail/' +id, back, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -83,7 +83,7 @@ console.log(error);
 
 
 const getRate = async()=>{
-axios.get('http://7895db46b776.ngrok.io/api/bookrating/'+id, {
+axiosinst.get('/api/bookrating/'+id, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -115,7 +115,7 @@ const payload={
 "rate": rate,
 }
 const back= JSON.stringify(payload);
-axios.post('http://7895db46b776.ngrok.io/api/bookrating/'+id ,back,{
+axiosinst.post('/api/bookrating/'+id ,back,{
 "headers":{"content-type":"application/json",
 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
 }
@@ -127,7 +127,7 @@ setratenum(rate);
 console.log('&&'+rate);
 if(response.data.message==="You rated this book already!!"){
 console.log('TOYE PUTTTTT')
-axios.put('http://7895db46b776.ngrok.io/api/bookrating/'+id, back, {
+axiosinst.put('/api/bookrating/'+id, back, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -140,56 +140,14 @@ getRate()
 .catch(function (error) {
 console.log(error)})}
 
-// getRate();
 })
 .catch(function (error) {
 console.log(error);
 
 });
 }
-}
-// const getQuote=async ()=>{
-//      console.log('DOVOM')
-//      console.log('id**************' +id);
-//      console.log(id) 
+} 
 
-//      try{
-//      setIDD(await (await AsyncStorage.getItem('id')).toString())
-//      const response = await axiosinst.get('api/quotes/'+id)
-//      console.log(IDD+'IDDresponse');
-//        console.log(response.data)      
-//       setinformation(information=>(response.data))
-//       console.log('GET QUOTE TRY')
-//      }
-//    catch(err){
-//       console.log(err);
-//       console.log('GET QUOTE CATCH')
-//    }
-//    console.log('AKHAR GET QUOTE')
-//   }
-// getQuote(); 
-
-const getComments = async () => {
-    console.log('GET COMMENTS')
-   try{
-   const response = await axiosinst.get("bookdetail/"+id+'/comment')
-    console.log(response.data)
-   setcinformation(response.data)
-   console.log(cinformation[0])
-   console.log('GET COMMENT TRY')
-   console.log(' COMMENT MESSAGE '+response.data.message)
-   if(response.data.message==='No Comment!'){
-       <Text>نظری در مورد این کتاب ثبت نشده!
-           شما اولین نفر باشید
-       </Text>
-   }
-   }
- catch(err){
-    console.log(err);
-    console.log('GET COMMENT catch') 
- }
- console.log('AKHAR GET COMMENT')
-}
 if (loading) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -231,7 +189,7 @@ items={[
 {label: 'قبلا خوانده ام', value: 'Read'},
 ]} 
 defaultValue={selectedValue}
-containerStyle={{height: 40 , width:220}}
+containerStyle={{height: 40 , width:220 ,marginBottom:hp('4%')}}
 style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
 itemStyle={{
 justifyContent: 'flex-start'
@@ -252,61 +210,18 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
 </Card>
 </Content>
 </Body>
-{/* <Animated.View style={{
-                    }}>
-                    
-                    {information.message==='No Quote!'?<FlatList
-                    style={{marginBottom:'17%'}}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    onEndReached={console.log('endreach')}
-                    onEndReachedThreshold={0.5}
-                    keyExtractor={(item)=>item.id}
-                    data={information}                    
-                    renderItem={({item})=>{
-                      return(
-                        <View>
-                        (<><QuoteCard  name={item.account.username} 
-                          date={item.sendtime.toString().split('T')[0]}  IDD={IDD}quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></QuoteCard>
-                        <Text style={styles.heartnumber}>{item.Likes}</Text>
-                        </>
-                        )
-                        </View>
-                      )
-                    }}
-                  >
-                  </FlatList>:null}
-                </Animated.View> */}
 
-                <Animated.View style={{ }}>
-
-                   {cinformation.message==='No Comment!'? <FlatList
-                    style={{marginBottom:'17%'}}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    onEndReached={console.log('endreach')}
-                    onEndReachedThreshold={0.5}
-                    keyExtractor={(item)=>item.id}
-                    data={cinformation}                    
-                    renderItem={({ item }) => ( 
-                    <Commentcard name={item.account.username} date={item.sendtime.toString().split('T')[0]}  IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://7895db46b776.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text}/>
-                    )}
-                    ></FlatList>:null}
-                    
-               
-                </Animated.View>
-
-{/* <Button style={{marginTop:hp('1%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
+<Button style={{marginTop:hp('4%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
                       width:200 , marginLeft:wp('20%') , borderRadius:15}}
 onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
 title: response.data.title,
-});}}><Text>صفحه نظرات</Text></Button> */}
+});}}><Text style={{marginLeft:wp('12%')}}>صفحه نظرات</Text></Button>
 
-{/* <Button style={{marginLeft:wp('20%') , backgroundColor:'#1F7A8C' , 
-                            width:200 , borderRadius:15}}
+<Button style={{marginLeft:wp('20%') , backgroundColor:'#1F7A8C' , 
+                            width:200 , borderRadius:15 , marginBottom:hp('3%')}}
 onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
 title: response.data.title,
-});}}><Text>صفحه نقل قول ها</Text></Button> */}
+});}}><Text style={{marginLeft:wp('10%')}}>صفحه نقل قول ها</Text></Button>
 </ScrollView>
 <StatusBar backgroundColor='#BFDBF7' style='light' />
 </Container>
