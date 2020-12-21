@@ -26,7 +26,7 @@ const Mybooks = ({navigation}) => {
           <List  style={{marginTop:hp('9%')}}>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
+                    <Thumbnail style={{borderRadius:10}} square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
                   </Left>
                   <Body>
                     <Text>می خواهم بخوانم</Text>
@@ -39,7 +39,7 @@ const Mybooks = ({navigation}) => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
+                    <Thumbnail style={{borderRadius:10}} square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
                   </Left>
                   <Body>
                     <Text>در حال خواندن </Text>
@@ -52,7 +52,7 @@ const Mybooks = ({navigation}) => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3j6eTFWS7e-4PN3rJxCX2ZJ7a86ZwAWVV0g&usqp=CAU' }} />
+                    <Thumbnail style={{borderRadius:10}} square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3j6eTFWS7e-4PN3rJxCX2ZJ7a86ZwAWVV0g&usqp=CAU' }} />
                   </Left>
                   <Body>
                     <Text>قبلا خوانده ام </Text>
