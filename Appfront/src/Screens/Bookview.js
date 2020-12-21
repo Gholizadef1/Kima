@@ -20,6 +20,7 @@ const Bookview = (prop) => {
 console.log('BOOKVIEW')
 const [rate , setrate] = useState(true);
 const [ratenum , setratenum] = useState(null);
+const [loading, setLoading] = useState(true);
 const [result , setResult] = useState(null);
 const [information,setinformation]=useState([]);
 const [cinformation,setcinformation]=useState([]);
@@ -28,6 +29,7 @@ const id = prop.route.params.id;
 const getResult = async (id) => {
 const response = await axiosinst.get('/bookdetail/'+id);
 setResult(response.data);
+setLoading(false);
 };
 useEffect(() =>{
 getResult(id);
@@ -145,51 +147,49 @@ console.log(error);
 });
 }
 }
-const getQuote=async ()=>{
-     console.log('DOVOM')
-     console.log('id**************' +id);
-     console.log(id) 
+// const getQuote=async ()=>{
+//      console.log('DOVOM')
+//      console.log('id**************' +id);
+//      console.log(id) 
 
-     try{
-     setIDD(await (await AsyncStorage.getItem('id')).toString())
-     const response = await axiosinst.get('api/quotes/'+id)
-     console.log(IDD+'IDDresponse');
-       console.log(response.data)      
-      setinformation(information=>(response.data))
-      console.log('GET QUOTE TRY')
-     }
-   catch(err){
-      console.log(err);
-      console.log('GET QUOTE CATCH')
-   }
-   console.log('AKHAR GET QUOTE')
-  }
-getQuote(); 
+//      try{
+//      setIDD(await (await AsyncStorage.getItem('id')).toString())
+//      const response = await axiosinst.get('api/quotes/'+id)
+//      console.log(IDD+'IDDresponse');
+//        console.log(response.data)      
+//       setinformation(information=>(response.data))
+//       console.log('GET QUOTE TRY')
+//      }
+//    catch(err){
+//       console.log(err);
+//       console.log('GET QUOTE CATCH')
+//    }
+//    console.log('AKHAR GET QUOTE')
+//   }
+// getQuote(); 
 
-const getComments = async () => {
-    console.log('GET COMMENTS')
-   try{
-   const response = await axiosinst.get("bookdetail/"+id+'/comment')
-    console.log(response.data)
-   setcinformation(response.data)
-   console.log(cinformation[0])
-   console.log('GET COMMENT TRY')
-   console.log(' COMMENT MESSAGE '+response.data.message)
-   if(response.data.message==='No Comment!'){
-       <Text>نظری در مورد این کتاب ثبت نشده!
-           شما اولین نفر باشید
-       </Text>
-   }
-   }
- catch(err){
-    console.log(err);
-    console.log('GET COMMENT catch')
-    
-  
- }
- console.log('AKHAR GET COMMENT')
-}
-getComments(); 
+// const getComments = async () => {
+//     console.log('GET COMMENTS')
+//    try{
+//    const response = await axiosinst.get("bookdetail/"+id+'/comment')
+//     console.log(response.data)
+//    setcinformation(response.data)
+//    console.log(cinformation[0])
+//    console.log('GET COMMENT TRY')
+//    console.log(' COMMENT MESSAGE '+response.data.message)
+//    if(response.data.message==='No Comment!'){
+//        <Text>نظری در مورد این کتاب ثبت نشده!
+//            شما اولین نفر باشید
+//        </Text>
+//    }
+//    }
+//  catch(err){
+//     console.log(err);
+//     console.log('GET COMMENT catch') 
+//  }
+//  console.log('AKHAR GET COMMENT')
+// }
+// getComments();
 
 return(
 <Container>
@@ -245,7 +245,7 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
 </Card>
 </Content>
 </Body>
-<Animated.View style={{
+{/* <Animated.View style={{
                     }}>
                     
                     {information.message==='No Quote!'?<FlatList
@@ -269,9 +269,9 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     }}
                   >
                   </FlatList>:null}
-                </Animated.View>
+                </Animated.View> */}
 
-                <Animated.View style={{ }}>
+                {/* <Animated.View style={{ }}>
 
                    {cinformation.message==='No Comment!'? <FlatList
                     style={{marginBottom:'17%'}}
@@ -287,7 +287,7 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     ></FlatList>:null}
                     
                
-                </Animated.View>
+                </Animated.View> */}
 
 {/* <Button style={{marginTop:hp('1%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
                       width:200 , marginLeft:wp('20%') , borderRadius:15}}
