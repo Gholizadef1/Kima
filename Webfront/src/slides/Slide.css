@@ -7,10 +7,10 @@
 .card-title2{
     font-size: 15px;
     color: black;
-    font-family: 'Mitra';  
+    /* font-family: 'Mitra';   */
 
 }.card-title1{
-    font-family: 'Mitra';
+    /* font-family: 'Mitra'; */
     color: #000000;
     padding-top: 10px;
     font-size: 20px;
@@ -57,7 +57,7 @@
    margin-bottom: 10px;
     font-weight: bold;
     font-size: calc(8px + 1vw);
-font-family: 'Mitra';
+/* font-family: 'Mitra'; */
 
 }
 .sr-only{

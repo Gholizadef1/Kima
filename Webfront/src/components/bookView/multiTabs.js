@@ -417,7 +417,7 @@ export default function FullWidthTabs(props) {
 
 
   return (
-    <div  >
+    <div>
       <div>
          <Snackbar
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
@@ -453,7 +453,7 @@ export default function FullWidthTabs(props) {
           {props.bookdescription}
         </TabPanel>
 
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel className="" value={value} index={1} dir={theme.direction}>
           <div style={{direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">نظر شما چیست؟</h3>
@@ -468,7 +468,7 @@ export default function FullWidthTabs(props) {
                 </div>
                 
                 <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitCommentClick}style={{color:"white",fontFamily:"Mitra",fontWeight:"bold"}}
+                onClick={handleSubmitCommentClick}style={{color:"white",fontWeight:"bold"}}
                 >ثبت</StyledButton>
                 </div>
                 </div>
@@ -476,7 +476,7 @@ export default function FullWidthTabs(props) {
               <Divider className="mt-3" variant="fullWidth" />
             </div>
 
-            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Mitra'}}>
+            <div className="d-flex my-2 mr-4 " >
               <label className="ml-2 mt-1">براساس:</label>
 
               <select className="form-control rounded-pill" style={{width:120}} id=""  onChange={handleCommentFilter} >
@@ -493,7 +493,7 @@ export default function FullWidthTabs(props) {
               {comments.message === "No Comment!" ? (
                  
 
-                 <p style={{fontFamily:'Mitra',color:'red'}}>نطری برای نمایش وجود ندارد</p>
+                 <p style={{color:'red'}}>نطری برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div>
@@ -602,7 +602,7 @@ export default function FullWidthTabs(props) {
                 </div>
                 
                 <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitQuoteClick} style={{color:"white",fontFamily:"Mitra",fontWeight:"bold"}}
+                onClick={handleSubmitQuoteClick} style={{color:"white",fontWeight:"bold"}}
                 >ثبت</StyledButton>
                 </div>
                 </div>
@@ -610,7 +610,7 @@ export default function FullWidthTabs(props) {
               <Divider className="mt-3" variant="fullWidth" />
             </div>
 
-            <div className="d-flex my-2 mr-4 " style={{fontFamily:'Mitra'}}>
+            <div className="d-flex my-2 mr-4 " >
               <label className="ml-2 mt-1">براساس:</label>
 
               <select className="form-control rounded-pill" style={{width:120}} id="" onChange={handleQuoteFilter} >
@@ -625,7 +625,7 @@ export default function FullWidthTabs(props) {
             {quotes.message === "No Quote!" ? (
                  
 
-                 <p style={{fontFamily:'Mitra',color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
+                 <p style={{color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
                   <div>

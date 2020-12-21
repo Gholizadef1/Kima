@@ -122,7 +122,7 @@ useEffect(() => {
           <GiBookshelf color="white" />
         </h1>
         <b className="mx-1 my-n2" 
-         style = {{fontSize:40,fontWeight:"bold",color:"white",fontFamily:"Morvarid"}}
+         style = {{fontSize:30,fontWeight:"bold",color:"white",fontFamily:"Morvarid"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,15 +132,15 @@ useEffect(() => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-5">
             <li class="my-n1" href="groups"
-               style = {{fontSize:25,fontWeight:"bold"}}>
+               style = {{fontSize:18,fontWeight:"bold"}}>
               <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
             </li>
             <li class="my-n1" href="quize"
-               style = {{fontSize:25,fontWeight:"bold"}}>
+               style = {{fontSize:18,fontWeight:"bold"}}>
               <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
             </li>
             <li class="nav-link btn my-n1"
-               style = {{fontSize:25,fontWeight:"bold",color:"white"}}>
+               style = {{fontSize:18,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
           </ul>
@@ -159,14 +159,14 @@ useEffect(() => {
                   <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
                 </div>
                 <div className="dropdown-menu px-1 mx-n2" aria-labelledby="btnGroupDrop1">
-                  <div className="text-left" style={{fontSize:22}}>
+                  <div className="text-left mx-3" >
                   {Cookies.get('userName')}
                   </div>
                   <div class="dropdown-divider"></div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:22}} >
+                  <div type="button" className="btn" onClick = {logout} style={{fontSize:12}} >
                     خروج ازحساب
                   </div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:22}}>
+                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:12}}>
                     پروفایل
                   </div>
                 </div>

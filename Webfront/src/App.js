@@ -42,7 +42,7 @@ function App(props) {
   // }
   return (
     <Router>
-      <div className="App ourfont2" >
+      <div className="App "  >
         
         <div >
           {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
