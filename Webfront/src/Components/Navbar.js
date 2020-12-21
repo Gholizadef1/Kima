@@ -117,62 +117,66 @@ useEffect(() => {
 }
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light px-4 color4">
-        <h1>  
+      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow " style={{direction:"rtl"}}>
+        <h1 className="mx-1">  
           <GiBookshelf color="white" />
         </h1>
-        <b className="" 
-         style = {{fontSize:35,fontFamily: 'Mitra',fontWeight:"bold",color:"white"}}
+        <b className="mx-1 my-n2" 
+         style = {{fontSize:40,fontWeight:"bold",color:"white",fontFamily:"Morvarid"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav ">
-            <li class="nav-item" href="groups"
-               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold"}}>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-5">
+            <li class="my-n1" href="groups"
+               style = {{fontSize:25,fontWeight:"bold"}}>
               <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
             </li>
-            <li class="nav-item" href="quize"
-               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
+            <li class="my-n1" href="quize"
+               style = {{fontSize:25,fontWeight:"bold"}}>
               <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
             </li>
-            <li class=" nav-item mr-md-5 btn"
-               style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
+            <li class="nav-link btn my-n1"
+               style = {{fontSize:25,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
-           
-            
           </ul>
           <div className="d-flex flex-grow-1 mx-md-5">
-              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1" type="text" name="name" placeholder="...جستجوی کتاب یا نویسنده" onChange={handleChange}  value={user.user} 
-               style={{fontFamily:'Mitra'}}
-               />  
               <Button variant="gray" className="mr-md-5" onClick={handleShow}>
-                <GoSearch size="30" color="white" />
+                <GoSearch className="" size="30" color="white" />
               </Button>
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1"  type="text" name="name" placeholder="   جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
+              
+               />  
+              
           </div>
-          <div className="d-flex justify-content-between flex-wrap">
-            
-            <div className="d-flex mx-auto ml-md-5">
-              <a className="row ml-2"  onClick={routeToProfile} style={{color:"white",fontFamily:'Morvarid'}} >
-               <small className="" size="50" style={{padding:10,fontSize:20}}>
-                {Cookies.get('userName')}
-               </small>
-                <Avatar alt="" src={Cookies.get('userPic')} className="" />
-              </a>
-              <li type="button" className="btn btn-sm mt-1 ml-2" onClick = {logout} style={{fontFamily:'Mitra',color:'white'}} >
-                  خروج ازحساب
-              </li>
-            </div>
+          <div className="d-flex justify-content-between">
+              <div className="btn-group mx-auto dropright" role="group">
+                <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
+                </div>
+                <div className="dropdown-menu px-1 mx-n2" aria-labelledby="btnGroupDrop1">
+                  <div className="text-left" style={{fontSize:22}}>
+                  {Cookies.get('userName')}
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <div type="button" className="btn" onClick = {logout} style={{fontSize:22}} >
+                    خروج ازحساب
+                  </div>
+                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:22}}>
+                    پروفایل
+                  </div>
+                </div>
+              </div>
           </div>
 
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header"style={{fontFamily:'Mitra'}}>
+           <div className="header">
           نتایج
           </div>
         </Modal.Header>
@@ -187,8 +191,8 @@ useEffect(() => {
            src={item.imgurl}
          /> 
          <small className= "title">
-         <h5 className="card-title3" style={{fontFamily:'Mitra'}}>{item.title}</h5>
-         <h5 className="card-title4" style={{fontFamily:'Mitra'}}>{item.author}</h5>
+         <h5 className="card-title3" >{item.title}</h5>
+         <h5 className="card-title4" >{item.author}</h5>
 
           </small>
           </div>
@@ -200,7 +204,7 @@ useEffect(() => {
 }
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose} style={{fontFamily:'Mitra'}}>
+          <Button variant="info" onClick={handleClose}>
             بستن
           </Button>
         </Modal.Footer>

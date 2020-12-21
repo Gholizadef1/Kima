@@ -77,6 +77,14 @@
   color: white;
   background-color:#022b3a;
 } 
-.ourfont{
+.ourfont1{
   font-family: "Mitra";
+}
+
+.ourfont2{
+  font-family: 'Scheherazade', serif;
+}
+
+.ourfont3{
+  font-family:"Morvarid";
 }
