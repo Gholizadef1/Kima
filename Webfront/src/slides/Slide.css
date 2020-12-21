@@ -1,118 +1,121 @@
-/*.body{
 
+/*.body{
     background: radial-gradient#e5e5e5;
 }*/
-
 
 .card-title2{
     font-size: 15px;
     color: black;
-    /* font-family: 'Mitra';   */
+
+    font-family: 'Yekan';  
 
 }.card-title1{
-    /* font-family: 'Mitra'; */
+    font-family: 'Yekan';
     color: #000000;
     padding-top: 10px;
     font-size: 20px;
     overflow:hidden; 
     white-space:nowrap; 
     text-overflow: ellipsis;
-    width: 180px;
+    
     direction: rtl;
-    padding-left: 40px;
+    padding-right: -10px;
+}
+.body{
+    margin-right: 40px;
+}
+
+.cat{
+    
+    
+    width: 150px;
+    height: 240px;
+
 }
 
 .container{
-    margin-top: 10vw;
+    margin-top: 20px;
     
-
 }
 .squere:hover{
     box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
     transform:scale(1, 1);
 
 }
-.squre{
-   padding-left: -30vw;
-    border-radius: 3%;
-    margin-left:2vw;
+.squere {
+  
+    width: 150px;
+    height: 240px;
+    padding-top: 0;
+   border-radius: 3%;
     transform:scale(1, 1);
     transition: 1s;
-    width:10vw;
-     height:15vw;
    
 }
-.slide{
-  
-}
 .slick-prev:before, .slick-next:before {
-    color: rgb(59, 70, 123) !important;
-    font-size: 30px;
- 
+    color: black !important;
 }
 
 .brand{
-   margin-top: 100px;
+    margin-top: 100px;
     margin-left: 900px;
    margin-bottom: 10px;
     font-weight: bold;
-    font-size: calc(8px + 1vw);
-/* font-family: 'Mitra'; */
+    font-size: 25px;
 
 }
 .sr-only{
     margin-left: 500px;
     color: black;
 }
-@media (max-width :600px) 
-  {
-      .container{
-        
-        
-      }
-      .slide{
-        margin-left: 30px;
-        margin-right: 30px;
-    }
-    .brand{
-        display: contents;
-    }
-  
-    }
 
-@media screen and (max-width :600px)
-{
-   .container{
-       background-color: #000000;
-   }
-    
-  }
-
-@media (max-width :768px) 
-{
-    .container{
-        width: 620PX;
-    }
-    .slide{
-        margin-left: -230px;
-        margin-right: -230px;
-    }
-    
-    }
   @media (max-width :800px) 
   {
       .container{
-        width: 620PX;
+        width: 330px;
+        margin-left:50px;
+        margin-top: 100px;
         
       }
       .slide{
-        margin-left: -230px;
-        margin-right: -230px;
+        margin-left: -310px;
+        margin-right: -310px;
+    }
+    .cat{
+        width: 130px;
+        height: 190px;
+    }
+    .squere{
+        width: 130px;
+        height: 190px;
     }
     .brand{
-        display: contents;
+        
+        margin-left: 500px;
+      
     }
   
     }
+    @media (max-width :600px)
+    {
+        .container{
+            width: 50px;
+            margin-left:5px;
+            margin-top: 10px;
+           
+        }
+        .cat{
+            width: 50px;
+            height: 90px;
+        
+        }
+        .squere{
+            width: 50px;
+            height: 90px;
+        }
+        
+      }
   
   
+    
+

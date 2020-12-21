@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
@@ -91,9 +92,9 @@ function Slide(props) {
 
   
   return (
-    <div className="container" id="i-container">
+    <div className="container">
 
-      <div class="brand mr-n4">کتاب‌های پیشنهادی</div> 
+      <h2 class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>کتاب‌های پیشنهادی</h2> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -101,41 +102,53 @@ function Slide(props) {
         
       ) : (
         
-       <div className = "row">
-         <div className="col-md-12">
+       <div className = "slide ml-5">
         <Slider {...settings}>
           {suggestions.map((current) => (
-            <div className="out" key={current.id}>
+            <div className="out pl-4" key={current.id}>
+
+              <div className="card cat "onClick={() => bookSelectedHandler( current )}>
                 <img
-                  className=" squre img-responsive rounded " 
+                  className="squere img-responsive" 
                   src={current.imgurl}
-             
-             
-                  onClick={() => bookSelectedHandler( current )}
                   
                 />
-      {current.title.length >19 ?
+   
+
+              </div>
+              <div className="body">
+              {current.title.length >19 ?
 <BlueOnGreenTooltip title={current.title}>
-<div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </BlueOnGreenTooltip>
-      : <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
                 <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.author}</h5>
 
                    </small>
-
-              </div>
-          
-            
+            </div>
+            </div>
           ))}
         </Slider>
         </div>
-        </div>
       )}
+
+{/* 
+      <Switch>
+        <Route path={`${match.path}/:bookId`}>
+          <BookView/>
+        </Route>
+        <Route path={match.path}>
+          <h3>Please select a topic.</h3>
+        </Route>
+      </Switch> */}
+
     </div>
   );
 }
 
 export default withRouter(Slide);
+
+   
