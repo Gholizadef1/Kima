@@ -1,6 +1,6 @@
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, View , Image , ImageBackground , ScrollView ,
-TouchableOpacity , FlatList , TextInput } from 'react-native';
+TouchableOpacity , FlatList , TextInput , ActivityIndicator} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
 Right, Left , Picker, Form, Item } from 'native-base';
 import {withNavigation} from 'react-navigation'
@@ -15,6 +15,7 @@ import axios from 'axios'
 //import Star from 'react-native-star-view';
 import { color } from 'react-native-reanimated';
 import Animated, { set } from 'react-native-reanimated';
+import Commentcard from './Commentcard';
 
 const Bookview = (prop) => {
 console.log('BOOKVIEW')
@@ -168,29 +169,35 @@ console.log(error);
 //   }
 // getQuote(); 
 
-// const getComments = async () => {
-//     console.log('GET COMMENTS')
-//    try{
-//    const response = await axiosinst.get("bookdetail/"+id+'/comment')
-//     console.log(response.data)
-//    setcinformation(response.data)
-//    console.log(cinformation[0])
-//    console.log('GET COMMENT TRY')
-//    console.log(' COMMENT MESSAGE '+response.data.message)
-//    if(response.data.message==='No Comment!'){
-//        <Text>نظری در مورد این کتاب ثبت نشده!
-//            شما اولین نفر باشید
-//        </Text>
-//    }
-//    }
-//  catch(err){
-//     console.log(err);
-//     console.log('GET COMMENT catch') 
-//  }
-//  console.log('AKHAR GET COMMENT')
-// }
-// getComments();
-
+const getComments = async () => {
+    console.log('GET COMMENTS')
+   try{
+   const response = await axiosinst.get("bookdetail/"+id+'/comment')
+    console.log(response.data)
+   setcinformation(response.data)
+   console.log(cinformation[0])
+   console.log('GET COMMENT TRY')
+   console.log(' COMMENT MESSAGE '+response.data.message)
+   if(response.data.message==='No Comment!'){
+       <Text>نظری در مورد این کتاب ثبت نشده!
+           شما اولین نفر باشید
+       </Text>
+   }
+   }
+ catch(err){
+    console.log(err);
+    console.log('GET COMMENT catch') 
+ }
+ console.log('AKHAR GET COMMENT')
+}
+if (loading) {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ActivityIndicator size="large" />
+    </View>
+  );
+}
+else{
 return(
 <Container>
 <ScrollView>
@@ -222,7 +229,7 @@ items={[
 {label: 'میخواهم بخوانم', value: 'ToRead'},
 {label: 'در حال خواندن', value: 'Reading'},
 {label: 'قبلا خوانده ام', value: 'Read'},
-]}
+]} 
 defaultValue={selectedValue}
 containerStyle={{height: 40 , width:220}}
 style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
@@ -271,7 +278,7 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                   </FlatList>:null}
                 </Animated.View> */}
 
-                {/* <Animated.View style={{ }}>
+                <Animated.View style={{ }}>
 
                    {cinformation.message==='No Comment!'? <FlatList
                     style={{marginBottom:'17%'}}
@@ -282,12 +289,12 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
                     keyExtractor={(item)=>item.id}
                     data={cinformation}                    
                     renderItem={({ item }) => ( 
-                    <CommentCard name={item.account.username} date={item.sendtime.toString().split('T')[0]}  IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1a063c3b068b.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text}/>
+                    <Commentcard name={item.account.username} date={item.sendtime.toString().split('T')[0]}  IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://7895db46b776.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text}/>
                     )}
                     ></FlatList>:null}
                     
                
-                </Animated.View> */}
+                </Animated.View>
 
 {/* <Button style={{marginTop:hp('1%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
                       width:200 , marginLeft:wp('20%') , borderRadius:15}}
@@ -304,6 +311,7 @@ title: response.data.title,
 <StatusBar backgroundColor='#BFDBF7' style='light' />
 </Container>
 );
+}
 };
 const styles = StyleSheet.create({
 container: {
