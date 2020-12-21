@@ -76,17 +76,26 @@ function Slide(props) {
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 2,
+          
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+     
     ],
   };
 
@@ -94,7 +103,7 @@ function Slide(props) {
   return (
     <div className="container">
 
-      <h2 class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>کتاب‌های پیشنهادی</h2> 
+      <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}> کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -125,7 +134,7 @@ function Slide(props) {
       
 } 
                 <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.author}</h5>
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
 
                    </small>
             </div>

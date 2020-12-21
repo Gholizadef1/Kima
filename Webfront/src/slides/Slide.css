@@ -4,26 +4,26 @@
 }*/
 
 .card-title2{
-    font-size: 15px;
-    color: black;
-
+    font-size: 14px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
     font-family: 'Yekan';  
 
 }.card-title1{
     font-family: 'Yekan';
     color: #000000;
     padding-top: 10px;
-    font-size: 20px;
+    font-size: 16px;
+    direction: rtl;
     overflow:hidden; 
     white-space:nowrap; 
     text-overflow: ellipsis;
-    
-    direction: rtl;
-    padding-right: -10px;
+  
+   
 }
-.body{
-    margin-right: 40px;
-}
+
 
 .cat{
     
@@ -46,76 +46,179 @@
   
     width: 150px;
     height: 240px;
-    padding-top: 0;
    border-radius: 3%;
     transform:scale(1, 1);
     transition: 1s;
    
 }
-.slick-prev:before, .slick-next:before {
+.slick-prev:before {
     color: black !important;
+    width: 46px;
+height: 46px;
+margin-left: -30px;
+position: absolute;
+top: -50px;
+}
+.slick-next:before{
+    color: black !important;
+    width: 46px;
+height: 46px;
+position: absolute;
+top: -50px;
 }
 
-.brand{
-    margin-top: 100px;
-    margin-left: 900px;
-   margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 25px;
 
-}
 .sr-only{
     margin-left: 500px;
     color: black;
 }
-
-  @media (max-width :800px) 
-  {
-      .container{
-        width: 330px;
-        margin-left:50px;
-        margin-top: 100px;
-        
-      }
-      .slide{
-        margin-left: -310px;
-        margin-right: -310px;
-    }
-    .cat{
-        width: 130px;
-        height: 190px;
-    }
-    .squere{
-        width: 130px;
-        height: 190px;
-    }
-    .brand{
-        
-        margin-left: 500px;
-      
-    }
-  
-    }
-    @media (max-width :600px)
+    @media (min-width :360px)
     {
         .container{
-            width: 50px;
+            width: 310px;
             margin-left:5px;
-            margin-top: 10px;
+            margin-top: 20px;
            
         }
+        .slide{
+            margin-left: 20px;
+            margin-right: 20px;
+          
+        }
         .cat{
-            width: 50px;
-            height: 90px;
+            width: 80px;
+            height: 100px;
         
         }
         .squere{
-            width: 50px;
-            height: 90px;
+            width: 80px;
+            height: 100px;
         }
+        .card-title1{
+           
+            font-size: 11px;
+        }
+        .body{
+            margin-right: 1px;
+        }
+        .slick-prev:before {
+            
+        top: -30px;
+        left: 20px;
+        }
+        .slick-next:before{
+         
+        top: -30px;
+        }
+        .brand{
+            margin-top: 10px;
+           padding-left: 70px;
+           margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            direction: rtl;
+            overflow:hidden; 
+            white-space:nowrap; 
+            text-overflow: ellipsis;
         
+        }
       }
   
+
+      @media (min-width :768px) 
+      {
+          .container{
+            width: 300px;
+            margin-left:70px;
+            margin-top: 100px;
+            
+          }
+          .slide{
+            margin-left: -310px;
+            margin-right: -310px;
+        }
+        .cat{
+            width: 100px;
+            height: 180px;
+        }
+        .squere{
+            width: 100px;
+            height: 180px;
+        }
+        .card-title1{
+           
+            font-size: 14px;
+        }
+        .body{
+            margin-right: 5px;
+        }
+        .brand{
+            margin-top: 100px;
+           padding-left: 570px;
+           margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 22px;
+            direction: rtl;
+            overflow:hidden; 
+            white-space:nowrap; 
+            text-overflow: ellipsis;
+        
+        }
+        .slick-next:before{
+         
+            left: -5px;
+            }
+        }
   
+        @media (min-width :960px) 
+        {
+            .container{
+              width: 550px;
+              margin-left:260px;
+              margin-top: 100px;
+              
+            }
+            .slide{
+              margin-left: -310px;
+              margin-right: -310px;
+          }
+          .cat{
+              width: 130px;
+              height: 190px;
+          }
+          .squere{
+              width: 130px;
+              height: 190px;
+          }
+          .brand{
+              
+              margin-left: 500px;
+            
+          }
+          .body{
+              margin-left: -1px;
+          }
+
+.card-title2{
+    font-size: 16px; 
+
+}.card-title1{
+    font-size: 18px;
+}
+.brand{
+    margin-top: 100px;
+   padding-left: 330px;
+   margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+
+}   
+    
+          }
+    
     
 
