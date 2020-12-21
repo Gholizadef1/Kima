@@ -459,6 +459,11 @@ class LikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if DislikeComment.objects.filter(account=user,comment=comment).exists():
+                userdislike=DislikeComment.objects.get(account=user,comment=comment)
+                userdislike.delete()
+                comment.DislikeCount-=1
+                comment.save()
             newlike = LikeComment(account=user,comment=comment)
             
             comment.LikeCount+=1
@@ -491,8 +496,13 @@ class DislikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if LikeComment.objects.filter(account=user,comment=comment).exists():
+                userlike=LikeComment.objects.get(account=user,comment=comment)
+                userlike.delete()
+                comment.LikeCount-=1
+                comment.save()
+
             newlike = DislikeComment(account=user,comment=comment)
-            
             comment.DislikeCount+=1
             comment.save()
             newlike.save()
