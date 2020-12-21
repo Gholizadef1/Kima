@@ -38,7 +38,7 @@ return null;
 }
 
 const getPicker = async () => {
-axios.get('http://ccafb55a4607.ngrok.io/bookdetail/'+id +'/getstate', {
+axios.get('http://7895db46b776.ngrok.io/bookdetail/'+id +'/getstate', {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -60,7 +60,7 @@ const payload = {
 "book_state": value,
 }
 const back = JSON.stringify(payload);
-axios.post('http://ccafb55a4607.ngrok.io/bookdetail/' +id, back, {
+axios.post('http://7895db46b776.ngrok.io/bookdetail/' +id, back, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -80,7 +80,7 @@ console.log(error);
 
 
 const getRate = async()=>{
-axios.get('http://ccafb55a4607.ngrok.io/api/bookrating/'+id, {
+axios.get('http://7895db46b776.ngrok.io/api/bookrating/'+id, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -112,7 +112,7 @@ const payload={
 "rate": rate,
 }
 const back= JSON.stringify(payload);
-axios.post('http://ccafb55a4607.ngrok.io/api/bookrating/'+id ,back,{
+axios.post('http://7895db46b776.ngrok.io/api/bookrating/'+id ,back,{
 "headers":{"content-type":"application/json",
 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
 }
@@ -124,7 +124,7 @@ setratenum(rate);
 console.log('&&'+rate);
 if(response.data.message==="You rated this book already!!"){
 console.log('TOYE PUTTTTT')
-axios.put('http://ccafb55a4607.ngrok.io/api/bookrating/'+id, back, {
+axios.put('http://7895db46b776.ngrok.io/api/bookrating/'+id, back, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
