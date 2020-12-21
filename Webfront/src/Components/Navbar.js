@@ -117,7 +117,7 @@ useEffect(() => {
 }
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow " style={{direction:"rtl"}}>
+      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1">  
           <GiBookshelf color="white" />
         </h1>

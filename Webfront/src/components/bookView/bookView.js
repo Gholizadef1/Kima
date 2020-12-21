@@ -285,13 +285,13 @@ return(
       <div className="col-md-4 mb-md-0 p-4 rounded-lg">
         <img src={state.imgurl} className="img-fluid shadow float-right rounded-lg" alt="" style={{width:'100%',height:'auto'}} />
       </div>
-      <div className="col-md-8 position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
+      <div className=" position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
         <h2 className="p-3 mt-2" >{state.title}</h2>
         <div>
               <div className="ml-auto">
                  <div className={classes.root}>
                  <button onClick={Sendrequest}  style={{boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-              background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:35,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
+              background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
                   <div style={{marginLeft:-3, color:"white",fontWeight:"bold"}}>
                   ثبت
                   </div>
@@ -315,10 +315,10 @@ return(
 
 
 
-          <table className="mt-auto table table-hover text-right" >
+          <table className="mt-auto table table-hover text-right " >
             <tbody className="">
               <tr>
-              <th>
+              <th >
               نام نویسنده:
               </th>
               <th >
@@ -347,7 +347,7 @@ return(
              
             </tbody>
           </table>
-          <div className="row " >
+          <div className="row mb-auto" >
           <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
           <select className="form-control mr-4 rounded-pill" style={{width:170,fontSize:12}} id="bookMood" onChange={ addBookToMineHandler} >
           <option id="none" value="none">هیچکدام</option>
@@ -367,7 +367,7 @@ return(
     </div>
   </div>
 </div>
-<div className="Tab color1 my-3 mb-5 mx-md-5">
+<div className="Tab color1 my-3 mb-5 mx-md-5 shadow rounded-lg">
 <Tabs book={state.id} bookdescription={state.description}/>
 </div>
 </div>
