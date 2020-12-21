@@ -87,7 +87,7 @@ class Readcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 
 
@@ -102,7 +102,7 @@ class ToReadcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 
 
@@ -117,7 +117,7 @@ class Readingcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
     
     
 
