@@ -15,11 +15,11 @@ from pathlib import Path
 from corsheaders.defaults import default_headers
 from . import quickstart
 import os
-#import environ
+import environ
 
-#env = environ.Env()
+env = environ.Env()
 # reading .env file
-#environ.Env.read_env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,8 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-#SECRET_KEY = env("SECRET_KEY")
-SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
+SECRET_KEY = env("SECRET_KEY")
+#SECRET_KEY = '(ly1ik9vivv)u6ay4e8%hjyo5zy4fn+_@=h36gab_ww8+zwf3_'
 
 
 
@@ -94,23 +94,23 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 
 DATABASES = {
 
-    'default': {
-      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-      'NAME': 'hope', 
-      'USER': 'postgres', 
-      'PASSWORD': 'melika55540430',
-     'HOST': 'localhost', 
-      'PORT': '',
-  }
+#     'default': {
+#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#       'NAME': 'hope', 
+#       'USER': 'postgres', 
+#       'PASSWORD': 'melika55540430',
+#      'HOST': 'localhost', 
+#       'PORT': '',
+#   }
 
-    #  'default': {
-    #      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #      'NAME': env("DATABASE_NAME"),
-    #      'USER': env("DATABASE_USER"),
-    #      'PASSWORD': env("DATABASE_PASSWORD"),
-    #      'HOST': env("DATABASE_HOST"),
-    #      'PORT': env("DATABASE_PORT"),
-    #  }
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': env("DATABASE_NAME"),
+         'USER': env("DATABASE_USER"),
+         'PASSWORD': env("DATABASE_PASSWORD"),
+         'HOST': env("DATABASE_HOST"),
+         'PORT': env("DATABASE_PORT"),
+     }
 
 }
 
