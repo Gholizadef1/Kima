@@ -37,20 +37,20 @@ const Home = ({navigation}) => {
     return(      
         <Container style={styles.frame}>
             <ScrollView>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:49}}/>
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('7%')}}/>
              <ScrollView>
-                 <View style={{padding: 10 , marginRight: 50}}>
+                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                  </View>
                  <View>
-                 <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های پیشنهادی</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     data={image}
                     renderItem= {({item}) =>{
                         return(
-                            <View style={{paddingVertical: 15 , paddingLeft: 8}}>
+                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
                                 <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
                                     <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
                                     <CardItem cardBody>
@@ -71,18 +71,18 @@ const Home = ({navigation}) => {
              </ScrollView>
 
               <ScrollView>
-                 <View style={{padding: 10 , marginRight: 50}}>
+                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                  </View>
                  <View>
-                 <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های برتر</Text>
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     data={image}
                     renderItem= {({item}) =>{
                         return(
-                            <View style={{paddingVertical: 15 , paddingLeft: 8}}>
+                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
                                 <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
                                     <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
                                     <CardItem cardBody>
