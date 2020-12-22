@@ -535,7 +535,7 @@ class FilterCommentbyLike(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-diff'))
+            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-LikeCount'))
             serializer = CommentSerializer(comment_list,many=True)
             return Response(serializer.data)
         response = {'message' : 'No Comment!',}
