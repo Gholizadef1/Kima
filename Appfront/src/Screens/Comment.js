@@ -344,7 +344,7 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
-            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://fc0ce8a13f6f.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
         </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}

@@ -19,7 +19,7 @@ const Quotecard = (prop) => {
       const backk2 = JSON.stringify(back2);
       console.log((await AsyncStorage.getItem('token')).toString())
       // await setTimeout(() => {  console.log("World!"); }, 5000);
-        axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid , {
+        axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid , {
           "headers":
           {
             "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const Quotecard = (prop) => {
 
               <TouchableOpacity style={styles.avatar}
                 onPress={() => { }}>
-                {prop.picture === 'http://dc39baf075fd.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+                {prop.picture === 'http://fc0ce8a13f6f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
                   source={require('../../assets/avatar.png')}
                   style={styles.avatar}
@@ -212,7 +212,7 @@ const Quotecard = (prop) => {
               
             const backk=JSON.stringify(back);
             // await setTimeout(() => {  console.log("World!"); }, 5000);
-          axiosinst.post('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
+          axiosinst.post('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
             "headers":
             {
               "Content-Type": "application/json",

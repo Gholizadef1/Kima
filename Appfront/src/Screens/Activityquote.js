@@ -31,7 +31,7 @@ const Activityquote = (prop) => {
     }
  
     const getlike = async (item) => {
-        axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/' + item.id, {
+        axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + item.id, {
             "headers":
             {
                 "Content-Type": "application/json",

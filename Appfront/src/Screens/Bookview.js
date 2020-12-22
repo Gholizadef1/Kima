@@ -43,7 +43,7 @@ const Bookview = (prop) => {
   }
 
   const getPicker = async () => {
-    axios.get('http://9fce63f3f8de.ngrok.io/bookdetail/'+id +'/getstate', {
+    axios.get('http://fc0ce8a13f6f.ngrok.io/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -65,7 +65,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://9fce63f3f8de.ngrok.io/bookdetail/' +id, back, {
+          axios.post('http://fc0ce8a13f6f.ngrok.io/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -85,7 +85,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id, {
+    axios.get('http://fc0ce8a13f6f.ngrok.io/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -117,7 +117,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('http://fc0ce8a13f6f.ngrok.io/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -129,7 +129,7 @@ const Bookview = (prop) => {
       console.log('&&'+rate);
       if(response.data.message==="You rated this book already!!"){
         console.log('TOYE PUTTTTT')
-        axios.put('http://9fce63f3f8de.ngrok.io/api/bookrating/'+id, back, {
+        axios.put('http://fc0ce8a13f6f.ngrok.io/api/bookrating/'+id, back, {
           "headers": {
             "content-type": "application/json",
             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()

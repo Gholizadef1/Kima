@@ -50,7 +50,7 @@ const callbackFunction = async(childData) => {
   
   const getlike=async(item)=>{
     // await setTimeout(() => {  console.log("World!"); }, 5000);
-    axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -386,7 +386,7 @@ const callbackFunction = async(childData) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://fc0ce8a13f6f.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 
 

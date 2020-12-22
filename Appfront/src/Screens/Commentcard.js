@@ -245,7 +245,7 @@ const getdislike=async()=>{
      
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === 'http://9fce63f3f8de.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+          {prop.picture === 'http://fc0ce8a13f6f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/avatar.png')}
             style={styles.avatar}

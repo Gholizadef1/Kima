@@ -22,7 +22,7 @@ const PickerScreen = (props) => {
   console.log('***nowhi'+props.bookid)
 
   const getData = async () => {
-    axios.get('http://2a70f9d05fdb.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
+    axios.get('http://fc0ce8a13f6f.ngrok.io/bookdetail/'+props.bookid +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -46,7 +46,7 @@ const PickerScreen = (props) => {
         "book_state": value,
       }
       const back = JSON.stringify(payload);
-      axios.post('http://2a70f9d05fdb.ngrok.io/bookdetail/' + props.bookid, back, {
+      axios.post('http://fc0ce8a13f6f.ngrok.io/bookdetail/' + props.bookid, back, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
