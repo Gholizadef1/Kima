@@ -37,7 +37,8 @@ const Home = ({navigation}) => {
     return(      
         <Container style={styles.frame}>
             <ScrollView>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('7%')}}/>
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('4.5%')}}/>
+            <Title style={{fontSize:24 , fontWeight:'bold',color:'#E1E5F2' ,marginTop:-44 , marginLeft:10}}>کیما</Title>
              <ScrollView>
                  <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                  </View>
