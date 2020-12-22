@@ -1,10 +1,7 @@
 .root{
-    height: 630px;
-    width: 90%;
+    height: 600px;
     background-color:rgb(238, 243, 250);
-
     position: fixed;
-    margin-top: -210px;
     border:16px solid #fff;
     border-radius: 3%;
    

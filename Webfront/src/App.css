@@ -18,6 +18,10 @@
       url('fonts/Yekan.ttf') format('truetype'),
       url('fonts/Yekan.woff') format('woff');
       }
+      @font-face {
+        font-family: 'Iranian Sans';
+        src: url('fonts/Iranian Sans.ttf') format('truetype'),
+        }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -16,14 +16,16 @@
 }
 
 .cardp{
-   left: 60rem;
-     border:2px solid #fff;
-   border-radius: 3%;
+   left: 55rem;
+     height: 300px;
+     width: 500px;
+   border-radius: 2%;
     margin-top: 3rem;
     background-color:rgb(238, 243, 250);
 }
 .decsciptionmine{
     font-size: 18px;
+    font-family: 'Yekan';
 }
 .custom-btn{
     max-width: 80%;
@@ -35,13 +37,18 @@
     padding-left:3px;
     padding-right:4px;
 }
+.btn{
+    width: 80px;
+    height: 50px;
+}
 .Tabz{
 
-    margin-left: 100px;
-    margin-top: -15rem;
+    margin-left: 90px;
+    margin-top: -319px;
+    
 }
 .line{
-    margin-top:60px;
+    margin-top:20px;
 }
 @media (max-width :400px) 
 {

@@ -240,14 +240,14 @@ useEffect(() => {
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="mt-5" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h5 className="mt-n2 ml-5" style={{fontFamily:'Yekan',fontWeight:"bold",fontSize:15}}>
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="mt-3" style={{fontFamily:'Mitra',fontWeight:"bold"}}>
+                                    <h6 className="mt-3  ml-5" style={{fontFamily:'Yekan',fontWeight:"bold",fontSize:13}}>
                                        {user.email}
                                     </h6>
-                                    <button type="button" className="btn btn-primary"
+                                    <button type="button" className="btn btn-primary  ml-5"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -256,16 +256,16 @@ useEffect(() => {
                                      onClick={handleShow}
 
 
-                                     aria-label="Toggle navigation"style={{fontFamily:'Mitra',marginTop:10,color:"white"}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Yekan',marginTop:10,color:"white"}}>
                   ویرایش
 
                                     </button>
                                 </div>
-                                    <div className="profile col-md-5 pl-1 mr-2 mt-5 ">
+                                    <div className="profile col-md-5 pl-1 mr-n3 mt-n1 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
-                                                                         width: 145,
-                                                                         height: 145,
+                                                                         width: 135,
+                                                                         height: 135,
 
 
                                                                          display: "block"}}/>
@@ -280,12 +280,12 @@ useEffect(() => {
 
                                 <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-5 ml-5 mr-5">
-                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.toRead}</b>
-                                        <b className="heading mr-4 ml-2"style={{fontSize:20}}>{bookNumbers.reading}</b>
-                                        <b className="heading"style={{fontSize:20}}>{bookNumbers.read}</b> 
+                                        <div className="d-flex justify-content-between text-right mt-md-3 ml-5 mr-5">
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
+                                        <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
+                                        <b className="heading"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between ourfont text-right mt-md-3">
+                                        <div className="d-flex justify-content-between text-right mt-md-2">
 
                                         <b className="description decsciptionmine ml-4">می‌خواهم بخوانم</b>
                                         <b className="description decsciptionmine mr-4">دارم می‌خوانم</b>
@@ -294,9 +294,7 @@ useEffect(() => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-header border-0 pt-6 pt-md-3 pb-3 pb-md-3">
-                                <div className="d-flex justify-content-between">
-                                    
+                          
                     
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Body>
@@ -413,8 +411,7 @@ useEffect(() => {
                                 </div>
                             </div>
                             </div>
-                            </div>
-                            </div>
+                           
                         
 
                             <div className="Tabz">
