@@ -15,6 +15,8 @@ import Eachgroup from './Eachgroup';
 const Groups = () => {
 
     const [modalopen,setmodalopen]=useState(false)
+    const [selectedValue, setselectedValue] = useState('none')
+    const [information, setinformation] = useState(['as;df']);
     return(
       
         <View style={styles.container}>
@@ -30,6 +32,45 @@ const Groups = () => {
          </View>
 
          <View style={{marginLeft:wp('2%')}}>
+
+         { (information.length>=0) ?    <DropDownPicker
+          items={[
+            { label: 'معروف ترین گروه ها', value: 'none' },
+            { label: 'جدید ترین گروه ها', value: 'like' },
+          ]}
+          defaultValue={selectedValue}
+          containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
+          style={{
+            
+            borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('3%')
+          }}
+          itemStyle={{
+          
+            justifyContent: 'flex-start'
+          }}
+          dropDownStyle={{ backgroundColor: '#fafafa',
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30,marginTop:hp('2%'), marginLeft: wp('3%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%') }}
+          onChangeItem={async (item) => {
+
+            if (item.value === 'none') {
+              console.log(item.value + 'VALUE')
+              console.log('to none')
+              await setlikeotime('/comment-filter-time')
+        
+            }
+            else if (item.value === 'like') {
+              console.log('tolike')
+              console.log(item.value + 'VALUE')
+              await setlikeotime('/comment-filter-like')
+         
+            }
+
+
+
+          }}
+
+        />:null}
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
