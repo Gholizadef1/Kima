@@ -49,7 +49,7 @@ const Comment = (prop) => {
   const [page, setpage] = useState(1);
 
   console.log('AVAL')
-  const response = async (page) => {
+  const response = async(page) => {
     console.log('PAGEEEE'+ page)
     console.log('DOVOM')
     await setpage(page)
@@ -63,13 +63,14 @@ const Comment = (prop) => {
       console.log(information)
 
     }
-    await settheend(false)
-    await setinformation([])
+    // await settheend(false)
+    // await setinformation([])
     const id = prop.route.params.id
     console.log(id)
     console.log(await (await AsyncStorage.getItem('id')).toString())
 
     try {
+      // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime, {
         params: {
@@ -88,7 +89,7 @@ const Comment = (prop) => {
          console.log(information)
          console.log('RESPONSE DATE')
          console.log(response.date)
-       await(  page === 1 ? setinformation(response.data) : setinformation(information.concat(response.data)))
+         page===1?setinformation(response.data):setinformation(information.concat(response.data))
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         console.log(information)
         setrefresh(false)
@@ -261,7 +262,7 @@ const Comment = (prop) => {
 
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
-        <DropDownPicker
+      { (information.length>=0) ?    <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -324,8 +325,8 @@ const Comment = (prop) => {
 
           }}
 
-        />
-        <FlatList
+        />:null}
+         { (information.length>=0) ? <FlatList
           style={{ marginBottom: '17%' }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
@@ -343,10 +344,10 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
-            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://d30e06d5c109.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
-        </FlatList>
+        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
 
 
         {/* <View style={{position:'absolute',marginTop:'160%',width:'100%'}}></View> */}

@@ -5,6 +5,8 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import ResultsDetail from './ResultsDetail';
 import Bookresult from '../Screens/Bookresult';
 import {withNavigation} from 'react-navigation';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const ResultsList = ({stylee,title,listresult,navigation}) => {
     return(
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     marginLeft:0
     },
     title:{
-        marginRight:30,
+        marginLeft:heightPercentageToDP('2%'),
         marginTop:30,
         fontSize:15,
         fontWeight:'bold'

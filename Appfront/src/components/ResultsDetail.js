@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View,Image } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { color } from 'react-native-reanimated';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const ResultsDetail = ({result}) => {
     return(
@@ -24,11 +25,12 @@ const ResultsDetail = ({result}) => {
 const styles = StyleSheet.create({
     container: {
        
-        marginLeft:10
+        marginLeft:wp('0.8%')
         },
     title:{
-        marginLeft:0,
-        marginRight:20,
+        marginLeft:hp('2%'),
+        marginRight:0,
+        
         marginTop:220,
         fontSize:12,
         fontWeight:'bold',
