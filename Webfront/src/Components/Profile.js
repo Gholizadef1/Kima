@@ -281,7 +281,7 @@ useEffect(() => {
 
                                 <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-3 ml-5 mr-5">
+                                        <div className="d-flex justify-content-between text-right mt-md-n1 ml-5 mr-5">
                                         <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
                                         <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
                                         <b className="heading"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
