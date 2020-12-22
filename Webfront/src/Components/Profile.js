@@ -8,6 +8,7 @@ import teal from '@material-ui/core/colors/teal';
 import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
 import Tabs from '../Tabs/Tabs';
+import MyGroups from '../Tabs/MyGroups';
 function ProFile (props){
     const [state , setState]=useState(
         {
@@ -261,11 +262,11 @@ useEffect(() => {
 
                                     </button>
                                 </div>
-                                    <div className="profile col-md-5 pl-1 mr-n3 mt-n1 ">
+                                    <div className="profile col-md-5 pl-1 mr-n4 mt-n2 ">
                                         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
 
-                                                                         width: 135,
-                                                                         height: 135,
+                                                                         width: 130,
+                                                                         height: 130,
 
 
                                                                          display: "block"}}/>
@@ -411,7 +412,9 @@ useEffect(() => {
                                 </div>
                             </div>
                             </div>
-                           
+                           <div className="mygroups">
+                               <MyGroups/>
+                           </div>
                         
 
                             <div className="Tabz">
