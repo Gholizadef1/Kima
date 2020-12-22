@@ -36,20 +36,8 @@ const Home = ({navigation}) => {
     }
     return(      
         <Container style={styles.frame}>
-        <View>
-            <View backgroundColor='#1F7A8C'>
-            <Container>
-        <Header style={{backgroundColor:'#1F7A8C',marginTop:35}}>
-          <Left/>
-          <Body>
-            <Title style={{fontSize:22 , fontWeight:'bold',color:'#E1E5F2' , marginRight: 40, marginLeft: 10 
-            , right:50,top:2}}>کیما</Title>
-          </Body>
-          <Right />
-        </Header>
-      </Container>
-            </View>
-
+            <ScrollView>
+            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:49}}/>
              <ScrollView>
                  <View style={{padding: 50 , marginRight: 50}}>
                  </View>
@@ -80,8 +68,42 @@ const Home = ({navigation}) => {
                 }
                     />
                  </View>
-             </ScrollView>     
-        </View>
+             </ScrollView>
+
+              <ScrollView>
+                 <View style={{padding: 50 , marginRight: 50}}>
+                 </View>
+                 <View>
+                 <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
+                 marginTop:30,right:-10,fontWeight:'bold',marginBottom:10}}>کتاب های پیشنهادی</Text>
+                    <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    data={image}
+                    renderItem= {({item}) =>{
+                        return(
+                            <View style={{paddingVertical: 15 , paddingLeft: 8}}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                    <CardItem cardBody>
+                                    <Image source={{uri : item.imgurl}} style={{width: 120,
+                                      height: 180 , borderRadius:15}}/>
+                                    </CardItem>
+                                    </Card>                                    
+                                        <CardItem>
+                                        <Text style={styles.ImageText}>{item.title}</Text>
+                                        </CardItem>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    } 
+                }
+                    />
+                 </View>
+             </ScrollView>   
+  
+
+        </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
         </Container>
     );
