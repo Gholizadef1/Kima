@@ -6,7 +6,7 @@ import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios'
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 
 const Home = ({navigation}) => { 
@@ -39,7 +39,7 @@ const Home = ({navigation}) => {
             <ScrollView>
             <Header style={{backgroundColor:'#1F7A8C' ,marginTop:49}}/>
              <ScrollView>
-                 <View style={{padding: 50 , marginRight: 50}}>
+                 <View style={{padding: 10 , marginRight: 50}}>
                  </View>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
@@ -71,7 +71,7 @@ const Home = ({navigation}) => {
              </ScrollView>
 
               <ScrollView>
-                 <View style={{padding: 50 , marginRight: 50}}>
+                 <View style={{padding: 10 , marginRight: 50}}>
                  </View>
                  <View>
                  <Text style={{fontSize: 20 , fontWeight:'bold' , color:'#1F7A8C',
