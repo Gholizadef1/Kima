@@ -10,25 +10,15 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-import Eachgroup from './Eachgroup';
 
-const Groups = () => {
 
-    const [modalopen,setmodalopen]=useState(false)
+const Eachgroup = () => {
+
+ 
     return(
       
         <View style={styles.container}>
-        <Modal visible={modalopen} animationType='slide'>
-        <AntDesign onPress={()=>setmodalopen(false)}
-         name="close" size={24} color="black" />
-        <Text>Hi im in modall :)))))</Text>
-        </Modal>
-        <View style={{position:'absolute', justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}}>
-        <Feather style={styles.plus} onPress={()=>setmodalopen(true)}
-         name="plus" size={32} color="#EDF2F4" />
-     
-         </View>
-         <Eachgroup></Eachgroup>
+
             <Text>
                 Groups
             </Text>
@@ -43,11 +33,6 @@ const styles = StyleSheet.create({
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
-    plus:{
-      
-      alignSelf:'center',
-      justifyContent:'center'
-    
-    }
+
   });
-  export default Groups;
+  export default Eachgroup;
