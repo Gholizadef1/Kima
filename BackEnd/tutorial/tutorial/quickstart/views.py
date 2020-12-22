@@ -524,8 +524,8 @@ class FilterCommentbyTime(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-sendtime'))
-            serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            serializer = CommentSerializer(comment_list,many=True)
+            return Response(serializer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -535,9 +535,9 @@ class FilterCommentbyLike(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-LikeCount'))
-            serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-diff'))
+            serializer = CommentSerializer(comment_list,many=True)
+            return Response(serializer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -548,8 +548,8 @@ class FilterQuotebyTime(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-sendtime'))
-            serilalizer = QuoteSerializer(quote_list,many=True)
-            return Response(serilalizer.data)
+            serializer = QuoteSerializer(quote_list,many=True)
+            return Response(serializer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
 
@@ -560,8 +560,8 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-Likes'))
-            serilalizer = QuoteSerializer(quote_list,many=True)
-            return Response(serilalizer.data)
+            serializer = QuoteSerializer(quote_list,many=True)
+            return Response(serializer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
 

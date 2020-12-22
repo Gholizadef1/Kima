@@ -114,6 +114,10 @@ class MyComment(models.Model):
     LikeCount=models.IntegerField(default=0)
     DislikeCount=models.IntegerField(default=0)
 
+    @property
+    def diff(self):
+        return self.LikeCount - self.DislikeCount
+
     def __str__(self):
         return self.comment_text
 
