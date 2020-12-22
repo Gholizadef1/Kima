@@ -1,32 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useFocusEffect } from '@react-navigation/native';
+import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const Groups = () => {
     return(
-        <Container style={{marginTop:100}}>
-        <Header hasSegment>
-          <Left>
-            <Button transparent>
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Segment>
-              <Button first><Text>Puppies</Text></Button>
-              <Button last active><Text>Cubs</Text></Button>
-            </Segment>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="search" />
-            </Button>
-          </Right>
-        </Header>
-        <Content padder>
-          <Text>Awesome segment</Text>
-        </Content>
-      </Container>
+        <View style={styles.container}>
+           
+            <Text>
+                Groups
+            </Text>
+        </View>
     );
 }
 

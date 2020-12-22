@@ -24,6 +24,7 @@ import Profile from './Profile';
 import Editprofile from './Editprofile';
 import Profilenavigation from './Profilenavigation';
 import MybooksNavigation from './MybooksNavigation';
+import Groupnavigation from './Groupnavigation';
 // const SNavigation = createStackNavigator();
 //  Snavigation=()=>{
 //    return(
@@ -68,7 +69,7 @@ const TabSreen = () => {
               ),
     
             }}/>
-             <Tab.Screen name="گروه ها" component={Groups} options={{tabBarIcon: ({ color, size }) => (
+             <Tab.Screen name="گروه ها" component={Groupnavigation} options={{tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="people" size={24} color={color} />
               ),
     
