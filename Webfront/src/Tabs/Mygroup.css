@@ -4,7 +4,11 @@
     padding: 3rem;
     background-color:rgb(238, 243, 250);
     margin-left: 55rem;
-    margin-top: 100px;
+    margin-top: 55px;
     width: 500px;
 
+}
+.line1{
+    margin-top:-180px;
+    margin-left: -45px;
 }

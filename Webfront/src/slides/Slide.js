@@ -69,18 +69,19 @@ function Slide(props) {
     infinite: false,
     speed: 10,
     arrows: true,
-    slidesToShow: 5,
+    slidesToShow: 7,
     slidesToScroll: 4,
 
     responsive: [
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 7,
           slidesToScroll: 2,
           
         },
-      },
+      }, 
+     
       {
         breakpoint: 480,
         settings: {
@@ -92,6 +93,13 @@ function Slide(props) {
         breakpoint: 768,
         settings: {
           slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 5,
           slidesToScroll: 2,
         },
       },
