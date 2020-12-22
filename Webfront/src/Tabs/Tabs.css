@@ -1,15 +1,13 @@
 .root{
     height: 630px;
     width: 90%;
-    background-color: white;
+    background-color:rgb(238, 243, 250);
+
     position: fixed;
     margin-top: -210px;
     border:16px solid #fff;
-    border-radius: 5%;
-    box-shadow: 10px 10px 5px #ccc;
-    -moz-box-shadow: 10px 10px 5px #ccc;
-    -webkit-box-shadow: 10px 10px 5px #ccc;
-    -khtml-box-shadow: 10px 10px 5px #ccc;
+    border-radius: 3%;
+   
 
     
 }

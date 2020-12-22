@@ -235,8 +235,6 @@ useEffect(() => {
         <div className="main-content">
             <div class="container-fluid">
                 <div className="row">
-
-                    <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 mt-3">
                         <div className="card cardp">
                             <div className=" d-flex justify-content-end">
 
@@ -417,7 +415,7 @@ useEffect(() => {
                             </div>
                             </div>
                             </div>
-                            </div>
+                        
 
                             <div className="Tabz">
 
