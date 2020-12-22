@@ -18,7 +18,7 @@ const Eachgroup = (prop) => {
  
     return(
       
-        <View style={styles.container}>
+        <View >
           <View style={styles.avatarname}>
      
      <TouchableOpacity style={styles.avatar}
@@ -32,7 +32,7 @@ const Eachgroup = (prop) => {
 
        </ImageBackground> : <ImageBackground borderRadius={100}
 
-         source={{ uri: prop.picture }}
+         source={require('../../assets/kima6.jpg')}
          style={styles.avatar}
 
        >
@@ -40,16 +40,22 @@ const Eachgroup = (prop) => {
          </ImageBackground>}
      </TouchableOpacity>
      <Text style={styles.username}>luna</Text>
+     <Text style={styles.date}>150</Text>
     
    </View>
   
    <View style={{ flexDirection: 'row' }}>
 
- 
+   <View style={styles.comment}>
+
+        <Text style={{}}>خلاضه ی گروهههههههه</Text>
+ </View>
+ <View >
    <Image
      source={require('../../assets/line2.png')}
-     style={{ width: 1000, height: 1 }}
+     style={{ width: wp('100%'), height: 1,marginRight:0,marginLeft:0}}
    ></Image>
+   </View>
    {/* </Card> */}
  </View>
             <Text>
@@ -68,27 +74,44 @@ const styles = StyleSheet.create({
     },
     username: {
         position: 'absolute',
-        marginTop: '5%',
+        marginTop: '6%',
         left: 80,
         fontSize: 15,
-        fontWeight: 'bold'
-    
-    
+        fontWeight: 'bold',
       },
       comment: {
-    
-    
-        marginTop: 20,
+       marginTop:hp('13%'),
         marginRight: '5%',
-        marginLeft: '5%',
+        marginLeft: wp('4%'),
+        marginBottom:hp('5%'),
+        // borderBottomColor:'blue'
+        
       },
       avatar: {
+           marginTop:hp('1%'),
+        // marginLeft:wp('4%'),
         height: 65,
         width: 65,
         borderRadius: 100,
         position: 'absolute'
     
       },
+      date: {
+        position: 'absolute',
+        marginTop:hp('6.5%'),
+        left: 80,
+        fontSize: 12,
+        color: 'gray'
+      },
+     avatarname: {
+    marginTop: '5%',
+    marginLeft: '5%',
+    flexDirection: 'row',
+
+    width: '50%',
+    height: 65,
+    borderRadius: 100
+  },
 
   });
   export default Eachgroup;

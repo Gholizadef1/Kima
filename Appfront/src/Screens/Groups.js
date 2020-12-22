@@ -28,7 +28,13 @@ const Groups = () => {
          name="plus" size={32} color="#EDF2F4" />
      
          </View>
+
+         <View style={{marginLeft:wp('2%')}}>
          <Eachgroup></Eachgroup>
+         <Eachgroup></Eachgroup>
+         <Eachgroup></Eachgroup>
+         <Eachgroup></Eachgroup>
+         </View>
             <Text>
                 Groups
             </Text>
