@@ -39,7 +39,7 @@ const Eachgroup = (prop) => {
 
          </ImageBackground>}
      </TouchableOpacity>
-     <Text style={styles.username}>luna</Text>
+     <Text style={styles.username}><Text>#</Text>لوناااا</Text>
      <Text style={styles.date}>150<Text style={{color:'gray'}}> عضو</Text></Text>
 
     
