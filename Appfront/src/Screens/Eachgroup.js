@@ -40,7 +40,8 @@ const Eachgroup = (prop) => {
          </ImageBackground>}
      </TouchableOpacity>
      <Text style={styles.username}>luna</Text>
-     <Text style={styles.date}>150</Text>
+     <Text style={styles.date}>150<Text style={{color:'gray'}}> عضو</Text></Text>
+
     
    </View>
   
@@ -48,19 +49,20 @@ const Eachgroup = (prop) => {
 
    <View style={styles.comment}>
 
-        <Text style={{}}>خلاضه ی گروهههههههه</Text>
+        <Text style={{color:'black'}}>خلاضه ی گروهههههههه</Text>
  </View>
- <View >
-   <Image
-     source={require('../../assets/line2.png')}
-     style={{ width: wp('100%'), height: 1,marginRight:0,marginLeft:0}}
-   ></Image>
-   </View>
+ 
+  
    {/* </Card> */}
  </View>
-            <Text>
+ 
+ <Image
+     source={require('../../assets/line2.png')}
+     style={{ width: wp('100%'), height: 1}}
+   ></Image>
+            {/* <Text>
                 Groups
-            </Text>
+            </Text> */}
         </View>
     );
 }
@@ -74,22 +76,21 @@ const styles = StyleSheet.create({
     },
     username: {
         position: 'absolute',
-        marginTop: '6%',
+        marginTop: '5%',
         left: 80,
         fontSize: 15,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
+    
+    
       },
       comment: {
-       marginTop:hp('13%'),
+    
+        marginBottom:hp('2%'),
+        marginTop: 20,
         marginRight: '5%',
-        marginLeft: wp('4%'),
-        marginBottom:hp('5%'),
-        // borderBottomColor:'blue'
-        
+        marginLeft: '5%',
       },
       avatar: {
-           marginTop:hp('1%'),
-        // marginLeft:wp('4%'),
         height: 65,
         width: 65,
         borderRadius: 100,
@@ -98,20 +99,20 @@ const styles = StyleSheet.create({
       },
       date: {
         position: 'absolute',
-        marginTop:hp('6.5%'),
+        marginTop: '17%',
         left: 80,
         fontSize: 12,
         color: 'gray'
       },
-     avatarname: {
-    marginTop: '5%',
-    marginLeft: '5%',
-    flexDirection: 'row',
-
-    width: '50%',
-    height: 65,
-    borderRadius: 100
-  },
+      avatarname: {
+        marginTop: '5%',
+        marginLeft: '5%',
+        flexDirection: 'row',
+    
+        width: '50%',
+        height: 65,
+        borderRadius: 100
+      },
 
   });
   export default Eachgroup;
