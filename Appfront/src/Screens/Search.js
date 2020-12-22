@@ -14,6 +14,7 @@ import axios from 'axios';
 import { sub } from 'react-native-reanimated';
 import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Search = ({navigation}) => {
     console.log({navigation})
@@ -108,11 +109,12 @@ const Search = ({navigation}) => {
      
         <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        <Text style={{marginTop:200,marginLeft:170,marginTop:20,marginRight:30}}>با اطلاعات شما {results.length+titles.length} کتاب پیدا شدند</Text>
+        <Text style={{marginTop:200,marginRight:170,marginTop:20,marginLeft:hp('2%')}}>با اطلاعات شما {results.length+titles.length} کتاب پیدا شدند</Text>
         <ScrollView>
         <ResultsList 
         navigation={navigation}
         listresult={authors}
+        
         stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
           <Image
          source={require('../../assets/line3.png')}

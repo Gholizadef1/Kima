@@ -49,12 +49,14 @@ const callbackFunction = async(childData) => {
 }
   
   const getlike=async(item)=>{
-    axiosinst.get('http://1244af18f7bf.ngrok.io/api/quotes/like/'+item.id,{"headers":
+    // await setTimeout(() => {  console.log("World!"); }, 5000);
+    axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/'+item.id,{"headers":
     {
      "Content-Type":"application/json",
      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
     }})
    .then(async function(response){
+    
         console.log(response);
         if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
      })
@@ -172,6 +174,7 @@ const callbackFunction = async(childData) => {
                 console.log((await AsyncStorage.getItem('token')).toString())
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
+                // await setTimeout(() => {  console.log("World!"); }, 5000);
                 axiosinst.post('api/quotes/'+prop.route.params.id,backk,{"headers":
                {
                 "Content-Type":"application/json",
@@ -179,6 +182,7 @@ const callbackFunction = async(childData) => {
                }})
               .then(async function(response){
                   console.log(response);
+                 
                   // await bs.current.snapTo(1)
 
                   // await Keyboard.dismiss();
@@ -382,7 +386,7 @@ const callbackFunction = async(childData) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
 
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1244af18f7bf.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 
 
@@ -390,7 +394,7 @@ const callbackFunction = async(childData) => {
     )}
       // extraData={finfo}
     >
-    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>نقل قولی وجود ندارد</Text>}
+    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('30%'),fontWeight:'bold'}}>نقل قولی وجود ندارد</Text>}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}

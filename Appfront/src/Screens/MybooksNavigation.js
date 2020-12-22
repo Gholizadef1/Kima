@@ -7,7 +7,7 @@ import IsReading from './IsReading'
 import Bookview from './Bookview'
 import Commentcard from './Commentcard';
 import Comment from './Comment';
-import Quote from './Quote';
+
 
 import Quote from './Quote';
 
