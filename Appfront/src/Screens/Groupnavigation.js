@@ -19,14 +19,16 @@ import Editprofile from './Editprofile';
 import Activityquote from './Activityquote';
 import EditProfile from './Editprofile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Groups from './Groups'
 
 const Tab = createMaterialTopTabNavigator();
 
 const Groupnavigation =()=>{
   return (
-    <Tab.Navigator style={{marginTop:hp('4.3.9%')}}>
-      <Tab.Screen name="profile" component={Profile} />
-      <Tab.Screen name="editprofile" component={EditProfile} />
+    <Tab.Navigator style={{marginTop:hp('4.3.9%')}
+    }    tabBarOptions={{activeTintColor:'#1f7a8c',pressColor:'#DEF2F8',allowFontScaling:true,labelStyle:{fontWeight:'bold'}, indicatorStyle:{backgroundColor:'#1f7a8c'} ,  style: {backgroundColor:'#EDF2F4',borderBottomRightRadius:10,borderBottomLeftRadius:10},}}  >
+      <Tab.Screen name="گروه ها" component={Groups} />
+      <Tab.Screen name="گروه های من" component={EditProfile} />
     </Tab.Navigator>
   );
 }
