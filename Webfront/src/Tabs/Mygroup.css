@@ -5,10 +5,19 @@
     background-color:rgb(238, 243, 250);
     margin-left: 55rem;
     margin-top: 55px;
-    width: 500px;
+    width: 300px;
 
 }
 .line1{
     margin-top:-180px;
     margin-left: -45px;
 }
+
+
+@media (min-width :768px) 
+{
+    .cardc{
+        width: 200px;
+    }
+
+  }

@@ -2,11 +2,14 @@
 
 
 
-.rounded-circle{
+.rounded-circle1{
    
+    width: 130px;
+    height: 130px;
+    display: "block";
    margin-bottom: 15px;
    margin-left: 10px;
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-right: 3rem;
     border:2px solid #fff;
     box-shadow: 10px 10px 5px #ccc;
@@ -22,6 +25,17 @@
    border-radius: 2%;
     margin-top: 3rem;
     background-color:rgb(238, 243, 250);
+}
+.username{
+    font-family: 'Yekan';
+    font-weight: bold;
+    font-size: 15px;
+    
+}
+.email{
+    font-family: 'Yekan';
+    font-weight: bold;
+    font-size: 13px;
 }
 .decsciptionmine{
     font-size: 18px;
@@ -41,6 +55,9 @@
     width: 80px;
     height: 40px;
 }
+.heading{
+    font-size: 18;
+}
 
 .Tabz{
 
@@ -52,53 +69,141 @@
 .line{
     margin-top:14px;
 }
-@media (max-width :400px) 
-{
-    .cardp{
-        left: -7px;
-        height: 400px;
+.heading1{
+margin-left: 10px;
+}
+.heading2{
+margin-left: 10px;
+}
+.heading3{
+margin-left: 10px;
+}
+.mygroups{
+    margin-left: -100px;
 
-    }
-  
-    .decsciptionmine{
-        margin-left: 30px;
-        font-size: 12px;
-       
-    }
-    .line{
-        margin-top: 35px;
-    }
-    
-  }
-  @media (max-width :780px) 
-{
-    .cardp{
-        left: -7px;
-        height: 300px;
-       
-    } 
-
-    .Tabz{
-
-        margin-left: 10px;
-        margin-top: -1rem;
-    }
-    .line{
-        margin-top: 40px;
-    }
+}
    
-  }
-  @media (max-width :800px) 
+@media (min-width :360px)
 {
     .cardp{
-        left: -7px;
-        height: 450px;
+        left: 31px;
+          height: 240px;
+          width: 300px;
+        border-radius: 2%;
+         margin-top: 3rem;
+         background-color:rgb(238, 243, 250);
+     }
+
+     .rounded-circle1{
+         width: 120px;
+         height: 120px;
+         display: "block";
+        margin-bottom: 15px;
+        margin-left: 3px;
+         margin-top: 1rem;
+        
+     }
+     .username{
+         margin-top: -18px;
+     }
+     .btn{
+        width: 69px;
+        height: 40px;
+    }
+    .line{
+        margin-top:-1px;
+    }
+    .decsciptionmine{
+        font-size: 14px;
+        font-family: 'Yekan';
+    }
        
-    } 
+.heading{
+    font-size: 15;
 
-    .Tabz{
-
-        margin-left: 10px;
-        margin-top: 12rem;
+}
+.heading1{
+    margin-left: -12px;
+    }
+    .heading2{
+    margin-left: 90px;
+    padding-right: 10px;
+    }
+    .heading3{
+    margin-left: 70px;
     }
   }
+
+
+  @media (min-width :768px) 
+  {
+      
+    .cardp{
+        left: 430px;
+          height: 240px;
+          width: 300px;
+        border-radius: 2%;
+         margin-top: 3rem;
+         background-color:rgb(238, 243, 250);
+     }
+
+     .rounded-circle1{
+         width: 120px;
+         height: 120px;
+         display: "block";
+        margin-bottom: 15px;
+        margin-left: 3px;
+         margin-top: 1rem;
+        
+     }
+     .username{
+         margin-top: -18px;
+     }
+     .btn{
+        width: 69px;
+        height: 40px;
+    }
+    .line{
+        margin-top:-1px;
+    }
+    .decsciptionmine{
+        font-size: 14px;
+        font-family: 'Yekan';
+    }
+       
+.heading{
+    font-size: 15;
+
+}
+.heading1{
+    margin-left: -12px;
+    }
+    .heading2{
+    margin-left: 90px;
+    padding-right: 10px;
+    }
+    .heading3{
+    margin-left: 70px;
+    }
+
+.Tabz{
+
+    margin-left: 14px;
+    margin-top: -250px;
+    
+}
+.mygroups{
+    margin-left: -800px;
+   
+
+}
+
+}
+    @media (min-width :960px) 
+    {
+        
+
+      }
+
+
+

@@ -241,14 +241,14 @@ useEffect(() => {
 
                                 <div className="col-7 mt-5 text-center ">
                                     {/* <img src={image} style={{width:300}}></img> */}
-                                    <h5 className="mt-n2 ml-5" style={{fontFamily:'Yekan',fontWeight:"bold",fontSize:15}}>
+                                    <h5 className="username">
                                         {user.userName}
                                     </h5>
 
-                                    <h6 className="mt-3  ml-5" style={{fontFamily:'Yekan',fontWeight:"bold",fontSize:13}}>
+                                    <h6 className="email">
                                        {user.email}
                                     </h6>
-                                    <button type="button" className="btn btn-primary  ml-5"
+                                    <button type="button" className="btn btn-primary"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -262,14 +262,8 @@ useEffect(() => {
 
                                     </button>
                                 </div>
-                                    <div className="profile col-md-5 pl-1 mr-n4 mt-n2 ">
-                                        <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle img-fluid" style={{
-
-                                                                         width: 130,
-                                                                         height: 130,
-
-
-                                                                         display: "block"}}/>
+                                    <div className="profile col-md-5">
+                                        <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle1 img-fluid"/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
                                 </div>
@@ -281,16 +275,16 @@ useEffect(() => {
 
                                 <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex justify-content-between text-right mt-md-n1 ml-5 mr-5">
-                                        <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
-                                        <b className="heading mr-4 ml-2"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
-                                        <b className="heading"style={{fontSize:20,fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
+                                        <div className="d-flex heading justify-content-between text-right mt-md-n1 ml-5 mr-5">
+                                        <b className="heading1"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
+                                        <b className="heading2"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
+                                        <b className="heading3"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
                                         </div>
                                         <div className="d-flex justify-content-between text-right mt-md-2">
 
-                                        <b className="description decsciptionmine ml-4">می‌خواهم بخوانم</b>
-                                        <b className="description decsciptionmine mr-4">دارم می‌خوانم</b>
-                                        <b className="description decsciptionmine mr-4 ml-1">خوانده‌ام</b>
+                                        <b className="description decsciptionmine">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine ">دارم می‌خوانم</b>
+                                        <b className="description decsciptionmine">خوانده‌ام</b>
                                         </div>   {/* < FaRegSmileBeam/> */}
                                     </div>
                                 </div>
@@ -417,10 +411,10 @@ useEffect(() => {
                            </div>
                         
 
-                            <div className="Tabz">
+                            {/* <div className="Tabz">
 
                               <Tabs/>
-                              </div>
+                              </div>  */}
                             </div>
                             
     )

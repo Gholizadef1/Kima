@@ -4,31 +4,19 @@
     position: fixed;
     border:16px solid #fff;
     border-radius: 3%;
-   
-
     
 }
-@media (max-width :414px) 
+
+@media (min-width :768px) 
 {
     .root{
-    width:300px;
-    margin-left: -100px;
-    
+        height: 600px;
+        background-color:rgb(238, 243, 250);
+       
+        border:16px solid #fff;
+        border-radius: 3%;
     }
    
+
   }
-  @media (max-width :769px) 
-{
-    .root{
-    width: 700px;
-    height: 500px;
-    }
-   
-  }
-  @media (min-width :800px) 
-  {
-      .root{
-      width: 750px;
-      }
-     
-    }
+

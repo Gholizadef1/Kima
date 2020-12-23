@@ -134,7 +134,7 @@ function Slide(props) {
 
               </div>
               <div className="body">
-              {current.title.length >19 ?
+              {current.title.length >17 ?
 <BlueOnGreenTooltip title={current.title}>
     <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </BlueOnGreenTooltip>
