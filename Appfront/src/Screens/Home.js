@@ -101,7 +101,39 @@ const Home = ({navigation}) => {
                 }
                     />
                  </View>
-             </ScrollView>   
+             </ScrollView>
+
+             <ScrollView>
+                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
+                 </View>
+                 <View>
+                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>پربحث ترین کتاب ها</Text>
+                    <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    data={image}
+                    renderItem= {({item}) =>{
+                        return(
+                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                    <CardItem cardBody>
+                                    <Image source={{uri : item.imgurl}} style={{width: 120,
+                                      height: 180 , borderRadius:15}}/>
+                                    </CardItem>
+                                    </Card>                                    
+                                        <CardItem>
+                                        <Text style={styles.ImageText}>{item.title}</Text>
+                                        </CardItem>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    } 
+                }
+                    />
+                 </View>
+             </ScrollView>     
   
 
         </ScrollView>
