@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Eachgroup from './Eachgroup';
 import { StatusBar } from 'expo-status-bar';
+import { TouchableOpacity } from 'react-native';
 
 const Groups = () => {
 
@@ -29,9 +30,20 @@ const Groups = () => {
         {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <AntDesign style={{}} onPress={()=>setmodalopen(false)}
-         name="close" size={24} color="black" />
-        <Text>Hi im in modall :)))))</Text>
+        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
+         name="close" size={23} color="#D75A5A" />
+        {/* <Text>Hi im in modall :)))))</Text> */}
+        <TouchableOpacity style={styles.avatar}
+       onPress={() => { }}>
+      <ImageBackground borderRadius={20}
+
+         source={require('../../assets/backprof5j.jpeg')}
+         style={styles.avatar}
+
+       >
+
+         </ImageBackground>
+     </TouchableOpacity>
         </View>
         </View>
         </Modal>
@@ -123,7 +135,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       padding: 35,
       height:hp('85%'),
-      alignItems: "center",
+   
       // shadowColor: "#000",
       // shadowOffset: {
       //   width: 0,
@@ -132,6 +144,14 @@ const styles = StyleSheet.create({
       // shadowOpacity: 0.25,
       // shadowRadius: 3.84,
       elevation: 50
+    },
+    avatar: {
+      height: hp('14%'),
+      width: wp('28%'),
+      margin:hp('1.5%'),
+      borderRadius: 5,
+      position: 'absolute'
+  
     },
   });
   export default Groups;
