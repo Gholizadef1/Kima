@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+
 const commentschema = yup.object({
 
   comment: yup.string()
@@ -344,7 +345,8 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
-            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://fc0ce8a13f6f.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            picture={`http://c8f6d3c6ac6e.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
         </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
