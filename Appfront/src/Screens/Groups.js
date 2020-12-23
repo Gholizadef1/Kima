@@ -11,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Eachgroup from './Eachgroup';
+import { StatusBar } from 'expo-status-bar';
 
 const Groups = () => {
 
@@ -18,13 +19,24 @@ const Groups = () => {
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState(['as;df']);
     return(
-      
+     
+     
+    
         <View style={styles.container}>
-        <Modal visible={modalopen} animationType='slide'>
-        <AntDesign onPress={()=>setmodalopen(false)}
+        <View style={{}}>
+       <Modal    transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalopen} animationType='fade' >
+        
+        {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
+        <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+        <AntDesign style={{}} onPress={()=>setmodalopen(false)}
          name="close" size={24} color="black" />
         <Text>Hi im in modall :)))))</Text>
+        </View>
+        </View>
         </Modal>
+    
+        </View>
         <View style={{position:'absolute', justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}}>
         <Feather style={styles.plus} onPress={()=>setmodalopen(true)}
          name="plus" size={32} color="#EDF2F4" />
@@ -81,6 +93,7 @@ const Groups = () => {
                 Groups
             </Text>
         </View>
+   
     );
 }
 
@@ -96,6 +109,29 @@ const styles = StyleSheet.create({
       alignSelf:'center',
       justifyContent:'center'
     
-    }
+    },
+    centeredView: {
+      flex: 1,
+      // justifyContent: "center",
+      // alignItems: "center",
+      height:hp('85%'),
+      marginTop:hp('6%')
+    },
+    modalView: {
+      margin: 10,
+      backgroundColor: "white",
+      borderRadius: 10,
+      padding: 35,
+      height:hp('85%'),
+      alignItems: "center",
+      // shadowColor: "#000",
+      // shadowOffset: {
+      //   width: 0,
+      //   height: 2
+      // },
+      // shadowOpacity: 0.25,
+      // shadowRadius: 3.84,
+      elevation: 50
+    },
   });
   export default Groups;
