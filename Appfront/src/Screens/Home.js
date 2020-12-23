@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 import axios from 'axios'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Home = ({navigation}) => { 
 
