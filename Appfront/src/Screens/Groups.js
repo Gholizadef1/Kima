@@ -39,9 +39,10 @@ const Groups = () => {
             { label: 'جدید ترین گروه ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
+          labelStyle={{fontSize:wp('3%')}}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
           style={{
-            
+          
             borderColor:'#1f7a8c',backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
             borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('3%')
           }}

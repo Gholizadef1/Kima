@@ -21,18 +21,19 @@ import EditProfile from './Editprofile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Groups from './Groups';
 import Mygroups from './Mygroups';
+import { TabBarIndicator } from 'react-native-tab-view';
 
 const Tab = createMaterialTopTabNavigator();
 
 const Groupnavigation =()=>{
   return (
       
-    <Tab.Navigator style={{marginTop:hp('4.3.9%')}
+    <Tab.Navigator style={{marginTop:hp('4.3.9%'),backgroundColor:'white'}
     
-    } elevation={50}   tabBarOptions={{elevation:50,activeTintColor:'#1f7a8c',pressColor:'#DEF2F8',elevation:50,allowFontScaling:true,labelStyle:{fontWeight:'bold'}, indicatorStyle:{backgroundColor:'#1f7a8c'} ,
+    } elevation={50}   tabBarOptions={{elevation:50,activeTintColor:'#1f7a8c',pressColor:'#DEF2F8',elevation:50,allowFontScaling:true,labelStyle:{fontWeight:'bold',fontSize:wp('3.3%')}, indicatorStyle:{backgroundColor:'#1f7a8c',left:wp('1%'),right:wp('1%'),width:wp('48%')} ,
       style: {backgroundColor:'#EDF2F4',borderBottomRightRadius:10,borderBottomLeftRadius:10},}
       }  >
-      <Tab.Screen name="گروه ها" component={Groups} elevation={50} />
+      <Tab.Screen name="گروه ها" component={Groups} elevation={50} style={{}} />
       <Tab.Screen name="گروه های من" component={Mygroups} />
     </Tab.Navigator>
   );

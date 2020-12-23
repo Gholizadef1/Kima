@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
       comment: {
     
         marginBottom:hp('2%'),
-        marginTop: 20,
+        marginTop: hp('2%'),
         marginRight: '5%',
         marginLeft: '5%',
       },
