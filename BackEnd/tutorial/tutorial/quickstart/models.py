@@ -134,4 +134,19 @@ class DislikeComment(models.Model):
     def __str__(self):
         return self.comment.comment_text
 
+class Group(models.Model):
+    owner = models.ForeignKey(Account,on_delete=models.CASCADE)
+    summary = models.TextField()
+    profile_photo = models.ImageField( upload_to='group_photos',default='default.png')
+    title = models.CharField(max_length=100)
+
+class Member(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    group = models.models.ForeignKey(Group, on_delete=models.CASCADE)
+
+    
+
+
+
+
 
