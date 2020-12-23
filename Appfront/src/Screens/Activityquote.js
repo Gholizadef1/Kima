@@ -20,7 +20,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 
 const Activityquote = (prop) => {
-
+   
     const callbackFunction = async (childData) => {
         if (childData === true) {
             // await setrefresh(childData)
@@ -29,9 +29,9 @@ const Activityquote = (prop) => {
 
         }
     }
-
+ 
     const getlike = async (item) => {
-        axiosinst.get('http://a6cf0ecdd61a.ngrok.io/api/quotes/like/' + item.id, {
+        axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/' + item.id, {
             "headers":
             {
                 "Content-Type": "application/json",
@@ -78,18 +78,23 @@ const Activityquote = (prop) => {
                  try{
                  const response = await axiosinst.get('api/user-profile/' + id+'/MyQuotes')
                  console.log(response)
+                
                  if(response.data+'RESPONSE'==='RESPONSE'){
                  console.log('quote nadare')
-                 setinformation()
+                 console.log('-------------')
+                 settheend(true)
+                 setinformation([])
+
                  }
                  else{
                  console.log(response+'RESPONSE')
                  console.log(response.data+'RESPONSE.DATA')
                   setrefresh(false)
+                  settheend(true)
                   if(response.data.detail==='Invalid page.')
                   settheend(true);
                   else{
-                    settheend(false)
+                    // settheend(false)
                      console.log(IDD+'IDDresponse');
                       //  console.log(response.data)
                     setinformation(response.data)
@@ -245,7 +250,7 @@ const Activityquote = (prop) => {
             flex: 1,
             // backgroundColor: '#B8B8B8',
             backgroundColor: '#ffff',
-            marginTop: hp('0%')
+            marginTop: hp('-4%')
         },
         nazar: {
             marginLeft: wp('20%'),

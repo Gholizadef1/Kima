@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 // import { Ionicons } from '@expo/vector-icons';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
@@ -17,8 +18,8 @@ const Quotecard = (prop) => {
     }
       const backk2 = JSON.stringify(back2);
       console.log((await AsyncStorage.getItem('token')).toString())
-      
-        axiosinst.get('http://1244af18f7bf.ngrok.io/api/quotes/like/' + prop.quoteid , {
+      // await setTimeout(() => {  console.log("World!"); }, 5000);
+        axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid , {
           "headers":
           {
             "Content-Type": "application/json",
@@ -26,6 +27,7 @@ const Quotecard = (prop) => {
           }
         })
           .then(async function (response) {
+            
             console.log(response)
             // setnumlike(response.data.LikeCount)
             if (response.data.message === 'True')
@@ -58,9 +60,15 @@ const Quotecard = (prop) => {
 
   // const [dislike,setdislike]=useState('lightblue')
   const [heart, setheart] = useState(false);
-  useEffect(()=>{
-    getlike();
-  },[])
+  // useEffect(()=>{
+  //   getlike();
+  // },[])
+  useFocusEffect(
+    React.useCallback(() => {
+      getlike();
+    }, [])
+
+  )
   // useEffect(()=>{
   //    equal();
   //    console.log(prop.id+'propaccountid')
@@ -88,11 +96,13 @@ const Quotecard = (prop) => {
                   style:'default'
                 },
                 {
+                  
                   text: 'حذف', onPress: async() => {
                     console.log(prop.lastinfo);
                     prop.INFO(prop.quoteid)
                     console.log(prop.INFO)
                     console.log(prop.lastinfo);
+                    // await setTimeout(() => {  console.log("World!"); }, 5000);
                     axiosinst.delete('api/quotes/' + prop.quoteid, {
                       "headers":
                       {
@@ -101,6 +111,7 @@ const Quotecard = (prop) => {
                       }
                     })
                       .then(async function (response) {
+                        
                         console.log(response);
                         prop.INFO(prop.quoteid);
                         await(prop.DELETE(true))
@@ -154,7 +165,7 @@ const Quotecard = (prop) => {
 
               <TouchableOpacity style={styles.avatar}
                 onPress={() => { }}>
-                {prop.picture === 'http://1244af18f7bf.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+                {prop.picture === 'http://dc39baf075fd.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
                   source={require('../../assets/avatar.png')}
                   style={styles.avatar}
@@ -200,7 +211,8 @@ const Quotecard = (prop) => {
                 
               
             const backk=JSON.stringify(back);
-          axiosinst.post('http://1244af18f7bf.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
+            // await setTimeout(() => {  console.log("World!"); }, 5000);
+          axiosinst.post('http://dc39baf075fd.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
             "headers":
             {
               "Content-Type": "application/json",
@@ -208,6 +220,7 @@ const Quotecard = (prop) => {
             }
           })
             .then(async function (response) {
+              
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')

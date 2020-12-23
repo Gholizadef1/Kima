@@ -61,19 +61,19 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://1244af18f7bf.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://dc39baf075fd.ngrok.io/api/user-profile/"+id)
 
         
     
   //  console.log(response)
   console.log('*****')
 
-        console.log(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://1244af18f7bf.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://1244af18f7bf.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://dc39baf075fd.ngrok.io/media/default.jpg"))
 
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
@@ -127,7 +127,7 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
 
-          const response=await axiosinst.put('http://1244af18f7bf.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://dc39baf075fd.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -217,7 +217,7 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
 
-          const response=await axiosinst.put('http://1244af18f7bf.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://dc39baf075fd.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -351,19 +351,17 @@ useFocusEffect(
             backgroundColor={'white'}
         
        />
-       <Animated.View style={{
-        opacity: Animated.add(0.4, Animated.multiply(fall, 1.0)),
-    }}>
+       <View >
         
         <View style={{position:'absolute',height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
 
-      {picture==='http://1244af18f7bf.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://dc39baf075fd.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}
-        style={{height:hp('20%'),width:wp('30%'),borderRadius:100}}
+        style={{height:hp('18.2%'),width:wp('36.7%'),borderRadius:100}}
         
         >
 
@@ -639,7 +637,7 @@ useFocusEffect(
         {/* </TouchableOpacity> */}
       
     {/* </ScrollView> */}
-    </Animated.View>
+    </View>
     <StatusBar backgroundColor='#BFDBF7' style='light' />
 
         </View>
