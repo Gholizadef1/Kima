@@ -172,7 +172,7 @@ margin-left: 10px;
     }
        
 .heading{
-    font-size: 15;
+    font-size: 15px;
 
 }
 .heading1{
@@ -192,11 +192,9 @@ margin-left: 10px;
     margin-top: -250px;
     
 }
-.mygroups{
-    margin-left: -800px;
-   
 
-}
+
+
 
 }
     @media (min-width :960px) 

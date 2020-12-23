@@ -39,9 +39,11 @@ function MyGroups (props){
                                 <div className="row">
                                     
                                     <div className="col">
-                                <hr className="line1" style={{width:"125%",color:"#333",backgroundColor:"#333"}}></hr>
+                                        
+                                        <div className="my-groups">گروه‌های من</div>
                                     </div>
-                                    
+                                    <hr className="line1" style={{color:"#333",backgroundColor:"#333"}}></hr>
+
                                 </div>
                                 
                             </div>

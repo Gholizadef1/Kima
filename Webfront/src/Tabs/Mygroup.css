@@ -5,19 +5,37 @@
     background-color:rgb(238, 243, 250);
     margin-left: 55rem;
     margin-top: 55px;
-    width: 300px;
+    width: 500px;
 
 }
 .line1{
-    margin-top:-180px;
+    margin-top:-10px;
     margin-left: -45px;
+    width: 200px;
 }
-
+.my-groups{
+    font-family: 'Yekan';
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: -45px;
+}
 
 @media (min-width :768px) 
 {
     .cardc{
-        width: 200px;
+        width: 300px;
+        margin-left: 8.5rem;
+        margin-top: -240px;
+        height: 240px;
+    }
+    .line1{
+        margin-top:-140px;
+        margin-left: -20px;
+        width:100%;
+    }
+    .my-groups{
+        font-size: 15px;
+        margin-top: -170px;
     }
 
   }
