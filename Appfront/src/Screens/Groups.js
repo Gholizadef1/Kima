@@ -30,8 +30,10 @@ const Groups = () => {
         {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
+        {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
          name="close" size={23} color="#D75A5A" />
+       {/* </View> */}
         {/* <Text>Hi im in modall :)))))</Text> */}
         <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
