@@ -48,6 +48,8 @@ urlpatterns = [
     path('bookdetail/<int:pk>/comment-filter-like',FilterCommentbyLike.as_view()),
     path('bookdetail/<int:pk>/quote-filter-time',FilterQuotebyTime.as_view()),
     path('bookdetail/<int:pk>/quote-filter-like',FilterQuotebyLike.as_view()),
+    path('filter-book-rate',FilterBookbyRate.as_view()),
+    path('filter-book-comment',FilterBookbyComment.as_view()),
     path('bookdetail/<int:pk>/getstate',BookState.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
