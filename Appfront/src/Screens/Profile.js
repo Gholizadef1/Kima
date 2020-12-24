@@ -353,10 +353,7 @@ const styles = StyleSheet.create({
     backpic:{
        
         width:wp('100%'),
-        height:hp('32%'),
-       
-        
-         
+        height:hp('32%'), 
         borderBottomRightRadius:50,
         borderBottomLeftRadius:50
     },

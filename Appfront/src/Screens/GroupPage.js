@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -14,14 +14,34 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Eachgroup from './Eachgroup';
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const GroupPage = () => {
     return(
         <View style={styles.container}>
-            <Text>
-                Groups
-            </Text>
+            <ScrollView>
+            <Text style={styles.kima}>کیما</Text>
+        <Image
+
+         source={require('../../assets/backprof4.jpeg')}
+         style={{   width:wp('100%'),
+        height:hp('35%'),
+        position:'absolute',
+        
+       
+       }}
+
+         ></Image>
+                  <View style={{position:'absolute',backgroundColor:'white',height:100,width:wp('100%'),marginTop:hp('30%'),borderTopStartRadius:30,borderTopEndRadius:30}}>
+
+                    </View>
+                    {/* <View style={styles.view}> */}
+                    <View style={styles.backpic}>
+
+                    </View>
+                    
+            </ScrollView>
         </View>
     );
 }
@@ -32,6 +52,21 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    kima:{
+        color:'#1F7A8C',
+        marginTop:hp('8%'),
+        marginLeft:wp('5%'),
+        fontSize:20,
+        fontWeight:'bold',
+        position:'absolute'       
+    },
+    backpic:{
+       
+        width:wp('100%'),
+        height:hp('32%'), 
+        borderBottomRightRadius:50,
+        borderBottomLeftRadius:50
     },
   });
 export default GroupPage;
