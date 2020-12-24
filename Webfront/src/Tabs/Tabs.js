@@ -66,6 +66,7 @@ export default function FullWidthTabs() {
       
       height: 100,
       backgroundColor: theme.palette.background.paper,
+     
     },
   }));
  
@@ -102,9 +103,10 @@ export default function FullWidthTabs() {
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction} height={400}>
-          <div className="scrolll">
-        <Scroll/>
-        </div>
+        <FixedSizeList height={400} width={650} itemSize={10} itemCount={1}>
+      {Scroll}
+      </FixedSizeList>
+        
         </TabPanel>
       </SwipeableViews>
     </div>
