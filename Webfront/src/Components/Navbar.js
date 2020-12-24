@@ -118,7 +118,7 @@ useEffect(() => {
 
     return(   
       <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
-        <h1 className="mx-1">  
+        <h1 className="mx-1 mb-n1">  
           <GiBookshelf color="white" />
         </h1>
         <b className="mx-1 my-n2" 
@@ -132,15 +132,15 @@ useEffect(() => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-5">
             <li class="my-n1" href="groups"
-               style = {{fontSize:18,fontWeight:"bold"}}>
+               style = {{fontSize:20,fontWeight:"bold"}}>
               <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
             </li>
             <li class="my-n1" href="quize"
-               style = {{fontSize:18,fontWeight:"bold"}}>
+               style = {{fontSize:20,fontWeight:"bold"}}>
               <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
             </li>
             <li class="nav-link btn my-n1"
-               style = {{fontSize:18,fontWeight:"bold",color:"white"}}>
+               style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
           </ul>
@@ -159,15 +159,18 @@ useEffect(() => {
                   <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
                 </div>
                 <div className="dropdown-menu px-1 mx-n2" aria-labelledby="btnGroupDrop1">
-                  <div className="text-left mx-3" >
+                  <div className="d-flex align-items-end flex-column">
+                  <div className="text-left mx-3" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
                   <div class="dropdown-divider"></div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:12}} >
+                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16}}>
+                    پروفایل
+                  </div>
+                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
                   </div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:12}}>
-                    پروفایل
+                 
                   </div>
                 </div>
               </div>

@@ -202,7 +202,7 @@ function ProFile (props){
         ...prevState,
         backError : 'عکس با موفقیت عوض شد'
     }))
-    Cookies.set('userName',user.picture);
+    Cookies.set('userPic',user.picture);
   })
   .catch(function(res){
     console.log(res);
@@ -337,13 +337,13 @@ useEffect(() => {
                                                 onClick={handleChangeInfosClick}
 
 
-                                                style={{fontFamily:'Mitra',color:"white"}}
+                                                style={{color:"white"}}
 
 
                                                 >ذخیره</button>
                                                 <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز قبلی</label>
-                                                <input type="text"
+                                                <label for="password">رمز قبلی</label>
+                                                <input type="password"
 
                                                   class="form-control rounded-pill"
 
@@ -354,8 +354,8 @@ useEffect(() => {
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
-                                                <label for="password"style={{fontFamily:'Mitra'}}>رمز جدید</label>
-                                                <input type="text"
+                                                <label for="password">رمز جدید</label>
+                                                <input type="password"
 
                                                   class="form-control rounded-pill"
 

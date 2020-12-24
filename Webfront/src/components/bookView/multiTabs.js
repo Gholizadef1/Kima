@@ -450,7 +450,7 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
          <TabPanel value={value} index={0} dir={theme.direction} >
-          <div style={{fontSize:22,fontFamily:'Yekan'}}>
+          <div style={{fontSize:18,fontFamily:'Yekan'}}>
            {props.bookdescription}
           </div>
         </TabPanel>
