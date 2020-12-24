@@ -5,6 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons'; 
@@ -14,7 +15,7 @@ import Eachgroup from './Eachgroup';
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
 
-const Groups = () => {
+const Groups = ({navigation}) => {
 
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
@@ -98,7 +99,11 @@ const Groups = () => {
           }}
 
         />:null}
-         <Eachgroup></Eachgroup>
+
+        <TouchableOpacity onPress={() => navigation.navigate('ShowGroupPage')}>
+        <Eachgroup></Eachgroup>
+        </TouchableOpacity>
+
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
