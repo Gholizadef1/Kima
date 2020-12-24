@@ -6,4 +6,5 @@ admin.site.register(MyBook)
 admin.site.register(MyQuote)
 admin.site.register(MyComment)
 admin.site.register(LikeComment)
+admin.site.register(Group)
 

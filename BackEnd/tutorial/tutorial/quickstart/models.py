@@ -137,12 +137,16 @@ class DislikeComment(models.Model):
 class Group(models.Model):
     owner = models.ForeignKey(Account,on_delete=models.CASCADE)
     summary = models.TextField()
-    profile_photo = models.ImageField( upload_to='group_photos',default='default.png')
+    group_photo = models.ImageField( upload_to='group_photos',default='default.png')
     title = models.CharField(max_length=100)
+
+    @property
+    def members_count(self):
+        return self.member_set.all().count()
 
 class Member(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    group = models.models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
     
 

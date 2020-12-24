@@ -290,7 +290,68 @@ class MyQuoteView(generics.ListAPIView):
         serializer = QuoteSerializer(queryset, many=True)
         return Response(serializer.data)
 
+class GroupView(APIView):
+
+    model = Group
+
+    def get(self,request):
+        groups = Group.objects.all()
+        serializer = GroupSerializer(groups,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        user=request.user
+        serializer = CreateGroupSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            summary = serializer.data.get("summary")
+            photo = serializer.data.get("photo")
+            if  not Group.objects.filter(title=title).exists():
+                new_group = Group(owner=user,title=title,summary=summary,group_photo=photo)
+                new_group.save()
+                return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
+            return Response({"message":"A group with this name exists!"})
+        return Response(serializer.errors)
+
+class GroupDetailsView(APIView):
+
+    model = Group
     
+    def get(self,request, pk):
+        group = Group.objects.get(id=pk)
+        serializer = GroupSerializer(group,many=False)
+        return Response(serializer.data)
+
+    def post(self, request, pk):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        if  not Member.objects.filter(user=user,group=group).exists():
+            new_member = Member(user=user,group=group)
+            new_member.save()
+            return Response({"message":"You joind this group!"})
+        Member.objects.get(user=user,group=group).delete()
+        return Response({"message":"You leaved this group!"})
+
+class MemberGroupView(APIView):
+
+    def get(self ,request ,pk ):
+        group = Group.objects.get(id=pk)
+        if Member.objects.filter(group=group).exists():
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
+            return Response(serializer.data)
+        return Response({"message":"No member!"})
+
+    def post(self ,request ,pk ):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        if  not Member.objects.filter(user=user,group=group).exists():
+            new_member = Member(user=user,group=group)
+            new_member.save()
+            return Response({"message":"You joind this group!"})
+        Member.objects.get(user=user,group=group).delete()
+        return Response({"message":"You leaved this group!"})
+  
 
 class QuoteView(APIView,PaginationHandlerMixin):
 

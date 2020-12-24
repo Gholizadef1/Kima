@@ -75,7 +75,6 @@ class BookrateSerializer(serializers.ModelSerializer):
         fields = fields = "__all__"
 
 
-
     
 
 
@@ -96,6 +95,28 @@ class QuoteSerializer(serializers.ModelSerializer):
 class PostCommentSerializer(serializers.Serializer):
     
     textcomment = serializers.CharField(required=True)
+
+class CreateGroupSerializer(serializers.Serializer):
+
+    title = serializers.CharField(max_length=100,required=True)
+    summary = serializers.CharField(required=True)
+    photo = serializers.ImageField(max_length=500, allow_empty_file=False, use_url=False)
+
+class GroupSerializer(serializers.ModelSerializer):
+
+    owner = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Group
+        fields = ['title','owner','group_photo','summary','id','members_count',]
+
+class MemberSerializer(serializers.ModelSerializer):
+
+    user = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Member
+        fields = ['user']
 
 class CommentSerializer(serializers.ModelSerializer):
 
