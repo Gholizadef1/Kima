@@ -123,7 +123,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class FilterSerializer(serializers.ModelSerializer):
-    #diff = serializers.IntegerField()
     account = UserProfileSerializer(read_only=True)
     current_book = bookSerializer(read_only=True)
 

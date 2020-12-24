@@ -260,9 +260,6 @@ class UserRatingview(APIView):
 
 
 
-
-    
-
 class BookRateView(generics.ListAPIView):
     serializer_class=BookrateSerializer
 
