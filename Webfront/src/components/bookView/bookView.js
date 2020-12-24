@@ -229,52 +229,51 @@ const bo = Number.isInteger(value);
 console.log(bo);
 console.log(value);
 const Sendrequest =()=> {
+  const payload={
+    "rate":value,
+    }
+    console.log(payload);
+    let back= JSON.stringify(payload);
+    console.log(back);
+  if(value==0){
 
-//console.log(event);
-// await setValue(e.target.value);
-// console.log(e.target.value);
-const payload={
-"rate":value,
-}
-console.log(payload);
-let back= JSON.stringify(payload);
-console.log(back);
 axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
 payload,{
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Token "+Cookies.get("userToken")}
 },)
-.then(()=>{
-axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
-,payload,{
+  }
+  else{
+    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+payload,{
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Token "+Cookies.get("userToken")}
-})
-
-})
+},)
+  }
 
 
 }
 useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
-    ,{
-    headers:{
-    "Content-Type":"application/json",
-    "Authorization":"Token "+Cookies.get("userToken")}
-    })
-    .then(data => {
-    
-    setValue(data.data.data);
-    console.log(data.data.data);
-    console.log(data);
-    const b = typeof(data.data);
-    console.log(b);
-    }).catch(error =>{
-    console.log(error)
-    });
-    }, []);
+  axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+  ,{
+  headers:{
+  "Content-Type":"application/json",
+  "Authorization":"Token "+Cookies.get("userToken")}
+  })
+  .then(data => {
+  
+  setValue(data.data.data);
+  console.log(data.data.data);
+  console.log(data);
+  const b = typeof(data.data);
+  console.log(b);
+  }).catch(error =>{
+  console.log(error)
+  });
+  }, []);
+
 
 
 return(
