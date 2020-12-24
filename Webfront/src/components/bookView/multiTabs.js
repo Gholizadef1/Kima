@@ -449,14 +449,16 @@ export default function FullWidthTabs(props) {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-         <TabPanel value={value} index={0} dir={theme.direction}>
-          {props.bookdescription}
+         <TabPanel value={value} index={0} dir={theme.direction} >
+          <div style={{fontSize:22,fontFamily:'Yekan'}}>
+           {props.bookdescription}
+          </div>
         </TabPanel>
 
-        <TabPanel className="" value={value} index={1} dir={theme.direction}>
-          <div style={{direction:"rtl"}}>
+        <TabPanel className="" value={value} index={1} dir={theme.direction} >
+          <div style={{fontSize:18,fontFamily:'Yekan',direction:"rtl"}}>
             <div className="">
-              <h3 className="text-center">نظر شما چیست؟</h3>
+              <h3 className="text-center" >نظر شما چیست؟</h3>
               <div className="d-flex flex-wrap p-3  ">
                 <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                 <div className="d-flex  flex-column mt-2 flex-fill">
@@ -588,7 +590,7 @@ export default function FullWidthTabs(props) {
         </TabPanel>
 
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <div style={{direction:"rtl"}}>
+          <div style={{fontSize:18,fontFamily:'Yekan',direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">بریده ای از کتاب بنویسید :</h3>
               <div className="d-flex flex-wrap p-3">
