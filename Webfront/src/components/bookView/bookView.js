@@ -89,6 +89,8 @@ direction:"ltr",
 
 const [value, setValue] = useState(0);
 const [hover, setHover] = useState(-1);
+const [mess, setMess] = useState("");
+const [num, setNum] = useState();
 const classes = useStyles();
 
 //console.log(useParams);
@@ -228,33 +230,47 @@ setOpenSnack(false);
 const bo = Number.isInteger(value);
 console.log(bo);
 console.log(value);
-const Sendrequest =()=> {
+const Sendrequest =()=>{
+  console.log(mess);
+  if(mess === "No User Rating!"){
   const payload={
     "rate":value,
     }
     console.log(payload);
     let back= JSON.stringify(payload);
     console.log(back);
-  if(value==0){
-
-axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    console.log(value);
+    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
 payload,{
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Token "+Cookies.get("userToken")}
-},)
-  }
-  else{
-    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
-payload,{
-headers:{
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
-},)
-  }
-
+}).then((data)=>{
+  setMess(data.message);
+  console.log(data.message);
+})
+}
+    
+else if(num!=0) {
+  const payload={
+    "rate":value,
+    }
+    console.log(payload);
+    let back= JSON.stringify(payload);
+    
+    console.log(back);
+    console.log(value);
+    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    payload,{
+    headers:{
+    "Content-Type":"application/json",}
+    },)
 
 }
+}
+
+
+
 useEffect(() => {
   axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
   ,{
@@ -265,7 +281,11 @@ useEffect(() => {
   .then(data => {
   
   setValue(data.data.data);
+  setMess(data.data.message);
+  setNum(data.data.data)
+  console.log(data.data.message);
   console.log(data.data.data);
+  console.log(data.message);
   console.log(data);
   const b = typeof(data.data);
   console.log(b);
@@ -273,8 +293,6 @@ useEffect(() => {
   console.log(error)
   });
   }, []);
-
-
 
 return(
 <div className="mx-md-5 px-md-5">
