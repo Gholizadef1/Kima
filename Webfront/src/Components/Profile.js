@@ -248,7 +248,7 @@ useEffect(() => {
                                     <h6 className="email">
                                        {user.email}
                                     </h6>
-                                    <button type="button" className="btn btn-primary"
+                                    <button type="button" className="btn btn1 btn-primary"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -282,9 +282,9 @@ useEffect(() => {
                                         </div>
                                         <div className="d-flex justify-content-between text-right mt-md-2">
 
-                                        <b className="description decsciptionmine">می‌خواهم بخوانم</b>
-                                        <b className="description decsciptionmine ">دارم می‌خوانم</b>
-                                        <b className="description decsciptionmine">خوانده‌ام</b>
+                                        <b className="description decsciptionmine1">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine2">دارم می‌خوانم</b>
+                                        <b className="description decsciptionmine3">خوانده‌ام</b>
                                         </div>   {/* < FaRegSmileBeam/> */}
                                     </div>
                                 </div>
@@ -411,10 +411,10 @@ useEffect(() => {
                            </div>
                         
 
-                            {/* <div className="Tabz">
+                            <div className="Tabz">
 
                               <Tabs/>
-                              </div>  */}
+                              </div>  
                             </div>
                             
     )

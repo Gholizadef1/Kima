@@ -1,170 +1,217 @@
-.car:hover{
-    box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
-}
+
 .card-title3{
-        /* font-family: 'Mitra'; */
-        color: #000000;
-        font-size: 1px;
-        overflow:hidden; 
-        white-space:nowrap; 
-        text-overflow: ellipsis;
-        direction: rtl;
-        padding-left: 20px;
-        padding-top: 5px;
-    
-}.card-titl0{
-    
-    color: black;
- font-size: 13px;
+    font-size: 14px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+    font-family: 'Yekan';  
+
+}.card-title2{
+    font-family: 'Yekan';
+    color: #000000;
+    padding-top: 10px;
+    font-size: 16px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+  
+   
 }
+
 
 .car{
-  
+    
+    
+    width: 150px;
+    height: 240px;
 
-    width: 120px;
-    height: 144px;
-    padding-right: 10px;
- 
-}
-.col-xl-8-gholi{
-   left: 120px;
 }
 
-.squer{
+.cont{
+    margin-top: 20px;
+    
+}
+.squer:hover{
+    box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
+    transform:scale(1, 1);
+
+}
+.squer {
   
-    width: 100px;
-    height: 80px;
-    padding-top:17px;
-    padding-left:17px;
+    width: 150px;
+    height: 240px;
+   border-radius: 3%;
+    transform:scale(1, 1);
+    transition: 1s;
+   
 }
-.slid{
-    margin-left: -110px;
-    margin-right: -110px;
-}
-.slick-prev:before, .slick-next:before {
+.slick-prev:before {
     color: black !important;
+    width: 46px;
+height: 46px;
+margin-left: -30px;
+position: absolute;
+top: -50px;
 }
+.slick-next:before{
+    color: black !important;
+    width: 46px;
+height: 46px;
+position: absolute;
+top: -50px;
+margin-left: 13px;
+}
+
 
 .sr-only{
     margin-left: 500px;
     color: black;
 }
+    @media (min-width :360px)
+    {
+        .cont{
+            width: 310px;
+            margin-left:5px;
+            margin-top: 20px;
+           
+        }
+        .slid{
+            margin-left: 20px;
+            margin-right: 20px;
+          
+        }
+        .car{
+            width: 80px;
+            height: 100px;
+        
+        }
+        .squer{
+            width: 80px;
+            height: 100px;
+        }
+        .card-title1{
+           
+            font-size: 11px;
+        }
+        .body{
+            margin-right: 1px;
+        }
+        .slick-prev:before {
+            
+        top: -30px;
+        left: 20px;
+        }
+        .slick-next:before{
+         
+        top: -30px;
+        }
+        .brand{
+            margin-top: 10px;
+           padding-left: 70px;
+           margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            direction: rtl;
+            overflow:hidden; 
+            white-space:nowrap; 
+            text-overflow: ellipsis;
+        
+        }
+      }
+  
 
+      @media (min-width :768px) 
+      {
+          .cont{
+            width: 330px;
+            margin-left:40px;
+            margin-top: 100px;
+            
+          }
+          .slid{
+            margin-left: -310px;
+            margin-right: -310px;
+        }
+        .car{
+            width: 100px;
+            height: 180px;
+        }
+        .squer{
+            width: 100px;
+            height: 180px;
+        }
+        .card-title1{
+           
+            font-size: 14px;
+        }
+        .body{
+            margin-right: 5px;
+        }
+        .brand{
+            margin-top: 100px;
+           padding-left: 593px;
+           margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 22px;
+            direction: rtl;
+            overflow:hidden; 
+            white-space:nowrap; 
+            text-overflow: ellipsis;
+        
+        }
+        .slick-next:before{
+         
+            left: -5px;
+            }
+        }
+  
+        @media (min-width :960px) 
+        {
+            .cont{
+              width: 900px;
+              margin-left:100px;
+              margin-top: 100px;
+              
+            }
+            .slid{
+              margin-left: -310px;
+              margin-right: -310px;
+          }
+          .car{
+              width: 130px;
+              height: 190px;
+          }
+          .squer{
+              width: 130px;
+              height: 190px;
+          }
+          
+          .body{
+              margin-left: -1px;
+          }
+
+.card-title3{
+    font-size: 16px; 
+
+}.card-title2{
+    font-size: 18px;
+}
 .brand1{
-    margin-left: 7px;
-    font-size: 25px;
-   
-}
-.subbrand1{
-    margin-top: -150px;
-}
-.brand2{
-    margin-left: -10px;
-    padding-top: 50px;
-    font-size: 25px;
-}
-.subbrand2{
-    margin-left: -10px;
-}
-.brand3{
-    margin-left: -10px;
-    padding-top: 50px;
-    font-size: 25px;
+    margin-top: 100px;
+   padding-left: 675px;
+   margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
 
-}
-.subbrand3{
-    margin-left: -10px;
-}
-@media (max-width :414px) 
-{
-    .col-xl-8-gholi{
-        margin-left: 19px;
-    }
-    .car{
-       width: 120px;
-       height: 144px;
-   
-    }
-    .slid{
-        margin-right: 10px;
-        margin-left: 140px;
-    }
-    .brand1{
-       
-       font-size: 20px;
-    }
-    .brand2{
-       margin-left: 80px;
-       padding-top: 50px;
-       font-size: 20px;
-    }
-    .brand3{
-       margin-left: 80px;
-       padding-top: 50px;
-       font-size: 20px;
-    }
-}
-@media (max-width :769px) 
-{
-    .col-xl-8-gholi{
-    margin-left: 290px;
-   
- }
- 
- .car{
-    width: 120px;
-    height: 144px;
-    margin-left: -300px;
- }
- .brand1{
-        
-    font-size: 20px;
- }
- .brand2{
-    margin-left: 80px;
-    padding-top: 50px;
-    font-size: 20px;
- }
- .brand3{
-    margin-left: 80px;
-    padding-top: 90px;
-    font-size: 20px;
- }
+}   
+    
+          }
+    
+    
 
-    
-    }
-  @media (max-width :800px) 
-  {
-    .col-xl-8-gholi{
-        margin-left: -190px;
-       
-     }
-     
-     .car{
-        width: 120px;
-        height: 144px;
-    
-     }
-     .slid{
-         margin-right: 10px;
-         margin-left: 140px;
-     }
-     .brand1{
-        
-        font-size: 20px;
-     }
-     .brand2{
-        margin-left: 80px;
-        padding-top: 50px;
-        font-size: 20px;
-     }
-     .brand3{
-        margin-left: 80px;
-        padding-top: 50px;
-        font-size: 20px;
-     }
-
-  
-    }
-  
-    

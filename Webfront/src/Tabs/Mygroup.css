@@ -8,11 +8,7 @@
     width: 500px;
 
 }
-.line1{
-    margin-top:-10px;
-    margin-left: -45px;
-    width: 200px;
-}
+
 .my-groups{
     font-family: 'Yekan';
     font-size: 15px;
@@ -20,6 +16,28 @@
     margin-top: -45px;
 }
 
+
+@media (min-width :360px) 
+{
+    .cardc{
+        overflow-x: scroll;
+        width: 300px;
+        margin-left: 8rem;
+        margin-top: 30px;
+        height: 240px;
+    }
+    .line1{
+        margin-top:-140px;
+        margin-left: -5px;
+        width:100%;
+       
+    }
+    .my-groups{
+        font-size: 15px;
+        margin-top: -170px;
+    }
+
+  }
 @media (min-width :768px) 
 {
     .cardc{
@@ -30,12 +48,37 @@
     }
     .line1{
         margin-top:-140px;
-        margin-left: -20px;
+        margin-left: -5px;
         width:100%;
+       
     }
     .my-groups{
         font-size: 15px;
         margin-top: -170px;
     }
 
+  }
+  @media (min-width:960px){
+    .cardc {
+        overflow-x: scroll;
+        max-height: 300px;
+        padding: 3rem;
+        background-color:rgb(238, 243, 250);
+        margin-left: 55rem;
+        margin-top: 55px;
+        width: 500px;
+    
+    }
+    .line1{
+        margin-top:-150px;
+        margin-left: -50px;
+        width: 200px;
+    }
+    .my-groups{
+        font-family: 'Yekan';
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: -155px;
+    }
+    
   }

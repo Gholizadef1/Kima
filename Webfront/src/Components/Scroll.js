@@ -83,7 +83,7 @@ function Slide(props) {
     infinite: false,
     speed: 10,
     arrows: true,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 4,
 
     responsive: [
@@ -106,24 +106,27 @@ function Slide(props) {
 
   
   return (
-    <div className="con text-center col-xl-8 col-xl-8-gholi">
-      <div className="brand1 ml-3 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> خوانده‌ام</div> 
+    <div className="container cont text-center col-xl-15">
+             <div className="brand1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
+
       {bookRead.length === 0 ? (
 
-        <div className="subbrand1" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+        <div className="subbrand1" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
        <div className = "slid">
         <Slider {...settings}>
           {bookRead.map((current) => (
-            <div className="out" key={current.id}>
+            <div className="out pl-4" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
-                  className="squer" 
+                  className="squer img-responsive" 
                   src={current.imgurl}
                   height={56}
                   width={56}
                 />
+                </div>
+                <div className="body">
                      {current.title.length >17 ?
 <BlueOnGreenTooltip title={current.title}>
 <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
@@ -131,17 +134,19 @@ function Slide(props) {
       : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       
 } 
-                   <h5 className="card-titl0"style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}>{current.author}</h5>
-                   
+<small className= "title0">
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+
+                   </small>                   
               </div>
             </div>
           ))}
         </Slider>
         </div>
       )}
-    <div className="brand2 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> دارم می‌خوانم</div> 
+    <div className="brand2 text-center" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
-        <div className="subbrand2" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+        <div className="subbrand2" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
        <div className = "slid">
@@ -163,7 +168,7 @@ function Slide(props) {
       : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       
 } 
-                   <h5 className="card-titl0"style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   <h5 className="card-titl0"style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                   
               </div>
             </div>
@@ -171,10 +176,10 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-           <div className="brand3 text-center" style={{fontFamily: 'Mitra',fontWeight:"bold",color:"black"}}> می‌خواهم بخوانم</div> 
+           <div className="brand3 text-center" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
 
       {bookWantto.length === 0 ? (
-          <div className="subbrand3" style={{fontFamily:'Mitra',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+          <div className="subbrand3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
        <div className = "slid">
@@ -197,7 +202,7 @@ function Slide(props) {
       : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
       
 } 
-                   <h5 className="card-titl0"style={{fontFamily: 'Morvarid',fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   <h5 className="card-titl0"style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black"}}>{current.author}</h5>
                    
               {/* </div> */}
               </div>

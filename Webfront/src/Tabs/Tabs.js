@@ -102,7 +102,9 @@ export default function FullWidthTabs() {
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction} height={400}>
+          <div className="scrolll">
         <Scroll/>
+        </div>
         </TabPanel>
       </SwipeableViews>
     </div>
