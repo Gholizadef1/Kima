@@ -153,47 +153,6 @@ function Slide(props) {
       )}
 
 
-<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
-      {suggestions.length === 0 ? (
-        <div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
-        
-      ) : (
-        
-       <div className = "slide ml-5">
-        <Slider {...settings}>
-          {suggestions.map((current) => (
-            <div className="out pl-4" key={current.id}>
-
-              <div className="card cat "onClick={() => bookSelectedHandler( current )}>
-                <img
-                  className="squere img-responsive" 
-                  src={current.imgurl}
-                  
-                />
-   
-
-              </div>
-              <div className="body">
-              {current.title.length >17 ?
-<BlueOnGreenTooltip title={current.title}>
-    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-      </BlueOnGreenTooltip>
-      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-      
-} 
-                <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
-
-                   </small>
-            </div>
-            </div>
-          ))}
-        </Slider>
-        </div>
-
-      )}
 
 <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
       {suggestions.length === 0 ? (
@@ -235,11 +194,11 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-      </div>
-    
+
+
+    </div>
   );
 }
-
 
 export default withRouter(Slide);
 
