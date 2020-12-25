@@ -88,6 +88,10 @@ useEffect(() => {
     props.history.push('/home');
   }
 
+  const routeToGroups = ()=>{
+    props.history.push('/groups');
+  }
+
   const accent= { backgroundColor: purple[500], color: '#000' }
 
   const bookSelectedHandler = ( b ) => {
@@ -131,13 +135,13 @@ useEffect(() => {
 
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav ">
-            <li class="nav-item" href="groups"
+            <li class="nav-item"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold"}}>
-              <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
+              <a class="nav-link"  style={{color:"white"}} onClick={routeToGroups}>گروه‌ها</a>
             </li>
-            <li class="nav-item" href="quize"
+            <li class="nav-item"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>
-              <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
+              <a class="nav-link"  style={{color:"white"}}>آزمونک</a>
             </li>
             <li class=" nav-item mr-md-5 btn"
                style = {{fontFamily: 'Mitra',fontSize:25,fontWeight:"bold",color:"white"}}>

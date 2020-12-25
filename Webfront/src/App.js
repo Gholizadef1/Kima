@@ -30,6 +30,7 @@ import Cookies from 'js-cookie'
 //import { render } from '@testing-library/react';
 //import { components } from 'react-select';
 //import protectedRoute from './components/protect';
+import GroupsPage from './components/groups/groupsPage';
 
 function App(props) {
   const [title, updateTitle] = useState(null);
@@ -77,6 +78,11 @@ function App(props) {
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
+
+            <Route path="/groups">
+              <GroupsPage />
+            </Route>
+
             <Route path="*">
               <div class="alert alert-warning" role="alert">
                 صفحه وجود ندارد
