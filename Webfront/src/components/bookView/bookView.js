@@ -251,17 +251,17 @@ headers:{
 })
 }
     
-else if(num!=0) {
-  const payload={
+ if(num!=0) {
+  const load={
     "rate":value,
     }
-    console.log(payload);
-    let back= JSON.stringify(payload);
-    
-    console.log(back);
+    console.log(load);
+    let bac= JSON.stringify(load);
+    console.log(bookId);
+    console.log(bac);
     console.log(value);
-    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
-    payload,{
+    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    load,{
     headers:{
     "Content-Type":"application/json",}
     },)
