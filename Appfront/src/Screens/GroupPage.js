@@ -62,17 +62,16 @@ const GroupPage = () => {
                       borderBottomWidth: 2
                     }}
                     />
-
-                    <Card style ={{marginTop:hp('3%') , marginLeft:wp('5%') , marginRight:wp('5%')}}>
-                      <Text style ={{textAlign:'left' , marginLeft:wp('2%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است</Text>
-                    </Card>
+                      <Text style ={{textAlign:'left' , marginLeft:wp('5%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> 
+                      منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
+                      </Text>
 
                     <Button style={{marginLeft:wp('48%') , width:170 , borderRadius:20 , marginTop:hp('2%')
                    , backgroundColor:'#87ceeb'}}>
                       <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
                     </Button>
 
-                    <Text style ={{fontSize:20 , marginTop:hp()}}>بحث های انجام شده</Text>
+                    <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('3%')}}>بحث های انجام شده</Text>
 
             </ScrollView>
         </View>
