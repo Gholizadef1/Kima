@@ -263,7 +263,8 @@ headers:{
     axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
     load,{
     headers:{
-    "Content-Type":"application/json",}
+    "Content-Type":"application/json",
+    "Authorization":"Token "+Cookies.get("userToken")}
     },)
 
 }
@@ -279,7 +280,6 @@ useEffect(() => {
   "Authorization":"Token "+Cookies.get("userToken")}
   })
   .then(data => {
-  
   setValue(data.data.data);
   setMess(data.data.message);
   setNum(data.data.data)
