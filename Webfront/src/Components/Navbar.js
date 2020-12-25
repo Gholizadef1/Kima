@@ -122,7 +122,7 @@ useEffect(() => {
           <GiBookshelf color="white" />
         </h1>
         <b className="mx-1 my-n2" 
-         style = {{fontSize:30,fontWeight:"bold",color:"white",fontFamily:"Morvarid"}}
+         style = {{fontSize:33,fontWeight:"bold",color:"white",fontFamily:"Yekan"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

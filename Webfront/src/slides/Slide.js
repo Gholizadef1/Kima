@@ -90,9 +90,9 @@ function Slide(props) {
       }, 
      
       {
-        breakpoint: 480,
+        breakpoint: 360,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 2,
         },
       },
