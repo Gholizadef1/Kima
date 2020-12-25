@@ -80,6 +80,7 @@ function App(props) {
             </Route>
 
             <Route path="/groups">
+              <NavBar/>
               <GroupsPage />
             </Route>
 

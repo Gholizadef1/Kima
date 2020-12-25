@@ -10,6 +10,7 @@ import {
     useParams,
     withRouter
   } from "react-router-dom";
+  import {GoSearch} from 'react-icons/go';
 
 function GroupsPage (props){
 
@@ -17,11 +18,20 @@ function GroupsPage (props){
     return(
         <div className="container-fluid rTOl">
             <div>
-
+                <div className="d-flex col-6 mx-md-5 my-5">
+                  <div variant="gray" className="mr-md-5 btn">
+                    <GoSearch size="30" color="black" />
+                  </div>
+                  <input className="form-control rounded-pill px-4 text-right " type="text" name="group" placeholder="نام گروه" />  
+                  <div variant="gray" className="mr-md-5 btn">
+                  </div>
+                </div>
             </div>
 
+            <div>
 
 
+            </div>
 
             <div className=""  >
                 <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2" style={{textAlign:'right'}}>
