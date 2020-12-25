@@ -50,6 +50,8 @@ const GroupPage = () => {
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
                       source={require('../../assets/avatar.png')}
                       ></Avatar.Image>}
+
+                      <Text style={styles.groupname}>نام گروه</Text>
                     
             </ScrollView>
         </View>
@@ -80,9 +82,11 @@ const styles = StyleSheet.create({
     },
     avatar:{
       marginTop:hp('-10%'),
-      alignSelf:'center'
-
+      marginLeft:wp('10%')
       
   },
+  groupname : {
+    fontSize:27
+  }
   });
 export default GroupPage;
