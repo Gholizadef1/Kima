@@ -558,8 +558,9 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
 
 class FilterBookbyRate(APIView):
     def get(self,request):
-        book_list=book.objects.order_by('-average_rating')
-        serializer = bookSerializer(book_list)
+        
+        book_list=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
+        serializer = bookSerializer(book_list,many=True)
         return Response(serializer.data)
    
    
@@ -567,32 +568,9 @@ class FilterBookbyRate(APIView):
 class FilterBookbyComment(APIView):
     def get(self,request):
         book_list=MyComment.objects.values('current_book').order_by('-current_book').annotate(Count('current_book'))
-        #serializer = FilterSerializer(book_list, many=True)
-        return Response(book_list)
+        serializer = FilterSerializer(book_list, many=True)
+        return Response(serializer.data)
 
-    # serializer_class=FilterSerializer
-
-    # def get_queryset(self):
-    #     return MyComment.objects.values('current_book').order_by('-current_book').annotate(Count('current_book'))
-
-
-
-    # def list(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = FilterSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-   
-    # serializer_class=MyBookSerializer
-
-    # def get_queryset(self,pk):
-    #     user=Account.objects.get(pk=pk)
-    #     return MyComment.objects.filter(state="Reading",account=user)
-
-
-    # def list(self, request,pk):
-    #     queryset = self.get_queryset(pk=pk)
-    #     serializer = MyBookSerializer(queryset, many=True)
-    #     return Response(serializer.data)
 
 
 

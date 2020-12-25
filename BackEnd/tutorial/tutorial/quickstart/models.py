@@ -114,10 +114,6 @@ class MyComment(models.Model):
     LikeCount=models.IntegerField(default=0)
     DislikeCount=models.IntegerField(default=0)
 
-    # @property
-    # def book_comment_count(self):
-    #     return MyComment.objects.values('current_book').order_by('current_book').annotate(count=count('current_book'))
-
     def __str__(self):
         return self.comment_text
 

@@ -114,5 +114,14 @@ class FilterSerializer(serializers.ModelSerializer):
         fields = ['book_info']
 
     def to_representation(self,value):
-        return bookSerializer(book.objects.get(pk=value.current_book.id)).data
+        return bookSerializer(book.objects.get(pk=value['current_book'])).data
 
+class FilterRateSerializer(serializers.ModelSerializer):
+    book_info = serializers.RelatedField(source='current_book',read_only=True)
+    
+    class Meta:
+        model = Ratinguser
+        fields = ['book_info']
+
+    def to_representation(self,value):
+        return bookSerializer(book.objects.get(pk=value['current_book'])).data
