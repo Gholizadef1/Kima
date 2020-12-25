@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -62,7 +62,18 @@ const GroupPage = () => {
                       borderBottomWidth: 2
                     }}
                     />
-                    
+
+                    <Card style ={{marginTop:hp('3%') , marginLeft:wp('5%') , marginRight:wp('5%')}}>
+                      <Text style ={{textAlign:'left' , marginLeft:wp('2%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است</Text>
+                    </Card>
+
+                    <Button style={{marginLeft:wp('48%') , width:170 , borderRadius:20 , marginTop:hp('2%')
+                   , backgroundColor:'#87ceeb'}}>
+                      <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
+                    </Button>
+
+                    <Text style ={{fontSize:20}}>بحث های انجام شده</Text>
+
             </ScrollView>
         </View>
     );
