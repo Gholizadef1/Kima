@@ -52,7 +52,16 @@ const GroupPage = () => {
                       ></Avatar.Image>}
 
                       <Text style={styles.groupname}>نام گروه</Text>
-                      
+
+                      <Text style={{fontSize:19 , marginLeft:wp('10%') , marginTop:hp('4%')}}>درباره گروه</Text>
+                      <View
+                    style={{
+                      marginTop:hp('2%'),
+                      width:150,
+                      marginLeft:wp('2%'),
+                      borderBottomWidth: 2
+                    }}
+                    />
                     
             </ScrollView>
         </View>
