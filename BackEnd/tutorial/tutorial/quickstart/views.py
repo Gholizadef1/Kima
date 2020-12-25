@@ -1,4 +1,5 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
+from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
@@ -553,5 +554,23 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
+
+
+class FilterBookbyRate(APIView):
+    def get(self,request):
+        
+        book_list=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
+        serializer = bookSerializer(book_list,many=True)
+        return Response(serializer.data)
+   
+   
+
+class FilterBookbyComment(APIView):
+    def get(self,request):
+        book_list=MyComment.objects.values('current_book').order_by('-current_book').annotate(Count('current_book'))
+        serializer = FilterSerializer(book_list, many=True)
+        return Response(serializer.data)
+
+
 
 
