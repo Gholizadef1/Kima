@@ -6,12 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Slide.css";
 import Slider from "react-slick";
 import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  // Link,
-  // useRouteMatch,
-  // useParams,
   withRouter
 } from "react-router-dom";
 import {
@@ -38,16 +32,29 @@ const BlueOnGreenTooltip = withStyles({
 function Slide(props) {
   console.log(props);
   const [suggestions, setSuggestions] = useState([]);
-  //let match=useRouteMatch();
-  //console.log(useRouteMatch())
+  const[favorite,setFavorite] = useState([]);
+  const[discussed,setDiscussed] = useState([]);
 
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/bookdetail/")
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setSuggestions(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/bookdetail/")
+      .then((res) => res.json())
+      .then((data) => {
+        setFavorite(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/bookdetail/")
+      .then((res) => res.json())
+      .then((data) => {
+        setDiscussed(data);
       });
   }, []);
 
@@ -194,6 +201,47 @@ function Slide(props) {
         </Slider>
         </div>
       )}
+
+<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
+            {suggestions.length === 0 ? (
+              <div className="spinner-border" role="status">
+                <div className="sr-only">Loading...</div>
+              </div>
+              
+            ) : (
+              
+             <div className = "slide ml-5">
+              <Slider {...settings}>
+                {suggestions.map((current) => (
+                  <div className="out pl-4" key={current.id}>
+      
+                    <div className="card cat "onClick={() => bookSelectedHandler( current )}>
+                      <img
+                        className="squere img-responsive" 
+                        src={current.imgurl}
+                        
+                      />
+         
+      
+                    </div>
+                    <div className="body">
+                    {current.title.length >17 ?
+      <BlueOnGreenTooltip title={current.title}>
+          <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+            </BlueOnGreenTooltip>
+            : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+            
+      } 
+                      <small className= "title">
+                         <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+      
+                         </small>
+                  </div>
+                  </div>
+                ))}
+              </Slider>
+              </div>
+            )}
 
 
     </div>
