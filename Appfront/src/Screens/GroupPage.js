@@ -15,9 +15,13 @@ import Eachgroup from './Eachgroup';
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Avatar } from 'react-native-paper';
 
 
 const GroupPage = () => {
+
+  const [picture,setpicture]=useState(null);
+
     return(
         <View style={styles.container}>
             <ScrollView>
@@ -40,6 +44,12 @@ const GroupPage = () => {
                     <View style={styles.backpic}>
 
                     </View>
+
+                    {picture!='http://15cbf5742c3b.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+                      source={{uri:picture}}
+                      ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
+                      source={require('../../assets/avatar.png')}
+                      ></Avatar.Image>}
                     
             </ScrollView>
         </View>
@@ -68,5 +78,11 @@ const styles = StyleSheet.create({
         borderBottomRightRadius:50,
         borderBottomLeftRadius:50
     },
+    avatar:{
+      marginTop:hp('-10%'),
+      alignSelf:'center'
+
+      
+  },
   });
 export default GroupPage;

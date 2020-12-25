@@ -5,11 +5,9 @@ import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
 
    Right, Left , Picker, Form, Item } from 'native-base';
 import {withNavigation} from 'react-navigation'
-
 import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -43,7 +41,7 @@ const Bookview = (prop) => {
   }
 
   const getPicker = async () => {
-    axios.get('http://c8f6d3c6ac6e.ngrok.io/bookdetail/'+id +'/getstate', {
+    axiosinst.get('/bookdetail/'+id +'/getstate', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -65,7 +63,7 @@ const Bookview = (prop) => {
             "book_state": value,
           }
           const back = JSON.stringify(payload);
-          axios.post('http://c8f6d3c6ac6e.ngrok.io/bookdetail/' +id, back, {
+          axiosinst.post('/bookdetail/' +id, back, {
             "headers": {
               "content-type": "application/json",
               "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -85,7 +83,7 @@ const Bookview = (prop) => {
 
 
   const getRate = async()=>{
-    axios.get('http://c8f6d3c6ac6e.ngrok.io/api/bookrating/'+id, {
+    axiosinst.get('/api/bookrating/'+id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -117,7 +115,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('http://c8f6d3c6ac6e.ngrok.io/api/bookrating/'+id ,back,{
+    axios.post('/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -129,7 +127,7 @@ const Bookview = (prop) => {
       console.log('&&'+rate);
       if(response.data.message==="You rated this book already!!"){
         console.log('TOYE PUTTTTT')
-        axios.put('http://c8f6d3c6ac6e.ngrok.io/api/bookrating/'+id, back, {
+        axios.put('/api/bookrating/'+id, back, {
           "headers": {
             "content-type": "application/json",
             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
