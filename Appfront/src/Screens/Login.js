@@ -65,7 +65,7 @@ const logschema=yup.object({
 
 
 
-         axios.post('http://fc0ce8a13f6f.ngrok.io/login',backk,{"headers":{"content-type":"application/json",}})
+         axiosinst.post('/login',backk,{"headers":{"content-type":"application/json",}})
 
 
         .then(async function(response){
