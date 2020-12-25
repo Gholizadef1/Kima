@@ -158,16 +158,16 @@ useEffect(() => {
                 <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
                 </div>
-                <div className="dropdown-menu px-1 mx-n2" aria-labelledby="btnGroupDrop1">
+                <div className="dropdown-menu px-1 mx-n2" style={{backgroundColor:"#b7dee4"}} aria-labelledby="btnGroupDrop1">
                   <div className="d-flex align-items-end flex-column">
-                  <div className="text-left mx-3" style={{fontSize:18}} >
+                  <div className="text-left mx-3" style={{fontSize:18,fontFamily:'Yekan'}} >
                   {Cookies.get('userName')}
                   </div>
                   <div class="dropdown-divider"></div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16}}>
+                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16,fontFamily:'Yekan'}}>
                     پروفایل
                   </div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16}} >
+                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16,fontFamily:'Yekan'}} >
                     خروج ازحساب
                   </div>
                  

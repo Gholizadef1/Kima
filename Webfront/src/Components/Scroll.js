@@ -68,7 +68,7 @@ function Slide(props) {
   const BlueOnGreenTooltip = withStyles({
     tooltip: {
       color: "black",
-      fontFamily:"Mitra",
+      fontFamily:"Yekan",
       fontSize:14,
       backgroundColor: "lightblue",
       width:120,

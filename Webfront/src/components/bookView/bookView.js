@@ -307,9 +307,9 @@ return(
         <div>
               <div className="ml-auto">
                  <div className={classes.root}>
-                 <button onClick={Sendrequest}  style={{boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-              background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
-                  <div style={{marginLeft:-3, color:"white",fontWeight:"bold"}}>
+                 <button onClick={Sendrequest} className="btn bg-primary" style={{
+              height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
+                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white",fontWeight:"bold"}}>
                   ثبت
                   </div>
                  </button>

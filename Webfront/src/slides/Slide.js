@@ -21,7 +21,7 @@ const BlueOnGreenTooltip = withStyles({
     color: "black",
     fontFamily:"Mitra",
     fontSize:20,
-    backgroundColor: "lightblue",
+    backgroundColor: '#b7dee4',
     width:170,
     height:80,
     textAlign:"center",
