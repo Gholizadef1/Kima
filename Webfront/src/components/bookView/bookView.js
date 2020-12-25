@@ -251,7 +251,7 @@ headers:{
 })
 }
     
- if(num!=0) {
+ else if(num!=0) {
   const load={
     "rate":value,
     }
