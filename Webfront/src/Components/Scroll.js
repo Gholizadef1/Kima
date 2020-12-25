@@ -95,9 +95,9 @@ function Slide(props) {
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 360,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
@@ -149,7 +149,7 @@ function Slide(props) {
         <div className="subbrand2" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
-       <div className = "slid">
+       <div className = "slid1">
 
         <Slider {...settings}>
           {bookReading.map((current) => (

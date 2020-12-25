@@ -50,7 +50,7 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:50, height:110}} />
+              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
               <div className="  ml-auto mr-3">
                 <h5 className="booktitle">
                 {current.current_book.title}

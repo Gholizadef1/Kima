@@ -159,8 +159,6 @@ function Slide(props) {
         </div>
       )}
 
-
-
 <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">

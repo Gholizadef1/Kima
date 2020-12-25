@@ -301,7 +301,7 @@ useEffect(() => {
              display: "block"}}/>
             <div className="d-flex justify-content-between p-4">
 
-                 <button className="btn custom-btn bg-primary" type="submit"onClick={handleUpload}style={{fontFamily:'Mitra',color:"white"}}>ثبت عکس</button>
+                 <button className="btn custom-btn bg-primary" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
 
                 <input class="form-control" 
                 type="file" accept="image/*" 
@@ -309,7 +309,7 @@ useEffect(() => {
                 ref={imageUploader} 
 
                 style={{ display: "none",color:"white" }} />
-              <button className="btn custom-btn1 bg-primary" type="submit" style={{fontFamily:'Mitra',color:"white"}}
+              <button className="btn custom-btn1 bg-primary" type="submit" style={{fontFamily:'Yekan',color:"white"}}
 
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
@@ -319,10 +319,10 @@ useEffect(() => {
                                     <form>
                                         <div class="form-group align-items-center text-right">
 
-                                            <p className="loginText my-1" style={{fontFamily:'Mitra'}}>{user.backError}</p>
+                                            <p className="loginText my-1" style={{fontFamily:'Yekan'}}>{user.backError}</p>
 
                                             <div class="my-1">
-                                                <label  for="userName"style={{fontFamily:'Mitra'}}>نام کاربری</label>
+                                                <label  for="userName"style={{fontFamily:'Yekan'}}>نام کاربری</label>
                                                 <input type="text"
                                                   class="form-control rounded-pill"
                                                   id="userName"
@@ -337,7 +337,7 @@ useEffect(() => {
                                                 onClick={handleChangeInfosClick}
 
 
-                                                style={{color:"white"}}
+                                                style={{color:"white",fontFamily:'Yekan'}}
 
 
                                                 >ذخیره</button>
@@ -380,7 +380,7 @@ useEffect(() => {
                                                 onClick={handleChangePassClick}
 
 
-                                                style={{fontFamily:'Mitra',color:"white"}}
+                                                style={{fontFamily:'Yekan',color:"white"}}
 
 
                                                
@@ -395,7 +395,7 @@ useEffect(() => {
         <Modal.Footer>
 
         
-          <button className="btn bg-primary mx-4"  onClick={handleClose} style={{fontFamily:'Mitra',color:"white"}}>
+          <button className="btn bg-primary mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"white"}}>
 
             بستن
           </button>
