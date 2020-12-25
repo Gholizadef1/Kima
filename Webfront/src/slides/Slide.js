@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
@@ -5,12 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Slide.css";
 import Slider from "react-slick";
 import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  // Link,
-  // useRouteMatch,
-  // useParams,
   withRouter
 } from "react-router-dom";
 import {
@@ -37,16 +32,29 @@ const BlueOnGreenTooltip = withStyles({
 function Slide(props) {
   console.log(props);
   const [suggestions, setSuggestions] = useState([]);
-  //let match=useRouteMatch();
-  //console.log(useRouteMatch())
+  const[favorite,setFavorite] = useState([]);
+  const[discussed,setDiscussed] = useState([]);
 
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/bookdetail/")
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setSuggestions(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/bookdetail/")
+      .then((res) => res.json())
+      .then((data) => {
+        setFavorite(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/bookdetail/")
+      .then((res) => res.json())
+      .then((data) => {
+        setDiscussed(data);
       });
   }, []);
 
@@ -68,24 +76,41 @@ function Slide(props) {
     infinite: false,
     speed: 10,
     arrows: true,
-    slidesToShow: 5,
+    slidesToShow: 7,
     slidesToScroll: 4,
 
     responsive: [
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 7,
+          slidesToScroll: 2,
+          
+        },
+      }, 
+     
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 4,
           slidesToScroll: 2,
         },
       },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 2,
+        },
+      },
+     
     ],
   };
 
@@ -93,7 +118,7 @@ function Slide(props) {
   return (
     <div className="container">
 
-      <div class="brand" style={{fontSize:25,fontWeight:"bold",color:"black"}}>کتاب‌های پیشنهادی</div> 
+      <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}> کتاب‌های پیشنهادی</div> 
       {suggestions.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
@@ -101,80 +126,83 @@ function Slide(props) {
         
       ) : (
         
-       <div className = "slide">
+       <div className = "slide ml-5">
         <Slider {...settings}>
           {suggestions.map((current) => (
-            <div className="out" key={current.id}>
+            <div className="out pl-4" key={current.id}>
 
-              <div className="card cat"onClick={() => bookSelectedHandler( current )}>
+              <div className="card cat "onClick={() => bookSelectedHandler( current )}>
                 <img
-                  className="squere" 
+                  className="squere img-responsive" 
                   src={current.imgurl}
-                  height={56}
-                  width={56}
+                  
                 />
-      {current.title.length >19 ?
+   
+
+              </div>
+              <div className="body">
+              {current.title.length >17 ?
 <BlueOnGreenTooltip title={current.title}>
-<div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </BlueOnGreenTooltip>
-      : <div className="card-title1" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
                 <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"black"}}>{current.author}</h5>
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
 
                    </small>
-
-              </div>
+            </div>
             </div>
           ))}
         </Slider>
         </div>
       )}
 
-      <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
-            {suggestions.length === 0 ? (
-              <div className="spinner-border" role="status">
-                <div className="sr-only">Loading...</div>
-              </div>
-              
-            ) : (
-              
-             <div className = "slide ml-5">
-              <Slider {...settings}>
-                {suggestions.map((current) => (
-                  <div className="out pl-4" key={current.id}>
-      
-                    <div className="card cat "onClick={() => bookSelectedHandler( current )}>
-                      <img
-                        className="squere img-responsive" 
-                        src={current.imgurl}
-                        
-                      />
-         
-      
-                    </div>
-                    <div className="body">
-                    {current.title.length >17 ?
-      <BlueOnGreenTooltip title={current.title}>
-          <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-            </BlueOnGreenTooltip>
-            : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-            
-      } 
-                      <small className= "title">
-                         <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
-      
-                         </small>
-                  </div>
-                  </div>
-                ))}
-              </Slider>
-              </div>
-            )}
-            
 
-            <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
+
+<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
+      {suggestions.length === 0 ? (
+        <div className="spinner-border" role="status">
+          <div className="sr-only">Loading...</div>
+        </div>
+        
+      ) : (
+        
+       <div className = "slide ml-5">
+        <Slider {...settings}>
+          {suggestions.map((current) => (
+            <div className="out pl-4" key={current.id}>
+
+              <div className="card cat "onClick={() => bookSelectedHandler( current )}>
+                <img
+                  className="squere img-responsive" 
+                  src={current.imgurl}
+                  
+                />
+   
+
+              </div>
+              <div className="body">
+              {current.title.length >17 ?
+<BlueOnGreenTooltip title={current.title}>
+    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+      </BlueOnGreenTooltip>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+      
+} 
+                <small className= "title">
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+
+                   </small>
+            </div>
+            </div>
+          ))}
+        </Slider>
+        </div>
+      )}
+
+<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
             {suggestions.length === 0 ? (
               <div className="spinner-border" role="status">
                 <div className="sr-only">Loading...</div>
@@ -214,8 +242,12 @@ function Slide(props) {
               </Slider>
               </div>
             )}
-            </div>
+
+
+    </div>
   );
 }
 
 export default withRouter(Slide);
+
+   
