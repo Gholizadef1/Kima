@@ -72,7 +72,7 @@ const GroupPage = () => {
                       <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
                     </Button>
 
-                    <Text style ={{fontSize:20}}>بحث های انجام شده</Text>
+                    <Text style ={{fontSize:20 , marginTop:hp()}}>بحث های انجام شده</Text>
 
             </ScrollView>
         </View>
