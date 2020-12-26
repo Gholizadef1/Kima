@@ -285,7 +285,7 @@ class MyQuoteView(generics.ListAPIView):
 
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
-        serializer = QuoteSerializer(queryset, many=True)
+        serializer = QuoteProfSerializer(queryset,context={"user": pk}, many=True)
         return Response(serializer.data)
 
     
@@ -305,7 +305,7 @@ class QuoteView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
-            serilalizer = QuoteSerializer(quote_list,many=True)
+            serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
@@ -385,7 +385,7 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
-            serilalizer = CommentSerializer(comment_list,many=True)
+            serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
@@ -437,7 +437,7 @@ class CommentProfileView(APIView):
         user=Account.objects.get(pk=pk)
         if MyComment.objects.filter(account=user).exists():
             comment_list = MyComment.objects.filter(account=user)
-            serilalizer = CommentSerializer(comment_list,many=True)
+            serilalizer = CommentProfSerializer(comment_list,context={"user": pk},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
