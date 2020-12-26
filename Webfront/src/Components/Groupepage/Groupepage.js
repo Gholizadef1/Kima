@@ -2,6 +2,8 @@ import React, {CuseState,useEffect} from "react";
 import axios from 'axios';
 import image from "../../assets/images.jpeg";
 import images from "../../assets/image.jpeg";
+import one from "../../assets/1.jpeg";
+import two from "../../assets/2.jpeg";
 import './Groupepage.css';
 import Divider from '@material-ui/core/Divider';
 
@@ -39,8 +41,34 @@ import {
 </p>
   </div>
     </div>
-    
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",right:-560}}>بحث‌ها</b>
+      <button className="btn bg-primary" style={{color:"white",fontFamily:"Yekan",marginRight:300,marginTop:15}}>اضافه‌کردن بحث</button>
+    <div class="card card-discussion">
+  <div class="card-body">
+  <p>بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بح ث
+</p>
+  </div>
+    </div>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:5,position:"relative",right:-320}}> (نفر۱۲۰) اعضا</b>
 
+    <hr className="line-g1" style={{width:"52%"}}></hr>
+    
+      <div className = "slide">
+            <div className="out">
+                <img
+                  
+                  src={one}
+                  height={70}
+                  width={120}
+                />
+                <img
+                  
+                  src={two}
+                  height={70}
+                  width={120}
+                />
+                </div>
+                </div>
     </div>
   
 

@@ -53,8 +53,8 @@
             .imageg{
                 width: 80px;
                 height: 160px;
-                margin-left: -5px;
-                margin-top: -5px; 
+                margin-left: -1px;
+                margin-top: -6px; 
                 border-radius: 3%;
                 
             }
@@ -70,5 +70,22 @@
                 border-radius: 3%;
                 border-color: whitesmoke;
             }
-            
+            .card-discussion{
+                width: 570px;
+                height: 200px;
+                margin-left: 550px;
+                margin-top: 15px;
+                border-radius: 3%;
+                border-color: whitesmoke;
+            }
+            .line-g1{
+                margin-left: 360px;
+            }
+            .members{
+                width: 80px;
+                height: 160px;
+                margin-left: 400px;
+                margin-top: -6px; 
+                border-radius: 3%;
+            }
             }
