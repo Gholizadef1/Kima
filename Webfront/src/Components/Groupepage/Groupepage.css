@@ -1,0 +1,52 @@
+
+@media (min-width:360px){
+    .avatar{
+        
+        margin-top: 20px;
+    }
+    .cardG{
+        width: 80px;
+        height: 140px;
+        margin-left: 33px;
+        margin-top: -60px;
+    }
+    }
+    @media (min-width:768px){
+        .avatar{
+            width: 500px;
+            height: 220px;
+            margin-top: 20px;
+        }
+        .cardG{
+            width: 100px;
+            height: 160px;
+            margin-left: 148px;
+            margin-top: -60px;
+        }
+        }
+        @media (min-width:800px){
+            .avatar{
+                width: 500px;
+                height: 220px;
+                margin-top: 20px;
+            }
+            .cardG{
+                width: 100px;
+                height: 160px;
+                margin-left: 165px;
+                margin-top: -60px;
+            }
+            }
+        @media (min-width:960px){
+            .avatar{
+                width: 900px;
+                height: 220px;
+                margin-top: 20px;
+            }
+            .cardG{
+                width: 130px;
+                height: 190px;
+                margin-left: 305px;
+                margin-top: -60px;
+            }
+            }
