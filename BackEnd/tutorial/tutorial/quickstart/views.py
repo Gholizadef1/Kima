@@ -398,6 +398,8 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         serializer = PostCommentSerializer(data=request.data)
         if serializer.is_valid():
+            this_book.comment_count+=1
+            this_book.save()
             comment_text = serializer.data.get("textcomment")
             new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
             new_comment.save()
@@ -416,9 +418,12 @@ class DeleteCommentView(APIView):
 
     def delete(self,request,pk):
         current_comment = MyComment.objects.get(id=pk)
+        comment_book =current_comment.current_book
         current_user = request.user
         comment_user = current_comment.account
         if comment_user == current_user:
+            comment_book.comment_count-=1
+            comment_book.save()
             current_comment.delete()
             return Response({'message':'Your Comment successfully deleted!'})
         else:
@@ -567,8 +572,8 @@ class FilterBookbyRate(APIView):
 
 class FilterBookbyComment(APIView):
     def get(self,request):
-        book_list=MyComment.objects.values('current_book').order_by('-current_book').annotate(Count('current_book'))
-        serializer = FilterSerializer(book_list, many=True)
+        book_list=book.objects.order_by('-comment_count')
+        serializer = bookSerializer(book_list, many=True)
         return Response(serializer.data)
 
 
