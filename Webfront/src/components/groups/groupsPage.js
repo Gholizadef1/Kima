@@ -15,25 +15,42 @@ import {
 function GroupsPage (props){
 
 
+  const handleChangeList =(e) =>{
+
+  }
+
+
     return(
-        <div className="container-fluid rTOl">
-            <div>
-                <div className="d-flex col-6 mx-md-5 my-5">
-                  <div variant="gray" className="mr-md-5 btn">
-                    <GoSearch size="30" color="black" />
-                  </div>
-                  <input className="form-control rounded-pill px-4 text-right " type="text" name="group" placeholder="نام گروه" />  
-                  <div variant="gray" className="mr-md-5 btn">
-                  </div>
+        <div className="container-fluid rTOl px-md-5">
+            <div className="d-flex  my-4 flex-wrap mx-md-5">
+              
+              <div className="d-flex ml-auto">
+                <div variant="gray" className="btn">
+                  <GoSearch size="30" color="black" />
                 </div>
+                <input className="form-control rounded-pill px-4 text-right " type="text" name="group" placeholder="نام گروه" />  
+                <div variant="gray" className="btn">
+                </div>
+              </div>
+              <div className="rounded-pill mx-md-4">
+                <select className="form-control rounded-pill" onChange={ handleChangeList} >
+                  <option value="popular">محبوب‌ترین گروه ها</option>
+                  <option value="new">جدیدترین گروه ها</option>
+                  <option value="mine">گروه‌های من</option>
+                </select>
+              </div>
+              <div>
+                <div className="btn btn-secondary rounded-pill">
+                  گروه جدید
+                </div>
+              </div>
             </div>
 
-            <div>
-
-
+            <div className="my-3">
+              <hr></hr>
             </div>
 
-            <div className=""  >
+            <div className="mx-md-5 px-md-5"  >
                 <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2" style={{textAlign:'right'}}>
                   <div class="col mb-4 ">
                     <div class="card h-100 shadow-lg">
