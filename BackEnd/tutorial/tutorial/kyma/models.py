@@ -35,6 +35,9 @@ class book(models.Model):
     #about book
     description = models.TextField(blank=True, null=True)
 
+    #comment count
+    comment_count = models.IntegerField(default=0)
+
     @property
     def average_rating(self):
         value=self.ratinguser_set.all().aggregate(Avg('userrate'))['userrate__avg']

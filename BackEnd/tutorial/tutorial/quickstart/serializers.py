@@ -106,15 +106,6 @@ class CommentSerializer(serializers.ModelSerializer):
         model = MyComment
         fields = "__all__"
 
-class FilterSerializer(serializers.ModelSerializer):
-    book_info = serializers.RelatedField(source='current_book',read_only=True)
-    
-    class Meta:
-        model = MyComment
-        fields = ['book_info']
-
-    def to_representation(self,value):
-        return bookSerializer(book.objects.get(pk=value['current_book'])).data
 
 class FilterRateSerializer(serializers.ModelSerializer):
     book_info = serializers.RelatedField(source='current_book',read_only=True)
