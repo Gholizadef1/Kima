@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card , List ,ListItem, Thumbnail } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -53,9 +53,9 @@ const GroupPage = () => {
 
                       <Text style={styles.groupname}>نام گروه</Text>
 
-                      <Button style={{marginLeft:wp('20%') , width:185 , borderRadius:20 , marginTop:hp('4%')
+                      <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('4%')
                    , backgroundColor:'#1F7A8C'}}>
-                      <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
+                      <Text style={{marginLeft:wp('20%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
                     </Button>
 
                       <Text style={{fontSize:22 , marginLeft:wp('7%') , marginTop:hp('6%') ,color:'#1F7A8C'}}>درباره گروه:</Text>
@@ -65,6 +65,49 @@ const GroupPage = () => {
                       </Text>
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C'}}>بحث های انجام شده:</Text>
+
+                    <List  style={{marginTop:'10%'}}>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>می خواهم این کتاب را بخوانم</Text>
+                  </Body>
+                  <Right>
+                    <Button transparent >
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>در حال خواندن </Text>
+                  </Body>
+                  <Right>
+                    <Button transparent >
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+                <ListItem thumbnail>
+                  <Left>
+                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3j6eTFWS7e-4PN3rJxCX2ZJ7a86ZwAWVV0g&usqp=CAU' }} />
+                  </Left>
+                  <Body>
+                    <Text>قبلا خوانده ام </Text>
+                  </Body>
+                  <Right>
+                    <Button transparent >
+                      <Text>مشاهده</Text>
+                    </Button>
+                  </Right>
+                </ListItem>
+            
+          </List>
 
             </ScrollView>
         </View>
