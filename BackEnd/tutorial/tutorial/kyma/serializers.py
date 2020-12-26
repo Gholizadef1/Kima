@@ -2,7 +2,6 @@ from rest_framework import serializers
 from . models import book
 
 class bookSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = book
         fields = ['average_rating_count','average_rating','title','imgurl','smallimgurl','numpages','publisher','avgrating','ratecount','author','description','id']
