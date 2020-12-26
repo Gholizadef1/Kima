@@ -53,18 +53,18 @@ const GroupPage = () => {
 
                       <Text style={styles.groupname}>نام گروه</Text>
 
-                      <Text style={{fontSize:19 , marginLeft:wp('10%') , marginTop:hp('4%')}}>درباره گروه</Text>
+                      <Button style={{marginLeft:wp('20%') , width:185 , borderRadius:20 , marginTop:hp('4%')
+                   , backgroundColor:'#1F7A8C'}}>
+                      <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
+                    </Button>
+
+                      <Text style={{fontSize:22 , marginLeft:wp('7%') , marginTop:hp('6%') ,color:'#1F7A8C'}}>درباره گروه:</Text>
 
                       <Text style ={{textAlign:'left' , marginLeft:wp('7%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> 
                       منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
                       </Text>
 
-                    <Button style={{marginLeft:wp('48%') , width:170 , borderRadius:20 , marginTop:hp('2%')
-                   , backgroundColor:'#1F7A8C'}}>
-                      <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
-                    </Button>
-
-                    <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('3%')}}>بحث های انجام شده</Text>
+                    <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C'}}>بحث های انجام شده:</Text>
 
             </ScrollView>
         </View>
@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
     },
     avatar:{
       marginTop:hp('-10%'),
-      marginLeft:wp('10%')
+      marginLeft:wp('35%')
       
   },
   groupname : {
     fontSize:27 ,
-    marginLeft:wp('63%') ,
-    marginTop:hp('-3%')
+    marginLeft:wp('37%') ,
+    marginTop:hp('3%')
   }
   });
 export default GroupPage;
