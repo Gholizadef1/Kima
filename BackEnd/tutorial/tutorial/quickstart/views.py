@@ -1,6 +1,7 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework import filters
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -322,16 +323,6 @@ class GroupDetailsView(APIView):
         serializer = GroupSerializer(group,many=False)
         return Response(serializer.data)
 
-    def post(self, request, pk):
-        user=request.user
-        group = Group.objects.get(id=pk)
-        if  not Member.objects.filter(user=user,group=group).exists():
-            new_member = Member(user=user,group=group)
-            new_member.save()
-            return Response({"message":"You joind this group!"})
-        Member.objects.get(user=user,group=group).delete()
-        return Response({"message":"You leaved this group!"})
-
 class MemberGroupView(APIView):
 
     def get(self ,request ,pk ):
@@ -351,6 +342,16 @@ class MemberGroupView(APIView):
             return Response({"message":"You joind this group!"})
         Member.objects.get(user=user,group=group).delete()
         return Response({"message":"You leaved this group!"})
+
+class DynamicSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search_fields', [])
+
+
+class DynamicGroupAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
   
 
 class QuoteView(APIView,PaginationHandlerMixin):
