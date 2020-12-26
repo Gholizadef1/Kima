@@ -9,6 +9,7 @@
         height: 140px;
         margin-left: 33px;
         margin-top: -60px;
+        background-color: rgb(237, 241, 248);
     }
     }
     @media (min-width:768px){
@@ -46,7 +47,28 @@
             .cardG{
                 width: 130px;
                 height: 190px;
-                margin-left: 305px;
-                margin-top: -60px;
+                margin-left: 980px;
+                margin-top: -100px;
             }
+            .imageg{
+                width: 80px;
+                height: 160px;
+                margin-left: -5px;
+                margin-top: -5px; 
+                border-radius: 3%;
+                
+            }
+            .line-g{
+                margin-top: 9px;
+                margin-right: 475px;
+            }
+            .cardb{
+                width: 310px;
+                height: 150px;
+                margin-left: 550px;
+                margin-top: 10px;
+                border-radius: 3%;
+                border-color: whitesmoke;
+            }
+            
             }
