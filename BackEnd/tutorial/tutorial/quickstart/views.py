@@ -57,7 +57,6 @@ def registration_view(request):
         serializer=RegistrationSerializer(Users,many=True)
         return Response(serializer.data)
 
-
 @api_view(["POST"])
 @permission_classes([AllowAny],)
 @permission_classes([IsAuthenticated])
@@ -75,7 +74,6 @@ def login(request):
     return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
                     status=HTTP_200_OK)
 
-
 class Readcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
 
@@ -88,8 +86,6 @@ class Readcollec(generics.ListAPIView):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
         return Response(serializer.data)
-
-
 
 class ToReadcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
@@ -104,8 +100,6 @@ class ToReadcollec(generics.ListAPIView):
         serializer = MyBookSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
 class Readingcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
 
@@ -119,8 +113,6 @@ class Readingcollec(generics.ListAPIView):
         serializer = MyBookSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    
-
 class ChangePasswordView(generics.UpdateAPIView):
 
     serializer_class = ChangePasswordSerializer
@@ -152,7 +144,6 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
     serializer_class = UpdateUserProfileSerializer
     permission_classes = (IsAuthenticated,)
@@ -166,7 +157,6 @@ class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
 
     def put(self,request,*args,**kwargs):
         return self.partial_update(request, *args, **kwargs)
-
 
 class UserProfileViewwithToken(generics.UpdateAPIView,RetrieveModelMixin):
     serializer_class =  UserProfileSerializer
@@ -194,7 +184,6 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
-
 
 class UserRatingview(APIView):
 
@@ -258,11 +247,6 @@ class UserRatingview(APIView):
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
 
-
-
-
-    
-
 class BookRateView(generics.ListAPIView):
     serializer_class=BookrateSerializer
 
@@ -275,7 +259,6 @@ class BookRateView(generics.ListAPIView):
         queryset = self.get_queryset(pk=pk)
         serializer = BookrateSerializer(queryset, many=True)
         return Response(serializer.data)
-
 
 class MyQuoteView(generics.ListAPIView):
 
@@ -290,69 +273,6 @@ class MyQuoteView(generics.ListAPIView):
         queryset = self.get_queryset(pk=pk)
         serializer = QuoteSerializer(queryset, many=True)
         return Response(serializer.data)
-
-class GroupView(APIView):
-
-    model = Group
-
-    def get(self,request):
-        groups = Group.objects.all()
-        serializer = GroupSerializer(groups,many=True)
-        return Response(serializer.data)
-
-    def post(self,request):
-        user=request.user
-        serializer = CreateGroupSerializer(data=request.data)
-        if serializer.is_valid():
-            title = serializer.data.get("title")
-            summary = serializer.data.get("summary")
-            photo = serializer.data.get("photo")
-            if  not Group.objects.filter(title=title).exists():
-                new_group = Group(owner=user,title=title,summary=summary,group_photo=photo)
-                new_group.save()
-                return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
-            return Response({"message":"A group with this name exists!"})
-        return Response(serializer.errors)
-
-class GroupDetailsView(APIView):
-
-    model = Group
-    
-    def get(self,request, pk):
-        group = Group.objects.get(id=pk)
-        serializer = GroupSerializer(group,many=False)
-        return Response(serializer.data)
-
-class MemberGroupView(APIView):
-
-    def get(self ,request ,pk ):
-        group = Group.objects.get(id=pk)
-        if Member.objects.filter(group=group).exists():
-            members = Member.objects.filter(group=group)
-            serializer = MemberSerializer(members,many=True)
-            return Response(serializer.data)
-        return Response({"message":"No member!"})
-
-    def post(self ,request ,pk ):
-        user=request.user
-        group = Group.objects.get(id=pk)
-        if  not Member.objects.filter(user=user,group=group).exists():
-            new_member = Member(user=user,group=group)
-            new_member.save()
-            return Response({"message":"You joind this group!"})
-        Member.objects.get(user=user,group=group).delete()
-        return Response({"message":"You leaved this group!"})
-
-class DynamicSearchFilter(filters.SearchFilter):
-    def get_search_fields(self, view, request):
-        return request.GET.getlist('search_fields', [])
-
-
-class DynamicGroupAPIView(generics.ListCreateAPIView):
-    filter_backends = (DynamicSearchFilter,)
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-  
 
 class QuoteView(APIView,PaginationHandlerMixin):
 
@@ -402,7 +322,6 @@ class QuoteView(APIView,PaginationHandlerMixin):
         else:
             return Response({'message':'You dont have permission to delete this quote!'})
 
-
 class LikeQuoteView(APIView):
 
     def get(self, request, pk):
@@ -430,8 +349,6 @@ class LikeQuoteView(APIView):
             quote.save()
             return Response({'message':"like success!",
                             'data':quote.Likes,})
-
-
 
 class CommentView(APIView,PaginationHandlerMixin):
 
@@ -472,7 +389,6 @@ class CommentView(APIView,PaginationHandlerMixin):
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
 
-
 class DeleteCommentView(APIView):
 
     def delete(self,request,pk):
@@ -484,7 +400,6 @@ class DeleteCommentView(APIView):
             return Response({'message':'Your Comment successfully deleted!'})
         else:
             return Response({'message':'You dont have permission to delete this comment!'})
-
 
 class CommentProfileView(APIView):
 
@@ -536,8 +451,6 @@ class LikeCommentView(APIView):
             return Response({'message' : "True",})
         return Response({'message' : "False",})
         
-        
-
 class DislikeCommentView(APIView):
 
     def post(self,request,pk):
@@ -616,4 +529,66 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
         response = {'message' : 'No Quote!',}
         return Response(response)
 
+class GroupView(APIView):
+
+    model = Group
+
+    def get(self,request):
+        groups = Group.objects.all()
+        serializer = GroupSerializer(groups,many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        user=request.user
+        serializer = CreateGroupSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            summary = serializer.data.get("summary")
+            photo = serializer.data.get("photo")
+            if  not Group.objects.filter(title=title).exists():
+                new_group = Group(owner=user,title=title,summary=summary,group_photo=photo)
+                new_group.save()
+                return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
+            return Response({"message":"A group with this name exists!"})
+        return Response(serializer.errors)
+
+class GroupDetailsView(APIView):
+
+    model = Group
+    
+    def get(self,request, pk):
+        group = Group.objects.get(id=pk)
+        serializer = GroupSerializer(group,many=False)
+        return Response(serializer.data)
+
+class MemberGroupView(APIView):
+
+    def get(self ,request ,pk ):
+        group = Group.objects.get(id=pk)
+        if Member.objects.filter(group=group).exists():
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
+            return Response(serializer.data)
+        return Response({"message":"No member!"})
+
+    def post(self ,request ,pk ):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        if  not Member.objects.filter(user=user,group=group).exists():
+            new_member = Member(user=user,group=group)
+            new_member.save()
+            return Response({"message":"You joind this group!"})
+        Member.objects.get(user=user,group=group).delete()
+        return Response({"message":"You leaved this group!"})
+
+class DynamicSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search_fields', [])
+
+
+class DynamicGroupAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+  
 

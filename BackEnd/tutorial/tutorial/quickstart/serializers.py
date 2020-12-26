@@ -27,10 +27,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account.save()
         return account
 
-
-
-
-
 class MyBookSerializer(serializers.ModelSerializer):
     book_info = serializers.RelatedField(source='book1',read_only=True)
     class Meta:
@@ -39,22 +35,18 @@ class MyBookSerializer(serializers.ModelSerializer):
 
     def to_representation(self,value):
         return bookSerializer(book.objects.get(pk=value.book1.id)).data
-
-
-        
+      
 class ChangePasswordSerializer(serializers.Serializer):
 
     model = Account
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
-
 class UpdateUserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
         fields = ['username','profile_photo']
-
 
 class UserProfileSerializer(serializers.ModelSerializer):
 
@@ -74,10 +66,6 @@ class BookrateSerializer(serializers.ModelSerializer):
         model = Ratinguser
         fields = fields = "__all__"
 
-
-    
-
-
 class PostQuoteSerializer(serializers.Serializer):
     
     textquote = serializers.CharField(required=True)
@@ -91,10 +79,18 @@ class QuoteSerializer(serializers.ModelSerializer):
         model = MyQuote
         fields = "__all__"
 
-
 class PostCommentSerializer(serializers.Serializer):
     
     textcomment = serializers.CharField(required=True)
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    
+    class Meta:
+        model = MyComment
+        fields = "__all__"
 
 class CreateGroupSerializer(serializers.Serializer):
 
@@ -117,14 +113,3 @@ class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['user']
-
-class CommentSerializer(serializers.ModelSerializer):
-
-    account = UserProfileSerializer(read_only=True)
-    current_book = bookSerializer(read_only=True)
-    
-    class Meta:
-        model = MyComment
-        fields = "__all__"
-
-
