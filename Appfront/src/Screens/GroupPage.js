@@ -55,12 +55,12 @@ const GroupPage = () => {
 
                       <Text style={{fontSize:19 , marginLeft:wp('10%') , marginTop:hp('4%')}}>درباره گروه</Text>
 
-                      <Text style ={{textAlign:'left' , marginLeft:wp('5%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> 
+                      <Text style ={{textAlign:'left' , marginLeft:wp('7%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> 
                       منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
                       </Text>
 
                     <Button style={{marginLeft:wp('48%') , width:170 , borderRadius:20 , marginTop:hp('2%')
-                   , backgroundColor:'#87ceeb'}}>
+                   , backgroundColor:'#1F7A8C'}}>
                       <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
                     </Button>
 
