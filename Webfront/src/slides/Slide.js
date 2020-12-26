@@ -44,14 +44,14 @@ function Slide(props) {
       });
   }, []);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
+    fetch("http://127.0.0.1:8000/filter-book-rate")
       .then((res) => res.json())
       .then((data) => {
         setFavorite(data);
       });
   }, []);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
+    fetch("http://127.0.0.1:8000/filter-book-comment")
       .then((res) => res.json())
       .then((data) => {
         setDiscussed(data);
@@ -161,8 +161,8 @@ function Slide(props) {
 
 
 
-<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
-      {suggestions.length === 0 ? (
+<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
+      {favorite.length === 0 ? (
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
@@ -171,7 +171,7 @@ function Slide(props) {
         
        <div className = "slide ml-5">
         <Slider {...settings}>
-          {suggestions.map((current) => (
+          {favorite.map((current) => (
             <div className="out pl-4" key={current.id}>
 
               <div className="card cat "onClick={() => bookSelectedHandler( current )}>
@@ -202,8 +202,8 @@ function Slide(props) {
         </div>
       )}
 
-<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
-            {suggestions.length === 0 ? (
+<div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
+            {discussed.length === 0 ? (
               <div className="spinner-border" role="status">
                 <div className="sr-only">Loading...</div>
               </div>
@@ -212,7 +212,7 @@ function Slide(props) {
               
              <div className = "slide ml-5">
               <Slider {...settings}>
-                {suggestions.map((current) => (
+                {discussed.map((current) => (
                   <div className="out pl-4" key={current.id}>
       
                     <div className="card cat "onClick={() => bookSelectedHandler( current )}>
