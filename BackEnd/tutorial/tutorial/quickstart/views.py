@@ -521,7 +521,7 @@ class FilterCommentbyTime(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-sendtime'))
-            serializer = CommentSerializer(comment_list,many=True)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
@@ -533,7 +533,7 @@ class FilterCommentbyLike(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-LikeCount', 'DislikeCount'))
-            serializer = CommentSerializer(comment_list,many=True)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
@@ -545,7 +545,7 @@ class FilterQuotebyTime(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-sendtime'))
-            serializer = QuoteSerializer(quote_list,many=True)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
@@ -557,7 +557,7 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-Likes'))
-            serializer = QuoteSerializer(quote_list,many=True)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
