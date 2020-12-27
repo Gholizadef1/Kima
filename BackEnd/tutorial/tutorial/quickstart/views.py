@@ -243,7 +243,7 @@ class UserRatingview(APIView):
             newrate = postrate.data.get("rate")
             wantedbookrate.userrate = newrate
             wantedbookrate.save()
-            return Response(postrate.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"update rate"})
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
 
@@ -528,6 +528,21 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
+
+class DiscussionView(APIView):
+
+    def post(self,request,pk):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        serializer = CreateDiscussionSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            description = serializer.data.get("description")
+            new_discuss = Discussion(creator=user,title=title,description=description,group=group)
+            new_discuss.save()
+            seri = DiscussionSerializer(new_discuss,many=False)
+            return Response(seri.data)
+        return Response(serializer.errors)
 
 class GroupView(APIView):
 

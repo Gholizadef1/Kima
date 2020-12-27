@@ -113,3 +113,19 @@ class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['user']
+
+
+class CreateDiscussionSerializer(serializers.Serializer):
+
+    title = serializers.CharField(max_length=100,required=True)
+    description = serializers.CharField(required=True)
+
+
+class DiscussionSerializer(serializers.ModelSerializer):
+
+    creator = UserProfileSerializer(read_only=True)
+    group = GroupSerializer(read_only=True)
+
+    class Meta:
+        model = Discussion
+        fields = "__all__"

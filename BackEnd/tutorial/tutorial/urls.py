@@ -35,6 +35,7 @@ urlpatterns = [
     path('api/bookrating/<int:pk>',UserRatingview.as_view()),
     path('api/rateperbook/<int:pk>',BookRateView.as_view()),
     path('api/group',GroupView.as_view()),
+    path('api/group/<int:pk>/discussion',DiscussionView.as_view()),
     path('api/group/details/<int:pk>',GroupDetailsView.as_view()),
     path('api/group/members/<int:pk>',MemberGroupView.as_view()),
     path('api/quotes/<int:pk>',QuoteView.as_view()),
