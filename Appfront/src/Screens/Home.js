@@ -19,6 +19,7 @@ const Home = ({navigation}) => {
     useEffect(() =>{
         getImageFromAPI()
         getbestsFromAPI()
+        getmostFromAPI();
     },[])
 
     function getImageFromAPI(){
@@ -41,6 +42,17 @@ const Home = ({navigation}) => {
             console.log(error)
         })
     }
+    function getmostFromAPI(){
+        axiosinst.get('/filter-book-comment')
+        .then(function(response){
+            setmostdis(response.data)
+            // console.log(response)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+
 
     if(!image){
         return null
@@ -123,7 +135,7 @@ const Home = ({navigation}) => {
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    data={image}
+                    data={mostdis}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
