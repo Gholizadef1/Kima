@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
@@ -15,6 +15,7 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
 const userschema=yup.object({
@@ -107,6 +108,7 @@ const Groups = () => {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
         {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
+      
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
          name="close" size={23} color="#D75A5A" />
        {/* </View> */}
@@ -122,7 +124,73 @@ const Groups = () => {
 
          </ImageBackground>
      </TouchableOpacity>
+     <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
+      initialValues={{Username:'',Discription:'',photo:'../../assets/backprof5j.jpeg'}}
+      validationSchema={userschema}
+
+      //   onSubmit={async(values,actions)=>{
+       
+      //   const back={
+      //     username:values.Username,
+      //     discription:Discription
+        
+      //   }
+      //   // const token=AsyncStorage.getItem('token');
+      //   // console.log(token)
+      //   // await console.log(await AsyncStorage.getItem('token'))
+      //    const backk=JSON.stringify(back);
+      //   const params=JSON.stringify({username:'Hi'});
+
+
+      //   const response=await axiosinst.post('/api/update-profile/',backk,{
+      //     headers:{
+      //       "Content-Type":"application/json",
+      //       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+      //     }
+      //        )
+      //   .then( function(response){
+      //     // console.log(response);
+      //     // console.log(response.data.username)
+      //     // console.log(response.username)
+      //     Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
+      //    Title:'فهمیدم',onPress:()=>console.log('alert closed')
+      //       }])
+          
+          
+      //   })
+      //   .catch( function(error){
+         
+      //       if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
+      //         Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
+            
+
+      //       Title:'فهمیدم',onPress:()=>console.log('alert closed')
+      //       }])
+      //       }
+      //       else
+      //       {
+      //         Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
+
+      //       Title:'فهمیدم',onPress:()=>console.log('alert closed')
+      //       }])
+      //       }     
+      //   })
+
+      // }}
+     >
+      {(props)=>(
+     <View style={{ marginTop:hp('2%')}}>
+       <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
+  
+     </View>
+    
+     </View>    
+     )}
+
+     </Formik>
         </View>
+
         </View>
         </Modal>
     
@@ -195,6 +263,27 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     //   alignItems: 'center',
     //   justifyContent: 'center',
+    },
+    item:{
+      marginLeft:wp('31%'),
+      marginRight:wp('5%'),
+      marginTop:hp('1%'),
+      height:wp('9.5%')
+      
+      
+    },
+   
+    button:{
+      // position:'absolute',
+      marginTop:hp('10.5%'),
+    
+      alignSelf:'center',
+      width:wp('41%'),
+      backgroundColor:'#1f7a8c',
+      borderColor:'#BFDBF7',
+      // marginLeft:wp('18%'),
+      borderRadius:50
+      
     },
     plus:{
       
