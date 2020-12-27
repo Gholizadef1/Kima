@@ -552,6 +552,14 @@ class DiscussionView(APIView):
             return Response(seri.data)
         return Response(serializer.errors)
 
+class DiscussionDetailsView(APIView):
+
+    def get(self,request,pk):
+        id = request.data.get("id")
+        discuss = Discussion.objects.get(id=id)
+        serializer = DiscussionSerializer()
+
+
 class GroupView(APIView):
 
     model = Group
