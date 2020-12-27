@@ -69,12 +69,12 @@ const GroupPage = () => {
                     <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail style={{borderRadius:10}} square source={require ('../../assets/girl.jpg')} />
+                    <Thumbnail style={{borderRadius:6}} square source={require ('../../assets/girl.jpg')} />
                   </Left>
-                  <Body>
+                  <Body style={{top:hp('0.5%') , marginLeft:wp('6%')}} >
                     <Text>بحث اول</Text>
                   </Body>
-                  <Right>
+                  <Right style={{marginRight:wp('6%')}}>
                     <Button transparent >
                       <Text>مشاهده</Text>
                     </Button>
@@ -82,12 +82,12 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail style={{borderRadius:10}} square source={require ('../../assets/index.jpg')} />
+                    <Thumbnail style={{borderRadius:6}} square source={require ('../../assets/index.jpg')} />
                   </Left>
-                  <Body>
+                  <Body style={{top:hp('0.5%')}}>
                     <Text>بحث سوم</Text>
                   </Body>
-                  <Right>
+                  <Right style={{marginRight:wp('6%')}}>
                     <Button transparent >
                       <Text>مشاهده</Text>
                     </Button>
@@ -97,10 +97,10 @@ const GroupPage = () => {
                   <Left>
                     <Thumbnail square source={require ('../../assets/tea.jpg')} />
                   </Left>
-                  <Body>
+                  <Body style={{top:hp('0.5%')}}>
                     <Text>بحث سوم </Text>
                   </Body>
-                  <Right>
+                  <Right style={{marginRight:wp('6%')}}>
                     <Button transparent >
                       <Text>مشاهده</Text>
                     </Button>
@@ -121,19 +121,17 @@ const GroupPage = () => {
               <Left>
                 <Thumbnail source={require('../../assets/sea.jpg')} />
               </Left>
-              <Body style={{marginTop:hp('8%')}}>
+              <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
                 <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
               </Body>
             </ListItem>
-            <ListItem avatar>
+            <ListItem avatar >
               <Left>
                 <Thumbnail source={require('../../assets/sea.jpg')} />
               </Left>
-              <Body style={{marginTop:hp('5%')}}>
+              <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
                 <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
               </Body>
-              <Right>
-              </Right>
             </ListItem>
           </List>
 
