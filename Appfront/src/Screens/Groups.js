@@ -181,11 +181,31 @@ const Groups = () => {
      >
       {(props)=>(
      <View style={{ marginTop:hp('2%')}}>
+     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('35%')}}>نام گروه</Text>
+     <Item style={styles.item} rounded >
+     {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
+     
+     <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
+         onChangeText={props.handleChange('Username')}
+         onBlur={props.handleBlur('Username')}
+         value={props.values.Username}
+         placeholder={''} placeholderTextColor='gray' >
+         </Input>
+         <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" />
+       
+
+      </Item>
+    
+      
        <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
-  
+       
+    
+      
      </View>
     
-     </View>    
+     </View>
+       
+       
      )}
 
      </Formik>
@@ -272,7 +292,21 @@ const styles = StyleSheet.create({
       
       
     },
-   
+    Input:{
+      // fontSize:hp('1.8%'),
+      // fontStyle:'normal',
+      // height:wp('1%')
+      // marginLeft:wp('31%'),
+      // marginRight:wp('31%'),
+      // left:wp('42%'),
+      left:wp('8%'),
+      marginRight:wp('10%'),
+      // marginTop:hp('1%'),
+      position:'absolute',
+      height:wp('9.5%'),
+      //  backgroundColor:'green',
+       width:wp('31.5%')
+    },
     button:{
       // position:'absolute',
       marginTop:hp('10.5%'),
