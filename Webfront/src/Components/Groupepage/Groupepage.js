@@ -43,7 +43,7 @@ import {
     </div>
     <div class="card cardb">
   <div class="card-body">
-  <p className="text-right mr-4">اسکندر و سمندر در گردباد: سمندر و اسکندر از بالکن خانه‌های هم با یکدیگر صحبت می‌کنند؛ اما یک روز سمندر حرفی میزند که به ضررش تمام می‌شود.
+  <p className="text-right mr-3">اسکندر و سمندر در گردباد: سمندر و اسکندر از بالکن خانه‌های هم با یکدیگر صحبت می‌کنند؛ اما یک روز سمندر حرفی میزند که به ضررش تمام می‌شود.
 
 </p>
   </div>
@@ -56,23 +56,25 @@ import {
 </p>
   </div>
     </div>
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:5,position:"relative",right:-320}}> (نفر۱۲۰) اعضا</b>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:5,position:"relative",right:-200}}> (نفر۱۲۰) اعضا</b>
 
-    <hr className="line-g1" style={{width:"52%"}}></hr>
+    <hr className="line-g1" style={{width:"47%"}}></hr>
     
       <div className = "slide">
             <div className="out">
                 <img
                   
                   src={one}
-                  height={70}
-                  width={120}
+                  height={90}
+                  width={70}
+                  style={{paddingRight:10,paddingBottom:10}}
                 />
                 <img
                   
                   src={two}
-                  height={70}
-                  width={120}
+                  height={90}
+                  width={70}
+                  style={{paddingRight:10,paddingBottom:10}}
                 />
                 </div>
                 </div>
