@@ -66,13 +66,13 @@ const GroupPage = () => {
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C'}}>بحث های انجام شده:</Text>
 
-                    <List  style={{marginTop:'10%'}}>
+                    <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>
                     <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
                   </Left>
                   <Body>
-                    <Text>می خواهم این کتاب را بخوانم</Text>
+                    <Text>بحث اول</Text>
                   </Body>
                   <Right>
                     <Button transparent >
@@ -85,7 +85,7 @@ const GroupPage = () => {
                     <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
                   </Left>
                   <Body>
-                    <Text>در حال خواندن </Text>
+                    <Text>بحث سوم</Text>
                   </Body>
                   <Right>
                     <Button transparent >
