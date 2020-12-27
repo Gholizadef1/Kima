@@ -16,6 +16,8 @@ import { TouchableOpacity } from 'react-native';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import * as permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 
 const userschema=yup.object({
@@ -25,8 +27,8 @@ const userschema=yup.object({
   .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
 
   Discription:yup.string()
-  .required("لطفا نام کاربری جدید خود را وارد کنید")
-  .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
+  .required("توضیحات گروه نمیتواند خالی باشد")
+  // .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
 
   // photo:yup.string()
   // .required("لطفا نام کاربری جدید خود را وارد کنید")
@@ -173,7 +175,7 @@ const Groups = () => {
      <View style={{ marginTop:hp('5%')}}>
      <View style={{}}>
      <TouchableOpacity style={styles.avatar}
-       onPress={() => { }}>
+       onPress={() => { pickfromgallery()}}>
       <ImageBackground borderRadius={20}
         
          source={require('../../assets/backprof5j.jpeg')}
@@ -239,6 +241,11 @@ const Groups = () => {
      )}
 
      </Formik>
+     <Button bordered rounded style={styles.button}
+       onPress={()=>{}}
+       >
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('11%')}}>ساخت گروه</Text>
+        </Button>
         </View>
 
         </View>
@@ -346,7 +353,7 @@ const styles = StyleSheet.create({
     },
     button:{
       // position:'absolute',
-      marginTop:hp('10.5%'),
+      marginTop:hp('26%'),
     
       alignSelf:'center',
       width:wp('41%'),
@@ -363,18 +370,19 @@ const styles = StyleSheet.create({
     
     },
     centeredView: {
-      flex: 1,
+      // flex: 1,
       // justifyContent: "center",
       // alignItems: "center",
-      height:hp('85%'),
-      marginTop:hp('6%')
+       height:hp('40%'),
+      marginTop:hp('15%'),
+      // marginBottom:hp('10%')
     },
     modalView: {
       margin: 10,
       backgroundColor: "white",
       borderRadius: 10,
       padding: 35,
-      height:hp('85%'),
+       height:hp('65%'),
    
       // shadowColor: "#000",
       // shadowOffset: {
@@ -383,7 +391,7 @@ const styles = StyleSheet.create({
       // },
       // shadowOpacity: 0.25,
       // shadowRadius: 3.84,
-      elevation: 50
+      elevation: 100
     },
     avatar: {
       height: hp('14%'),
