@@ -74,10 +74,7 @@ function App(props) {
                 <NavBar/>
               <Grouppage/>
               </Route>
-              <Route path="/jgroup">
-                <NavBar/>
-              <Grouppagej/>
-              </Route>
+              
             
             <Route path="/book/:bookId">
               <NavBar/>

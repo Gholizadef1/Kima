@@ -8,6 +8,7 @@ import './Groupepage.css';
 import React, { useState, useEffect } from "react";
 import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
+import Cookies from 'js-cookie';
 
 
 import {
@@ -23,31 +24,28 @@ import {
   function GroupPage (props){
     const[openSnack,setOpenSnack]=useState(false);
     const [massage,setMassage]=useState("");
-    
+    const routeToGroup = ()=>{
+      props.history.push('/jgroup');
+    }
     const joinGroup =()=> {
       
       axios.post(
-        "http://127.0.0.1:8000/api/group",
+        `http://127.0.0.1:8000/api/group/members/${Cookies.get('userId')}`,
       {},
       {
-       headers:{
-      "Content-Type":"application/json",}
-      }).then(response=>{
-            props.history.push(`/jgroup`);
-          
-        }
-      )
+        headers:{
+          "Content-Type":"application/json",
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
       .catch(error=>{
         console.log(error);
       });
+      routeToGroup();
+     
       
     }
-    const handleCloseSnack = (event, reason) => {
-      if (reason === 'clickaway') {
-          return;
-        }
-      setOpenSnack(false);
-    };
+    
+     
     
     return(
       
@@ -65,7 +63,6 @@ import {
 
               autoHideDuration={2000}
 
-              onClose={handleCloseSnack}
               message={massage}
             />
       </div>
