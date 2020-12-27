@@ -553,12 +553,11 @@ class DiscussionView(APIView):
         return Response(serializer.errors)
 
 class DiscussionDetailsView(APIView):
-
+    
     def get(self,request,pk):
         id = request.data.get("id")
         discuss = Discussion.objects.get(id=id)
         serializer = DiscussionSerializer()
-
 
 class GroupView(APIView):
 
@@ -616,10 +615,8 @@ class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
         return request.GET.getlist('search_fields', [])
 
-
 class DynamicGroupAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
   
-

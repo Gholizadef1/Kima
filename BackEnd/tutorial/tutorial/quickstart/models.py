@@ -139,6 +139,7 @@ class Group(models.Model):
     summary = models.TextField()
     group_photo = models.ImageField( upload_to='group_photos',default='default.png')
     title = models.CharField(max_length=100)
+    create_time=models.DateTimeField(default=timezone.now, editable=False)
 
     @property
     def members_count(self):
