@@ -38,7 +38,7 @@ const userschema=yup.object({
 
 const Groups = () => {
 
-  const [picture,setpicture]=useState(require('../../assets/backprof5j.jpeg'));
+  const [picture,setpicture]=useState('../../assets/backprof5j.jpeg');
 
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
@@ -54,7 +54,8 @@ const Groups = () => {
           })
           console.log(data);
           console.log(data.uri)
-          const formdata = new FormData();
+      
+          
           const newfile={uri:data.uri,
             type:`test/${data.uri.split(".")[3]}`,
             name:`test.${data.uri.split(".")[3]}`}
@@ -71,7 +72,7 @@ const Groups = () => {
             // props.values.photo="{uri:"+data.uri+'}'
            props.values.photo=data.uri
            //baraye in ke rerender beshe va photo formik form taghir kone
-            setpicture(data.uri)
+            setpicture(profile_photo)
              props.handleChange('photo')
             // change(data.uri)
            console.log(props.values.photo+'formik photo2')
@@ -128,56 +129,47 @@ const Groups = () => {
       initialValues={{Username:'',Discription:'',photo:require('../../assets/backprof5j.jpeg')}}
       validationSchema={userschema}
 
-      //   onSubmit={async(values,actions)=>{
-       
-      //   const back={
-      //     username:values.Username,
-      //     discription:Discription
+        onSubmit={async(values,actions)=>{
+          const formdata = new FormData();
+          formdata.append('title',values.Username)
+          formdata.append('summary',values.Discription)
+          formdata.append('photo',picture)
+        // const back={
+        //   username:values.Username,
+        //   discription:Discription,
+        //   groupimage:picture
         
-      //   }
-      //   // const token=AsyncStorage.getItem('token');
-      //   // console.log(token)
-      //   // await console.log(await AsyncStorage.getItem('token'))
-      //    const backk=JSON.stringify(back);
-      //   const params=JSON.stringify({username:'Hi'});
+        // }
+      
+        //  const backk=JSON.stringify(back);
+        // const params=JSON.stringify({username:'Hi'});
 
 
-      //   const response=await axiosinst.post('/api/update-profile/',backk,{
-      //     headers:{
-      //       "Content-Type":"application/json",
-      //       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-      //     }
-      //        )
-      //   .then( function(response){
-      //     // console.log(response);
-      //     // console.log(response.data.username)
-      //     // console.log(response.username)
-      //     Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
-      //    Title:'فهمیدم',onPress:()=>console.log('alert closed')
-      //       }])
+        const response=await axiosinst.post('/api/group/',formdata,{
+          headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+          }
+             )
+        .then( function(response){
+      
+          Alert.alert('oops','گروه با موفقیت تغییر کرد ',[{
+         Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
           
           
-      //   })
-      //   .catch( function(error){
-         
-      //       if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-      //         Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
+        })
+        .catch( function(error){  
+            {
+              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
             
 
-      //       Title:'فهمیدم',onPress:()=>console.log('alert closed')
-      //       }])
-      //       }
-      //       else
-      //       {
-      //         Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
+            }     
+        })
 
-      //       Title:'فهمیدم',onPress:()=>console.log('alert closed')
-      //       }])
-      //       }     
-      //   })
-
-      // }}
+      }}
      >
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
@@ -415,7 +407,7 @@ const styles = StyleSheet.create({
       // },
       // shadowOpacity: 0.25,
       // shadowRadius: 3.84,
-      elevation: 100
+      elevation: 300
     },
     avatar: {
       height: hp('14%'),
