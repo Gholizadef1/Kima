@@ -55,7 +55,7 @@ const GroupPage = () => {
 
                       <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('4%')
                    , backgroundColor:'#1F7A8C'}}>
-                      <Text style={{marginLeft:wp('20%') , fontSize:15 , fontWeight:'bold'}}>عضو شدن</Text>
+                      <Text style={{marginLeft:wp('23%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
                     </Button>
 
                       <Text style={{fontSize:22 , marginLeft:wp('7%') , marginTop:hp('6%') ,color:'#1F7A8C'}}>درباره گروه:</Text>
@@ -109,7 +109,12 @@ const GroupPage = () => {
             
           </List>
 
+          <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('2%')
+                   , backgroundColor:'#1F7A8C'}}>
+                      <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ایجاد بحث جدید</Text>
+                    </Button>
             </ScrollView>
+
         </View>
     );
 }
