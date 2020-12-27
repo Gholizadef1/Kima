@@ -38,6 +38,8 @@ urlpatterns = [
     path('api/group/<int:pk>/discussion',DiscussionView.as_view()),
     path('api/group/details/<int:pk>',GroupDetailsView.as_view()),
     path('api/group/members/<int:pk>',MemberGroupView.as_view()),
+    path('api/group/filter-time',FilterGroupbyTime.as_view()),
+    path('api/group/filter-member',FilterGroupbyMember.as_view()),
     path('api/quotes/<int:pk>',QuoteView.as_view()),
     path('api/quotes/like/<int:pk>',LikeQuoteView.as_view()),
     path('api/user-profile/<int:pk>/ToRead',ToReadcollec.as_view()),

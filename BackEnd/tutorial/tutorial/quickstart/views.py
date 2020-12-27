@@ -620,3 +620,22 @@ class DynamicGroupAPIView(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
   
+class FilterGroupbyTime(APIView):
+
+    def get(self,request):
+        if Group.objects is not None:
+            gp_list = Group.objects.order_by('-create_time')
+            serializer = GroupSerializer(gp_list,many=True)
+            return Response(serializer.data)
+        response = {'message' : 'No Group!',}
+        return Response(response)
+
+class FilterGroupbyMember(APIView):
+
+    def get(self,request):
+        if Group.objects is not None:
+            gp_list=sorted(Group.objects.all(),  key=lambda m: -m.members_count)
+            serializer = GroupSerializer(gp_list,many=True)
+            return Response(serializer.data)
+        response = {'message' : 'No Group!',}
+        return Response(response)
