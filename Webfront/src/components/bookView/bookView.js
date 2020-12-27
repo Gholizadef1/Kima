@@ -282,7 +282,7 @@ return(
 <div className="mx-md-5 px-md-5">
   <div className="container-fluid rTOl text-right px-md-5" >
     <div className="mx-md-5 ">
-    <div className="row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 ">
+    <div className="row no-gutters shadow color1 table-borderless my-1 mx-md-5 ">
       <div className="col-md-4 mb-md-0 p-4">
         <img src={state.imgurl} className="img-fluid shadow float-right" alt="" style={{width:'100%',height:'auto'}} />
       </div>
