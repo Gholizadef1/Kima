@@ -115,7 +115,7 @@ const Bookview = (prop) => {
         "rate": rate,
     }
     const back= JSON.stringify(payload);
-    axios.post('/api/bookrating/'+id ,back,{
+    axiosinst.post('/api/bookrating/'+id ,back,{
       "headers":{"content-type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
               }
@@ -127,7 +127,7 @@ const Bookview = (prop) => {
       console.log('&&'+rate);
       if(response.data.message==="You rated this book already!!"){
         console.log('TOYE PUTTTTT')
-        axios.put('/api/bookrating/'+id, back, {
+        axiosinst.put('/api/bookrating/'+id, back, {
           "headers": {
             "content-type": "application/json",
             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()

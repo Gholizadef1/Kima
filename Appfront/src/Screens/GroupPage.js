@@ -28,7 +28,7 @@ const GroupPage = () => {
             <Text style={styles.kima}>کیما</Text>
         <Image
 
-         source={require('../../assets/backprof4.jpeg')}
+         source={require('../../assets/kiddy_book.jpg')}
          style={{   width:wp('100%'),
         height:hp('35%'),
         position:'absolute',
@@ -69,7 +69,7 @@ const GroupPage = () => {
                     <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpZz6LmJahWgHdjXYy0uCuz8DTzJzCYPqtYA&usqp=CAU' }} />
+                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
                   </Left>
                   <Body>
                     <Text>بحث اول</Text>
@@ -82,7 +82,7 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2eaKKSlvGpTQSsYM7k400fPWpCnoNXeUwjg&usqp=CAU' }} />
+                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
                   </Left>
                   <Body>
                     <Text>بحث سوم</Text>
@@ -95,10 +95,10 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3j6eTFWS7e-4PN3rJxCX2ZJ7a86ZwAWVV0g&usqp=CAU' }} />
+                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
                   </Left>
                   <Body>
-                    <Text>قبلا خوانده ام </Text>
+                    <Text>بحث سوم </Text>
                   </Body>
                   <Right>
                     <Button transparent >
