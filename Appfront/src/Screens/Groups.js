@@ -23,8 +23,8 @@ import * as ImagePicker from 'expo-image-picker';
 const userschema=yup.object({
 
   Username:yup.string()
-  .required("لطفا نام کاربری جدید خود را وارد کنید")
-  .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
+  .required("اسم گروه نمیتواند خالی باشد")
+  .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
 
   Discription:yup.string()
   .required("توضیحات گروه نمیتواند خالی باشد")
@@ -247,17 +247,16 @@ const Groups = () => {
        
      
          <Button bordered rounded style={styles.button}
-       onPress={()=>{props.handleSubmit}}
+       onPress={props.handleSubmit}
        >
          <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت گروه</Text>
         </Button>
-    
-      
-       <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
+
+       {/* <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
        
        
       
-     </View>
+     </View> */}
     
      </View>
        
