@@ -1,4 +1,4 @@
-import React, {CuseState,useEffect} from "react";
+import React, {CuseState,useEffect, useState} from "react";
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -13,17 +13,43 @@ import {
   import {GoSearch} from 'react-icons/go';
 
 function GroupsPage (props){
+  const [groups,setGroups] = useState([]);
+  const [filterBase,setFilterBase]= useState("popular");
+
+  useEffect(()=>{
+    if(filterBase==="popular"){
+      axios.get()
+      .then(response=>{
+        console.log(response);
+        setGroups(response.data);
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
+    else if (filterBase==="new"){
+      axios.get()
+      .then(response=>{
+        console.log(response);
+        setGroups(response.data);
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
+    else console.log(filterBase);
+  },[filterBase])
 
 
   const handleChangeList =(e) =>{
-
+    setFilterBase(e.target.value);
+    console.log(e.target.value);
   }
 
 
     return(
         <div className="container-fluid rTOl px-md-5">
             <div className="d-flex  my-4 flex-wrap mx-md-5">
-              
               <div className="d-flex ml-auto">
                 <div variant="gray" className="btn">
                   <GoSearch size="30" color="black" />
@@ -33,7 +59,7 @@ function GroupsPage (props){
                 </div>
               </div>
               <div className="rounded-pill mx-md-4">
-                <select className="form-control rounded-pill" onChange={ handleChangeList} >
+                <select className="form-control rounded-pill" onChange={handleChangeList} >
                   <option value="popular">محبوب‌ترین گروه ها</option>
                   <option value="new">جدیدترین گروه ها</option>
                   <option value="mine">گروه‌های من</option>
