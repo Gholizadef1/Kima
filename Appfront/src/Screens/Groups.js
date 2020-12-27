@@ -98,7 +98,9 @@ const Groups = () => {
           }}
 
         />:null}
+        <TouchableOpacity onPress={()=>console.log('aladkki')}>
          <Eachgroup></Eachgroup>
+         </TouchableOpacity>
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>

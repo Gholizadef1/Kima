@@ -40,7 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://c8f6d3c6ac6e.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://6124bc8043de.ngrok.io/api/user-profile/"+id)
             
         
         // console.log(response)
@@ -51,8 +51,8 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://c8f6d3c6ac6e.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://c8f6d3c6ac6e.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://6124bc8043de.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://6124bc8043de.ngrok.io${response.data.profile_photo}`)
 
             console.log(';;;;;')
             console.log(picture);
@@ -85,13 +85,13 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://c8f6d3c6ac6e.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://6124bc8043de.ngrok.io/api/user-profile/"+id)
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://c8f6d3c6ac6e.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://c8f6d3c6ac6e.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://6124bc8043de.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://6124bc8043de.ngrok.io${response.data.profile_photo}`)
             console.log(picture);
           
        console.log(response.data.profile_photo)
@@ -164,7 +164,7 @@ import { Entypo } from '@expo/vector-icons';
         
 
 
-        {picture!='http://c8f6d3c6ac6e.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+        {picture!='http://6124bc8043de.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
         source={require('../../assets/avatar.png')}
