@@ -1,11 +1,14 @@
-import React, {CuseState,useEffect} from "react";
+
 import axios from 'axios';
 import image from "../../assets/5.jpeg";
 import images from "../../assets/image.jpeg";
 import one from "../../assets/1.jpeg";
 import two from "../../assets/2.jpeg";
 import './Groupepage.css';
+import React, { useState, useEffect } from "react";
 import Divider from '@material-ui/core/Divider';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 import {
     BrowserRouter as Router,
@@ -18,9 +21,36 @@ import {
     withRouter
   } from "react-router-dom";
   function GroupPage (props){
-
-
+    const[openSnack,setOpenSnack]=useState(false);
+    const [massage,setMassage]=useState("");
+    
+    const joinGroup =()=> {
+      
+      axios.post(
+        "http://127.0.0.1:8000/api/group",
+      {},
+      {
+       headers:{
+      "Content-Type":"application/json",}
+      }).then(response=>{
+            props.history.push(`/jgroup`);
+          
+        }
+      )
+      .catch(error=>{
+        console.log(error);
+      });
+      
+    }
+    const handleCloseSnack = (event, reason) => {
+      if (reason === 'clickaway') {
+          return;
+        }
+      setOpenSnack(false);
+    };
+    
     return(
+      
       <div className="mx-md-5 pt-5 px-md-5">
       <div className="container-fluid text-center px-md-5 py-md-5" >
         <div className="mx-md-5 ">
@@ -28,14 +58,25 @@ import {
         <img src={image} className="avatar img-responsive"/>
         
         <div class="card cardG">
-  
+        <div>
+         <Snackbar
+              anchorOrigin={{ vertical:'top', horizontal:'center'}}
+              open={openSnack}
+
+              autoHideDuration={2000}
+
+              onClose={handleCloseSnack}
+              message={massage}
+            />
+      </div>
+
   <div class="card-body">
     <img src={images} className="imageg img-responsive"></img>
   </div>
     </div>
     <div className="mt-n5">
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:4,position:"relative",left:345}}>آشفته‌حالان بیداربخت</b>
-    <button className="btn bg-primary" style={{color:"white",fontFamily:"Yekan",marginRight:545,marginTop:-8}}>اضافه‌شدن به گروه</button>
+    <b className="title-g" >آشفته‌حالان بیداربخت</b>
+    <button onClick={joinGroup}  className="btn btn-g bg-primary" >اضافه‌شدن به گروه</button>
     </div>
     <hr className="line-g" style={{width:"37%"}}></hr>
 

@@ -1,15 +1,73 @@
 
 @media (min-width:360px){
     .avatar{
-        
-        margin-top: 20px;
+        width: 200px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -5px;
+        border-radius: 3%;
+
     }
     .cardG{
-        width: 80px;
-        height: 140px;
-        margin-left: 33px;
-        margin-top: -60px;
-        background-color: rgb(237, 241, 248);
+        width: 70px;
+        height: 70px;
+        margin-left: 170px;
+        margin-top: -30px;
+        border-radius: 3%;
+        background-color: lightsteelblue;
+    }
+    .imageg{
+        width: 50px;
+        height: 50px;
+        margin-left: -10px;
+        margin-top: -10px; 
+        border-radius: 3%;
+        
+    }
+    .title-g{
+        font-family: 'Yekan';
+        font-size: 13px;
+        top: 4px;
+        position: relative;
+        left: -30px;
+    }
+    
+    .line-g{
+        margin-top: 10px;
+        margin-right: 385px;
+    }
+    .cardb{
+        width: 310px;
+        height: 150px;
+        margin-left: 355px;
+        margin-top: 10px;
+        border-radius: 3%;
+        border-color: white;
+    }
+    .card-discussion{
+        width: 500px;
+        height: 150px;
+        margin-left: 290px;
+        margin-top: 15px;
+        border-radius: 3%;
+        border-color: whitesmoke;
+    }
+    .line-g1{
+        margin-left: 290px;
+    }
+    .btn-g{
+        color: white;
+        font-family: 'Yekan';
+        margin-right: 545px;
+        margin-top: -8px;
+     
+    }
+    .out{
+       
+        margin-left: -350px;
+        margin-top: -6px; 
+        border-radius: 3%;
+       padding-left: 10px;
     }
     }
     @media (min-width:768px){
@@ -74,6 +132,15 @@
                 border-radius: 3%;
                 border-color: white;
             }
+            .title-g{
+                font-family: 'Yekan';
+                font-size: 25px;
+                top: 4px;
+                position: relative;
+                left: 345px;
+            }
+            
+
             .card-discussion{
                 width: 500px;
                 height: 150px;
@@ -82,8 +149,16 @@
                 border-radius: 3%;
                 border-color: whitesmoke;
             }
+
             .line-g1{
                 margin-left: 290px;
+            }
+            .btn-g{
+                color: white;
+                font-family: 'Yekan';
+                margin-right: 545px;
+                margin-top: -8px;
+             
             }
             .out{
                

@@ -73,7 +73,10 @@ function App(props) {
               <Route path="/groups">
                 <NavBar/>
               <Grouppage/>
-              
+              </Route>
+              <Route path="/jgroup">
+                <NavBar/>
+              <Grouppagej/>
               </Route>
             
             <Route path="/book/:bookId">
