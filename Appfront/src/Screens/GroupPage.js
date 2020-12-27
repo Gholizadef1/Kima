@@ -53,14 +53,14 @@ const GroupPage = () => {
                       <Text style={styles.groupname}>نام گروه</Text>
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :20</Text>
 
-                      <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-20%')
+                      <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                    , backgroundColor:'#1F7A8C'}}>
                       <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
                     </Button>
 
-                      <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('15%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
+                      <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
-                      <Text style ={{textAlign:'left' ,marginTop:hp('1') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
+                      <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
                       منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
                       </Text>
 
@@ -109,30 +109,28 @@ const GroupPage = () => {
             
           </List>
 
-          <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('2%')
+          <Button style={{marginLeft:wp('21%') , width:220 , borderRadius:20 , marginTop:hp('3%')
                    , backgroundColor:'#1F7A8C'}}>
                       <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ایجاد بحث جدید</Text>
           </Button>
 
-          <Text style ={{fontSize:20 , marginTop:hp('2%') , marginLeft:wp('7%'),color:'#1F7A8C'}}> اعضای گروه :</Text>
+          <Text style ={{fontSize:20 , marginTop:hp('2%') , marginLeft:wp('7%'),color:'#1F7A8C' , fontWeight:'bold'}}> اعضای گروه :</Text>
 
           <List>
-            <ListItem avatar>
+            <ListItem  style={{marginTop:hp('1%')}} avatar>
               <Left>
                 <Thumbnail source={require('../../assets/sea.jpg')} />
               </Left>
-              <Body>
-                <Text>مرضیه</Text>
+              <Body style={{marginTop:hp('8%')}}>
+                <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
               </Body>
-              <Right>
-              </Right>
             </ListItem>
             <ListItem avatar>
               <Left>
                 <Thumbnail source={require('../../assets/sea.jpg')} />
               </Left>
-              <Body>
-                <Text>مرضیه</Text>
+              <Body style={{marginTop:hp('5%')}}>
+                <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
               </Body>
               <Right>
               </Right>
