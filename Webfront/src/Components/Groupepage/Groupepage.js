@@ -53,6 +53,7 @@ import {
      
       
     }
+
     return(
       
       <div className="mx-md-5 pt-5 px-md-5">
@@ -76,20 +77,23 @@ import {
     <b className="title-g" >{current.title}</b>
     </div>
     {message === "You joind this group!" ?
-    <button onClick={joinGroup}  className="btn btn-g bg-primary" >اضافه‌شدن به گروه</button>
+    <div>
+    <button onClick={joinGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
+    <button className="btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:425,marginTop:15}}>اضافه‌کردن بحث</button>
+</div>
     :
     <div></div>
         }
-    {message === "You leaved this group!" ?
-    <button onClick={joinGroup}  className="btn btn-g bg-danger" >خارج‌شدن از گروه </button>
+        {message === "You leaved this group!" ?
+        <div>
+       <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+
+        </div>
         :
         <div></div>
       }
-    
-    <hr className="line-g" style={{width:"37%"}}></hr>
 
-    <div>
-    </div>
+    <hr className="line-g" style={{width:"37%"}}></hr>
     <div class="card cardb">
   <div class="card-body">
   <p className="text-right mr-3">{current.summary}
@@ -98,11 +102,6 @@ import {
   </div>
     </div>
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",right:-495}}>بحث‌ها</b>
-    {message === "You joind this group!"?
-    <div></div>
-      :
-      <button className="btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:425,marginTop:15}}>اضافه‌کردن بحث</button>
-      }
     <div class="card card-discussion">
   <div class="card-body">
   <p className="text-right">بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بح ث
