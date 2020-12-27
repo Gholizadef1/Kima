@@ -13,17 +13,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Home = ({navigation}) => { 
 
     const [image,setImage] = useState([])
+    const [best,setbest] = useState([])
+    const [mostdis,setmostdis] = useState([])
 
     useEffect(() =>{
         getImageFromAPI()
+        getbestsFromAPI()
     },[])
 
     function getImageFromAPI(){
-
-
         axiosinst.get('/bookdetail')
-
-
         .then(function(response){
             setImage(response.data)
             // console.log(response)
@@ -32,6 +31,17 @@ const Home = ({navigation}) => {
             console.log(error)
         })
     }
+    function getbestsFromAPI(){
+        axiosinst.get('/filter-book-rate')
+        .then(function(response){
+            setbest(response.data)
+            // console.log(response)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+
     if(!image){
         return null
     }
@@ -81,7 +91,7 @@ const Home = ({navigation}) => {
                     <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    data={image}
+                    data={best}
                     renderItem= {({item}) =>{
                         return(
                             <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
