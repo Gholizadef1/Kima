@@ -35,6 +35,63 @@ const userschema=yup.object({
 
 const Groups = () => {
 
+  const [picture,setpicture]=useState(null);
+
+  const pickfromgallery = async ()=>{
+    await console.log(await AsyncStorage.getItem('token'));
+    console.log('gallery')
+      const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
+      if(granted){
+          console.log(granted)
+          let data=await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            allowsEditing:true,
+            aspect:[1,1],
+            quality:1
+          })
+          console.log(data);
+          console.log(data.uri)
+          const formdata = new FormData();
+          const newfile={uri:data.uri,
+            type:`test/${data.uri.split(".")[3]}`,
+            name:`test.${data.uri.split(".")[3]}`}
+          console.log(newfile)
+
+          formdata.append('profile_photo',newfile)
+          
+          if(data.cancelled===false){
+          const back={        
+            profile_photo:data
+          }
+           const backk=JSON.stringify(back);
+
+          // const response=await axiosinst.put('http://6124bc8043de.ngrok.io/api/update-profile/',formdata,{
+
+          //   headers:{
+          //     "Content-Type":"application/json",
+          //     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+          //   }
+          //      )
+          // .then( function(response){
+          //   const a=response.data.profile_photo
+          //   setpicture(a);
+            
+          // })
+          // .catch( function(error){
+          //   console.log(error)
+          // })
+         
+          }
+      }
+      else
+      {
+        Alert.alert('oops',' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید',[{
+          Title:'فهمیدم',onPress:()=>console.log('alert closed')
+          }])
+      }
+  
+  }
+
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState(['as;df']);
