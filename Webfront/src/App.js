@@ -28,7 +28,7 @@ import BookView from './components/bookView/bookView'
 //import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
-
+//import Inditual from './Components/Groupepage/Groupepagej';
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
@@ -74,7 +74,7 @@ function App(props) {
                 <NavBar/>
               <Grouppage/>
               </Route>
-              
+             
             
             <Route path="/book/:bookId">
               <NavBar/>

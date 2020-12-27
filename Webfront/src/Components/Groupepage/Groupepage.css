@@ -98,7 +98,7 @@
             }
         @media (min-width:960px){
             .avatar{
-                width: 500px;
+                width: 600px;
                 height: 200px;
                 margin-top: -100px;
                 margin-left: 10px;
@@ -125,9 +125,9 @@
                 margin-right: 385px;
             }
             .cardb{
-                width: 310px;
+                width: 510px;
                 height: 150px;
-                margin-left: 355px;
+                margin-left: 350px;
                 margin-top: 10px;
                 border-radius: 3%;
                 border-color: white;
@@ -142,9 +142,9 @@
             
 
             .card-discussion{
-                width: 500px;
+                width: 510px;
                 height: 150px;
-                margin-left: 290px;
+                margin-left: 350px;
                 margin-top: 15px;
                 border-radius: 3%;
                 border-color: whitesmoke;
