@@ -113,17 +113,7 @@ const Groups = () => {
          name="close" size={23} color="#D75A5A" />
        {/* </View> */}
         {/* <Text>Hi im in modall :)))))</Text> */}
-        <TouchableOpacity style={styles.avatar}
-       onPress={() => { }}>
-      <ImageBackground borderRadius={20}
-
-         source={require('../../assets/backprof5j.jpeg')}
-         style={styles.avatar}
-
-       >
-
-         </ImageBackground>
-     </TouchableOpacity>
+       
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Username:'',Discription:'',photo:'../../assets/backprof5j.jpeg'}}
       validationSchema={userschema}
@@ -181,6 +171,19 @@ const Groups = () => {
      >
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
+     <View style={{}}>
+     <TouchableOpacity style={styles.avatar}
+       onPress={() => { }}>
+      <ImageBackground borderRadius={20}
+        
+         source={require('../../assets/backprof5j.jpeg')}
+         style={styles.avatar}
+
+       >
+
+         </ImageBackground>
+     </TouchableOpacity>
+    
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
      <Item style={styles.item} rounded >
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
@@ -195,17 +198,17 @@ const Groups = () => {
        
 
       </Item>
-
-    
+      </View>
+     
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
    
      <View style={styles.item2}>
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('1%')}}>توضیحات</Text>
                 <Textarea rowSpan={7.5} bordered borderRadius={8}
                   borderColor={'lightgray'}
-                  onChangeText={props.handleChange('comment')}
-                  onBlur={props.handleBlur('comment')}
-                  value={props.values.comment}
+                  onChangeText={props.handleChange('Discription')}
+                  onBlur={props.handleBlur('Discription')}
+                  value={props.values.Discription}
                   
                   placeholder={'  '} placeholderTextColor='black' fontSize={16} style={{ backgroundColor: 'white'}}>
 
@@ -220,13 +223,13 @@ const Groups = () => {
          </Input>
          <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" /> */}
        
-
      
+        
     
       
        <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
        
-    
+       
       
      </View>
     
@@ -384,11 +387,11 @@ const styles = StyleSheet.create({
     },
     avatar: {
       height: hp('14%'),
+      marginTop:hp('-1.5%'),
       width: wp('28%'),
-      margin:hp('1.5%'),
+      marginLeft:wp('-1%'),
       borderRadius: 5,
-      position: 'absolute'
-  
+      position:'absolute'
     },
   });
   export default Groups;
