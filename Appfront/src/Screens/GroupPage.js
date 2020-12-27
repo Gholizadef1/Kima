@@ -29,11 +29,10 @@ const GroupPage = () => {
         <Image
 
          source={require('../../assets/kiddy_book.jpg')}
-         style={{   width:wp('100%'),
-        height:hp('35%'),
-        position:'absolute',
+         style={{width:wp('100%'),
+         height:hp('35%'),
+         position:'absolute',
         
-       
        }}
 
          ></Image>
@@ -52,24 +51,25 @@ const GroupPage = () => {
                       ></Avatar.Image>}
 
                       <Text style={styles.groupname}>نام گروه</Text>
+                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :20</Text>
 
-                      <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('4%')
+                      <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-20%')
                    , backgroundColor:'#1F7A8C'}}>
-                      <Text style={{marginLeft:wp('23%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
+                      <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
                     </Button>
 
-                      <Text style={{fontSize:22 , marginLeft:wp('7%') , marginTop:hp('6%') ,color:'#1F7A8C'}}>درباره گروه:</Text>
+                      <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('15%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
-                      <Text style ={{textAlign:'left' , marginLeft:wp('7%') , marginTop:hp('1%') ,marginBottom:hp('2%')}}> 
+                      <Text style ={{textAlign:'left' ,marginTop:hp('1') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
                       منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
                       </Text>
 
-                    <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C'}}>بحث های انجام شده:</Text>
+                    <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C' ,fontWeight:'bold'}}>بحث های انجام شده :</Text>
 
                     <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail style={{borderRadius:25}} square source={require ('../../assets/girl.jpg')} />
+                    <Thumbnail style={{borderRadius:10}} square source={require ('../../assets/girl.jpg')} />
                   </Left>
                   <Body>
                     <Text>بحث اول</Text>
@@ -82,7 +82,7 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail style={{borderRadius:25}} square source={require ('../../assets/index.jpg')} />
+                    <Thumbnail style={{borderRadius:10}} square source={require ('../../assets/index.jpg')} />
                   </Left>
                   <Body>
                     <Text>بحث سوم</Text>
@@ -112,7 +112,23 @@ const GroupPage = () => {
           <Button style={{marginLeft:wp('17%') , width:220 , borderRadius:20 , marginTop:hp('2%')
                    , backgroundColor:'#1F7A8C'}}>
                       <Text style={{marginLeft:wp('17%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ایجاد بحث جدید</Text>
-                    </Button>
+          </Button>
+
+          <Text style ={{fontSize:20 , marginTop:hp('2%') , marginLeft:wp('7%'),color:'#1F7A8C'}}> اعضای گروه :</Text>
+
+          <List>
+            <ListItem avatar>
+              <Left>
+                <Thumbnail source={require('../../assets/sea.jpg')} />
+              </Left>
+              <Body>
+                <Text>مرضیه</Text>
+              </Body>
+              <Right>
+              </Right>
+            </ListItem>
+          </List>
+
             </ScrollView>
 
         </View>
@@ -137,18 +153,17 @@ const styles = StyleSheet.create({
     backpic:{
        
         width:wp('100%'),
-        height:hp('32%'), 
-        borderBottomRightRadius:50,
-        borderBottomLeftRadius:50
+        height:hp('32%')
     },
     avatar:{
       marginTop:hp('-10%'),
-      marginLeft:wp('35%')
+      marginLeft:wp('15%')
       
   },
   groupname : {
     fontSize:27 ,
-    marginLeft:wp('37%') ,
+    fontWeight:'bold',
+    marginLeft:wp('19%') ,
     marginTop:hp('3%')
   }
   });
