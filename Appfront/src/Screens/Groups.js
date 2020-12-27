@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
@@ -180,8 +180,8 @@ const Groups = () => {
       // }}
      >
       {(props)=>(
-     <View style={{ marginTop:hp('2%')}}>
-     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('35%')}}>نام گروه</Text>
+     <View style={{ marginTop:hp('5%')}}>
+     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
      <Item style={styles.item} rounded >
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
      
@@ -195,6 +195,33 @@ const Groups = () => {
        
 
       </Item>
+
+    
+     {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
+   
+     <View style={styles.item2}>
+     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('1%')}}>توضیحات</Text>
+                <Textarea rowSpan={7.5} bordered borderRadius={8}
+                  borderColor={'lightgray'}
+                  onChangeText={props.handleChange('comment')}
+                  onBlur={props.handleBlur('comment')}
+                  value={props.values.comment}
+                  
+                  placeholder={'  '} placeholderTextColor='black' fontSize={16} style={{ backgroundColor: 'white'}}>
+
+                </Textarea>
+              </View>
+
+     {/* <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
+         onChangeText={props.handleChange('Username')}
+         onBlur={props.handleBlur('Username')}
+         value={props.values.Username}
+         placeholder={''} placeholderTextColor='gray' >
+         </Input>
+         <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" /> */}
+       
+
+     
     
       
        <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
@@ -284,16 +311,23 @@ const styles = StyleSheet.create({
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
+    item2:{
+      marginLeft:wp('-2%'),
+      marginRight:wp('-1%'),
+      marginTop:hp('6%'),
+      height:wp('9.5%'),
+    
+    },
     item:{
       marginLeft:wp('31%'),
       marginRight:wp('5%'),
-      marginTop:hp('1%'),
+      // marginTop:hp('1%'),
       height:wp('9.5%')
       
       
     },
     Input:{
-      // fontSize:hp('1.8%'),
+      // fontSize:hp('1.8%'),a
       // fontStyle:'normal',
       // height:wp('1%')
       // marginLeft:wp('31%'),
