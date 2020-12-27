@@ -38,9 +38,9 @@ const userschema=yup.object({
 
 const Groups = () => {
 
-  const [picture,setpicture]=useState(null);
+  const [picture,setpicture]=useState(require('../../assets/backprof5j.jpeg'));
 
-  const pickfromgallery = async ()=>{
+  const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
       const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
@@ -67,7 +67,15 @@ const Groups = () => {
             profile_photo:data
           }
            const backk=JSON.stringify(back);
-
+           console.log(props.values.photo+'formik photo1')
+            // props.values.photo="{uri:"+data.uri+'}'
+           props.values.photo=data.uri
+           //baraye in ke rerender beshe va photo formik form taghir kone
+            setpicture(data.uri)
+             props.handleChange('photo')
+            // change(data.uri)
+           console.log(props.values.photo+'formik photo2')
+           
           // const response=await axiosinst.put('http://6124bc8043de.ngrok.io/api/update-profile/',formdata,{
 
           //   headers:{
@@ -117,7 +125,7 @@ const Groups = () => {
         {/* <Text>Hi im in modall :)))))</Text> */}
        
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:'',Discription:'',photo:'../../assets/backprof5j.jpeg'}}
+      initialValues={{Username:'',Discription:'',photo:require('../../assets/backprof5j.jpeg')}}
       validationSchema={userschema}
 
       //   onSubmit={async(values,actions)=>{
@@ -174,17 +182,33 @@ const Groups = () => {
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
      <View style={{}}>
-     <TouchableOpacity style={styles.avatar}
-       onPress={() => { pickfromgallery()}}>
+     {props.values.photo===require('../../assets/backprof5j.jpeg')?<TouchableOpacity style={styles.avatar}
+       onPress={() => { pickfromgallery(props)}}>
       <ImageBackground borderRadius={20}
         
-         source={require('../../assets/backprof5j.jpeg')}
+         source={props.values.photo}
+         
          style={styles.avatar}
+        //  onBlur={props.handleBlur('photo')}
+     
 
        >
 
          </ImageBackground>
-     </TouchableOpacity>
+     </TouchableOpacity>:<TouchableOpacity style={styles.avatar}
+       onPress={() => { pickfromgallery(props,props.handleChange)}}>
+      <ImageBackground borderRadius={20}
+        
+         source={{uri:`${props.values.photo}`}}
+         onChangeItem={props.handleChange('photo')}
+         style={styles.avatar}
+        //  onBlur={props.handleBlur('photo')}
+     
+
+       >
+
+         </ImageBackground>
+     </TouchableOpacity>}
     
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
      <Item style={styles.item} rounded >
