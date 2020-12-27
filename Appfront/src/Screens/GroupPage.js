@@ -134,6 +134,9 @@ const GroupPage = () => {
               </Body>
             </ListItem>
           </List>
+          <Button style={{marginLeft:wp('90%')}} transparent>
+            <Text style={{color:'#1F7A8C'}}>بیشتر</Text>
+          </Button>
 
             </ScrollView>
 
