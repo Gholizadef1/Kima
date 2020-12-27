@@ -129,7 +129,8 @@ const Groups = () => {
       initialValues={{Username:'',Discription:'',photo:require('../../assets/backprof5j.jpeg')}}
       validationSchema={userschema}
 
-        onSubmit={async(values,actions)=>{
+      onSubmit={async(values,actions)=>{
+          console.log('ON SUBMIT')
           const formdata = new FormData();
           formdata.append('title',values.Username)
           formdata.append('summary',values.Discription)
@@ -214,14 +215,15 @@ const Groups = () => {
          </Input>
          <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" />
        
-
+  <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
       </Item>
+    
       </View>
      
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
    
      <View style={styles.item2}>
-     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('1%')}}>توضیحات</Text>
+        <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('1%')}}>توضیحات</Text>
                 <Textarea rowSpan={7.5} bordered borderRadius={8}
                   borderColor={'lightgray'}
                   onChangeText={props.handleChange('Discription')}
@@ -231,7 +233,9 @@ const Groups = () => {
                   placeholder={'  '} placeholderTextColor='black' fontSize={16} style={{ backgroundColor: 'white'}}>
 
                 </Textarea>
+                <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
               </View>
+
 
      {/* <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
          onChangeText={props.handleChange('Username')}
@@ -242,7 +246,11 @@ const Groups = () => {
          <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" /> */}
        
      
-        
+         <Button bordered rounded style={styles.button}
+       onPress={()=>{props.handleSubmit}}
+       >
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت گروه</Text>
+        </Button>
     
       
        <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
@@ -257,11 +265,7 @@ const Groups = () => {
      )}
 
      </Formik>
-     <Button bordered rounded style={styles.button}
-       onPress={()=>{}}
-       >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('11%')}}>ساخت گروه</Text>
-        </Button>
+    
         </View>
 
         </View>
