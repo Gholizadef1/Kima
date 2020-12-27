@@ -13,6 +13,25 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Eachgroup from './Eachgroup';
 import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
+import {Formik,formik} from 'formik';
+import * as yup from 'yup';
+
+
+const userschema=yup.object({
+
+  Username:yup.string()
+  .required("لطفا نام کاربری جدید خود را وارد کنید")
+  .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
+
+  Discription:yup.string()
+  .required("لطفا نام کاربری جدید خود را وارد کنید")
+  .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
+
+  // photo:yup.string()
+  // .required("لطفا نام کاربری جدید خود را وارد کنید")
+  // .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
+
+})
 
 const Groups = () => {
 
