@@ -138,6 +138,11 @@ const GroupPage = () => {
             <Text style={{color:'#1F7A8C'}}>بیشتر</Text>
           </Button>
 
+          <Button style={{marginLeft:wp('21%') , width:220 , borderRadius:20 , marginTop:hp('3%')
+                   , backgroundColor:'#1F7A8C' , marginBottom:hp('2%')}}>
+                      <Text style={{marginLeft:wp('25%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
+          </Button>
+
             </ScrollView>
 
         </View>
