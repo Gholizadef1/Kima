@@ -107,3 +107,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class FilterRateSerializer(serializers.ModelSerializer):
+    book_info = serializers.RelatedField(source='current_book',read_only=True)
+    
+    class Meta:
+        model = Ratinguser
+        fields = ['book_info']
+
+    def to_representation(self,value):
+        return bookSerializer(book.objects.get(pk=value['current_book'])).data
