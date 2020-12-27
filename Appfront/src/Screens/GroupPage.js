@@ -69,7 +69,7 @@ const GroupPage = () => {
                     <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
+                    <Thumbnail style={{borderRadius:25}} square source={require ('../../assets/girl.jpg')} />
                   </Left>
                   <Body>
                     <Text>بحث اول</Text>
@@ -82,7 +82,7 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
+                    <Thumbnail style={{borderRadius:25}} square source={require ('../../assets/index.jpg')} />
                   </Left>
                   <Body>
                     <Text>بحث سوم</Text>
@@ -95,7 +95,7 @@ const GroupPage = () => {
                 </ListItem>
                 <ListItem thumbnail>
                   <Left>
-                    <Thumbnail square source={{ uri: 'http://426bd15ca445.ngrok.io/media/default.png' }} />
+                    <Thumbnail square source={require ('../../assets/tea.jpg')} />
                   </Left>
                   <Body>
                     <Text>بحث سوم </Text>
