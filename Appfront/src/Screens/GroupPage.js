@@ -127,6 +127,16 @@ const GroupPage = () => {
               <Right>
               </Right>
             </ListItem>
+            <ListItem avatar>
+              <Left>
+                <Thumbnail source={require('../../assets/sea.jpg')} />
+              </Left>
+              <Body>
+                <Text>مرضیه</Text>
+              </Body>
+              <Right>
+              </Right>
+            </ListItem>
           </List>
 
             </ScrollView>
