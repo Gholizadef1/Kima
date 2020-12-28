@@ -154,18 +154,18 @@ const Groups = () => {
              )
         .then( function(response){
           console.log(response)
-          Alert.alert('گروه با موفقیت تغییر کرد ','',[
+          Alert.alert('','گروه با موفقیت ساخته شد ',[
             {
          text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
             }
-            ],{cancelable:false})
+            ],{cancelable:false},{style:{height:50}})
           
           
         })
         .catch( function(error){  
             {
               console.log(error)
-              Alert.alert('مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم','',[{
+              Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
             
 
             text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
