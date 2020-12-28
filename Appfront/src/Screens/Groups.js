@@ -233,7 +233,7 @@ const Groups = () => {
                   onBlur={props.handleBlur('Discription')}
                   value={props.values.Discription}
                   
-                  placeholder={'  '} placeholderTextColor='black' fontSize={16} style={{ backgroundColor: 'white'}}>
+                  placeholder={'  '}  placeholderTextColor='black' fontSize={hp('1.6.5%')}  style={{ backgroundColor: 'white',fontSize:hp('1.5%')}}>
 
                 </Textarea>
                 <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
@@ -348,6 +348,7 @@ const styles = StyleSheet.create({
       marginRight:wp('-1%'),
       marginTop:hp('6%'),
       height:wp('9.5%'),
+      fontSize:hp('2.5%')
     
     },
     item:{
@@ -366,6 +367,8 @@ const styles = StyleSheet.create({
       // marginRight:wp('31%'),
       // left:wp('42%'),
       left:wp('8%'),
+      fontSize:hp('1.5%'),
+      fontWeight:'bold',
       marginRight:wp('10%'),
       // marginTop:hp('1%'),
       position:'absolute',
