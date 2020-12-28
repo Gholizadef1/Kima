@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState , useEffect} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card , List ,ListItem, Thumbnail } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -24,16 +24,13 @@ const GroupPage = () => {
   const [picture,setpicture]=useState(null);
   const [userid, setuserid] = useState('');
   const [groupinfo,setgroupinfo]=useState(null);
-  const equal = async (item) => {
-    setuserid(await AsyncStorage.getItem('id').toString());
-  }
 
   useEffect(() =>{
     getInfo()
 },[])
 
   const getInfo = async()=>{
-    axiosinst.get('/api/group/details/'+userid, {
+    axiosinst.get('/api/group/details/'+await (await AsyncStorage.getItem('id')).toString(), {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -79,18 +76,18 @@ const GroupPage = () => {
                       source={require('../../assets/avatar.png')}
                       ></Avatar.Image>}
 
-                      <Text style={styles.groupname}>نام گروه</Text>
+                      <Text style={styles.groupname}>{groupinfo.title}</Text>
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :20</Text>
 
                       <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                   , backgroundColor:'#1F7A8C'}}>
+                      , backgroundColor:'#1F7A8C'}}>
                       <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
                     </Button>
 
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
                       <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
-                      منیتتتتنتنیتتالاتنمنئدذرزبلاتنئدذرزبلاتدذرزذدئنومنتالبفغعهخمنئدذرزبلاتاین گروه درباره کتاب خوانی است
+                      {groupinfo.description}
                       </Text>
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C' ,fontWeight:'bold'}}>بحث های انجام شده :</Text>
