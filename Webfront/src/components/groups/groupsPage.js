@@ -21,11 +21,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import { red } from "@material-ui/core/colors";
+import {withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 function GroupsPage (props){
   const [groups,setGroups] = useState([]);
   const [filterBase,setFilterBase]= useState("popular");
+  
 
   useEffect(()=>{
     axios.get('http://127.0.0.1:8000/api/group')
@@ -129,17 +132,16 @@ const handleCreateGroupSubmit =(e) =>{
     console.log(response);
 
     if(response.status === 200){
-      setNewGroup(prevState => ({
-          ...prevState,
-          backError : 'گروه با موفقیت ساخته شد'
-      }))}
+      setMassage('گروه با موفقیت ساخته شد')
+      setOpenSnack(true);
+      handleCloseCreateGroup();
+
+    }
   })
   .catch(error=>{
     console.log(error);
-    setNewGroup(prevState => ({
-      ...prevState,
-      backError : "گروه از قبل وجود دارد"
-  }));
+    setMassage("گروه از قبل وجود دارد")
+    setOpenSnack(true);
   });
 }
 
@@ -169,6 +171,15 @@ const handleImageUpload = e => {
     reader.readAsDataURL(file);
   }
 };
+
+const [massage, setMassage]= useState(<br></br>);
+const[openSnack,setOpenSnack]=useState(false);
+const handleCloseSnack = (event, reason) => {
+  if (reason === 'clickaway') {
+  return;
+  }
+  setOpenSnack(false);
+  };
 
 
     return(
@@ -288,9 +299,14 @@ const handleImageUpload = e => {
                 </div>
 
                    )}
-
-
             </div>
+            <Snackbar
+          anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
+          open={openSnack}
+          autoHideDuration={3000}
+          onClose={handleCloseSnack}
+          message={massage}
+          />
         </div>
 
 
