@@ -106,17 +106,19 @@ const handleCreateGroupSubmit =(e) =>{
   })); 
 
   var formdata = new FormData()
+  formdata.append('title',newGroup.name)
+  formdata.append('summary',newGroup.description)
   formdata.append('photo',state.file)
 
-  const payload={
-        "title":newGroup.name,
-        "summary":newGroup.description,
-        "photo":state.file
-        //formdata
-  }
+  // const payload={
+  //       "title":newGroup.name,
+  //       "summary":newGroup.description,
+  //       "photo":state.file
+  //       //formdata
+  // }
 
   //const back= JSON.stringify(payload)
-  axios.post('http://127.0.0.1:8000/api/group',payload,
+  axios.post('http://127.0.0.1:8000/api/group',formdata,
   {
     headers:{
    "Content-Type":"application/json",
