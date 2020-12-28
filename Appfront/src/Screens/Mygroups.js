@@ -275,11 +275,11 @@ const Mygroups = () => {
         </Modal>
     
         </View>
-        <View style={{position:'absolute', justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}}>
-        <Feather style={styles.plus} onPress={()=>setmodalopen(true)}
+        <Button style={{position:'absolute', justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>setmodalopen(true)} >
+        <Feather style={styles.plus} 
          name="plus" size={32} color="#EDF2F4" />
      
-         </View>
+         </Button>
 
          <View style={{marginLeft:wp('2%')}}>
 
