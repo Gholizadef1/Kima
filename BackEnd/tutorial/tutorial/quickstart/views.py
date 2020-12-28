@@ -599,9 +599,8 @@ class GroupView(APIView):
         if serializer.is_valid():
             title = serializer.data.get("title")
             summary = serializer.data.get("summary")
-            photo = serializer.data.get("photo")
             if  not Group.objects.filter(title=title).exists():
-                new_group = Group(owner=user,title=title,summary=summary,group_photo=photo)
+                new_group = Group(owner=user,title=title,summary=summary,group_photo=request.FILES["photo"])
                 new_group.save()
                 new_member = Member(group=new_group,user=user)
                 new_member.save()
