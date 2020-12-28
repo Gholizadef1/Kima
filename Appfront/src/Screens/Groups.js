@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground,Alert} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -144,29 +144,32 @@ const Groups = () => {
       
         //  const backk=JSON.stringify(back);
         // const params=JSON.stringify({username:'Hi'});
+        console.log(formdata.data+'formdata')
 
-
-        const response=await axiosinst.post('/api/group/',formdata,{
+        const response=await axiosinst.post('http://17ff0670a2de.ngrok.io/api/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
           }
              )
         .then( function(response){
-      
-          Alert.alert('oops','گروه با موفقیت تغییر کرد ',[{
-         Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+          console.log(response)
+          Alert.alert('گروه با موفقیت تغییر کرد ','',[
+            {
+         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+            }
+            ],{cancelable:false})
           
           
         })
         .catch( function(error){  
             {
-              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+              console.log(error)
+              Alert.alert('مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم','',[{
             
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+            text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+            }],{cancelable:false},{style:{height:50}})
             }     
         })
 
