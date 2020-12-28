@@ -54,26 +54,28 @@ const Mygroups = () => {
           })
           console.log(data);
           console.log(data.uri)
-      
+          const formdata = new FormData();
           
           const newfile={uri:data.uri,
             type:`test/${data.uri.split(".")[3]}`,
             name:`test.${data.uri.split(".")[3]}`}
           console.log(newfile)
 
-          formdata.append('profile_photo',newfile)
+          formdata.append('photo',newfile)
           
           if(data.cancelled===false){
           const back={        
-            profile_photo:data
+            photo:data
           }
            const backk=JSON.stringify(back);
            console.log(props.values.photo+'formik photo1')
             // props.values.photo="{uri:"+data.uri+'}'
            props.values.photo=data.uri
            //baraye in ke rerender beshe va photo formik form taghir kone
-            setpicture(profile_photo)
+        
              props.handleChange('photo')
+             setpicture(data.uri)
+             console.log(picture+'  PICTURE')
             // change(data.uri)
            console.log(props.values.photo+'formik photo2')
            
@@ -147,7 +149,7 @@ const Mygroups = () => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('http://17ff0670a2de.ngrok.io/api/group',formdata,{
+        const response=await axiosinst.post('http://a32f717e71fe.ngrok.io/api/grup',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -166,6 +168,7 @@ const Mygroups = () => {
         .catch( function(error){  
             {
               console.log(error)
+            
               Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
             
 
