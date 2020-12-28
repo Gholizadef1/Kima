@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal} from 'react-native';
- import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
+//  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
@@ -11,16 +11,32 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Eachgroup from './Eachgroup';
-// import { SearchBar } from 'react-native-elements';
+ import { SearchBar } from 'react-native-elements';
 
 const Groups = () => {
 
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState(['as;df']);
+    const [search,setsearch]=useState([])
     return(
       
         <View style={styles.container}>
+          <SearchBar
+          style={{backgroundColor:'#EDF2F4',height:hp('4%'),width:wp('95%'),position:'absolute',right:wp('2%'),left:wp('-1.5%')}}
+          searchIcon={ <Feather name="search" size={24} color="black"style={{position:'absolute',right:100}} />}
+          borderTopLeftRadius={20}
+          borderTopRightRadius={20}
+          borderBottomRightRadius={20}
+          borderBottomLeftRadius={20}
+          containerStyle={{backgroundColor:'white',borderTopColor:'white',borderBottomColor:'white'}}
+          inputContainerStyle={{backgroundColor:'white',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%')}}
+          cancelIcon={<AntDesign style={{}}
+         name="close" size={30} color="gray" />}
+        placeholder="Type Here..."
+        onChangeText={console.log('taghirkarde')}
+        value={search}
+      />
         {/* <Modal visible={modalopen} animationType='slide'>
         <AntDesign onPress={()=>setmodalopen(false)}
          name="close" size={24} color="black" />
