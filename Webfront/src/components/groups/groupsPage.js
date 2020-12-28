@@ -137,7 +137,7 @@ const handleCreateGroup =(e) =>{
 const [state , setState]=useState(
   {
       navigate:false,
-      file:null
+      file:""
   }
 )
 const uploadedImage = React.useRef(null);
@@ -187,22 +187,48 @@ const handleImageUpload = e => {
                 <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                   <DialogTitle id="form-dialog-title">ساخت گروه جدید</DialogTitle>
                   <DialogContent >
+                    
 
+                  <input class="form-control" 
+                type="file" accept="image/*" 
+                onChange={handleImageUpload} 
+                ref={imageUploader} 
+
+                style={{ display: "none",color:"white" }} />
+
+                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="rounded-circle img-fluid"
+                onClick={() => imageUploader.current.click()} 
+                style={{
+                  width: 120,
+                  height: 120,
+                  marginLeft:180,
+                  marginTop:-5,
+                  display: "block"}}/>
+
+                  <form >
                     <TextField
                       autoFocus
                       margin="dense"
                       id="name"
+                      value={newGroup.name}
                       label="نام گروه"
                       type="name"
+                      onChange={handleChange}
                       fullWidth
+                      variant="outlined"
                     />
                     <TextField
                       margin="dense"
-                      id="text"
+                      id="description"
+                      value={newGroup.description}
                       label="توضیحات"
-                      type="text"
+                      type="description"
+                      onChange={handleChange}
                       fullWidth
+                      multiline
+                      variant="outlined"
                     />
+                    </form>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleCloseCreateGroup} color="black">
