@@ -101,10 +101,24 @@ class CreateGroupSerializer(serializers.Serializer):
 class GroupSerializer(serializers.ModelSerializer):
 
     owner = UserProfileSerializer(read_only=True)
+    is_member = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
 
     class Meta:
         model = Group
-        fields = ['title','owner','group_photo','summary','id','members_count',]
+        fields = ['title','owner','group_photo','summary','id','members_count','is_owner','is_member']
+
+    def get_is_owner(self, obj):
+        user =  self.context['request'].user
+        if obj.owner == user:
+            return True
+        return False
+    
+    def get_is_member(self, obj):
+        user =  self.context['request'].user
+        if Member.objects.filter(user=user,group=obj).exists():
+            return True
+        return False
 
 class MemberSerializer(serializers.ModelSerializer):
 

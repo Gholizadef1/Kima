@@ -565,7 +565,7 @@ class GroupView(APIView):
 
     def get(self,request):
         groups = Group.objects.all()
-        serializer = GroupSerializer(groups,many=True)
+        serializer = GroupSerializer(groups,context={"request": request},many=True)
         return Response(serializer.data)
 
     def post(self,request):
@@ -588,7 +588,7 @@ class GroupDetailsView(APIView):
     
     def get(self,request, pk):
         group = Group.objects.get(id=pk)
-        serializer = GroupSerializer(group,many=False)
+        serializer = GroupSerializer(group,context={"request": request},many=False)
         return Response(serializer.data)
 
 class MemberGroupView(APIView):
@@ -625,7 +625,7 @@ class FilterGroupbyTime(APIView):
     def get(self,request):
         if Group.objects is not None:
             gp_list = Group.objects.order_by('-create_time')
-            serializer = GroupSerializer(gp_list,many=True)
+            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Group!',}
         return Response(response)
@@ -635,7 +635,7 @@ class FilterGroupbyMember(APIView):
     def get(self,request):
         if Group.objects is not None:
             gp_list=sorted(Group.objects.all(),  key=lambda m: -m.members_count)
-            serializer = GroupSerializer(gp_list,many=True)
+            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Group!',}
         return Response(response)
