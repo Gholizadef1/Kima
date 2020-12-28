@@ -74,6 +74,12 @@ function GroupsPage (props){
 
   const handleCloseCreateGroup = () => {
     setOpenCreateGroup(false);
+    setNewGroup({
+      picture: "",
+      name : "",
+      description :"",
+      backError : ""
+    }); 
   };
 
   const [newGroup,setNewGroup] = useState({
@@ -91,24 +97,23 @@ function GroupsPage (props){
     }))
 }
 
-const handleCreateGroup =(e) =>{
+const handleCreateGroupSubmit =(e) =>{
   e.preventDefault();
   setNewGroup(prevState => ({
       ...prevState,
       backError : ""
   })); 
 
-  //var formdata = new FormData()
-  //formdata.append('profile_photo',state.file)
+  var formdata = new FormData()
+  formdata.append('profile_photo',state.file)
 
   const payload={
-        "name":newGroup.name,
-        "d":newGroup.description,
-        "p":state.file
+        "title":newGroup.name,
+        "summary":newGroup.description
   }
 
-  const back= JSON.stringify(payload)
-  axios.put('http://127.0.0.1:8000/api/group',back,
+  //const back= JSON.stringify(payload)
+  axios.post('http://127.0.0.1:8000/api/group',payload,
   {
     headers:{
    "Content-Type":"application/json",
@@ -119,7 +124,6 @@ const handleCreateGroup =(e) =>{
     console.log(response);
 
     if(response.status === 200){
-      console.log(response.status);
       setNewGroup(prevState => ({
           ...prevState,
           backError : 'گروه با موفقیت ساخته شد'
@@ -169,7 +173,7 @@ const handleImageUpload = e => {
                 <div variant="gray" className="btn">
                   <GoSearch size="30" color="black"/>
                 </div>
-                <input className=" shadow form-control rounded-pill px-4 text-right " type="text" name="group" placeholder="نام گروه" />  
+                <input className=" shadow form-control rounded-pill px-4 text-right " type="title" name="group" placeholder="نام گروه" />  
                 <div variant="gray" className="btn">
                 </div>
               </div>
@@ -212,7 +216,7 @@ const handleImageUpload = e => {
                       id="name"
                       value={newGroup.name}
                       label="نام گروه"
-                      type="name"
+                      type="title"
                       onChange={handleChange}
                       fullWidth
                       variant="outlined"
@@ -234,7 +238,7 @@ const handleImageUpload = e => {
                     <Button onClick={handleCloseCreateGroup} color="black">
                       انصراف
                     </Button>
-                    <Button onClick={handleCreateGroup} color="black">
+                    <Button onClick={handleCreateGroupSubmit} color="black">
                       ثبت
                     </Button>
                   </DialogActions>
