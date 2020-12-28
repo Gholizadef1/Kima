@@ -48,6 +48,26 @@ const GroupPage = () => {
     });
   }
 
+  // const PostJoin = async () => {
+
+  //     axiosinst.post('/api/' +id, back, {
+  //       "headers": {
+  //         "content-type": "application/json",
+  //         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //       }
+  //     })
+  //       .then(async function (response) {
+  //         console.log(response.data)
+  //         getPicker();
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+          
+          
+  //       });
+
+  // }
+
     return(
         <View style={styles.container}>
             <ScrollView>
