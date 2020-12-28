@@ -23,17 +23,20 @@ const Groups = () => {
       
         <View style={styles.container}>
           <SearchBar
-          style={{backgroundColor:'#EDF2F4',height:hp('4%'),width:wp('95%'),position:'absolute',right:wp('2%'),left:wp('-1.5%')}}
-          searchIcon={ <Feather name="search" size={24} color="black"style={{position:'absolute',right:100}} />}
+          style={{backgroundColor:'#EDF2F4',height:hp('4.5%'),width:wp('50%')}}
+          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%')}} />}
           borderTopLeftRadius={20}
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
+          placeholder={'نام گروه ...'}
+          placeholderTextColor={'gray'}
+          inputStyle={{color:'black',fontSize:hp('1.7%')}}
           containerStyle={{backgroundColor:'white',borderTopColor:'white',borderBottomColor:'white'}}
-          inputContainerStyle={{backgroundColor:'white',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%')}}
+          inputContainerStyle={{backgroundColor:'#EDF2F4',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%'),borderRadius:20}}
           cancelIcon={<AntDesign style={{}}
          name="close" size={30} color="gray" />}
-        placeholder="Type Here..."
+        // placeholder="نام گروه ..."
         onChangeText={console.log('taghirkarde')}
         value={search}
       />
