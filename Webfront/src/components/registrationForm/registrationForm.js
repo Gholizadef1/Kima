@@ -147,17 +147,17 @@ function RegistrationForm(props) {
         <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
             <div className="card color2 " >
                 <br></br>
-                <h1 style={{fontFamily:'Mitra'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Mitra'}}>در کیما می‌توانی به دنبال کتاب‌های مورد‌علاقه خودت بگردی</p>
-                <p style={{fontFamily:'Mitra'}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنی</p>
+                <h1 style={{fontFamily:'Yekan'}}>به کیما خوش‌آمدی</h1>
+                <p style={{fontFamily:'Yekan',fontSize:24}}>در کیما می‌توانی به دنبال کتاب‌های مورد‌علاقه خودت بگردی</p>
+                <p style={{fontFamily:'Yekan',fontSize:20}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنی</p>
                 <img src="people&books.png" className="col-12 card-img-bottom hv-center" alt="" /> 
             </div>
             <div className="card color2 p-2">
             <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Mitra'}}>ثبت‌نام</h1>
+                <h1 style={{fontFamily:'Yekan'}}>ثبت‌نام</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputUserName" style={{fontFamily:'Mitra'}}>نام کاربری</label>
+                <label htmlFor="exampleInputUserName" style={{fontFamily:'Yekan'}}>نام کاربری</label>
                 <input type="name" 
                        className="form-control" 
                        id="userName" 
@@ -172,7 +172,7 @@ function RegistrationForm(props) {
                 </div>
 
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Mitra'}}>ایمیل</label>
+                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Yekan'}}>ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -187,7 +187,7 @@ function RegistrationForm(props) {
                 </div>
                 
                 <div className="form-group-sm text-right">
-                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Mitra'}}>رمز</label>
+                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -201,7 +201,7 @@ function RegistrationForm(props) {
                     </div> */}
                 </div>
                 <div className="form-group text-right">
-                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Mitra'}}>تأیید رمز</label>
+                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>تأیید رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
@@ -215,21 +215,21 @@ function RegistrationForm(props) {
                     </div> */}
                 </div>
                 <p className="loginText"> {state.backError} </p>
-                <StyledButton 
-                style={{fontFamily:'Mitra'}}
+                <button
+                style={{fontFamily:'Yekan',color:'white'}}
                     type="submit" 
-                    className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
+                    className="btn col-6 mx-auto bg-primary btn-block"
                     onClick={handleSubmitClick}
                 >
                     ثبت
-                </StyledButton>
+                </button>
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
             <div className="mt-2">
-                <span style={{fontFamily:'Mitra'}}>قبلاً ثبت‌نام کرده‌اید؟ </span>
-                <span className="loginText" onClick={() => redirectToLogin()} style={{fontFamily:'Morvarid'}}>اینجا وارد شوید</span> 
+                <span style={{fontFamily:'Yekan'}}>قبلاً ثبت‌نام کرده‌اید؟ </span>
+                <span className="loginText" onClick={() => redirectToLogin()} style={{fontFamily:'Yekan'}}>اینجا وارد شوید</span> 
             </div>
             </div>
             </div>
