@@ -119,9 +119,10 @@ const Groups = () => {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
         {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
-      
+      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
          name="close" size={23} color="#D75A5A" />
+         </TouchableOpacity>
        {/* </View> */}
         {/* <Text>Hi im in modall :)))))</Text> */}
        
@@ -232,7 +233,7 @@ const Groups = () => {
                   onChangeText={props.handleChange('Discription')}
                   onBlur={props.handleBlur('Discription')}
                   value={props.values.Discription}
-                  
+              
                   placeholder={'  '}  placeholderTextColor='black' fontSize={hp('1.6.5%')}  style={{ backgroundColor: 'white',fontSize:hp('1.5%')}}>
 
                 </Textarea>
