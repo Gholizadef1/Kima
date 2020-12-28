@@ -25,14 +25,32 @@ import {
   function GroupPage (props){
     const [ginfo, setGinfo] = useState([]);
     const[message,setMessage]= useState("");
-
+    const [members,setMembers] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/group")
+    axios.get("http://127.0.0.1:8000/api/group/details/12")
+      
+      .then((data) => {
+         console.log(data);
+        setGinfo(data.data);
+        
+        console.log(data);
+        if(data.data.owner.username === Cookies.get('userName')){
+          setMessage("You joind this group!");
+        }
+        if(data.data.owner.username != Cookies.get('userName')){
+          setMessage("You leaved this group!");
+        }
+       
+      });
+      
+  }, []);
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/group/members/${Cookies.get('userId')}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        setGinfo(data);
-        console.log(data.photo);
+        setMembers(data);
+        //console.log(data[0].user.username);
       });
   }, []);
     const joinGroup =()=> { 
@@ -44,22 +62,22 @@ import {
           "Content-Type":"application/json",
          "Authorization":"Token "+Cookies.get("userToken")}
           }).then(data => {
-            setMessage(data.data.message);
+          
             console.log(data.data.message);
           })
       .catch(error=>{
         console.log(error);
       });
-     
+ 
       
     }
 
     return(
       
-      <div className="mx-md-5 pt-5 px-md-5">
-        {ginfo.map((current) => (
+      <div className="mx-md-1 pt-5 px-md-5">
+       
       <div className="container-fluid text-center px-md-5 py-md-5" >
-        <div className="mx-md-5 ">
+        <div className="mx-md-5">
         <div className="no-gutters shadow table-borderless my-5 mx-2 ">
         <img src={image} className="avatar img-responsive"/>
         
@@ -67,36 +85,39 @@ import {
 
   <div class="card-body">
     
-    <img src={current.photo} className="imageg img-responsive"></img>
+    <img src={ginfo.photo} className="imageg img-responsive"></img>
   </div>
     </div>
     <div>
         
-    <div className="mt-n5">
+    <div className="mt-n5 ml-5">
   
-    <b className="title-g" >{current.title}</b>
+    <b className="title-g" >{ginfo.title}</b>
     </div>
+
     {message === "You joind this group!" ?
     <div>
     <button onClick={joinGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <button className="btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:425,marginTop:15}}>اضافه‌کردن بحث</button>
+    <button className="btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:550,marginTop:200}}>اضافه‌کردن بحث</button>
 </div>
     :
-    <div></div>
-        }
-        {message === "You leaved this group!" ?
-        <div>
-       <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
-
-        </div>
-        :
-        <div></div>
+    <div>       
+    </div>
       }
+      {message === "You leaved this group!"?
+      <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+      </div>
+      :
+      <div></div>
+    }
+    
 
     <hr className="line-g" style={{width:"37%"}}></hr>
     <div class="card cardb">
   <div class="card-body">
-  <p className="text-right mr-3">{current.summary}
+  <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",right:-495}}>دربارهٔ گروه</b>
+
+  <p className="text-right mr-3 summary" >{ginfo.summary}
 
 </p>
   </div>
@@ -108,15 +129,17 @@ import {
 </p>
   </div>
     </div>
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:5,position:"relative",right:-200}}> (نفر۱۲۰) اعضا</b>
 
     <hr className="line-g1" style={{width:"47%"}}></hr>
     
       <div className = "slide">
+     
             <div className="out">
+                  <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:5,position:"relative",right:-200}}> ({ginfo.members_count}) اعضا</b>
+
                 <img
                   
-                  src={one}
+                  src={""}
                   height={90}
                   width={70}
                   style={{paddingRight:10,paddingBottom:10}}
@@ -129,14 +152,14 @@ import {
                   style={{paddingRight:10,paddingBottom:10}}
                 />
                 </div>
-                </div>
+               
+         </div>
    
 </div>
 </div>
 </div>
 </div>
- 
-))}
+
 </div>
 
 

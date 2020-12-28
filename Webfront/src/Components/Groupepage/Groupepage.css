@@ -98,7 +98,7 @@
             }
         @media (min-width:960px){
             .avatar{
-                width: 600px;
+                width: 750px;
                 height: 200px;
                 margin-top: -100px;
                 margin-left: 10px;
@@ -108,7 +108,7 @@
             .cardG{
                 width: 130px;
                 height: 130px;
-                margin-left: 640px;
+                margin-left: 800px;
                 margin-top: -70px;
                 border-radius: 3%;
             }
@@ -121,23 +121,26 @@
                 
             }
             .line-g{
-                margin-top: 10px;
+                margin-top: -400px;
                 margin-right: 385px;
             }
             .cardb{
                 width: 510px;
                 height: 150px;
-                margin-left: 350px;
-                margin-top: 10px;
+                margin-left: 460px;
+                margin-top: 200px;
                 border-radius: 3%;
                 border-color: white;
+            }
+            .summary{
+                font-size: larger;
             }
             .title-g{
                 font-family: 'Yekan';
                 font-size: 25px;
                 top: 4px;
                 position: relative;
-                left: 345px;
+                left: 145px;
             }
             
 
@@ -156,8 +159,9 @@
             .btn-g{
                 
                 font-family: 'Yekan';
-                margin-right: 545px;
+                margin-right: 600px;
                 margin-top: -8px;
+                height: 50px;
              
             }
             .out{
