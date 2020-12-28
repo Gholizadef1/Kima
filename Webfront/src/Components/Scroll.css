@@ -50,32 +50,13 @@ margin-left: 13px;
 }
     @media (min-width :360px)
     {
-        
-        .cont{
-              
-            margin-top: 100px;
-            
-          }
-          .slid{
-            margin-left:60px;
-          margin-top: 10px;
-            width: 150px;
-            
-        }
-        .slid1{
-            margin-left:60px;
-          margin-top: -25px;
-            width: 150px;
-            
-        }
-        
         .car{
-            width: 40px;
-            height: 100px;
+            width: 70px;
+            height: 130px;
         }
         .squer{
-            width: 40px;
-            height: 100px;
+            width: 70px;
+            height: 130px;
         }
         .body{
             margin-left: 1px;
@@ -87,14 +68,12 @@ margin-left: 13px;
 }.card-title2{
   font-size: 18px;
 }
-.brand1{
-  margin-top: -30px
-}   
+
 .brand2{
-    margin-top: -15px
-  }   
+  font-size: 20px;
+}
   .subbrand1{
-      margin-top: -120px;
+      margin-top: 300px;
       margin-left: -430px;
       margin-bottom: 30px;
   }
@@ -110,77 +89,73 @@ margin-left: 13px;
   }
         }
   
+  
+
+
+  
 
       @media (min-width :768px) 
       {
-          .container{
-            width: 330px;
-            margin-left:40px;
-            margin-top: 100px;
-            
-          }
-          .slid{
-            margin-left: -310px;
-            margin-right: -310px;
+        .cont{
+          
+          margin-left:100px;
+          margin-top: -200px;
+          
         }
-        .car{
-            width: 100px;
-            height: 180px;
-        }
-        .squer{
-            width: 100px;
-            height: 180px;
-        }
-        .card-title3{
-           
-            font-size: 14px;
-        }
-        .body{
-            margin-right: 5px;
-        }
-        .brand{
-            margin-top: 100px;
-           padding-left: 593px;
-           margin-bottom: 10px;
-            font-weight: bold;
-            font-size: 22px;
-            direction: rtl;
-            overflow:hidden; 
-            white-space:nowrap; 
-            text-overflow: ellipsis;
-        
-        }
-        .slick-next:before{
-         
-            left: -5px;
-            }
-        }
+        .slid{
+          margin-left: 70px;
+          margin-right: 190px;
+          width: 400px;
+      }
+
+    
+      .car{
+          width: 70px;
+          height: 130px;
+      }
+      .squer{
+          width: 70px;
+          height: 130px;
+      }
+      .body{
+          margin-left: -30px;
+      }
+      
+.card-title3{
+font-size: 16px; 
+
+}.card-title2{
+font-size: 18px;
+}
+.brand1{
+margin-top: -100px;
+margin-left: -200px;
+
+}   
+.brand2{
+font-size: 20px;
+margin-left: -200px;
+}
+.subbrand1{
+    margin-top: 300px;
+    margin-left: -430px;
+    margin-bottom: 30px;
+}
+.subbrand2{
+    
+    margin-left: -430px;
+    margin-bottom: 30px;
+}
+.subbrand3{
+    
+    margin-left: -430px;
+    margin-bottom: 30px;
+}
+      }
   
         @media (min-width :960px) 
         {
-            .cont{
-              
-              margin-left:200px;
-              margin-top: -200px;
-              
-            }
-            .slid{
-              margin-left: 20px;
-              margin-right: 190px;
-              width: 400px;
-          }
-
-        .slid1{
-            margin-left:20px;
-          margin-top: -25px;
-            width: 400px;
-            
-        }
-        .slid2{
-            margin-left:20px;
-            margin-top: -30px;
-            width: 400px;
-        }
+        
         
           .car{
               width: 70px;
@@ -200,11 +175,12 @@ margin-left: 13px;
 }.card-title2{
     font-size: 18px;
 }
-.brand1{
-    margin-top: -100px;
-}   
+
+.brand2{
+    font-size: 20px;
+}
     .subbrand1{
-        margin-top: -120px;
+        margin-top: 300px;
         margin-left: -430px;
         margin-bottom: 30px;
     }

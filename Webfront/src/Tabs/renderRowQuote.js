@@ -27,14 +27,15 @@ import { red } from "@material-ui/core/colors";
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
+           console.log(data.message);
           setQuote(data);
         });
     }, []);
     return (
       <div>
-      {quote.message==='No Quote!' ? (
+      {quote.length===0 ? (
                  
-        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>

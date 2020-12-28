@@ -46,15 +46,13 @@
         margin-top: -230px;
         height: 230px;
     }
-    .line1{
-        margin-top:-140px;
-        margin-left: -5px;
-        width:100%;
-       
-    }
+  
     .my-groups{
+        font-family: 'Yekan';
         font-size: 15px;
+        font-weight: bold;
         margin-top: -170px;
+        margin-left: 40px;
     }
 
   }
@@ -69,16 +67,13 @@
         width: 500px;
     
     }
-    .line1{
-        margin-top:-150px;
-        margin-left: -50px;
-        width: 200px;
-    }
+    
     .my-groups{
         font-family: 'Yekan';
         font-size: 15px;
         font-weight: bold;
-        margin-top: -155px;
+        margin-top: -170px;
+        margin-left: 40px;
     }
     
   }

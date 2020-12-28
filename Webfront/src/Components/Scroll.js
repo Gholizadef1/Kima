@@ -5,6 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Slider from "react-slick";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import {
   withRouter
 } from "react-router-dom";
@@ -106,18 +109,27 @@ function Slide(props) {
 
   
   return (
-    <div className="container cont text-center">
-             <div className="brand1 text-center ml-1 mb-3" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
+   
+    <ListItem alignItems="flex-start">
+    <ListItem
+      alignItems="flex-start"
+      style={{direction:"rtl"}}
+     >
+    
+      <ListItemText style={{textAlign:"right"}}
+        primary={
+          <List >
+             <div className="brand1 text-center mb-md-3 ml-sm-5 mt-sm-1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
 
       {bookRead.length === 0 ? (
 
-        <div className="subbrand1" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+        <div className="subbrand1 text-center mt-sm-n4 ml-sm-5 pt-md-3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
        <div className = "slid">
         <Slider {...settings}>
           {bookRead.map((current) => (
-            <div className="out pl-4" key={current.id}>
+            <div className="out" key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
                   className="squer img-responsive" 
@@ -144,12 +156,12 @@ function Slide(props) {
         
         </div>
       )}
-    <div className="brand2 text-center ml-1 mb-5" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
+    <div className="brand2 text-center mb-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
-        <div className="subbrand2" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+        <div className="subbrand2 text-center mt-3 mt-sm-n4 ml-sm-5 pb-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
-       <div className = "slid1">
+       <div className = "slid">
 
         <Slider {...settings}>
           {bookReading.map((current) => (
@@ -180,10 +192,10 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-           <div className="brand3 text-center ml-1 mb-4" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
+           <div className="brand3 text-center ml-1 ml-sm-5 mb-5 mt-sm-n4 pt-5" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
 
       {bookWantto.length === 0 ? (
-          <div className="subbrand3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
+          <div className="subbrand3 text-center  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
        <div className = "slid">
@@ -217,8 +229,13 @@ function Slide(props) {
         </Slider>
         </div>
       )}
-    </div>
-  );
-}
+
+</List>
+             }
+            />
+            </ListItem>
+            </ListItem>
+    );
+          }
 
 export default withRouter(Slide);

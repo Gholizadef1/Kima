@@ -23,7 +23,9 @@
 {
     .root{
         height: 600px;
+        width: 664px;
         background-color:rgb(238, 243, 250);
+        position: fixed;
         border:16px solid #fff;
         border-radius: 3%;
     }
@@ -39,6 +41,7 @@
         position: fixed;
         border:16px solid #fff;
         border-radius: 3%;
+        overflow: hidden;
         
         
         
