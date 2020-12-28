@@ -16,14 +16,39 @@ import { StatusBar } from 'expo-status-bar';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper';
+import { getIn } from 'formik';
 
 
 const GroupPage = () => {
 
   const [picture,setpicture]=useState(null);
   const [userid, setuserid] = useState('');
+  const [groupinfo,setgroupinfo]=useState(null);
   const equal = async (item) => {
     setuserid(await AsyncStorage.getItem('id').toString());
+  }
+
+  useEffect(() =>{
+    getInfo()
+},[])
+
+  const getInfo = async()=>{
+    axiosinst.get('/api/group/details/'+userid, {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+    .then(function(response){
+      console.log('response data : ', response.data)
+      console.log(response.message)
+      console.log('$$$$'+response.data)
+      setgroupinfo(response.data)   
+  }) 
+    .catch( async function (error) {
+      console.log(error);
+      console.log(error.code+'ERROR CODE')      
+    });
   }
 
     return(
