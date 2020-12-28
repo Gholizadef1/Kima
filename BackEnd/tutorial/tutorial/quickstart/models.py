@@ -137,7 +137,7 @@ class DislikeComment(models.Model):
 class Group(models.Model):
     owner = models.ForeignKey(Account,on_delete=models.CASCADE)
     summary = models.TextField()
-    group_photo = models.ImageField( upload_to='group_photos',default='default.png')
+    group_photo = models.ImageField(upload_to='group_photos',default='default.png')
     title = models.CharField(max_length=100)
     create_time=models.DateTimeField(default=timezone.now, editable=False)
 

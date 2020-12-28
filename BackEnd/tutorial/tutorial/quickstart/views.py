@@ -555,9 +555,34 @@ class DiscussionView(APIView):
 class DiscussionDetailsView(APIView):
     
     def get(self,request,pk):
-        id = request.data.get("id")
-        discuss = Discussion.objects.get(id=id)
-        serializer = DiscussionSerializer()
+        discuss = Discussion.objects.get(id=pk)
+        serializer = DiscussionSerializer(discuss,many=False)
+        return Response(serializer.data)
+
+class DiscussionChatView(APIView):
+
+    def get(self,request,pk):
+        discuss = Discussion.objects.get(id=pk)
+        chats = Chat.objects.filter(discuss=discuss)
+        serializer = DiscussionChatSerializer(chats,many=True)
+        return Response(serializer.data)
+
+    def post(self,request,pk):
+        user = request.user
+        discuss = Discussion.objects.get(id=pk)
+        current_group = discuss.group
+        if not Member.objects.filter(user=user,group=current_group).exists():
+            return Response({"message":"You aren't a group member!"})
+        else:
+            serializer = CreateChatSerializer(data=request.data)
+            if serializer.is_valid():
+                chattext = serializer.data.get("chat_text")
+                new_chat = Chat(user=user,discuss=discuss,chat_text=chattext)
+                new_chat.save()
+                return Response({"message":"new chat!"})
+            return Response(serializers.errors)
+        
+
 
 class GroupView(APIView):
 
@@ -574,10 +599,11 @@ class GroupView(APIView):
         if serializer.is_valid():
             title = serializer.data.get("title")
             summary = serializer.data.get("summary")
-            photo = serializer.data.get("photo")
             if  not Group.objects.filter(title=title).exists():
-                new_group = Group(owner=user,title=title,summary=summary,group_photo=photo)
+                new_group = Group(owner=user,title=title,summary=summary,group_photo=request.FILES["photo"])
                 new_group.save()
+                new_member = Member(group=new_group,user=user)
+                new_member.save()
                 return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
             return Response({"message":"A group with this name exists!"})
         return Response(serializer.errors)
