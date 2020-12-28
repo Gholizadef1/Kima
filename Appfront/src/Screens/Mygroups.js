@@ -76,9 +76,9 @@ const Groups = () => {
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
          </View>
-            <Text>
+            {/* <Text>
                 Groups
-            </Text>
+            </Text> */}
         </View>
     );
 }
