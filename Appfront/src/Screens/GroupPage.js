@@ -21,6 +21,10 @@ import { Avatar } from 'react-native-paper';
 const GroupPage = () => {
 
   const [picture,setpicture]=useState(null);
+  const [userid, setuserid] = useState('');
+  const equal = async (item) => {
+    setuserid(await AsyncStorage.getItem('id').toString());
+  }
 
     return(
         <View style={styles.container}>
