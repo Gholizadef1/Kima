@@ -143,3 +143,20 @@ class DiscussionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discussion
         fields = "__all__"
+
+class CreateChatSerializer(serializers.Serializer):
+
+    chat_text = serializers.CharField(required=True)
+
+class DiscussionChatSerializer(serializers.ModelSerializer):
+
+    discuss = DiscussionSerializer(read_only=True)
+    user = UserProfileSerializer(read_only=True)
+
+
+    class Meta:
+        model = Chat
+        fields = "__all__"
+
+
+
