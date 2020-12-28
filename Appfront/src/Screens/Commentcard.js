@@ -15,7 +15,7 @@ import { useFocusEffect } from '@react-navigation/native';
 const Commentcard = (prop) => {
   console.log('COMMENT CARD')
   const [like, setlike] = useState('lightblue')
-  const [dislike, setdislike] = useState('lightblue')
+  const [dislike, setdislike] = useState('#F2A4A3')
   const[likeshode,setlikeshode]=useState(false);
 // const[commentID,setcommentID]=useState();
 //  setcommentID(prop.commentid)
@@ -70,9 +70,9 @@ const getdislike=async()=>{
             console.log(response)
           // setnumlike(response.data.LikeCount)
           if (response.data.message === 'True')
-         await  setdislike('#1f7a8c')
+         await  setdislike('#E64846')
         else
-         await setdislike('lightblue')
+         await setdislike('#F2A4A3')
           // console.log(response);
 
         })
@@ -275,7 +275,7 @@ const getdislike=async()=>{
           await setlikeshode(false)
           else
           await setlikeshode(true)
-          if (dislike === '#1f7a8c') {
+          if (dislike === '#E64846') {
             console.log('DISLIKEDOROSTHAZFMISHE')
             const back2 = {}
             const backk2 = JSON.stringify(back2);
@@ -289,7 +289,7 @@ const getdislike=async()=>{
               .then(async function (response) {
                 setnumdislike(response.data.DislikeCount)
                 // console.log(response);
-                setdislike('lightblue')
+                setdislike('#F2A4A3')
 
               })
               .catch(function (error) {
@@ -398,10 +398,10 @@ const getdislike=async()=>{
           })
             .then(async function (response) {
               setnumdislike(response.data.DislikeCount)
-              if(dislike==='lightblue')
-              setdislike('#1f7a8c')
+              if(dislike==='#F2A4A3')
+              setdislike('#E64846')
               else
-              setdislike('lightblue')
+              setdislike('#F2A4A3')
               // console.log(response);
 
             })
