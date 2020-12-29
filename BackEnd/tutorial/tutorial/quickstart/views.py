@@ -584,12 +584,13 @@ class DiscussionChatView(APIView):
         
 
 
-class GroupView(APIView):
+class GroupView(APIView,PaginationHandlerMixin):
 
+    pagination_class = BasicPagination
     model = Group
 
     def get(self,request):
-        groups = Group.objects.all()
+        groups = self.paginate_queryset(Group.objects.all())
         serializer = GroupSerializer(groups,context={"request": request},many=True)
         return Response(serializer.data)
 
@@ -646,21 +647,23 @@ class DynamicGroupAPIView(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
   
-class FilterGroupbyTime(APIView):
+class FilterGroupbyTime(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
 
     def get(self,request):
         if Group.objects is not None:
-            gp_list = Group.objects.order_by('-create_time')
+            gp_list = self.paginate_queryset(Group.objects.order_by('-create_time'))
             serializer = GroupSerializer(gp_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Group!',}
         return Response(response)
 
-class FilterGroupbyMember(APIView):
+class FilterGroupbyMember(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
 
     def get(self,request):
         if Group.objects is not None:
-            gp_list=sorted(Group.objects.all(),  key=lambda m: -m.members_count)
+            gp_list=self.paginate_queryset(sorted(Group.objects.all(),  key=lambda m: -m.members_count))
             serializer = GroupSerializer(gp_list,context={"request": request},many=True)
             return Response(serializer.data)
         response = {'message' : 'No Group!',}
