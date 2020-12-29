@@ -70,7 +70,7 @@ function App(props) {
               <Profile/>
               
               </Route>
-              <Route path="/groups">
+              <Route path="/groups/:gropId">
                 <NavBar/>
               <Grouppage/>
               </Route>

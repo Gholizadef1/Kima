@@ -29,6 +29,7 @@ import {
   } from "react-router-dom";
   
   function GroupPage (props){
+    let { groupId } = useParams();
     const [ginfo, setGinfo] = useState([]);
     const [openCreateGroup, setOpenCreateGroup] = useState(false);
     const[message,setMessage]= useState("");
@@ -37,9 +38,10 @@ import {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
-    
+ 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/details/1")
+    if (props.match.params.groupId) {
+    axios.get("http://127.0.0.1:8000/api/group/details/groups" + props.match.params.groupId)
       
       .then((data) => {
          console.log(data);
@@ -48,6 +50,7 @@ import {
         console.log(data.data);
         console.log(ginfo.group_photo);
       });
+    }
       
   }, []);
   ///////////////////////////////////////////////////////
