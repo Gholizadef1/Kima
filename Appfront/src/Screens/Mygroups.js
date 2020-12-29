@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground,Alert} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -39,7 +39,7 @@ const userschema=yup.object({
 const Mygroups = () => {
 
   const [picture,setpicture]=useState({uri:'../../assets/backprof5j.jpeg',name:'',type:''});
-
+  
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
@@ -110,6 +110,74 @@ const Mygroups = () => {
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState(['as;df']);
+    const [refresh,setrefresh]=useState(false);
+    const [likeotime, setlikeotime] = useState('/filter-time');
+    const [theend,settheend]=useState(false);
+    const[page,setpage]=useState(1);
+    const response=async (page)=>{
+      //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
+      await setpage(page)
+  
+      if(page===1){
+        console.log('PAGE 111')
+  
+      await settheend(false)
+      await setinformation([])
+  
+      console.log('IT IS HEAR SET INFO []')
+      console.log(information)
+      
+      } 
+      console.log('DOVOM')
+       console.log(page+'PAGE')
+       try{
+         console.log('  omad to response')
+         console.log(likeotime + ' likeotime to response')
+        // setIDD(await (await AsyncStorage.getItem('id')).toString())
+        const response = await axiosinst.get('api/group'+ likeotime,{
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+  
+     })
+    setrefresh(false)
+    if(response.data.detail==='Invalid page.')
+    settheend(true);
+    else{
+      settheend(false)
+      //  console.log(IDD+'IDDresponse');
+      setinformation(response.data)
+        // page===1?setinformation(response.data):setinformation(information.concat(response.data))
+        console.log('++++INFO++++'+information+"++++INFO++++")
+       
+       }
+       }
+     catch(err){
+       setrefresh(false)
+       console.log(err.toString().split('\n')[0])
+      if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
+      settheend(true);
+      // else if(theend===true)
+      // settheend(false)
+      console.log(theend+'THE END')
+        console.log(err);
+      
+     }
+   
+     }
+     const handleLoadMore = async() => {
+      console.log('END OF THE LIST')
+       if(theend===false)
+       response(page+1);
+      };
+   
+    useFocusEffect(
+      React.useCallback(() => {         
+          response(1)
+          // setlikeotime('filter-time')
+      },[]))
     return(
      
      
@@ -331,12 +399,38 @@ const Mygroups = () => {
           }}
 
         />:null}
-        <TouchableOpacity onPress={()=>console.log('aladkki')}>
+        {/* <TouchableOpacity onPress={()=>console.log('aladkki')}>
          <Eachgroup></Eachgroup>
-         </TouchableOpacity>
+         </TouchableOpacity> */}
+         {/* <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup>
-         <Eachgroup></Eachgroup>
-         <Eachgroup></Eachgroup>
+         <Eachgroup></Eachgroup> */}
+         <View style={{height:hp('2%')}}></View>
+        {(information.length >= 0) ?
+
+          <FlatList
+            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
+            style={{ marginBottom: hp('18%') }}
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => handleLoadMore()}
+            onEndReachedThreshold={0}
+            keyExtractor={(item) => item.id}
+            refreshing={refresh}
+            onRefresh={async () => {
+              await setrefresh(true)
+              response(1)
+            }}
+
+            data={information}
+            onEndReachedThreshold={0.5}
+
+            renderItem={({ item }) => (<>
+            {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
+            </>
+            )}
+          // extraData={finfo}
+          >
+          </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>}
          </View>
             {/* <Text>
                 Mygroups
@@ -436,5 +530,13 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       position:'absolute'
     },
+    loader:{
+
+    alignItems:'center',
+    marginBottom:hp('5%'),
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:hp('10%')
+  }
   });
   export default Mygroups;

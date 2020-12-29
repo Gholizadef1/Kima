@@ -179,7 +179,7 @@ const Groups = () => {
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup> */}
 
-
+        <View style={{height:hp('2%')}}></View>
         {(information.length >= 0) ?
 
           <FlatList
@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     //   alignItems: 'center',
+  
     //   justifyContent: 'center',
   },
   plus: {
