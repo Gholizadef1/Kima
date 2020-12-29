@@ -640,7 +640,7 @@ class GroupDetailsView(APIView):
     
     def get(self,request, pk):
         group = Group.objects.get(id=pk)
-        serializer = GroupSerializer(group,context={"request": request},many=False)
+        serializer = GroupDetSerializer(group,many=False)
         return Response(serializer.data)
 
 class MemberGroupView(APIView,PaginationHandlerMixin):
