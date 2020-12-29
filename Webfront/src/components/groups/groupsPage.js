@@ -20,8 +20,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
-import { red } from "@material-ui/core/colors";
-import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 
 
@@ -112,8 +110,7 @@ const handleCreateGroupSubmit =(e) =>{
   var formdata = new FormData()
   formdata.append('title',newGroup.name)
   formdata.append('summary',newGroup.description)
-  //formdata.append('photo',state.file)
-  formdata.append('photo',newGroup)
+  formdata.append('photo',state.file)
 
   // const payload={
   //       "title":newGroup.name,
@@ -183,21 +180,42 @@ const handleCloseSnack = (event, reason) => {
   setOpenSnack(false);
   };
 
+  const [searchWord,setSearchWord]=useState("");
+
+  const handleChangeSearchWord = (e) => {
+    const {value} = e.target   
+    setSearchWord(value);
+  };
+
+  const handleGoSearchGroup = ( ) => {
+    console.log( searchWord);
+    axios.get('http://127.0.0.1:8000/api/group')
+      .then(response=>{
+        console.log(response);
+        setGroups(response.data);
+      })
+      .catch(error=>{
+        console.log(error);
+      });
+  }
 
 
     return(
         <div className="container-fluid rTOl px-md-5">
             <div className="d-flex  my-4 flex-wrap mx-md-5 px-md-4">
               <div className="d-flex ml-auto">
-                <div variant="gray" className="btn">
+                <div variant="gray" className="btn" onClick={handleGoSearchGroup} >
                   <GoSearch size="30" color="black"/>
                 </div>
-                <input className=" shadow form-control rounded-pill px-4 text-right " type="title" name="group" placeholder="جستجوی گروه... " />  
+                <input className=" shadow form-control rounded-pill px-4 text-right "
+                 type="title" name="group" placeholder="جستجوی گروه... " 
+                 value={searchWord}
+                 onChange={handleChangeSearchWord}/>  
                 <div variant="gray" className="btn">
                 </div>
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
-                <select className="form-control rounded-pill shadow" onChange={handleChangeList} >
+                <select className="form-control rounded-pill shadow" onClick={handleChangeList} >
                   <option value="popular">محبوب‌ترین گروه ها</option>
                   <option value="new">جدیدترین گروه ها</option>
                   <option value="mine">گروه‌های من</option>
