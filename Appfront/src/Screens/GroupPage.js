@@ -30,7 +30,7 @@ const GroupPage = () => {
 },[])
 
   const getInfo = async()=>{
-    axiosinst.get('/api/group/details/'+await (await AsyncStorage.getItem('id')).toString(), {
+    axiosinst.get('/api/group/details/1', {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -39,7 +39,7 @@ const GroupPage = () => {
     .then(function(response){
       console.log('response data : ', response.data)
       console.log(response.message)
-      console.log('$$$$'+response.data)
+      console.log('$$$$'+response.data.title)
       setgroupinfo(response.data)   
   }) 
     .catch( async function (error) {
@@ -47,6 +47,8 @@ const GroupPage = () => {
       console.log(error.code+'ERROR CODE')      
     });
   }
+  console.log('GROUPPP' +groupinfo.title)
+  console.log('^^^^^^^' +groupinfo.members_count)
 
   // const PostJoin = async () => {
 
@@ -97,7 +99,7 @@ const GroupPage = () => {
                       ></Avatar.Image>}
 
                       <Text style={styles.groupname}>{groupinfo.title}</Text>
-                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :20</Text>
+                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
                       <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                       , backgroundColor:'#1F7A8C'}}>
@@ -107,7 +109,7 @@ const GroupPage = () => {
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
                       <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
-                      {groupinfo.description}
+                      {groupinfo.summary}
                       </Text>
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C' ,fontWeight:'bold'}}>بحث های انجام شده :</Text>
