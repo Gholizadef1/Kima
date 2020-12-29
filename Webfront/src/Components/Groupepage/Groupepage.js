@@ -17,7 +17,6 @@ import Divider from '@material-ui/core/Divider';
 import Snackbar from '@material-ui/core/Snackbar';
 import Cookies from 'js-cookie';
 
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -72,6 +71,22 @@ import {
       
       });
   }, [join]);
+  const leaveGroup = ()=>{
+    axios.post(
+      "http://127.0.0.1:8000/api/group/members/1",
+    {},
+    {
+      headers:{
+        "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+        setJoin(true);
+          console.log(data.data.message);
+        })
+    .catch(error=>{
+      console.log(error);
+    });
+  }
   /////////////////////////////////////////////////////////
     const joinGroup =()=> { 
       axios.post(
@@ -189,7 +204,7 @@ import {
     </div>
       }
       {message === "You leaved this group!"?
-      <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+      <div>      <button onClick={leaveGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
       </div>
       :
       <div></div>
