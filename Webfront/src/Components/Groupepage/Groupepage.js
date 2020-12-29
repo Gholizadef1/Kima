@@ -9,6 +9,7 @@ import axios from 'axios';
 import image from "../../assets/5.jpeg";
 import images from "../../assets/image.jpeg";
 import one from "../../assets/1.jpeg";
+import { Modal, Form } from "react-bootstrap";
 import two from "../../assets/2.jpeg";
 import './Groupepage.css';
 import React, { useState, useEffect } from "react";
@@ -33,6 +34,9 @@ import {
     const [openCreateGroup, setOpenCreateGroup] = useState(false);
     const[message,setMessage]= useState("");
     const [members,setMembers] = useState([]);
+    const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
     
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/group/details/1")
@@ -225,7 +229,24 @@ import {
                   style={{paddingRight:10,paddingBottom:10,marginTop:-300,marginLeft:-150}}
                 />
                 </div>
-                <button className="more btn-danger" style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</button>
+                <button className="more btn-danger" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</button>
+
+            <Modal show={show} onHide={handleClose} className="maodal">
+        <Modal.Header closeButton>
+           <div className="header"style={{fontFamily:'Yekan'}}>
+          نتایج
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="info" onClick={handleClose} style={{fontFamily:'Mitra'}}>
+            بستن
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
 
 </div>
 </div>
