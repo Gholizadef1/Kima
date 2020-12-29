@@ -11,7 +11,9 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 // import { MaterialIcons } from '@expo/vector-icons'; 
 // import { SearchBar } from 'react-native-elements';
+import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
+
 const Groups = () => {
 
   const [modalopen, setmodalopen] = useState(false)
@@ -41,7 +43,7 @@ const Groups = () => {
      console.log(id) 
      console.log(page+'PAGE')
      try{
-      setIDD(await (await AsyncStorage.getItem('id')).toString())
+      // setIDD(await (await AsyncStorage.getItem('id')).toString())
   //    const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
   //    page:page
   //    }
@@ -51,7 +53,7 @@ const Groups = () => {
   settheend(true);
   else{
     settheend(false)
-     console.log(IDD+'IDDresponse');
+    //  console.log(IDD+'IDDresponse');
       page===1?setinformation(response.data):setinformation(information.concat(response.data))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
@@ -70,7 +72,12 @@ const Groups = () => {
    }
  
    }
-
+ 
+  useFocusEffect(
+    React.useCallback(() => {         
+        response(1)
+   
+    },[]))
   return (
 
     <View style={styles.container}>
@@ -172,12 +179,7 @@ const Groups = () => {
             data={information}
             onEndReachedThreshold={0.5}
 
-            renderItem={({ item }) => (<><Quotecrad name={item.account.username}
-
-              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://a32f717e71fe.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
-
-
-
+            renderItem={({ item }) => (<>
             </>
             )}
           // extraData={finfo}
