@@ -604,7 +604,7 @@ class GroupView(APIView):
                 new_group.save()
                 new_member = Member(group=new_group,user=user)
                 new_member.save()
-                return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
+                return Response({"data":GroupSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
             return Response({"message":"A group with this name exists!"})
         return Response(serializer.errors)
 
@@ -616,6 +616,15 @@ class GroupDetailsView(APIView):
         group = Group.objects.get(id=pk)
         serializer = GroupSerializer(group,many=False)
         return Response(serializer.data)
+
+    def delete(self,request,pk):
+        group = Group.objects.get(id=pk)
+        current_user = request.user
+        owner = group.owner
+        if owner == current_user:
+            group.delete()
+            return Response({"message":"Successfull delete group!"})
+        return Response({"message":"No permission!"})
 
 class MemberGroupView(APIView):
 
