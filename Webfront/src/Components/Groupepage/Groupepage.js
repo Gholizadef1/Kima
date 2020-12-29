@@ -1,4 +1,10 @@
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 import image from "../../assets/5.jpeg";
 import images from "../../assets/image.jpeg";
@@ -24,38 +30,47 @@ import {
   
   function GroupPage (props){
     const [ginfo, setGinfo] = useState([]);
+    const [openCreateGroup, setOpenCreateGroup] = useState(false);
     const[message,setMessage]= useState("");
     const [members,setMembers] = useState([]);
+    
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/details/12")
+    axios.get("http://127.0.0.1:8000/api/group/details/1")
       
       .then((data) => {
          console.log(data);
+         console.log(data.data.group_photo);
         setGinfo(data.data);
-        
-        console.log(data);
-        if(data.data.owner.username === Cookies.get('userName')){
-          setMessage("You joind this group!");
-        }
-        if(data.data.owner.username != Cookies.get('userName')){
-          setMessage("You leaved this group!");
-        }
-       
+        console.log(data.data);
+        console.log(ginfo.group_photo);
       });
       
   }, []);
+  ///////////////////////////////////////////////////////
+
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/group/members/${Cookies.get('userId')}`)
+    fetch(`http://127.0.0.1:8000/api/group/members/1`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-        setMembers(data);
-        //console.log(data[0].user.username);
+         console.log(data[0].user.profile_photo);
+        setMembers(data[0].user);
+        console.log(members.profile_photo);
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].user.username === Cookies.get('userName')){
+            setMessage('You joind this group!');
+          }
+          if(data[i].user.username != Cookies.get('userName')){
+            setMessage('You leaved this group!');
+          }
+        }
+      
       });
   }, []);
+  /////////////////////////////////////////////////////////
     const joinGroup =()=> { 
       axios.post(
-        `http://127.0.0.1:8000/api/group/members/${Cookies.get('userId')}`,
+        "http://127.0.0.1:8000/api/group/members/1",
       {},
       {
         headers:{
@@ -68,9 +83,43 @@ import {
       .catch(error=>{
         console.log(error);
       });
- 
-      
     }
+ /////////////////////////////////////////////////////   
+    const handleCloseCreateGroup = () => {
+      setOpenCreateGroup(false);
+      setNewGroup({
+        picture: "",
+        name : "",
+        description :"",
+        backError : ""
+      }); 
+    };
+    
+    const handleChange = (e) => {
+      const {id , value} = e.target   
+      setNewGroup(prevState => ({
+          ...prevState,
+          [id] : value
+      }))
+  }
+    const handleCreateGroupSubmit =(e) =>{
+      e.preventDefault();
+      setNewGroup(prevState => ({
+          ...prevState,
+          backError : ""
+      })); 
+    }
+    
+    const [newGroup,setNewGroup] = useState({
+      picture: "",
+      name : "",
+      description :"",
+      backError : ""
+    });
+
+  const handleClickOpenCreateGroup = () => {
+    setOpenCreateGroup(true);
+  };
 
     return(
       
@@ -83,22 +132,52 @@ import {
         
         <div class="card cardG">
 
-  <div class="card-body">
+  <div class="card-body" key={ginfo.id}>
     
-    <img src={ginfo.photo} className="imageg img-responsive"></img>
+    <img src={`http://127.0.0.1:8000${ginfo.group_photo}`} className="imageg img-responsive"></img>
   </div>
     </div>
     <div>
         
     <div className="mt-n5 ml-5">
   
-    <b className="title-g" >{ginfo.title}</b>
+    <b className="title-g" >نام گروه:  {ginfo.title}</b>
     </div>
 
     {message === "You joind this group!" ?
     <div>
     <button onClick={joinGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <button className="btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:550,marginTop:200}}>اضافه‌کردن بحث</button>
+    <div className="btn btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:550,marginTop:200}} onClick={handleClickOpenCreateGroup}>
+ بحث جدید
+                </div>
+                <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                  <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                  <DialogContent >
+
+                  <form >
+                    <input
+                      autoFocus
+                      margin="dense"
+                      id="name"
+                      style={{fontFamily:"Yekan"}}
+                      placeholder="عنوان بحث"
+                      type="title"
+                      onChange={handleChange}
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    </form>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseCreateGroup} color="black">
+                    بستن
+                    </Button>
+                    <Button onClick={handleCreateGroupSubmit} color="black">
+                      ثبت
+                    </Button>
+                  </DialogActions>
+                </Dialog>
 </div>
     :
     <div>       
@@ -139,7 +218,7 @@ import {
 
                 <img
                   
-                  src={""}
+                  src={`http://127.0.0.1:8000${members.profile_photo}`}
                   height={90}
                   width={70}
                   style={{paddingRight:10,paddingBottom:10}}
