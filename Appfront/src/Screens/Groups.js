@@ -26,6 +26,8 @@ const Groups = () => {
   const [likeotime, setlikeotime] = useState('/filter-time');
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
+  const[numberofpage,setnumberofpage]=useState(0);
+  const [count,setcount]=useState(0);
   const response=async (page)=>{
     //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
     await setpage(page)
@@ -47,20 +49,25 @@ const Groups = () => {
        console.log(likeotime + ' likeotime to response')
       // setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get('api/group'+ likeotime,{
+        params: {
+          page: page
+        },
       "headers":
       {
         "Content-Type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
       }
-
+     
    })
+   setcount(response.data.count)
+  setnumberofpage(numberofpage+1)
   setrefresh(false)
-  if(response.data.detail==='Invalid page.')
+  if(numberofpage===count)
   settheend(true);
   else{
     settheend(false)
     //  console.log(IDD+'IDDresponse');
-    setinformation(response.data)
+    setinformation(response.data.groups)
       // page===1?setinformation(response.data):setinformation(information.concat(response.data))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
@@ -183,7 +190,8 @@ const Groups = () => {
         {(information.length >= 0) ?
 
           <FlatList
-            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
+            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
+            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>گروه دیگری وجود ندارد</Text></View>)}
             style={{ marginBottom: hp('18%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => handleLoadMore()}
