@@ -116,7 +116,7 @@
                 width: 100px;
                 height: 100px;
                 margin-left: -5px;
-                margin-top: -7px; 
+                margin-top: -12px; 
                 border-radius: 3%;
                 
             }
@@ -134,40 +134,50 @@
             }
             .summary{
                 font-size: larger;
+                margin-top: 30px;
+                margin-right: -20px;
             }
             .title-g{
                 font-family: 'Yekan';
                 font-size: 25px;
-                top: 4px;
+                
                 position: relative;
                 left: 60px;
             }
             
 
             .card-discussion{
-                width: 510px;
+                width: 630px;
                 height: 150px;
-                margin-left: 350px;
-                margin-top: 15px;
+                margin-left: 312px;
+                margin-top: 36px;
+                margin-bottom: 250px;
                 border-radius: 3%;
                 border-color: whitesmoke;
             }
 
-            .line-g1{
-                margin-left: 290px;
-            }
+           .more{
+               border-radius: 3%;
+           }
             .btn-g{
                 
                 font-family: 'Yekan';
                 margin-right: 600px;
-               top:-300px;
+               margin-top: -50px;
                 height: 50px;
              
+            }
+            .btn-d{
+                font-family: 'Yekan';
+                margin-right: 600px;
+               margin-top: 140px;
+                height: 40px;
             }
             .out{
                
                 margin-left: -350px;
-                margin-top: -6px; 
+                margin-top: -200px; 
+                margin-bottom: 100px;
                 border-radius: 3%;
                padding-left: 10px;
             }

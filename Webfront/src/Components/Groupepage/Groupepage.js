@@ -147,7 +147,7 @@ import {
     {message === "You joind this group!" ?
     <div>
     <button onClick={joinGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <div className="btn btn bg-danger" style={{color:"white",fontFamily:"Yekan",marginRight:550,marginTop:200}} onClick={handleClickOpenCreateGroup}>
+    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateGroup}>
  بحث جدید
                 </div>
                 <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
@@ -194,46 +194,39 @@ import {
     <hr className="line-g" style={{width:"37%"}}></hr>
     <div class="card cardb">
   <div class="card-body">
-  <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",right:-495}}>دربارهٔ گروه</b>
+  <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:260}}>:دربارهٔ گروه</b>
 
-  <p className="text-right mr-3 summary" >{ginfo.summary}
+  <p className="text-right summary" >{ginfo.summary}
 
 </p>
   </div>
     </div>
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",right:-495}}>بحث‌ها</b>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:580}}>بحث‌ها</b>
     <div class="card card-discussion">
   <div class="card-body">
   <p className="text-right">بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بح ث
 </p>
   </div>
-    </div>
-
-    <hr className="line-g1" style={{width:"47%"}}></hr>
-    
+    </div>    
       <div className = "slide">
-     
-            <div className="out">
-                  <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:5,position:"relative",right:-200}}> ({ginfo.members_count}) اعضا</b>
+      <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-230,position:"relative",marginLeft:450}}> ({ginfo.members_count}) اعضا</b>
 
                 <img
                   
                   src={`http://127.0.0.1:8000${members.profile_photo}`}
                   height={90}
                   width={70}
-                  style={{paddingRight:10,paddingBottom:10}}
+                  style={{paddingRight:10,paddingBottom:10,marginTop:-300,marginLeft:-100}}
                 />
                 <img
-                  
                   src={two}
                   height={90}
                   width={70}
-                  style={{paddingRight:10,paddingBottom:10}}
+                  style={{paddingRight:10,paddingBottom:10,marginTop:-300,marginLeft:-150}}
                 />
                 </div>
-               
-         </div>
-   
+                <button className="more btn-danger" style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</button>
+
 </div>
 </div>
 </div>
