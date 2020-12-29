@@ -60,7 +60,8 @@ const Groups = () => {
   else{
     settheend(false)
     //  console.log(IDD+'IDDresponse');
-      page===1?setinformation(response.data):setinformation(information.concat(response.data))
+    setinformation(response.data)
+      // page===1?setinformation(response.data):setinformation(information.concat(response.data))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
      }
@@ -87,7 +88,7 @@ const Groups = () => {
   useFocusEffect(
     React.useCallback(() => {         
         response(1)
-        setlikeotime('filter-time')
+        // setlikeotime('filter-time')
     },[]))
   return (
 
@@ -191,15 +192,14 @@ const Groups = () => {
             refreshing={refresh}
             onRefresh={async () => {
               await setrefresh(true)
-
               response(1)
-
             }}
 
             data={information}
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
+            <Eachgroup groupphoto={item.group_photo} discription={item.summary} title={item.title} ></Eachgroup>
             </>
             )}
           // extraData={finfo}
@@ -226,6 +226,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center'
 
+  }, 
+  loader:{
+
+    alignItems:'center',
+    marginBottom:hp('5%'),
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:hp('10%')
   }
 });
 export default Groups;

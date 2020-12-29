@@ -23,7 +23,7 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.picture === 'http://c8f6d3c6ac6e.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.groupphoto === 'http://c8f6d3c6ac6e.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/avatar.png')}
          style={styles.avatar}
@@ -32,15 +32,15 @@ const Eachgroup = (prop) => {
 
        </ImageBackground> : <ImageBackground borderRadius={100}
 
-         source={require('../../assets/kima6.jpg')}
+         source={{uri:prop.groupphoto}}
          style={styles.avatar}
 
        >
 
          </ImageBackground>}
      </TouchableOpacity>
-     <Text style={styles.username}><Text>#</Text>لوناااا</Text>
-     <Text style={styles.date}>150<Text style={{color:'gray'}}> عضو</Text></Text>
+     <Text style={styles.username}><Text>#</Text>{prop.title}</Text>
+     <Text style={styles.date}>150<Text style={{color:'gray'}}> {prop.discription}</Text></Text>
 
     
    </View>
