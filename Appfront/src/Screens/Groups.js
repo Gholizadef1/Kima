@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 
+
 const Groups = () => {
 
   const [modalopen, setmodalopen] = useState(false)
@@ -21,9 +22,9 @@ const Groups = () => {
   const [information, setinformation] = useState([]);
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
-
+  
   const [theend,settheend]=useState(false);
-
+  const[page,setpage]=useState(1);
   const response=async (page)=>{
     //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
     await setpage(page)
@@ -39,8 +40,6 @@ const Groups = () => {
     
     } 
     console.log('DOVOM')
-     const id=prop.route.params.id
-     console.log(id) 
      console.log(page+'PAGE')
      try{
       // setIDD(await (await AsyncStorage.getItem('id')).toString())
@@ -72,6 +71,11 @@ const Groups = () => {
    }
  
    }
+   const handleLoadMore = async() => {
+    console.log('END OF THE LIST')
+     if(theend===false)
+     response(page+1);
+    };
  
   useFocusEffect(
     React.useCallback(() => {         
