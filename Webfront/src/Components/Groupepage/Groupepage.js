@@ -37,6 +37,7 @@ import {
     const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [join,setJoin] = useState(false);
     
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/group/details/1")
@@ -70,7 +71,7 @@ import {
         }
       
       });
-  }, []);
+  }, [join]);
   /////////////////////////////////////////////////////////
     const joinGroup =()=> { 
       axios.post(
@@ -81,7 +82,7 @@ import {
           "Content-Type":"application/json",
          "Authorization":"Token "+Cookies.get("userToken")}
           }).then(data => {
-          
+          setJoin(true);
             console.log(data.data.message);
           })
       .catch(error=>{
@@ -195,16 +196,12 @@ import {
     }
     
 
-    <hr className="line-g" style={{width:"37%"}}></hr>
-    <div class="card cardb">
-  <div class="card-body">
-  <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:260}}>:دربارهٔ گروه</b>
-
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:560}}>:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 
 </p>
-  </div>
-    </div>
+  
+   
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:580}}>بحث‌ها</b>
     <div class="card card-discussion">
   <div class="card-body">

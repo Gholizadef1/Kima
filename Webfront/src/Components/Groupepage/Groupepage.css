@@ -124,18 +124,11 @@
                 margin-top: -400px;
                 margin-right: 385px;
             }
-            .cardb{
-                width: 510px;
-                height: 150px;
-                margin-left: 460px;
-                margin-top: 200px;
-                border-radius: 3%;
-                border-color: white;
-            }
+            
             .summary{
                 font-size: larger;
                 margin-top: 30px;
-                margin-right: -20px;
+                margin-right: 180px;
             }
             .title-g{
                 font-family: 'Yekan';
@@ -170,7 +163,7 @@
             .btn-d{
                 font-family: 'Yekan';
                 margin-right: 600px;
-               margin-top: 140px;
+               
                 height: 40px;
             }
             .out{
