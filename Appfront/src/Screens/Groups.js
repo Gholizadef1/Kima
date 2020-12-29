@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator } from 'react-
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
@@ -13,16 +13,17 @@ import { AntDesign } from '@expo/vector-icons';
 // import { SearchBar } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
-
-
+import axiosinst from '../api/axiosinst'
 const Groups = () => {
 
   const [modalopen, setmodalopen] = useState(false)
+  // const [selectedValue, setselectedValue] = useState('none')
+  // const selectedValue='none'
   const [selectedValue, setselectedValue] = useState('none')
   const [information, setinformation] = useState([]);
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
-  
+  const [likeotime, setlikeotime] = useState('/filter-time');
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
   const response=async (page)=>{
@@ -42,11 +43,17 @@ const Groups = () => {
     console.log('DOVOM')
      console.log(page+'PAGE')
      try{
+       console.log('  omad to response')
+       console.log(likeotime + ' likeotime to response')
       // setIDD(await (await AsyncStorage.getItem('id')).toString())
-  //    const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
-  //    page:page
-  //    }
-  // })
+      const response = await axiosinst.get('api/group'+ likeotime,{
+      "headers":
+      {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+
+   })
   setrefresh(false)
   if(response.data.detail==='Invalid page.')
   settheend(true);
@@ -80,7 +87,7 @@ const Groups = () => {
   useFocusEffect(
     React.useCallback(() => {         
         response(1)
-   
+        setlikeotime('filter-time')
     },[]))
   return (
 
@@ -119,8 +126,8 @@ const Groups = () => {
 
         {(information.length >= 0) ? <DropDownPicker
           items={[
-            { label: 'معروف ترین گروه ها', value: 'none' },
-            { label: 'جدید ترین گروه ها', value: 'like' },
+            { label: 'جدید ترین گروه ها',value:'none'},
+            { label: 'معروف ترین گروه ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
@@ -142,13 +149,22 @@ const Groups = () => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/comment-filter-time')
-
+              // await setlikeotime('')
+              console.log(likeotime+'BEIN TIME')
+              await setlikeotime('/filter-time')
+              console.log('set shod be time')
+              console.log(likeotime+'likeotime')
+              // response(1)
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/comment-filter-like')
+              // await setlikeotime('')
+              console.log(likeotime+'BEIN LIKE')
+               await setlikeotime('/filter-member')
+              console.log('set shod be like')
+              console.log(likeotime+'likeotime')
+              // response(1)
 
             }
 
@@ -157,10 +173,10 @@ const Groups = () => {
           }}
 
         /> : null}
+        {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
-        <Eachgroup></Eachgroup>
-        <Eachgroup></Eachgroup>
+        <Eachgroup></Eachgroup> */}
 
 
         {(information.length >= 0) ?
