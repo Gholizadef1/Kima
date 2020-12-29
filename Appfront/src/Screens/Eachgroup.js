@@ -23,7 +23,7 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.groupphoto === 'http://c8f6d3c6ac6e.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.groupphoto === 'http://70070a12ba99.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/avatar.png')}
          style={styles.avatar}
@@ -39,8 +39,11 @@ const Eachgroup = (prop) => {
 
          </ImageBackground>}
      </TouchableOpacity>
-     <Text style={styles.username}><Text>#</Text>{prop.title}</Text>
-     <Text style={styles.date}>150<Text style={{color:'gray'}}> {prop.discription}</Text></Text>
+     {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
+     <Text style={styles.username}>{prop.title}</Text>
+     {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
+     <Text style={styles.date}>150<Text style={{color:'gray'}}> عضو</Text></Text>
+
 
     
    </View>
@@ -49,7 +52,7 @@ const Eachgroup = (prop) => {
 
    <View style={styles.comment}>
 
-        <Text style={{color:'black'}}>خلاضه ی گروهههههههه</Text>
+        <Text style={{color:'black'}}>{prop.discription}</Text>
  </View>
  
   
@@ -74,11 +77,19 @@ const styles = StyleSheet.create({
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
+    yourgroup:{
+      position:'absolute',
+      marginLeft:wp('74%'),
+      marginTop:hp('1%'),
+      color:'#1f7a8c',
+      fontSize:hp('1.5%'),
+      // fontWeight:'bold'
+    },
     username: {
         position: 'absolute',
         marginTop: '5%',
-        left: 80,
-        fontSize: 15,
+        left: wp('20%'),
+        fontSize: hp('1.7%'),
         fontWeight: 'bold'
     
     

@@ -199,7 +199,7 @@ const Groups = () => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
-            <Eachgroup groupphoto={item.group_photo} discription={item.summary} title={item.title} ></Eachgroup>
+            <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>
             </>
             )}
           // extraData={finfo}
