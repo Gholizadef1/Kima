@@ -642,9 +642,11 @@ class MemberGroupView(APIView):
         if  not Member.objects.filter(user=user,group=group).exists():
             new_member = Member(user=user,group=group)
             new_member.save()
-            return Response({"message":"You joind this group!"})
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
+            return Response({"message":"You joind this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
         Member.objects.get(user=user,group=group).delete()
-        return Response({"message":"You leaved this group!"})
+        return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
