@@ -25,6 +25,7 @@ import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 
 
+
 function GroupsPage (props){
   const [groups,setGroups] = useState([]);
   const [filterBase,setFilterBase]= useState("popular");
@@ -79,18 +80,18 @@ function GroupsPage (props){
   const handleCloseCreateGroup = () => {
     setOpenCreateGroup(false);
     setNewGroup({
-      picture: "",
+      picture: "fae8d917da344e6eb3b832a4b706ff49..jpg",
       name : "",
-      description :"",
-      backError : ""
+      description :""
+     // backError : ""
     }); 
   };
 
   const [newGroup,setNewGroup] = useState({
-    picture: "",
+    picture: "fae8d917da344e6eb3b832a4b706ff49..jpg",
     name : "",
-    description :"",
-    backError : ""
+    description :""
+   // backError : ""
   })
 
   const handleChange = (e) => {
@@ -103,15 +104,16 @@ function GroupsPage (props){
 
 const handleCreateGroupSubmit =(e) =>{
   e.preventDefault();
-  setNewGroup(prevState => ({
-      ...prevState,
-      backError : ""
-  })); 
+  // setNewGroup(prevState => ({
+  //     ...prevState,
+  //     backError : ""
+  // })); 
 
   var formdata = new FormData()
   formdata.append('title',newGroup.name)
   formdata.append('summary',newGroup.description)
-  formdata.append('photo',state.file)
+  //formdata.append('photo',state.file)
+  formdata.append('photo',newGroup)
 
   // const payload={
   //       "title":newGroup.name,
@@ -182,6 +184,7 @@ const handleCloseSnack = (event, reason) => {
   };
 
 
+
     return(
         <div className="container-fluid rTOl px-md-5">
             <div className="d-flex  my-4 flex-wrap mx-md-5 px-md-4">
@@ -189,7 +192,7 @@ const handleCloseSnack = (event, reason) => {
                 <div variant="gray" className="btn">
                   <GoSearch size="30" color="black"/>
                 </div>
-                <input className=" shadow form-control rounded-pill px-4 text-right " type="title" name="group" placeholder="نام گروه" />  
+                <input className=" shadow form-control rounded-pill px-4 text-right " type="title" name="group" placeholder="جستجوی گروه... " />  
                 <div variant="gray" className="btn">
                 </div>
               </div>
@@ -216,9 +219,12 @@ const handleCloseSnack = (event, reason) => {
 
                 style={{ display: "none",color:"white" }} />
 
-                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="rounded-lg mx-auto d-block text-center"
-                onClick={() => imageUploader.current.click()} 
-                />
+                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="rounded-lg mx-auto d-block text-center"/>
+                <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
+                  <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
+                  </svg>
+                </div>
 
                   <form >
                     <TextField
@@ -277,7 +283,7 @@ const handleCloseSnack = (event, reason) => {
                   
 
                   <div class="col mb-4">
-                    <div class="card h-100 shadow-lg  border border-dark">
+                    <div class="card h-100 shadow-lg ">
                       <img src={`http://127.0.0.1:8000${current.group_photo}`} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
                         <h5 class="card-title">{current.title}</h5>
