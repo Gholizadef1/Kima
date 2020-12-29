@@ -27,7 +27,7 @@ const Groups = () => {
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
   const[numberofpage,setnumberofpage]=useState(0);
-  const [count,setcount]=useState(0);
+  let count=0;
   const response=async (page)=>{
     //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
     await setpage(page)
@@ -59,7 +59,7 @@ const Groups = () => {
       }
      
    })
-   setcount(response.data.count)
+   count=response.data.count;
   setnumberofpage(numberofpage+1)
   setrefresh(false)
   if(numberofpage===count)
@@ -132,7 +132,7 @@ const Groups = () => {
 
       <View style={{ marginLeft: wp('2%') }}>
 
-        {(information.length >= 0) ? <DropDownPicker
+        {(count >= 0) ? <DropDownPicker
           items={[
             { label: 'جدید ترین گروه ها',value:'none'},
             { label: 'معروف ترین گروه ها', value: 'like' },
@@ -187,7 +187,7 @@ const Groups = () => {
         <Eachgroup></Eachgroup> */}
 
         <View style={{height:hp('2%')}}></View>
-        {(information.length >= 0) ?
+        {(count >= 0) ?
 
           <FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 

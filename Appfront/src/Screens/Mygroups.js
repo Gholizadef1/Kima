@@ -114,41 +114,49 @@ const Mygroups = () => {
     const [likeotime, setlikeotime] = useState('/filter-time');
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
-    const response=async (page)=>{
-      //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
-      await setpage(page)
-  
-      if(page===1){
-        console.log('PAGE 111')
-  
-      await settheend(false)
-      await setinformation([])
-  
-      console.log('IT IS HEAR SET INFO []')
-      console.log(information)
-      
-      } 
-      console.log('DOVOM')
-       console.log(page+'PAGE')
-       try{
-         console.log('  omad to response')
-         console.log(likeotime + ' likeotime to response')
-        // setIDD(await (await AsyncStorage.getItem('id')).toString())
-        const response = await axiosinst.get('api/group'+ likeotime,{
-        "headers":
-        {
-          "Content-Type": "application/json",
-          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-        }
-  
-     })
-    setrefresh(false)
-    if(response.data.detail==='Invalid page.')
-    settheend(true);
-    else{
-      settheend(false)
-      //  console.log(IDD+'IDDresponse');
-      setinformation(response.data)
+    const[numberofpage,setnumberofpage]=useState(0);
+  // const [count,setcount]=useState(0);
+  let count=0;
+  const response=async (page)=>{
+    //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
+    await setpage(page)
+
+    if(page===1){
+      console.log('PAGE 111')
+
+    await settheend(false)
+    await setinformation([])
+
+    console.log('IT IS HEAR SET INFO []')
+    console.log(information)
+    
+    } 
+    console.log('DOVOM')
+     console.log(page+'PAGE')
+     try{
+       console.log('  omad to response')
+       console.log(likeotime + ' likeotime to response')
+      // setIDD(await (await AsyncStorage.getItem('id')).toString())
+      const response = await axiosinst.get('api/group'+ likeotime,{
+        params: {
+          page: page
+        },
+      "headers":
+      {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+     
+   })
+   count=response.data.count
+  setnumberofpage(numberofpage+1)
+  setrefresh(false)
+  if(numberofpage===count)
+  settheend(true);
+  else{
+    settheend(false)
+    //  console.log(IDD+'IDDresponse');
+    setinformation(response.data.groups)
         // page===1?setinformation(response.data):setinformation(information.concat(response.data))
         console.log('++++INFO++++'+information+"++++INFO++++")
        
@@ -362,8 +370,8 @@ const Mygroups = () => {
 
          { (information.length>=0) ?    <DropDownPicker
           items={[
-            { label: 'معروف ترین گروه ها', value: 'none' },
-            { label: 'جدید ترین گروه ها', value: 'like' },
+            { label: 'معروف ترین گروه ها', value: 'like' },
+            { label: 'جدید ترین گروه ها', value: 'none' },
           ]}
           defaultValue={selectedValue}
           labelStyle={{fontSize:wp('3%')}}
@@ -384,13 +392,13 @@ const Mygroups = () => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/comment-filter-time')
+              await setlikeotime('/filter-time')
         
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/comment-filter-like')
+              await setlikeotime('/filter-member')
          
             }
 
