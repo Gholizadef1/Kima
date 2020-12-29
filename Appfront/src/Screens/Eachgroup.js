@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Alert, ScrollView,Modal } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
+//  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';

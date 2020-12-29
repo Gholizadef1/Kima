@@ -38,7 +38,7 @@ const userschema=yup.object({
 
 const Mygroups = () => {
 
-  const [picture,setpicture]=useState('../../assets/backprof5j.jpeg');
+  const [picture,setpicture]=useState({uri:'../../assets/backprof5j.jpeg',name:'',type:''});
 
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
@@ -74,7 +74,8 @@ const Mygroups = () => {
            //baraye in ke rerender beshe va photo formik form taghir kone
         
              props.handleChange('photo')
-             setpicture(data.uri)
+             setpicture(newfile)
+             
              console.log(picture+'  PICTURE')
             // change(data.uri)
            console.log(props.values.photo+'formik photo2')
@@ -135,9 +136,12 @@ const Mygroups = () => {
       onSubmit={async(values,actions)=>{
           console.log('ON SUBMIT')
           const formdata = new FormData();
-          formdata.append('title',values.Username)
-          formdata.append('summary',values.Discription)
-          formdata.append('photo',picture)
+          //  const newfile={title:values.Username,summary:values.summary,photo:picture}
+           formdata.append('title',values.Username)
+           formdata.append('summary',values.Discription)
+           formdata.append('photo',picture)
+          //  formdata.append({photo:'',name:'',type:''},'photo')
+            // formdata.append(newfile,'data')
         // const back={
         //   username:values.Username,
         //   discription:Discription,
@@ -149,13 +153,15 @@ const Mygroups = () => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('http://a32f717e71fe.ngrok.io/api/grup',formdata,{
+        const response=await axiosinst.post('http://70070a12ba99.ngrok.io/api/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
           }
              )
         .then( function(response){
+          console.log(picture+' PICTURE POST')
+        
           console.log(response)
           Alert.alert('','گروه با موفقیت ساخته شد ',[
             {

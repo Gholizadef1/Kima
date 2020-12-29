@@ -1,18 +1,17 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Modal} from 'react-native';
-//  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useFocusEffect } from '@react-navigation/native';
-import axiosinst from '../api/axiosinst';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+//  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
+// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// import { useFocusEffect } from '@react-navigation/native';
+// import axiosinst from '../api/axiosinst';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
+// import { MaterialIcons } from '@expo/vector-icons'; 
+// import { SearchBar } from 'react-native-elements';
 import Eachgroup from './Eachgroup';
- import { SearchBar } from 'react-native-elements';
-
 const Groups = () => {
 
     const [modalopen,setmodalopen]=useState(false)
@@ -22,8 +21,8 @@ const Groups = () => {
     return(
       
         <View style={styles.container}>
-          <SearchBar
-          style={{backgroundColor:'#EDF2F4',height:hp('4.5%'),width:wp('50%')}}
+            {/* <SearchBar
+          style={{backgroundColor:'#F1F3F9',height:hp('4.5%'),width:wp('50%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%')}} />}
           borderTopLeftRadius={20}
           borderTopRightRadius={20}
@@ -33,13 +32,13 @@ const Groups = () => {
           placeholderTextColor={'gray'}
           inputStyle={{color:'black',fontSize:hp('1.7%')}}
           containerStyle={{backgroundColor:'white',borderTopColor:'white',borderBottomColor:'white'}}
-          inputContainerStyle={{backgroundColor:'#EDF2F4',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%'),borderRadius:20}}
+          inputContainerStyle={{backgroundColor:'#F1F3F9',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%'),borderRadius:20}}
           cancelIcon={<AntDesign style={{}}
          name="close" size={30} color="gray" />}
         // placeholder="نام گروه ..."
         onChangeText={console.log('taghirkarde')}
         value={search}
-      />
+      /> */}
         {/* <Modal visible={modalopen} animationType='slide'>
         <AntDesign onPress={()=>setmodalopen(false)}
          name="close" size={24} color="black" />
