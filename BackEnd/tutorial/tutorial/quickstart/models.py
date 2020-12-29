@@ -159,6 +159,7 @@ class Chat(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     discuss = models.ForeignKey(Discussion, on_delete=models.CASCADE)
     chat_text = models.TextField()
+    send_time = models.DateTimeField(default=timezone.now, editable=False)
 
     
 
