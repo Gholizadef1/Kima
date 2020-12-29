@@ -50,25 +50,23 @@ const GroupPage = () => {
   console.log('GROUPPP' +groupinfo.title)
   console.log('^^^^^^^' +groupinfo.members_count)
 
-  // const PostJoin = async () => {
+  const PostJoin = async () => {
+      const back = {}
+      const backk = JSON.stringify(back);
+      axiosinst.post('/api/group/members/1' , back , {
+        "headers": {
+          "content-type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+      })
+        .then(async function (response) {
+          console.log(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);          
+        });
 
-  //     axiosinst.post('/api/' +id, back, {
-  //       "headers": {
-  //         "content-type": "application/json",
-  //         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-  //       }
-  //     })
-  //       .then(async function (response) {
-  //         console.log(response.data)
-  //         getPicker();
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-          
-          
-  //       });
-
-  // }
+  }
 
     return(
         <View style={styles.container}>
@@ -102,7 +100,7 @@ const GroupPage = () => {
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
                       <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                      , backgroundColor:'#1F7A8C'}}>
+                      , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
                       <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
                     </Button>
 
