@@ -29,7 +29,6 @@ import {
   } from "react-router-dom";
   
   function GroupPage (props){
-    let { groupId } = useParams();
     const [ginfo, setGinfo] = useState([]);
     const [openCreateGroup, setOpenCreateGroup] = useState(false);
     const[message,setMessage]= useState("");
@@ -38,19 +37,20 @@ import {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
- 
+    
   useEffect(() => {
-    if (props.match.params.groupId) {
-    axios.get("http://127.0.0.1:8000/api/group/details/groups" + props.match.params.groupId)
+    axios.get("http://127.0.0.1:8000/api/group/details/1")
       
       .then((data) => {
          console.log(data);
          console.log(data.data.group_photo);
         setGinfo(data.data);
-        console.log(data.data);
+        console.log(data.data.owner.username);
+        if(data.data.owner.username === Cookies.get('userName')){
+          setMessage("You are owner!");
+        }
         console.log(ginfo.group_photo);
       });
-    }
       
   }, []);
   ///////////////////////////////////////////////////////
@@ -64,6 +64,7 @@ import {
         console.log(members.profile_photo);
         console.log(data);
         for (var i = 0; i < data.length; i++) {
+         
           if(data[i].user.username === Cookies.get('userName')){
             setMessage('You joind this group!');
           }
@@ -85,10 +86,15 @@ import {
         }).then(data => {
         setJoin(true);
           console.log(data.data.message);
+          
         })
     .catch(error=>{
       console.log(error);
     });
+    props.history.push('/group');
+  }
+  const deletGroup =()=>{
+    props.history.push('/groups');
   }
   /////////////////////////////////////////////////////////
     const joinGroup =()=> { 
@@ -169,10 +175,11 @@ import {
 
     {message === "You joind this group!" ?
     <div>
-    <button onClick={joinGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
+    <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
     <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateGroup}>
  بحث جدید
                 </div>
+                
                 <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                   <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
                   <DialogContent >
@@ -206,12 +213,56 @@ import {
     <div>       
     </div>
       }
+     
       {message === "You leaved this group!"?
-      <div>      <button onClick={leaveGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+      <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
       </div>
       :
       <div></div>
     }
+    
+    {message === "You are owner!" ?
+    <div>
+    <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
+    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateGroup}>
+ بحث جدید
+                </div>
+                
+                <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                  <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                  <DialogContent >
+
+                  <form >
+                    <input
+                      autoFocus
+                      margin="dense"
+                      id="name"
+                      style={{fontFamily:"Yekan"}}
+                      placeholder="عنوان بحث"
+                      type="title"
+                      onChange={handleChange}
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    </form>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseCreateGroup} color="black">
+                    بستن
+                    </Button>
+                    <Button onClick={handleCreateGroupSubmit} color="black">
+                      ثبت
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+</div>
+    :
+    <div>       
+    </div>
+      }
+     
+   
     
 
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:560}}>:دربارهٔ گروه</b>
