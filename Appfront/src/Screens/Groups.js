@@ -21,6 +21,56 @@ const Groups = () => {
   const [refresh,setrefresh]=useState(false);
 
   const [theend,settheend]=useState(false);
+
+  const response=async (page)=>{
+    //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
+    await setpage(page)
+
+    if(page===1){
+      console.log('PAGE 111')
+
+    await settheend(false)
+    await setinformation([])
+
+    console.log('IT IS HEAR SET INFO []')
+    console.log(information)
+    
+    } 
+    console.log('DOVOM')
+     const id=prop.route.params.id
+     console.log(id) 
+     console.log(page+'PAGE')
+     try{
+      setIDD(await (await AsyncStorage.getItem('id')).toString())
+  //    const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
+  //    page:page
+  //    }
+  // })
+  setrefresh(false)
+  if(response.data.detail==='Invalid page.')
+  settheend(true);
+  else{
+    settheend(false)
+     console.log(IDD+'IDDresponse');
+      page===1?setinformation(response.data):setinformation(information.concat(response.data))
+      console.log('++++INFO++++'+information+"++++INFO++++")
+     
+     }
+     }
+   catch(err){
+     setrefresh(false)
+     console.log(err.toString().split('\n')[0])
+    if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
+    settheend(true);
+    // else if(theend===true)
+    // settheend(false)
+    console.log(theend+'THE END')
+      console.log(err);
+    
+   }
+ 
+   }
+
   return (
 
     <View style={styles.container}>
