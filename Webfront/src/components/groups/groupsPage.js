@@ -184,7 +184,7 @@ const handleCloseSnack = (event, reason) => {
 
     return(
         <div className="container-fluid rTOl px-md-5">
-            <div className="d-flex  my-4 flex-wrap mx-md-5">
+            <div className="d-flex  my-4 flex-wrap mx-md-5 px-md-4">
               <div className="d-flex ml-auto">
                 <div variant="gray" className="btn">
                   <GoSearch size="30" color="black"/>
@@ -201,7 +201,7 @@ const handleCloseSnack = (event, reason) => {
                 </select>
               </div>
               <div>
-                <div className="btn btn-secondary rounded-pill  shadow" onClick={handleClickOpenCreateGroup}>
+                <div className="btn btn-dark rounded-pill  shadow" onClick={handleClickOpenCreateGroup}>
                   گروه جدید
                 </div>
                 <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
@@ -216,7 +216,7 @@ const handleCloseSnack = (event, reason) => {
 
                 style={{ display: "none",color:"white" }} />
 
-                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="img-thumbnail mx-auto d-block text-center"
+                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="rounded-lg mx-auto d-block text-center"
                 onClick={() => imageUploader.current.click()} 
                 />
 
@@ -271,13 +271,13 @@ const handleCloseSnack = (event, reason) => {
                  <p >گروهی برای نمایش وجود ندارد</p>
 
                 ) : (
-                  <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2" style={{textAlign:'right'}}>
+                  <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2" style={{textAlign:'right'}}>
 
                 {groups.map ((current) => (
                   
 
-                  <div class="col mb-4 ">
-                    <div class="card h-100 shadow-lg">
+                  <div class="col mb-4">
+                    <div class="card h-100 shadow-lg  border border-dark">
                       <img src={`http://127.0.0.1:8000${current.group_photo}`} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
                         <h5 class="card-title">{current.title}</h5>

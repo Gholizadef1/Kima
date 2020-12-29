@@ -384,7 +384,7 @@ return(
     </div>
   </div>
 </div>
-<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg">
+<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg border border-dark">
 <Tabs book={state.id} bookdescription={state.description}/>
 </div>
 </div>
