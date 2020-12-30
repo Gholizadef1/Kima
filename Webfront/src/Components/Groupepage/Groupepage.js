@@ -32,21 +32,23 @@ import {
   
   function GroupPage (props){
     const [ginfo, setGinfo] = useState([]);
-    const [openCreateGroup, setOpenCreateGroup] = useState(false);
+    const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
     const[message,setMessage]= useState("");
     const [members,setMembers] = useState([]);
     const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
+  const [showdiscussion,setShowdiscussion]=useState([]);
     
   const [newDiscussion,setNewDiscussion] = useState({
     name : "",
+    summary: "",
     backError : ""
   });
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/details/1")
+    axios.get("http://127.0.0.1:8000/api/group/details/3")
       
       .then((data) => {
          console.log(data);
@@ -63,7 +65,7 @@ import {
   ///////////////////////////////////////////////////////
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/group/members/1`)
+    fetch(`http://127.0.0.1:8000/api/group/members/3`)
       .then((res) => res.json())
       .then((data) => {
          console.log(data);
@@ -84,7 +86,7 @@ import {
   }, [join]);
   const leaveGroup = ()=>{
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/1",
+      "http://127.0.0.1:8000/api/group/members/3",
     {},
     {
       headers:{
@@ -98,24 +100,32 @@ import {
     .catch(error=>{
       console.log(error);
     });
-    props.history.push('/group');
+    props.history.push('/groups');
   }
   const deletGroup =()=>{
     props.history.push('/groups');
   }
   ///////////////////////////////////////////////////////////
-  axios.post(
-    "http://127.0.0.1:8000/api/group/1/discussion",newDiscussion.name,
-  {
-    headers:{
-      "Content-Type":"application/json",
-     "Authorization":"Token "+Cookies.get("userToken")}
-      })
+  
+  useEffect(() => {
+    axios.get(
+      "http://127.0.0.1:8000/api/group/discussion/details/3",
+    {
+      headers:{
+        "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+          console.log(data);
+          setShowdiscussion(data);
+        setJoin(true);
+          console.log(data.data.message);
+        })
+  }, []);
   
   /////////////////////////////////////////////////////////
     const joinGroup =()=> { 
       axios.post(
-        "http://127.0.0.1:8000/api/group/members/1",
+        "http://127.0.0.1:8000/api/group/members/3",
       {},
       {
         headers:{
@@ -131,7 +141,7 @@ import {
     }
  /////////////////////////////////////////////////////   
     const handleCloseCreateGroup = () => {
-      setOpenCreateGroup(false);
+      setOpenCreateDiscussion(false);
       setNewDiscussion({
         name : "",
         backError : ""
@@ -145,7 +155,19 @@ import {
           [id] : value
       }))
   }
+
+  var formdata = new FormData()
+  formdata.append('title',newDiscussion.name)
+  formdata.append('summary',newDiscussion.summary)
+
     const handleCreateDiscussionSubmit =(e) =>{
+      axios.post(
+        "http://127.0.0.1:8000/api/group/3/discussion",formdata,
+      {
+        headers:{
+          "Content-Type":"application/json",
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
       e.preventDefault();
       setNewDiscussion(prevState => ({
           ...prevState,
@@ -153,8 +175,8 @@ import {
       })); 
     }
     
-  const handleClickOpenCreateGroup = () => {
-    setOpenCreateGroup(true);
+  const handleClickOpenCreateDiscussion = () => {
+    setOpenCreateDiscussion(true);
   };
 
 
@@ -184,22 +206,36 @@ import {
     {message === "You joind this group!" ?
     <div>
     <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateGroup}>
+    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
                 
-                <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                   <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
                   <DialogContent >
 
                   <form >
-                    <input
+                    <TextField
                       autoFocus
                       margin="dense"
                       id="name"
                       style={{fontFamily:"Yekan"}}
+                      value={newDiscussion.name}
                       placeholder="عنوان بحث"
                       type="title"
+                      onChange={handleChange}
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    <TextField
+                      autoFocus
+                    margin="dense"
+                      id="description"
+                      style={{fontFamily:"Yekan"}}
+                      value={newDiscussion.summary}
+                      placeholder="دربارهٔ بحث"
+                      type="description"
                       onChange={handleChange}
                       fullWidth
                       variant="outlined"
@@ -209,7 +245,7 @@ import {
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleCloseCreateGroup} color="black">
-                    بستن
+                    انصراف
                     </Button>
                     <Button onClick={handleCreateDiscussionSubmit} color="black">
                       ثبت
@@ -232,25 +268,36 @@ import {
     {message === "You are owner!" ?
     <div>
     <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
-    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateGroup}>
+    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
                 
-                <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                   <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
                   <DialogContent >
 
                   <form >
-                    <input
-                      autoFocus
+                    <TextField
+                  autoFocus
                       margin="dense"
                       id="name"
                       value={newDiscussion.name}
-                      style={{fontFamily:"Yekan"}}
-                      placeholder="عنوان بحث"
+                      label="نام گروه"
                       type="title"
                       onChange={handleChange}
                       fullWidth
+                      variant="outlined"
+
+                    />
+                    <TextField
+                      margin="dense"
+                      id="description"
+                      value={newDiscussion.description}
+                      label="توضیحات"
+                      type="description"
+                      onChange={handleChange}
+                      fullWidth
+                      multiline
                       variant="outlined"
 
                     />
@@ -258,7 +305,7 @@ import {
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleCloseCreateGroup} color="black">
-                    بستن
+                    انصراف
                     </Button>
                     <Button onClick={handleCreateDiscussionSubmit} color="black">
                       ثبت
