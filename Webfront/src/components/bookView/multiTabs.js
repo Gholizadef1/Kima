@@ -13,15 +13,9 @@ import {AiOutlineDislike} from 'react-icons/ai';
 import {AiOutlineLike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
-
-//import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-//import ListItemText from '@material-ui/core/ListItemText';
-//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
-
-
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';

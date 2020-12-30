@@ -26,7 +26,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 function GroupsPage (props){
   const [groups,setGroups] = useState([]);
-  const [filterBase,setFilterBase]= useState("popular");
+  const [filterBase,setFilterBase]= useState("time");
+
+  const [page, setPage] = useState(1);
+  const [pagesNumber, setPagesNumber] = useState();
   
 
   useEffect(()=>{
@@ -40,28 +43,32 @@ function GroupsPage (props){
     //   });
 
 
-    if(filterBase==="popular"){
-      axios.get('http://127.0.0.1:8000/api/group/filter-member')
+    if(filterBase==="mine"){
+      // axios.get('http://127.0.0.1:8000/api/group/filter-member')
+      // .then(response=>{
+      //   console.log(response);
+      //   setGroups(response.data);
+      // })
+      // .catch(error=>{
+      //   console.log(error);
+      // })
+    }
+    else{
+      axios.get('http://127.0.0.1:8000/api/group/filter-'+filterBase+'?page='+page
+      ,{
+        headers:{
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
       .then(response=>{
         console.log(response);
-        setGroups(response.data);
+        setGroups(response.data.groups);
+        setPagesNumber(response.data.count)
       })
       .catch(error=>{
         console.log(error);
       })
     }
-    else if (filterBase==="new"){
-      axios.get('http://127.0.0.1:8000/api/group/filter-time')
-      .then(response=>{
-        console.log(response);
-        setGroups(response.data);
-      })
-      .catch(error=>{
-        console.log(error);
-      })
-    }
-    else console.log(filterBase);
-  },[filterBase])
+  },[filterBase,page])
 
 
   const handleChangeList =(e) =>{
@@ -220,8 +227,8 @@ const handleCloseSnack = (event, reason) => {
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
                 <select className="form-control rounded-pill shadow" onClick={handleChangeList} >
-                  <option value="popular">محبوب‌ترین گروه ها</option>
-                  <option value="new">جدیدترین گروه ها</option>
+                  <option value="time">جدیدترین گروه ها</option>
+                  <option value="member">محبوب‌ترین گروه ها</option>
                   <option value="mine">گروه‌های من</option>
                 </select>
               </div>
@@ -293,7 +300,7 @@ const handleCloseSnack = (event, reason) => {
             <div className="mx-md-5 px-md-5"  >
                
 
-                {groups.message === "No!" ? (
+                {groups.length === 0 ? (
                  
 
                  <p >گروهی برای نمایش وجود ندارد</p>
@@ -328,6 +335,15 @@ const handleCloseSnack = (event, reason) => {
 
                    )}
             </div>
+
+            <div className="mb-5">
+              {Array.from(Array(pagesNumber),(e,i)=>{
+                return <div className="btn btn-light" 
+                onClick={()=>{setPage(i+1)}}
+                > {i+1} </div>
+              })}
+              </div>
+
             <Snackbar
           anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
           open={openSnack}
