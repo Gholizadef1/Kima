@@ -644,7 +644,7 @@ class MemberGroupView(APIView):
         if Member.objects.filter(group=group).exists():
             members = Member.objects.filter(group=group)
             serializer = MemberSerializer(members,many=True)
-            return Response(serializer.data)
+            return Response({"members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
         return Response({"message":"No member!"})
 
     def post(self ,request ,pk ):
