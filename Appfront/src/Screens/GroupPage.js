@@ -7,16 +7,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { Feather } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
-import Eachgroup from './Eachgroup';
-import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper';
-import { getIn } from 'formik';
+
 
 
 const GroupPage = () => {
@@ -24,43 +17,37 @@ const GroupPage = () => {
   const [picture,setpicture]=useState(null);
   const [userid, setuserid] = useState('');
   const [groupinfo,setgroupinfo]=useState(null);
+  const [message,setmessage]=useState(null);
+  const [id,setid]=useState(1);
+
+  const getInfo = async () => {
+    const response = await axiosinst.get('/api/group/details/3');
+    setgroupinfo(response.data);
+    };
+
 
   useEffect(() =>{
-    getInfo()
-},[])
+    getInfo();
+},[]);
 
-  const getInfo = async()=>{
-    axiosinst.get('/api/group/details/1', {
-      "headers": {
-        "content-type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-    .then(function(response){
-      console.log('response data : ', response.data)
-      console.log(response.message)
-      console.log('$$$$'+response.data.title)
-      setgroupinfo(response.data)   
-  }) 
-    .catch( async function (error) {
-      console.log(error);
-      console.log(error.code+'ERROR CODE')      
-    });
-  }
-  console.log('GROUPPP' +groupinfo.title)
-  console.log('^^^^^^^' +groupinfo.members_count)
+
 
   const PostJoin = async () => {
       const back = {}
       const backk = JSON.stringify(back);
-      axiosinst.post('/api/group/members/1' , back , {
+      axiosinst.post('/api/group/members/3' , backk , {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
         }
       })
         .then(async function (response) {
-          console.log(response.data)
+//          console.log(await AsyncStorage.getItem('token')).toString()
+          console.log('response' +response.data.message)
+          console.log('response' +response.data.owner.username)
+          console.log('response' +response.data.members[0].username)
+
+          setmessage(response.data.message)
         })
         .catch(function (error) {
           console.log(error);          
@@ -90,24 +77,35 @@ const GroupPage = () => {
 
                     </View>
 
-                    {picture!='http://15cbf5742c3b.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+                    {picture!='http://3f58107b5393.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
                       source={{uri:picture}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
                       source={require('../../assets/avatar.png')}
                       ></Avatar.Image>}
 
-                      <Text style={styles.groupname}>{groupinfo.title}</Text>
-                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
+                      <Text style={styles.groupname}></Text>
+                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :</Text>
 
-                      <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                      , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
-                      <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
-                    </Button>
+                      {message === "You joind this group!" ? 
+                        <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                        , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
+                          <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
+                          </Button> :
+                          <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                          , backgroundColor:'#1F7A8C'}}  onPress = {() => PostJoin()}>
+                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
+                            </Button> }  
+{/* 
+                          {message === "You leaved this group!" ?
+                          <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                          , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
+                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
+                            </Button> : null}                     */}
 
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
                       <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
-                      {groupinfo.summary}
+                     
                       </Text>
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C' ,fontWeight:'bold'}}>بحث های انجام شده :</Text>
