@@ -102,24 +102,23 @@ function GroupsPage (props){
 
 const handleCreateGroupSubmit =(e) =>{
   e.preventDefault();
-  // setNewGroup(prevState => ({
-  //     ...prevState,
-  //     backError : ""
-  // })); 
+
+  if(newGroup.name === ""){
+    setMassage("اسم گروه نمی‌تواند خالی باشد")
+    setOpenSnack(true);
+  }
+  else if(newGroup.description === ""){
+    setMassage("توضیحات گروه نمی‌تواند خالی باشد")
+    setOpenSnack(true);
+  }
+
+  else{
 
   var formdata = new FormData()
   formdata.append('title',newGroup.name)
   formdata.append('summary',newGroup.description)
   formdata.append('photo',state.file)
 
-  // const payload={
-  //       "title":newGroup.name,
-  //       "summary":newGroup.description,
-  //       "photo":state.file
-  //       //formdata
-  // }
-
-  //const back= JSON.stringify(payload)
   axios.post('http://127.0.0.1:8000/api/group',formdata,
   {
     headers:{
@@ -130,11 +129,15 @@ const handleCreateGroupSubmit =(e) =>{
   .then(response=>{
     console.log(response);
 
-    if(response.status === 200){
+    if(response.data.message === "Your group is succesfully created!"){
       setMassage('گروه با موفقیت ساخته شد')
       setOpenSnack(true);
       handleCloseCreateGroup();
 
+    }
+    else{
+      setMassage("مشکلی پیش آمده دوباره امتحان کنید")
+      setOpenSnack(true);
     }
   })
   .catch(error=>{
@@ -142,6 +145,7 @@ const handleCreateGroupSubmit =(e) =>{
     setMassage("گروه از قبل وجود دارد")
     setOpenSnack(true);
   });
+}
 }
 
 const [state , setState]=useState(
@@ -222,11 +226,11 @@ const handleCloseSnack = (event, reason) => {
                 </select>
               </div>
               <div>
-                <div className="btn btn-dark rounded-pill  shadow" onClick={handleClickOpenCreateGroup}>
+                <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup}>
                   گروه جدید
                 </div>
                 <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle id="form-dialog-title">ساخت گروه جدید</DialogTitle>
+                  <DialogTitle id="form-dialog-title">گروه جدید بسازید</DialogTitle>
                   <DialogContent >
                     
 
@@ -306,11 +310,11 @@ const handleCloseSnack = (event, reason) => {
                       <div class="card-body">
                         <h5 class="card-title">{current.title}</h5>
                         <p class="card-text">{current.summary}</p>
-                        <div className="d-flex align-items-center">
+                        <div className="align-items-center">
                             <svg style={{width:24,height:24}} className="mx-1" viewBox="0 0 24 24">
                                 <path fill="#00BCD4" d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z" />
                             </svg>
-                            <h6 class="card-subtitle mt-1 text-muted">{current.members_count+1}عضو</h6>
+                            <h6 class="card-subtitle mt-1 text-muted">{current.members_count}عضو</h6>
                         </div>
                       </div>
                     </div>
