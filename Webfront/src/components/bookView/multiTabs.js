@@ -99,6 +99,7 @@ export default function FullWidthTabs(props) {
   //for comment
   useEffect(()=>{
     setEndComment("");
+    //console.log(props)
     console.log(props.book)
     // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     // .then(response=>{
@@ -114,7 +115,7 @@ export default function FullWidthTabs(props) {
     if(filterBaseComment==="time"){
       axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time"+"?page="+commentsPage)
     .then(response=>{
-     setComments(response.data);
+     setComments(response.data.comments);
       console.log(response);
     })
     .catch(error=>{
@@ -124,7 +125,7 @@ export default function FullWidthTabs(props) {
     }else if(filterBaseComment==="like"){
       axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like"+"?page="+commentsPage)
       .then(response=>{
-        setComments(response.data);
+        setComments(response.data.comments);
          console.log(response);
        })
        .catch(error=>{
@@ -154,8 +155,7 @@ export default function FullWidthTabs(props) {
     if(filterBaseQuote==="time"){
       axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-time"+"?page="+quotesPage)
     .then(response=>{
-     //setQuotes(quotes.concat(response.data));
-     setQuotes(response.data);
+     setQuotes(response.data.quotes);
       console.log(response);
     })
     .catch(error=>{
@@ -166,7 +166,7 @@ export default function FullWidthTabs(props) {
       axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-like"+"?page="+quotesPage)
     .then(response=>{
      //setQuotes(quotes.concat(response.data));
-     setQuotes(response.data);
+     setQuotes(response.data.quotes);
       console.log(response);
     })
     .catch(error=>{
@@ -492,10 +492,10 @@ export default function FullWidthTabs(props) {
 
             <List >
 
-              {comments.message === "No Comment!" ? (
+               {comments === undefined ? (
                  
 
-                 <p style={{color:'red'}}>نطری برای نمایش وجود ندارد</p>
+                 <p >نطری برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div>
@@ -563,7 +563,7 @@ export default function FullWidthTabs(props) {
                ))}
                </div>
 
-                   )}
+                   )} 
 
             </List>
 
@@ -624,10 +624,10 @@ export default function FullWidthTabs(props) {
 
             <List >
 
-            {quotes.message === "No Quote!" ? (
+            {quotes === undefined ? (
                  
 
-                 <p style={{color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
+                 <p >نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
                   <div>

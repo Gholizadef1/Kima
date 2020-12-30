@@ -228,8 +228,8 @@ setOpenSnack(false);
 //console.log(response.data.title);
 
 const bo = Number.isInteger(value);
-console.log(bo);
-console.log(value);
+//console.log(bo);
+//console.log(value);
 const Sendrequest =()=>{
   console.log(mess);
   if(mess === "No User Rating!"){

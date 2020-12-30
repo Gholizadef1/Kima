@@ -30,37 +30,37 @@ function GroupsPage (props){
   
 
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/api/group')
+    // axios.get('http://127.0.0.1:8000/api/group')
+    //   .then(response=>{
+    //     console.log(response);
+    //     setGroups(response.data);
+    //   })
+    //   .catch(error=>{
+    //     console.log(error);
+    //   });
+
+
+    if(filterBase==="popular"){
+      axios.get('http://127.0.0.1:8000/api/group/filter-member')
       .then(response=>{
         console.log(response);
         setGroups(response.data);
       })
       .catch(error=>{
         console.log(error);
-      });
-
-
-    // if(filterBase==="popular"){
-    //   axios.get('http://127.0.0.1:8000/api/group')
-    //   .then(response=>{
-    //     console.log(response);
-    //     setGroups(response.data);
-    //   })
-    //   .catch(error=>{
-    //     console.log(error);
-    //   })
-    // }
-    // else if (filterBase==="new"){
-    //   axios.get()
-    //   .then(response=>{
-    //     console.log(response);
-    //     setGroups(response.data);
-    //   })
-    //   .catch(error=>{
-    //     console.log(error);
-    //   })
-    // }
-    // else console.log(filterBase);
+      })
+    }
+    else if (filterBase==="new"){
+      axios.get('http://127.0.0.1:8000/api/group/filter-time')
+      .then(response=>{
+        console.log(response);
+        setGroups(response.data);
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
+    else console.log(filterBase);
   },[filterBase])
 
 
@@ -86,7 +86,7 @@ function GroupsPage (props){
   };
 
   const [newGroup,setNewGroup] = useState({
-    picture: "fae8d917da344e6eb3b832a4b706ff49..jpg",
+    picture: "defualt.jpg",
     name : "",
     description :""
    // backError : ""
