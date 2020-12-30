@@ -650,13 +650,17 @@ class MemberGroupView(APIView):
     def post(self ,request ,pk ):
         user=request.user
         group = Group.objects.get(id=pk)
-        members = Member.objects.filter(group=group)
-        serializer = MemberSerializer(members,many=True)
+        if user == group.owner:
+            return Response({"message":"You are owner!You cant leave or join group!"},status=HTTP_400_BAD_REQUEST)
         if  not Member.objects.filter(user=user,group=group).exists():
             new_member = Member(user=user,group=group)
             new_member.save()
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
             return Response({"message":"You joind this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
         Member.objects.get(user=user,group=group).delete()
+        members = Member.objects.filter(group=group)
+        serializer = MemberSerializer(members,many=True)
         return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
 class DynamicSearchFilter(filters.SearchFilter):
