@@ -276,7 +276,7 @@ const Comment = (prop) => {
 
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
-      { (information.length>=0) ?    <DropDownPicker
+      { (information!=undefined) ?    <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -340,7 +340,7 @@ const Comment = (prop) => {
           }}
 
         />:null}
-         { (information.length>=0) ? <FlatList
+         { (information!=undefined) ? <FlatList
           style={{ marginBottom: '17%' }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
