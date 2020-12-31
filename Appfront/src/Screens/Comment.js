@@ -37,6 +37,7 @@ const Comment = (prop) => {
   }
   const [delet, setdelet] = useState(false)
   const [refresh, setrefresh] = useState(false);
+  const [count,setcount]=useState(1);
   const [IDD, setIDD] = useState('');
   const equal = async (item) => {
 
@@ -85,7 +86,7 @@ const Comment = (prop) => {
 
       })
       // console.log(response.data)
-    
+      await setcount(response.data.count);
       if (response.data.detail === 'Invalid page.')
         settheend(true);
       else {
@@ -133,8 +134,13 @@ const Comment = (prop) => {
   )
   const handleLoadMore = async() => {
     console.log('END OF THE LIST')
+    if(page<count){
      if(theend===false)
      response(page+1);
+    }
+    else{
+      settheend(true)
+    }
     };
   const [showbutton, setshowbutton] = useState(true);
   console.log(prop.route.params.title)
