@@ -13,15 +13,9 @@ import {AiOutlineDislike} from 'react-icons/ai';
 import {AiOutlineLike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
-
-//import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-//import ListItemText from '@material-ui/core/ListItemText';
-//import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
-
-
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -84,13 +78,13 @@ export default function FullWidthTabs(props) {
   const [quotes, setQuotes] = useState([]);
 
   const [quotesPage, setQuotesPage] = useState(1);
+  const [quotesPagesNumber, setQuotesPagesNumber] = useState();
+
   const [commentsPage, setCommentsPage] = useState(1);
+  const [commentsPagesNumber, setCommentsPagesNumber] = useState();
 
   const [quoteAgain,setquoteAgain] = useState(0);
   const [commentAgain,setcommentAgain] = useState(0);
-
-  const [endQuote,setEndQuote] = useState("");
-  const [endComment,setEndComment] = useState("");
 
   const [filterBaseComment,setFilterBaseComment]= useState("time");
   const [filterBaseQuote,setFilterBaseQuote]= useState("time");
@@ -98,7 +92,7 @@ export default function FullWidthTabs(props) {
 
   //for comment
   useEffect(()=>{
-    setEndComment("");
+    //console.log(props)
     console.log(props.book)
     // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     // .then(response=>{
@@ -111,33 +105,26 @@ export default function FullWidthTabs(props) {
     //   setEndComment("نظر دیگری وجود ندارد");
     // });
 
-    if(filterBaseComment==="time"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-time"+"?page="+commentsPage)
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-"+filterBaseComment+"?page="+commentsPage,
+      {
+        headers:{
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
     .then(response=>{
-     setComments(response.data);
+     setComments(response.data.comments);
+     setCommentsPagesNumber(response.data.count)
       console.log(response);
     })
     .catch(error=>{
       console.log(error);
-      setEndComment("نظر دیگری وجود ندارد");
     });
-    }else if(filterBaseComment==="like"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-like"+"?page="+commentsPage)
-      .then(response=>{
-        setComments(response.data);
-         console.log(response);
-       })
-       .catch(error=>{
-         console.log(error);
-         setEndComment("نظر دیگری وجود ندارد");
-       });
-    }else{console.log(filterBaseComment);}
 
   },[props.book,commentAgain,commentsPage,filterBaseComment]);
 
+  
+  
 //for quote
   useEffect(()=>{
-    setEndQuote("");
     console.log(props.book)
     console.log(quotesPage);
     // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
@@ -151,29 +138,15 @@ export default function FullWidthTabs(props) {
     //   setEndQuote("نقل قول دیگری وجود ندارد");
     // });
 
-    if(filterBaseQuote==="time"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-time"+"?page="+quotesPage)
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-" + filterBaseQuote +"?page="+quotesPage)
     .then(response=>{
-     //setQuotes(quotes.concat(response.data));
-     setQuotes(response.data);
+     setQuotes(response.data.quotes);
+     setQuotesPagesNumber(response.data.count);
       console.log(response);
     })
     .catch(error=>{
       console.log(error);
-      setEndQuote("نقل قول دیگری وجود ندارد");
     });
-    }else if(filterBaseQuote==="like"){
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-like"+"?page="+quotesPage)
-    .then(response=>{
-     //setQuotes(quotes.concat(response.data));
-     setQuotes(response.data);
-      console.log(response);
-    })
-    .catch(error=>{
-      console.log(error);
-      setEndQuote("نقل قول دیگری وجود ندارد");
-    });
-    }else{console.log(filterBaseQuote);}
   },[props.book,quoteAgain,quotesPage,filterBaseQuote]);
 
 
@@ -492,10 +465,10 @@ export default function FullWidthTabs(props) {
 
             <List >
 
-              {comments.message === "No Comment!" ? (
+               {comments === undefined ? (
                  
 
-                 <p style={{color:'red'}}>نطری برای نمایش وجود ندارد</p>
+                 <p >نطری برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div>
@@ -563,28 +536,21 @@ export default function FullWidthTabs(props) {
                ))}
                </div>
 
-                   )}
+                   )} 
 
             </List>
 
-            <p>
-              {endComment}
-            </p>
-
-            <div className="d-flex justify-content-center">
-              <button type="button" className="btn btn-light "
-                onClick={()=>{setCommentsPage(commentsPage-1)}}
-               >
-                 صفحه قبلی 
-              </button>
-              <button type="button" className="btn btn-light"
-                onClick={()=>{setCommentsPage(commentsPage+1)}}
-               >
-                صفحه بعدی
-              </button>
-            </div>
-
-
+            {commentsPagesNumber===1 ?(
+                <p></p>
+              ):(
+            <div className="">
+              {Array.from(Array(commentsPagesNumber),(e,i)=>{
+                return <div className="btn btn-light" 
+                onClick={()=>{setCommentsPage(i+1)}}
+                > {i+1} </div>
+              })}
+              </div>
+               )}
 
           </div>
         </TabPanel>
@@ -624,10 +590,10 @@ export default function FullWidthTabs(props) {
 
             <List >
 
-            {quotes.message === "No Quote!" ? (
+            {quotes === undefined ? (
                  
 
-                 <p style={{color:'red'}}>نقل‌قولی برای نمایش وجود ندارد </p>
+                 <p >نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
                   <div>
@@ -701,12 +667,18 @@ export default function FullWidthTabs(props) {
                    )}
             </List>
 
-            <p>
-              {endQuote}
-            </p>
 
-            <div className="d-flex justify-content-center">
-              <button type="button" className="btn btn-light "
+            {quotesPagesNumber===1 ?(
+                <p></p>
+              ):(
+            <div className="">
+              {Array.from(Array(quotesPagesNumber),(e,i)=>{
+                return <div className="btn btn-light" 
+                onClick={()=>{setQuotesPage(i+1)}}
+                > {i+1} </div>
+              })}
+
+              {/* <button type="button" className="btn btn-light "
                 onClick={()=>{setQuotesPage(quotesPage-1)}}
                >
                  صفحه قبلی 
@@ -715,8 +687,9 @@ export default function FullWidthTabs(props) {
                 onClick={()=>{setQuotesPage(quotesPage+1)}}
                >
                 صفحه بعدی
-              </button>
+              </button> */}
             </div>
+              )}
 
 
           </div>
