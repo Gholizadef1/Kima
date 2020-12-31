@@ -553,9 +553,8 @@ class DiscussionView(APIView,PaginationHandlerMixin):
 
     pagination_class = BasicPagination
     def get(self,request,pk):
-        user=request.user
         group = Group.objects.get(id=pk)
-        discuss = Discussion.objects.filter(creator=user,group=group)
+        discuss = Discussion.objects.filter(group=group)
         if discuss is not None:
             discuss_list = self.paginate_queryset(discuss)
             serializer = DiscussionSerializer(discuss_list,many=True)
