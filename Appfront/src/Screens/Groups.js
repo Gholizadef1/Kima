@@ -71,6 +71,7 @@ const Groups = () => {
       }
      
    })
+   
    if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
   await settheend(true)
   await setrefresh(false)

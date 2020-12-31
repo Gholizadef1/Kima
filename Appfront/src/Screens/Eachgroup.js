@@ -48,8 +48,14 @@ const Eachgroup = (prop) => {
        onPress={() => { }}>
        {prop.groupphoto === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
-         source={require('../../assets/avatar.png')}
-         style={styles.avatar}
+         source={require('../../assets/group.jpg')}
+         style={ { height: hp('8%'),
+        width: wp('16%'),
+         borderRadius: 100,
+        position: 'absolute',borderColor:'#1f7a8c'
+        ,borderWidth:wp('0.3%'),
+        // borderBottomColor:'red',borderBottomWidth:2,borderRightWidth:2,borderRightColor:'green'
+        }}
 
        >
 
@@ -152,10 +158,11 @@ const styles = StyleSheet.create({
         marginLeft: '5%',
       },
       avatar: {
-        height: 65,
-        width: 65,
+        height: hp('8%'),
+        width: wp('16%'),
         borderRadius: 100,
-        position: 'absolute'
+        position: 'absolute',
+        // borderColor:'#1f7a8c'
     
       },
       date: {

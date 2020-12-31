@@ -39,7 +39,7 @@ const userschema=yup.object({
 
 const Mygroups = () => {
 
-  const [picture,setpicture]=useState({uri:'../../assets/backprof5j.jpeg',name:'',type:''});
+  const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
   
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
@@ -229,7 +229,7 @@ const Mygroups = () => {
         {/* <Text>Hi im in modall :)))))</Text> */}
        
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:'',Discription:'',photo:require('../../assets/backprof5j.jpeg')}}
+      initialValues={{Username:'',Discription:'',photo:require('../../assets/group.jpg')}}
       validationSchema={userschema}
 
       onSubmit={async(values,actions)=>{
@@ -238,7 +238,7 @@ const Mygroups = () => {
           //  const newfile={title:values.Username,summary:values.summary,photo:picture}
            formdata.append('title',values.Username)
            formdata.append('summary',values.Discription)
-           if(picture.uri==='../../assets/backprof5j.jpeg'){
+           if(picture.uri==='../../assets/group.jpg'){
           //  formdata.append('photo',{uri:'',type:'',name:''})
             // formdata.append('photo','')
            }
@@ -291,14 +291,28 @@ const Mygroups = () => {
      >
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
-     <View style={{}}>
-     {props.values.photo===require('../../assets/backprof5j.jpeg')?<TouchableOpacity style={styles.avatar}
+     <View style={{borderColor:'blue'}}>
+     {props.values.photo===require('../../assets/group.jpg')?<TouchableOpacity style={{  
+      height: hp('14%'),
+      marginTop:hp('-1.5%'),
+      width: wp('28%'),
+      marginLeft:wp('-1%'),
+      borderRadius: 5,
+      position:'absolute',
+      borderColor:'blue'}}
        onPress={() => { pickfromgallery(props)}}>
       <ImageBackground borderRadius={20}
         
          source={props.values.photo}
          
-         style={styles.avatar}
+         style={{height: hp('14%'),
+      marginTop:hp('-1.5%'),
+      width: wp('28%'),
+      marginLeft:wp('-1%'),
+      borderRadius: 5,
+      position:'absolute',
+      borderColor:'#1f7a8c',
+      borderWidth:wp('0.2%')}}
         //  onBlur={props.handleBlur('photo')}
      
 
