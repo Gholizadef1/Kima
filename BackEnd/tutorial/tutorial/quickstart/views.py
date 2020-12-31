@@ -532,9 +532,8 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
 class DiscussionView(APIView):
 
     def get(self,request,pk):
-        user=request.user
         group = Group.objects.get(id=pk)
-        discuss = Discussion.objects.filter(creator=user,group=group)
+        discuss = Discussion.objects.filter(group=group)
         serializer = DiscussionSerializer(discuss,many=True)
         return Response(serializer.data)
 
