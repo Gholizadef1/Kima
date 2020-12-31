@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator,TextInput} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -18,6 +18,7 @@ import * as yup from 'yup';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+// import { TextInput } from 'react-native-paper';
 
 
 const userschema=yup.object({
@@ -321,7 +322,7 @@ const Mygroups = () => {
          onChangeText={props.handleChange('Username')}
          onBlur={props.handleBlur('Username')}
          value={props.values.Username}
-         placeholder={''} placeholderTextColor='gray' >
+         placeholder={'نام گروه ...'} placeholderTextColor='gray' >
          </Input>
          <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" />
        
@@ -332,18 +333,24 @@ const Mygroups = () => {
      
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
    
-     <View style={styles.item2}>
-        <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('1%')}}>توضیحات</Text>
-                <Textarea rowSpan={7.5} bordered borderRadius={8}
+     {/* <View style={styles.item2}> */}
+     <View>
+        <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
+        <TouchableOpacity>
+                <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                  // selectTextOnFocus={true}
+
                   borderColor={'lightgray'}
                   onChangeText={props.handleChange('Discription')}
                   onBlur={props.handleBlur('Discription')}
                   value={props.values.Discription}
-              
-                  placeholder={'  '}  placeholderTextColor='black' fontSize={hp('1.6.5%')}  style={{ backgroundColor: 'white',fontSize:hp('1.5%')}}>
+                 
+                  placeholder={'توضیحات گروه ...'}  placeholderTextColor='gray' fontSize={hp('1.6.5%')}  style={styles.item2}>
 
                 </Textarea>
+                </TouchableOpacity>
                 <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
+              {/* </View> */}
               </View>
 
 
@@ -490,8 +497,10 @@ const styles = StyleSheet.create({
       marginLeft:wp('-2%'),
       marginRight:wp('-1%'),
       marginTop:hp('6%'),
-      height:wp('9.5%'),
-      fontSize:hp('2.5%')
+      // marginBottom:hp('-40%'),
+      // height:wp('9.5%'),
+      fontSize:hp('2.5%'),
+      // position:'absolute'
     
     },
     item:{
@@ -520,8 +529,8 @@ const styles = StyleSheet.create({
        width:wp('31.5%')
     },
     button:{
-      // position:'absolute',
-      marginTop:hp('26%'),
+      //  position:'absolute',
+      marginTop:hp('3%'),
     
       alignSelf:'center',
       width:wp('41%'),
