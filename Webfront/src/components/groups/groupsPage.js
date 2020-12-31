@@ -326,7 +326,7 @@ const handleCloseSnack = (event, reason) => {
 
                   <div class="col mb-4">
                     <div class="card h-100 shadow-lg ">
-                      <img src={`http://127.0.0.1:8000${current.group_photo}`} class="card-img-top shadow-sm " alt={current.title}/>
+                      <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
                         <h5 class="card-title">{current.title}</h5>
                         <p class="card-text">{current.summary}</p>
@@ -350,11 +350,27 @@ const handleCloseSnack = (event, reason) => {
             </div>
 
             <div className="mb-5">
-              {Array.from(Array(pagesNumber),(e,i)=>{
-                return <div className="btn btn-light" 
-                onClick={()=>{setPage(i+1)}}
-                > {i+1} </div>
-              })}
+
+              {pagesNumber===1 ?(
+                <p></p>
+
+              ):(
+
+                <div>
+                {Array.from(Array(pagesNumber),(e,i)=>{
+                  return <div className="btn btn-light" 
+                  onClick={()=>{setPage(i+1)}}
+                  > {i+1} </div>
+                
+
+                })}
+                </div>
+
+              )}
+
+
+              
+            
               </div>
 
             <Snackbar
