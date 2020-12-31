@@ -101,6 +101,28 @@ class CreateGroupSerializer(serializers.Serializer):
 class GroupSerializer(serializers.ModelSerializer):
 
     owner = UserProfileSerializer(read_only=True)
+    is_member = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Group
+        fields = ['title','owner','group_photo','summary','id','members_count','is_owner','is_member']
+
+    def get_is_owner(self, obj):
+        user =  self.context['request'].user
+        if obj.owner == user:
+            return True
+        return False
+    
+    def get_is_member(self, obj):
+        user =  self.context['request'].user
+        if Member.objects.filter(user=user,group=obj).exists():
+            return True
+        return False
+
+class GroupDetSerializer(serializers.ModelSerializer):
+
+    owner = UserProfileSerializer(read_only=True)
 
     class Meta:
         model = Group
@@ -114,17 +136,15 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = ['user']
 
-
 class CreateDiscussionSerializer(serializers.Serializer):
 
     title = serializers.CharField(max_length=100,required=True)
     description = serializers.CharField(required=True)
 
-
 class DiscussionSerializer(serializers.ModelSerializer):
 
     creator = UserProfileSerializer(read_only=True)
-    group = GroupSerializer(read_only=True)
+    group = GroupDetSerializer(read_only=True)
 
     class Meta:
         model = Discussion
@@ -138,7 +158,6 @@ class DiscussionChatSerializer(serializers.ModelSerializer):
 
     discuss = DiscussionSerializer(read_only=True)
     user = UserProfileSerializer(read_only=True)
-
 
     class Meta:
         model = Chat
