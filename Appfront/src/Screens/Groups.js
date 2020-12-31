@@ -7,7 +7,7 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
-// import { Feather } from '@expo/vector-icons';
+ import { Feather } from '@expo/vector-icons';
 // import { AntDesign } from '@expo/vector-icons';
 // import { MaterialIcons } from '@expo/vector-icons'; 
 // import { SearchBar } from 'react-native-elements';
@@ -15,6 +15,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Searchbar } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
 const Groups = () => {
 
@@ -37,6 +38,8 @@ const Groups = () => {
   const[numberofpage,setnumberofpage]=useState(0);
   const [count,setcount]=useState(1);
   const [pageone,setpageone]=useState(false);
+  const [searchterm,setsearchterm]=useState('');
+  const searching=(term)=>setsearchterm(term);
   const response=async (page)=>{
     
     await (console.log(await(AsyncStorage.getItem('token'))))
@@ -130,6 +133,28 @@ const Groups = () => {
   return (
 
     <View style={styles.container}>
+     <Searchbar
+      placeholder="Search"
+      onChangeText={searching}
+      underlineColorAndroid={'#F1F3F9'}
+      value={searchterm}
+      borderTopLeftRadius={hp('20%')}
+          borderTopRightRadius={20}
+          borderBottomRightRadius={20}
+          borderBottomLeftRadius={20}
+          placeholder={'نام گروه ...'}
+          style={{  borderTopLeftRadius:hp('5%'),
+          marginTop:hp('1.5%'),
+          alignSelf:'center',
+          borderTopRightRadius:hp('5%'),
+          borderBottomRightRadius:hp('5%'),
+          borderBottomLeftRadius:hp('5%'),
+          
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('90%'),marginBottom:hp('-0.5%')}}
+          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
+        
+          }} />}
+    />
       {/* <SearchBar
           style={{backgroundColor:'#F1F3F9',height:hp('4.5%'),width:wp('50%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%')}} />}
