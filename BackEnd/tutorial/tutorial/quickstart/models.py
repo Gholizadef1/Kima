@@ -152,7 +152,7 @@ class Member(models.Model):
 class Discussion(models.Model):
     creator = models.ForeignKey(Account, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100,unique=True)
     description = models.TextField()
 
 class Chat(models.Model):

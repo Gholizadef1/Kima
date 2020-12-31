@@ -96,7 +96,7 @@ class CreateGroupSerializer(serializers.Serializer):
 
     title = serializers.CharField(max_length=100,required=True)
     summary = serializers.CharField(required=True)
-    photo = serializers.ImageField(max_length=500, allow_empty_file=False, use_url=False)
+    #photo = serializers.ImageField(max_length=500, allow_empty_file=False, use_url=False)
 
 class GroupSerializer(serializers.ModelSerializer):
 
