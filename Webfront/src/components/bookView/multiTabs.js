@@ -540,6 +540,9 @@ export default function FullWidthTabs(props) {
 
             </List>
 
+            {commentsPagesNumber===1 ?(
+                <p></p>
+              ):(
             <div className="">
               {Array.from(Array(commentsPagesNumber),(e,i)=>{
                 return <div className="btn btn-light" 
@@ -547,6 +550,8 @@ export default function FullWidthTabs(props) {
                 > {i+1} </div>
               })}
               </div>
+               )}
+
           </div>
         </TabPanel>
 
@@ -663,6 +668,9 @@ export default function FullWidthTabs(props) {
             </List>
 
 
+            {quotesPagesNumber===1 ?(
+                <p></p>
+              ):(
             <div className="">
               {Array.from(Array(quotesPagesNumber),(e,i)=>{
                 return <div className="btn btn-light" 
@@ -681,6 +689,7 @@ export default function FullWidthTabs(props) {
                 صفحه بعدی
               </button> */}
             </div>
+              )}
 
 
           </div>

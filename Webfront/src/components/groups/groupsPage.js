@@ -150,16 +150,16 @@ const handleCreateGroupSubmit =(e) =>{
       setMassage('گروه با موفقیت ساخته شد')
       setOpenSnack(true);
       handleCloseCreateGroup();
-
+      routeToGroupHandler(response.data.data.id);
     }
     else{
-      setMassage("مشکلی پیش آمده دوباره امتحان کنید")
+      setMassage("گروه از قبل وجود دارد")
       setOpenSnack(true);
     }
   })
   .catch(error=>{
     console.log(error);
-    setMassage("گروه از قبل وجود دارد")
+    setMassage("مشکلی پیش آمده دوباره امتحان کنید")
     setOpenSnack(true);
   });
 }
@@ -221,6 +221,11 @@ const handleCloseSnack = (event, reason) => {
       .catch(error=>{
         console.log(error);
       });
+  }
+  
+  const routeToGroupHandler = ( id ) => {
+    console.log(id);
+    props.history.push( '/group/' + id );
   }
 
 
@@ -325,7 +330,7 @@ const handleCloseSnack = (event, reason) => {
                   
 
                   <div class="col mb-4">
-                    <div class="card h-100 shadow-lg ">
+                    <div class="card h-100 shadow-lg" onClick={() => routeToGroupHandler(current.id)}>
                       <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
                         <h5 class="card-title">{current.title}</h5>
@@ -339,10 +344,6 @@ const handleCloseSnack = (event, reason) => {
                       </div>
                     </div>
                   </div>
-
-                  
-
-
                ))}
                 </div>
 
@@ -355,22 +356,14 @@ const handleCloseSnack = (event, reason) => {
                 <p></p>
 
               ):(
-
                 <div>
                 {Array.from(Array(pagesNumber),(e,i)=>{
                   return <div className="btn btn-light" 
                   onClick={()=>{setPage(i+1)}}
                   > {i+1} </div>
-                
-
                 })}
                 </div>
-
               )}
-
-
-              
-            
               </div>
 
             <Snackbar
