@@ -381,13 +381,10 @@ const Mygroups = () => {
         </Modal>
     
         </View>
-        <Button style={{position:'absolute', justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>setmodalopen(true)} >
-        <Feather style={styles.plus} 
-         name="plus" size={32} color="#EDF2F4" />
-     
-         </Button>
+        
 
          <View style={{marginLeft:wp('2%')}}>
+      
 
        <DropDownPicker
           items={[
@@ -439,8 +436,8 @@ const Mygroups = () => {
 
           <FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
-            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%') }}>گروه دیگری وجود ندارد</Text></View>)}
-            style={{ marginBottom: hp('5%') }}
+            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom:hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
+            style={{ marginBottom: hp('7%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => handleLoadMore()}
             onEndReachedThreshold={0}
@@ -462,7 +459,18 @@ const Mygroups = () => {
           >
           </FlatList> 
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
+          <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
+        <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
+        backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>{
+          console.log('PLUS PRESSED')
+          setmodalopen(true)}} >
+        <Feather style={styles.plus} 
+         name="plus" size={32} color="#EDF2F4" />
+     
+         </Button>
          </View>
+         </View>
+         
             {/* <Text>
                 Mygroups
             </Text> */}
@@ -524,7 +532,7 @@ const styles = StyleSheet.create({
       
     },
     plus:{
-      
+      // position:'absolute',
       alignSelf:'center',
       justifyContent:'center'
     
