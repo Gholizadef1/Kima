@@ -115,28 +115,31 @@ const Mygroups = () => {
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
-  // const [count,setcount]=useState(0);
-  let count=0;
+   const [count,setcount]=useState(1);
+  // let count=0;
   const response=async (page)=>{
-    //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
+    
+    await (console.log(await(AsyncStorage.getItem('token'))))
+   
     await setpage(page)
-
-    if(page===1){
-      console.log('PAGE 111')
+    console.log(page+'  شماره صفحه اول ریسپانس')
 
     await settheend(false)
-    await setinformation([])
+    console.log(theend+'  THE END RESOPONSE AVAL')
+    if(page===1){
+      await settheend(false)
+     await setinformation([])
 
-    console.log('IT IS HEAR SET INFO []')
-    console.log(information)
+    }
+
     
-    } 
     console.log('DOVOM')
      console.log(page+'PAGE')
      try{
        console.log('  omad to response')
-       console.log(likeotime + ' likeotime to response')
-      // setIDD(await (await AsyncStorage.getItem('id')).toString())
+       console.log('api/group'+likeotime)
+
+
       const response = await axiosinst.get('api/group'+ likeotime,{
         params: {
           page: page
@@ -148,38 +151,56 @@ const Mygroups = () => {
       }
      
    })
-   count=response.data.count
-  setnumberofpage(numberofpage+1)
-  setrefresh(false)
-  if(numberofpage===count)
-  settheend(true);
-  else{
+   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+  await settheend(true)
+  await setrefresh(false)
+   console.log('#########')
+   }
+   else{
+  console.log(response.data+'RESPONSE.DATA')
+  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+   await setcount(response.data.count);
+   console.log(count+'  COUNT')
+   console.log(page+' PAGE BAD COUNT')
+   console.log((page===count)+' PAGE===COUNT')
+
     settheend(false)
-    //  console.log(IDD+'IDDresponse');
-    setinformation(response.data.groups)
-        // page===1?setinformation(response.data):setinformation(information.concat(response.data))
-        console.log('++++INFO++++'+information+"++++INFO++++")
-       
-       }
-       }
-     catch(err){
-       setrefresh(false)
-       console.log(err.toString().split('\n')[0])
-      if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
-      settheend(true);
-      // else if(theend===true)
-      // settheend(false)
-      console.log(theend+'THE END')
-        console.log(err);
-      
+   console.log('omade inja')
+    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+  // setinformation(information.concat(response.data.groups))
+    //  setinformation(response.data.groups)
+     setrefresh(false)
+    console.log(response.data.groups.id+'  INFORMATION.ID')
+    
+      console.log('++++INFO++++'+information+"++++INFO++++")
+     
      }
-   
+    }
+    //  }
+   catch(err){
+     setrefresh(false)
+     console.log(err.toString().split('\n')[0])
+    if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
+    settheend(true);
+    console.log(theend+'THE END')
+      console.log(err);
+    
+   }
+  
+   }
+   const handleLoadMore = async() => {
+    console.log('END OF THE LIST')
+     if(page<count){
+     response(page+1);
      }
-     const handleLoadMore = async() => {
-      console.log('END OF THE LIST')
-       if(theend===false)
-       response(page+1);
-      };
+     else
+     {
+       console.log(page+'handlemore page')
+       console.log(count +'handlemore count')
+       console.log('*********')
+       settheend(true)
+      }
+    };
    
     useFocusEffect(
       React.useCallback(() => {         
@@ -229,7 +250,7 @@ const Mygroups = () => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('http://70070a12ba99.ngrok.io/api/group',formdata,{
+        const response=await axiosinst.post('http://3fefbe690991.ngrok.io/api/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -368,7 +389,7 @@ const Mygroups = () => {
 
          <View style={{marginLeft:wp('2%')}}>
 
-         { (information.length>=0) ?    <DropDownPicker
+       <DropDownPicker
           items={[
             { label: 'معروف ترین گروه ها', value: 'like' },
             { label: 'جدید ترین گروه ها', value: 'none' },
@@ -406,7 +427,7 @@ const Mygroups = () => {
 
           }}
 
-        />:null}
+        />
         {/* <TouchableOpacity onPress={()=>console.log('aladkki')}>
          <Eachgroup></Eachgroup>
          </TouchableOpacity> */}
@@ -414,11 +435,12 @@ const Mygroups = () => {
          <Eachgroup></Eachgroup>
          <Eachgroup></Eachgroup> */}
          <View style={{height:hp('2%')}}></View>
-        {(information.length >= 0) ?
+        {/* {(information.length >= 0) ? */}
 
           <FlatList
-            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
-            style={{ marginBottom: hp('18%') }}
+            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
+            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%') }}>گروه دیگری وجود ندارد</Text></View>)}
+            style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => handleLoadMore()}
             onEndReachedThreshold={0}
@@ -438,7 +460,8 @@ const Mygroups = () => {
             )}
           // extraData={finfo}
           >
-          </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>}
+          </FlatList> 
+          {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
          </View>
             {/* <Text>
                 Mygroups
