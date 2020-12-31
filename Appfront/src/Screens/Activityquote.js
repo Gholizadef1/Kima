@@ -49,9 +49,17 @@ const Activityquote = (prop) => {
     // }
     const handleLoadMore = async () => {
         console.log('END OF THE LIST')
-        if (theend === false)
-            response(page + 1);
+        if(page<count){
+            if(theend===false)
+            response(page+1);
+           }
+           else
+           {
+             settheend(true)
+           }
     };
+    
+    const [count,setcount]=useState(1);
     const [theend, settheend] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState([]);
     const [loading, setloading] = useState(false);
@@ -86,7 +94,7 @@ const Activityquote = (prop) => {
                     }
                  })
                  console.log(response)
-                
+                 await setcount(response.data.count);
                  if(response.data+'RESPONSE'==='RESPONSE'){
                  console.log('quote nadare')
                  console.log('-------------')
@@ -217,7 +225,13 @@ const Activityquote = (prop) => {
 
                 <View>
                    { (information!=undefined) ? <FlatList
-                        ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
+                        ListFooterComponent={(theend === false ? 
+                        <View style={styles.loader}>
+                        <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+                        </View> :
+                         <View style={styles.loader}>
+                         <Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text>
+                         </View>)}
                         style={{ marginBottom: '0%' }}
                         showsVerticalScrollIndicator={false}
                         onEndReached={() => handleLoadMore()}
