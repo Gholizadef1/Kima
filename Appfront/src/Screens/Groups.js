@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes } from 'react-native';
+import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
@@ -16,17 +16,24 @@ import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
+import { number } from 'yup';
+import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
 const Groups = () => {
    
 
    const searchpost=async(page)=>{
-     if(searchterm!=''){
+     await setpage(page)
     const back = {
       search:searchterm,
 
     }
     await settheend(false)
+    if(page===1){
+      await settheend(false)
+     await setinformation([])
+
+    }
     const backk = JSON.stringify(back);
     try{
     const response = await axiosinst.get('api/group/search/',{
@@ -43,18 +50,39 @@ const Groups = () => {
 
    
   })
-  console.log(response.data)
- 
-  await setinformation(response.data.groups)
+  // console.log(response.data)
+  // setrefresh(true)
+  settheend(false)
+  setrefresh(false)
+  if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+    await settheend(true)
+    await setrefresh(false)
+     console.log('#########')
+     }
+  await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+
   console.log(information+'******######********########')
-  setcount(response.data.count)
+  // console.log(information[0].title)
+  // settheend(true)
+  // setcount(response.data.count)
+  setnext(response.data.next)
+  console.log(next,' NEXT')
+  setnumberofresults(response.data.count)
   setpage(page);
-  await settheend(true)
+  
   }
   catch(err){
+    setrefresh(false)
    console.log(err)
-    }
-  }
+   Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
+
+    text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+    }],{cancelable:false},{style:{height:50}})
+    }     
+    
+  
+  
    }
 
 
@@ -72,6 +100,7 @@ const Groups = () => {
   // const selectedValue='none'
   const [selectedValue, setselectedValue] = useState('none')
   const [information, setinformation] = useState([]);
+  const [next,setnext]=useState('')
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
   const [likeotime, setlikeotime] = useState('/filter-time');
@@ -81,6 +110,7 @@ const Groups = () => {
   const [count,setcount]=useState(1);
   const [pageone,setpageone]=useState(false);
   const [searchterm,setsearchterm]=useState('');
+  const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
   const response=async (page)=>{
     
@@ -156,8 +186,17 @@ const Groups = () => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<count){
+    console.log(next+'  NEXT NEXT NEXT NEXT')
+     if(page<count&&searchterm===''||(next!=null)){
+       if(searchterm===''){
+         settheend(false)
      response(page+1);
+       }
+       else
+       {
+         console.log('OMAAAAAAAAAAAAAAAAAAAAAAAAAAD TOOOOOOOOOOOSH')
+         searchpost(page+1)
+       }
      }
      else
      {
@@ -169,8 +208,13 @@ const Groups = () => {
     };
  
   useFocusEffect(
-    React.useCallback(() => {     
+    React.useCallback(() => {   
+        setsearchterm('')
+        setnumberofresults()
+      // if(searchterm==='')  
         response(1)
+        // else
+        // searchpost(1)
     },[]))
   return (
 
@@ -180,7 +224,8 @@ const Groups = () => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
-      onIconPress={()=>searchpost(1)}
+      onIconPress={()=>{
+        searchpost(1)}}
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
@@ -188,6 +233,7 @@ const Groups = () => {
           placeholder={'نام گروه ...'}
           style={{  borderTopLeftRadius:hp('5%'),
           marginTop:hp('1.5%'),
+        
           alignSelf:'center',
           borderTopRightRadius:hp('5%'),
           borderBottomRightRadius:hp('5%'),
@@ -265,6 +311,7 @@ const Groups = () => {
             borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
           }}
           onChangeItem={async (item) => {
+            setsearchterm('');
 
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
@@ -304,7 +351,7 @@ const Groups = () => {
 
         <View style={{height:hp('2%')}}></View>
        
-
+        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
          <FlatList
             ListFooterComponent={(theend === false ? 
             <View style={styles.loader}>
@@ -328,15 +375,23 @@ const Groups = () => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
-               
+              // await setsearchterm('')
+              if(searchterm===''){
+               await(setnumberofresults())
               await setrefresh(true)         
               // await setinformation([]);
               // await setpage(1);
               response(1)
+              }
+              else{
+                await setrefresh(true)   
+              searchpost(1)
+              }
             }}
 
             data={information}
             renderItem={({ item }) =><>
+         
             <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
             <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
              discription={item.summary} title={item.title} ></Eachgroup>
@@ -373,7 +428,7 @@ const styles = StyleSheet.create({
   loader:{
 
     alignItems:'center',
-    marginBottom:hp('7%'),
+    marginBottom:hp('15%'),
     justifyContent:'center',
     alignSelf:'center',
     marginTop:hp('10%')

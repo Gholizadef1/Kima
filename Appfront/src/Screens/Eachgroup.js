@@ -22,7 +22,7 @@ const Eachgroup = (prop) => {
   const linenumber = (commentt.split('').length)
   console.log(linenumber+'  LINE NUMBER')
   const commenttt = `${prop.discription}`.toString().split('');
-  console.log(commentt)
+  // console.log(commentt)
   // const[comment4,setcomment4]=useState('')
   let comment4 = '';
   if (linenumber > 250) {

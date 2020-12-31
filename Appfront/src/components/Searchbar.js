@@ -9,6 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const Searchbar = ({term,onTermChange,onTermsubmit}) => {
   const [showCancel, setShowCancel] = useState(false);
 
+
     return(
 
        <View>
@@ -20,7 +21,13 @@ const Searchbar = ({term,onTermChange,onTermsubmit}) => {
             autoCorrect={false}
             placeholder='نام کتاب نویسنده ...'style={styles.Icontext}
             value={term}
-            onChangeText={newterm=>{onTermChange(newterm)}}
+            onChangeText={newterm=>{
+              onTermChange(newterm) 
+              if(term!='')
+              setShowCancel(true)
+              else
+              setShowCancel(false)
+            }}
             onEndEditing={onTermsubmit}
             
             />
@@ -30,8 +37,10 @@ const Searchbar = ({term,onTermChange,onTermsubmit}) => {
            onPress={()=>{console.log(prees)}}
            >
            
-           {showCancel? <AntDesign name="close" size={24}  color="black" style={{position:'absolute', color:'#BFDBF7',marginLeft:10,marginTop:10}} />:null}
-         
+           {/* {showCancel? <AntDesign name="close" size={24}  color="black" style={{position:'absolute', color:'#BFDBF7',marginLeft:200,marginTop:10}}
+           onPress={()=>onTermChange(null)}
+            />:null}
+          */}
            </Button>
 
             </Item>
