@@ -30,23 +30,23 @@ const Activityquote = (prop) => {
         }
     }
  
-    const getlike = async (item) => {
-        axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + item.id, {
-            "headers":
-            {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-            }
-        })
-            .then(async function (response) {
-                console.log(response);
-                if (response.data.message === 'true') { setlike('#1F7A8C') } else { setlike('gray') }
-            })
-            .catch(function (error) {
-                console.log(error);
+    // const getlike = async (item) => {
+    //     axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + item.id, {
+    //         "headers":
+    //         {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+    //         }
+    //     })
+    //         .then(async function (response) {
+    //             console.log(response);
+    //             if (response.data.message === 'true') { setlike('#1F7A8C') } else { setlike('gray') }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
 
-            })
-    }
+    //         })
+    // }
     const handleLoadMore = async () => {
         console.log('END OF THE LIST')
         if (theend === false)
@@ -76,7 +76,15 @@ const Activityquote = (prop) => {
             const id=await(AsyncStorage.getItem('id'))
             console.log(id)
                  try{
-                 const response = await axiosinst.get('api/user-profile/' + id+'/MyQuotes')
+                 const response = await axiosinst.get('api/user-profile/' + id+'/MyQuotes',{ params:{
+                    page:page
+                    },
+                    "headers":
+                    {
+                      "Content-Type": "application/json",
+                      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                    }
+                 })
                  console.log(response)
                 
                  if(response.data+'RESPONSE'==='RESPONSE'){
@@ -208,7 +216,7 @@ const Activityquote = (prop) => {
 
 
                 <View>
-                   { (information.length>=0) ? <FlatList
+                   { (information!=undefined) ? <FlatList
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: '0%' }}
                         showsVerticalScrollIndicator={false}
@@ -227,7 +235,7 @@ const Activityquote = (prop) => {
                         onEndReachedThreshold={0.5}
 
                         renderItem={({ item }) => (<><Activityquotecard name={item.account.username}
-
+                            isliked={item.isliked}
                             date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} booktitle={item.current_book.title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://1244af18f7bf.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
 
                            

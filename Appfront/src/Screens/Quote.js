@@ -48,23 +48,23 @@ const callbackFunction = async(childData) => {
   //  await response(1);
 }
   
-  const getlike=async(item)=>{
-    // await setTimeout(() => {  console.log("World!"); }, 5000);
-    axiosinst.get('http://a32f717e71fe.ngrok.io/api/quotes/like/'+item.id,{"headers":
-    {
-     "Content-Type":"application/json",
-     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-    }})
-   .then(async function(response){
+  // const getlike=async(item)=>{
+  //   // await setTimeout(() => {  console.log("World!"); }, 5000);
+  //   axiosinst.get('http://a32f717e71fe.ngrok.io/api/quotes/like/'+item.id,{"headers":
+  //   {
+  //    "Content-Type":"application/json",
+  //    "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+  //   }})
+  //  .then(async function(response){
     
-        console.log(response);
-        if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
-     })
-   .catch(function(error){
-   console.log(error);
+  //       console.log(response);
+  //       if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
+  //    })
+  //  .catch(function(error){
+  //  console.log(error);
 
-    })
-  }
+  //   })
+  // }
   const handleLoadMore = async() => {
    console.log('END OF THE LIST')
    if(page<count){
