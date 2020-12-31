@@ -96,14 +96,14 @@ function LoginForm(props) {
         <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
             <div className="card color2 " >
                 <br></br>
-                <h1 style={{fontFamily:'Mitra'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Mitra'}}>"کتاب یار مهربان است"</p>
-                <p style={{fontFamily:'Mitra'}}>خوشحالیم امروز می‌بینیمت</p>
+                <h1 style={{fontFamily:'Yekan'}}>به کیما خوش‌آمدی</h1>
+                <p style={{fontFamily:'Yekan',fontSize:24}}>"کتاب یار مهربان است"</p>
+                <p style={{fontFamily:'Yekan',fontSize:20}}>خوشحالیم امروز می‌بینیمت</p>
                 <img src="people&books.png" className="col-12" alt=""/> 
             </div>
             <div className="card color2 p-2">
             <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Mitra'}}>ورود</h1>
+                <h1 style={{fontFamily:'Yekan'}}>ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
                 <label htmlFor="exampleInputEmail1"style={{fontFamily:'Mitra'}}>ایمیل</label>
@@ -123,7 +123,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Mitra'}}>رمز</label>
+                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -137,12 +137,12 @@ function LoginForm(props) {
                 </div> */}
                 </div>
                 <p className="loginText"> {state.backError} </p>
-                <StyledButton 
-                style={{fontFamily:'Mitra'}}
+                <button 
+                style={{fontFamily:'Yekan',color:"white"}}
                     type="submit" 
-                    className="btn col-6 mx-auto btn-outline-success btn-block badge-pill"
+                    className="btn col-6 mx-auto bg-primary btn-block"
                     onClick={handleSubmitClick}
-                >ثبت</StyledButton>
+                >ثبت</button>
                 
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
@@ -150,8 +150,8 @@ function LoginForm(props) {
             </div>
             
             <div className="registerMessage">
-                <span style={{fontFamily:'Mitra'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
-                <span className="loginText" style={{fontFamily:'Mitra'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
+                <span style={{fontFamily:'Yekan'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
+                <span className="loginText" style={{fontFamily:'Yekan'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
         </div>
