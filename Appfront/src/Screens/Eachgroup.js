@@ -11,10 +11,32 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 
 const Eachgroup = (prop) => {
 
+  const [more, setmore] = useState(false);
+  const [showmore, setshowmore] = useState('بیشتر...');
+  const commentt = `${prop.discription}`.toString();
+  const linenumber = (commentt.split('').length)
+  console.log(linenumber+'  LINE NUMBER')
+  const commenttt = `${prop.discription}`.toString().split('');
+  console.log(commentt)
+  // const[comment4,setcomment4]=useState('')
+  let comment4 = '';
+  if (linenumber > 250) {
+    for (let i = 0; i < 250; i++)
+          comment4 += commenttt[i]
+    console.log(comment4+'  COMMENT4 FOR')
+    // comment4 += commenttt[]
+  }
+  else {
+    comment4 = prop.discription
+    console.log(comment4+'  COMMENT4 ELSE')
+  }
+  console.log('****'+comment4)
+  console.log('*****************'+prop.discription+'  prop discription*********************')
  
     return(
       
@@ -41,7 +63,9 @@ const Eachgroup = (prop) => {
          </ImageBackground>}
      </TouchableOpacity>
      {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
+
      <Text style={styles.username}>{prop.title}</Text>
+
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
 
@@ -53,7 +77,30 @@ const Eachgroup = (prop) => {
 
    <View style={styles.comment}>
 
-        <Text style={{color:'black'}}>{prop.discription}</Text>
+        {/* <Text style={{color:'black'}}>{prop.discription}</Text> */}
+        
+        {/* {!more ? <Text>{comment4}</Text> : <Text>{prop.comment}</Text>} */}
+        {!more ? <Text style={{color:'black'}}>{comment4}</Text>:<Text style={{color:'black'}}>{prop.discription}</Text>}
+        {linenumber>= 250 ? <TouchableOpacity
+      
+          onPress={async() => {
+            // if(likeshode===true)
+            // await setlikeshode(false)
+            // else
+            // await setlikeshode(true)
+            if (more === false) {
+              setmore(true)
+              setshowmore('کم تر')
+
+            }
+            else {
+              setmore(false)
+              setshowmore('بیشتر...')
+            }
+          }}
+          style={{ marginTop:hp('1%'),left:wp('75%')}}
+        ><Text style={{ color: '#1f7a8c' }}>{showmore}</Text>
+        </TouchableOpacity> : null}
  </View>
  
   

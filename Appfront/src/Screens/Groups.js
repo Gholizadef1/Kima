@@ -7,14 +7,14 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+// import { Feather } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
 // import { MaterialIcons } from '@expo/vector-icons'; 
 // import { SearchBar } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
-import { Button } from 'react-native-paper';
+// import { Button } from 'react-native-paper';
 const Groups = () => {
 
    const lastinformation=()=>{
@@ -252,8 +252,6 @@ const Groups = () => {
             }}
 
             data={information}
-       
-
             renderItem={({ item }) =><>
             <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
              discription={item.summary} title={item.title} ></Eachgroup>

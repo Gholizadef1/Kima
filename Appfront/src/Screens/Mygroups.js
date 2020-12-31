@@ -179,6 +179,7 @@ const Mygroups = () => {
     }
     //  }
    catch(err){
+     console.log(err.response+'   error response')
      setrefresh(false)
      console.log(err.toString().split('\n')[0])
     if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
@@ -237,6 +238,11 @@ const Mygroups = () => {
           //  const newfile={title:values.Username,summary:values.summary,photo:picture}
            formdata.append('title',values.Username)
            formdata.append('summary',values.Discription)
+           if(picture.uri==='../../assets/backprof5j.jpeg'){
+          //  formdata.append('photo',{uri:'',type:'',name:''})
+            // formdata.append('photo','')
+           }
+           else
            formdata.append('photo',picture)
           //  formdata.append({photo:'',name:'',type:''},'photo')
             // formdata.append(newfile,'data')
