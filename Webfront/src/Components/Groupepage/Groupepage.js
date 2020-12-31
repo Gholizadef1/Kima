@@ -42,6 +42,7 @@ import {
     const[owner,setOwner]= useState("");
     const[joinduser,setJoinduser]= useState("");
     const[user,setUser]= useState("");
+    const[summary,setSummary]=useState({user:null});
     const [member,setMembers] = useState([]);
     const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -51,8 +52,6 @@ import {
     
   const [newDiscussion,setNewDiscussion] = useState({
     name : "",
-    summary: "",
-    backError : ""
   });
 
   useEffect(() => {
@@ -143,7 +142,7 @@ import {
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
         
-          console.log(data.data.message);
+          console.log(data.data);
           
         })
     .catch(error=>{
@@ -169,20 +168,7 @@ import {
   }
   ///////////////////////////////////////////////////////////
   
-  useEffect(() => {
-    axios.get(
-      "http://127.0.0.1:8000/api/group/5/discussion",
-    {
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Token "+Cookies.get("userToken")}
-        }).then(data => {
-          console.log(data);
-          setShowdiscussion(data);
-        setJoin(true);
-          console.log(data.data.message);
-        })
-  }, []);
+
   
   /////////////////////////////////////////////////////////
     
@@ -193,25 +179,42 @@ import {
           [id] : value
       }))
   }
+  const handleChangesum = event => {
+    setUser({ user: event.target.value });
+  }
+    const payloadtitle={
+      "title":newDiscussion.name,"description":user.user
+    }
 
-  var formdata = new FormData()
-  formdata.append('title',newDiscussion.name)
-  formdata.append('summary',newDiscussion.summary)
-
+    //console.log(payloadsummary);
+    console.log(payloadtitle);
+    const backtitle= JSON.stringify(payloadtitle);
+    //const backsummary = JSON.stringify(payloadsummary);
+    console.log(backtitle);
+    //console.log(backsummary);
     const handleCreateDiscussionSubmit =(e) =>{
       axios.post(
-        "http://127.0.0.1:8000/api/group/5/discussion",formdata,
+        "http://127.0.0.1:8000/api/group/5/discussion",backtitle,
       {
         headers:{
           "Content-Type":"application/json",
          "Authorization":"Token "+Cookies.get("userToken")}
           })
-      e.preventDefault();
-      setNewDiscussion(prevState => ({
-          ...prevState,
-          backError : ""
-      })); 
+          setJoin(true);
     }
+    useEffect(() => {
+      axios.get(
+        "http://127.0.0.1:8000/api/group/5/discussion",
+      {
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Token "+Cookies.get("userToken")}
+          }).then(data => {
+            console.log(data);
+            setShowdiscussion(data.data);
+          setJoin(true);
+          })
+    }, [join]);
     
   const handleClickOpenCreateDiscussion = () => {
     setOpenCreateDiscussion(true);
@@ -266,17 +269,18 @@ import {
                       variant="outlined"
 
                     />
+                      
                     <TextField
-                      autoFocus
                     margin="dense"
-                    defaultValue=" حخنمر"
                       id="description"
                       style={{fontFamily:"Yekan"}}
                       value={newDiscussion.summary}
                       placeholder="دربارهٔ بحث"
+                      label="توضیحات"
                       type="description"
                       onChange={handleChange}
                       fullWidth
+                      multiline
                       variant="outlined"
 
                     />
@@ -337,7 +341,7 @@ import {
    
                        />
                        <TextField
-                         autoFocus
+                         
                        margin="dense"
                          id="description"
                          style={{fontFamily:"Yekan"}}
@@ -381,11 +385,11 @@ import {
 
                   <form >
                     <TextField
-                  autoFocus
+                    autoFocus
                       margin="dense"
                       id="name"
                       value={newDiscussion.name}
-                      label="نام گروه"
+                      label="عنوان بحث"
                       type="title"
                       onChange={handleChange}
                       fullWidth
@@ -395,10 +399,11 @@ import {
                     <TextField
                       margin="dense"
                       id="description"
-                      value={newDiscussion.description}
+                      value={user.user} 
                       label="توضیحات"
                       type="description"
-                      onChange={handleChange}
+                      
+                      onChange={handleChangesum}
                       fullWidth
                       multiline
                       variant="outlined"
@@ -434,6 +439,54 @@ import {
     <div class="card card-discussion">
   <div class="card-body">
   <div>
+      {showdiscussion.message==='No Quote!' ? (
+                 
+        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+        <ListItem alignItems="flex-start" key={current.id}>
+        <ListItem
+          alignItems="flex-start"
+          style={{direction:"rtl"}}
+         >
+        
+          <ListItemText style={{textAlign:"right"}}
+            primary={
+              <List >
+            <div className="" style={{direction:"rtl"}}>
+              <div className="d-flex p-n1 pb-2 mt-n4">
+              <div className="  ml-auto mr-3">
+                <h5 className="booktitle">
+                
+                </h5>
+                <small className="date">
+                </small>
+              </div>
+              <div className="d-flex flex-column">
+                <small className=" like mr-3">
+                
+                <GoHeart color="red" size="25"/>
+                </small>
+              </div>
+             </div>
+ 
+             <p className="quote">
+
+             </p>
+             <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
+              </div>
+            </List>
+             }
+            />
+            </ListItem>
+            </ListItem>
+        ))}
+        </div>
+       )}
+       </div>
+  <div>
      
        </div>
 
@@ -443,24 +496,76 @@ import {
   
    
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-230,position:"relative",marginLeft:450}}> ({ginfo.members_count}) اعضا</b>
-     {member.map ((current) => (
-       <div className="row" key={current.id}>
-                <Avatar
-                  src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+       
+       <div className="row" key={member.id}>
+
+          {member.length <=3 ?
+          <div>
+           <div> {member[0].user.username} </div>
+
+          <Avatar
+          src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
+          style={{
+          fontSize: '80px',
+         width: 70,
+         height: 70}}
+          
+        />
+        <Avatar
+                  src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
                   style={{
                   fontSize: '80px',
                  width: 70,
                  height: 70}}
                   
                 />
-                <div> {current.user.username} </div>
-              </div>
-                
-        ))
-        }
-          </div>
-                <div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</div>
+                <Avatar
+                  src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
+                  style={{
+                  fontSize: '80px',
+                 width: 70,
+                 height: 70}}
+                  
+                />
+              
+</div>
 
+:
+<div>
+<div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</div>
+{member.length >=3 ?
+          <div>
+<Avatar
+          src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
+          style={{
+          fontSize: '80px',
+         width: 70,
+         height: 70}}
+          
+        />
+        <Avatar
+                  src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
+                  style={{
+                  fontSize: '80px',
+                 width: 70,
+                 height: 70}}
+                  
+                />
+                <Avatar
+                  src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
+                  style={{
+                  fontSize: '80px',
+                 width: 70,
+                 height: 70}}
+                  
+                />
+</div>
+:<div></div>
+  }
+</div>
+
+}
+</div>
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
            <div className="header"style={{fontFamily:'Yekan'}}>
@@ -468,7 +573,20 @@ import {
           </div>
         </Modal.Header>
         <Modal.Body>
-          
+          <div>
+        {member.map ((current) => (
+       <div className="row" key={current.id}>
+          <Avatar
+          src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+          style={{
+          fontSize: '80px',
+         width: 70,
+         height: 70}}
+        />
+        <div> {current.user.username} </div>
+        </div>
+        ))}
+        </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleClose} style={{fontFamily:'Mitra'}}>
@@ -476,13 +594,15 @@ import {
           </Button>
         </Modal.Footer>
       </Modal>
-
-</div>
-</div>
-
+           
+        
 </div>
 
+</div>
 
+</div>
+
+</div>
 </div>
     );
 
