@@ -210,10 +210,13 @@ const handleCloseSnack = (event, reason) => {
 
   const handleGoSearchGroup = ( ) => {
     console.log( searchWord);
-    axios.get('http://127.0.0.1:8000/api/group')
+    axios.get(`http://127.0.0.1:8000/api/group/search/?search=${searchWord}&search_fields=title`,{
+      headers:{
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
       .then(response=>{
         console.log(response);
-        setGroups(response.data);
+        setGroups(response.data.results);
       })
       .catch(error=>{
         console.log(error);
