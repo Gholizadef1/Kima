@@ -18,12 +18,13 @@ const Eachgroup = (prop) => {
  
     return(
       
-        <View >
+      <View>
+      {/* {prop.discription!='' ? (<View > */}
           <View style={styles.avatarname}>
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.groupphoto === 'http://70070a12ba99.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.groupphoto === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/avatar.png')}
          style={styles.avatar}
@@ -42,7 +43,7 @@ const Eachgroup = (prop) => {
      {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
      <Text style={styles.username}>{prop.title}</Text>
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
-     <Text style={styles.date}>150<Text style={{color:'gray'}}> عضو</Text></Text>
+     <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
 
 
     
@@ -66,7 +67,9 @@ const Eachgroup = (prop) => {
             {/* <Text>
                 Groups
             </Text> */}
-        </View>
+        {/* </View>):(<Text style={{ color: 'blue', alignSelf: 'center', marginTop: hp('30%'),
+         fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>)} */}
+         </View>
     );
 }
 

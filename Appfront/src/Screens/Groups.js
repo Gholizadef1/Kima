@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes } from 'react-native';
 //  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
@@ -14,8 +14,15 @@ import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
+import { Button } from 'react-native-paper';
 const Groups = () => {
 
+   const lastinformation=()=>{
+    if(information.length>0)
+    return information;
+    console.log('mikhad chap kone dige nist')
+    return( <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>)
+   }
   const [modalopen, setmodalopen] = useState(false)
   // const [selectedValue, setselectedValue] = useState('none')
   // const selectedValue='none'
@@ -27,27 +34,31 @@ const Groups = () => {
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
   const[numberofpage,setnumberofpage]=useState(0);
-  let count=0;
+  const [count,setcount]=useState(1);
+  const [pageone,setpageone]=useState(false);
   const response=async (page)=>{
-    //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
+    
+    await (console.log(await(AsyncStorage.getItem('token'))))
+   
     await setpage(page)
-
-    if(page===1){
-      console.log('PAGE 111')
+    console.log(page+'  شماره صفحه اول ریسپانس')
 
     await settheend(false)
-    await setinformation([])
+    console.log(theend+'  THE END RESOPONSE AVAL')
+    if(page===1){
+      await settheend(false)
+     await setinformation([])
 
-    console.log('IT IS HEAR SET INFO []')
-    console.log(information)
+    }
+
     
-    } 
     console.log('DOVOM')
      console.log(page+'PAGE')
      try{
        console.log('  omad to response')
-       console.log(likeotime + ' likeotime to response')
-      // setIDD(await (await AsyncStorage.getItem('id')).toString())
+       console.log('api/group'+likeotime)
+
+
       const response = await axiosinst.get('api/group'+ likeotime,{
         params: {
           page: page
@@ -59,43 +70,60 @@ const Groups = () => {
       }
      
    })
-   count=response.data.count;
-  setnumberofpage(numberofpage+1)
-  setrefresh(false)
-  if(numberofpage===count)
-  settheend(true);
-  else{
+   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+  await settheend(true)
+  await setrefresh(false)
+   console.log('#########')
+   }
+   else{
+  console.log(response.data+'RESPONSE.DATA')
+  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+   await setcount(response.data.count);
+   console.log(count+'  COUNT')
+   console.log(page+' PAGE BAD COUNT')
+   console.log((page===count)+' PAGE===COUNT')
+
     settheend(false)
-    //  console.log(IDD+'IDDresponse');
-    setinformation(response.data.groups)
-      // page===1?setinformation(response.data):setinformation(information.concat(response.data))
+   console.log('omade inja')
+    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+  // setinformation(information.concat(response.data.groups))
+    //  setinformation(response.data.groups)
+     setrefresh(false)
+    console.log(response.data.groups.id+'  INFORMATION.ID')
+    
       console.log('++++INFO++++'+information+"++++INFO++++")
      
      }
-     }
+    }
+    //  }
    catch(err){
      setrefresh(false)
      console.log(err.toString().split('\n')[0])
     if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
     settheend(true);
-    // else if(theend===true)
-    // settheend(false)
     console.log(theend+'THE END')
       console.log(err);
     
    }
- 
+  
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(theend===false)
+     if(page<count){
      response(page+1);
+     }
+     else
+     {
+       console.log(page+'handlemore page')
+       console.log(count +'handlemore count')
+       console.log('*********')
+       settheend(true)
+      }
     };
  
   useFocusEffect(
-    React.useCallback(() => {         
+    React.useCallback(() => {     
         response(1)
-        // setlikeotime('filter-time')
     },[]))
   return (
 
@@ -132,7 +160,7 @@ const Groups = () => {
 
       <View style={{ marginLeft: wp('2%') }}>
 
-        {(count >= 0) ? <DropDownPicker
+       <DropDownPicker
           items={[
             { label: 'جدید ترین گروه ها',value:'none'},
             { label: 'معروف ترین گروه ها', value: 'like' },
@@ -159,7 +187,9 @@ const Groups = () => {
               console.log('to none')
               // await setlikeotime('')
               console.log(likeotime+'BEIN TIME')
-              await setlikeotime('/filter-time')
+               await setlikeotime('/filter-time')
+              // setrefresh(true)
+              // response(1)
               console.log('set shod be time')
               console.log(likeotime+'likeotime')
               // response(1)
@@ -170,6 +200,8 @@ const Groups = () => {
               // await setlikeotime('')
               console.log(likeotime+'BEIN LIKE')
                await setlikeotime('/filter-member')
+              //  setrefresh(true)
+              //  response(1)
               console.log('set shod be like')
               console.log(likeotime+'likeotime')
               // response(1)
@@ -180,39 +212,57 @@ const Groups = () => {
 
           }}
 
-        /> : null}
+        />
         {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup> */}
 
         <View style={{height:hp('2%')}}></View>
-        {(count >= 0) ?
+       
 
-          <FlatList
-            ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
-            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>گروه دیگری وجود ندارد</Text></View>)}
-            style={{ marginBottom: hp('18%') }}
+         <FlatList
+            ListFooterComponent={(theend === false ? 
+            <View style={styles.loader}>
+            <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+            </View> : 
+            <View style={styles.loader}>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('3%')}}>گروه دیگری وجود ندارد</Text>
+            </View>)}
+            style={{ marginBottom: hp('7%') }}
             showsVerticalScrollIndicator={false}
-            onEndReached={() => handleLoadMore()}
-            onEndReachedThreshold={0}
+            onEndReached={() => {
+              // if(page<count)
+              // if(pageone===false)
+              // setpageone(true)
+              // else{
+                handleLoadMore()
+              // }
+              console.log('-----AKHAR LIST')
+            }}
+            onEndReachedThreshold={0.5}
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
-              await setrefresh(true)
+               
+              await setrefresh(true)         
+              // await setinformation([]);
+              // await setpage(1);
               response(1)
             }}
 
             data={information}
-            onEndReachedThreshold={0.5}
+       
 
-            renderItem={({ item }) => (<>
-            <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>
+            renderItem={({ item }) =><>
+            <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
+             discription={item.summary} title={item.title} ></Eachgroup>
+           
             </>
-            )}
+            }
           // extraData={finfo}
           >
-          </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>}
+          </FlatList> 
 
       </View>
       {/* <Text>
