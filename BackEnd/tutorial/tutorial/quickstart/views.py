@@ -545,11 +545,15 @@ class DiscussionView(APIView):
         serializer = CreateDiscussionSerializer(data=request.data)
         if serializer.is_valid():
             title = serializer.data.get("title")
-            description = serializer.data.get("description")
-            new_discuss = Discussion(creator=user,title=title,description=description,group=group)
-            new_discuss.save()
-            seri = DiscussionSerializer(new_discuss,many=False)
-            return Response(seri.data)
+            if not Discussion.objects.filter(title=title,group=group).exists():
+                description = serializer.data.get("description")
+                new_discuss = Discussion(creator=user,title=title,description=description,group=group)
+                new_discuss.save()
+                seri = DiscussionSerializer(new_discuss,many=False)
+                return Response(seri.data)
+            else:
+                return Response({"message":"A Discussion group with this name exists!"})
+
         return Response(serializer.errors)
 
 class DiscussionDetailsView(APIView):
@@ -600,11 +604,18 @@ class GroupView(APIView):
             title = serializer.data.get("title")
             summary = serializer.data.get("summary")
             if  not Group.objects.filter(title=title).exists():
-                new_group = Group(owner=user,title=title,summary=summary,group_photo=request.FILES["photo"])
-                new_group.save()
-                new_member = Member(group=new_group,user=user)
-                new_member.save()
-                return Response({"data":serializer.data,"message":"Your group is succesfully created!",})
+                if 'photo' in request.FILES:
+                    new_group = Group(owner=user,title=title,summary=summary,group_photo=request.FILES["photo"])
+                    new_group.save()
+                    new_member = Member(group=new_group,user=user)
+                    new_member.save()
+                    return Response({"data":GroupSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
+                else:
+                    new_group = Group(owner=user,title=title,summary=summary)
+                    new_group.save()
+                    new_member = Member(group=new_group,user=user)
+                    new_member.save()
+                    return Response({"data":GroupSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
             return Response({"message":"A group with this name exists!"})
         return Response(serializer.errors)
 
@@ -617,6 +628,15 @@ class GroupDetailsView(APIView):
         serializer = GroupSerializer(group,many=False)
         return Response(serializer.data)
 
+    def delete(self,request,pk):
+        group = Group.objects.get(id=pk)
+        current_user = request.user
+        owner = group.owner
+        if owner == current_user:
+            group.delete()
+            return Response({"message":"Successfull delete group!"})
+        return Response({"message":"No permission!"})
+
 class MemberGroupView(APIView):
 
     def get(self ,request ,pk ):
@@ -624,18 +644,24 @@ class MemberGroupView(APIView):
         if Member.objects.filter(group=group).exists():
             members = Member.objects.filter(group=group)
             serializer = MemberSerializer(members,many=True)
-            return Response(serializer.data)
+            return Response({"members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
         return Response({"message":"No member!"})
 
     def post(self ,request ,pk ):
         user=request.user
         group = Group.objects.get(id=pk)
+        if user == group.owner:
+            return Response({"message":"You are owner!You cant leave or join group!"},status=HTTP_400_BAD_REQUEST)
         if  not Member.objects.filter(user=user,group=group).exists():
             new_member = Member(user=user,group=group)
             new_member.save()
-            return Response({"message":"You joind this group!"})
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
+            return Response({"message":"You joind this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
         Member.objects.get(user=user,group=group).delete()
-        return Response({"message":"You leaved this group!"})
+        members = Member.objects.filter(group=group)
+        serializer = MemberSerializer(members,many=True)
+        return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
