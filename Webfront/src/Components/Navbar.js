@@ -88,6 +88,10 @@ useEffect(() => {
     props.history.push('/home');
   }
 
+  const routeToGroups = ()=>{
+    props.history.push('/groups');
+  }
+
   const accent= { backgroundColor: purple[500], color: '#000' }
 
   const bookSelectedHandler = ( b ) => {
@@ -124,31 +128,30 @@ const routeToGroups = ()=>{
         <h1 className="mx-1 mb-n1">  
           <GiBookshelf color="white" />
         </h1>
-        <b className="mx-1 my-n2" 
-         style = {{fontSize:33,fontWeight:"bold",color:"white",fontFamily:"Yekan"}}
+        <b className="mx-1 my-n2 " 
+         style = {{fontSize:33,fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav ml-5">
-            <li class="my-n1" href="groups"
-               style = {{fontSize:20,fontWeight:"bold"}}>
-              <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
-
+            <li  class="nav-link btn"
+               style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
+              <a onClick={routeToGroups}>گروه‌ها</a>
             </li>
-            <li class="my-n1" href="quize"
-               style = {{fontSize:20,fontWeight:"bold"}}>
-              <a class="nav-link" href="#"  style={{color:"white"}}>آزمونک</a>
+            <li  class="nav-link btn"
+               style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
+              <a >آزمونک</a>
             </li>
-            <li class="nav-link btn my-n1"
+            <li class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
           </ul>
-          <div className="d-flex flex-grow-1 mx-md-5">
+          <div className="d-flex flex-grow-1 mx-md-5 ">
               <Button variant="gray" className="mr-md-5" onClick={handleShow}>
                 <GoSearch className="" size="30" color="white" />
               </Button>
@@ -157,12 +160,12 @@ const routeToGroups = ()=>{
                />  
               
           </div>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between mr-md-5">
               <div className="btn-group mx-auto dropright" role="group">
                 <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
                 </div>
-                <div className="dropdown-menu px-1 mx-n2" style={{backgroundColor:"#b7dee4"}} aria-labelledby="btnGroupDrop1">
+                <div className="dropdown-menu px-1 mx-n2"  aria-labelledby="btnGroupDrop1">
                   <div className="d-flex align-items-end flex-column">
                   <div className="text-left mx-3" style={{fontSize:18,fontFamily:'Yekan'}} >
                   {Cookies.get('userName')}

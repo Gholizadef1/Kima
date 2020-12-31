@@ -23,7 +23,7 @@ import Cookies from 'js-cookie';
 //import { data, event, noConflict } from 'jquery';
 
 import Tabs from "./multiTabs"
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 //import { ajax } from 'jquery';
 //import { data } from 'jquery';
@@ -228,8 +228,8 @@ setOpenSnack(false);
 //console.log(response.data.title);
 
 const bo = Number.isInteger(value);
-console.log(bo);
-console.log(value);
+//console.log(bo);
+//console.log(value);
 const Sendrequest =()=>{
   console.log(mess);
   if(mess === "No User Rating!"){
@@ -299,7 +299,7 @@ return(
 
   <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
     <div className="mx-md-5">
-    <div className=" row no-gutters position-relative shadow border border-dark color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
+    <div className=" row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
       <div className="col-md-4 mb-md-0 p-4 rounded-lg" >
         <img src={state.imgurl} className="img-fluid float-right rounded-lg" alt="" style={{width:'100%',height:'auto',boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
 
@@ -386,7 +386,7 @@ return(
     </div>
   </div>
 </div>
-<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg">
+<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg  ">
 <Tabs book={state.id} bookdescription={state.description}/>
 </div>
 </div>

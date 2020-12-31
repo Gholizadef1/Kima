@@ -28,7 +28,6 @@ import BookView from './components/bookView/bookView'
 //import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
-//import Inditual from './Components/Groupepage/Groupepagej';
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
@@ -80,6 +79,12 @@ function App(props) {
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
+
+            <Route path="/groups">
+              <NavBar/>
+              <GroupsPage />
+            </Route>
+
             <Route path="*">
               <div class="alert alert-warning" role="alert">
                 صفحه وجود ندارد
