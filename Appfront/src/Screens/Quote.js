@@ -112,6 +112,11 @@ const callbackFunction = async(childData) => {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
      page:page
+     },
+     "headers":
+     {
+       "Content-Type": "application/json",
+       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
      }
   })
   setrefresh(false)
@@ -121,7 +126,7 @@ const callbackFunction = async(childData) => {
     settheend(false)
      console.log(IDD+'IDDresponse');
       //  console.log(response.data)
-      page===1?setinformation(response.data):setinformation(information.concat(response.data))
+      page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
   //     setloading(false);
@@ -385,7 +390,7 @@ const callbackFunction = async(childData) => {
      onEndReachedThreshold={0.5}
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
-
+    isliked={item.isliked}
     date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://a32f717e71fe.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 

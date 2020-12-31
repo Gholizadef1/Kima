@@ -12,37 +12,37 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
-  const getlike=async()=>{
-    const back2 = {
+  // const getlike=async()=>{
+  //   const back2 = {
   
-    }
-      const backk2 = JSON.stringify(back2);
-      console.log((await AsyncStorage.getItem('token')).toString())
-      // await setTimeout(() => {  console.log("World!"); }, 5000);
-        axiosinst.get('http://a32f717e71fe.ngrok.io/api/quotes/like/' + prop.quoteid , {
-          "headers":
-          {
-            "Content-Type": "application/json",
-            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-          }
-        })
-          .then(async function (response) {
+  //   }
+  //     const backk2 = JSON.stringify(back2);
+  //     console.log((await AsyncStorage.getItem('token')).toString())
+  //     // await setTimeout(() => {  console.log("World!"); }, 5000);
+  //       axiosinst.get('http://3fefbe690991.ngrok.io/api/quotes/like/' + prop.quoteid , {
+  //         "headers":
+  //         {
+  //           "Content-Type": "application/json",
+  //           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //         }
+  //       })
+  //         .then(async function (response) {
             
-            console.log(response)
-            // setnumlike(response.data.LikeCount)
-            if (response.data.message === 'True')
-            setheart('#1f7a8c')
-          else
-            setheart('lightblue')
-          //   console.log(response);
+  //           console.log(response)
+  //           // setnumlike(response.data.LikeCount)
+  //           if (response.data.message === 'True')
+  //           setheart('#1f7a8c')
+  //         else
+  //           setheart('lightblue')
+  //         //   console.log(response);
   
-          })
-          .catch(function (error) {
-            console.log(error);
-            console.log('like error ||||||||||||')
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //           console.log('like error ||||||||||||')
   
-          })
-  }
+  //         })
+  // }
   
   console.log(prop.IDD + 'PROP IDD')
   console.log(prop.id + 'PROP ACCOUNT ID')
@@ -59,13 +59,17 @@ const Quotecard = (prop) => {
   const [numheart, setnumheart] = useState(prop.heartnumber);
 
   // const [dislike,setdislike]=useState('lightblue')
-  const [heart, setheart] = useState(false);
+  const [heart, setheart] = useState('lightblue');
   // useEffect(()=>{
   //   getlike();
   // },[])
   useFocusEffect(
     React.useCallback(() => {
-      getlike();
+      if(prop.isliked)
+      setheart('#1f7a8c')
+      else
+      setheart('lightblue')
+      // getlike();
     }, [])
 
   )
@@ -165,7 +169,7 @@ const Quotecard = (prop) => {
 
               <TouchableOpacity style={styles.avatar}
                 onPress={() => { }}>
-                {prop.picture === 'http://a32f717e71fe.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+                {prop.picture === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
                   source={require('../../assets/avatar.png')}
                   style={styles.avatar}
@@ -212,7 +216,7 @@ const Quotecard = (prop) => {
               
             const backk=JSON.stringify(back);
             // await setTimeout(() => {  console.log("World!"); }, 5000);
-          axiosinst.post('http://a32f717e71fe.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
+          axiosinst.post('http://3fefbe690991.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
             "headers":
             {
               "Content-Type": "application/json",
@@ -288,7 +292,6 @@ const styles = StyleSheet.create({
   },
   heart: {
     position: 'absolute',
-
     right: wp('6.5%')
 
   },
