@@ -56,7 +56,7 @@ import {
   });
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/details/3")
+    axios.get("http://127.0.0.1:8000/api/group/details/5")
       
       .then((data) => {
          console.log(data);
@@ -84,13 +84,13 @@ import {
   };
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/members/3")
+    axios.get("http://127.0.0.1:8000/api/group/members/5")
       .then((data) => {
-         console.log(data.data.owner.username);
+         console.log(data.data.members);
         setMembers(data.data.members);
         
           for(var i =0; i<data.data.members.length ; i++){
-            if(data.data.members[i].user.username === Cookies.get("userName")){
+            if(data.data.members[i].user.username === Cookies.get("userName") && data.data.owner.username != Cookies.get("userName")){
               setJoinduser("You joind this group!");
               setUser("");
               console.log("dkjsn");
@@ -115,7 +115,7 @@ import {
   }, [join]);
   const joinGroup =()=> { 
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/3",
+      "http://127.0.0.1:8000/api/group/members/5",
     {},
     {
       headers:{
@@ -135,7 +135,7 @@ import {
   }
   const leaveGroup = ()=>{
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/3",
+      "http://127.0.0.1:8000/api/group/members/5",
     {},
     {
       headers:{
@@ -152,23 +152,37 @@ import {
     props.history.push('/groups');
   }
   const deletGroup =()=>{
-    props.history.push('/groups');
+    axios.delete(
+      "http://127.0.0.1:8000/api/group/details/5",
+    
+    {
+      headers:{
+        "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+          console.log(Cookies.get("userToken"));
+          console.log(data);
+          props.history.push('/groups');
+          
+        })
+    
   }
   ///////////////////////////////////////////////////////////
   
-  // useEffect(() => {
-  //   axios.get(
-  //     "http://127.0.0.1:8000/api/group/3/discussion",
-  //   {
-  //     headers:{
-  //       "Content-Type":"application/json",}
-  //       }).then(data => {
-  //         console.log(data);
-  //         setShowdiscussion(data);
-  //       setJoin(true);
-  //         console.log(data.data.message);
-  //       })
-  // }, []);
+  useEffect(() => {
+    axios.get(
+      "http://127.0.0.1:8000/api/group/5/discussion",
+    {
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+          console.log(data);
+          setShowdiscussion(data);
+        setJoin(true);
+          console.log(data.data.message);
+        })
+  }, []);
   
   /////////////////////////////////////////////////////////
     
@@ -186,7 +200,7 @@ import {
 
     const handleCreateDiscussionSubmit =(e) =>{
       axios.post(
-        "http://127.0.0.1:8000/api/group/3/discussion",formdata,
+        "http://127.0.0.1:8000/api/group/5/discussion",formdata,
       {
         headers:{
           "Content-Type":"application/json",
@@ -255,7 +269,7 @@ import {
                     <TextField
                       autoFocus
                     margin="dense"
-                    defaultValue=" "
+                    defaultValue=" حخنمر"
                       id="description"
                       style={{fontFamily:"Yekan"}}
                       value={newDiscussion.summary}
