@@ -67,10 +67,17 @@ const callbackFunction = async(childData) => {
   }
   const handleLoadMore = async() => {
    console.log('END OF THE LIST')
+   if(page<count){
     if(theend===false)
     response(page+1);
+   }
+   else
+   {
+     settheend(true)
+   }
    };
   const [theend,settheend]=useState(false)
+  const [count,setcount]=useState(1);
   const [likeotime, setlikeotime] = useState('/quote-filter-time');
   const [selectedValue, setselectedValue] = useState('none')
   const [selectedIndex, setSelectedIndex] = useState([]);
@@ -119,6 +126,7 @@ const callbackFunction = async(childData) => {
        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
      }
   })
+  await setcount(response.data.count);
   setrefresh(false)
   if(response.data.detail==='Invalid page.')
   settheend(true);
@@ -154,7 +162,7 @@ const callbackFunction = async(childData) => {
       // settheend(false);
     
       // getlike()
-         
+      
         response(1)
      console.log(IDD+'IDD');
     
@@ -293,7 +301,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     <DropDownPicker
+        { (information!=undefined) ? <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -329,8 +337,8 @@ const callbackFunction = async(childData) => {
 
           }}
 
-        />
-     { (information.length>=0) ?
+        />:null}
+     { (information!=undefined) ?
      
      <FlatList
     //  ListHeaderComponent={ <DropDownPicker
@@ -399,7 +407,7 @@ const callbackFunction = async(childData) => {
     )}
       // extraData={finfo}
     >
-    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('30%'),fontWeight:'bold'}}>نقل قولی وجود ندارد</Text>}
+    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('30%'),fontWeight:'bold'}}>برای این کتاب نقل قولی وجود ندارد</Text>}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}
