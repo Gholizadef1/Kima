@@ -529,9 +529,9 @@ class FilterQuotebyTime(APIView,PaginationHandlerMixin):
         if MyQuote.objects.filter(current_book=bk).exists():
             q_list = MyQuote.objects.filter(current_book=bk).order_by('-sendtime')
             quote_list = self.paginate_queryset(q_list)
-            serializer = QuoteSerializer(quote_list,many=True)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
             count = Paginator(q_list,10).num_pages
-            return Response({"quotes" : serializer.data,context={"request": request}, "count": count})
+            return Response({"quotes" : serializer.data, "count": count})
         response = {'message' : 'No Quote!',}
         return Response(response)
 
@@ -646,13 +646,13 @@ class GroupView(APIView,PaginationHandlerMixin):
                     new_group.save()
                     new_member = Member(group=new_group,user=user)
                     new_member.save()
-                    return Response({"data":GroupSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
+                    return Response({"data":GroupDetSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
                 else:
                     new_group = Group(owner=user,title=title,summary=summary)
                     new_group.save()
                     new_member = Member(group=new_group,user=user)
                     new_member.save()
-                    return Response({"data":GroupSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
+                    return Response({"data":GroupDetSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
             return Response({"message":"A group with this name exists!"})
         return Response(serializer.errors)
 
@@ -682,7 +682,7 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
         if Member.objects.filter(group=group).exists():
             members = Member.objects.filter(group=group)
             mem_list = self.paginate_queryset(members)
-            serializer = MemberSerializer(members,many=True)
+            serializer = MemberSerializer(mem_list,many=True)
             count = Paginator(members,10).num_pages
             return Response({"members" : serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data, "count": count})
         return Response({"message":"No member!"})
@@ -710,7 +710,7 @@ class DynamicSearchFilter(filters.SearchFilter):
 class DynamicGroupAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+    serializer_class = GroupDetSerializer
   
 class FilterGroupbyTime(APIView,PaginationHandlerMixin):
     pagination_class = BasicPagination
