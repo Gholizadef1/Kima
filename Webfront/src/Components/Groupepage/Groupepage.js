@@ -4,6 +4,12 @@ import Dialog from '@material-ui/core/Dialog';
 import Avatar from '@material-ui/core/Avatar';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import List from '@material-ui/core/List';
+import PropTypes from 'prop-types';
+import {GoHeart} from 'react-icons/go';
+import {AiOutlineLike} from 'react-icons/ai';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -33,8 +39,10 @@ import {
   function GroupPage (props){
     const [ginfo, setGinfo] = useState([]);
     const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
-    const[message,setMessage]= useState("");
-    const [members,setMembers] = useState([]);
+    const[owner,setOwner]= useState("");
+    const[joinduser,setJoinduser]= useState("");
+    const[user,setUser]= useState("");
+    const [member,setMembers] = useState([]);
     const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,33 +63,64 @@ import {
          console.log(data.data.group_photo);
         setGinfo(data.data);
         console.log(data.data.owner.username);
-        if(data.data.owner.username === Cookies.get('userName')){
-          setMessage("You are owner!");
-        }
+         
         console.log(ginfo.group_photo);
       });
       
   }, []);
   ///////////////////////////////////////////////////////
+  const joinGroup =()=> { 
+    axios.post(
+      "http://127.0.0.1:8000/api/group/members/3",
+    {},
+    {
+      headers:{
+        "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+        setJoin(true);
+        
+          console.log(data.data.message);
+      
+         
+        })
+    .catch(error=>{
+      console.log(error);
+    });
+  }
+/////////////////////////////////////////////////////   
+  const handleCloseCreateGroup = () => {
+    setOpenCreateDiscussion(false);
+    setNewDiscussion({
+      name : "",
+      backError : ""
+    }); 
+  };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/group/members/3`)
-      .then((res) => res.json())
+    axios.get("http://127.0.0.1:8000/api/group/members/3")
       .then((data) => {
-         console.log(data);
-        setMembers(data);
-        console.log(members.profile_photo);
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
+         console.log(data.data.members[1].user.username);
+        setMembers(data.data.members);
+        if(data.data.owner.username === Cookies.get("userName")){
+          setOwner('You are owner!');
          
-          if(data[i].user.username === Cookies.get('userName')){
-            setMessage('You joind this group!');
-          }
-          if(data[i].user.username != Cookies.get('userName')){
-            setMessage('You leaved this group!');
-          }
         }
-      
+          for(var i =0; i<data.data.members.length ; i++){
+            if(data.data.members[i].user.username === Cookies.get("userName")){
+              setJoinduser("You joind this group!");
+              
+              console.log("dkjsn");
+              break;
+        }
+        if(data.data.members[i].user.username != Cookies.get("userName") && data.data.owner.username != Cookies.get("userName")){
+          setJoinduser("You leaved this group!");
+          
+          console.log("dkjsn");
+          break;
+    }
+      }
+       
       });
   }, [join]);
   const leaveGroup = ()=>{
@@ -107,46 +146,21 @@ import {
   }
   ///////////////////////////////////////////////////////////
   
-  useEffect(() => {
-    axios.get(
-      "http://127.0.0.1:8000/api/group/discussion/details/3",
-    {
-      headers:{
-        "Content-Type":"application/json",
-       "Authorization":"Token "+Cookies.get("userToken")}
-        }).then(data => {
-          console.log(data);
-          setShowdiscussion(data);
-        setJoin(true);
-          console.log(data.data.message);
-        })
-  }, []);
+  // useEffect(() => {
+  //   axios.get(
+  //     "http://127.0.0.1:8000/api/group/3/discussion",
+  //   {
+  //     headers:{
+  //       "Content-Type":"application/json",}
+  //       }).then(data => {
+  //         console.log(data);
+  //         setShowdiscussion(data);
+  //       setJoin(true);
+  //         console.log(data.data.message);
+  //       })
+  // }, []);
   
   /////////////////////////////////////////////////////////
-    const joinGroup =()=> { 
-      axios.post(
-        "http://127.0.0.1:8000/api/group/members/3",
-      {},
-      {
-        headers:{
-          "Content-Type":"application/json",
-         "Authorization":"Token "+Cookies.get("userToken")}
-          }).then(data => {
-          setJoin(true);
-            console.log(data.data.message);
-          })
-      .catch(error=>{
-        console.log(error);
-      });
-    }
- /////////////////////////////////////////////////////   
-    const handleCloseCreateGroup = () => {
-      setOpenCreateDiscussion(false);
-      setNewDiscussion({
-        name : "",
-        backError : ""
-      }); 
-    };
     
     const handleChange = (e) => {
       const {id , value} = e.target   
@@ -203,7 +217,7 @@ import {
     <b className="title-g" >نام گروه:  {ginfo.title}</b>
     </div>
 
-    {message === "You joind this group!" ?
+    {joinduser ?
     <div>
     <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
     <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
@@ -258,14 +272,14 @@ import {
     </div>
       }
      
-      {message === "You leaved this group!"?
+      {user?
       <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
       </div>
       :
       <div></div>
     }
     
-    {message === "You are owner!" ?
+    {owner ?
     <div>
     <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
     <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
@@ -330,15 +344,17 @@ import {
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:580}}>بحث‌ها</b>
     <div class="card card-discussion">
   <div class="card-body">
-  <p className="text-right">بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بحث بح ث
-</p>
+  <div>
+     
+       </div>
+
   </div>
   
     </div>  
   
    
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-230,position:"relative",marginLeft:450}}> ({ginfo.members_count}) اعضا</b>
-     {members.map ((current) => (
+     {member.map ((current) => (
        <div className="row" key={current.id}>
                 <Avatar
                   src={`http://127.0.0.1:8000${current.user.profile_photo}`}

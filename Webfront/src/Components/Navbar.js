@@ -117,7 +117,7 @@ useEffect(() => {
 }
 
 const routeToGroups = ()=>{
-  props.history.push('/groups');
+  props.history.push('/group');
 }
     return(   
       <nav class="navbar navbar-expand-lg navbar-light px-4 color4">
