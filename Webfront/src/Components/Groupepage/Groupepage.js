@@ -63,31 +63,17 @@ import {
          console.log(data.data.group_photo);
         setGinfo(data.data);
         console.log(data.data.owner.username);
-         
+        if(data.data.owner.username === Cookies.get("userName")){
+          setOwner('You are owner!');
+          console.log("cjd");
+          console.log(user);
+        }
         console.log(ginfo.group_photo);
       });
       
-  }, []);
+  }, [join]);
   ///////////////////////////////////////////////////////
-  const joinGroup =()=> { 
-    axios.post(
-      "http://127.0.0.1:8000/api/group/members/3",
-    {},
-    {
-      headers:{
-        "Content-Type":"application/json",
-       "Authorization":"Token "+Cookies.get("userToken")}
-        }).then(data => {
-        setJoin(true);
-        
-          console.log(data.data.message);
-      
-         
-        })
-    .catch(error=>{
-      console.log(error);
-    });
-  }
+  
 /////////////////////////////////////////////////////   
   const handleCloseCreateGroup = () => {
     setOpenCreateDiscussion(false);
@@ -100,30 +86,34 @@ import {
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/group/members/3")
       .then((data) => {
-         console.log(data.data.members[1].user.username);
+         console.log(data.data.owner.username);
         setMembers(data.data.members);
-        if(data.data.owner.username === Cookies.get("userName")){
-          setOwner('You are owner!');
-         
-        }
+        
           for(var i =0; i<data.data.members.length ; i++){
             if(data.data.members[i].user.username === Cookies.get("userName")){
               setJoinduser("You joind this group!");
-              
+              setUser("");
               console.log("dkjsn");
+              console.log(user);
+              console.log(owner);
               break;
         }
-        if(data.data.members[i].user.username != Cookies.get("userName") && data.data.owner.username != Cookies.get("userName")){
-          setJoinduser("You leaved this group!");
+        console.log(joinduser);
+      
+        if(data.data.owner.username != Cookies.get("userName") && joinduser != ""){
+          setUser("You leaved this group!");
           
           console.log("dkjsn");
-          break;
+        }
+        console.log(user);
+        console.log(joinduser);
+      
     }
-      }
+ 
        
       });
   }, [join]);
-  const leaveGroup = ()=>{
+  const joinGroup =()=> { 
     axios.post(
       "http://127.0.0.1:8000/api/group/members/3",
     {},
@@ -133,6 +123,26 @@ import {
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
         setJoin(true);
+        setUser("You joind this group!");
+
+    
+          console.log(data);
+         
+        })
+    .catch(error=>{
+      console.log(error);
+    });
+  }
+  const leaveGroup = ()=>{
+    axios.post(
+      "http://127.0.0.1:8000/api/group/members/3",
+    {},
+    {
+      headers:{
+        "Content-Type":"application/json",
+       "Authorization":"Token "+Cookies.get("userToken")}
+        }).then(data => {
+        
           console.log(data.data.message);
           
         })
@@ -217,7 +227,7 @@ import {
     <b className="title-g" >نام گروه:  {ginfo.title}</b>
     </div>
 
-    {joinduser ?
+    {joinduser === "You joind this group!" ?
     <div>
     <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
     <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
@@ -245,6 +255,7 @@ import {
                     <TextField
                       autoFocus
                     margin="dense"
+                    defaultValue=" "
                       id="description"
                       style={{fontFamily:"Yekan"}}
                       value={newDiscussion.summary}
@@ -268,18 +279,82 @@ import {
                 </Dialog>
 </div>
     :
+    
     <div>       
     </div>
       }
-     
-      {user?
+     {user ==="" && joinduser==="" && owner==="" ?
+     <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+     </div>
+     :
+     <div>
+     </div>
+     }
+      {user === "You leaved this group!"?
       <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
       </div>
       :
+      <div>
+      </div>
+  }
+      {user === "You joind this group!" ?
+       <div>
+       <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
+       <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+    بحث جدید
+                   </div>
+                   
+                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                     <DialogContent >
+   
+                     <form >
+                       <TextField
+                         autoFocus
+                         margin="dense"
+                         id="name"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.name}
+                         placeholder="عنوان بحث"
+                         type="title"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       <TextField
+                         autoFocus
+                       margin="dense"
+                         id="description"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.summary}
+                         placeholder="دربارهٔ بحث"
+                         type="description"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       </form>
+                     </DialogContent>
+                     <DialogActions>
+                       <Button onClick={handleCloseCreateGroup} color="black">
+                       انصراف
+                       </Button>
+                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                         ثبت
+                       </Button>
+                     </DialogActions>
+                   </Dialog>
+   </div>
+
+      :
       <div></div>
-    }
+      }
     
-    {owner ?
+    
+    
+    {owner === 'You are owner!' ?
     <div>
     <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
     <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
