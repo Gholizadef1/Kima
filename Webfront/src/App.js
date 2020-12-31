@@ -27,11 +27,7 @@ import BookView from './components/bookView/bookView'
 //import loginForm from './components/loginForm/loginForm';
 //import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
-//import { render } from '@testing-library/react';
-//import { components } from 'react-select';
-//import protectedRoute from './components/protect';
-import GroupsPage from './components/groups/groupsPage';
-
+import Grouppage from './Components/Groupepage/Groupepage';
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
@@ -73,6 +69,11 @@ function App(props) {
               <Profile/>
               
               </Route>
+              <Route path="/group">
+                <NavBar/>
+              <Grouppage/>
+              </Route>
+             
             
             <Route path="/book/:bookId">
               <NavBar/>
