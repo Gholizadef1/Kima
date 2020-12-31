@@ -1,106 +1,262 @@
 
-/* .btn-default
- 
-{
- margin-top: 100px;
-background-color: #9dc3e9;
-}
-.head{
-    margin-top: 400px;
-}
 
-.card-profile{
-  margin-top: 80px;
-  height: 500px;
- left: 800px;
-}
-.card-body{
-    margin-top: -350px;
-    padding-right: -100px;
-    
-} */
-.rounded-circle{
-   
-   margin-bottom: 15px;
-   margin-left: 10px;
-    margin-top: 2rem;
-    margin-right: 3rem;
-    border:2px solid #fff;
-    box-shadow: 10px 10px 5px #ccc;
-    -moz-box-shadow: 10px 10px 5px #ccc;
-    -webkit-box-shadow: 10px 10px 5px #ccc;
-    -khtml-box-shadow: 10px 10px 5px #ccc;
-}
 
-.cardp{
-   left: 63rem;
-   border:2px solid #fff;
-    height: 550px;
-    border-radius: 5%;
-    box-shadow: 20px 10px 5px #ccc;
-    -moz-box-shadow: 10px 10px 5px #ccc;
-    -webkit-box-shadow: 10px 10px 5px #ccc;
-    -khtml-box-shadow: 10px 10px 5px #ccc;
-}
-.decsciptionmine{
-    font-size: 18px;
-}
 
-.Tabz{
-
-    margin-left: 100px;
-    margin-top: -21rem;
-}
-.line{
-    margin-top:60px;
-}
-@media (max-width :400px) 
+@media (min-width :360px)
 {
     .cardp{
-        left: -7px;
-        height: 400px;
+        left: 31px;
+          height: 240px;
+          width: 300px;
+        border-radius: 2%;
+         margin-top: 1.5rem;
+         background-color:rgb(238, 243, 250);
+     }
 
+     .rounded-circle1{
+         width: 120px;
+         height: 120px;
+         display: "block";
+        margin-bottom: 15px;
+        margin-left: 3px;
+         margin-top: 1rem;
+        
+     }
+     .username{
+         margin-top: -18px;
+     }
+     .btn1{
+        width: 69px;
+        height: 40px;
     }
-  
+    .line{
+        margin-top:-1px;
+    }
     .decsciptionmine{
-        margin-left: 30px;
-        font-size: 12px;
-       
+        font-size: 14px;
+        font-family: 'Yekan';
     }
-    .line{
-        margin-top: 35px;
+       
+.heading{
+    font-size: 15;
+
+}
+.heading1{
+    margin-left: -12px;
+    }
+    .heading2{
+    margin-left: 90px;
+    padding-right: 10px;
+    }
+    .heading3{
+    margin-left: 70px;
+    }
+    .Tabz{
+
+    margin-left: 14px;
+    margin-top: 5px;
+    
+}
+  }
+
+
+  @media (min-width :768px) 
+  {
+  
+    .rounded-circle1{
+        width: 120px;
+        height: 120px;
+        display: "block";
+       margin-bottom: 15px;
+       margin-left: -10px;
+        margin-top: 1rem;
+        margin-right: 4rem;
+        border:2px solid #fff;
+        box-shadow: 10px 10px 5px #ccc;
+        -moz-box-shadow: 10px 10px 5px #ccc;
+        -webkit-box-shadow: 10px 10px 5px #ccc;
+        -khtml-box-shadow: 10px 10px 5px #ccc;
     }
     
-  }
-  @media (max-width :780px) 
-{
     .cardp{
-        left: -7px;
-        height: 300px;
-       
-    } 
-
-    .Tabz{
-
-        margin-left: 10px;
+       left: 25rem;
+         height: 230px;
+         width: 300px;
+       border-radius: 2%;
+        margin-top: 3rem;
+        background-color:rgb(238, 243, 250);
+    }
+    .username{
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 15px;
         margin-top: -1rem;
-    }
-    .line{
-        margin-top: 40px;
-    }
-   
-  }
-  @media (max-width :800px) 
-{
-    .cardp{
-        left: -7px;
-        height: 450px;
        
-    } 
-
-    .Tabz{
-
-        margin-left: 10px;
-        margin-top: 12rem;
+        
     }
-  }
+    .email{
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 13px;
+    }
+    .decsciptionmine1{
+        font-size: 12px;
+        font-family: 'Yekan';
+        margin-left: -5px;
+    }
+    .decsciptionmine2{
+        font-size: 12px;
+        font-family: 'Yekan';
+        margin-left: -30px;
+    }
+    .decsciptionmine3{
+        font-size: 12px;
+        font-family: 'Yekan';
+        margin-left: 15px;
+    }
+    .custom-btn{
+        max-width: 80%;
+        padding-left:8px;
+        padding-right:10px;
+    }
+    .custom-btn1 {
+        max-width: 80%;
+        padding-left:3px;
+        padding-right:4px;
+    }
+    .btn1{
+        width: 80px;
+        height: 40px;
+    }
+    .heading{
+        font-size: 18;
+    }
+    
+    .Tabz{
+    
+        margin-left: 50px;
+        margin-top: 20px;
+        
+    }
+    
+    .line{
+        margin-top:-5px;
+    }
+    .heading1{
+    margin-left: -10px;
+    }
+    .heading2{
+    margin-left: -80px;
+    
+    }
+    .heading3{
+    margin-left: -100px;
+    }
+    .mygroups{
+        margin-left: 1px;
+    
+    }
+
+}
+    @media (min-width :960px) 
+    {
+        
+        .rounded-circle1{
+   
+            width: 120px;
+            height: 120px;
+            display: "block";
+           margin-bottom: 15px;
+           margin-left: -10px;
+            margin-top: 1rem;
+            margin-right: 4rem;
+            border:2px solid #fff;
+            box-shadow: 10px 10px 5px #ccc;
+            -moz-box-shadow: 10px 10px 5px #ccc;
+            -webkit-box-shadow: 10px 10px 5px #ccc;
+            -khtml-box-shadow: 10px 10px 5px #ccc;
+        }
+        
+        .cardp{
+           left: 55rem;
+             height: 230px;
+             width: 500px;
+           border-radius: 2%;
+            margin-top: 3rem;
+            background-color:rgb(238, 243, 250);
+        }
+        .username{
+            font-family: 'Yekan';
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: -1rem;
+           
+            
+        }
+        .email{
+            font-family: 'Yekan';
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .decsciptionmine1{
+            font-size: 18px;
+            font-family: 'Yekan';
+            margin-left: -5px;
+        }
+        .decsciptionmine2{
+            font-size: 18px;
+            font-family: 'Yekan';
+            margin-left: -30px;
+        }
+        .decsciptionmine3{
+            font-size: 18px;
+            font-family: 'Yekan';
+            margin-left: 15px;
+        }
+        .custom-btn{
+            max-width: 80%;
+            padding-left:8px;
+            padding-right:10px;
+        }
+        .custom-btn1 {
+            max-width: 80%;
+            padding-left:3px;
+            padding-right:4px;
+        }
+        .btn1{
+            width: 80px;
+            height: 40px;
+        }
+        .heading{
+            font-size: 18;
+        }
+        
+        .Tabz{
+        
+            margin-left: 90px;
+            margin-top: -530px;
+            
+        }
+        
+        .line{
+            margin-top:-5px;
+        }
+        .heading1{
+        margin-left: -10px;
+        }
+        .heading2{
+        margin-left: -80px;
+        
+        }
+        .heading3{
+        margin-left: -100px;
+        }
+        .mygroups{
+            margin-left: 1px;
+        
+        }
+           
+      }
+
+
+

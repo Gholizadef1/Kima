@@ -87,10 +87,33 @@ class QuoteSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
     current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyQuote
-        fields = "__all__"
+        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+    
+    def get_isliked(self, obj):
+        user =  self.context['request'].user
+        if LikeQuote.objects.filter(account=user,quote=obj).exists():
+            return True
+        return False
+
+class QuoteProfSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = MyQuote
+        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+
+    def get_isliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if LikeQuote.objects.filter(account=user,quote=obj).exists():
+            return True
+        return False
 
 
 class PostCommentSerializer(serializers.Serializer):
@@ -101,12 +124,47 @@ class CommentSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
     current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    isdisliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyComment
-        fields = "__all__"
+        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+    
+    def get_isliked(self, obj):
+        user =  self.context['request'].user
+        if LikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+    
+    def get_isdisliked(self, obj):
+        user =  self.context['request'].user
+        if DislikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
 
-
+class CommentProfSerializer(serializers.ModelSerializer):
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    isdisliked = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = MyComment
+        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+    
+    def get_isliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if LikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+    
+    def get_isdisliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if DislikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+        
 class FilterRateSerializer(serializers.ModelSerializer):
     book_info = serializers.RelatedField(source='current_book',read_only=True)
     

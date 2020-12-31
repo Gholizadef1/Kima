@@ -21,7 +21,7 @@ const BlueOnGreenTooltip = withStyles({
     color: "black",
     fontFamily:"Mitra",
     fontSize:20,
-    backgroundColor: "lightblue",
+    backgroundColor: '#b7dee4',
     width:170,
     height:80,
     textAlign:"center",
@@ -44,14 +44,18 @@ function Slide(props) {
       });
   }, []);
   useEffect(() => {
+
     fetch("http://127.0.0.1:8000/filter-book-rate")
+
       .then((res) => res.json())
       .then((data) => {
         setFavorite(data);
       });
   }, []);
   useEffect(() => {
+
     fetch("http://127.0.0.1:8000/filter-book-comment")
+
       .then((res) => res.json())
       .then((data) => {
         setDiscussed(data);
@@ -84,14 +88,23 @@ function Slide(props) {
         breakpoint: 960,
         settings: {
           slidesToShow: 7,
+
           slidesToScroll: 2,
           
         },
       }, 
      
       {
-        breakpoint: 480,
+        breakpoint: 768,
         settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+
           slidesToShow: 2,
           slidesToScroll: 2,
         },
@@ -106,6 +119,7 @@ function Slide(props) {
       {
         breakpoint: 800,
         settings: {
+
           slidesToShow: 5,
           slidesToScroll: 2,
         },
@@ -161,8 +175,10 @@ function Slide(props) {
 
 
 
+
 <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>محبوب‌ترین‌ها</div> 
       {favorite.length === 0 ? (
+
         <div className="spinner-border" role="status">
           <div className="sr-only">Loading...</div>
         </div>
@@ -171,7 +187,9 @@ function Slide(props) {
         
        <div className = "slide ml-5">
         <Slider {...settings}>
+
           {favorite.map((current) => (
+
             <div className="out pl-4" key={current.id}>
 
               <div className="card cat "onClick={() => bookSelectedHandler( current )}>
@@ -202,8 +220,10 @@ function Slide(props) {
         </div>
       )}
 
+
 <div class="brand" style={{fontcolor:"black",fontFamily:"Yekan"}}>پربحث‌ترین‌ها</div> 
             {discussed.length === 0 ? (
+
               <div className="spinner-border" role="status">
                 <div className="sr-only">Loading...</div>
               </div>
@@ -212,7 +232,9 @@ function Slide(props) {
               
              <div className = "slide ml-5">
               <Slider {...settings}>
+
                 {discussed.map((current) => (
+
                   <div className="out pl-4" key={current.id}>
       
                     <div className="card cat "onClick={() => bookSelectedHandler( current )}>

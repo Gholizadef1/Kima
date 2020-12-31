@@ -38,7 +38,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['']
+
+
+ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -95,14 +98,14 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 
 DATABASES = {
 
-    #'default': {
-     #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
-      # 'NAME': 'hope', 
-      # 'USER': 'postgres', 
-     #  'PASSWORD': 'melika55540430',
-     # 'HOST': 'localhost', 
-     #  'PORT': '',
-  # }
+#     'default': {
+#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#       'NAME': 'hope', 
+#       'USER': 'postgres', 
+#       'PASSWORD': 'melika55540430',
+#      'HOST': 'localhost', 
+#       'PORT': '',
+#   }
 
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
