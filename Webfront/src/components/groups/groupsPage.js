@@ -17,7 +17,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -27,7 +26,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 function GroupsPage (props){
   const [groups,setGroups] = useState([]);
   const [filterBase,setFilterBase]= useState("time");
-
+  const [isMine,setIsMine]=useState(false);
   const [page, setPage] = useState(1);
   const [pagesNumber, setPagesNumber] = useState();
   
@@ -43,17 +42,13 @@ function GroupsPage (props){
     //   });
 
 
-    if(filterBase==="mine"){
-      // axios.get('http://127.0.0.1:8000/api/group/filter-member')
-      // .then(response=>{
-      //   console.log(response);
-      //   setGroups(response.data);
-      // })
-      // .catch(error=>{
-      //   console.log(error);
-      // })
-    }
-    else{
+    // if(filterBase==="mine"){
+    //   const newList = groups.filter((item)=>item.is_member === true);
+    //   setGroups(newList);
+    //   setPagesNumber(0)
+
+    // }
+    // else{
       axios.get('http://127.0.0.1:8000/api/group/filter-'+filterBase+'?page='+page
       ,{
         headers:{
@@ -61,19 +56,34 @@ function GroupsPage (props){
         })
       .then(response=>{
         console.log(response);
-        setGroups(response.data.groups);
+        //setGroups(response.data.groups);
+        if(isMine){
+          const newList = response.data.groups.filter((item)=>item.is_member === true);
+          setGroups(newList);
+        }else setGroups(response.data.groups);
         setPagesNumber(response.data.count)
       })
       .catch(error=>{
         console.log(error);
       })
-    }
-  },[filterBase,page])
+    //}
+  },[filterBase,page,isMine])
 
 
   const handleChangeList =(e) =>{
+    setPage(1);
+    if(e.target.value!=="mine"){
     setFilterBase(e.target.value);
-    console.log(e.target.value);
+    setIsMine(false)
+    }else {
+      // const newList = groups.filter((item)=>item.is_member === true);
+      // setGroups(newList);
+      // //setPagesNumber(0)
+      setIsMine(true);
+    }
+
+    
+    //console.log(e.target.value);
   }
 
   const [openCreateGroup, setOpenCreateGroup] = useState(false);
