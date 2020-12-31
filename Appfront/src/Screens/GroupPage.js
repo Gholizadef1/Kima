@@ -9,40 +9,86 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper';
+import { CONTACTS } from 'expo-permissions';
+import { not } from 'react-native-reanimated';
 
 
 
-const GroupPage = (prop) => {
+const GroupPage = ({navigation}) => {
   const [picture,setpicture]=useState(null);
-  const [userid, setuserid] = useState('');
+  const [username, setusername] = useState(null);
   const [groupinfo,setgroupinfo]=useState(null);
   const [message,setmessage]=useState(null);
-  const [id,setid]=useState(1);
-
-  const getInfo = async () => {
-    const response = axiosinst.get('/api/group/details/3')
-    .then(function(response){
-      setgroupinfo(response.data);
-      console.log('GROUP PAGE4')
-      console.log('**'+response.data.title)
-    })
-    };
-
+  const [owner,setowner]=useState(null);
+  const [joind,setjoined]=useState(null);
+  const [notjoined,setnotjoined]=useState(null);
+  const [members,setmembers]=useState(null);
 
   useEffect(() =>{
     getInfo();
+    getMembers();
+    getUsername();
 },[]);
 
+
+  const getInfo = async () => {
+    const response = axiosinst.get('/api/group/details/2')
+    .then(function(response){
+      setgroupinfo(response.data);
+//      console.log('GROUP PAGE4')
+//      console.log('**'+response.data.title)
+    })
+    };
+
+    const getMembers = async () => {
+      const response = axiosinst.get('/api/group/members/2')
+      .then(function(response){
+//        console.log('**'+response.data.members[0].user.username)
+        console.log('++'+response.data.owner.username)
+        console.log('++'+response.data.count)
+        for (var i =0 ; i<response.data.count ; i++){
+          if ( response.data.members[i].user.username === response.data.owner.username){
+            setowner(true)
+          }
+        }
+        for(var i =0 ; i<response.data.count ; i++){
+          if(response.data.members[i].user.username === username && response.data.members[i].user.username != response.data.owner.username){
+            setjoined(true)
+            console.log('&&&&&&&&&')
+          }
+          console.log('_______')
+        }
+        for(var i =0 ; i<response.data.count ; i++){
+          if(response.data.members[i].user.username != username){
+            setnotjoined(true)
+          }
+        }
+        
+      })
+      };
+
+      console.log('joinedd' +joind)
+
+      const getUsername = async () => {
+        const id=await AsyncStorage.getItem('id');
+        console.log('ID' +id)
+        const response = axiosinst.get('/api/user-profile/' +id)
+        .then(function(response){
+          console.log('ID' +id)
+          setusername(response.data.username)
+          console.log('USERR' +response.data.username)
+        })
+        };
+  
 if (!groupinfo){
   return null ;
 }
 
 
-
-  const PostJoin = async () => {
+  const JoinGroup = async () => {
       const back = {}
       const backk = JSON.stringify(back);
-      axiosinst.post('/api/group/members/3' , backk , {
+      axiosinst.post('/api/group/members/2' , backk , {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -51,16 +97,49 @@ if (!groupinfo){
         .then(async function (response) {
 //          console.log(await AsyncStorage.getItem('token')).toString()
           console.log('response' +response.data.message)
-          console.log('response' +response.data.owner.username)
-          console.log('response' +response.data.members[0].username)
-
-          setmessage(response.data.message)
+          setjoined(true)
         })
         .catch(function (error) {
           console.log(error);          
         });
-
   }
+  const LeaveGroup = async () => {
+    const back = {}
+    const backk = JSON.stringify(back);
+    axiosinst.post('/api/group/members/2' , backk , {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+      .then(async function (response) {
+//          console.log(await AsyncStorage.getItem('token')).toString()
+        console.log('response' +response.data.message)
+        setnotjoined(true)
+      })
+      .catch(function (error) {
+        console.log(error);          
+      });
+}
+  const deleteGroup = async()=>{
+    console.log('delete')
+    axiosinst.delete('/api/group/details/2' ,{
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+      .then(async function (response) {
+        navigation.navigate('ShowGroups')
+        console.log('delete')
+      })
+      .catch(function (error) {
+        console.log(error);          
+      });
+    
+  }
+
+
 
     return(
         <View style={styles.container}>
@@ -93,21 +172,23 @@ if (!groupinfo){
                       <Text style={styles.groupname}>{groupinfo.title}</Text>
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-                      {message === "You joind this group!" ? 
+                      {joind === true ? 
                         <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                        , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
+                        , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
                           <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
-                          </Button> :
+                          </Button> :null }  
+
+                          {notjoined === true ?
                           <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                          , backgroundColor:'#1F7A8C'}}  onPress = {() => PostJoin()}>
-                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>عضو شدن</Text>
-                            </Button> }  
-{/* 
-                          {message === "You leaved this group!" ?
+                          , backgroundColor:'#1F7A8C'}} onPress = {() => LeaveGroup()}>
+                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
+                            </Button> : null}   
+
+                          {owner === true ?
                           <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                          , backgroundColor:'#1F7A8C'}} onPress = {() => PostJoin()}>
-                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
-                            </Button> : null}                     */}
+                          , backgroundColor:'#1F7A8C'}} onPress = {() => deleteGroup()}>
+                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>حذف گروه</Text>
+                            </Button> : null}                  
 
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
