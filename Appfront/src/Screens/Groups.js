@@ -175,6 +175,12 @@ const Groups = () => {
     //  }
    catch(err){
      setrefresh(false)
+     Alert.alert('','مشکلی پیش اومده لطفا دوباره امتحان کن',[{
+            
+
+      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+      }],{cancelable:false},{style:{height:50}})
+       
      console.log(err.toString().split('\n')[0])
     if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
     settheend(true);

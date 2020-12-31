@@ -179,6 +179,12 @@ const Mygroups = () => {
     }
     //  }
    catch(err){
+    Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
+
+      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+      }],{cancelable:false},{style:{height:50}})
+      
      console.log(err.response+'   error response')
      setrefresh(false)
      console.log(err.toString().split('\n')[0])
