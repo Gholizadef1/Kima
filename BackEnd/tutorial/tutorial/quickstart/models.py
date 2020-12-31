@@ -114,6 +114,7 @@ class MyComment(models.Model):
     LikeCount=models.IntegerField(default=0)
     DislikeCount=models.IntegerField(default=0)
 
+
     def __str__(self):
         return self.comment_text
 

@@ -48,6 +48,7 @@ def registration_view(request):
             data['username'] = account.username
             token=Token.objects.get(user=account).key
             data['token']=token
+            data['id']=account.id
 
         else:
             data = serializer.errors
@@ -86,7 +87,7 @@ class Readcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 class ToReadcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
@@ -99,7 +100,7 @@ class ToReadcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 class Readingcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
@@ -112,7 +113,7 @@ class Readingcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
     
 class ChangePasswordView(generics.UpdateAPIView):
 
@@ -272,7 +273,7 @@ class MyQuoteView(generics.ListAPIView):
 
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
-        serializer = QuoteSerializer(queryset, many=True)
+        serializer = QuoteProfSerializer(queryset,context={"user": pk}, many=True)
         return Response(serializer.data)
 
 class QuoteView(APIView,PaginationHandlerMixin):
@@ -290,8 +291,8 @@ class QuoteView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
-            serializer = QuoteSerializer(quote_list,many=True)
-            return Response(serializer.data)
+            serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
+            return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
         
@@ -367,8 +368,8 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
-            serializer = CommentSerializer(comment_list,many=True)
-            return Response(serializer.data)
+            serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
+            return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -417,8 +418,8 @@ class CommentProfileView(APIView):
         user=Account.objects.get(pk=pk)
         if MyComment.objects.filter(account=user).exists():
             comment_list = MyComment.objects.filter(account=user)
-            serializer = CommentSerializer(comment_list,many=True)
-            return Response(serializer.data)
+            serilalizer = CommentProfSerializer(comment_list,context={"user": pk},many=True)
+            return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -436,6 +437,11 @@ class LikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if DislikeComment.objects.filter(account=user,comment=comment).exists():
+                userdislike=DislikeComment.objects.get(account=user,comment=comment)
+                userdislike.delete()
+                comment.DislikeCount-=1
+                comment.save()
             newlike = LikeComment(account=user,comment=comment)
             
             comment.LikeCount+=1
@@ -466,8 +472,13 @@ class DislikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if LikeComment.objects.filter(account=user,comment=comment).exists():
+                userlike=LikeComment.objects.get(account=user,comment=comment)
+                userlike.delete()
+                comment.LikeCount-=1
+                comment.save()
+
             newlike = DislikeComment(account=user,comment=comment)
-            
             comment.DislikeCount+=1
             comment.save()
             newlike.save()
@@ -490,7 +501,7 @@ class FilterCommentbyTime(APIView,PaginationHandlerMixin):
         if MyComment.objects.filter(current_book=bk).exists():
             com_list = MyComment.objects.filter(current_book=bk).order_by('-sendtime')
             comment_list = self.paginate_queryset(com_list)
-            serializer = CommentSerializer(comment_list,many=True)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
             count = Paginator(com_list,10).num_pages
             return Response({"comments" : serializer.data, "count": count})
         response = {'message' : 'No Comment!',}
@@ -504,7 +515,7 @@ class FilterCommentbyLike(APIView,PaginationHandlerMixin):
         if MyComment.objects.filter(current_book=bk).exists():
             com_list = MyComment.objects.filter(current_book=bk).order_by('-LikeCount')
             comment_list = self.paginate_queryset(com_list)
-            serializer = CommentSerializer(comment_list,many=True)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
             count = Paginator(com_list,10).num_pages
             return Response({"comments" : serializer.data, "count": count})
         response = {'message' : 'No Comment!',}
@@ -520,7 +531,7 @@ class FilterQuotebyTime(APIView,PaginationHandlerMixin):
             quote_list = self.paginate_queryset(q_list)
             serializer = QuoteSerializer(quote_list,many=True)
             count = Paginator(q_list,10).num_pages
-            return Response({"quotes" : serializer.data, "count": count})
+            return Response({"quotes" : serializer.data,context={"request": request}, "count": count})
         response = {'message' : 'No Quote!',}
         return Response(response)
 
@@ -532,7 +543,7 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
         if MyQuote.objects.filter(current_book=bk).exists():
             q_list = MyQuote.objects.filter(current_book=bk).order_by('-Likes')
             quote_list = self.paginate_queryset(q_list)
-            serializer = QuoteSerializer(quote_list,many=True)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
             count = Paginator(q_list,10).num_pages
             return Response({"quotes" : serializer.data, "count": count})
         response = {'message' : 'No Quote!',}
