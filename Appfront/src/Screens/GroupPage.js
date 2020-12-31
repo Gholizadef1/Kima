@@ -12,8 +12,7 @@ import { Avatar } from 'react-native-paper';
 
 
 
-const GroupPage = () => {
-
+const GroupPage = (prop) => {
   const [picture,setpicture]=useState(null);
   const [userid, setuserid] = useState('');
   const [groupinfo,setgroupinfo]=useState(null);
@@ -21,14 +20,22 @@ const GroupPage = () => {
   const [id,setid]=useState(1);
 
   const getInfo = async () => {
-    const response = await axiosinst.get('/api/group/details/3');
-    setgroupinfo(response.data);
+    const response = axiosinst.get('/api/group/details/3')
+    .then(function(response){
+      setgroupinfo(response.data);
+      console.log('GROUP PAGE4')
+      console.log('**'+response.data.title)
+    })
     };
 
 
   useEffect(() =>{
     getInfo();
 },[]);
+
+if (!groupinfo){
+  return null ;
+}
 
 
 
@@ -78,13 +85,13 @@ const GroupPage = () => {
                     </View>
 
                     {picture!='http://3f58107b5393.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
-                      source={{uri:picture}}
+                      source={{uri:groupinfo.profile_photo}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
                       source={require('../../assets/avatar.png')}
                       ></Avatar.Image>}
 
-                      <Text style={styles.groupname}></Text>
-                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :</Text>
+                      <Text style={styles.groupname}>{groupinfo.title}</Text>
+                      <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
                       {message === "You joind this group!" ? 
                         <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
@@ -105,11 +112,10 @@ const GroupPage = () => {
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
                       <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
-                     
+                      {groupinfo.summary}
                       </Text>
 
                     <Text style ={{fontSize:20 , marginTop:hp('3%') , marginLeft:wp('7%'),color:'#1F7A8C' ,fontWeight:'bold'}}>بحث های انجام شده :</Text>
-
                     <List  style={{marginTop:'8%'}}>
                 <ListItem thumbnail>
                   <Left>

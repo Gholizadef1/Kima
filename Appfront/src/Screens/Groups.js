@@ -60,7 +60,7 @@ const Groups = ({navigation}) => {
 
          <View style={{marginLeft:wp('2%')}}>
 
-         { (information.length>=0) ?    <DropDownPicker
+         {/* { (information.length>=0) ?    <DropDownPicker
           items={[
             { label: 'معروف ترین گروه ها', value: 'none' },
             { label: 'جدید ترین گروه ها', value: 'like' },
@@ -98,19 +98,18 @@ const Groups = ({navigation}) => {
 
           }}
 
-        />:null}
+        />:null} */}
 
-        <TouchableOpacity onPress={() => navigation.navigate('ShowGroupPage')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ShowGroupPage')}>
         <Eachgroup></Eachgroup>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-         <Eachgroup></Eachgroup>
-         <Eachgroup></Eachgroup>
-         <Eachgroup></Eachgroup>
          </View>
-            <Text>
-                Groups
-            </Text>
+
+         <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('8%')
+        , backgroundColor:'#1F7A8C'}} onPress = {() => navigation.navigate('ShowGroupPage')}>
+          <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>رفتن به صفحه هر گروه</Text>
+          </Button>
         </View>
    
     );
