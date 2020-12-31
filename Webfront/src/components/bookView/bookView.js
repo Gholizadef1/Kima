@@ -296,11 +296,13 @@ useEffect(() => {
 
 return(
 <div className="mx-md-5 px-md-5">
+
   <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
     <div className="mx-md-5">
     <div className=" row no-gutters position-relative shadow border border-dark color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
       <div className="col-md-4 mb-md-0 p-4 rounded-lg" >
         <img src={state.imgurl} className="img-fluid float-right rounded-lg" alt="" style={{width:'100%',height:'auto',boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
+
       </div>
       <div className=" position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
         <h2 className="p-3 mt-2" >{state.title}</h2>

@@ -116,6 +116,9 @@ useEffect(() => {
     props.history.push('/login');
 }
 
+const routeToGroups = ()=>{
+  props.history.push('/group');
+}
     return(   
       <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
@@ -134,6 +137,7 @@ useEffect(() => {
             <li class="my-n1" href="groups"
                style = {{fontSize:20,fontWeight:"bold"}}>
               <a class="nav-link" href="#" style={{color:"white"}}>گروه‌ها</a>
+
             </li>
             <li class="my-n1" href="quize"
                style = {{fontSize:20,fontWeight:"bold"}}>
