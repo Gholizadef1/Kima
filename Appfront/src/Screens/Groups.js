@@ -227,9 +227,9 @@ const Groups = () => {
             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View> : 
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('3%')}}>گروه دیگری وجود ندارد</Text>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%')}}>گروه دیگری وجود ندارد</Text>
             </View>)}
-            style={{ marginBottom: hp('7%') }}
+            style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
               // if(page<count)
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   loader:{
 
     alignItems:'center',
-    marginBottom:hp('5%'),
+    marginBottom:hp('7%'),
     justifyContent:'center',
     alignSelf:'center',
     marginTop:hp('10%')
