@@ -76,7 +76,13 @@ const Comment = (prop) => {
       const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime, {
         params: {
           page: page
+        },
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
         }
+
       })
       // console.log(response.data)
     
@@ -90,7 +96,7 @@ const Comment = (prop) => {
          console.log(information)
          console.log('RESPONSE DATE')
          console.log(response.date)
-         page===1?setinformation(response.data):setinformation(information.concat(response.data))
+         page===1?setinformation(response.data.comments):setinformation(information.concat(response.data.comments))
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         console.log(information)
         setrefresh(false)
@@ -214,7 +220,8 @@ const Comment = (prop) => {
 
 
 
-                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height: '50%', width: '40%', marginLeft: '28%', marginBottom: '8%', marginTop: '0.5%' }}
+                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height: '50%', width: '40%',
+                 marginLeft: '28%', marginBottom: '8%', marginTop: '0.5%' }}
                   onPress={props.handleSubmit}
                 >
                   <Text style={{ color: '#ffff', fontSize: 15, fontWeight: 'bold', marginLeft: '85%', width: '100%' }}>ثبت</Text>
@@ -336,7 +343,8 @@ const Comment = (prop) => {
           refreshing={refresh}
           onEndReached={() => handleLoadMore()}
           onEndReachedThreshold={0.7}
-          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
+           <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
           style={{ marginBottom: hp('15.5%') }}
           onRefresh={async () => {
             await setrefresh(true)
@@ -345,8 +353,10 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
+            isliked={item.isliked}
+            isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
-            picture={`http://a32f717e71fe.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            picture={`http://3fefbe690991.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
         </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}

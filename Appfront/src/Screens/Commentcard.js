@@ -19,69 +19,69 @@ const Commentcard = (prop) => {
   const[likeshode,setlikeshode]=useState(false);
 // const[commentID,setcommentID]=useState();
 //  setcommentID(prop.commentid)
-const getlike=async()=>{
-  await setTimeout(() => {  console.log("World!"); }, 800);
-  const back2 = {
+// const getlike=async()=>{
+//   await setTimeout(() => {  console.log("World!"); }, 800);
+//   const back2 = {
 
-  }
-    const backk2 = JSON.stringify(back2);
-    console.log((await AsyncStorage.getItem('token')).toString())
+//   }
+//     const backk2 = JSON.stringify(back2);
+//     console.log((await AsyncStorage.getItem('token')).toString())
     
-      axiosinst.get('comment/' + prop.commentid + '/like', {
-        "headers":
-        {
-          "Content-Type": "application/json",
-          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-        }
-      })
-        .then(async function (response) {
-          // setnumlike(response.data.LikeCount)
-          if (response.data.message === 'True')
-          await setlike('#1f7a8c')
-        else
-          await setlike('lightblue')
-          console.log(response);
+//       axiosinst.get('comment/' + prop.commentid + '/like', {
+//         "headers":
+//         {
+//           "Content-Type": "application/json",
+//           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+//         }
+//       })
+//         .then(async function (response) {
+//           // setnumlike(response.data.LikeCount)
+//           if (response.data.message === 'True')
+//           await setlike('#1f7a8c')
+//         else
+//           await setlike('lightblue')
+//           console.log(response);
 
-        })
-        .catch(function (error) {
-          console.log(error);
-          console.log('like error ||||||||||||')
+//         })
+//         .catch(function (error) {
+//           console.log(error);
+//           console.log('like error ||||||||||||')
 
-        })
-}
+//         })
+// }
 
 
-const getdislike=async()=>{
-  // await   setTimeout(() => {  console.log("World!"); }, 500);
-  const back2 = {
+// const getdislike=async()=>{
+//   // await   setTimeout(() => {  console.log("World!"); }, 500);
+//   const back2 = {
 
-  }
-    const backk2 = JSON.stringify(back2);
-    console.log((await AsyncStorage.getItem('token')).toString())
+//   }
+//     const backk2 = JSON.stringify(back2);
+//     console.log((await AsyncStorage.getItem('token')).toString())
     
-      axiosinst.get('comment/' + prop.commentid + '/dislike', {
-        "headers":
-        {
-          "Content-Type": "application/json",
-          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-        }
-      })
-        .then(async function (response) {
-            console.log(response)
-          // setnumlike(response.data.LikeCount)
-          if (response.data.message === 'True')
-         await  setdislike('#E64846')
-        else
-         await setdislike('#F2A4A3')
-          // console.log(response);
+//       axiosinst.get('comment/' + prop.commentid + '/dislike', {
+//         "headers":
+//         {
+//           "Content-Type": "application/json",
+//           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+//         }
+//       })
+//         .then(async function (response) {
+//             console.log(response)
+//           // setnumlike(response.data.LikeCount)
+//           if (response.data.message === 'True')
+//          await  setdislike('#E64846')
+//         else
+//          await setdislike('#F2A4A3')
+//           // console.log(response);
 
-        })
-        .catch(function (error) {
-          console.log(error);
-          console.log('dislike error ||||||||||||')
+//         })
+//         .catch(function (error) {
+//           console.log(error);
+//           console.log('dislike error ||||||||||||')
 
-        })
-}
+//         })
+// }
 
   //  async function getdislike(){
   //   const back2 = {}
@@ -137,8 +137,12 @@ const getdislike=async()=>{
   // getdislike();
   useFocusEffect(
     React.useCallback(() => {
-       getdislike()
-       getlike(prop.commentid)
+      if(prop.isliked)
+      setlike('#1f7a8c')
+      if(prop.isdisliked)
+      setdislike('#E64846')
+      //  getdislike()
+      //  getlike(prop.commentid)
     }, [])
     // [likeshode]
 
@@ -245,7 +249,7 @@ const getdislike=async()=>{
      
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === 'http://a32f717e71fe.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+          {prop.picture === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/avatar.png')}
             style={styles.avatar}
@@ -279,24 +283,25 @@ const getdislike=async()=>{
             console.log('DISLIKEDOROSTHAZFMISHE')
             const back2 = {}
             const backk2 = JSON.stringify(back2);
-            axiosinst.post('comment/' + prop.commentid + '/dislike', backk2, {
-              "headers":
-              {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-              }
-            })
-              .then(async function (response) {
-                setnumdislike(response.data.DislikeCount)
-                // console.log(response);
-                setdislike('#F2A4A3')
+            setdislike('#F2A4A3')
+            // axiosinst.post('comment/' + prop.commentid + '/dislike', backk2, {
+            //   "headers":
+            //   {
+            //     "Content-Type": "application/json",
+            //     "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            //   }
+            // })
+            //   .then(async function (response) {
+            //     setnumdislike(response.data.DislikeCount)
+            //     // console.log(response);
+            //     setdislike('#F2A4A3')
 
-              })
-              .catch(function (error) {
-                console.log(error);
-                console.log('like error ||||||||||||')
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //     console.log('like error ||||||||||||')
 
-              })
+            //   })
           }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
@@ -327,6 +332,7 @@ const getdislike=async()=>{
               setlike('#1f7a8c')
               else
               setlike('lightblue')
+              setnumdislike(response.data.DislikeCount)
               // console.log(response);
 
             })
@@ -353,25 +359,26 @@ const getdislike=async()=>{
           if (like === '#1f7a8c') {
             console.log('DARE LIKE RO AVAZ MIKONE BEKHATER DISLIKE')
             const backk2 = JSON.stringify(back2);
-            axiosinst.post('comment/' + prop.commentid + '/like', backk2, {
-              "headers":
-              {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-              }
-            })
-              .then(async function (response) {
-                console.log('MIKHAD LIKE RO BARAYE DISLIKE BARDARE')
-                setnumlike(response.data.LikeCount)
-                // console.log(response);
-                setlike('lightblue')
+            setlike('lightblue')
+            // axiosinst.post('comment/' + prop.commentid + '/like', backk2, {
+            //   "headers":
+            //   {
+            //     "Content-Type": "application/json",
+            //     "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            //   }
+            // })
+            //   .then(async function (response) {
+            //     console.log('MIKHAD LIKE RO BARAYE DISLIKE BARDARE')
+            //     setnumlike(response.data.LikeCount)
+            //     // console.log(response);
+            //     setlike('lightblue')
 
-              })
-              .catch(function (error) {
-                console.log(error);
-                console.log('like error ||||||||||||')
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //     console.log('like error ||||||||||||')
 
-              })
+            //   })
           }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
@@ -402,6 +409,7 @@ const getdislike=async()=>{
               setdislike('#E64846')
               else
               setdislike('#F2A4A3')
+              setnumlike(response.data.LikeCount)
               // console.log(response);
 
             })
