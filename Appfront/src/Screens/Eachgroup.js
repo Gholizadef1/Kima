@@ -46,7 +46,7 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.groupphoto === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.groupphoto === 'http://8c183d3ebc7d.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),

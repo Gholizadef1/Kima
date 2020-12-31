@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes } from 'react-native';
-//  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
+ import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
@@ -18,6 +18,48 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
 const Groups = () => {
+   
+
+   const searchpost=async(page)=>{
+     if(searchterm!=''){
+    const back = {
+      search:searchterm,
+
+    }
+    await settheend(false)
+    const backk = JSON.stringify(back);
+    try{
+    const response = await axiosinst.get('api/group/search/',{
+      params: {
+        page:page,
+        search: searchterm,
+        search_fields:'title'
+      },
+    "headers":
+    {
+      "Content-Type": "application/json",
+      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+    }
+
+   
+  })
+  console.log(response.data)
+ 
+  await setinformation(response.data.groups)
+  console.log(information+'******######********########')
+  setcount(response.data.count)
+  setpage(page);
+  await settheend(true)
+  }
+  catch(err){
+   console.log(err)
+    }
+  }
+   }
+
+
+
+
 
    const lastinformation=()=>{
     if(information.length>0)
@@ -138,6 +180,7 @@ const Groups = () => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      onIconPress={()=>searchpost(1)}
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
@@ -186,13 +229,27 @@ const Groups = () => {
 
 
       <View style={{ marginLeft: wp('2%') }}>
-
+      {/* <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
+        backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>{
+          console.log('PLUS PRESSED')
+          setmodalopen(true)}} >
+        <Feather style={styles.plus} 
+         name="plus" size={32} color="#EDF2F4" />
+     
+         </Button> */}
+      {/* <Button style={{position:'absolute',backgroundColor:'blue' }}>
+      <Feather name="search" size={24} color="#1f7a8c" style={{
+        position:'absolute',
+        left:wp('85%'),marginTop:hp('3.5%')
+      }} />
+      </Button> */}
        <DropDownPicker
           items={[
             { label: 'جدید ترین گروه ها',value:'none'},
             { label: 'معروف ترین گروه ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
+          labelStyle={{fontSize:wp('3%')}}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
           style={{
 
