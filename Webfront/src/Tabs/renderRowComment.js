@@ -32,7 +32,7 @@ import { red } from "@material-ui/core/colors";
     return (
       <div>
       {comment.message==='No Comment!' ? (                   
-      <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
+      <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
 
         
        ) : (
@@ -49,7 +49,7 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
+              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
               <div className="booktitle ml-auto mr-3">
                 <h5>
                 {current.current_book.title}

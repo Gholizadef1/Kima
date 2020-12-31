@@ -27,14 +27,15 @@ import { red } from "@material-ui/core/colors";
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
+           console.log(data.message);
           setQuote(data);
         });
     }, []);
     return (
       <div>
-      {quote.message==='No Quote!' ? (
+      {quote.length===0 ? (
                  
-        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -50,7 +51,7 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:60, height:60}} />
+              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
               <div className="  ml-auto mr-3">
                 <h5 className="booktitle">
                 {current.current_book.title}
@@ -62,7 +63,7 @@ import { red } from "@material-ui/core/colors";
               <div className="d-flex flex-column">
                 <small className=" like mr-3">
                 {current.Likes}
-                <GoHeart color="red" size="25"/>
+                <GoHeart color="lightred" size="35"/>
                 </small>
               </div>
              </div>

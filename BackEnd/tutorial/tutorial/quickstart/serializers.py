@@ -74,10 +74,33 @@ class QuoteSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
     current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyQuote
-        fields = "__all__"
+        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+    
+    def get_isliked(self, obj):
+        user =  self.context['request'].user
+        if LikeQuote.objects.filter(account=user,quote=obj).exists():
+            return True
+        return False
+
+class QuoteProfSerializer(serializers.ModelSerializer):
+
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = MyQuote
+        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+
+    def get_isliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if LikeQuote.objects.filter(account=user,quote=obj).exists():
+            return True
+        return False
 
 class PostCommentSerializer(serializers.Serializer):
     
@@ -87,10 +110,24 @@ class CommentSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
     current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    isdisliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyComment
-        fields = "__all__"
+        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+    
+    def get_isliked(self, obj):
+        user =  self.context['request'].user
+        if LikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+    
+    def get_isdisliked(self, obj):
+        user =  self.context['request'].user
+        if DislikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
 
 class CreateGroupSerializer(serializers.Serializer):
 
@@ -99,6 +136,28 @@ class CreateGroupSerializer(serializers.Serializer):
     #photo = serializers.ImageField(max_length=500, allow_empty_file=False, use_url=False)
 
 class GroupSerializer(serializers.ModelSerializer):
+
+    owner = UserProfileSerializer(read_only=True)
+    is_member = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Group
+        fields = ['title','owner','group_photo','summary','id','members_count','is_owner','is_member']
+
+    def get_is_owner(self, obj):
+        user =  self.context['request'].user
+        if obj.owner == user:
+            return True
+        return False
+    
+    def get_is_member(self, obj):
+        user =  self.context['request'].user
+        if Member.objects.filter(user=user,group=obj).exists():
+            return True
+        return False
+
+class GroupDetSerializer(serializers.ModelSerializer):
 
     owner = UserProfileSerializer(read_only=True)
 
@@ -114,17 +173,15 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = ['user']
 
-
 class CreateDiscussionSerializer(serializers.Serializer):
 
     title = serializers.CharField(max_length=100,required=True)
     description = serializers.CharField(required=True)
 
-
 class DiscussionSerializer(serializers.ModelSerializer):
 
     creator = UserProfileSerializer(read_only=True)
-    group = GroupSerializer(read_only=True)
+    group = GroupDetSerializer(read_only=True)
 
     class Meta:
         model = Discussion
@@ -139,10 +196,31 @@ class DiscussionChatSerializer(serializers.ModelSerializer):
     discuss = DiscussionSerializer(read_only=True)
     user = UserProfileSerializer(read_only=True)
 
-
     class Meta:
         model = Chat
         fields = "__all__"
 
+class CommentProfSerializer(serializers.ModelSerializer):
 
-
+    account = UserProfileSerializer(read_only=True)
+    current_book = bookSerializer(read_only=True)
+    isliked = serializers.SerializerMethodField()
+    isdisliked = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = MyComment
+        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+    
+    def get_isliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if LikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+    
+    def get_isdisliked(self, obj):
+        user =  Account.objects.get(pk=self.context['user'])
+        if DislikeComment.objects.filter(account=user,comment=obj).exists():
+            return True
+        return False
+        
+    
