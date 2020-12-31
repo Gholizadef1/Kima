@@ -14,6 +14,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 // import { Button } from 'react-native-paper';
 const Groups = () => {
 
@@ -253,8 +254,10 @@ const Groups = () => {
 
             data={information}
             renderItem={({ item }) =><>
+            <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
             <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
              discription={item.summary} title={item.title} ></Eachgroup>
+             </TouchableOpacity>
            
             </>
             }

@@ -465,7 +465,9 @@ const Mygroups = () => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
+             <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
             {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
+            </TouchableOpacity>
             </>
             )}
           // extraData={finfo}
