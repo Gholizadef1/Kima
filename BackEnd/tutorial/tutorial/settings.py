@@ -38,7 +38,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -95,7 +98,6 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-
     #'default': {
      #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
       # 'NAME': 'melika', 
@@ -104,7 +106,6 @@ DATABASES = {
      # 'HOST': 'localhost', 
      #  'PORT': '',
   # }
-
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME': env("DATABASE_NAME"),

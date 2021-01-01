@@ -1,4 +1,5 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
+from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework import filters
@@ -262,9 +263,10 @@ class BookRateView(generics.ListAPIView):
         serializer = BookrateSerializer(queryset, many=True)
         return Response(serializer.data)
 
-class MyQuoteView(generics.ListAPIView):
+class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
 
     serializer_class=QuoteSerializer
+    pagination_class = BasicPagination
 
     def get_queryset(self,pk):
         user=Account.objects.get(pk=pk)
@@ -290,6 +292,7 @@ class QuoteView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
+            mquote = MyQuote.objects.filter(current_book=this_book)
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
             serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serilalizer.data)
@@ -367,6 +370,7 @@ class CommentView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
+            mcomment = MyComment.objects.filter(current_book=this_book)
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
             serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serilalizer.data)
@@ -378,6 +382,8 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         serializer = PostCommentSerializer(data=request.data)
         if serializer.is_valid():
+            this_book.comment_count+=1
+            this_book.save()
             comment_text = serializer.data.get("textcomment")
             new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
             new_comment.save()
@@ -395,17 +401,21 @@ class DeleteCommentView(APIView):
 
     def delete(self,request,pk):
         current_comment = MyComment.objects.get(id=pk)
+        comment_book =current_comment.current_book
         current_user = request.user
         comment_user = current_comment.account
         if comment_user == current_user:
+            comment_book.comment_count-=1
+            comment_book.save()
             current_comment.delete()
             return Response({'message':'Your Comment successfully deleted!'})
         else:
             return Response({'message':'You dont have permission to delete this comment!'})
-
-class CommentProfileView(APIView):
+          
+class CommentProfileView(APIView,PaginationHandlerMixin):
 
     model = MyComment
+    pagination_class = BasicPagination
     parser_classes = [JSONParser]
 
     def get_object(self, pk):
@@ -736,3 +746,16 @@ class FilterGroupbyMember(APIView,PaginationHandlerMixin):
             return Response({"groups" : serializer.data, "count": count})
         response = {'message' : 'No Group!',}
         return Response(response)
+      
+class FilterBookbyRate(APIView):
+    def get(self,request):
+        
+        book_list=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
+        serializer = bookSerializer(book_list,many=True)
+        return Response(serializer.data)
+   
+class FilterBookbyComment(APIView):
+    def get(self,request):
+        book_list=book.objects.order_by('-comment_count')
+        serializer = bookSerializer(book_list, many=True)
+        return Response(serializer.data)
