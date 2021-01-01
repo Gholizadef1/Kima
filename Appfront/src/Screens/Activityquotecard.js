@@ -27,7 +27,7 @@ const Quotecard = (prop) => {
       const backk2 = JSON.stringify(back2);
       console.log((await AsyncStorage.getItem('token')).toString())
       // await setTimeout(() => {  console.log("World!"); }, 5000);
-        axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid , {
+        axiosinst.get('http://505a2dd8d5cc.ngrok.io/api/quotes/like/' + prop.quoteid , {
           "headers":
           {
             "Content-Type": "application/json",
@@ -194,7 +194,7 @@ const Quotecard = (prop) => {
           console.log((await AsyncStorage.getItem('token')).toString())
           console.log(prop.quoteid + 'PROP QUOTE ID');
           // // console.log(item.account.id);
-          axiosinst.post('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid, {
+          axiosinst.post('http://505a2dd8d5cc.ngrok.io/api/quotes/like/' + prop.quoteid, {
             "headers":
             {
               "Content-Type": "application/json",
