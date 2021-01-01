@@ -36,28 +36,40 @@ const GroupPage = (prop) => {
     const response = axiosinst.get('/api/group/details/'+ prop.route.params.id)
     .then(function(response){
       setgroupinfo(response.data);
-//      console.log('GROUP PAGE4')
+      console.log('GROUP PAGE4')
 //      console.log('**'+response.data.title)
     })
     };
 
     const getMembers = async () => {
+      console.log('GETMEMBERS')
       const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
       .then(function(response){
-//        console.log('**'+response.data.members[0].user.username)
-        console.log('++'+response.data.owner.username)
-        console.log('++'+response.data.count)
-        for (var i =0 ; i<response.data.count ; i++){
-          if ( response.data.members[i].user.username === response.data.owner.username){
-            setowner(true)
+       console.log('**'+response.data.members[0].user.username)
+       console.log('+++++'+response.data.owner.username)
+       console.log('++'+response.data.count)
+       console.log('members'+response.data.members[0].user.username)
+        for (var i =0 ; i<response.data.members.length ; i++){
+          if (response.data.members[i].user.username === username ){
+            console.log('((((((((((')
+            if ( response.data.members[i].user.username === response.data.owner.username ){
+              setowner(true)
+            }
           }
         }
         for(var i =0 ; i<response.data.count ; i++){
-          if(response.data.members[i].user.username === username && response.data.members[i].user.username != response.data.owner.username){
-            setjoined(true)
-            console.log('&&&&&&&&&')
-          }
-          console.log('_______')
+          console.log('&&&&&&&&&')
+          if(response.data.members[i].user.username === username){
+             if (response.data.members[i].user.username != response.data.owner.username){
+              console.log('ghable joined')
+              setjoined(true)
+              console.log('baade join')
+            }
+            console.log('_______')
+             }
+        }
+        if ( owner === false && joind === false ){
+          setnotjoined(true)
         }
         for(var i =0 ; i<response.data.count ; i++){
           if(response.data.members[i].user.username != username || response.data.count === 0){
@@ -73,11 +85,14 @@ const GroupPage = (prop) => {
       const getUsername = async () => {
         const id=await AsyncStorage.getItem('id');
         console.log('ID' +id)
+        
         const response = axiosinst.get('/api/user-profile/' +id)
         .then(function(response){
           console.log('ID' +id)
           setusername(response.data.username)
           console.log('USERR' +response.data.username)
+          console.log('hhhkll')
+          console.log('hhh'+prop.route.params.id)
         })
         };
   
