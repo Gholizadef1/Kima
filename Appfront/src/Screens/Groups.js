@@ -235,6 +235,7 @@ const Groups = () => {
  
   useFocusEffect(
     React.useCallback(() => {   
+        // setselectedValue('none')
         setsearchterm('')
         setnumberofresults()
       // if(searchterm==='')  
@@ -398,7 +399,7 @@ const Groups = () => {
 
         <View style={{height:hp('2%')}}></View>
        
-        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
+        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
          <FlatList
             ListFooterComponent={(theend === false ? 
             <View style={styles.loader}>
