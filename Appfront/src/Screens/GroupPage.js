@@ -21,12 +21,13 @@ const GroupPage = (prop) => {
   const [username, setusername] = useState(null);
   const [groupinfo,setgroupinfo]=useState(null);
   const [message,setmessage]=useState(null);
-  const [owner,setowner]=useState(null);
-  const [joind,setjoined]=useState(null);
-  const [notjoined,setnotjoined]=useState(null);
+  const [owner,setowner]=useState(false);
+  const [joind,setjoined]=useState(false);
+  const [notjoined,setnotjoined]=useState(false);
   const [members,setmembers]=useState(null);
   const [groupphoto,setgroupphoto]=useState(null)
   const [reload,setreload]=useState(false)
+  const [membernumber,setmembernumber]=useState();
   // if(owner===true)
   // {
   //   if(reload===false)
@@ -35,14 +36,14 @@ const GroupPage = (prop) => {
   //   setreload(false)
   // }
   useEffect(() =>{
-    
+
     getInfo();
     getMembers();
     getUsername();
 },[]);
 
 // useFocusEffect(
-//   React.useCallback(async() => {   
+//   React.useCallback(async() => {
 //      getInfo();
 //     getMembers();
 //     getUsername();
@@ -51,7 +52,9 @@ const GroupPage = (prop) => {
   const getInfo = async () => {
     const response = axiosinst.get('/api/group/details/'+ prop.route.params.id)
     .then(async function(response){
+     
       await setgroupinfo(response.data);
+      setmembernumber(groupinfo.members_count);
       console.log('GROUP PAGE4')
       // console.log(response.data)
       console.log(response.data.group_photo+'group photo')
@@ -67,14 +70,17 @@ const GroupPage = (prop) => {
       console.log('GETMEMBERS')
       const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
       .then(async function(response){
+        console.log(response.data.members.lenght+'^^^^^^^^^^^^^^^^^^^^')
+        console.log(membernumber+'MEMBER NUM')
        console.log(response.data)
        setmembers(response.data.members)
        console.log('member 0'+response.data.members[0].user.username)
        console.log('ownerrr '+response.data.owner.username)
        console.log('count   '+response.data.count)
       //  console.log('member 0'+response.data.members[0].user.username)
-      if(username===response.data.owner.username)
+      if(username===response.data.owner.username){
         await setowner(true)
+      }
         // getInfo();
         // navigation.navigate('')
         // for (var i =0 ; i<response.data.members.length ; i++){
@@ -85,16 +91,26 @@ const GroupPage = (prop) => {
         //     }
         //   }
         // }
-        // for(var i =0 ; i<response.data.count ; i++){
-        //   console.log('&&&&&&&&&')
-        //   if(response.data.members[i].user.username === username){
-        //      if (response.data.members[i].user.username != response.data.owner.username){
-        //       console.log('ghable joined')
-        //       setjoined(true)
-        //       console.log('baade join')
-        //     }
-        //     console.log('_______')
-        //      }
+        console.log('INJA HAMM')
+        console.log(response.data.members.count+'LENGG********GGGGGGGGGGTH')
+        // console.log(groupinfo.members_count +' GROUP INFO .MEMBER_COUNTTTTTT')
+        console.log(membernumber+'  MEMBER NUMBERRRR')
+        for(let i =0 ; i<membernumber ; i++){
+           console.log(response.data.members.lenght+'LENGGGGGGGGGGGGTH')
+          console.log('&&&&&&&&&')
+
+          if(response.data.members[i].user.username === username && owner!=true){
+            //  if (response.data.members[i].user.username != response.data.owner.username){
+              console.log('ghable joined')
+              setjoined(true)
+              console.log('baade join')
+            }
+            console.log('_______')
+             }
+
+             if(joind===false && owner ===false)
+             setnotjoined(true)
+
         // }
         // if ( owner === false && joind === false ){
         //   setnotjoined(true)
@@ -104,7 +120,7 @@ const GroupPage = (prop) => {
         //     setnotjoined(true)
         //   }
         // }
-        
+
       })
       };
 
@@ -113,7 +129,7 @@ const GroupPage = (prop) => {
       const getUsername = async () => {
         const id=await AsyncStorage.getItem('id');
         console.log('ID' +id)
-        
+
         const response = axiosinst.get('/api/user-profile/' +id)
         .then(function(response){
           console.log('ID' +id)
@@ -123,13 +139,15 @@ const GroupPage = (prop) => {
           console.log('hhh'+prop.route.params.id)
         })
         };
-  
+
 if (!groupinfo){
   return null ;
 }
 
 
   const JoinGroup = async () => {
+
+    console.log(' OMAD TO JOIN GROUP')
       const back = {}
       const backk = JSON.stringify(back);
       axiosinst.post('/api/group/members/'+prop.route.params.id , backk , {
@@ -141,13 +159,15 @@ if (!groupinfo){
         .then(async function (response) {
 //          console.log(await AsyncStorage.getItem('token')).toString()
           console.log('response' +response.data.message)
-          setjoined(true)
+          // setjoined(true)
+          getMembers()
         })
         .catch(function (error) {
-          console.log(error);          
+          console.log(error);
         });
   }
   const LeaveGroup = async () => {
+    console.log(' OMAD TO LEAVE GROUP')
     const back = {}
     const backk = JSON.stringify(back);
     axiosinst.post('/api/group/members/'+prop.route.params.id , backk , {
@@ -159,10 +179,11 @@ if (!groupinfo){
       .then(async function (response) {
 //          console.log(await AsyncStorage.getItem('token')).toString()
         console.log('response' +response.data.message)
-        setnotjoined(true)
+        // setnotjoined(true)
+        getMembers()
       })
       .catch(function (error) {
-        console.log(error);          
+        console.log(error);
       });
 }
   const deleteGroup = async()=>{
@@ -179,10 +200,10 @@ if (!groupinfo){
         console.log('%%%%%%%%%%')
       })
       .catch(function (error) {
-        console.log(error);   
-        console.log('//////////////////')       
+        console.log(error);
+        console.log('//////////////////')
       });
-    
+
   }
 
 
@@ -197,7 +218,7 @@ if (!groupinfo){
          style={{width:wp('100%'),
          height:hp('35%'),
          position:'absolute',
-        
+
        }}
 
          ></Image>
@@ -218,26 +239,28 @@ if (!groupinfo){
                       <Text style={styles.groupname}>{groupinfo.title}</Text>
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-                      {joind === true ? 
-                        <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                        , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
+                      {joind === true ? <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                        , backgroundColor:'#1F7A8C'}} onPress = {() => LeaveGroup()}>
                           <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
-                          </Button> :null }  
-
-                          {notjoined === true ?
-                          <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                          , backgroundColor:'#1F7A8C'}} onPress = {() => LeaveGroup()}>
+                          </Button> : <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                          , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
                             <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
-                            </Button> : null}   
+                            </Button> }
+
+                          {/* {joind === false ?
+                          <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                          , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
+                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
+                            </Button> : null} */}
 
                           {owner === true ?<Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                           , backgroundColor:'#1F7A8C'}} onPress = {() => deleteGroup()}>
                             <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>حذف گروه</Text>
-                            </Button> : null}                  
+                            </Button> : null}
 
                       <Text style={{fontSize:21 , marginLeft:wp('7%') , marginTop:hp('10%') ,color:'#1F7A8C' , fontWeight:'bold'}}>درباره گروه :</Text>
 
-                      <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}> 
+                      <Text style ={{textAlign:'left' ,marginTop:hp('2') , marginLeft:wp('6%') , marginRight:wp('1%')}}>
                       {groupinfo.summary}
                       </Text>
 
@@ -282,7 +305,7 @@ if (!groupinfo){
                     </Button>
                   </Right>
                 </ListItem>
-            
+
           </List>
 
           <Button style={{marginLeft:wp('21%') , width:220 , borderRadius:20 , marginTop:hp('3%')
@@ -314,6 +337,7 @@ if (!groupinfo){
 
 
           <FlatList
+            horizontal={true}
             style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
@@ -329,8 +353,8 @@ if (!groupinfo){
 
             data={members}
             renderItem={({ item }) =><>
-         
-              <View style={{left:wp('5%'),marginTop:hp('2%')}}>
+
+              <View style={{maginLeft:wp('5%'),right:wp('5%'),marginTop:hp('2%')}}>
                      {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={{}} size={90}
                       source={{uri:groupphoto}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={90}
@@ -345,7 +369,7 @@ if (!groupinfo){
             }
           // extraData={finfo}
           >
-          </FlatList> 
+          </FlatList>
 
 
 
@@ -375,10 +399,10 @@ const styles = StyleSheet.create({
         marginLeft:wp('5%'),
         fontSize:20,
         fontWeight:'bold',
-        position:'absolute'       
+        position:'absolute'
     },
     backpic:{
-       
+
         width:wp('100%'),
         height:hp('32%')
     },
@@ -386,14 +410,14 @@ const styles = StyleSheet.create({
       elevation:5,
       marginTop:hp('-10%'),
       marginLeft:wp('15%')
-      
+
   },
   groupname : {
     fontSize:15 ,
     fontWeight:'bold',
     marginLeft:wp('19%') ,
     marginTop:hp('3%'),
-    
+
   }
   });
 export default GroupPage;
