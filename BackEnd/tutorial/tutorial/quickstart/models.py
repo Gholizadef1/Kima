@@ -114,6 +114,7 @@ class MyComment(models.Model):
     LikeCount=models.IntegerField(default=0)
     DislikeCount=models.IntegerField(default=0)
 
+
     def __str__(self):
         return self.comment_text
 
@@ -133,5 +134,37 @@ class DislikeComment(models.Model):
 
     def __str__(self):
         return self.comment.comment_text
+
+class Group(models.Model):
+    owner = models.ForeignKey(Account,on_delete=models.CASCADE)
+    summary = models.TextField()
+    group_photo = models.ImageField(upload_to='group_photos',default='default.png')
+    title = models.CharField(max_length=100)
+    create_time=models.DateTimeField(default=timezone.now, editable=False)
+
+    @property
+    def members_count(self):
+        return self.member_set.all().count()
+
+class Member(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+class Discussion(models.Model):
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100,unique=True)
+    description = models.TextField()
+
+class Chat(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    discuss = models.ForeignKey(Discussion, on_delete=models.CASCADE)
+    chat_text = models.TextField()
+    send_time = models.DateTimeField(default=timezone.now, editable=False)
+
+    
+
+
+
 
 

@@ -11,38 +11,21 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
-//import HelpingNavBook from "./Components/HelpingNavBook";
-//import Scroll from "./Components/Scroll";
-//import Tabs from "./Tabs/Tabs";
 import LoginForm from './components/loginForm/loginForm';
-//import AlertComponent from './components/alertComponent/alertComponent.js';  
-//import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
-//import HelpingNavbar from"./Components/HelpingNavbar";
-//import UsersList from "./Components/UsersList";
 import NavBar from "./Components/Navbar";
-//import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
-//import loginForm from './components/loginForm/loginForm';
-//import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
-//import { render } from '@testing-library/react';
-//import { components } from 'react-select';
-//import protectedRoute from './components/protect';
+import Grouppage from './Components/Groupepage/Groupepage';
+import Groups from './components/groups/groupsPage';
 
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
-  //const [auth,setAuth] = useState(false);
-  //const [cookies, setCookie ] =useCookies({token:""});
-
-  // const onChange = (newName)  => {
-  //   setCookie('name', newName, { path: '/' });
-  // }
   return (
     <Router>
-      <div className="App" >
+      <div className="App yekanfont"  >
         
         <div >
           {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
@@ -70,13 +53,24 @@ function App(props) {
             <Route path="/profile">
               <NavBar/>
               <Profile/>
-              
-              </Route>
+            </Route>
+
+            <Route path="/group/:groupId">
+                <NavBar/>
+              <Grouppage/>
+            </Route>
+             
             
             <Route path="/book/:bookId">
               <NavBar/>
               <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
+
+            <Route path="/groups">
+              <NavBar/>
+              <Groups />
+            </Route>
+
             <Route path="*">
               <div class="alert alert-warning" role="alert">
                 صفحه وجود ندارد
