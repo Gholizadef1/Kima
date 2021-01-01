@@ -4,21 +4,10 @@ import Dialog from '@material-ui/core/Dialog';
 import Avatar from '@material-ui/core/Avatar';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import List from '@material-ui/core/List';
-import PropTypes from 'prop-types';
-import {GoHeart} from 'react-icons/go';
-import {AiOutlineLike} from 'react-icons/ai';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 import image from "../../assets/5.jpeg";
-import images from "../../assets/image.jpeg";
-import one from "../../assets/1.jpeg";
 import { Modal, Form } from "react-bootstrap";
-import two from "../../assets/2.jpeg";
 import './Groupepage.css';
 import React, { useState, useEffect } from "react";
 import Divider from '@material-ui/core/Divider';
@@ -37,6 +26,9 @@ import {
   } from "react-router-dom";
   
   function GroupPage (props){
+
+    console.log(props)
+
     const [ginfo, setGinfo] = useState([]);
     const [openCreateDiscussion, setOpenCreateDiscussion] = useState(false);
     const[owner,setOwner]= useState("");
@@ -57,6 +49,7 @@ import {
 
 
   useEffect(() => {
+    console.log(props.match.params.groupId)
     if (props.match.params.groupId) {
 
     axios.get("http://127.0.0.1:8000/api/group/details/" + props.match.params.groupId)
@@ -74,7 +67,7 @@ import {
         console.log(ginfo.group_photo);
       });
       
-  }}, [join]);
+  }}, [join,props.match.params.groupId]);
   ///////////////////////////////////////////////////////
   
 /////////////////////////////////////////////////////   
@@ -87,7 +80,7 @@ import {
   };
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/members/5")
+    axios.get("http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId)
       .then((data) => {
          console.log(data.data.members);
         setMembers(data.data.members);
@@ -115,10 +108,10 @@ import {
  
        
       });
-  }, [join]);
+  }, [join,props.match.params.groupId]);
   const joinGroup =()=> { 
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/5",
+      "http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId,
     {},
     {
       headers:{
@@ -138,7 +131,7 @@ import {
   }
   const leaveGroup = ()=>{
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/5",
+      "http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId,
     {},
     {
       headers:{
@@ -156,7 +149,7 @@ import {
   }
   const deletGroup =()=>{
     axios.delete(
-      "http://127.0.0.1:8000/api/group/details/5",
+      "http://127.0.0.1:8000/api/group/details/" + props.match.params.groupId,
     
     {
       headers:{
@@ -196,7 +189,7 @@ import {
     //console.log(backsummary);
     const handleCreateDiscussionSubmit =(e) =>{
       axios.post(
-        "http://127.0.0.1:8000/api/group/5/discussion",backtitle,
+        "http://127.0.0.1:8000/api/group/"+ props.match.params.groupId+"/discussion",backtitle,
       {
         headers:{
           "Content-Type":"application/json",
@@ -207,7 +200,7 @@ import {
     }
     useEffect(() => {
       axios.get(
-        "http://127.0.0.1:8000/api/group/5/discussion",
+        "http://127.0.0.1:8000/api/group/" + props.match.params.groupId+"/discussion",
       {
         headers:{
           "Content-Type":"application/json",
@@ -217,7 +210,7 @@ import {
             setShowdiscussion(data.data.discussions);
           setJoin(true);
           })
-    }, [join]);
+    }, [join,props.match.params.groupId]);
     
   const handleClickOpenCreateDiscussion = () => {
     setOpenCreateDiscussion(true);
@@ -520,33 +513,18 @@ import {
 
 </div>
 :
-<div>
+<div >
 {member.map ((current) => (
   <div>
 <Avatar
-src={`http://127.0.0.1:8000${current[0].user.profile_photo}`}
+src={`http://127.0.0.1:8000${current.user.profile_photo}`}
 style={{
 fontSize: '80px',
 width: 70,
 height: 70}}
 
 />
-<Avatar
-        src={`http://127.0.0.1:8000${current[1].user.profile_photo}`}
-        style={{
-        fontSize: '80px',
-       width: 70,
-       height: 70}}
-        
-      />
-      <Avatar
-        src={`http://127.0.0.1:8000${current[2].user.profile_photo}`}
-        style={{
-        fontSize: '80px',
-       width: 70,
-       height: 70}}
-        
-      />
+
       </div>
 ))}
     </div>

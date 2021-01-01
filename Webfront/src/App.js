@@ -11,32 +11,18 @@ import {
 //  useParams,
 //  withRouter
 } from "react-router-dom";
-//import HelpingNavBook from "./Components/HelpingNavBook";
-//import Scroll from "./Components/Scroll";
-//import Tabs from "./Tabs/Tabs";
 import LoginForm from './components/loginForm/loginForm';
-//import AlertComponent from './components/alertComponent/alertComponent.js';  
-//import Avatar from "./Components/Avatar";
 import Profile from "./Components/Profile"; 
 import Slide from './slides/Slide';
-//import HelpingNavbar from"./Components/HelpingNavbar";
-//import UsersList from "./Components/UsersList";
 import NavBar from "./Components/Navbar";
-//import *as ReactBootstrap from "react-bootstrap";
 import BookView from './components/bookView/bookView'
-//import loginForm from './components/loginForm/loginForm';
-//import {withCookies, Cookies , useCookies} from "react-cookie";
 import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
+import Groups from './components/groups/groupsPage';
+
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
-  //const [auth,setAuth] = useState(false);
-  //const [cookies, setCookie ] =useCookies({token:""});
-
-  // const onChange = (newName)  => {
-  //   setCookie('name', newName, { path: '/' });
-  // }
   return (
     <Router>
       <div className="App yekanfont"  >
@@ -67,12 +53,12 @@ function App(props) {
             <Route path="/profile">
               <NavBar/>
               <Profile/>
-              
-              </Route>
-              <Route path="/groups/:groupId">
+            </Route>
+
+            <Route path="/group/:groupId">
                 <NavBar/>
               <Grouppage/>
-              </Route>
+            </Route>
              
             
             <Route path="/book/:bookId">
@@ -82,7 +68,7 @@ function App(props) {
 
             <Route path="/groups">
               <NavBar/>
-              <GroupsPage />
+              <Groups />
             </Route>
 
             <Route path="*">
