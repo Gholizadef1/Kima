@@ -161,9 +161,15 @@ const Mygroups = () => {
       }
      
    })
-   for(let i=0;i<response.data.groups.lenght;i++){
-     setcount(count+1);
+   console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+   for(let i=0;response.data.groups[i]!=null;i++){
+     setnumberofgp(numberofgp+1);
    }
+   if(numberofgp===0)
+   settheend(true)
+
+   console.log(numberofgp/10+'number of group ////////10')
+   console.log(numberofgp+'   !!!!!!!!!  '+numberofgp)
    console.log(response.data)
    console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
    if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
@@ -213,7 +219,7 @@ const Mygroups = () => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<count){
+     if(page<numberofgp/10){
      response(page+1);
      }
      else
@@ -495,7 +501,7 @@ const Mygroups = () => {
          <View style={{height:hp('2%')}}></View>
         {/* {(information.length >= 0) ? */}
 
-         {numberofgp!=0? <FlatList
+        <FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom:hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
             style={{ marginBottom: hp('7%') }}
@@ -521,7 +527,7 @@ const Mygroups = () => {
             )}
           // extraData={finfo}
           >
-          </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>گروهی وجود ندارد</Text>}
+          </FlatList> 
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
