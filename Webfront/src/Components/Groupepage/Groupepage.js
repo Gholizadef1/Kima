@@ -52,6 +52,7 @@ import {
     
   const [newDiscussion,setNewDiscussion] = useState({
     name : "",
+    description: ""
   });
 
   useEffect(() => {
@@ -179,11 +180,9 @@ import {
           [id] : value
       }))
   }
-  const handleChangesum = event => {
-    setUser({ user: event.target.value });
-  }
+ 
     const payloadtitle={
-      "title":newDiscussion.name,"description":user.user
+      "title":newDiscussion.name,"description":newDiscussion.description
     }
 
     //console.log(payloadsummary);
@@ -199,8 +198,9 @@ import {
         headers:{
           "Content-Type":"application/json",
          "Authorization":"Token "+Cookies.get("userToken")}
+          }).then(data =>{
+          setJoin(true)
           })
-          setJoin(true);
     }
     useEffect(() => {
       axios.get(
@@ -208,10 +208,10 @@ import {
       {
         headers:{
           "Content-Type":"application/json",
-          "Authorization":"Token "+Cookies.get("userToken")}
+      }
           }).then(data => {
-            console.log(data);
-            setShowdiscussion(data.data);
+            console.log(data.data.discussions);
+            setShowdiscussion(data.data.discussions);
           setJoin(true);
           })
     }, [join]);
@@ -274,7 +274,7 @@ import {
                     margin="dense"
                       id="description"
                       style={{fontFamily:"Yekan"}}
-                      value={newDiscussion.summary}
+                      value={newDiscussion.description}
                       placeholder="دربارهٔ بحث"
                       label="توضیحات"
                       type="description"
@@ -345,7 +345,7 @@ import {
                        margin="dense"
                          id="description"
                          style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.summary}
+                         value={newDiscussion.description}
                          placeholder="دربارهٔ بحث"
                          type="description"
                          onChange={handleChange}
@@ -399,11 +399,11 @@ import {
                     <TextField
                       margin="dense"
                       id="description"
-                      value={user.user} 
+                      value={newDiscussion.description} 
                       label="توضیحات"
                       type="description"
                       
-                      onChange={handleChangesum}
+                      onChange={handleChange}
                       fullWidth
                       multiline
                       variant="outlined"
@@ -435,73 +435,55 @@ import {
 </p>
   
    
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:580}}>بحث‌ها</b>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:600}}>بحث‌ها</b>
     <div class="card card-discussion">
-  <div class="card-body">
-  <div>
-      {showdiscussion.message==='No Quote!' ? (
+    <div class="overflow-auto">
+      {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Mitra",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
         {showdiscussion.map((current) => (
-        <ListItem alignItems="flex-start" key={current.id}>
-        <ListItem
-          alignItems="flex-start"
-          style={{direction:"rtl"}}
-         >
         
-          <ListItemText style={{textAlign:"right"}}
-            primary={
-              <List >
-            <div className="" style={{direction:"rtl"}}>
-              <div className="d-flex p-n1 pb-2 mt-n4">
-              <div className="  ml-auto mr-3">
-                <h5 className="booktitle">
+          <ul class="list-group text-right list-inline">
+            
+          <li class="list-group-item py-3">
+          <div className="text-left">
+                <small className="">
+                {current.creator.username}
+                :سازنده
                 
-                </h5>
-                <small className="date">
                 </small>
               </div>
-              <div className="d-flex flex-column">
-                <small className=" like mr-3">
-                
-                <GoHeart color="red" size="25"/>
+            <h6 className="pt-n5">{current.title}</h6>
+            
+            <small className="description">
+                 {current.description}
                 </small>
-              </div>
-             </div>
- 
-             <p className="quote">
-
-             </p>
-             <hr style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
-              </div>
-            </List>
-             }
-            />
-            </ListItem>
-            </ListItem>
+                
+          </li>
+        </ul>
         ))}
         </div>
+        
        )}
-       </div>
+       
   <div>
+    </div>
      
        </div>
 
-  </div>
-  
+
     </div>  
   
    
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-230,position:"relative",marginLeft:450}}> ({ginfo.members_count}) اعضا</b>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-190,position:"relative",marginLeft:600}}> ({ginfo.members_count}) اعضا</b>
        
        <div className="row" key={member.id}>
-
-          {member.length <=3 ?
-          <div>
-           <div> {member[0].user.username} </div>
+{member.length >=3 ?
+          <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
+            <div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:19,position:"relative",marginLeft:-60, paddingRight:20}}>...بیش‌تر</div>
 
           <Avatar
           src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
@@ -511,6 +493,8 @@ import {
          height: 70}}
           
         />
+        <div className="mt-5"> {member[0].user.username} </div>
+
         <Avatar
                   src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
                   style={{
@@ -519,6 +503,8 @@ import {
                  height: 70}}
                   
                 />
+            <div className="mt-5"> {member[1].user.username} </div>
+
                 <Avatar
                   src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
                   style={{
@@ -527,55 +513,54 @@ import {
                  height: 70}}
                   
                 />
-              
-</div>
+              <div className=" mt-5"> {member[2].user.username} </div>
 
+</div>
 :
 <div>
-<div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:-170,position:"relative",marginLeft:50}}>...بیش‌تر</div>
-{member.length >=3 ?
-          <div>
+{member.map ((current) => (
+  <div>
 <Avatar
-          src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
-          style={{
-          fontSize: '80px',
-         width: 70,
-         height: 70}}
-          
-        />
-        <Avatar
-                  src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
-                  style={{
-                  fontSize: '80px',
-                 width: 70,
-                 height: 70}}
-                  
-                />
-                <Avatar
-                  src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
-                  style={{
-                  fontSize: '80px',
-                 width: 70,
-                 height: 70}}
-                  
-                />
-</div>
-:<div></div>
-  }
-</div>
+src={`http://127.0.0.1:8000${current[0].user.profile_photo}`}
+style={{
+fontSize: '80px',
+width: 70,
+height: 70}}
+
+/>
+<Avatar
+        src={`http://127.0.0.1:8000${current[1].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+      <Avatar
+        src={`http://127.0.0.1:8000${current[2].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+      </div>
+))}
+    </div>
 
 }
 </div>
+
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header"style={{fontFamily:'Yekan'}}>
-          نتایج
+           <div className="header"style={{fontFamily:'Yekan',paddingLeft:200}}>
+          همه اعضا
           </div>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="row">
         {member.map ((current) => (
-       <div className="row" key={current.id}>
+       <div className="col-md" key={current.id}>
           <Avatar
           src={`http://127.0.0.1:8000${current.user.profile_photo}`}
           style={{
@@ -583,13 +568,13 @@ import {
          width: 70,
          height: 70}}
         />
-        <div> {current.user.username} </div>
+        <div className="pl-2"> {current.user.username} </div>
         </div>
         ))}
         </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose} style={{fontFamily:'Mitra'}}>
+          <Button variant="info" onClick={handleClose} style={{fontFamily:'Yekan'}}>
             بستن
           </Button>
         </Modal.Footer>
