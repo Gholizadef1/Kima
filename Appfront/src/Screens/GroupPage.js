@@ -24,7 +24,7 @@ const GroupPage = (prop) => {
   const [joind,setjoined]=useState(null);
   const [notjoined,setnotjoined]=useState(null);
   const [members,setmembers]=useState(null);
-
+  const [groupphoto,setgroupphoto]=useState(null)
   useEffect(() =>{
     getInfo();
     getMembers();
@@ -34,9 +34,15 @@ const GroupPage = (prop) => {
 
   const getInfo = async () => {
     const response = axiosinst.get('/api/group/details/'+ prop.route.params.id)
-    .then(function(response){
-      setgroupinfo(response.data);
+    .then(async function(response){
+      await setgroupinfo(response.data);
       console.log('GROUP PAGE4')
+      console.log(response.data)
+      console.log(response.data.group_photo+'group photo')
+      console.log(groupinfo+'*****')
+      setgroupphoto(`http://505a2dd8d5cc.ngrok.io${response.data.group_photo}`)
+      console.log(groupphoto+'------')
+      // console.log(groupinfo.group_photo)
 //      console.log('**'+response.data.title)
     })
     };
@@ -180,9 +186,9 @@ if (!groupinfo){
                     </View>
 
                     {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
-                      source={{uri:groupinfo.profile_photo}}
+                      source={{uri:groupphoto}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
-                      source={require('../../assets/avatar.png')}
+                      source={require('../../assets/group.jpg')}
                       ></Avatar.Image>}
 
                       <Text style={styles.groupname}>{groupinfo.title}</Text>
@@ -312,6 +318,7 @@ const styles = StyleSheet.create({
         height:hp('32%')
     },
     avatar:{
+      elevation:5,
       marginTop:hp('-10%'),
       marginLeft:wp('15%')
       
