@@ -36,7 +36,8 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          setBookRead(data.data);
+          console.log(data.data.data);
+          setBookRead(data.data.data);
         });
     }, []);
 
@@ -47,7 +48,7 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          setBookReading(data.data);
+          setBookReading(data.data.data);
         });
     }, []);
 
@@ -58,7 +59,7 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          setBookWantto(data.data);
+          setBookWantto(data.data.data);
         });
     }, []);
 
@@ -150,85 +151,88 @@ function Slide(props) {
 
                    </small>                   
               </div>
-            </div>
+              </div>
           ))}
-        </Slider>
-        
-        </div>
-      )}
+            </Slider>
+            </div>
+      )
+        }
+    
     <div className="brand2 text-center mb-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
         <div className="subbrand2 text-center mt-3 mt-sm-n4 ml-sm-5 pb-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
-       <div className = "slid">
-
-        <Slider {...settings}>
-          {bookReading.map((current) => (
-            <div className="out1 pl-4" key={current.id}>
-              <div className="card car"onClick={() => bookSelectedHandler( current )}>
-                <img
-                  className="squer img-responsive" 
-                  src={current.imgurl}
-              
-                />
-                </div>
+         <div className = "slid">
+          <Slider {...settings}>
+            {bookReading.map((current) => (
+              <div className="out" key={current.id}>
+                <div className="card car"onClick={() => bookSelectedHandler( current )}>
+                  <img
+                    className="squer img-responsive" 
+                    src={current.imgurl}
+                 
+                  />
+                  </div>
                   <div className="body">
-                  {current.title.length >17 ?
-<BlueOnGreenTooltip title={current.title}>
-<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
-      </BlueOnGreenTooltip>
-      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
-      
-} 
-              <small className= "title0">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
-
-                   </small>                   
-              </div>
-              </div>
+                       {current.title.length >17 ?
+  <BlueOnGreenTooltip title={current.title}>
+  <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+        </BlueOnGreenTooltip>
+        : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
         
-          ))}
-        </Slider>
-        </div>
-      )}
+  } 
+                <small className= "title0">
+                     <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+  
+                     </small>                   
+                </div>
+                </div>
+            ))}
+              </Slider>
+              </div>
+      )
+          }
+      
+      
            <div className="brand3 text-center ml-1 ml-sm-5 mb-5 mt-sm-n4 pt-5" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
 
       {bookWantto.length === 0 ? (
           <div className="subbrand3 text-center  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
       ) : (
-       <div className = "slid">
-        <Slider {...settings}>
-          {bookWantto.map((current) => (
-            
-            <div className="out pl-4" key={current.id}>
-              <div className="card car"onClick={() => bookSelectedHandler( current )}>
-                <img
-                  className="squer img-responsive" 
-                  src={current.imgurl}
-                  
-                />
+         <div className = "slid">
+          <Slider {...settings}>
+            {bookWantto.map((current) => (
+              <div className="out" key={current.id}>
+                <div className="card car"onClick={() => bookSelectedHandler( current )}>
+                  <img
+                    className="squer img-responsive" 
+                    src={current.imgurl}
+                 
+                  />
+                  </div>
+                  <div className="body">
+                       {current.title.length >17 ?
+  <BlueOnGreenTooltip title={current.title}>
+  <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+        </BlueOnGreenTooltip>
+        : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+        
+  } 
+                <small className= "title0">
+                     <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+  
+                     </small>                   
                 </div>
-                 <div className="body">
-                 {current.title.length >17 ?
-<BlueOnGreenTooltip title={current.title}>
-<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
-      </BlueOnGreenTooltip>
-      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{current.title}</div>
+                </div>
+            ))}
+              </Slider>
+              </div>
+      )
+          }
       
-} 
-<small className= "title0">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
-
-                   </small>                     
-             
-              </div>
-              </div>
-          ))}
-        </Slider>
-        </div>
-      )}
+      
 
 </List>
              }
