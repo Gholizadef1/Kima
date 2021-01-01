@@ -28,15 +28,15 @@ const Eachgroup = (prop) => {
   if (linenumber > 250) {
     for (let i = 0; i < 250; i++)
           comment4 += commenttt[i]
-    console.log(comment4+'  COMMENT4 FOR')
+    // console.log(comment4+'  COMMENT4 FOR')
     // comment4 += commenttt[]
   }
   else {
     comment4 = prop.discription
-    console.log(comment4+'  COMMENT4 ELSE')
+    // console.log(comment4+'  COMMENT4 ELSE')
   }
-  console.log('****'+comment4)
-  console.log('*****************'+prop.discription+'  prop discription*********************')
+  // console.log('****'+comment4)
+  // console.log('*****************'+prop.discription+'  prop discription*********************')
  
     return(
       

@@ -7,8 +7,8 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
- import { Feather } from '@expo/vector-icons';
-// import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 // import { MaterialIcons } from '@expo/vector-icons'; 
 // import { SearchBar } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
@@ -50,7 +50,7 @@ const Groups = () => {
 
    
   })
-  // console.log(response.data)
+   console.log(response.data)
   // setrefresh(true)
   settheend(false)
   setrefresh(false)
@@ -66,7 +66,8 @@ const Groups = () => {
   // settheend(true)
   // setcount(response.data.count)
   setnext(response.data.next)
-  console.log(next,' NEXT')
+  // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
+  console.log(next,' NEXTtttttttttttttttt')
   setnumberofresults(response.data.count)
   setpage(page);
   
@@ -103,6 +104,7 @@ const Groups = () => {
   const [next,setnext]=useState('')
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
+  const [opensearch,setopensearch]=useState(false);
   const [likeotime, setlikeotime] = useState('/filter-time');
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
@@ -113,7 +115,7 @@ const Groups = () => {
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
   const response=async (page)=>{
-    
+    setopensearch(false)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
     await setpage(page)
@@ -146,7 +148,7 @@ const Groups = () => {
       }
      
    })
-   
+   if(page<=count){
    if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
   await settheend(true)
   await setrefresh(false)
@@ -172,6 +174,11 @@ const Groups = () => {
      
      }
     }
+    else{
+      settheend(true)
+    }
+    }
+    
     //  }
    catch(err){
      setrefresh(false)
@@ -187,30 +194,43 @@ const Groups = () => {
     console.log(theend+'THE END')
       console.log(err);
     
-   }
+   
+  }
   
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
     console.log(next+'  NEXT NEXT NEXT NEXT')
-     if(page<count&&searchterm===''||(next!=null)){
-       if(searchterm===''){
-         settheend(false)
-     response(page+1);
-       }
-       else
-       {
-         console.log('OMAAAAAAAAAAAAAAAAAAAAAAAAAAD TOOOOOOOOOOOSH')
-         searchpost(page+1)
-       }
+    if(searchterm===''){
+     if(page<count){
+       
+        await settheend(false)
+         response(page+1);
+      
+       
      }
      else
      {
        console.log(page+'handlemore page')
        console.log(count +'handlemore count')
        console.log('*********')
-       settheend(true)
+       await settheend(true)
       }
+    }
+    else
+    {
+      if(next!=null){
+        await settheend(false)
+        searchpost(page+1);
+      }
+      else
+      {
+        console.log(page+'handlemore page')
+        console.log(count +'handlemore count')
+        console.log('*********')
+        await settheend(true)
+      }
+    }
     };
  
   useFocusEffect(
@@ -225,6 +245,20 @@ const Groups = () => {
   return (
 
     <View style={styles.container}>
+     {opensearch?
+     <>
+      <AntDesign name="arrowleft" size={24} color="#1f7a8c"
+      style={{marginTop:hp('3%'),
+      position:'absolute',
+      marginRight:wp('5%'),
+      marginLeft:wp('87%')
+          }}
+          onPress={()=>{
+          setsearchterm('');
+          setnumberofresults();
+          setopensearch(false)}
+          }
+       />
      <Searchbar
       placeholder="Search"
       onChangeText={searching}
@@ -238,18 +272,20 @@ const Groups = () => {
           borderBottomLeftRadius={20}
           placeholder={'نام گروه ...'}
           style={{  borderTopLeftRadius:hp('5%'),
-          marginTop:hp('1.5%'),
-        
-          alignSelf:'center',
+          marginTop:hp('2%'),
+          
+          // alignSelf:'center',
+          marginLeft:wp('5%'),
           borderTopRightRadius:hp('5%'),
           borderBottomRightRadius:hp('5%'),
           borderBottomLeftRadius:hp('5%'),
           
-          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('90%'),marginBottom:hp('-0.5%')}}
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
         
           }} />}
-    />
+    /></>
+    :null}
       {/* <SearchBar
           style={{backgroundColor:'#F1F3F9',height:hp('4.5%'),width:wp('50%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%')}} />}
@@ -289,23 +325,27 @@ const Groups = () => {
          name="plus" size={32} color="#EDF2F4" />
      
          </Button> */}
-      {/* <Button style={{position:'absolute',backgroundColor:'blue' }}>
-      <Feather name="search" size={24} color="#1f7a8c" style={{
-        position:'absolute',
-        left:wp('85%'),marginTop:hp('3.5%')
+      {!opensearch?<Button style={{position:'absolute',backgroundColor:'lightgray',height:hp('5.5%'),width:wp('11.3%'),borderRadius:1000,
+        backgroundColor:'#1f7a8c',left:wp('4%'),marginLeft:wp('78%'),marginTop:hp('2%'),elevation:20,justifyContent:'center'}}
+        onPress={()=>setopensearch(true)}
+        >
+      <Feather name="search" size={24} color="#F1F3F9" style={{
+         position:'absolute',
+         marginTop:hp('3.5%'),alignSelf:'center'
       }} />
-      </Button> */}
-       <DropDownPicker
+      </Button>:null}
+      {!opensearch? <DropDownPicker
           items={[
             { label: 'جدید ترین گروه ها',value:'none'},
             { label: 'معروف ترین گروه ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
           labelStyle={{fontSize:wp('3%')}}
-          containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
+          containerStyle={{ height: hp('8%'), width: wp('35%'), marginBottom: hp('-0.3%') }}
           style={{
 
-            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'),
+             marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
             borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('3%')
           }}
           itemStyle={{
@@ -314,7 +354,8 @@ const Groups = () => {
           }}
           dropDownStyle={{
             backgroundColor: '#fafafa',
-            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'),
+             width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
           }}
           onChangeItem={async (item) => {
             setsearchterm('');
@@ -349,7 +390,7 @@ const Groups = () => {
 
           }}
 
-        />
+        />:null}
         {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
