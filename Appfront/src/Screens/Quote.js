@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator,Keyboard} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -105,9 +104,10 @@ const callbackFunction = async(childData) => {
       console.log('PAGE 111')
     await settheend(false)
     await setinformation([])
+    console.log(information+'BAYAN KHALI BASHEEEEEEEEEE')
 
     console.log('IT IS HEAR SET INFO []')
-    console.log(information)
+    // console.log(information)
     
     }
     
@@ -132,7 +132,7 @@ const callbackFunction = async(childData) => {
   settheend(true);
   else{
     settheend(false)
-     console.log(IDD+'IDDresponse');
+    //  console.log(IDD+'IDDresponse');
       //  console.log(response.data)
       page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
       console.log('++++INFO++++'+information+"++++INFO++++")

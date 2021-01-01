@@ -66,6 +66,10 @@ const Groups = ({navigation}) => {
   // settheend(true)
   // setcount(response.data.count)
   setnext(response.data.next)
+  if(next===null)
+  {
+    console.log(next+'  NEXT TO IF')
+  }
   // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
   console.log(next,' NEXTtttttttttttttttt')
   setnumberofresults(response.data.count)
@@ -101,9 +105,10 @@ const Groups = ({navigation}) => {
   // const selectedValue='none'
   const [selectedValue, setselectedValue] = useState('none')
   const [information, setinformation] = useState([]);
-  const [next,setnext]=useState('')
+  const [next,setnext]=useState(null)
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
+  const [pickerselected,setpickerselected]=useState(false);
   const [opensearch,setopensearch]=useState(false);
   const [likeotime, setlikeotime] = useState('/filter-time');
   const [theend,settheend]=useState(false);
@@ -115,7 +120,9 @@ const Groups = ({navigation}) => {
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
   const response=async (page)=>{
+    // await setinformation([])
     setopensearch(false)
+    setpickerselected(false)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
     await setpage(page)
@@ -238,6 +245,7 @@ const Groups = ({navigation}) => {
         // setselectedValue('none')
         setsearchterm('')
         setnumberofresults()
+         setinformation([])
       // if(searchterm==='')  
         response(1)
         // else
@@ -367,8 +375,14 @@ const Groups = ({navigation}) => {
               // await setlikeotime('')
               console.log(likeotime+'BEIN TIME')
                await setlikeotime('/filter-time')
-              // setrefresh(true)
-              // response(1)
+              // // setrefresh(true)
+              // await setsearchterm('')
+              // setnumberofresults()
+              // await setpage(1)
+              // setpickerselected(true)
+              //  await setinformation()
+              //  settheend(true)
+              //  response(1)
               console.log('set shod be time')
               console.log(likeotime+'likeotime')
               // response(1)
@@ -380,7 +394,13 @@ const Groups = ({navigation}) => {
               console.log(likeotime+'BEIN LIKE')
                await setlikeotime('/filter-member')
               //  setrefresh(true)
-              //  response(1)
+              // setpickerselected(true)
+              // await setsearchterm('')
+              // setnumberofresults()
+              // await setinformation()
+              // settheend(true)
+              // await setpage(1)
+              // response(1)
               console.log('set shod be like')
               console.log(likeotime+'likeotime')
               // response(1)

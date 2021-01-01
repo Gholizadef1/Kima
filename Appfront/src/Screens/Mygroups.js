@@ -107,10 +107,10 @@ const Mygroups = () => {
       }
   
   }
-
+    const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
-    const [information, setinformation] = useState(['as;df']);
+    const [information, setinformation] = useState();
     const [refresh,setrefresh]=useState(false);
     const [likeotime, setlikeotime] = useState('/filter-time');
     const [theend,settheend]=useState(false);
@@ -119,23 +119,31 @@ const Mygroups = () => {
    const [count,setcount]=useState(1);
   // let count=0;
   const response=async (page)=>{
-    
+    // await setinformation(null)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
-    await setpage(page)
-    console.log(page+'  شماره صفحه اول ریسپانس')
+    await setpage(page);
+    console.log(page+' PAGEEEEEEEEEEEEEEEEPAGEEEEEEEEEE')
 
     await settheend(false)
     console.log(theend+'  THE END RESOPONSE AVAL')
     if(page===1){
       await settheend(false)
-     await setinformation([])
+      await setinformation()
+      // if(inforamtionchange===false)
+      // setinfromationchange(true)
+      // else
+      // setinfromationchange(false)
+      console.log(information+'BAYAN KHALI BASHEEEEEEEEEE')
+      console.log('----------------------PGAE 11111111---------------')
 
     }
+    
 
     
     console.log('DOVOM')
-     console.log(page+'PAGE')
+     console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+     console.log('ALAIK ALIAKDALFKJASFKJAKSFKLJSFH')
      try{
        console.log('  omad to response')
        console.log('api/group'+likeotime)
@@ -152,6 +160,7 @@ const Mygroups = () => {
       }
      
    })
+   console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
    if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
   await settheend(true)
   await setrefresh(false)
@@ -167,8 +176,9 @@ const Mygroups = () => {
 
     settheend(false)
    console.log('omade inja')
+   console.log('++++INFOGHABLESET++++'+information+"++++INFOGHABLESET++++")
     await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
-  // setinformation(information.concat(response.data.groups))
+    // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
      setrefresh(false)
     console.log(response.data.groups.id+'  INFORMATION.ID')
@@ -211,7 +221,11 @@ const Mygroups = () => {
     };
    
     useFocusEffect(
-      React.useCallback(() => {         
+      React.useCallback(() => {   
+        // setselectedValue('none')
+        // setinformation(undefined);
+        console.log(information+'INFORMATION USE EFFECT')
+        // setpage(1)      
           response(1)
           // setlikeotime('filter-time')
       },[]))
@@ -263,7 +277,7 @@ const Mygroups = () => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('/api/group',formdata,{
+        const response=await axiosinst.post('http://505a2dd8d5cc.ngrok.io/api/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -443,12 +457,20 @@ const Mygroups = () => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
+              // await setinformation()
+              // settheend(false)
+              // response(1)
               await setlikeotime('/filter-time')
+              // setselectedValue('none')
         
             }
             else if (item.value === 'like') {
               console.log('tolike')
+              // setselectedValue('like')
               console.log(item.value + 'VALUE')
+              // await setinformation()
+              // settheend(false)
+              // response(1)
               await setlikeotime('/filter-member')
          
             }
@@ -477,6 +499,7 @@ const Mygroups = () => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
+              await setinformation()
               await setrefresh(true)
               response(1)
             }}
@@ -486,7 +509,7 @@ const Mygroups = () => {
 
             renderItem={({ item }) => (<>
              <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
-            {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
+            {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
             </TouchableOpacity>
             </>
             )}

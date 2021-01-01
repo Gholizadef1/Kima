@@ -20,7 +20,7 @@ const Eachgroup = (prop) => {
   const [showmore, setshowmore] = useState('بیشتر...');
   const commentt = `${prop.discription}`.toString();
   const linenumber = (commentt.split('').length)
-  console.log(linenumber+'  LINE NUMBER')
+  // console.log(linenumber+'  LINE NUMBER')
   const commenttt = `${prop.discription}`.toString().split('');
   // console.log(commentt)
   // const[comment4,setcomment4]=useState('')

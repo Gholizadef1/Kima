@@ -44,8 +44,8 @@ const Quotecard = (prop) => {
   //         })
   // }
   
-  console.log(prop.IDD + 'PROP IDD')
-  console.log(prop.id + 'PROP ACCOUNT ID')
+  // console.log(prop.IDD + 'PROP IDD')
+  // console.log(prop.id + 'PROP ACCOUNT ID')
   // const[IDD,setIDD]=useState('');
 
   // const equal=async(item)=>{
@@ -80,7 +80,7 @@ const Quotecard = (prop) => {
   //    console.log(IDD);
   //   },[])
   // setdele(prop.delet)
-  console.log('quotecard')
+  // console.log('quotecard')
   return (
     <View style={styles.container}>
 
