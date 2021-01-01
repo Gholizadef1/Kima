@@ -38,7 +38,7 @@ const userschema=yup.object({
 })
 
 const Mygroups = () => {
-
+  const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
   
   const pickfromgallery = async (props,change)=>{
@@ -119,6 +119,7 @@ const Mygroups = () => {
    const [count,setcount]=useState(1);
   // let count=0;
   const response=async (page)=>{
+
     // await setinformation(null)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
@@ -160,6 +161,10 @@ const Mygroups = () => {
       }
      
    })
+   for(let i=0;i<response.data.groups.lenght;i++){
+     setcount(count+1);
+   }
+   console.log(response.data)
    console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
    if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
   await settheend(true)
@@ -434,7 +439,7 @@ const Mygroups = () => {
          <View style={{marginLeft:wp('2%')}}>
       
 
-       <DropDownPicker
+         {numberofgp!=0? <DropDownPicker
           items={[
             { label: 'معروف ترین گروه ها', value: 'like' },
             { label: 'جدید ترین گروه ها', value: 'none' },
@@ -480,7 +485,7 @@ const Mygroups = () => {
 
           }}
 
-        />
+        />:null}
         {/* <TouchableOpacity onPress={()=>console.log('aladkki')}>
          <Eachgroup></Eachgroup>
          </TouchableOpacity> */}
@@ -490,7 +495,7 @@ const Mygroups = () => {
          <View style={{height:hp('2%')}}></View>
         {/* {(information.length >= 0) ? */}
 
-          <FlatList
+         {numberofgp!=0? <FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom:hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
             style={{ marginBottom: hp('7%') }}
@@ -516,7 +521,7 @@ const Mygroups = () => {
             )}
           // extraData={finfo}
           >
-          </FlatList> 
+          </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>گروهی وجود ندارد</Text>}
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
