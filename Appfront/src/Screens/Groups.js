@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
@@ -85,10 +86,6 @@ const Groups = () => {
   
   
    }
-
-
-
-
 
    const lastinformation=()=>{
     if(information.length>0)
@@ -390,6 +387,13 @@ const Groups = () => {
 
 
           }}
+
+
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ShowGroupPage')}>
+        <Eachgroup></Eachgroup>
+        </TouchableOpacity> */}
+   
+    );
 
         />:null}
         {/* <Eachgroup></Eachgroup>
