@@ -440,7 +440,9 @@ const Groups = ({navigation}) => {
             data={information}
             renderItem={({ item }) =><>
          
-            <TouchableOpacity onPress={()=>navigation.navigate('ShowGroupPage',item.id)}>
+            <TouchableOpacity onPress={()=>{
+              console.log(item.id+'####')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}>
             <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
              discription={item.summary} title={item.title} ></Eachgroup>
              </TouchableOpacity>

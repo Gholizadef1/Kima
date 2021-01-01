@@ -42,7 +42,7 @@ const GroupPage = (prop) => {
     };
 
     const getMembers = async () => {
-      const response = axiosinst.get('/api/group/members/4')
+      const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
       .then(function(response){
 //        console.log('**'+response.data.members[0].user.username)
         console.log('++'+response.data.owner.username)
@@ -89,7 +89,7 @@ if (!groupinfo){
   const JoinGroup = async () => {
       const back = {}
       const backk = JSON.stringify(back);
-      axiosinst.post('/api/group/members/4' , backk , {
+      axiosinst.post('/api/group/members/'+prop.route.params.id , backk , {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -107,7 +107,7 @@ if (!groupinfo){
   const LeaveGroup = async () => {
     const back = {}
     const backk = JSON.stringify(back);
-    axiosinst.post('/api/group/members/4' , backk , {
+    axiosinst.post('/api/group/members/'+prop.route.params.id , backk , {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -124,7 +124,7 @@ if (!groupinfo){
 }
   const deleteGroup = async()=>{
     console.log('delete')
-    axiosinst.delete('/api/group/details/4' ,{
+    axiosinst.delete('/api/group/details/'+prop.route.params.id ,{
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
