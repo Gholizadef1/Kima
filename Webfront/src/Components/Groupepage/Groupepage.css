@@ -1,0 +1,175 @@
+
+@media (min-width:360px){
+    .avatar{
+        width: 200px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -5px;
+        border-radius: 3%;
+
+    }
+    .cardG{
+        width: 70px;
+        height: 70px;
+        margin-left: 170px;
+        margin-top: -30px;
+        border-radius: 3%;
+        background-color: lightsteelblue;
+    }
+    .imageg{
+        width: 50px;
+        height: 50px;
+        margin-left: -10px;
+        margin-top: -10px; 
+        border-radius: 3%;
+        
+    }
+    .title-g{
+        font-family: 'Yekan';
+        font-size: 13px;
+        top: 4px;
+        position: relative;
+        left: -30px;
+    }
+    
+    .line-g{
+        margin-top: 10px;
+        margin-right: 385px;
+    }
+    .cardb{
+        width: 310px;
+        height: 150px;
+        margin-left: 355px;
+        margin-top: 10px;
+        border-radius: 3%;
+        border-color: white;
+    }
+    .card-discussion{
+        width: 500px;
+        height: 150px;
+        margin-left: 290px;
+        margin-top: 15px;
+        border-radius: 3%;
+        border-color: whitesmoke;
+    }
+    .line-g1{
+        margin-left: 290px;
+    }
+    .btn-g{
+        color: white;
+        font-family: 'Yekan';
+        margin-right: 545px;
+        margin-top: -8px;
+     
+    }
+    .out{
+       
+        margin-left: -350px;
+        margin-top: -6px; 
+        border-radius: 3%;
+       padding-left: 10px;
+    }
+    }
+    @media (min-width:768px){
+        .avatar{
+            width: 500px;
+            height: 220px;
+            margin-top: 20px;
+        }
+        .cardG{
+            width: 100px;
+            height: 160px;
+            margin-left: 148px;
+            margin-top: -60px;
+        }
+        }
+        @media (min-width:800px){
+            .avatar{
+                width: 500px;
+                height: 220px;
+                margin-top: 20px;
+            }
+            .cardG{
+                width: 100px;
+                height: 160px;
+                margin-left: 165px;
+                margin-top: -60px;
+            }
+            }
+        @media (min-width:960px){
+            .avatar{
+                width: 750px;
+                height: 200px;
+                margin-top: -100px;
+                margin-left: 10px;
+                border-radius: 3%;
+
+            }
+            .cardG{
+                width: 130px;
+                height: 130px;
+                margin-left: 800px;
+                margin-top: -70px;
+                border-radius: 3%;
+            }
+            .imageg{
+                width: 100px;
+                height: 100px;
+                margin-left: -5px;
+                margin-top: -12px; 
+                border-radius: 3%;
+                
+            }
+            .line-g{
+                margin-top: -400px;
+                margin-right: 385px;
+            }
+            
+            .summary{
+                font-size: larger;
+                margin-top: 30px;
+                margin-right: 180px;
+            }
+            .title-g{
+                font-family: 'Yekan';
+                font-size: 25px;
+                
+                position: relative;
+                left: 60px;
+            }
+            
+
+            .card-discussion{
+                width: 630px;
+                height: 150px;
+                margin-left: 312px;
+                margin-top: 36px;
+                margin-bottom: 250px;
+                border-radius: 3%;
+                border-color: whitesmoke;
+            }
+
+           .more{
+               border-radius: 3%;
+           }
+            .btn-g{
+                
+                font-family: 'Yekan';
+                margin-right: 600px;
+               margin-top: -50px;
+                height: 50px;
+             
+            }
+            .btn-d{
+                font-family: 'Yekan';
+                margin-right: 600px;
+               
+                height: 40px;
+            }
+           
+            .modal {
+                margin-top: 200px;
+                
+             }
+             
+            }

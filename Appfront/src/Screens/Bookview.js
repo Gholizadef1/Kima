@@ -18,27 +18,26 @@ import Animated, { set } from 'react-native-reanimated';
 import Commentcard from './Commentcard';
 
 const Bookview = (prop) => {
-console.log('BOOKVIEW')
-const [rate , setrate] = useState(true);
-const [ratenum , setratenum] = useState(null);
-const [loading, setLoading] = useState(true);
-const [result , setResult] = useState(null);
-const [information,setinformation]=useState([]);
-const [cinformation,setcinformation]=useState([]);
-const [selectedValue, setSelectedValue] = useState('none');
-const id = prop.route.params.id;
-const getResult = async (id) => {
-const response = await axiosinst.get('/bookdetail/'+id);
-setResult(response.data);
-setLoading(false);
-};
-useEffect(() =>{
-getResult(id);
-}, []);
+    console.log('BOOKVIEW')
+  const [rate , setrate] = useState(true);
 
-if (!result) {
-return null;
-}
+  const [ratenum , setratenum] = useState(null);
+
+
+  const [result , setResult] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('none');
+  const id = prop.route.params.id;
+  const getResult = async (id) => {
+  const response = await axiosinst.get('/bookdetail/'+id);
+  setResult(response.data);
+  };
+  useEffect(() =>{
+    getResult(id);
+  }, []);
+
+  if (!result) {
+    return null;
+  }
 
 const getPicker = async () => {
 axiosinst.get('/bookdetail/'+id +'/getstate', {

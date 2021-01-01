@@ -12,27 +12,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-	
-@font-face {
-  font-family: 'Zar';
-  src: url('fonts/Zar.eot') format('eot'),
-  url('fonts/Zar.ttf') format('truetype'),
-  url('fonts/Zar.woff') format('woff');
-  }
-	
-  @font-face {
-    font-family: 'Mitra';
-    src: url('fonts/Mitra.eot') format('eot'),
-    url('fonts/Mitra.eot') format('truetype'),
-    url('fonts/Mitra.eot') format('woff');
-    }
-    @font-face {
-      font-family: 'Morvarid';
-      src: url('fonts/Morvarid.eot') format('eot'),
-      url('fonts/Morvarid.ttf') format('truetype'),
-      url('fonts/Morvarid.woff') format('woff');
+       @font-face {
+      font-family: 'Yekan';
+      src: url('fonts/Yekan.eot') format('eot'),
+      url('fonts/Yekan.ttf') format('truetype'),
+      url('fonts/Yekan.woff') format('woff');
       }
+      @font-face {
+        font-family: 'Iranian Sans';
+        src: url('fonts/Iranian Sans.ttf') format('truetype'),
+        }
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -77,6 +66,15 @@
   color: white;
   background-color:#022b3a;
 } 
-.ourfont{
-  font-family: "Mitra";
+
+.yekanfont{
+  font-family: "Yekan";
+}
+
+.ourfont2{
+  font-family: 'Scheherazade', serif;
+}
+
+.ourfont3{
+  font-family:"Morvarid";
 }

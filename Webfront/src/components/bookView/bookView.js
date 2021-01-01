@@ -23,7 +23,7 @@ import Cookies from 'js-cookie';
 //import { data, event, noConflict } from 'jquery';
 
 import Tabs from "./multiTabs"
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 //import { ajax } from 'jquery';
 //import { data } from 'jquery';
@@ -80,7 +80,7 @@ const useStyles = makeStyles({
 root: {
 width: 200,
 display: 'flex',
-paddingLeft:15,
+paddingLeft:23,
 height:22,
 alignItems: 'center',
 direction:"ltr",
@@ -89,6 +89,8 @@ direction:"ltr",
 
 const [value, setValue] = useState(0);
 const [hover, setHover] = useState(-1);
+const [mess, setMess] = useState("");
+const [num, setNum] = useState();
 const classes = useStyles();
 
 //console.log(useParams);
@@ -159,7 +161,6 @@ console.log(error);
   const BlueOnGreenTooltip = withStyles({
     tooltip: {
       color: "black",
-      fontFamily:"Mitra",
       fontSize:15,
       backgroundColor: "lightblue",
       width:100,
@@ -227,105 +228,90 @@ setOpenSnack(false);
 //console.log(response.data.title);
 
 const bo = Number.isInteger(value);
-console.log(bo);
-console.log(value);
-const Sendrequest =()=> {
-
-//console.log(event);
-// await setValue(e.target.value);
-// console.log(e.target.value);
-const payload={
-"rate":value,
-}
-console.log(payload);
-let back= JSON.stringify(payload);
-console.log(back);
-axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+//console.log(bo);
+//console.log(value);
+const Sendrequest =()=>{
+  console.log(mess);
+  if(mess === "No User Rating!"){
+  const payload={
+    "rate":value,
+    }
+    console.log(payload);
+    let back= JSON.stringify(payload);
+    console.log(back);
+    console.log(value);
+    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
 payload,{
 headers:{
 "Content-Type":"application/json",
 "Authorization":"Token "+Cookies.get("userToken")}
-},)
-.then(()=>{
-axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
-,payload,{
-headers:{
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
+}).then((data)=>{
+  setMess(data.message);
+  console.log(data.message);
 })
-
-})
-
-
 }
-useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
-    ,{
+    
+ else if(num!=0) {
+  const load={
+    "rate":value,
+    }
+    console.log(load);
+    let bac= JSON.stringify(load);
+    console.log(bookId);
+    console.log(bac);
+    console.log(value);
+    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    load,{
     headers:{
     "Content-Type":"application/json",
     "Authorization":"Token "+Cookies.get("userToken")}
-    })
-    .then(data => {
-    
-    setValue(data.data.data);
-    console.log(data.data.data);
-    console.log(data);
-    const b = typeof(data.data);
-    console.log(b);
-    }).catch(error =>{
-    console.log(error)
-    });
-    }, []);
+    },)
 
+}
+}
+
+
+
+useEffect(() => {
+  axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+  ,{
+  headers:{
+  "Content-Type":"application/json",
+  "Authorization":"Token "+Cookies.get("userToken")}
+  })
+  .then(data => {
+  setValue(data.data.data);
+  setMess(data.data.message);
+  setNum(data.data.data)
+  console.log(data.data.message);
+  console.log(data.data.data);
+  console.log(data.message);
+  console.log(data);
+  const b = typeof(data.data);
+  console.log(b);
+  }).catch(error =>{
+  console.log(error)
+  });
+  }, []);
 
 return(
 <div className="mx-md-5 px-md-5">
-  <div className="container-fluid rTOl text-right px-md-5" >
-    <div className="mx-md-5 ">
-    <div className="row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 ">
-      <div className="col-md-4 mb-md-0 p-4">
-        <img src={state.imgurl} className="img-fluid shadow float-right" alt="" style={{width:'100%',height:'auto'}} />
+
+  <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
+    <div className="mx-md-5">
+    <div className=" row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
+      <div className="col-md-4 mb-md-0 p-4 rounded-lg" >
+        <img src={state.imgurl} className="img-fluid float-right rounded-lg" alt="" style={{width:'100%',height:'auto',boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
+
       </div>
-      <div className="col-md-8 position-static pl-md-0 d-flex flex-column mb-4 ">
-        <h2 className="p-3 mt-2" style={{fontFamily:'Mitra'}}>{state.title}</h2>
-          <table className="mt-auto table table-hover text-right" >
-            <tbody className="">
-              <tr>
-              <th style={{fontFamily:'Mitra'}}>
-              نام نویسنده:
-              </th>
-              <th style={{fontFamily:'Mitra'}}>
-              {state.author}
-              </th>
-              </tr>
-              <tr>
-              <th style={{fontFamily:'Mitra'}}>
-              نام ناشر:
-              </th>
-              <th style={{fontFamily:'Mitra'}}>
-              {state.publisher}
-              </th>
-              </tr>
-              <tr>
-              <th style={{fontFamily:'Mitra'}}>
-              امتیاز کتاب:
-              </th>
-                 <th style={{fontFamily:'Mitra'}}>
-                  {parseFloat(state.average_rating).toFixed(1)}
-                 از 5 در
-                  {state.average_rating_count}
-              رای
-              </th>
-              </tr>
-              <tr>
-              <th className="" style={{fontFamily:'Mitra'}}>
-              به این کتاب رای دهید
-                 </th>
-              <th className="">
+      <div className=" position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
+        <h2 className="p-3 mt-2" >{state.title}</h2>
+        <div>
+              <div className="ml-auto">
                  <div className={classes.root}>
-                 <button onClick={Sendrequest}  style={{boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-              background:'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',height:35,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
-                  <div style={{marginLeft:-3, color:"white",fontFamily:"Mitra",fontWeight:"bold"}}>
+                 <button onClick={Sendrequest} className="btn bg-primary" style={{
+              height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
+                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white",fontWeight:"bold"}}>
                   ثبت
                   </div>
                  </button>
@@ -333,7 +319,7 @@ return(
               className=""
               name="hover-feedback"
               precision={1}
-              size="large"
+              size="medium"
               onChange={(event,newValue)=>{
               setValue(event.target.value)
               }}
@@ -343,20 +329,52 @@ return(
               value={value}
                          />
                              </div>
+              </div>
+              </div>
+
+
+
+          <table className="mt-auto table table-hover text-right " >
+            <tbody className="">
+              <tr>
+              <th >
+              نام نویسنده:
+              </th>
+              <th >
+              {state.author}
               </th>
               </tr>
+              <tr>
+              <th >
+              نام ناشر:
+              </th>
+              <th >
+              {state.publisher}
+              </th>
+              </tr>
+              <tr>
+              <th >
+              امتیاز کتاب:
+              </th>
+                 <th >
+                  {parseFloat(state.average_rating).toFixed(1)}
+                 از 5 در
+                  {state.average_rating_count}
+              رای
+              </th>
+              </tr>
+             
             </tbody>
           </table>
-          <div className="row" style={{fontFamily:'Mitra'}}>
+          <div className="row mb-auto" >
           <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-          <select className="form-control mr-4 rounded-pill" style={{width:170}} id="bookMood" onChange={ addBookToMineHandler} >
+          <select className="form-control mr-4 rounded-pill" style={{width:170,fontSize:12}} id="bookMood" onChange={ addBookToMineHandler} >
           <option id="none" value="none">هیچکدام</option>
           <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
           <option id="Reading" value="Reading">دارم می‌خوانم</option>
           <option id="Read" value="Read">خوانده‌ام</option>
           </select>
           <div>
-          {/* {/ <Button onClick={handleClickSnack}>Top-Center</Button> /} */}
           <Snackbar
           anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
           open={openSnack}
@@ -368,7 +386,7 @@ return(
     </div>
   </div>
 </div>
-<div className="Tab color1 my-3 mb-5 mx-md-5">
+<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg  ">
 <Tabs book={state.id} bookdescription={state.description}/>
 </div>
 </div>

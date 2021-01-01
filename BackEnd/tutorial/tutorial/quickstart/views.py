@@ -1,6 +1,8 @@
 from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
+from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework import filters
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -26,6 +28,7 @@ from tutorial.kyma.serializers import bookSerializer
 from rest_framework import generics
 from .serializers import * 
 from rest_framework.parsers import JSONParser
+from django.core.paginator import Paginator
 
 
 class BasicPagination(PageNumberPagination):
@@ -46,6 +49,7 @@ def registration_view(request):
             data['username'] = account.username
             token=Token.objects.get(user=account).key
             data['token']=token
+            data['id']=account.id
 
         else:
             data = serializer.errors
@@ -55,7 +59,6 @@ def registration_view(request):
         Users=Account.objects.all()
         serializer=RegistrationSerializer(Users,many=True)
         return Response(serializer.data)
-
 
 @api_view(["POST"])
 @permission_classes([AllowAny],)
@@ -74,7 +77,6 @@ def login(request):
     return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
                     status=HTTP_200_OK)
 
-
 class Readcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
 
@@ -86,9 +88,7 @@ class Readcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 class ToReadcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
@@ -101,9 +101,7 @@ class ToReadcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
+        return Response({'data': serializer.data, 'Count': queryset.count()})
 
 class Readingcollec(generics.ListAPIView):
     serializer_class=MyBookSerializer
@@ -116,10 +114,8 @@ class Readingcollec(generics.ListAPIView):
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyBookSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
     
-    
-
 class ChangePasswordView(generics.UpdateAPIView):
 
     serializer_class = ChangePasswordSerializer
@@ -151,7 +147,6 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
     serializer_class = UpdateUserProfileSerializer
     permission_classes = (IsAuthenticated,)
@@ -165,7 +160,6 @@ class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
 
     def put(self,request,*args,**kwargs):
         return self.partial_update(request, *args, **kwargs)
-
 
 class UserProfileViewwithToken(generics.UpdateAPIView,RetrieveModelMixin):
     serializer_class =  UserProfileSerializer
@@ -193,7 +187,6 @@ class UserProfileView(APIView):
         userprofile = self.get_object(pk)
         serializer = UserProfileSerializer(userprofile)
         return Response(serializer.data)
-
 
 class UserRatingview(APIView):
 
@@ -253,14 +246,9 @@ class UserRatingview(APIView):
             newrate = postrate.data.get("rate")
             wantedbookrate.userrate = newrate
             wantedbookrate.save()
-            return Response(postrate.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"update rate"})
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
-
-
-
-
-    
 
 class BookRateView(generics.ListAPIView):
     serializer_class=BookrateSerializer
@@ -275,10 +263,10 @@ class BookRateView(generics.ListAPIView):
         serializer = BookrateSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
-class MyQuoteView(generics.ListAPIView):
+class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
 
     serializer_class=QuoteSerializer
+    pagination_class = BasicPagination
 
     def get_queryset(self,pk):
         user=Account.objects.get(pk=pk)
@@ -287,10 +275,8 @@ class MyQuoteView(generics.ListAPIView):
 
     def list(self, request,pk):
         queryset = self.get_queryset(pk=pk)
-        serializer = QuoteSerializer(queryset, many=True)
+        serializer = QuoteProfSerializer(queryset,context={"user": pk}, many=True)
         return Response(serializer.data)
-
-    
 
 class QuoteView(APIView,PaginationHandlerMixin):
 
@@ -306,8 +292,9 @@ class QuoteView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
+            mquote = MyQuote.objects.filter(current_book=this_book)
             quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
-            serilalizer = QuoteSerializer(quote_list,many=True)
+            serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}
         return Response(response)
@@ -340,7 +327,6 @@ class QuoteView(APIView,PaginationHandlerMixin):
         else:
             return Response({'message':'You dont have permission to delete this quote!'})
 
-
 class LikeQuoteView(APIView):
 
     def get(self, request, pk):
@@ -369,8 +355,6 @@ class LikeQuoteView(APIView):
             return Response({'message':"like success!",
                             'data':quote.Likes,})
 
-
-
 class CommentView(APIView,PaginationHandlerMixin):
 
     model = MyComment
@@ -386,8 +370,9 @@ class CommentView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
+            mcomment = MyComment.objects.filter(current_book=this_book)
             comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
-            serilalizer = CommentSerializer(comment_list,many=True)
+            serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
@@ -397,6 +382,8 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         serializer = PostCommentSerializer(data=request.data)
         if serializer.is_valid():
+            this_book.comment_count+=1
+            this_book.save()
             comment_text = serializer.data.get("textcomment")
             new_comment = MyComment(account=user,current_book=this_book,comment_text=comment_text)
             new_comment.save()
@@ -410,23 +397,25 @@ class CommentView(APIView,PaginationHandlerMixin):
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
 
-
 class DeleteCommentView(APIView):
 
     def delete(self,request,pk):
         current_comment = MyComment.objects.get(id=pk)
+        comment_book =current_comment.current_book
         current_user = request.user
         comment_user = current_comment.account
         if comment_user == current_user:
+            comment_book.comment_count-=1
+            comment_book.save()
             current_comment.delete()
             return Response({'message':'Your Comment successfully deleted!'})
         else:
             return Response({'message':'You dont have permission to delete this comment!'})
-
-
-class CommentProfileView(APIView):
+          
+class CommentProfileView(APIView,PaginationHandlerMixin):
 
     model = MyComment
+    pagination_class = BasicPagination
     parser_classes = [JSONParser]
 
     def get_object(self, pk):
@@ -439,7 +428,7 @@ class CommentProfileView(APIView):
         user=Account.objects.get(pk=pk)
         if MyComment.objects.filter(account=user).exists():
             comment_list = MyComment.objects.filter(account=user)
-            serilalizer = CommentSerializer(comment_list,many=True)
+            serilalizer = CommentProfSerializer(comment_list,context={"user": pk},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
         return Response(response)
@@ -458,6 +447,11 @@ class LikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if DislikeComment.objects.filter(account=user,comment=comment).exists():
+                userdislike=DislikeComment.objects.get(account=user,comment=comment)
+                userdislike.delete()
+                comment.DislikeCount-=1
+                comment.save()
             newlike = LikeComment(account=user,comment=comment)
             
             comment.LikeCount+=1
@@ -474,8 +468,6 @@ class LikeCommentView(APIView):
             return Response({'message' : "True",})
         return Response({'message' : "False",})
         
-        
-
 class DislikeCommentView(APIView):
 
     def post(self,request,pk):
@@ -490,8 +482,13 @@ class DislikeCommentView(APIView):
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
         else:
+            if LikeComment.objects.filter(account=user,comment=comment).exists():
+                userlike=LikeComment.objects.get(account=user,comment=comment)
+                userlike.delete()
+                comment.LikeCount-=1
+                comment.save()
+
             newlike = DislikeComment(account=user,comment=comment)
-            
             comment.DislikeCount+=1
             comment.save()
             newlike.save()
@@ -512,9 +509,11 @@ class FilterCommentbyTime(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-sendtime'))
-            serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            com_list = MyComment.objects.filter(current_book=bk).order_by('-sendtime')
+            comment_list = self.paginate_queryset(com_list)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
+            count = Paginator(com_list,10).num_pages
+            return Response({"comments" : serializer.data, "count": count})
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -524,9 +523,11 @@ class FilterCommentbyLike(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=bk).exists():
-            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=bk).order_by('-LikeCount'))
-            serilalizer = CommentSerializer(comment_list,many=True)
-            return Response(serilalizer.data)
+            com_list = MyComment.objects.filter(current_book=bk).order_by('-LikeCount')
+            comment_list = self.paginate_queryset(com_list)
+            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
+            count = Paginator(com_list,10).num_pages
+            return Response({"comments" : serializer.data, "count": count})
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -536,9 +537,11 @@ class FilterQuotebyTime(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
-            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-sendtime'))
-            serilalizer = QuoteSerializer(quote_list,many=True)
-            return Response(serilalizer.data)
+            q_list = MyQuote.objects.filter(current_book=bk).order_by('-sendtime')
+            quote_list = self.paginate_queryset(q_list)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
+            count = Paginator(q_list,10).num_pages
+            return Response({"quotes" : serializer.data, "count": count})
         response = {'message' : 'No Quote!',}
         return Response(response)
 
@@ -548,10 +551,211 @@ class FilterQuotebyLike(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         bk=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=bk).exists():
-            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=bk).order_by('-Likes'))
-            serilalizer = QuoteSerializer(quote_list,many=True)
-            return Response(serilalizer.data)
+            q_list = MyQuote.objects.filter(current_book=bk).order_by('-Likes')
+            quote_list = self.paginate_queryset(q_list)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
+            count = Paginator(q_list,10).num_pages
+            return Response({"quotes" : serializer.data, "count": count})
         response = {'message' : 'No Quote!',}
         return Response(response)
 
+class DiscussionView(APIView,PaginationHandlerMixin):
 
+    pagination_class = BasicPagination
+    def get(self,request,pk):
+        group = Group.objects.get(id=pk)
+        discuss = Discussion.objects.filter(group=group)
+        if discuss is not None:
+            discuss_list = self.paginate_queryset(discuss)
+            serializer = DiscussionSerializer(discuss_list,many=True)
+            count = Paginator(discuss,10).num_pages
+            return Response({"discussions" : serializer.data, "count": count})
+        response = {'message' : 'No Discussion!',}
+        return Response(response)
+
+
+    def post(self,request,pk):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        serializer = CreateDiscussionSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            if not Discussion.objects.filter(title=title,group=group).exists():
+                description = serializer.data.get("description")
+                new_discuss = Discussion(creator=user,title=title,description=description,group=group)
+                new_discuss.save()
+                seri = DiscussionSerializer(new_discuss,many=False)
+                return Response(seri.data)
+            else:
+                return Response({"message":"A Discussion group with this name exists!"})
+
+        return Response(serializer.errors)
+
+class DiscussionDetailsView(APIView):
+    
+    def get(self,request,pk):
+        discuss = Discussion.objects.get(id=pk)
+        serializer = DiscussionSerializer(discuss,many=False)
+        return Response(serializer.data)
+
+class DiscussionChatView(APIView,PaginationHandlerMixin):
+
+    pagination_class = BasicPagination
+    def get(self,request,pk):
+        discuss = Discussion.objects.get(id=pk)
+        chats = Chat.objects.filter(discuss=discuss)
+        if chats is not None:
+            chat_list = self.paginate_queryset(chats)
+            serializer = DiscussionChatSerializer(chat_list,many=True)
+            count = Paginator(chats,10).num_pages
+            return Response({"chats" : serializer.data, "count": count})
+        response = {'message' : 'No Chat!',}
+        return Response(response)
+
+
+    def post(self,request,pk):
+        user = request.user
+        discuss = Discussion.objects.get(id=pk)
+        current_group = discuss.group
+        if not Member.objects.filter(user=user,group=current_group).exists():
+            return Response({"message":"You aren't a group member!"})
+        else:
+            serializer = CreateChatSerializer(data=request.data)
+            if serializer.is_valid():
+                chattext = serializer.data.get("chat_text")
+                new_chat = Chat(user=user,discuss=discuss,chat_text=chattext)
+                new_chat.save()
+                return Response({"message":"new chat!"})
+            return Response(serializers.errors)
+        
+class GroupView(APIView,PaginationHandlerMixin):
+
+    pagination_class = BasicPagination
+    model = Group
+
+    def get(self,request):
+        groups = Group.objects.all()
+        if groups is not None : 
+            gp_list = self.paginate_queryset(groups)
+            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
+            count = Paginator(groups,10).num_pages
+            return Response({"groups" : serializer.data, "count": count})
+        response = {'message' : 'No Group!',}
+        return Response(response)
+
+    def post(self,request):
+        user=request.user
+        serializer = CreateGroupSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            summary = serializer.data.get("summary")
+            if  not Group.objects.filter(title=title).exists():
+                if 'photo' in request.FILES:
+                    new_group = Group(owner=user,title=title,summary=summary,group_photo=request.FILES["photo"])
+                    new_group.save()
+                    new_member = Member(group=new_group,user=user)
+                    new_member.save()
+                    return Response({"data":GroupDetSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
+                else:
+                    new_group = Group(owner=user,title=title,summary=summary)
+                    new_group.save()
+                    new_member = Member(group=new_group,user=user)
+                    new_member.save()
+                    return Response({"data":GroupDetSerializer(new_group,many=False).data,"message":"Your group is succesfully created!",})
+            return Response({"message":"A group with this name exists!"})
+        return Response(serializer.errors)
+
+class GroupDetailsView(APIView):
+
+    model = Group
+    
+    def get(self,request, pk):
+        group = Group.objects.get(id=pk)
+        serializer = GroupDetSerializer(group,many=False)
+        return Response(serializer.data)
+
+    def delete(self,request,pk):
+        group = Group.objects.get(id=pk)
+        current_user = request.user
+        owner = group.owner
+        if owner == current_user:
+            group.delete()
+            return Response({"message":"Successfull delete group!"})
+        return Response({"message":"No permission!"})
+      
+class MemberGroupView(APIView,PaginationHandlerMixin):
+
+    pagination_class = BasicPagination
+    def get(self ,request ,pk ):
+        group = Group.objects.get(id=pk)
+        if Member.objects.filter(group=group).exists():
+            members = Member.objects.filter(group=group)
+            mem_list = self.paginate_queryset(members)
+            serializer = MemberSerializer(mem_list,many=True)
+            count = Paginator(members,10).num_pages
+            return Response({"members" : serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data, "count": count})
+        return Response({"message":"No member!"})
+
+    def post(self ,request ,pk ):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        if user == group.owner:
+            return Response({"message":"You are owner!You cant leave or join group!"},status=HTTP_400_BAD_REQUEST)
+        if  not Member.objects.filter(user=user,group=group).exists():
+            new_member = Member(user=user,group=group)
+            new_member.save()
+            members = Member.objects.filter(group=group)
+            serializer = MemberSerializer(members,many=True)
+            return Response({"message":"You joind this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
+        Member.objects.get(user=user,group=group).delete()
+        members = Member.objects.filter(group=group)
+        serializer = MemberSerializer(members,many=True)
+        return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
+
+class DynamicSearchFilter(filters.SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search_fields', [])
+
+class DynamicGroupAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = Group.objects.all()
+    serializer_class = GroupDetSerializer
+  
+class FilterGroupbyTime(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+
+    def get(self,request):
+        if Group.objects is not None:
+            groups = Group.objects.order_by('-create_time')
+            gp_list = self.paginate_queryset(groups)
+            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
+            count = Paginator(groups,10).num_pages
+            return Response({"groups" : serializer.data, "count": count})
+        response = {'message' : 'No Group!',}
+        return Response(response)
+
+class FilterGroupbyMember(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+
+    def get(self,request):
+        if Group.objects is not None:
+            groups = sorted(Group.objects.all(),  key=lambda m: -m.members_count)
+            gp_list=self.paginate_queryset(groups)
+            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
+            count = Paginator(groups,10).num_pages
+            return Response({"groups" : serializer.data, "count": count})
+        response = {'message' : 'No Group!',}
+        return Response(response)
+      
+class FilterBookbyRate(APIView):
+    def get(self,request):
+        
+        book_list=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
+        serializer = bookSerializer(book_list,many=True)
+        return Response(serializer.data)
+   
+class FilterBookbyComment(APIView):
+    def get(self,request):
+        book_list=book.objects.order_by('-comment_count')
+        serializer = bookSerializer(book_list, many=True)
+        return Response(serializer.data)
