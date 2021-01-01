@@ -36,8 +36,8 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          console.log(data.data);
-          setBookRead(data.data);
+          console.log(data.data.data);
+          setBookRead(data.data.data);
         });
     }, []);
 
@@ -48,7 +48,7 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          setBookReading(data.data);
+          setBookReading(data.data.data);
         });
     }, []);
 
@@ -59,7 +59,7 @@ function Slide(props) {
        "Authorization":"Token "+Cookies.get("userToken")}
         })
         .then((data) => {
-          setBookWantto(data.data);
+          setBookWantto(data.data.data);
         });
     }, []);
 
@@ -122,43 +122,11 @@ function Slide(props) {
           <List >
              <div className="brand1 text-center mb-md-3 ml-sm-5 mt-sm-1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
 
-      {bookRead.Count === 0 ? (
+      {bookRead.length === 0 ? (
 
         <div className="subbrand1 text-center mt-sm-n4 ml-sm-5 pt-md-3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
-      ) : 
-      <div></div>
-        }
-        {bookRead.length ===1 ? 
-    <div className = "slid">
-        <Slider {...settings}>
-            <div className="out" key={bookRead.id}>
-              <div className="card car"onClick={() => bookSelectedHandler( bookRead )}>
-                <img
-                  className="squer img-responsive" 
-                  src={bookRead.imgurl}
-                />
-                </div>
-                <div className="body">
-                     {bookRead.title.length >17 ?
-<BlueOnGreenTooltip title={bookRead.title}>
-<div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookRead.title}</div>
-      </BlueOnGreenTooltip>
-      : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookRead.title}</div>
-      
-} 
-              <small className= "title0">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{bookRead.author}</h5>
-
-                   </small>                   
-              </div>
-            </div>
-            </Slider>
-            </div>
-            :
-            <div></div>
-        }
-        {bookRead.length >1 ?
+      ) : (
        <div className = "slid">
         <Slider {...settings}>
           {bookRead.map((current) => (
@@ -187,50 +155,17 @@ function Slide(props) {
           ))}
             </Slider>
             </div>
-            :
-            <div></div>
+      )
         }
     
     <div className="brand2 text-center mb-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
-      {bookReading.Count === 0 ? (
+      {bookReading.length === 0 ? (
         <div className="subbrand2 text-center mt-3 mt-sm-n4 ml-sm-5 pb-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
-      ) : 
-        <div></div>
-          }
-          {bookReading.length ===1 ? 
-      <div className = "slid">
-          <Slider {...settings}>
-              <div className="out" key={bookReading.id}>
-                <div className="card car"onClick={() => bookSelectedHandler( bookReading )}>
-                  <img
-                    className="squer img-responsive" 
-                    src={bookReading.imgurl}
-                  />
-                  </div>
-                  <div className="body">
-                       {bookReading.title.length >17 ?
-  <BlueOnGreenTooltip title={bookReading.title}>
-  <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookReading.title}</div>
-        </BlueOnGreenTooltip>
-        : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookReading.title}</div>
-        
-  } 
-                <small className= "title0">
-                     <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{bookReading.author}</h5>
-  
-                     </small>                   
-                </div>
-              </div>
-              </Slider>
-              </div>
-              :
-              <div></div>
-          }
-          {bookReading.length >1 ?
+      ) : (
          <div className = "slid">
           <Slider {...settings}>
-            {bookRead.map((current) => (
+            {bookReading.map((current) => (
               <div className="out" key={current.id}>
                 <div className="card car"onClick={() => bookSelectedHandler( current )}>
                   <img
@@ -256,52 +191,19 @@ function Slide(props) {
             ))}
               </Slider>
               </div>
-              :
-              <div></div>
+      )
           }
       
       
            <div className="brand3 text-center ml-1 ml-sm-5 mb-5 mt-sm-n4 pt-5" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
 
-      {bookWantto.Count === 0 ? (
+      {bookWantto.length === 0 ? (
           <div className="subbrand3 text-center  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
 
-      ) : 
-        <div></div>
-          }
-          {bookWantto.length ===1 ? 
-      <div className = "slid">
-          <Slider {...settings}>
-              <div className="out" key={bookWantto.id}>
-                <div className="card car"onClick={() => bookSelectedHandler( bookWantto )}>
-                  <img
-                    className="squer img-responsive" 
-                    src={bookWantto.imgurl}
-                  />
-                  </div>
-                  <div className="body">
-                       {bookWantto.title.length >17 ?
-  <BlueOnGreenTooltip title={bookWantto.title}>
-  <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookWantto.title}</div>
-        </BlueOnGreenTooltip>
-        : <div className="card-title3" style={{fontWeight:"bold",color:"black"}}>{bookWantto.title}</div>
-        
-  } 
-                <small className= "title0">
-                     <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{bookWantto.author}</h5>
-  
-                     </small>                   
-                </div>
-              </div>
-              </Slider>
-              </div>
-              :
-              <div></div>
-          }
-          {bookWantto.length >1 ?
+      ) : (
          <div className = "slid">
           <Slider {...settings}>
-            {bookRead.map((current) => (
+            {bookWantto.map((current) => (
               <div className="out" key={current.id}>
                 <div className="card car"onClick={() => bookSelectedHandler( current )}>
                   <img
@@ -327,8 +229,7 @@ function Slide(props) {
             ))}
               </Slider>
               </div>
-              :
-              <div></div>
+      )
           }
       
       
