@@ -24,6 +24,7 @@ import Mygroups from './Mygroups';
 // import { TabBarIndicator } from 'react-native-tab-view';
   // import { SearchBar } from 'react-native-elements';
  import Eachgroup from './Eachgroup';
+ import GroupPage from './GroupPage';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,6 +42,7 @@ const Groupnavigation =()=>{
        {/* <View style={{position:'absolute'}}></View> */}
       <Tab.Screen name="گروه ها" component={Groups} elevation={50} style={{}} />
       <Tab.Screen name="گروه های من" component={Mygroups} />
+    
     </Tab.Navigator>
    
   );

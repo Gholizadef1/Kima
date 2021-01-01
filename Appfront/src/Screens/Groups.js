@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
@@ -20,7 +19,7 @@ import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
-const Groups = () => {
+const Groups = ({navigation}) => {
    
 
    const searchpost=async(page)=>{
@@ -86,6 +85,10 @@ const Groups = () => {
   
   
    }
+
+
+
+
 
    const lastinformation=()=>{
     if(information.length>0)
@@ -388,13 +391,6 @@ const Groups = () => {
 
           }}
 
-
-        {/* <TouchableOpacity onPress={() => navigation.navigate('ShowGroupPage')}>
-        <Eachgroup></Eachgroup>
-        </TouchableOpacity> */}
-   
-    );
-
         />:null}
         {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
@@ -444,7 +440,7 @@ const Groups = () => {
             data={information}
             renderItem={({ item }) =><>
          
-            <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ShowGroupPage',item.id)}>
             <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
              discription={item.summary} title={item.title} ></Eachgroup>
              </TouchableOpacity>

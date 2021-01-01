@@ -1,3 +1,4 @@
+
 import React,{useState , useEffect} from 'react';
 import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card , List ,ListItem, Thumbnail } from 'native-base';
@@ -14,7 +15,7 @@ import { not } from 'react-native-reanimated';
 
 
 
-const GroupPage = ({navigation}) => {
+const GroupPage = (prop) => {
   const [picture,setpicture]=useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo,setgroupinfo]=useState(null);
@@ -32,7 +33,7 @@ const GroupPage = ({navigation}) => {
 
 
   const getInfo = async () => {
-    const response = axiosinst.get('/api/group/details/4')
+    const response = axiosinst.get('/api/group/details/'+ prop.route.params.id)
     .then(function(response){
       setgroupinfo(response.data);
 //      console.log('GROUP PAGE4')
@@ -130,7 +131,7 @@ if (!groupinfo){
       }
     })
       .then(async function (response) {
-        navigation.navigate('ShowGroups')
+        prop.navigation.navigate('ShowGroups')
         console.log('delete')
       })
       .catch(function (error) {
@@ -163,7 +164,7 @@ if (!groupinfo){
 
                     </View>
 
-                    {picture!='http://3f58107b5393.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+                    {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
                       source={{uri:groupinfo.profile_photo}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
                       source={require('../../assets/avatar.png')}
