@@ -53,14 +53,18 @@ const Quotecard = (prop) => {
   }
   useFocusEffect(
     React.useCallback(() => {
-      getlike();
+      if(prop.isliked)
+      setheart('#1f7a8c')
+      else
+      setheart('lightblue')
+      // getlike();
     }, [])
 
   )
   const hieght = prop.height
   const [like, setlike] = useState('gray')
   // const [dislike,setdislike]=useState('lightblue')
-  const [heart, setheart] = useState(false);
+  const [heart, setheart] = useState('lightblue');
   // useEffect(()=>{
   //    equal();
   //    console.log(prop.id+'propaccountid')
