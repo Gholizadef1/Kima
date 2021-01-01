@@ -51,7 +51,7 @@ const Eachgroup = (prop) => {
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
         width: wp('16%'),
-         borderRadius: 100,
+         borderRadius: 20,
         position: 'absolute',borderColor:'#1f7a8c'
         ,borderWidth:wp('0.3%'),
         // borderBottomColor:'red',borderBottomWidth:2,borderRightWidth:2,borderRightColor:'green'
@@ -59,7 +59,7 @@ const Eachgroup = (prop) => {
 
        >
 
-       </ImageBackground> : <ImageBackground borderRadius={100}
+       </ImageBackground> : <ImageBackground borderRadius={20}
 
          source={{uri:prop.groupphoto}}
          style={styles.avatar}
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
       avatar: {
         height: hp('8%'),
         width: wp('16%'),
-        borderRadius: 100,
+        borderRadius: 20,
         position: 'absolute',
         // borderColor:'#1f7a8c'
     

@@ -317,7 +317,7 @@ const Mygroups = () => {
       marginTop:hp('-1.5%'),
       width: wp('28%'),
       marginLeft:wp('-1%'),
-      borderRadius: 5,
+      borderRadius: 20,
       position:'absolute',
       borderColor:'blue'}}
        onPress={() => { pickfromgallery(props)}}>
@@ -329,10 +329,11 @@ const Mygroups = () => {
       marginTop:hp('-1.5%'),
       width: wp('28%'),
       marginLeft:wp('-1%'),
-      borderRadius: 5,
+      borderRadius:20 ,
       position:'absolute',
-      borderColor:'#1f7a8c',
-      borderWidth:wp('0.2%')}}
+      // borderColor:'#1f7a8c',
+      // borderWidth:wp('0.2%')
+      }}
         //  onBlur={props.handleBlur('photo')}
      
 
@@ -626,7 +627,7 @@ const styles = StyleSheet.create({
       marginTop:hp('-1.5%'),
       width: wp('28%'),
       marginLeft:wp('-1%'),
-      borderRadius: 5,
+      borderRadius: 20,
       position:'absolute'
     },
     loader:{
