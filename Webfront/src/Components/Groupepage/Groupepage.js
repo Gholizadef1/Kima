@@ -49,14 +49,17 @@ import {
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
   const [showdiscussion,setShowdiscussion]=useState([]);
-    
+  let { groupId } = useParams();
   const [newDiscussion,setNewDiscussion] = useState({
     name : "",
     description: ""
   });
 
+
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/details/5")
+    if (props.match.params.groupId) {
+
+    axios.get("http://127.0.0.1:8000/api/group/details/" + props.match.params.groupId)
       
       .then((data) => {
          console.log(data);
@@ -71,7 +74,7 @@ import {
         console.log(ginfo.group_photo);
       });
       
-  }, [join]);
+  }}, [join]);
   ///////////////////////////////////////////////////////
   
 /////////////////////////////////////////////////////   
