@@ -9,18 +9,29 @@ import axios from 'axios'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const Home = ({navigation}) => { 
 
     const [image,setImage] = useState([])
     const [best,setbest] = useState([])
     const [mostdis,setmostdis] = useState([])
+    useFocusEffect(
+        React.useCallback(() => {
+            getImageFromAPI()
+            getbestsFromAPI()
+            getmostFromAPI();
+        }, [])
+    
+      )
 
-    useEffect(() =>{
-        getImageFromAPI()
-        getbestsFromAPI()
-        getmostFromAPI();
-    },[])
+    // useEffect(() =>{
+    //     getImageFromAPI()
+    //     getbestsFromAPI()
+    //     getmostFromAPI();
+    // },[])
+    
 
     function getImageFromAPI(){
         axiosinst.get('/bookdetail')

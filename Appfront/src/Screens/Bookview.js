@@ -213,12 +213,12 @@ textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
 </Body>
 
 <Button style={{marginTop:hp('4%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
-                      width:200 , marginLeft:wp('20%') , borderRadius:15}}
+                      width:200 , alignSelf:'center' , borderRadius:15}}
 onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
 title: response.data.title,
 });}}><Text style={{marginLeft:wp('12%')}}>صفحه نظرات</Text></Button>
 
-<Button style={{marginLeft:wp('20%') , backgroundColor:'#1F7A8C' , 
+<Button style={{alignSelf:'center' , backgroundColor:'#1F7A8C' , 
                             width:200 , borderRadius:15 , marginBottom:hp('3%')}}
 onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
 title: response.data.title,
