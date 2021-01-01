@@ -11,6 +11,7 @@ const GroupPageNavigation = () => {
       <GroupPagenav.Navigator initialRouteName={'Groups'}>
       <GroupPagenav.Screen name = 'Groups' component={Groups} options={{headerShown: false}} ></GroupPagenav.Screen>
       <GroupPagenav.Screen name = "ShowGroupPage" component={GroupPage} options={{headerShown: false}} />
+      <GroupPagenav.Screen name = "ShowGroups" component={Groups} options={{headerShown: false}} />
       </GroupPagenav.Navigator>
   );
 }

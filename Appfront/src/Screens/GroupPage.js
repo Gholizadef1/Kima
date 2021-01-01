@@ -32,7 +32,7 @@ const GroupPage = ({navigation}) => {
 
 
   const getInfo = async () => {
-    const response = axiosinst.get('/api/group/details/2')
+    const response = axiosinst.get('/api/group/details/4')
     .then(function(response){
       setgroupinfo(response.data);
 //      console.log('GROUP PAGE4')
@@ -41,7 +41,7 @@ const GroupPage = ({navigation}) => {
     };
 
     const getMembers = async () => {
-      const response = axiosinst.get('/api/group/members/2')
+      const response = axiosinst.get('/api/group/members/4')
       .then(function(response){
 //        console.log('**'+response.data.members[0].user.username)
         console.log('++'+response.data.owner.username)
@@ -59,7 +59,7 @@ const GroupPage = ({navigation}) => {
           console.log('_______')
         }
         for(var i =0 ; i<response.data.count ; i++){
-          if(response.data.members[i].user.username != username){
+          if(response.data.members[i].user.username != username || response.data.count === 0){
             setnotjoined(true)
           }
         }
@@ -88,7 +88,7 @@ if (!groupinfo){
   const JoinGroup = async () => {
       const back = {}
       const backk = JSON.stringify(back);
-      axiosinst.post('/api/group/members/2' , backk , {
+      axiosinst.post('/api/group/members/4' , backk , {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -106,7 +106,7 @@ if (!groupinfo){
   const LeaveGroup = async () => {
     const back = {}
     const backk = JSON.stringify(back);
-    axiosinst.post('/api/group/members/2' , backk , {
+    axiosinst.post('/api/group/members/4' , backk , {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -123,7 +123,7 @@ if (!groupinfo){
 }
   const deleteGroup = async()=>{
     console.log('delete')
-    axiosinst.delete('/api/group/details/2' ,{
+    axiosinst.delete('/api/group/details/4' ,{
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
