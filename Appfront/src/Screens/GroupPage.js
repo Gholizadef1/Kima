@@ -1,6 +1,6 @@
 
 import React,{useState , useEffect} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground ,Image} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground ,Image,FlatList} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card , List ,ListItem, Thumbnail } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -16,7 +16,7 @@ import { not } from 'react-native-reanimated';
 
 
 const GroupPage = (prop) => {
-
+  const[refreshmembers,setrefreshmembers]=useState(false)
   const [picture,setpicture]=useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo,setgroupinfo]=useState(null);
@@ -68,13 +68,14 @@ const GroupPage = (prop) => {
       const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
       .then(async function(response){
        console.log(response.data)
+       setmembers(response.data.members)
        console.log('member 0'+response.data.members[0].user.username)
        console.log('ownerrr '+response.data.owner.username)
        console.log('count   '+response.data.count)
       //  console.log('member 0'+response.data.members[0].user.username)
       if(username===response.data.owner.username)
         await setowner(true)
-        getInfo();
+        // getInfo();
         // navigation.navigate('')
         // for (var i =0 ; i<response.data.members.length ; i++){
         //   if (response.data.members[i].user.username === username ){
@@ -291,7 +292,7 @@ if (!groupinfo){
 
           <Text style ={{fontSize:20 , marginTop:hp('2%') , marginLeft:wp('7%'),color:'#1F7A8C' , fontWeight:'bold'}}> اعضای گروه :</Text>
 
-          <List>
+          {/* <List>
             <ListItem  style={{marginTop:hp('1%')}} avatar>
               <Left>
                 <Thumbnail source={require('../../assets/sea.jpg')} />
@@ -308,7 +309,49 @@ if (!groupinfo){
                 <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
               </Body>
             </ListItem>
-          </List>
+          </List> */}
+
+
+
+          <FlatList
+            style={{ marginBottom: hp('5%') }}
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => {
+
+              console.log('-----AKHAR LIST')
+            }}
+            onEndReachedThreshold={0.5}
+            keyExtractor={(item) => item.id}
+            refreshing={refreshmembers}
+            onRefresh={async () => {
+             console.log('refresh')
+            }}
+
+            data={members}
+            renderItem={({ item }) =><>
+         
+              <View style={{left:wp('5%'),marginTop:hp('2%')}}>
+                     {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={{}} size={90}
+                      source={{uri:groupphoto}}
+                      ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={90}
+                      source={require('../../assets/group.jpg')}
+                      ></Avatar.Image>}
+                       <Text style={{alignSelf:'flex-start',left:wp('5%')}}>{item.user.username}</Text>
+              </View>
+              {/* <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
+                <Text style={{marginTop:hp('-4%')}}>{item.user.username}</Text>
+              </Body> */}
+            </>
+            }
+          // extraData={finfo}
+          >
+          </FlatList> 
+
+
+
+
+
+
           <Button style={{marginLeft:wp('90%')}} transparent>
             <Text style={{color:'#1F7A8C'}}>بیشتر</Text>
           </Button>
