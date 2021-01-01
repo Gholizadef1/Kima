@@ -6,5 +6,7 @@ admin.site.register(MyBook)
 admin.site.register(MyQuote)
 admin.site.register(MyComment)
 admin.site.register(LikeComment)
-admin.site.register(Ratinguser)
+admin.site.register(Group)
+admin.site.register(Discussion)
+
 
