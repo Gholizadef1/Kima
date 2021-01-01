@@ -36,7 +36,9 @@ const GroupPage = (prop) => {
   //   setreload(false)
   // }
   useEffect(() =>{
-
+    setjoined(false)
+    setowner(false)
+    setnotjoined(false)
     getInfo();
     getMembers();
     getUsername();
@@ -239,19 +241,16 @@ if (!groupinfo){
                       <Text style={styles.groupname}>{groupinfo.title}</Text>
                       <Text style={{color:'#a9a9a9' , marginLeft:wp('19') , marginTop:hp('1')}}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-                      {joind === true ? <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                        {joind === true ? <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                         , backgroundColor:'#1F7A8C'}} onPress = {() => LeaveGroup()}>
                           <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>ترک گروه</Text>
-                          </Button> : <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
-                          , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
-                            <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
-                            </Button> }
+                          </Button> : null }
 
-                          {/* {joind === false ?
+                          {notjoined === true ?
                           <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                           , backgroundColor:'#1F7A8C'}} onPress = {() => JoinGroup()}>
                             <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
-                            </Button> : null} */}
+                            </Button> : null}
 
                           {owner === true ?<Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                           , backgroundColor:'#1F7A8C'}} onPress = {() => deleteGroup()}>

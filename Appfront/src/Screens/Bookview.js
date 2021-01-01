@@ -23,12 +23,13 @@ const Bookview = (prop) => {
 
   const [ratenum , setratenum] = useState(null);
 
-
+  const [loading,setloading]=useState(true);
   const [result , setResult] = useState(null);
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
   const getResult = async (id) => {
   const response = await axiosinst.get('/bookdetail/'+id);
+  setloading(false)
   setResult(response.data);
   };
   useEffect(() =>{
@@ -69,6 +70,7 @@ axiosinst.post('/bookdetail/' +id, back, {
 }
 })
 .then(async function (response) {
+  // setloading(false)
 console.log(response.data)
 getPicker();
 })

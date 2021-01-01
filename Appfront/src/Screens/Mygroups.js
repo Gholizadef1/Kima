@@ -219,7 +219,7 @@ const Mygroups = () => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<numberofgp/10){
+     if(page<numberofgp/10+1){
      response(page+1);
      }
      else
