@@ -16,6 +16,7 @@ import { not } from 'react-native-reanimated';
 
 
 const GroupPage = (prop) => {
+
   const [picture,setpicture]=useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo,setgroupinfo]=useState(null);
@@ -25,19 +26,34 @@ const GroupPage = (prop) => {
   const [notjoined,setnotjoined]=useState(null);
   const [members,setmembers]=useState(null);
   const [groupphoto,setgroupphoto]=useState(null)
+  const [reload,setreload]=useState(false)
+  // if(owner===true)
+  // {
+  //   if(reload===false)
+  //   setreload(true)
+  //   else
+  //   setreload(false)
+  // }
   useEffect(() =>{
+    
     getInfo();
     getMembers();
     getUsername();
 },[]);
 
+// useFocusEffect(
+//   React.useCallback(async() => {   
+//      getInfo();
+//     getMembers();
+//     getUsername();
+//   },[]))
 
   const getInfo = async () => {
     const response = axiosinst.get('/api/group/details/'+ prop.route.params.id)
     .then(async function(response){
       await setgroupinfo(response.data);
       console.log('GROUP PAGE4')
-      console.log(response.data)
+      // console.log(response.data)
       console.log(response.data.group_photo+'group photo')
       console.log(groupinfo+'*****')
       setgroupphoto(`http://505a2dd8d5cc.ngrok.io${response.data.group_photo}`)
@@ -50,38 +66,43 @@ const GroupPage = (prop) => {
     const getMembers = async () => {
       console.log('GETMEMBERS')
       const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
-      .then(function(response){
-       console.log('**'+response.data.members[0].user.username)
-       console.log('+++++'+response.data.owner.username)
-       console.log('++'+response.data.count)
-       console.log('members'+response.data.members[0].user.username)
-        for (var i =0 ; i<response.data.members.length ; i++){
-          if (response.data.members[i].user.username === username ){
-            console.log('((((((((((')
-            if ( response.data.members[i].user.username === response.data.owner.username ){
-              setowner(true)
-            }
-          }
-        }
-        for(var i =0 ; i<response.data.count ; i++){
-          console.log('&&&&&&&&&')
-          if(response.data.members[i].user.username === username){
-             if (response.data.members[i].user.username != response.data.owner.username){
-              console.log('ghable joined')
-              setjoined(true)
-              console.log('baade join')
-            }
-            console.log('_______')
-             }
-        }
-        if ( owner === false && joind === false ){
-          setnotjoined(true)
-        }
-        for(var i =0 ; i<response.data.count ; i++){
-          if(response.data.members[i].user.username != username || response.data.count === 0){
-            setnotjoined(true)
-          }
-        }
+      .then(async function(response){
+       console.log(response.data)
+       console.log('member 0'+response.data.members[0].user.username)
+       console.log('ownerrr '+response.data.owner.username)
+       console.log('count   '+response.data.count)
+      //  console.log('member 0'+response.data.members[0].user.username)
+      if(username===response.data.owner.username)
+        await setowner(true)
+        getInfo();
+        // navigation.navigate('')
+        // for (var i =0 ; i<response.data.members.length ; i++){
+        //   if (response.data.members[i].user.username === username ){
+        //     console.log('((((((((((')
+        //     if ( response.data.members[i].user.username === response.data.owner.username ){
+        //       setowner(true)
+        //     }
+        //   }
+        // }
+        // for(var i =0 ; i<response.data.count ; i++){
+        //   console.log('&&&&&&&&&')
+        //   if(response.data.members[i].user.username === username){
+        //      if (response.data.members[i].user.username != response.data.owner.username){
+        //       console.log('ghable joined')
+        //       setjoined(true)
+        //       console.log('baade join')
+        //     }
+        //     console.log('_______')
+        //      }
+        // }
+        // if ( owner === false && joind === false ){
+        //   setnotjoined(true)
+        // }
+        // for(var i =0 ; i<response.data.count ; i++){
+        //   if(response.data.members[i].user.username != username || response.data.count === 0){
+        //     setnotjoined(true)
+        //   }
+        // }
         
       })
       };
@@ -152,11 +173,13 @@ if (!groupinfo){
       }
     })
       .then(async function (response) {
-        prop.navigation.navigate('ShowGroups')
+        prop.navigation.navigate('Groupmainpage')
         console.log('delete')
+        console.log('%%%%%%%%%%')
       })
       .catch(function (error) {
-        console.log(error);          
+        console.log(error);   
+        console.log('//////////////////')       
       });
     
   }
@@ -206,8 +229,7 @@ if (!groupinfo){
                             <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}> عضو شدن</Text>
                             </Button> : null}   
 
-                          {owner === true ?
-                          <Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
+                          {owner === true ?<Button style={{marginLeft:wp('60%') , width:110 , borderRadius:15 , marginTop:hp('-8%')
                           , backgroundColor:'#1F7A8C'}} onPress = {() => deleteGroup()}>
                             <Text style={{marginLeft:wp('7.5%') , fontSize:15 , fontWeight:'bold' , color:'white'}}>حذف گروه</Text>
                             </Button> : null}                  
@@ -324,10 +346,11 @@ const styles = StyleSheet.create({
       
   },
   groupname : {
-    fontSize:27 ,
+    fontSize:15 ,
     fontWeight:'bold',
     marginLeft:wp('19%') ,
-    marginTop:hp('3%')
+    marginTop:hp('3%'),
+    
   }
   });
 export default GroupPage;
