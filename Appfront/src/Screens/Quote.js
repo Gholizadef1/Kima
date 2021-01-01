@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Image,FlatList, ImageBackground, Alert,ActivityIndicator,Keyboard} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -48,29 +47,36 @@ const callbackFunction = async(childData) => {
   //  await response(1);
 }
   
-  const getlike=async(item)=>{
-    // await setTimeout(() => {  console.log("World!"); }, 5000);
-    axiosinst.get('http://dc39baf075fd.ngrok.io/api/quotes/like/'+item.id,{"headers":
-    {
-     "Content-Type":"application/json",
-     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-    }})
-   .then(async function(response){
+  // const getlike=async(item)=>{
+  //   // await setTimeout(() => {  console.log("World!"); }, 5000);
+  //   axiosinst.get('http://505a2dd8d5cc.ngrok.io/api/quotes/like/'+item.id,{"headers":
+  //   {
+  //    "Content-Type":"application/json",
+  //    "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+  //   }})
+  //  .then(async function(response){
     
-        console.log(response);
-        if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
-     })
-   .catch(function(error){
-   console.log(error);
+  //       console.log(response);
+  //       if(response.data.message==='true'){setlike('#1F7A8C')}else{setlike('gray')}
+  //    })
+  //  .catch(function(error){
+  //  console.log(error);
 
-    })
-  }
+  //   })
+  // }
   const handleLoadMore = async() => {
    console.log('END OF THE LIST')
+   if(page<count){
     if(theend===false)
     response(page+1);
+   }
+   else
+   {
+     settheend(true)
+   }
    };
   const [theend,settheend]=useState(false)
+  const [count,setcount]=useState(1);
   const [likeotime, setlikeotime] = useState('/quote-filter-time');
   const [selectedValue, setselectedValue] = useState('none')
   const [selectedIndex, setSelectedIndex] = useState([]);
@@ -98,9 +104,10 @@ const callbackFunction = async(childData) => {
       console.log('PAGE 111')
     await settheend(false)
     await setinformation([])
+    console.log(information+'BAYAN KHALI BASHEEEEEEEEEE')
 
     console.log('IT IS HEAR SET INFO []')
-    console.log(information)
+    // console.log(information)
     
     }
     
@@ -112,16 +119,22 @@ const callbackFunction = async(childData) => {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
      const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
      page:page
+     },
+     "headers":
+     {
+       "Content-Type": "application/json",
+       "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
      }
   })
+  await setcount(response.data.count);
   setrefresh(false)
   if(response.data.detail==='Invalid page.')
   settheend(true);
   else{
     settheend(false)
-     console.log(IDD+'IDDresponse');
+    //  console.log(IDD+'IDDresponse');
       //  console.log(response.data)
-      page===1?setinformation(response.data):setinformation(information.concat(response.data))
+      page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
       console.log('++++INFO++++'+information+"++++INFO++++")
      
   //     setloading(false);
@@ -149,7 +162,7 @@ const callbackFunction = async(childData) => {
       // settheend(false);
     
       // getlike()
-         
+      
         response(1)
      console.log(IDD+'IDD');
     
@@ -288,7 +301,7 @@ const callbackFunction = async(childData) => {
     
        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
    }}>
-     <DropDownPicker
+        { (information!=undefined) ? <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -324,8 +337,8 @@ const callbackFunction = async(childData) => {
 
           }}
 
-        />
-     { (information.length>=0) ?
+        />:null}
+     { (information!=undefined) ?
      
      <FlatList
     //  ListHeaderComponent={ <DropDownPicker
@@ -385,8 +398,8 @@ const callbackFunction = async(childData) => {
      onEndReachedThreshold={0.5}
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
-
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    isliked={item.isliked}
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 
 
@@ -394,7 +407,7 @@ const callbackFunction = async(childData) => {
     )}
       // extraData={finfo}
     >
-    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('30%'),fontWeight:'bold'}}>نقل قولی وجود ندارد</Text>}
+    </FlatList>: <Text style={{color:'gray',alignSelf:'center',marginTop:hp('30%'),fontWeight:'bold'}}>برای این کتاب نقل قولی وجود ندارد</Text>}
            </Animated.View>
    
            {showbutton?<Button style={styles.addcomment}

@@ -61,19 +61,19 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://dc39baf075fd.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://17ff0670a2de.ngrok.io/api/user-profile/"+id)
 
         
     
   //  console.log(response)
   console.log('*****')
 
-        console.log(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://dc39baf075fd.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://17ff0670a2de.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://17ff0670a2de.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://dc39baf075fd.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://17ff0670a2de.ngrok.io/media/default.jpg"))
 
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
@@ -127,7 +127,7 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
 
-          const response=await axiosinst.put('http://dc39baf075fd.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://17ff0670a2de.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -217,7 +217,7 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
 
-          const response=await axiosinst.put('http://dc39baf075fd.ngrok.io/api/update-profile/',formdata,{
+          const response=await axiosinst.put('http://17ff0670a2de.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -357,7 +357,7 @@ useFocusEffect(
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
 
-      {picture==='http://dc39baf075fd.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://17ff0670a2de.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}

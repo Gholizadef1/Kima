@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+
 const commentschema = yup.object({
 
   comment: yup.string()
@@ -36,6 +37,7 @@ const Comment = (prop) => {
   }
   const [delet, setdelet] = useState(false)
   const [refresh, setrefresh] = useState(false);
+  const [count,setcount]=useState(1);
   const [IDD, setIDD] = useState('');
   const equal = async (item) => {
 
@@ -75,10 +77,16 @@ const Comment = (prop) => {
       const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime, {
         params: {
           page: page
+        },
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
         }
+
       })
       // console.log(response.data)
-    
+      await setcount(response.data.count);
       if (response.data.detail === 'Invalid page.')
         settheend(true);
       else {
@@ -89,7 +97,7 @@ const Comment = (prop) => {
          console.log(information)
          console.log('RESPONSE DATE')
          console.log(response.date)
-         page===1?setinformation(response.data):setinformation(information.concat(response.data))
+         page===1?setinformation(response.data.comments):setinformation(information.concat(response.data.comments))
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         console.log(information)
         setrefresh(false)
@@ -126,8 +134,13 @@ const Comment = (prop) => {
   )
   const handleLoadMore = async() => {
     console.log('END OF THE LIST')
+    if(page<count){
      if(theend===false)
      response(page+1);
+    }
+    else{
+      settheend(true)
+    }
     };
   const [showbutton, setshowbutton] = useState(true);
   console.log(prop.route.params.title)
@@ -213,7 +226,8 @@ const Comment = (prop) => {
 
 
 
-                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height: '50%', width: '40%', marginLeft: '28%', marginBottom: '8%', marginTop: '0.5%' }}
+                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height: '50%', width: '40%',
+                 marginLeft: '28%', marginBottom: '8%', marginTop: '0.5%' }}
                   onPress={props.handleSubmit}
                 >
                   <Text style={{ color: '#ffff', fontSize: 15, fontWeight: 'bold', marginLeft: '85%', width: '100%' }}>ثبت</Text>
@@ -262,7 +276,7 @@ const Comment = (prop) => {
 
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
-      { (information.length>=0) ?    <DropDownPicker
+      { (information!=undefined) ?    <DropDownPicker
           items={[
             { label: 'فیلتر بر اساس تاریخ', value: 'none' },
             { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
@@ -326,7 +340,7 @@ const Comment = (prop) => {
           }}
 
         />:null}
-         { (information.length>=0) ? <FlatList
+         { (information!=undefined) ? <FlatList
           style={{ marginBottom: '17%' }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
@@ -335,7 +349,8 @@ const Comment = (prop) => {
           refreshing={refresh}
           onEndReached={() => handleLoadMore()}
           onEndReachedThreshold={0.7}
-          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
+           <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
           style={{ marginBottom: hp('15.5%') }}
           onRefresh={async () => {
             await setrefresh(true)
@@ -344,7 +359,10 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
-            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} picture={`http://dc39baf075fd.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            isliked={item.isliked}
+            isdisliked={item.isdisliked}
+            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            picture={`http://3fefbe690991.ngrok.io${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
         </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
