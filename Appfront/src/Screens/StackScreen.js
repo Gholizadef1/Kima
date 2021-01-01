@@ -35,13 +35,14 @@ const StackScreen=(prop)=>{
   return(
 
    <stackScreen.Navigator initialRouteName={'Log'}>
-     <stackScreen.Screen name='Log' component={Login} options={{headerTitle:'kima',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'},transitionSpec: {
-    open: TransitionSpecs.TransitionIOSSpec,
-    close: TransitionSpecs.TransitionIOSSpec,
-  },gestureDirection: 'horizontal',
+     <stackScreen.Screen name='Log' component={Login} options={{headerTitle:'کیما',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'},headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',position:'absolute',bottom:-15}
+  //    ,transitionSpec: {
+  //   open: TransitionSpecs.TransitionIOSSpec,
+  //   close: TransitionSpecs.TransitionIOSSpec,
+  // },gestureDirection: 'horizontal',
   }
   } ></stackScreen.Screen>
-     <stackScreen.Screen name="Sign"   component={SignUp} options={{headerTitle:'kima',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'}}} ></stackScreen.Screen>
+     <stackScreen.Screen name="Sign"   component={SignUp} options={{headerTitle:'کیما',headerTintColor:'#1F7A8C',headerStyle:{backgroundColor:'#E1E5F2'},headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}} ></stackScreen.Screen>
 
    </stackScreen.Navigator>
  

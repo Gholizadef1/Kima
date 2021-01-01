@@ -5,11 +5,9 @@ import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,
 
    Right, Left , Picker, Form, Item } from 'native-base';
 import {withNavigation} from 'react-navigation'
-
 import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
 import { Rating, AirbnbRating } from 'react-native-ratings';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';

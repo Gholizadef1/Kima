@@ -89,7 +89,9 @@ const signschema=yup.object({
         const params=JSON.stringify({username:'Hi',email:'Hi@Hi.Hi',password:'12345',password2:'12345'});
 
 
-        axios.post('http://dc39baf075fd.ngrok.io/register',backk,{"headers":{"content-type":"application/json",}})
+
+        axiosinst.post('/register',backk,{"headers":{"content-type":"application/json",}})
+
 
 
         .then(async function(response){
