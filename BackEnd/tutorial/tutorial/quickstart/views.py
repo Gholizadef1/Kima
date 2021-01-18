@@ -2,38 +2,31 @@ from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
 from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework import filters
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
 from django.shortcuts import render, get_object_or_404, redirect
-from rest_framework import status
+from rest_framework import status,generics,filters
 from .serializers import *
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
 from .models import *
 from .pagination import PaginationHandlerMixin
 from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
-from rest_framework import generics
-from .serializers import * 
-from rest_framework.parsers import JSONParser
 from django.core.paginator import Paginator
-
 
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
-
 
 
 @api_view(['POST','GET'])
@@ -249,19 +242,6 @@ class UserRatingview(APIView):
             return Response({"message":"update rate"})
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
-
-class BookRateView(generics.ListAPIView):
-    serializer_class=BookrateSerializer
-
-    def get_queryset(self,pk):
-        this_book=book.objects.get(pk=pk)
-        return Ratinguser.objects.filter(current_book=this_book)
-
-
-    def list(self, request,pk):
-        queryset = self.get_queryset(pk=pk)
-        serializer = BookrateSerializer(queryset, many=True)
-        return Response(serializer.data)
 
 class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
 
@@ -747,15 +727,3 @@ class FilterGroupbyMember(APIView,PaginationHandlerMixin):
         response = {'message' : 'No Group!',}
         return Response(response)
       
-class FilterBookbyRate(APIView):
-    def get(self,request):
-        
-        book_list=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
-        serializer = bookSerializer(book_list,many=True)
-        return Response(serializer.data)
-   
-class FilterBookbyComment(APIView):
-    def get(self,request):
-        book_list=book.objects.order_by('-comment_count')
-        serializer = bookSerializer(book_list, many=True)
-        return Response(serializer.data)

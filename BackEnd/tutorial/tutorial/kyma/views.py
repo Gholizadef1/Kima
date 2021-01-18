@@ -20,7 +20,19 @@ class BookView(APIView):
     """
 
     def get(self, request, format=None):
-        
+        filter = self.request.query_params.get('filter', None)
+        if filter is not None:
+
+            if filter=='rate':
+                books=sorted(book.objects.all(),  key=lambda m: -m.average_rating)
+                serializer = bookSerializer(books,many=True)
+                return Response(serializer.data)
+
+            if filter=='comment':
+                books=book.objects.order_by('-comment_count')
+                serializer = bookSerializer(books, many=True)
+                return Response(serializer.data)
+
         books = book.objects.all()
         serializer = bookSerializer(books,many=True)
         return Response(serializer.data)
