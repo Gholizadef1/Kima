@@ -350,7 +350,7 @@ import {
        <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
   <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
@@ -397,52 +397,8 @@ import {
     </div>
      
        </div>
-
-
-    </div>  
-                   
-                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                     <DialogContent >
-   
-                     <form >
-                       <TextField
-                         autoFocus
-                         margin="dense"
-                         id="name"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.name}
-                         placeholder="عنوان بحث"
-                         type="title"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       <TextField
-                         
-                       margin="dense"
-                         id="description"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.description}
-                         placeholder="دربارهٔ بحث"
-                         type="description"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       </form>
-                     </DialogContent>
-                     <DialogActions>
-                       <Button onClick={handleCloseCreateGroup} color="black">
-                       انصراف
-                       </Button>
-                       <Button onClick={handleCreateDiscussionSubmit} color="black">
-                         ثبت
-                       </Button>
-                     </DialogActions>
-                   </Dialog>
+</div>
+                       
    </div>
 
       :
@@ -454,7 +410,7 @@ import {
         <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
   <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
@@ -504,49 +460,8 @@ import {
 
 
     </div>  
-                   
-                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                     <DialogContent >
-   
-                     <form >
-                       <TextField
-                         autoFocus
-                         margin="dense"
-                         id="name"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.name}
-                         placeholder="عنوان بحث"
-                         type="title"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       <TextField
-                         
-                       margin="dense"
-                         id="description"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.description}
-                         placeholder="دربارهٔ بحث"
-                         type="description"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       </form>
-                     </DialogContent>
-                     <DialogActions>
-                       <Button onClick={handleCloseCreateGroup} color="black">
-                       انصراف
-                       </Button>
-                       <Button onClick={handleCreateDiscussionSubmit} color="black">
-                         ثبت
-                       </Button>
-                     </DialogActions>
-                   </Dialog>
+                     
+                    
    </div>
 
       :
