@@ -24,9 +24,27 @@ import {
     useParams,
     withRouter
   } from "react-router-dom";
-  
-  function GroupPage (props){
+  import {
+    createMuiTheme,
+    MuiThemeProvider,
+    withStyles
+  } from "@material-ui/core/styles";
+import Tooltip from '@material-ui/core/Tooltip';
 
+  function GroupPage (props){
+    const BlueOnGreenTooltip = withStyles({
+      tooltip: {
+        color: "black",
+        fontFamily:"Yekan",
+        fontSize:16,
+        backgroundColor: '#b7dee4',
+        width:170,
+        height:80,
+        textAlign:"center",
+        marginLeft:20,
+        paddingTop:20,
+      }
+    })(Tooltip);
     console.log(props)
 
     const [ginfo, setGinfo] = useState([]);
@@ -257,7 +275,7 @@ import {
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -350,9 +368,11 @@ import {
        <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
+<BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
 <div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
+                </BlueOnGreenTooltip>
   <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
    
     <div class="card card-discussion">
@@ -361,7 +381,7 @@ import {
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -410,9 +430,11 @@ import {
         <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
+<BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
 <div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
+                </BlueOnGreenTooltip>
   <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
    
     <div class="card card-discussion">
@@ -421,7 +443,7 @@ import {
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -484,7 +506,7 @@ import {
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -592,7 +614,7 @@ import {
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
