@@ -9,7 +9,8 @@ from . serializers import *
 from rest_framework import filters
 from rest_framework import generics
 from django.conf import settings
-from tutorial.quickstart.models import MyBook
+from tutorial.quickstart.models import *
+from tutorial.quickstart.serializers import *
 from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -78,27 +79,6 @@ class BookViewPage(APIView):
         else:
             return Response({"data" : serializer.data ,'book_state': bookcheck.state})
 
-    def post(self,request,pk):
-        user=request.user
-        book2=book.objects.get(id=pk)
-        bookcheck=self.checkbook(user,book2)
-        st=request.data.get("book_state")
-        if(bookcheck==None):
-            b=MyBook(account=user,book1=book2,state=st)
-            b.save()
-            return Response("successfully added")
-        else:
-            if(bookcheck.state==st):
-                return Response("this book is already here")
-            else:
-                if(st=="none"):
-                    bookcheck.delete()
-                    return Response("successfully deleted from collection")
-                else:
-                    bookcheck.state=request.data.get("book_state")
-                    bookcheck.save()
-                    return Response("successfully changed state")
-
     def checkbook(self,user,book2):
         try:
             return MyBook.objects.get(account=user,book1=book2)
@@ -112,5 +92,60 @@ class BookViewPage(APIView):
             newratingbook = serializer.save()
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
 
+class BookCollectionView(APIView):
+    
+    def post(self,request,pk):
+        user=Account.objects.get(id=pk)
+        book_id=request.data.get("book_id")
+        book2=book.objects.get(id=book_id)
+        bookcheck=self.checkbook(user,book2)
+        state = self.request.query_params.get('type', None)
+        if state is not None:
+            st=state
+        else:
+            st="none"
+        if(bookcheck==None):
+            b=MyBook(account=user,book1=book2,state=st)
+            b.save()
+            return Response("successfully added")
+        else:
+            if(bookcheck.state==st):
+                return Response("this book is already here")
+            else:
+                if(st=="none"):
+                    bookcheck.delete()
+                    return Response("successfully deleted from collection")
+                else:
+                    bookcheck.state=st
+                    bookcheck.save()
+                    return Response("successfully changed state")
+    def checkbook(self,user,book2):
+        try:
+            return MyBook.objects.get(account=user,book1=book2)
+        except MyBook.DoesNotExist:
+            return None
+    
+    serializer_class=MyBookSerializer
 
-  
+    def get_queryset(self,pk):
+        state = self.request.query_params.get('type', None)
+        user=Account.objects.get(pk=pk)
+        return MyBook.objects.filter(state=state,account=user)
+        
+
+
+    def get(self, request,pk):
+        state = self.request.query_params.get('type', None)
+        if state is not None:
+            queryset = self.get_queryset(pk=pk)
+            serializer = MyBookSerializer(queryset, many=True)
+            return Response({'data': serializer.data, 'Count': queryset.count()})
+
+        user=Account.objects.get(pk=pk)
+        Read = MyBook.objects.filter(state="Read",account=user)
+        Read_c = MyBookSerializer(Read, many=True)
+        Reading = MyBook.objects.filter(state="Reading",account=user)
+        Reading_c = MyBookSerializer(Reading, many=True)
+        ToRead = MyBook.objects.filter(state="ToRead",account=user)
+        ToRead_c = MyBookSerializer(ToRead, many=True)
+        return Response({"Read":Read_c.data,"Reading":Reading_c.data,"ToRead":ToRead_c.data})

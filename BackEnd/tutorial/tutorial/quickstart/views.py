@@ -69,46 +69,7 @@ def login(request):
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
                     status=HTTP_200_OK)
-
-class Readcollec(generics.ListAPIView):
-    serializer_class=MyBookSerializer
-
-    def get_queryset(self,pk):
-        user=Account.objects.get(pk=pk)
-        return MyBook.objects.filter(state="Read",account=user)
-
-
-    def list(self, request,pk):
-        queryset = self.get_queryset(pk=pk)
-        serializer = MyBookSerializer(queryset, many=True)
-        return Response({'data': serializer.data, 'Count': queryset.count()})
-
-class ToReadcollec(generics.ListAPIView):
-    serializer_class=MyBookSerializer
-
-    def get_queryset(self,pk):
-        user=Account.objects.get(pk=pk)
-        return MyBook.objects.filter(state="ToRead",account=user)
-
-
-    def list(self, request,pk):
-        queryset = self.get_queryset(pk=pk)
-        serializer = MyBookSerializer(queryset, many=True)
-        return Response({'data': serializer.data, 'Count': queryset.count()})
-
-class Readingcollec(generics.ListAPIView):
-    serializer_class=MyBookSerializer
-
-    def get_queryset(self,pk):
-        user=Account.objects.get(pk=pk)
-        return MyBook.objects.filter(state="Reading",account=user)
-
-
-    def list(self, request,pk):
-        queryset = self.get_queryset(pk=pk)
-        serializer = MyBookSerializer(queryset, many=True)
-        return Response({'data': serializer.data, 'Count': queryset.count()})
-    
+  
 class ChangePasswordView(generics.UpdateAPIView):
 
     serializer_class = ChangePasswordSerializer
