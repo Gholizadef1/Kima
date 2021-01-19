@@ -69,9 +69,14 @@ class BookViewPage(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
+        user=request.user
         wantedbook = self.get_object(pk)
+        bookcheck=self.checkbook(user,wantedbook)
         serializer = bookSerializer(wantedbook)
-        return Response(serializer.data)
+        if(bookcheck==None):
+            return Response({"data" : serializer.data ,'book_state': 'none'})
+        else:
+            return Response({"data" : serializer.data ,'book_state': bookcheck.state})
 
     def post(self,request,pk):
         user=request.user
@@ -106,23 +111,6 @@ class BookViewPage(APIView):
         if serializer.is_valid(raise_exception=True):
             newratingbook = serializer.save()
         return Response({"success": "Rating '{}' updated successfully".format(newratingbook.avgrating)})
-
-class BookState(APIView):
-    
-    def get(self, request, pk, format=None):
-        user=request.user
-        bk=book.objects.get(pk=pk)
-        bookcheck=self.checkbook(user,bk)
-        if(bookcheck==None):
-            return Response({'book_state': 'none'})
-        else:
-            return Response({'book_state': bookcheck.state})
-
-    def checkbook(self,user,book2):
-        try:
-            return MyBook.objects.get(account=user,book1=book2)
-        except MyBook.DoesNotExist:
-            return None
 
 
   
