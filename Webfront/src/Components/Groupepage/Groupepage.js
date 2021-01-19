@@ -235,88 +235,379 @@ import {
     </div>
     <div>
         
-    <div className="mt-n5 ml-5">
+    <div className="mt-n5">
   
-    <b className="title-g" >نام گروه:  {ginfo.title}</b>
+    <b className="name">نام گروه:  {ginfo.title}</b>
     </div>
 
     {joinduser === "You joind this group!" ?
-    <div>
+    <div className="group-info">
     <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+  <p className="text-right summary" >{ginfo.summary}
+</p>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
+  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+   
+    <div class="card card-discussion">
+  
+    <div class="overflow-auto">
+   
+      {showdiscussion.length === 0  ? (
+                 
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+       
+          <ul class="list-group text-right">
+            
+          <li class="list-group-item py-1">
+          <div className="text-left">
+                <small className="creator">
+                {current.creator.username}
+                :سازنده
                 
-                <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                  <DialogContent >
-
-                  <form >
-                    <TextField
-                      autoFocus
-                      margin="dense"
-                      id="name"
-                      style={{fontFamily:"Yekan"}}
-                      value={newDiscussion.name}
-                      placeholder="عنوان بحث"
-                      type="title"
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-
-                    />
-                      
-                    <TextField
-                    margin="dense"
-                      id="description"
-                      style={{fontFamily:"Yekan"}}
-                      value={newDiscussion.description}
-                      placeholder="دربارهٔ بحث"
-                      label="توضیحات"
-                      type="description"
-                      onChange={handleChange}
-                      fullWidth
-                      multiline
-                      variant="outlined"
-
-                    />
-                    </form>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseCreateGroup} color="black">
-                    انصراف
-                    </Button>
-                    <Button onClick={handleCreateDiscussionSubmit} color="black">
-                      ثبت
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-</div>
-    :
-    
-    <div>       
+                </small>
+                <div className="text-right name-d" >
+            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            </div>
+              </div>
+              
+            <small className="description" style={{fontFamily:"Yekan",fontSize:15}}>
+                 {current.description}
+                </small>
+                
+          </li>
+        </ul>
+      
+        ))}
+        </div>
+        
+       )}
+       
+  <div>
     </div>
+     
+       </div>
+
+
+    </div>  
+                   
+                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                     <DialogContent >
+   
+                     <form >
+                       <TextField
+                         autoFocus
+                         margin="dense"
+                         id="name"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.name}
+                         placeholder="عنوان بحث"
+                         type="title"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       <TextField
+                         
+                       margin="dense"
+                         id="description"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.description}
+                         placeholder="دربارهٔ بحث"
+                         type="description"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       </form>
+                     </DialogContent>
+                     <DialogActions>
+                       <Button onClick={handleCloseCreateGroup} color="black">
+                       انصراف
+                       </Button>
+                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                         ثبت
+                       </Button>
+                     </DialogActions>
+                   </Dialog>
+   </div>
+
+      :
+      <div></div>
       }
      {user ==="" && joinduser==="" && owner==="" ?
-     <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
-     </div>
-     :
-     <div>
-     </div>
-     }
-      {user === "You leaved this group!"?
-      <div>      <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
-      </div>
+     <div className="group-info">      
+       <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+       <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+  <p className="text-right summary" >{ginfo.summary}
+</p>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+ بحث جدید
+                </div>
+  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+   
+    <div class="card card-discussion">
+  
+    <div class="overflow-auto">
+   
+      {showdiscussion.length === 0  ? (
+                 
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+       
+          <ul class="list-group text-right">
+            
+          <li class="list-group-item py-1">
+          <div className="text-left">
+                <small className="creator">
+                {current.creator.username}
+                :سازنده
+                
+                </small>
+                <div className="text-right name-d" >
+            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            </div>
+              </div>
+              
+            <small className="description" style={{fontFamily:"Yekan",fontSize:15}}>
+                 {current.description}
+                </small>
+                
+          </li>
+        </ul>
+      
+        ))}
+        </div>
+        
+       )}
+       
+  <div>
+    </div>
+     
+       </div>
+
+
+    </div>  
+                   
+                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                     <DialogContent >
+   
+                     <form >
+                       <TextField
+                         autoFocus
+                         margin="dense"
+                         id="name"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.name}
+                         placeholder="عنوان بحث"
+                         type="title"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       <TextField
+                         
+                       margin="dense"
+                         id="description"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.description}
+                         placeholder="دربارهٔ بحث"
+                         type="description"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       </form>
+                     </DialogContent>
+                     <DialogActions>
+                       <Button onClick={handleCloseCreateGroup} color="black">
+                       انصراف
+                       </Button>
+                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                         ثبت
+                       </Button>
+                     </DialogActions>
+                   </Dialog>
+   </div>
+
       :
-      <div>
-      </div>
-  }
+      <div></div>
+      }
+      {user === "You leaved this group!"?
+      <div className="group-info">      
+        <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+        <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+  <p className="text-right summary" >{ginfo.summary}
+</p>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+ بحث جدید
+                </div>
+  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+   
+    <div class="card card-discussion">
+  
+    <div class="overflow-auto">
+   
+      {showdiscussion.length === 0  ? (
+                 
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+       
+          <ul class="list-group text-right">
+            
+          <li class="list-group-item py-1">
+          <div className="text-left">
+                <small className="creator">
+                {current.creator.username}
+                :سازنده
+                
+                </small>
+                <div className="text-right name-d" >
+            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            </div>
+              </div>
+              
+            <small className="description" style={{fontFamily:"Yekan",fontSize:15}}>
+                 {current.description}
+                </small>
+                
+          </li>
+        </ul>
+      
+        ))}
+        </div>
+        
+       )}
+       
+  <div>
+    </div>
+     
+       </div>
+
+
+    </div>  
+                   
+                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                     <DialogContent >
+   
+                     <form >
+                       <TextField
+                         autoFocus
+                         margin="dense"
+                         id="name"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.name}
+                         placeholder="عنوان بحث"
+                         type="title"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       <TextField
+                         
+                       margin="dense"
+                         id="description"
+                         style={{fontFamily:"Yekan"}}
+                         value={newDiscussion.description}
+                         placeholder="دربارهٔ بحث"
+                         type="description"
+                         onChange={handleChange}
+                         fullWidth
+                         variant="outlined"
+   
+                       />
+                       </form>
+                     </DialogContent>
+                     <DialogActions>
+                       <Button onClick={handleCloseCreateGroup} color="black">
+                       انصراف
+                       </Button>
+                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                         ثبت
+                       </Button>
+                     </DialogActions>
+                   </Dialog>
+   </div>
+
+      :
+      <div></div>
+      }
       {user === "You joind this group!" ?
-       <div>
+       <div className="group-info">
        <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-       <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
-    بحث جدید
-                   </div>
+       <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+  <p className="text-right summary" >{ginfo.summary}
+</p>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+ بحث جدید
+                </div>
+  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+   
+    <div class="card card-discussion">
+  
+    <div class="overflow-auto">
+   
+      {showdiscussion.length === 0  ? (
+                 
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+       
+          <ul class="list-group text-right">
+            
+          <li class="list-group-item py-1">
+          <div className="text-left">
+                <small className="creator">
+                {current.creator.username}
+                :سازنده
+                
+                </small>
+                <div className="text-right name-d" >
+            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            </div>
+              </div>
+              
+            <small className="description" style={{fontFamily:"Yekan",fontSize:15}}>
+                 {current.description}
+                </small>
+                
+          </li>
+        </ul>
+      
+        ))}
+        </div>
+        
+       )}
+       
+  <div>
+    </div>
+     
+       </div>
+
+
+    </div>  
                    
                    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                      <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
@@ -369,11 +660,63 @@ import {
     
     
     {owner === 'You are owner!' ?
-    <div>
+    <div className="group-info">
     <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
-    <div className="btn btn-d bg-danger" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+
+    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+  <p className="text-right summary" >{ginfo.summary}
+</p>
+<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
+    <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+   
+    <div class="card card-discussion">
+  
+    <div class="overflow-auto">
+   
+      {showdiscussion.length === 0  ? (
+                 
+        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:100}}>بحثی برای نمایش وجود ندارد</div>
+
+       ) : (
+         <div>
+        {showdiscussion.map((current) => (
+       
+          <ul class="list-group text-right">
+            
+          <li class="list-group-item py-1">
+          <div className="text-left">
+                <small className="creator">
+                {current.creator.username}
+                :سازنده
+                
+                </small>
+                <div className="text-right name-d" >
+            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            </div>
+              </div>
+              
+            <small className="description" style={{fontFamily:"Yekan",fontSize:15}}>
+                 {current.description}
+                </small>
+                
+          </li>
+        </ul>
+      
+        ))}
+        </div>
+        
+       )}
+       
+  <div>
+    </div>
+     
+       </div>
+
+
+    </div>  
+  
                 
                 <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                   <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
@@ -424,55 +767,6 @@ import {
      
    
     
-
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:560}}>:دربارهٔ گروه</b>
-  <p className="text-right summary" >{ginfo.summary}
-
-</p>
-  
-   
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25,top:20,position:"relative",marginLeft:600}}>بحث‌ها</b>
-    <div class="card card-discussion">
-    <div class="overflow-auto">
-      {showdiscussion.length === 0  ? (
-                 
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>بحثی برای نمایش وجود ندارد</div>
-
-       ) : (
-         <div>
-        {showdiscussion.map((current) => (
-        
-          <ul class="list-group text-right list-inline">
-            
-          <li class="list-group-item py-3">
-          <div className="text-left">
-                <small className="">
-                {current.creator.username}
-                :سازنده
-                
-                </small>
-              </div>
-            <h6 className="pt-n5">{current.title}</h6>
-            
-            <small className="description">
-                 {current.description}
-                </small>
-                
-          </li>
-        </ul>
-        ))}
-        </div>
-        
-       )}
-       
-  <div>
-    </div>
-     
-       </div>
-
-
-    </div>  
-  
    
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-190,position:"relative",marginLeft:600}}> ({ginfo.members_count}) اعضا</b>
        

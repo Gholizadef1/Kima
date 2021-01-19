@@ -115,8 +115,8 @@
             .imageg{
                 width: 100px;
                 height: 100px;
-                margin-left: -5px;
-                margin-top: -12px; 
+                margin-left: -6px;
+                margin-top: -7px; 
                 border-radius: 3%;
                 
             }
@@ -128,25 +128,40 @@
             .summary{
                 font-size: larger;
                 margin-top: 30px;
-                margin-right: 180px;
+                margin-right: 220px;
             }
+            .creator{
+                font-family: 'Yekan';
+                font-size: 13px;
+            }
+            .name-d{
+                margin-top: -20px;
+            }
+           
             .title-g{
                 font-family: 'Yekan';
                 font-size: 25px;
-                
                 position: relative;
-                left: 60px;
+                left: 10px;
+            }
+            .title-d{
+                font-family: 'Yekan';
+                font-size: 25px;
+                top:20px;
+                position: relative;
+                left: 520px;
             }
             
 
             .card-discussion{
-                width: 630px;
-                height: 150px;
+                width: 620px;
+                height: 320px;
                 margin-left: 312px;
-                margin-top: 36px;
+                margin-top: 20px;
                 margin-bottom: 250px;
                 border-radius: 3%;
-                border-color: whitesmoke;
+                border-color: white;
+                
             }
 
            .more{
@@ -155,21 +170,25 @@
             .btn-g{
                 
                 font-family: 'Yekan';
-                margin-right: 600px;
-               margin-top: -50px;
-                height: 50px;
+                margin-right: 500px;
+               margin-top: -230px;
+                height: 45px;
              
+            }
+            .name{
+                font-family: 'Yekan';
+                font-size: 25px;
+                margin-right: -200px;
             }
             .btn-d{
                 font-family: 'Yekan';
-                margin-right: 600px;
-               
-                height: 40px;
-            }
-           
-            .modal {
-                margin-top: 200px;
+                margin-right: -500px;
+                margin-top: 40px;
                 
-             }
+            }
+           .group-info{
+               margin-top: 80px;
+           }
+            
              
             }
