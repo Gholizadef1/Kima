@@ -312,7 +312,7 @@ class CommentView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyComment.objects.filter(current_book=this_book).exists():
             mcomment = MyComment.objects.filter(current_book=this_book)
-            comment_list = self.paginate_queryset(MyComment.objects.filter(current_book=this_book))
+            comment_list = self.paginate_queryset(mcomment)
             serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Comment!',}
