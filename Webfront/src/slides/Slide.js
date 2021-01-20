@@ -65,23 +65,16 @@ function Slide(props) {
   const bookSelectedHandler = ( b ) => {
         console.log(b);
         props.history.push( '/book/' + b.id );
-      //   return (
-      //     <div>
-      //         <Link to={'/book/' + b.id} key={b.id}> </Link>
-      //         {/* <section className="Posts">
-      //             {suggestions}
-      //         </section>
-      //         <Route path={props.match.url + '/:id'} exact component={BookView} /> */}
-      //     </div>
-      // );
   }
 
   let settings = {
-    infinite: false,
+    infinite:true,
     speed: 10,
     arrows: true,
+    
     slidesToShow: 7,
     slidesToScroll: 4,
+    
 
     responsive: [
       {
@@ -101,14 +94,7 @@ function Slide(props) {
           slidesToScroll: 2,
         },
       },
-      {
-        breakpoint: 800,
-        settings: {
-
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
+     
       {
         breakpoint: 768,
         settings: {
@@ -149,7 +135,7 @@ function Slide(props) {
                 <img
                   className="squere img-responsive" 
                   src={current.imgurl}
-                  
+                
                 />
    
 
