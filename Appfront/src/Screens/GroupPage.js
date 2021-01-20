@@ -59,7 +59,7 @@ const GroupPage = (prop) => {
       // console.log(response.data)
       console.log(response.data.group_photo+'group photo')
       console.log(groupinfo+'*****')
-      setgroupphoto(`http://505a2dd8d5cc.ngrok.io${response.data.group_photo}`)
+      setgroupphoto(`http://cc4552eb4e3a.ngrok.io${response.data.group_photo}`)
       console.log(groupphoto+'------')
       // console.log(groupinfo.group_photo)
 //      console.log('**'+response.data.title)
@@ -230,7 +230,7 @@ if (!groupinfo){
 
                     </View>
 
-                    {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+                    {picture!='http://cc4552eb4e3a.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
                       source={{uri:groupphoto}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
                       source={require('../../assets/group.jpg')}
@@ -355,7 +355,7 @@ if (!groupinfo){
             renderItem={({ item }) =><>
 
               <View style={{maginLeft:wp('5%'),right:wp('5%'),marginTop:hp('2%')}}>
-                     {picture!='http://505a2dd8d5cc.ngrok.io/media/default.png'?<Avatar.Image style={{}} size={90}
+                     {picture!='http://cc4552eb4e3a.ngrok.io/media/default.png'?<Avatar.Image style={{}} size={90}
                       source={{uri:groupphoto}}
                       ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={90}
                       source={require('../../assets/group.jpg')}
