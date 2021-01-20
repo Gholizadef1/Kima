@@ -260,7 +260,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
     {joinduser === "You joind this group!" ?
     <div className="group-info">
-    <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
+    <button onClick={leaveGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>خارج‌شدن از گروه</button>
     <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
@@ -491,11 +491,11 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
       {user === "You joind this group!" ?
        <div className="group-info">
-       <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
+       <button onClick={leaveGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>خارج‌شدن از گروه</button>
        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-peimary ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
   <b className="title-d">بحث‌ها</b>
@@ -598,12 +598,12 @@ import Tooltip from '@material-ui/core/Tooltip';
     
     {owner === 'You are owner!' ?
     <div className="group-info">
-    <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
+    <button onClick={deletGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>حذف گروه</button>
 
     <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-primary ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
     <b className="title-d">بحث‌ها</b>
