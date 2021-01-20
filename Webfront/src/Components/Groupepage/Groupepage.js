@@ -253,21 +253,21 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>
     <div>
         
-    <div className="mt-n5">
+    <div className=" name">
   
-    <b className="name">نام گروه:  {ginfo.title}</b>
+    <b className="">نام گروه:  {ginfo.title}</b>
     </div>
 
     {joinduser === "You joind this group!" ?
     <div className="group-info">
     <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+    <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
-  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+  <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
   
@@ -291,7 +291,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            <h6 className="pt-n3">{current.title}</h6>
             </div>
               </div>
               
@@ -365,7 +365,7 @@ import Tooltip from '@material-ui/core/Tooltip';
      {user ==="" && joinduser==="" && owner==="" ?
      <div className="group-info">      
        <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
-       <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+       <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
@@ -373,7 +373,7 @@ import Tooltip from '@material-ui/core/Tooltip';
  بحث جدید
                 </div>
                 </BlueOnGreenTooltip>
-  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+  <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
   
@@ -427,7 +427,7 @@ import Tooltip from '@material-ui/core/Tooltip';
       {user === "You leaved this group!"?
       <div className="group-info">      
         <button onClick={joinGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>اضافه‌شدن به گروه</button>
-        <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
@@ -435,7 +435,7 @@ import Tooltip from '@material-ui/core/Tooltip';
  بحث جدید
                 </div>
                 </BlueOnGreenTooltip>
-  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+  <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
   
@@ -459,7 +459,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            <h6 className="pt-n3">{current.title}</h6>
             </div>
               </div>
               
@@ -492,13 +492,13 @@ import Tooltip from '@material-ui/core/Tooltip';
       {user === "You joind this group!" ?
        <div className="group-info">
        <button onClick={leaveGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>خارج‌شدن از گروه</button>
-       <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+       <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
-  <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+  <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
   
@@ -522,7 +522,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            <h6 className="pt-n3">{current.title}</h6>
             </div>
               </div>
               
@@ -600,13 +600,13 @@ import Tooltip from '@material-ui/core/Tooltip';
     <div className="group-info">
     <button onClick={deletGroup}  className="btn btn-g bg-danger" style={{color:'white'}}>حذف گروه</button>
 
-    <b className="title-g" style={{fontFamily:'Yekan',fontSize:25}}>:دربارهٔ گروه</b>
+    <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <div className="btn btn-d bg-danger ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
-    <b className="title-d" style={{fontFamily:'Yekan',fontSize:25}}>بحث‌ها</b>
+    <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
   
@@ -630,7 +630,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
+            <h6 className="pt-n3">{current.title}</h6>
             </div>
               </div>
               
