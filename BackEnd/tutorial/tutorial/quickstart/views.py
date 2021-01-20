@@ -309,12 +309,30 @@ class CommentView(APIView,PaginationHandlerMixin):
             raise Http404
 
     def get(self,request,pk):
+        filter = self.request.query_params.get('filter', None)
         this_book=book.objects.get(id=pk)
-        if MyComment.objects.filter(current_book=this_book).exists():
+        if MyComment.objects.filter(current_book=this_book).exists():    
+            if filter is not None:
+
+                if filter=='time':
+                    com_list = MyComment.objects.filter(current_book=this_book).order_by('-sendtime')
+                    comment_list = self.paginate_queryset(com_list)
+                    serializer = CommentSerializer(comment_list,context={"request": request},many=True)
+                    count = Paginator(com_list,10).num_pages
+                    return Response({"comments" : serializer.data, "count": count})
+
+                if filter=='like':
+                    com_list = MyComment.objects.filter(current_book=this_book).order_by('-LikeCount')
+                    comment_list = self.paginate_queryset(com_list)
+                    serializer = CommentSerializer(comment_list,context={"request": request},many=True)
+                    count = Paginator(com_list,10).num_pages
+                    return Response({"comments" : serializer.data, "count": count})
+        
             mcomment = MyComment.objects.filter(current_book=this_book)
             comment_list = self.paginate_queryset(mcomment)
             serilalizer = CommentSerializer(comment_list,context={"request": request},many=True)
             return Response(serilalizer.data)
+
         response = {'message' : 'No Comment!',}
         return Response(response)
 
@@ -338,21 +356,6 @@ class CommentView(APIView,PaginationHandlerMixin):
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
 
-class DeleteCommentView(APIView):
-
-    def delete(self,request,pk):
-        current_comment = MyComment.objects.get(id=pk)
-        comment_book =current_comment.current_book
-        current_user = request.user
-        comment_user = current_comment.account
-        if comment_user == current_user:
-            comment_book.comment_count-=1
-            comment_book.save()
-            current_comment.delete()
-            return Response({'message':'Your Comment successfully deleted!'})
-        else:
-            return Response({'message':'You dont have permission to delete this comment!'})
-          
 class CommentProfileView(APIView,PaginationHandlerMixin):
 
     model = MyComment
@@ -374,103 +377,87 @@ class CommentProfileView(APIView,PaginationHandlerMixin):
         response = {'message' : 'No Comment!',}
         return Response(response)
 
-class LikeCommentView(APIView):
+class CommentFeedView(APIView):
 
-    def post(self,request,pk):
+    def post(self,request,book_pk,comment_pk):
+        feedback=self.request.query_params.get('feedback', None)
         user=request.user
-        comment = MyComment.objects.get(id=pk)
-        if LikeComment.objects.filter(account=user,comment=comment).exists():
+        comment = MyComment.objects.get(id=comment_pk)
+        if feedback is not None:
+            if feedback=="like":
+                if LikeComment.objects.filter(account=user,comment=comment).exists():
+                    return Response({'message':"You have liked before!",
+                                     'LikeCount':comment.LikeCount,
+                                     'DislikeCount':comment.DislikeCount})
+                else:
+                    if DislikeComment.objects.filter(account=user,comment=comment).exists():
+                        userdislike=DislikeComment.objects.get(account=user,comment=comment)
+                        userdislike.delete()
+                        comment.DislikeCount-=1
+                        comment.save()
+                    newlike = LikeComment(account=user,comment=comment)
+            
+                    comment.LikeCount+=1
+                    comment.save()
+                    newlike.save()
+                    return Response({'message':"successfully liked!",
+                                     'LikeCount':comment.LikeCount,
+                                     'DislikeCount':comment.DislikeCount})
+
+            if feedback=="dislike":
+                if (DislikeComment.objects.filter(account=user,comment=comment).exists()):
+                    return Response({'message':"You have disliked before!",
+                                     'LikeCount':comment.LikeCount,
+                                     'DislikeCount':comment.DislikeCount})
+                else:
+                    if LikeComment.objects.filter(account=user,comment=comment).exists():
+                        userlike=LikeComment.objects.get(account=user,comment=comment)
+                        userlike.delete()
+                        comment.LikeCount-=1
+                        comment.save()
+
+                    newlike = DislikeComment(account=user,comment=comment)
+                    comment.DislikeCount+=1
+                    comment.save()
+                    newlike.save()
+                    return Response({'message':"successfully disliked!",
+                                     'LikeCount':comment.LikeCount,
+                                     'DislikeCount':comment.DislikeCount})
+    
+    def delete(self,request,book_pk,comment_pk):
+        feedback=self.request.query_params.get('feedback', None)
+        if feedback is None:
+            current_comment = MyComment.objects.get(id=comment_pk)
+            comment_book =book.objects.get(id=book_pk)
+            current_user = request.user
+            comment_user = current_comment.account
+            if comment_user == current_user:
+                comment_book.comment_count-=1
+                comment_book.save()
+                current_comment.delete()
+                return Response({'message':'Your Comment successfully deleted!'})
+            else:
+                return Response({'message':'You dont have permission to delete this comment!'})
+        
+        user=request.user
+        comment = MyComment.objects.get(id=comment_pk)
+        if feedback=="like":
             userlike=LikeComment.objects.get(account=user,comment=comment)
             userlike.delete()
             comment.LikeCount-=1
             comment.save()
-            return Response({'message':"successfully unliked!",
-                             'LikeCount':comment.LikeCount,
-                             'DislikeCount':comment.DislikeCount})
-        else:
-            if DislikeComment.objects.filter(account=user,comment=comment).exists():
-                userdislike=DislikeComment.objects.get(account=user,comment=comment)
-                userdislike.delete()
-                comment.DislikeCount-=1
-                comment.save()
-            newlike = LikeComment(account=user,comment=comment)
-            
-            comment.LikeCount+=1
-            comment.save()
-            newlike.save()
-            return Response({'message':"successfully liked!",
+            return Response({'message':"successfully delete your like!",
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
 
-    def get(self,request,pk):
-        user=self.request.user
-        comment = MyComment.objects.get(id=pk)
-        if LikeComment.objects.filter(account=user,comment=comment).exists():
-            return Response({'message' : "True",})
-        return Response({'message' : "False",})
-        
-class DislikeCommentView(APIView):
-
-    def post(self,request,pk):
-        user=request.user
-        comment = MyComment.objects.get(id=pk)
-        if (DislikeComment.objects.filter(account=user,comment=comment).exists()):
+        if feedback=="dislike":
             userlike=DislikeComment.objects.get(account=user,comment=comment)
             userlike.delete()
             comment.DislikeCount-=1
             comment.save()
-            return Response({'message':"successfully undisliked!",
+            return Response({'message':"successfully delete your dislike!",
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
-        else:
-            if LikeComment.objects.filter(account=user,comment=comment).exists():
-                userlike=LikeComment.objects.get(account=user,comment=comment)
-                userlike.delete()
-                comment.LikeCount-=1
-                comment.save()
-
-            newlike = DislikeComment(account=user,comment=comment)
-            comment.DislikeCount+=1
-            comment.save()
-            newlike.save()
-            return Response({'message':"successfully disliked!",
-                             'LikeCount':comment.LikeCount,
-                             'DislikeCount':comment.DislikeCount})
-
-    def get(self,request,pk):
-        user=self.request.user
-        comment = MyComment.objects.get(id=pk)
-        if DislikeComment.objects.filter(account=user,comment=comment).exists():
-            return Response({'message' : "True",})
-        return Response({'message' : "False",})
-
-class FilterCommentbyTime(APIView,PaginationHandlerMixin):
-
-    pagination_class = BasicPagination
-    def get(self,request,pk):
-        bk=book.objects.get(id=pk)
-        if MyComment.objects.filter(current_book=bk).exists():
-            com_list = MyComment.objects.filter(current_book=bk).order_by('-sendtime')
-            comment_list = self.paginate_queryset(com_list)
-            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
-            count = Paginator(com_list,10).num_pages
-            return Response({"comments" : serializer.data, "count": count})
-        response = {'message' : 'No Comment!',}
-        return Response(response)
-
-class FilterCommentbyLike(APIView,PaginationHandlerMixin):
-    
-    pagination_class = BasicPagination
-    def get(self,request,pk):
-        bk=book.objects.get(id=pk)
-        if MyComment.objects.filter(current_book=bk).exists():
-            com_list = MyComment.objects.filter(current_book=bk).order_by('-LikeCount')
-            comment_list = self.paginate_queryset(com_list)
-            serializer = CommentSerializer(comment_list,context={"request": request},many=True)
-            count = Paginator(com_list,10).num_pages
-            return Response({"comments" : serializer.data, "count": count})
-        response = {'message' : 'No Comment!',}
-        return Response(response)
 
 class FilterQuotebyTime(APIView,PaginationHandlerMixin):
 

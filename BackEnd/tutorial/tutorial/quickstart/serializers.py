@@ -109,13 +109,12 @@ class PostCommentSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
-    current_book = bookSerializer(read_only=True)
     isliked = serializers.SerializerMethodField()
     isdisliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyComment
-        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+        fields = ['account', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
     
     def get_isliked(self, obj):
         user =  self.context['request'].user
@@ -222,12 +221,3 @@ class CommentProfSerializer(serializers.ModelSerializer):
             return True
         return False
         
-class FilterRateSerializer(serializers.ModelSerializer):
-    book_info = serializers.RelatedField(source='current_book',read_only=True)
-    
-    class Meta:
-        model = Ratinguser
-        fields = ['book_info']
-
-    def to_representation(self,value):
-        return bookSerializer(book.objects.get(pk=value['current_book'])).data
