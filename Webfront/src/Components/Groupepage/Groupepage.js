@@ -275,7 +275,7 @@ import Tooltip from '@material-ui/core/Tooltip';
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
+        <div className="no-discussion" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -369,7 +369,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
+<div className="btn btn-d bg-primary ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
                 </BlueOnGreenTooltip>
@@ -381,7 +381,7 @@ import Tooltip from '@material-ui/core/Tooltip';
    
       {showdiscussion.length === 0  ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
+        <div className="no-discussion" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>بحثی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -431,7 +431,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   <p className="text-right summary" >{ginfo.summary}
 </p>
 <BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
-<div className="btn btn-d bg-danger ml-4" style={{color:"white"}}>
+<div className="btn btn-d bg-primary ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
                 </BlueOnGreenTooltip>
