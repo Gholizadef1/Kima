@@ -3,11 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import AllowAny,IsAuthenticated
-from rest_framework import status
 from . models import book
 from . serializers import *
-from rest_framework import filters
-from rest_framework import generics
+from rest_framework import filters,generics,status
 from django.conf import settings
 from tutorial.quickstart.models import *
 from tutorial.quickstart.serializers import *
@@ -49,7 +47,7 @@ class BookView(APIView):
 
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
-        return request.GET.getlist('search_fields', [])
+        return request.GET.getlist('search-fields', [])
 
 class BookListView(generics.ListAPIView):
     queryset = book.objects.all()

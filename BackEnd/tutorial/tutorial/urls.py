@@ -46,11 +46,11 @@ urlpatterns = [
     path('user/<int:pk>/quote',MyQuoteView.as_view()),
     path('user/<int:pk>/comment',CommentProfileView.as_view()),
     path('user/<int:pk>/group',MyGroupView.as_view()),
+    path('user/<int:pk>',UserProfileView.as_view()),
+    path('book/search',kyma.views.DynamicBookAPIView.as_view()),
+    path('user/<int:pk>/change-password', ChangePasswordView.as_view(), name='change-password'),
+    path('user/<int:pk>/update-profile', UpdateUserProfileView.as_view(), name='update-profile'),
 
-    path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
-    path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
-    path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
-    path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
     path('api/profile/', UserProfileViewwithToken.as_view(), name='profile'),
     
     path('bookinfo/', kyma.views.BookListView.as_view()),

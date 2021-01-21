@@ -80,7 +80,7 @@ class ChangePasswordView(generics.UpdateAPIView):
         obj = self.request.user
         return obj
 
-    def update(self,request,*args,**kwargs):
+    def update(self,request,pk,*args,**kwargs):
 
         self.object = self.get_object()
         serializer = self.get_serializer(data=request.data)
