@@ -179,7 +179,6 @@ class CreateDiscussionSerializer(serializers.Serializer):
 class DiscussionSerializer(serializers.ModelSerializer):
 
     creator = UserProfileSerializer(read_only=True)
-    group = GroupDetSerializer(read_only=True)
 
     class Meta:
         model = Discussion

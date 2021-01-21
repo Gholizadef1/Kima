@@ -511,8 +511,8 @@ class DiscussionView(APIView,PaginationHandlerMixin):
 
 class DiscussionDetailsView(APIView):
     
-    def get(self,request,pk):
-        discuss = Discussion.objects.get(id=pk)
+    def get(self,request,group_pk,discussion_pk):
+        discuss = Discussion.objects.get(id=discussion_pk)
         serializer = DiscussionSerializer(discuss,many=False)
         return Response(serializer.data)
 
