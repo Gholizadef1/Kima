@@ -59,7 +59,8 @@ const Groups = ({navigation}) => {
     await setrefresh(false)
      console.log('#########')
      }
-  await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+  // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+  await setinformation([...information,...response.data.results])
 
   console.log(information+'******######********########')
   // console.log(information[0].title)
@@ -164,7 +165,7 @@ const Groups = ({navigation}) => {
    console.log('#########')
    }
    else{
-  console.log(response.data+'RESPONSE.DATA')
+  // console.log(response.data+'RESPONSE.DATA')
   console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
@@ -173,11 +174,17 @@ const Groups = ({navigation}) => {
 
     settheend(false)
    console.log('omade inja')
-    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+   console.log('----INFO----'+information+"----INFO----")
+    // await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
   // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
+    //let alaki=[...information]
+    //alaki+=response.data.results;
+    //await setinformation(alaki);
+    //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
      setrefresh(false)
-    console.log(response.data.groups.id+'  INFORMATION.ID')
+     setinformation(information=>[...information,...response.data.groups])
+    // console.log(response.data.groups.id+'  INFORMATION.ID')
     
       console.log('++++INFO++++'+information+"++++INFO++++")
      
@@ -248,14 +255,16 @@ const Groups = ({navigation}) => {
     }
  
   useFocusEffect(
-    React.useCallback(() => {   
+    React.useCallback(() => {  
+      async function refreshing(){ 
       // setmoreclicked(false)
         // setselectedValue('none')
         setsearchterm('')
         setnumberofresults()
-         setinformation([])
+         await setinformation([])
       // if(searchterm==='')  
         response(1)
+      }
         // else
         // searchpost(1)
     },[]))
