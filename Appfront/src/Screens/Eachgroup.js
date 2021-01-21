@@ -50,19 +50,19 @@ const Eachgroup = (prop) => {
       //   // setmoreclicked(true);
       //   Groups.navigation.navigate('ShowGroupPage',{id:prop.id})}}}>
       <View>
-     
+{/*      
       <TouchableOpacity
       onPress={()=>{
         console.log('^^^^^^^^^^^^^^'+'GROUP PRESSED')
-        prop.gotogp(true);
+        //prop.gotogp(true);
       }}
-      >
+      > */}
       {/* {prop.discription!='' ? (<View > */}
       <View style={{flexDirection:'row'}}>
           <View style={styles.avatarname}>
      
      <TouchableOpacity style={styles.avatar}
-       onPress={() => {prop.gotogp(true)}}>
+       onPress={() => {}}>
        {prop.groupphoto === 'http://c56f3ca733ca.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
@@ -96,7 +96,7 @@ const Eachgroup = (prop) => {
     
    </View>
    </View>
-   </TouchableOpacity>
+   {/* </TouchableOpacity> */}
    <View style={{ flexDirection: 'row' }}>
  
 

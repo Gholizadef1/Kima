@@ -37,7 +37,7 @@ const userschema=yup.object({
 
 })
 
-const Mygroups = () => {
+const Mygroups = (prop) => {
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
   
@@ -188,9 +188,10 @@ const Mygroups = () => {
     settheend(false)
    console.log('omade inja')
    console.log('++++INFOGHABLESET++++'+information+"++++INFOGHABLESET++++")
-    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+    //await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
     // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
+    await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
      setrefresh(false)
     console.log(response.data.groups.id+'  INFORMATION.ID')
     
@@ -520,7 +521,12 @@ const Mygroups = () => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
-             <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
+             {/* <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}> */}
+             <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'white',marginBottom:0}}
+            onPress={async()=>{
+              prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
             </TouchableOpacity>
             </>
