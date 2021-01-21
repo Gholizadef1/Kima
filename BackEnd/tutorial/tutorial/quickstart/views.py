@@ -231,12 +231,29 @@ class QuoteView(APIView,PaginationHandlerMixin):
           raise Http404
           
     def get(self,request,pk):
+        filter = self.request.query_params.get('filter', None)
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
+            if filter is not None:
+                if filter=="time":
+                    q_list = MyQuote.objects.filter(current_book=this_book).order_by('-sendtime')
+                    quote_list = self.paginate_queryset(q_list)
+                    serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
+                    count = Paginator(q_list,10).num_pages
+                    return Response({"quotes" : serializer.data, "count": count})
+
+                if filter=="like":
+                    q_list = MyQuote.objects.filter(current_book=this_book).order_by('-Likes')
+                    quote_list = self.paginate_queryset(q_list)
+                    serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
+                    count = Paginator(q_list,10).num_pages
+                    return Response({"quotes" : serializer.data, "count": count})
+        
             mquote = MyQuote.objects.filter(current_book=this_book)
             quote_list = self.paginate_queryset(mquote)
             serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serilalizer.data)
+
         response = {'message' : 'No Quote!',}
         return Response(response)
         
@@ -257,14 +274,12 @@ class QuoteView(APIView,PaginationHandlerMixin):
             return Response(response)
         return Response(serializer.errors,
                         status=HTTP_404_NOT_FOUND)
-
-    def delete(self,request,pk):
-        
+    
 class LikeQuoteView(APIView):
 
-    def post(self,request,pk):
+    def post(self,request,book_pk,quote_pk):
         user=request.user
-        quote = MyQuote.objects.get(id=pk)
+        quote = MyQuote.objects.get(id=quote_pk)
         feedback=self.request.query_params.get('feedback', None)
         if feedback=="like":
             if LikeQuote.objects.filter(account=user,quote=quote).exists():
@@ -279,7 +294,7 @@ class LikeQuoteView(APIView):
                                 'data':quote.Likes,})
 
     def delete(self,request,book_pk,quote_pk):
-        current_quote = MyQuote.objects.get(id=pk)
+        current_quote = MyQuote.objects.get(id=quote_pk)
         current_user = request.user
 
         feedback=self.request.query_params.get('feedback', None)
@@ -287,10 +302,10 @@ class LikeQuoteView(APIView):
             if feedback=="like":
                 userlike = LikeQuote.objects.filter(account=current_user,quote=current_quote)
                 userlike.delete()
-                quote.Likes-=1
-                quote.save()
+                current_quote.Likes-=1
+                current_quote.save()
                 return Response({'message':"unlike success!",
-                                 'data':quote.Likes,})
+                                 'data':current_quote.Likes,})
             
         quote_user = current_quote.account
         if quote_user == current_user:
@@ -461,34 +476,6 @@ class CommentFeedView(APIView):
             return Response({'message':"successfully delete your dislike!",
                              'LikeCount':comment.LikeCount,
                              'DislikeCount':comment.DislikeCount})
-
-class FilterQuotebyTime(APIView,PaginationHandlerMixin):
-
-    pagination_class = BasicPagination
-    def get(self,request,pk):
-        bk=book.objects.get(id=pk)
-        if MyQuote.objects.filter(current_book=bk).exists():
-            q_list = MyQuote.objects.filter(current_book=bk).order_by('-sendtime')
-            quote_list = self.paginate_queryset(q_list)
-            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
-            count = Paginator(q_list,10).num_pages
-            return Response({"quotes" : serializer.data, "count": count})
-        response = {'message' : 'No Quote!',}
-        return Response(response)
-
-class FilterQuotebyLike(APIView,PaginationHandlerMixin):
-
-    pagination_class = BasicPagination
-    def get(self,request,pk):
-        bk=book.objects.get(id=pk)
-        if MyQuote.objects.filter(current_book=bk).exists():
-            q_list = MyQuote.objects.filter(current_book=bk).order_by('-Likes')
-            quote_list = self.paginate_queryset(q_list)
-            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
-            count = Paginator(q_list,10).num_pages
-            return Response({"quotes" : serializer.data, "count": count})
-        response = {'message' : 'No Quote!',}
-        return Response(response)
 
 class DiscussionView(APIView,PaginationHandlerMixin):
 

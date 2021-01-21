@@ -35,11 +35,10 @@ urlpatterns = [
     path('book/<book_pk>/comment/<comment_pk>',CommentFeedView.as_view()),
     path('book/<int:pk>/quote',QuoteView.as_view()),
     path('book/<book_pk>/quote/<quote_pk>',LikeQuoteView.as_view()),
+    path('group',GroupView.as_view()),
 
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('api/group/search/',DynamicGroupAPIView.as_view()),
-    path('bookinfo/', kyma.views.BookListView.as_view()),
-    path('api/group',GroupView.as_view()),
     path('api/group/<int:pk>/discussion',DiscussionView.as_view()),
     path('api/group/discussion/details/<int:pk>',DiscussionDetailsView.as_view()),
     path('api/group/discussion/chat/<int:pk>',DiscussionChatView.as_view()),
@@ -47,16 +46,14 @@ urlpatterns = [
     path('api/group/members/<int:pk>',MemberGroupView.as_view()),
     path('api/group/filter-time',FilterGroupbyTime.as_view()),
     path('api/group/filter-member',FilterGroupbyMember.as_view()),
-    
-    
     path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
     path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
-    path('bookdetail/<int:pk>/quote-filter-time',FilterQuotebyTime.as_view()),
-    path('bookdetail/<int:pk>/quote-filter-like',FilterQuotebyLike.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
     path('api/profile/', UserProfileViewwithToken.as_view(), name='profile'),
+    
+    path('bookinfo/', kyma.views.BookListView.as_view()),
     path('register',registration_view,name="register"),
     path('login',login,name="login"),
     
