@@ -234,7 +234,7 @@ class QuoteView(APIView,PaginationHandlerMixin):
         this_book=book.objects.get(id=pk)
         if MyQuote.objects.filter(current_book=this_book).exists():
             mquote = MyQuote.objects.filter(current_book=this_book)
-            quote_list = self.paginate_queryset(MyQuote.objects.filter(current_book=this_book))
+            quote_list = self.paginate_queryset(mquote)
             serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
             return Response(serilalizer.data)
         response = {'message' : 'No Quote!',}

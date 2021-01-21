@@ -27,12 +27,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('book/', kyma.views.BookView.as_view()),
+    path('book', kyma.views.BookView.as_view()),
     path('book/<int:pk>',kyma.views.BookViewPage.as_view()),
-    path('user/<int:pk>/collection/',kyma.views.BookCollectionView.as_view()),
+    path('user/<int:pk>/collection',kyma.views.BookCollectionView.as_view()),
     path('book/<int:pk>/rate',UserRatingview.as_view()),
-    path('book/<int:pk>/comment/',CommentView.as_view()),
-    path('book/<book_pk>/comment/<comment_pk>/',CommentFeedView.as_view()),
+    path('book/<int:pk>/comment',CommentView.as_view()),
+    path('book/<book_pk>/comment/<comment_pk>',CommentFeedView.as_view()),
+    path('book/<int:pk>/quote',QuoteView.as_view()),
+    path('book/<book_pk>/quote/<quote_pk>',LikeQuoteView.as_view()),
 
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
     path('api/group/search/',DynamicGroupAPIView.as_view()),
@@ -45,8 +47,8 @@ urlpatterns = [
     path('api/group/members/<int:pk>',MemberGroupView.as_view()),
     path('api/group/filter-time',FilterGroupbyTime.as_view()),
     path('api/group/filter-member',FilterGroupbyMember.as_view()),
-    path('api/quotes/<int:pk>',QuoteView.as_view()),
-    path('api/quotes/like/<int:pk>',LikeQuoteView.as_view()),
+    
+    
     path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
     path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
     path('bookdetail/<int:pk>/quote-filter-time',FilterQuotebyTime.as_view()),

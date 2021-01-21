@@ -73,12 +73,11 @@ class PostQuoteSerializer(serializers.Serializer):
 class QuoteSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
-    current_book = bookSerializer(read_only=True)
     isliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyQuote
-        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+        fields = ['account', 'quote_text','sendtime','Likes','isliked','id']
     
     def get_isliked(self, obj):
         user =  self.context['request'].user
