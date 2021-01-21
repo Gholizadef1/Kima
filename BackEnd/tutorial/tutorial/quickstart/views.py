@@ -552,8 +552,25 @@ class GroupView(APIView,PaginationHandlerMixin):
     model = Group
 
     def get(self,request):
+        filter = self.request.query_params.get('filter', None)
         groups = Group.objects.all()
         if groups is not None : 
+            if filter is not None:
+
+                if filter=="time":
+                    groups = Group.objects.order_by('-create_time')
+                    gp_list = self.paginate_queryset(groups)
+                    serializer = GroupSerializer(gp_list,context={"request": request},many=True)
+                    count = Paginator(groups,10).num_pages
+                    return Response({"groups" : serializer.data, "count": count})
+
+                if filter=="member":
+                    groups = sorted(Group.objects.all(),  key=lambda m: -m.members_count)
+                    gp_list=self.paginate_queryset(groups)
+                    serializer = GroupSerializer(gp_list,context={"request": request},many=True)
+                    count = Paginator(groups,10).num_pages
+                    return Response({"groups" : serializer.data, "count": count})
+
             gp_list = self.paginate_queryset(groups)
             serializer = GroupSerializer(gp_list,context={"request": request},many=True)
             count = Paginator(groups,10).num_pages
@@ -618,13 +635,23 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
         user=request.user
         group = Group.objects.get(id=pk)
         if user == group.owner:
-            return Response({"message":"You are owner!You cant leave or join group!"},status=HTTP_400_BAD_REQUEST)
+            return Response({"message":"You are owner!You can't join this group!"},status=HTTP_400_BAD_REQUEST)
         if  not Member.objects.filter(user=user,group=group).exists():
             new_member = Member(user=user,group=group)
             new_member.save()
             members = Member.objects.filter(group=group)
             serializer = MemberSerializer(members,many=True)
             return Response({"message":"You joind this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
+        
+        members = Member.objects.filter(group=group)
+        serializer = MemberSerializer(members,many=True)
+        return Response({"message":"You joined before!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
+
+    def delete(self ,request ,pk):
+        user=request.user
+        group = Group.objects.get(id=pk)
+        if user == group.owner:
+            return Response({"message":"You are owner!You can't leave this group!"},status=HTTP_400_BAD_REQUEST)
         Member.objects.get(user=user,group=group).delete()
         members = Member.objects.filter(group=group)
         serializer = MemberSerializer(members,many=True)
@@ -632,36 +659,11 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
 
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
-        return request.GET.getlist('search_fields', [])
+        return request.GET.getlist('search-fields', [])
 
 class DynamicGroupAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = Group.objects.all()
     serializer_class = GroupDetSerializer
   
-class FilterGroupbyTime(APIView,PaginationHandlerMixin):
-    pagination_class = BasicPagination
-
-    def get(self,request):
-        if Group.objects is not None:
-            groups = Group.objects.order_by('-create_time')
-            gp_list = self.paginate_queryset(groups)
-            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
-            count = Paginator(groups,10).num_pages
-            return Response({"groups" : serializer.data, "count": count})
-        response = {'message' : 'No Group!',}
-        return Response(response)
-
-class FilterGroupbyMember(APIView,PaginationHandlerMixin):
-    pagination_class = BasicPagination
-
-    def get(self,request):
-        if Group.objects is not None:
-            groups = sorted(Group.objects.all(),  key=lambda m: -m.members_count)
-            gp_list=self.paginate_queryset(groups)
-            serializer = GroupSerializer(gp_list,context={"request": request},many=True)
-            count = Paginator(groups,10).num_pages
-            return Response({"groups" : serializer.data, "count": count})
-        response = {'message' : 'No Group!',}
-        return Response(response)
       
