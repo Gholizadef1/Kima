@@ -322,7 +322,9 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3">{current.title}</h6>
+               
+<p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+            
             </div>
               </div>
               

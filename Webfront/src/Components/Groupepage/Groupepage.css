@@ -591,6 +591,13 @@
            .group-info{
                margin-top: 80px;
            }
-            
+           a {
+        color: black;
+       text-decoration: underline;
+          }
+          a:hover {
+            color: black;
+          
+              }
              
             }
