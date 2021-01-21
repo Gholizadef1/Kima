@@ -19,7 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const BlueOnGreenTooltip = withStyles({
   tooltip: {
     color: "black",
-    fontFamily:"Mitra",
+    fontFamily:"Yekan",
     fontSize:20,
     backgroundColor: '#b7dee4',
     width:170,
@@ -68,10 +68,8 @@ function Slide(props) {
   }
 
   let settings = {
-    infinite:true,
+    infinite:false,
     speed: 10,
-    arrows: true,
-    
     slidesToShow: 7,
     slidesToScroll: 4,
     
