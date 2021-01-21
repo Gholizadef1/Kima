@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -24,6 +24,7 @@ const Groups = ({navigation}) => {
 
    const searchpost=async(page)=>{
      await setpage(page)
+     console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
     const back = {
       search:searchterm,
 
@@ -32,6 +33,7 @@ const Groups = ({navigation}) => {
     if(page===1){
       await settheend(false)
      await setinformation([])
+     console.log('IF PAGE === 1   ')
 
     }
     const backk = JSON.stringify(back);
@@ -59,16 +61,19 @@ const Groups = ({navigation}) => {
     await setrefresh(false)
      console.log('#########')
      }
+     console.log('searchpost beforeee'+information+'1111111111111111111111')
   // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
-  await setinformation([...information,...response.data.results])
-
-  console.log(information+'******######********########')
+  // await setinformation([...information,...response.data.results])
+   await setinformation(information=>[...information,...response.data.results])
+   console.log('searchpost afterrrrrrr'+information+'222222222222222222')     
+  // console.log(information+'******######********########')
   // console.log(information[0].title)
   // settheend(true)
   // setcount(response.data.count)
   setnext(response.data.next)
   if(next===null)
   {
+    settheend(true)
     console.log(next+'  NEXT TO IF')
   }
   // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
@@ -254,20 +259,27 @@ const Groups = ({navigation}) => {
       
     }
  
-  useFocusEffect(
-    React.useCallback(() => {  
-      async function refreshing(){ 
-      // setmoreclicked(false)
-        // setselectedValue('none')
-        setsearchterm('')
-        setnumberofresults()
-         await setinformation([])
-      // if(searchterm==='')  
-        response(1)
-      }
+  useEffect(()=>{
+    // React.useCallback(() => { 
+      setsearchterm('')
+      setnumberofresults()
+        setinformation([])
+    // if(searchterm==='')  
+      response(1) 
+      // async function refreshing(){ 
+      // // setmoreclicked(false)
+      setselectedValue('none')
+      //   setsearchterm('')
+      //   setnumberofresults()
+      //    await setinformation([])
+      // // if(searchterm==='')  
+      //   response(1)
+      // }
         // else
         // searchpost(1)
-    },[]))
+    // }
+    // ,[])
+  },[])
   return (
 
     <View style={styles.container}>
@@ -280,6 +292,9 @@ const Groups = ({navigation}) => {
       marginLeft:wp('87%')
           }}
           onPress={()=>{
+          setinformation([]);
+          setpage(1)
+          response(1);
           setsearchterm('');
           setnumberofresults();
           setopensearch(false)}
@@ -291,6 +306,7 @@ const Groups = ({navigation}) => {
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
       onIconPress={()=>{
+        setinformation([])
         searchpost(1)}}
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
