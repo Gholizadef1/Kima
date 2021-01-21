@@ -676,5 +676,20 @@ class DeleteChatView(APIView):
             return Response({"message":"Successfull delete chat!"})
         return Response({"message":"No permission!"})
 
+class MyGroupView(APIView):
+    model = Group
+    pagination_class = BasicPagination
+    parser_classes = [JSONParser]
+    serializer_class=MyGroupSerializer
 
-        
+    def get_queryset(self,pk):
+        user=Account.objects.get(pk=pk)
+        return Member.objects.filter(user=user)
+
+    def get(self, request,pk):
+        queryset = self.get_queryset(pk=pk)
+        serializer = MyGroupSerializer(queryset, many=True)
+        return Response({'data': serializer.data, 'Count': queryset.count()})
+
+    
+

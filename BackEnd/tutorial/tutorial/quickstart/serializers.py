@@ -218,3 +218,11 @@ class CommentProfSerializer(serializers.ModelSerializer):
             return True
         return False
         
+class MyGroupSerializer(serializers.ModelSerializer):
+    group_info = serializers.RelatedField(source='group',read_only=True)
+    class Meta:
+        model = Member
+        fields = ['group_info']
+
+    def to_representation(self,value):
+        return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data

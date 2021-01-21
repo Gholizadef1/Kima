@@ -43,10 +43,11 @@ urlpatterns = [
     path('group/<group_pk>/discussion/<discussion_pk>',DiscussionDetailsView.as_view()),
     path('group/<group_pk>/discussion/<discussion_pk>/chat',DiscussionChatView.as_view()),
     path('group/<group_pk>/discussion/<discussion_pk>/chat/<chat_pk>',DeleteChatView.as_view()),
+    path('user/<int:pk>/quote',MyQuoteView.as_view()),
+    path('user/<int:pk>/comment',CommentProfileView.as_view()),
+    path('user/<int:pk>/group',MyGroupView.as_view()),
 
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
-    path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
-    path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),
     path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/update-profile/', UpdateUserProfileView.as_view(), name='update-profile'),
