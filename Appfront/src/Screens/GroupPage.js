@@ -55,12 +55,12 @@ const GroupPage = (prop) => {
      
       await setgroupinfo(response.data);
       setmembernumber(groupinfo.members_count);
-      console.log('GROUP PAGE4')
-      // console.log(response.data)
-      console.log(response.data.group_photo+'group photo')
-      console.log(groupinfo+'*****')
+      // console.log('GROUP PAGE4')
+      // // console.log(response.data)
+      // console.log(response.data.group_photo+'group photo')
+      // console.log(groupinfo+'*****')
       setgroupphoto(`http://cc4552eb4e3a.ngrok.io${response.data.group_photo}`)
-      console.log(groupphoto+'------')
+      // console.log(groupphoto+'------')
       // console.log(groupinfo.group_photo)
 //      console.log('**'+response.data.title)
     })
@@ -70,13 +70,13 @@ const GroupPage = (prop) => {
       console.log('GETMEMBERS')
       const response = axiosinst.get('/api/group/members/'+prop.route.params.id)
       .then(async function(response){
-        console.log(response.data.members.lenght+'^^^^^^^^^^^^^^^^^^^^')
-        console.log(membernumber+'MEMBER NUM')
-       console.log(response.data)
+      //   console.log(response.data.members.lenght+'^^^^^^^^^^^^^^^^^^^^')
+      //   console.log(membernumber+'MEMBER NUM')
+      //  console.log(response.data)
        setmembers(response.data.members)
-       console.log('member 0'+response.data.members[0].user.username)
-       console.log('ownerrr '+response.data.owner.username)
-       console.log('count   '+response.data.count)
+      //  console.log('member 0'+response.data.members[0].user.username)
+      //  console.log('ownerrr '+response.data.owner.username)
+      //  console.log('count   '+response.data.count)
       //  console.log('member 0'+response.data.members[0].user.username)
       if(username===response.data.owner.username){
         await setowner(true)
@@ -91,13 +91,13 @@ const GroupPage = (prop) => {
         //     }
         //   }
         // }
-        console.log('INJA HAMM')
-        console.log(response.data.members.count+'LENGG********GGGGGGGGGGTH')
+        // console.log('INJA HAMM')
+        // console.log(response.data.members.count+'LENGG********GGGGGGGGGGTH')
         // console.log(groupinfo.members_count +' GROUP INFO .MEMBER_COUNTTTTTT')
-        console.log(membernumber+'  MEMBER NUMBERRRR')
+        // console.log(membernumber+'  MEMBER NUMBERRRR')
         for(let i =0 ; i<membernumber ; i++){
-           console.log(response.data.members.lenght+'LENGGGGGGGGGGGGTH')
-          console.log('&&&&&&&&&')
+          //  console.log(response.data.members.lenght+'LENGGGGGGGGGGGGTH')
+          // console.log('&&&&&&&&&')
 
           if(response.data.members[i].user.username === username && owner!=true){
             //  if (response.data.members[i].user.username != response.data.owner.username){
@@ -132,11 +132,11 @@ const GroupPage = (prop) => {
 
         const response = axiosinst.get('/api/user-profile/' +id)
         .then(function(response){
-          console.log('ID' +id)
+          // console.log('ID' +id)
           setusername(response.data.username)
-          console.log('USERR' +response.data.username)
-          console.log('hhhkll')
-          console.log('hhh'+prop.route.params.id)
+          // console.log('USERR' +response.data.username)
+          // console.log('hhhkll')
+          // console.log('hhh'+prop.route.params.id)
         })
         };
 
@@ -158,7 +158,7 @@ if (!groupinfo){
       })
         .then(async function (response) {
 //          console.log(await AsyncStorage.getItem('token')).toString()
-          console.log('response' +response.data.message)
+          // console.log('response' +response.data.message)
           // setjoined(true)
           getMembers()
         })
@@ -178,7 +178,7 @@ if (!groupinfo){
     })
       .then(async function (response) {
 //          console.log(await AsyncStorage.getItem('token')).toString()
-        console.log('response' +response.data.message)
+        // console.log('response' +response.data.message)
         // setnotjoined(true)
         getMembers()
       })

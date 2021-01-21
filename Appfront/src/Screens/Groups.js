@@ -104,6 +104,7 @@ const Groups = ({navigation}) => {
   // const [selectedValue, setselectedValue] = useState('none')
   // const selectedValue='none'
   const [selectedValue, setselectedValue] = useState('none')
+  const [gotogrouppage,setgotogrouppage]=useState(false);
   const [information, setinformation] = useState([]);
   const [next,setnext]=useState(null)
   const [search, setsearch] = useState([])
@@ -119,6 +120,7 @@ const Groups = ({navigation}) => {
   const [searchterm,setsearchterm]=useState('');
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
+  const [moreclicked,setmoreclicked]=useState(false);
   const response=async (page)=>{
     // await setinformation([])
     setopensearch(false)
@@ -239,9 +241,15 @@ const Groups = ({navigation}) => {
       }
     }
     };
+    const callbackFunction = async (childData) => {
+     
+       await setmoreclicked(childData)
+      
+    }
  
   useFocusEffect(
     React.useCallback(() => {   
+      // setmoreclicked(false)
         // setselectedValue('none')
         setsearchterm('')
         setnumberofresults()
@@ -460,12 +468,45 @@ const Groups = ({navigation}) => {
             data={information}
             renderItem={({ item }) =><>
          
-            <TouchableOpacity onPress={()=>{
+         <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'white',marginBottom:0}}
+            onPress={async()=>{
+              
+              console.log(moreclicked+' MORECLICKED in grouppppppp')
+               
+               if(moreclicked===false){
+             //if(gotogrouppage===true){
               console.log(item.id+'####')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
-             discription={item.summary} title={item.title} ></Eachgroup>
+              //setgotogrouppage(false)
+               //setmoreclicked(true);
+               console.log(moreclicked+' MORECLICKED in grp')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
+            <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
+             discription={item.summary} title={item.title} >
+              {/* <Text style={{position:'absolute'}}>kjhlkjhlkjhkjhlkjh</Text>
+              <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'lightblue',marginBottom:0,height:100}}
+            onPress={async()=>{
+              
+              console.log(moreclicked+' MORECLICKED in grouppppppp')
+               
+               if(moreclicked===false){
+             //if(gotogrouppage===true){
+              console.log(item.id+'####')
+              //setgotogrouppage(false)
+               //setmoreclicked(true);
+               console.log(moreclicked+' MORECLICKED in grp')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
+                <Text>kjhlkjhlkjhkjhlkjh</Text>
+                 </TouchableOpacity>
+              <Text>kjhlkjhlkjhkjhlkjh</Text> */}
+             
+             </Eachgroup>
              </TouchableOpacity>
+         
+          
            
             </>
             }
