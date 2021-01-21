@@ -259,42 +259,45 @@ class QuoteView(APIView,PaginationHandlerMixin):
                         status=HTTP_404_NOT_FOUND)
 
     def delete(self,request,pk):
+        
+class LikeQuoteView(APIView):
+
+    def post(self,request,pk):
+        user=request.user
+        quote = MyQuote.objects.get(id=pk)
+        feedback=self.request.query_params.get('feedback', None)
+        if feedback=="like":
+            if LikeQuote.objects.filter(account=user,quote=quote).exists():
+                return Response({'message':"You have liked before!",
+                                 'data':quote.Likes,})
+            else:
+                newlike = LikeQuote(account=user,quote=quote)
+                newlike.save()
+                quote.Likes+=1
+                quote.save()
+                return Response({'message':"like success!",
+                                'data':quote.Likes,})
+
+    def delete(self,request,book_pk,quote_pk):
         current_quote = MyQuote.objects.get(id=pk)
         current_user = request.user
+
+        feedback=self.request.query_params.get('feedback', None)
+        if feedback is not None:
+            if feedback=="like":
+                userlike = LikeQuote.objects.filter(account=current_user,quote=current_quote)
+                userlike.delete()
+                quote.Likes-=1
+                quote.save()
+                return Response({'message':"unlike success!",
+                                 'data':quote.Likes,})
+            
         quote_user = current_quote.account
         if quote_user == current_user:
             current_quote.delete()
             return Response({'message':'Your Quote successfully delleted!'})
         else:
             return Response({'message':'You dont have permission to delete this quote!'})
-
-class LikeQuoteView(APIView):
-
-    def get(self, request, pk):
-        user=request.user
-        quote = MyQuote.objects.get(id=pk)
-        if LikeQuote.objects.filter(account=user,quote=quote).exists():
-            return Response({'message' : "True",})
-        return Response({'message' : "False",})
-
-
-    def post(self,request,pk):
-        user=request.user
-        quote = MyQuote.objects.get(id=pk)
-        if LikeQuote.objects.filter(account=user,quote=quote).exists():
-            userlike = LikeQuote.objects.filter(account=user,quote=quote)
-            userlike.delete()
-            quote.Likes-=1
-            quote.save()
-            return Response({'message':"unlike success!",
-                             'data':quote.Likes,})
-        else:
-            newlike = LikeQuote(account=user,quote=quote)
-            newlike.save()
-            quote.Likes+=1
-            quote.save()
-            return Response({'message':"like success!",
-                            'data':quote.Likes,})
 
 class CommentView(APIView,PaginationHandlerMixin):
 
