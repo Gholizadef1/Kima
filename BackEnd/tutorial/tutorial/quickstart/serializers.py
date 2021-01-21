@@ -190,12 +190,11 @@ class CreateChatSerializer(serializers.Serializer):
 
 class DiscussionChatSerializer(serializers.ModelSerializer):
 
-    discuss = DiscussionSerializer(read_only=True)
     user = UserProfileSerializer(read_only=True)
 
     class Meta:
         model = Chat
-        fields = "__all__"
+        fields = ['user','chat_text','send_time','id']
 
 class CommentProfSerializer(serializers.ModelSerializer):
     account = UserProfileSerializer(read_only=True)

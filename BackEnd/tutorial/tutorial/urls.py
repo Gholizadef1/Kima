@@ -41,9 +41,10 @@ urlpatterns = [
     path('group/search',DynamicGroupAPIView.as_view()),
     path('group/<int:pk>/discussion',DiscussionView.as_view()),
     path('group/<group_pk>/discussion/<discussion_pk>',DiscussionDetailsView.as_view()),
+    path('group/<group_pk>/discussion/<discussion_pk>/chat',DiscussionChatView.as_view()),
+    path('group/<group_pk>/discussion/<discussion_pk>/chat/<chat_pk>',DeleteChatView.as_view()),
 
     path('dyanmicsearch/',kyma.views.DynamicBookAPIView.as_view()),
-    path('api/group/discussion/chat/<int:pk>',DiscussionChatView.as_view()),
     path('api/user-profile/<int:pk>/MyQuotes',MyQuoteView.as_view()),
     path('api/user-profile/<int:pk>/mycomments',CommentProfileView.as_view()),
     path('api/user-profile/<int:pk>',quickstart.views.UserProfileView.as_view()),

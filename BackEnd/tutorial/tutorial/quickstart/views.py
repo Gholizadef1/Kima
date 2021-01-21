@@ -519,9 +519,9 @@ class DiscussionDetailsView(APIView):
 class DiscussionChatView(APIView,PaginationHandlerMixin):
 
     pagination_class = BasicPagination
-    def get(self,request,pk):
-        discuss = Discussion.objects.get(id=pk)
-        chats = Chat.objects.filter(discuss=discuss)
+    def get(self,request,group_pk,discussion_pk):
+        discuss = Discussion.objects.get(id=discussion_pk)
+        chats = Chat.objects.filter(discuss=discuss).order_by('-send_time')
         if chats is not None:
             chat_list = self.paginate_queryset(chats)
             serializer = DiscussionChatSerializer(chat_list,many=True)
@@ -531,9 +531,9 @@ class DiscussionChatView(APIView,PaginationHandlerMixin):
         return Response(response)
 
 
-    def post(self,request,pk):
+    def post(self,request,group_pk,discussion_pk):
         user = request.user
-        discuss = Discussion.objects.get(id=pk)
+        discuss = Discussion.objects.get(id=discussion_pk)
         current_group = discuss.group
         if not Member.objects.filter(user=user,group=current_group).exists():
             return Response({"message":"You aren't a group member!"})
@@ -666,4 +666,15 @@ class DynamicGroupAPIView(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupDetSerializer
   
-      
+class DeleteChatView(APIView):    
+    def delete(self,request,group_pk,discussion_pk,chat_pk):
+        current_user=request.user
+        user=Chat.objects.get(id=chat_pk).user
+        current_chat=Chat.objects.get(id=chat_pk)
+        if current_user==user:
+            current_chat.delete()
+            return Response({"message":"Successfull delete chat!"})
+        return Response({"message":"No permission!"})
+
+
+        
