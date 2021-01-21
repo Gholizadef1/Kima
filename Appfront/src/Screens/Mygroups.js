@@ -288,7 +288,7 @@ const Mygroups = () => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('http://505a2dd8d5cc.ngrok.io/api/group',formdata,{
+        const response=await axiosinst.post('http://c56f3ca733ca.ngrok.io/api/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
