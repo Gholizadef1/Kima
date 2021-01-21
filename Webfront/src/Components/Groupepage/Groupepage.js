@@ -138,9 +138,13 @@ import Tooltip from '@material-ui/core/Tooltip';
         }).then(data => {
         setJoin(true);
         setUser("You joind this group!");
-
     
-          console.log(data);
+          if(data.statusText==="OK"){
+            setOpenSnack(true);
+            setMassage("!شما با مؤفقیت به گروه اضافه شدید")
+           
+        }
+          console.log(data.statusText);
          
         })
     .catch(error=>{
@@ -156,8 +160,12 @@ import Tooltip from '@material-ui/core/Tooltip';
         "Content-Type":"application/json",
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
-        
-          console.log(data.data);
+          if(data.message ==="You leaved this group!"){
+            setOpenSnack(true);
+            setMassage("!شما با مؤفقیت از گروه خارج شدید")
+           
+        }
+          console.log(data.statusText);
           
         })
     .catch(error=>{
@@ -174,6 +182,12 @@ import Tooltip from '@material-ui/core/Tooltip';
         "Content-Type":"application/json",
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
+          if(data.message ==="You leaved this group!"){
+            setOpenSnack(true);
+            setMassage("!شما با مؤفقیت گروه خود را حذف کردید")
+           
+        }
+          console.log(data.statusText);
           console.log(Cookies.get("userToken"));
           console.log(data);
           props.history.push('/groups');
@@ -233,12 +247,29 @@ import Tooltip from '@material-ui/core/Tooltip';
   const handleClickOpenCreateDiscussion = () => {
     setOpenCreateDiscussion(true);
   };
-
+  const [massage,setMassage]=useState("");
+  const[openSnack,setOpenSnack]=useState(false);
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+      }
+    setOpenSnack(false);
+  };
 
     return(
       
       <div className="mx-md-1 pt-5 px-md-5">
-       
+       <div>
+         <Snackbar
+              anchorOrigin={{ vertical:'top', horizontal:'center'}}
+              open={openSnack}
+
+              autoHideDuration={5000}
+
+              onClose={handleCloseSnack}
+              message={massage}
+            />
+      </div>
       <div className="container-fluid text-center px-md-5 py-md-5" >
         <div className="mx-md-5">
         <div className="no-gutters shadow table-borderless my-5 mx-2 ">
