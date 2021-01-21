@@ -58,6 +58,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
+  const [discu,setDisc] = useState("");
   const [showdiscussion,setShowdiscussion]=useState([]);
   let { groupId } = useParams();
   const [newDiscussion,setNewDiscussion] = useState({
@@ -202,10 +203,13 @@ import Tooltip from '@material-ui/core/Tooltip';
   /////////////////////////////////////////////////////////
     
     const handleChange = (e) => {
-      const {id , value} = e.target   
+      const {id , value} = e.target  
+   
       setNewDiscussion(prevState => ({
+        
           ...prevState,
-          [id] : value
+          [id] : value,
+          
       }))
   }
  
@@ -219,17 +223,6 @@ import Tooltip from '@material-ui/core/Tooltip';
     //const backsummary = JSON.stringify(payloadsummary);
     console.log(backtitle);
     //console.log(backsummary);
-    const handleCreateDiscussionSubmit =(e) =>{
-      axios.post(
-        "http://127.0.0.1:8000/api/group/"+ props.match.params.groupId+"/discussion",backtitle,
-      {
-        headers:{
-          "Content-Type":"application/json",
-         "Authorization":"Token "+Cookies.get("userToken")}
-          }).then(data =>{
-          setJoin(true)
-          })
-    }
     useEffect(() => {
       axios.get(
         "http://127.0.0.1:8000/api/group/" + props.match.params.groupId+"/discussion",
@@ -239,13 +232,28 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
           }).then(data => {
             console.log(data.data.discussions);
+           
             setShowdiscussion(data.data.discussions);
-          setJoin(true);
+            
+         
           })
-    }, [join,props.match.params.groupId]);
+    }, [showdiscussion,props.match.params.groupId]);
+
+    const handleCreateDiscussionSubmit =(e) =>{
+      axios.post(
+        "http://127.0.0.1:8000/api/group/"+ props.match.params.groupId+"/discussion",backtitle,
+      {
+        headers:{
+          "Content-Type":"application/json",
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
+          setNewDiscussion("");
+         
+    }
     
   const handleClickOpenCreateDiscussion = () => {
     setOpenCreateDiscussion(true);
+    setJoin(true);
   };
   const [massage,setMassage]=useState("");
   const[openSnack,setOpenSnack]=useState(false);
