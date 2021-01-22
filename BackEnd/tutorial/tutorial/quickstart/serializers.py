@@ -73,12 +73,11 @@ class PostQuoteSerializer(serializers.Serializer):
 class QuoteSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
-    current_book = bookSerializer(read_only=True)
     isliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyQuote
-        fields = ['account', 'current_book', 'quote_text','sendtime','Likes','isliked','id']
+        fields = ['account', 'quote_text','sendtime','Likes','isliked','id']
     
     def get_isliked(self, obj):
         user =  self.context['request'].user
@@ -109,13 +108,12 @@ class PostCommentSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     account = UserProfileSerializer(read_only=True)
-    current_book = bookSerializer(read_only=True)
     isliked = serializers.SerializerMethodField()
     isdisliked = serializers.SerializerMethodField()
     
     class Meta:
         model = MyComment
-        fields = ['account', 'current_book', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
+        fields = ['account', 'comment_text','sendtime','LikeCount','DislikeCount','isliked','isdisliked','id']
     
     def get_isliked(self, obj):
         user =  self.context['request'].user
@@ -181,7 +179,6 @@ class CreateDiscussionSerializer(serializers.Serializer):
 class DiscussionSerializer(serializers.ModelSerializer):
 
     creator = UserProfileSerializer(read_only=True)
-    group = GroupDetSerializer(read_only=True)
 
     class Meta:
         model = Discussion
@@ -193,12 +190,11 @@ class CreateChatSerializer(serializers.Serializer):
 
 class DiscussionChatSerializer(serializers.ModelSerializer):
 
-    discuss = DiscussionSerializer(read_only=True)
     user = UserProfileSerializer(read_only=True)
 
     class Meta:
         model = Chat
-        fields = "__all__"
+        fields = ['user','chat_text','send_time','id']
 
 class CommentProfSerializer(serializers.ModelSerializer):
     account = UserProfileSerializer(read_only=True)
@@ -222,12 +218,11 @@ class CommentProfSerializer(serializers.ModelSerializer):
             return True
         return False
         
-class FilterRateSerializer(serializers.ModelSerializer):
-    book_info = serializers.RelatedField(source='current_book',read_only=True)
-    
+class MyGroupSerializer(serializers.ModelSerializer):
+    group_info = serializers.RelatedField(source='group',read_only=True)
     class Meta:
-        model = Ratinguser
-        fields = ['book_info']
+        model = Member
+        fields = ['group_info']
 
     def to_representation(self,value):
-        return bookSerializer(book.objects.get(pk=value['current_book'])).data
+        return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
