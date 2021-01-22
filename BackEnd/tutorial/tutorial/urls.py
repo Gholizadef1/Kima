@@ -50,11 +50,8 @@ urlpatterns = [
     path('book/search',kyma.views.DynamicBookAPIView.as_view()),
     path('user/<int:pk>/change-password', ChangePasswordView.as_view(), name='change-password'),
     path('user/<int:pk>/update-profile', UpdateUserProfileView.as_view(), name='update-profile'),
-
-    path('api/profile/', UserProfileViewwithToken.as_view(), name='profile'),
-    
-    path('bookinfo/', kyma.views.BookListView.as_view()),
-    path('register',registration_view,name="register"),
-    path('login',login,name="login"),
+    path('bookinfo', kyma.views.BookListView.as_view()),
+    path('register',RegistrationView.as_view()),
+    path('login',LoginView.as_view()),
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

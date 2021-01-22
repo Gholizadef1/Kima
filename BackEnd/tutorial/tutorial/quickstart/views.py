@@ -28,11 +28,9 @@ from django.core.paginator import Paginator
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
 
-
-@api_view(['POST','GET'])
-def registration_view(request):
+class RegistrationView(APIView):
     
-    if request.method == 'POST':
+    def post(self,request):
         serializer = RegistrationSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
@@ -48,27 +46,23 @@ def registration_view(request):
             data = serializer.errors
         return Response(data)
 
-    if request.method == 'GET':
-        Users=Account.objects.all()
-        serializer=RegistrationSerializer(Users,many=True)
-        return Response(serializer.data)
+class LoginView(APIView):
 
-@api_view(["POST"])
-@permission_classes([AllowAny],)
-@permission_classes([IsAuthenticated])
-def login(request):
-    email = request.data.get("email")
-    password = request.data.get("password")
-    if email is None or password is None:
-        return Response({'error': 'Please provide both username and password'},
-                        status=HTTP_400_BAD_REQUEST)
-    user = authenticate(email=email, password=password)
-    if not user:
-        return Response({'error': 'Invalid Credentials'},
-                        status=HTTP_404_NOT_FOUND)
-    token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
-                    status=HTTP_200_OK)
+    permission_classes = (AllowAny,)
+
+    def post(self,request):
+        email = request.data.get("email")
+        password = request.data.get("password")
+        if email is None or password is None:
+            return Response({'error': 'Please provide both username and password'},
+                            status=HTTP_400_BAD_REQUEST)
+        user = authenticate(email=email, password=password)
+        if not user:
+            return Response({'error': 'Invalid Credentials'},
+                            status=HTTP_404_NOT_FOUND)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'username' : user.username, 'userid': user.id},
+                        status=HTTP_200_OK)
   
 class ChangePasswordView(generics.UpdateAPIView):
 
@@ -114,20 +108,6 @@ class UpdateUserProfileView(generics.UpdateAPIView,UpdateModelMixin):
 
     def put(self,request,*args,**kwargs):
         return self.partial_update(request, *args, **kwargs)
-
-class UserProfileViewwithToken(generics.UpdateAPIView,RetrieveModelMixin):
-    serializer_class =  UserProfileSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset = Account.objects.all()
-
-    def get_object(self):
-        queryset = self.filter_queryset(self.get_queryset())
-        obj = get_object_or_404(queryset,pk=self.request.user.id)
-        self.check_object_permissions(self.request, obj)
-        return obj
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
 
 class UserProfileView(APIView):
     
