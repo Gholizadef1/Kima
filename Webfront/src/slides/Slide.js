@@ -50,6 +50,7 @@ function Slide(props) {
       .then((res) => res.json())
       .then((data) => {
         setFavorite(data);
+        console.log(data);
       });
   }, []);
   useEffect(() => {

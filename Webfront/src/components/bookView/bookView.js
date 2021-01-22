@@ -89,6 +89,7 @@ direction:"ltr",
 
 const [value, setValue] = useState(0);
 const [hover, setHover] = useState(-1);
+const [update,setUpdate] = useState();
 const [mess, setMess] = useState("");
 const [num, setNum] = useState();
 const classes = useStyles();
@@ -144,7 +145,7 @@ console.log(error);
 
 
 }
-},[props.match.params.bookId] );
+},[state,props.match.params.bookId] );
 
 // const StyledButton = withStyles({
 //     root: {
@@ -266,6 +267,7 @@ headers:{
     "Content-Type":"application/json",
     "Authorization":"Token "+Cookies.get("userToken")}
     },)
+    
 
 }
 }
