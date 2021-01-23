@@ -369,13 +369,14 @@ const Mygroups = (prop) => {
 
          </ImageBackground>
      </TouchableOpacity>}
+    
+     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('12%'),
+      marginTop:hp('-2%'),
+      width: wp('25%'),elevation:0}}     onPress={() => {pickfromgallery(props,props.handleChange)}}>
+     </TouchableOpacity>
      <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('7%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
       <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
       </TouchableOpacity>
-     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('12%'),
-      marginTop:hp('-2%'),
-      width: wp('25%'),elevation:0}}     onPress={() => { pickfromgallery(props,props.handleChange)}}>
-     </TouchableOpacity>
     
     
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
@@ -394,6 +395,9 @@ const Mygroups = (prop) => {
       </Item>
     
       </View>
+      <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('7%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
+      <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
+      </TouchableOpacity>
      
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
    
