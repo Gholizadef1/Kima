@@ -37,7 +37,7 @@ const userschema=yup.object({
 
 })
 
-const Mygroups = () => {
+const Mygroups = ({navigation}) => {
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
   
@@ -219,7 +219,7 @@ const Mygroups = () => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<numberofgp/10){
+     if(page<numberofgp/10+1){
      response(page+1);
      }
      else
@@ -520,7 +520,9 @@ const Mygroups = () => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
-             <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}>
+               <TouchableOpacity onPress={()=>{
+              console.log(item.id+'####')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
             </TouchableOpacity>
             </>
