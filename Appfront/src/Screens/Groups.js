@@ -26,7 +26,7 @@ const Groups = ({navigation}) => {
      await setpage(page)
      console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
     const back = {
-      search:searchterm,
+      key:searchterm,
 
     }
     await settheend(false)
@@ -38,11 +38,12 @@ const Groups = ({navigation}) => {
     }
     const backk = JSON.stringify(back);
     try{
-    const response = await axiosinst.get('api/group/search/',{
+    const response = await axiosinst.get('group/search',{
       params: {
+       
+        key: searchterm,
+        search_fields:'title',
         page:page,
-        search: searchterm,
-        search_fields:'title'
       },
     "headers":
     {
@@ -117,7 +118,7 @@ const Groups = ({navigation}) => {
   const [refresh,setrefresh]=useState(false);
   const [pickerselected,setpickerselected]=useState(false);
   const [opensearch,setopensearch]=useState(false);
-  const [likeotime, setlikeotime] = useState('/filter-time');
+  const [likeotime, setlikeotime] = useState('time');
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
   const[numberofpage,setnumberofpage]=useState(0);
@@ -152,8 +153,9 @@ const Groups = ({navigation}) => {
        console.log('api/group'+likeotime)
 
 
-      const response = await axiosinst.get('api/group'+ likeotime,{
+      const response = await axiosinst.get('/group',{
         params: {
+          filter:likeotime,
           page: page
         },
       "headers":
@@ -407,7 +409,7 @@ const Groups = ({navigation}) => {
               console.log('to none')
               // await setlikeotime('')
               console.log(likeotime+'BEIN TIME')
-               await setlikeotime('/filter-time')
+               await setlikeotime('time')
               // // setrefresh(true)
               // await setsearchterm('')
               // setnumberofresults()
@@ -425,7 +427,7 @@ const Groups = ({navigation}) => {
               console.log(item.value + 'VALUE')
               // await setlikeotime('')
               console.log(likeotime+'BEIN LIKE')
-               await setlikeotime('/filter-member')
+               await setlikeotime('member')
               //  setrefresh(true)
               // setpickerselected(true)
               // await setsearchterm('')
