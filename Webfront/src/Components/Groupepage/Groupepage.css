@@ -559,13 +559,15 @@
             }
             
             .summary{
-                font-size: larger;
+                font-size:20px;
+                font-family: "Yekan";
                 margin-top: 30px;
-                margin-right: 220px;
+                margin-right: 240px;
             }
             .creator{
                 font-family: 'Yekan';
-                font-size: 13px;
+                font-size: 16px;
+                font-weight: bold;
             }
             .name-d{
                 margin-top: -20px;

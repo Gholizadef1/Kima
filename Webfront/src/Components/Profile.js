@@ -248,7 +248,7 @@ useEffect(() => {
                                     <h6 className="email">
                                        {user.email}
                                     </h6>
-                                    <button type="button" className="btn btn1 btn-primary"
+                                    <button type="button" className="btn btn1 btn-info rounded-lg"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -301,7 +301,7 @@ useEffect(() => {
              display: "block"}}/>
             <div className="d-flex justify-content-between p-4">
 
-                 <button className="btn custom-btn bg-primary" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
+                 <button className="btn custom-btn btn-info rounded-lg" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
 
                 <input class="form-control" 
                 type="file" accept="image/*" 
@@ -309,7 +309,7 @@ useEffect(() => {
                 ref={imageUploader} 
 
                 style={{ display: "none",color:"white" }} />
-              <button className="btn custom-btn1 bg-primary" type="submit" style={{fontFamily:'Yekan',color:"white"}}
+              <button className="btn custom-btn1 btn-info rounded-lg" type="submit" style={{fontFamily:'Yekan',color:"white"}}
 
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
@@ -333,7 +333,7 @@ useEffect(() => {
                                             <div class=" my-2">
                                                 <button
                                                 type="submit" 
-                                                className="btn d-flex flex-row bg-primary "
+                                                className="btn d-flex flex-row btn-info rounded-lg "
                                                 onClick={handleChangeInfosClick}
 
 
@@ -342,7 +342,7 @@ useEffect(() => {
 
                                                 >ذخیره</button>
                                                 <div class="my-1">
-                                                <label for="password">رمز قبلی</label>
+                                                <label for="password" style={{fontFamily:"Yekan"}}>رمز قبلی</label>
                                                 <input type="password"
 
                                                   class="form-control rounded-pill"
@@ -354,7 +354,7 @@ useEffect(() => {
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
-                                                <label for="password">رمز جدید</label>
+                                                <label for="password"style={{fontFamily:"Yekan"}}>رمز جدید</label>
                                                 <input type="password"
 
                                                   class="form-control rounded-pill"
@@ -376,7 +376,7 @@ useEffect(() => {
                                             <div class=" my-2">
                                                 <button
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row bg-primary"
+                                                className="btn  d-flex flex-row btn-info rounded-lg"
                                                 onClick={handleChangePassClick}
 
 
@@ -395,7 +395,7 @@ useEffect(() => {
         <Modal.Footer>
 
         
-          <button className="btn bg-primary mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"white"}}>
+          <button className="btn btn-info rounded-lg mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"white"}}>
 
             بستن
           </button>

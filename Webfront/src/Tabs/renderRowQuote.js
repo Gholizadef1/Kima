@@ -63,7 +63,7 @@ import { red } from "@material-ui/core/colors";
               <div className="d-flex flex-column">
                 <small className=" like mr-3">
                 {current.Likes}
-                <GoHeart color="lightred" size="35"/>
+                <GoHeart color="red" size="35"/>
                 </small>
               </div>
              </div>
