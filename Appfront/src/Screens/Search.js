@@ -30,9 +30,9 @@ const Search = ({navigation}) => {
     // setStart(false)
     const searchapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('/book/search',{
             params:{
-                search:searchTerm,
+                key:searchTerm,
                 //nemidonam chetori ham title va ham author ro behesh bedam
                 search_fields:'author',
                 
@@ -53,9 +53,9 @@ const Search = ({navigation}) => {
 
     const searchauthorapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('/book/search',{
             params:{
-                search:searchTerm,
+                key:searchTerm,
                 search_fields:'author',
                
                
@@ -75,9 +75,9 @@ const Search = ({navigation}) => {
 
     const searchtitleapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('/book/search',{
             params:{
-                search:searchTerm,
+                key:searchTerm,
                 search_fields:'title',
                
                
