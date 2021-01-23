@@ -58,7 +58,6 @@ import Tooltip from '@material-ui/core/Tooltip';
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [join,setJoin] = useState(false);
-  const [discu,setDisc] = useState("");
   const [showdiscussion,setShowdiscussion]=useState([]);
   let { groupId } = useParams();
   const [newDiscussion,setNewDiscussion] = useState({
@@ -639,7 +638,27 @@ import Tooltip from '@material-ui/core/Tooltip';
     
     {owner === 'You are owner!' ?
     <div className="group-info">
-    <button onClick={deletGroup}  className="btn btn-g bg-primary" style={{color:'white'}}>حذف گروه</button>
+      <button type="button" className="btn btn-g bg-primary" style={{color:'white'}} data-toggle="modal" data-target="#exampleModal">
+  حذف گروه
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style={{fontFamily:"Yekan",fontSize:20}}>
+       !آیا مطمئن هستید که می‌خواهید گروه را حذف کنید؟
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">!خیر</button>
+        <button onClick={deletGroup} data-dismiss="modal"  type="button" class="btn btn-primary">!بله</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
