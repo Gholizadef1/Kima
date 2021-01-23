@@ -399,7 +399,8 @@ const callbackFunction = async(childData) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
     isliked={item.isliked}
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} 
+    picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 
 
