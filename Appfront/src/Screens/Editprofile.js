@@ -9,6 +9,7 @@ import App from '../../App';
 import AuthContext,{AuthProvider} from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import Animated from 'react-native-reanimated';
@@ -373,6 +374,12 @@ useFocusEffect(
       >
 
       </ImageBackground>}
+      {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
+      
+      <TouchableOpacity  onPress={async()=>await bs.current.snapTo(0)} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
+      <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
+      </TouchableOpacity>
+      {/* </TouchableOpacity> */}
       {/* <Feather style={{position:'absolute',Top:'70%',Left:'40%',
                       opacity: 0.7,
                       alignItems: 'center',
