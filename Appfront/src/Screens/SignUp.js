@@ -72,7 +72,7 @@ const signschema=yup.object({
       style={{marginTop:hp('8%'),
       position:'absolute',
       marginRight:wp('5%'),
-      marginLeft:wp('87%')
+      marginLeft:wp('85%')
           }}
           onPress={()=>{
             pro.navigation.navigate('Log')
