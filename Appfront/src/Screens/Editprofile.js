@@ -62,7 +62,7 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/user/"+id)
 
         
     
@@ -127,8 +127,9 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
+           const id=await AsyncStorage.getItem('id');
+          const response=await axiosinst.put('http://c3d2c5787bdd.ngrok.io/user/'+id+'/update-profile',formdata,{
 
-          const response=await axiosinst.put('http://c3d2c5787bdd.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -217,8 +218,9 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
+           const id=await (await AsyncStorage.getItem('id')).toString();
+          const response=await axiosinst.put('http://c3d2c5787bdd.ngrok.io/user/'+id+'/update-profile',formdata,{
 
-          const response=await axiosinst.put('http://c3d2c5787bdd.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -408,8 +410,8 @@ useFocusEffect(
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
 
-
-        const response=await axiosinst.put('/api/update-profile/',backk,{
+        const id=await (await AsyncStorage.getItem('id')).toString();
+        const response=await axiosinst.put('user/'+id+'/update-profile',backk,{
 
 
           headers:{
@@ -508,11 +510,11 @@ useFocusEffect(
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
 
-        const response=axiosinst.put('/api/change-password/',backk,{
+        const response=axiosinst.put('user/'+id+'/change-password',backk,{
 
           headers:{
             "Content-Type":"application/json",
-            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()} , 
           })
          
         .then( function(response){

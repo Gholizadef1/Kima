@@ -40,7 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/user/"+id)
             
         
         // console.log(response)
@@ -85,7 +85,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/api/user-profile/"+id)
+        const response = await axiosinst.get("http://c3d2c5787bdd.ngrok.io/user/"+id)
             
         
       //  console.log(response)
