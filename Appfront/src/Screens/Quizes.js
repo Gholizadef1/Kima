@@ -19,27 +19,27 @@ import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
-const Quizes = ({navigation}) => {
+const Quizes = () => {
    
 
-  const [information, setinformation] = useState([]);
-  const [search, setsearch] = useState([])
-  const [refresh,setrefresh]=useState(false);
-  const [opensearch,setopensearch]=useState(false);
-  const [likeotime, setlikeotime] = useState('/filter-time');
-  const [theend,settheend]=useState(false);
-  const[page,setpage]=useState(1);
-  const [count,setcount]=useState(1);
+  // const [information, setinformation] = useState([]);
+  // const [search, setsearch] = useState([])
+  // const [refresh,setrefresh]=useState(false);
+  // const [opensearch,setopensearch]=useState(false);
+  // const [likeotime, setlikeotime] = useState('/filter-time');
+  // const [theend,settheend]=useState(false);
+  // const[page,setpage]=useState(1);
+  // const [count,setcount]=useState(1);
 
    
-  useFocusEffect(
-    React.useCallback(() => {   
+  // useFocusEffect(
+  //   React.useCallback(() => {   
      
-    },[]))
+  //   },[]))
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
-
+        <Text>a;ldjf;slkfjd;lksjf</Text>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>

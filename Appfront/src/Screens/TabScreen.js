@@ -30,6 +30,8 @@ import { Button } from 'native-base';
 import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Quizes from "./Quizes";
+import Eachquiz from "./Eachquiz";
 // import { useSafeArea } from 'react-native-safe-area-context';
 // import { white } from 'react-native-paper/lib/typescript/src/styles/colors';
 // const SNavigation = createStackNavigator();
@@ -92,7 +94,7 @@ const TabSreen = (prop) => {
       <Tab.Screen name="گروه ها" component={GroupPageNavigation} options={{
         tabBarIcon: ({ color, size }) => (
           //  <View>
-          <MaterialIcons name="people" size={24} color={color} />
+          <MaterialIcons name="people" size={size} color={color} />
           // {/* <Text>aldfh;skfj;k</Text>
           // </View> */}
         ),
@@ -151,7 +153,7 @@ const TabSreen = (prop) => {
                  onPress={() => {
                    setquizcolor('gray')   
                    setprofilecolor('#1f7a8c');      
-                   setprofileoquiz(GroupPageNavigation)
+                   setprofileoquiz(Profilenavigation)
                  }}>
                 <MaterialIcons name="person" size={24} color={profilecolor} style={{alignSelf:'center'}} />
                 <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:profilecolor}}>حساب کاربری</Text>
@@ -164,7 +166,7 @@ const TabSreen = (prop) => {
                  onPress={() => {
                    setprofilecolor('gray');     
                    setquizcolor('#1f7a8c')         
-                   setprofileoquiz(Profilenavigation)
+                   setprofileoquiz(Quizes)
                    }}>
                 <AntDesign name="questioncircleo" size={24} color={quizcolor} />
                 <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:quizcolor}}>کوییز</Text>

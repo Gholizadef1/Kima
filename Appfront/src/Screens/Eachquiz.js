@@ -22,10 +22,10 @@ import { set } from 'react-native-reanimated';
 const Eachquiz = ({navigation}) => {
 
    
-  useFocusEffect(
-    React.useCallback(() => {   
+//   useFocusEffect(
+//     React.useCallback(() => {   
      
-    },[]))
+//     },[]))
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
