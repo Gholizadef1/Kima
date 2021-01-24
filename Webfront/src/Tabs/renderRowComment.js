@@ -25,13 +25,13 @@ import { red } from "@material-ui/core/colors";
             })
         .then((res) => res.json())
         .then((data) => {
-           console.log(data);
+           console.log(data.message);
           setComment(data);
         });
     }, []);
     return (
       <div>
-      {comment.message==='No Comment!' ? (                   
+      {comment.message==="No Comment!" ? (                   
       <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
 
         
@@ -49,7 +49,7 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
+              <img  className="squere img-responsive"  src={current.current_book.smallimgurl} style={{width:63, height:100}} />
               <div className="booktitle ml-auto mr-3">
                 <h5>
                 {current.current_book.title}

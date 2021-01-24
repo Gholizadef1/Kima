@@ -3,7 +3,8 @@
 .card-title2{
     font-size: 14px;
     direction: rtl;
- 
+    text-align: center;
+    padding-right: 2px;
     font-family: 'Yekan';  
 
 }
@@ -11,6 +12,8 @@
     font-family: 'Yekan';
     color: #000000;
     padding-top: 10px;
+    text-align: center;
+    padding-right: 10px;
     font-size: 16px;
     direction: rtl;
     overflow:hidden; 
@@ -51,12 +54,15 @@ margin-left: 13px;
     @media (min-width :360px)
     {
         .car{
-            width: 70px;
+            width: 82px;
             height: 130px;
         }
         .squer{
-            width: 70px;
+            width: 82px;
             height: 130px;
+            border-radius: 3%;
+    transform:scale(1, 1);
+    transition: 1s;
         }
         .body{
             margin-left: 1px;
@@ -110,12 +116,15 @@ margin-left: 13px;
 
     
       .car{
-          width: 70px;
+          width:82px;
           height: 130px;
       }
       .squer{
-          width: 70px;
+          width: 82px;
           height: 130px;
+          border-radius: 3%;
+    transform:scale(1, 1);
+    transition: 1s;
       }
       .body{
           margin-left: -30px;
@@ -158,16 +167,20 @@ margin-left: -200px;
         
         
           .car{
-              width: 70px;
+              width: 82px;
               height: 130px;
           }
           .squer{
-              width: 70px;
+              width: 82px;
               height: 130px;
+              border-radius: 3%;
+    transform:scale(1, 1);
+    transition: 1s;
           }
           .body{
               margin-left: 1px;
           }
+          
           
 .card-title3{
     font-size: 16px; 
@@ -178,23 +191,7 @@ margin-left: -200px;
 
 .brand2{
     font-size: 20px;
-}
-    .subbrand1{
-        margin-top: 300px;
-        margin-left: -430px;
-        margin-bottom: 30px;
-    }
-    .subbrand2{
-        margin-top: -120px;
-        margin-left: -430px;
-        margin-bottom: 30px;
-    }
-    .subbrand3{
-        margin-top: 10px;
-        margin-left: -430px;
-        margin-bottom: 30px;
-    }
-          }
+}  }
     
     
 

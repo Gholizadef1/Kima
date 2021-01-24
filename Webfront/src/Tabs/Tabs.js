@@ -103,7 +103,7 @@ export default function FullWidthTabs() {
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction} height={400}>
-        <FixedSizeList height={400} width={650} itemSize={10} itemCount={1}>
+        <FixedSizeList height={400} width={650} itemSize={20} itemCount={1}>
       {Scroll}
       </FixedSizeList>
         
