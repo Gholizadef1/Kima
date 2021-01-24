@@ -1,4 +1,3 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
@@ -23,11 +22,10 @@ const Home = ({navigation}) => {
             getbestsFromAPI()
             getmostFromAPI();
         }, [])
-    
       )
-
+      
     function getImageFromAPI(){
-        axiosinst.get('/book')
+        axiosinst.get('/bookdetail')
         .then(function(response){
             setImage(response.data)
             // console.log(response)
@@ -37,7 +35,7 @@ const Home = ({navigation}) => {
         })
     }
     function getbestsFromAPI(){
-        axiosinst.get('/book ?filter=rate')
+        axiosinst.get('/filter-book-rate')
         .then(function(response){
             setbest(response.data)
             // console.log(response)
@@ -47,7 +45,7 @@ const Home = ({navigation}) => {
         })
     }
     function getmostFromAPI(){
-        axiosinst.get('/book ?filter=comment')
+        axiosinst.get('/filter-book-comment')
         .then(function(response){
             setmostdis(response.data)
             // console.log(response)
@@ -194,9 +192,3 @@ const styles = StyleSheet.create({
   });
   export default Home;
 
-
-
-
-
-                    
-            
