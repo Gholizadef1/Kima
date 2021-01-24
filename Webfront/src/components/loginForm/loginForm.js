@@ -93,20 +93,19 @@ function LoginForm(props) {
       })(Button);
     return(
         <div className="d-flex justify-content-center py-sm-4 color4">
-        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
-            <div className="card color2 " >
-                <br></br>
-                <h1 style={{fontFamily:'Yekan'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Yekan',fontSize:24}}>"کتاب یار مهربان است"</p>
-                <p style={{fontFamily:'Yekan',fontSize:20}}>خوشحالیم امروز می‌بینیمت</p>
-                <img src="people&books.png" className="col-12" alt=""/> 
+        <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
+            <div className="card color2" >
+                <h1 className="mt-5" >به کیما خوش‌آمدید</h1>
+                <p style={{fontSize:24}}>"کتاب یار مهربان است"</p>
+                <p style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
+                <img src="people&books.png" className="col-12 mt-n5 card-img-bottom hv-center" alt=""/> 
             </div>
-            <div className="card color2 p-2">
-            <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Yekan'}}>ورود</h1>
+            <div className="card color2">
+            <form className="col-8 mx-auto mt-5 was-validated">
+                <h1 >ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Mitra'}}>ایمیل</label>
+                <label htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -123,7 +122,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
+                <label htmlFor="exampleInputPassword1">رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -138,9 +137,9 @@ function LoginForm(props) {
                 </div>
                 <p className="loginText"> {state.backError} </p>
                 <button 
-                style={{fontFamily:'Yekan',color:"white"}}
+                
                     type="submit" 
-                    className="btn col-6 mx-auto bg-primary btn-block"
+                    className="btn  mx-auto btn-info"
                     onClick={handleSubmitClick}
                 >ثبت</button>
                 
@@ -150,8 +149,8 @@ function LoginForm(props) {
             </div>
             
             <div className="registerMessage">
-                <span style={{fontFamily:'Yekan'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
-                <span className="loginText" style={{fontFamily:'Yekan'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
+                <span > قبلاً ثبت‌نام نکرده‌اید؟ </span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
         </div>
