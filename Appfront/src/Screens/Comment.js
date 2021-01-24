@@ -46,7 +46,7 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
-  const [likeotime, setlikeotime] = useState('/comment-filter-time');
+  const [likeotime, setlikeotime] = useState('/time');
   const [theend, settheend] = useState(false)
   const [page, setpage] = useState(1);
 
@@ -74,8 +74,9 @@ const Comment = (prop) => {
     try {
       // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-      const response = await axiosinst.get("bookdetail/" + prop.route.params.id + likeotime, {
+      const response = await axiosinst.get("book/" + prop.route.params.id+'/comment' , {
         params: {
+          filter:likeotime,
           page: page
         },
         "headers":
@@ -85,7 +86,7 @@ const Comment = (prop) => {
         }
 
       })
-      // console.log(response.data)
+       console.log(response.data)
       await setcount(response.data.count);
       if (response.data.detail === 'Invalid page.')
         settheend(true);
@@ -184,7 +185,7 @@ const Comment = (prop) => {
             }
             const backk = JSON.stringify(back);
 
-            axiosinst.post("bookdetail/" + prop.route.params.id + '/comment', backk, {
+            axiosinst.post("book/" + prop.route.params.id + '/comment', backk, {
               "headers":
               {
                 "Content-Type": "application/json",
@@ -296,11 +297,11 @@ const Comment = (prop) => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/comment-filter-time')
+              await setlikeotime('/time')
               // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
-              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-like')
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/like')
               //   console.log(response.data)
 
               //   setrefresh(false)
@@ -317,11 +318,11 @@ const Comment = (prop) => {
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/comment-filter-like')
+              await setlikeotime('/like')
               // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
-              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/comment-filter-time')
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/time')
               //   console.log(response.data)
               //   console.log('FILTER TIME')
               //   setrefresh(false)
@@ -361,7 +362,7 @@ const Comment = (prop) => {
           renderItem={({ item }) => (<Commentcard name={item.account.username}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 

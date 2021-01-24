@@ -16,72 +16,72 @@ const Commentcard = (prop) => {
   console.log('COMMENT CARD')
   const [like, setlike] = useState('lightblue')
   const [dislike, setdislike] = useState('#F2A4A3')
-  const[likeshode,setlikeshode]=useState(false);
-// const[commentID,setcommentID]=useState();
-//  setcommentID(prop.commentid)
-// const getlike=async()=>{
-//   await setTimeout(() => {  console.log("World!"); }, 800);
-//   const back2 = {
+  const [likeshode, setlikeshode] = useState(false);
+  // const[commentID,setcommentID]=useState();
+  //  setcommentID(prop.commentid)
+  // const getlike=async()=>{
+  //   await setTimeout(() => {  console.log("World!"); }, 800);
+  //   const back2 = {
 
-//   }
-//     const backk2 = JSON.stringify(back2);
-//     console.log((await AsyncStorage.getItem('token')).toString())
-    
-//       axiosinst.get('comment/' + prop.commentid + '/like', {
-//         "headers":
-//         {
-//           "Content-Type": "application/json",
-//           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-//         }
-//       })
-//         .then(async function (response) {
-//           // setnumlike(response.data.LikeCount)
-//           if (response.data.message === 'True')
-//           await setlike('#1f7a8c')
-//         else
-//           await setlike('lightblue')
-//           console.log(response);
+  //   }
+  //     const backk2 = JSON.stringify(back2);
+  //     console.log((await AsyncStorage.getItem('token')).toString())
 
-//         })
-//         .catch(function (error) {
-//           console.log(error);
-//           console.log('like error ||||||||||||')
+  //       axiosinst.get('comment/' + prop.commentid + '/like', {
+  //         "headers":
+  //         {
+  //           "Content-Type": "application/json",
+  //           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //         }
+  //       })
+  //         .then(async function (response) {
+  //           // setnumlike(response.data.LikeCount)
+  //           if (response.data.message === 'True')
+  //           await setlike('#1f7a8c')
+  //         else
+  //           await setlike('lightblue')
+  //           console.log(response);
 
-//         })
-// }
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //           console.log('like error ||||||||||||')
+
+  //         })
+  // }
 
 
-// const getdislike=async()=>{
-//   // await   setTimeout(() => {  console.log("World!"); }, 500);
-//   const back2 = {
+  // const getdislike=async()=>{
+  //   // await   setTimeout(() => {  console.log("World!"); }, 500);
+  //   const back2 = {
 
-//   }
-//     const backk2 = JSON.stringify(back2);
-//     console.log((await AsyncStorage.getItem('token')).toString())
-    
-//       axiosinst.get('comment/' + prop.commentid + '/dislike', {
-//         "headers":
-//         {
-//           "Content-Type": "application/json",
-//           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-//         }
-//       })
-//         .then(async function (response) {
-//             console.log(response)
-//           // setnumlike(response.data.LikeCount)
-//           if (response.data.message === 'True')
-//          await  setdislike('#E64846')
-//         else
-//          await setdislike('#F2A4A3')
-//           // console.log(response);
+  //   }
+  //     const backk2 = JSON.stringify(back2);
+  //     console.log((await AsyncStorage.getItem('token')).toString())
 
-//         })
-//         .catch(function (error) {
-//           console.log(error);
-//           console.log('dislike error ||||||||||||')
+  //       axiosinst.get('comment/' + prop.commentid + '/dislike', {
+  //         "headers":
+  //         {
+  //           "Content-Type": "application/json",
+  //           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //         }
+  //       })
+  //         .then(async function (response) {
+  //             console.log(response)
+  //           // setnumlike(response.data.LikeCount)
+  //           if (response.data.message === 'True')
+  //          await  setdislike('#E64846')
+  //         else
+  //          await setdislike('#F2A4A3')
+  //           // console.log(response);
 
-//         })
-// }
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //           console.log('dislike error ||||||||||||')
+
+  //         })
+  // }
 
   //  async function getdislike(){
   //   const back2 = {}
@@ -137,10 +137,10 @@ const Commentcard = (prop) => {
   // getdislike();
   useFocusEffect(
     React.useCallback(() => {
-      if(prop.isliked)
-      setlike('#1f7a8c')
-      if(prop.isdisliked)
-      setdislike('#E64846')
+      if (prop.isliked)
+        setlike('#1f7a8c')
+      if (prop.isdisliked)
+        setdislike('#E64846')
       //  getdislike()
       //  getlike(prop.commentid)
     }, [])
@@ -169,67 +169,67 @@ const Commentcard = (prop) => {
     comment4 = prop.comment
   }
 
-//   React.usallback(() => {
-//         getdislike()
-//          getlike()
-   
-//   }, [])
+  //   React.usallback(() => {
+  //         getdislike()
+  //          getlike()
+
+  //   }, [])
 
   //  useEffect(()=>{
-   
+
   //    getdislike()
   //    getlike()
   // }, [like,dislike])
   // console.log('commentcard')
   return (
     <View style={styles.container}>
-       {prop.IDD.toString() === prop.accountid.toString() ? <AntDesign name="delete"
-          size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('4%'), right: wp('5%') }}
-          onPress={async () => {
-            await Alert.alert(
-              'از حذف این نظر اطمینان دارید؟',
+      {prop.IDD.toString() === prop.accountid.toString() ? <AntDesign name="delete"
+        size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('4%'), right: wp('5%') }}
+        onPress={async () => {
+          await Alert.alert(
+            'از حذف این نظر اطمینان دارید؟',
 
-              '',
-              [
-                {
-                  text: 'انصراف',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'default'
-                },
-                {
-                  text: 'حذف', onPress: async () => {
-                    // console.log(prop.lastinfo);
-                    // prop.INFO(prop.quoteid)
-                    // console.log(prop.INFO)
-                    // console.log(prop.lastinfo);
-                    axiosinst.delete('comment/' + prop.commentid + '/delete', {
-                      "headers":
-                      {
-                        "Content-Type": "application/json",
-                        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-                      }
+            '',
+            [
+              {
+                text: 'انصراف',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'default'
+              },
+              {
+                text: 'حذف', onPress: async () => {
+                  // console.log(prop.lastinfo);
+                  // prop.INFO(prop.quoteid)
+                  // console.log(prop.INFO)
+                  // console.log(prop.lastinfo);
+                  axiosinst.delete('book/' + prop.bookid + 'comment/' + prop.commentid , {
+                    "headers":
+                    {
+                      "Content-Type": "application/json",
+                      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                    }
+                  })
+                    .then(async function (response) {
+                      // console.log(response);
+                      // prop.INFO(prop.quoteid);
+                      await (prop.DELETE(true))
+
+
                     })
-                      .then(async function (response) {
-                        // console.log(response);
-                        // prop.INFO(prop.quoteid);
-                         await(prop.DELETE(true))
+                    .catch(function (error) {
+                      console.log(error);
+                      console.log('delete error ||||||||||||')
 
-
-                      })
-                      .catch(function (error) {
-                        console.log(error);
-                        console.log('delete error ||||||||||||')
-
-                      })
-                  }
+                    })
                 }
-              ],
-              { cancelable: false }
-            );
+              }
+            ],
+            { cancelable: false }
+          );
 
-            //  response();
-          }}
-          color="#e56b6f" /> : null}
+          //  response();
+        }}
+        color="#e56b6f" /> : null}
       {/* <LinearGradient
         // Background Linear Gradient
         //'#E9E9E9','#d8d8d8'
@@ -246,7 +246,7 @@ const Commentcard = (prop) => {
       {/* <Card style={{marginLeft:5,marginRight:5,shadowOpacity:1000,marginTop:5,borderRadius:10}}> */}
       {/* <ImageBackground source={require('../../assets/commentbackground.jpeg')} style={{width:'100%',height:'100%',position:'absolute'}}></ImageBackground> */}
       <View style={styles.avatarname}>
-     
+
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
           {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={100}
@@ -273,12 +273,12 @@ const Commentcard = (prop) => {
         {!more ? <Text>{comment4}</Text> : <Text>{prop.comment}</Text>}
       </View>
       <View style={{ flexDirection: 'row' }}>
-      {/* like */}
+        {/* like */}
         <AntDesign onPress={async () => {
-          if(likeshode===true)
-          await setlikeshode(false)
+          if (likeshode === true)
+            await setlikeshode(false)
           else
-          await setlikeshode(true)
+            await setlikeshode(true)
           if (dislike === '#E64846') {
             console.log('DISLIKEDOROSTHAZFMISHE')
             const back2 = {}
@@ -306,7 +306,7 @@ const Commentcard = (prop) => {
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
           // if (like === 'lightblue')
-          
+
           // else
           //   setlike('lightblue')
 
@@ -319,7 +319,11 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('comment/' + prop.commentid + '/like', backk, {
+          axiosinst.post('book/' + prop.bookid + 'comment/' + prop.commentid, backk, {
+            params: {
+              feedback: "like",
+          
+            },
             "headers":
             {
               "Content-Type": "application/json",
@@ -328,10 +332,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumlike(response.data.LikeCount)
-              if(like==='lightblue')
-              setlike('#1f7a8c')
+              if (like === 'lightblue')
+                setlike('#1f7a8c')
               else
-              setlike('lightblue')
+                setlike('lightblue')
               setnumdislike(response.data.DislikeCount)
               // console.log(response);
 
@@ -383,7 +387,7 @@ const Commentcard = (prop) => {
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
           // if (dislike === 'lightblue')
-            // setdislike('#1f7a8c')
+          // setdislike('#1f7a8c')
           // else
           //   setdislike('lightblue')
 
@@ -396,7 +400,11 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('comment/' + prop.commentid + '/dislike', backk, {
+          axiosinst.post('book/' + prop.bookid + 'comment/' + prop.commentid , backk, {
+            params: {
+              feedback: "like",
+          
+            },
             "headers":
             {
               "Content-Type": "application/json",
@@ -405,10 +413,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumdislike(response.data.DislikeCount)
-              if(dislike==='#F2A4A3')
-              setdislike('#E64846')
+              if (dislike === '#F2A4A3')
+                setdislike('#E64846')
               else
-              setdislike('#F2A4A3')
+                setdislike('#F2A4A3')
               setnumlike(response.data.LikeCount)
               // console.log(response);
 
@@ -425,11 +433,11 @@ const Commentcard = (prop) => {
         }} name="dislike1" size={20} color={dislike} style={styles.dislike} />
         <Text style={styles.dislikenumber}>{numdislike}</Text>
         {`${prop.comment}`.toString().split('\n').length >= 5 ? <TouchableOpacity
-          onPress={async() => {
-            if(likeshode===true)
-            await setlikeshode(false)
+          onPress={async () => {
+            if (likeshode === true)
+              await setlikeshode(false)
             else
-            await setlikeshode(true)
+              await setlikeshode(true)
             if (more === false) {
               setmore(true)
               setshowmore('کم تر')
