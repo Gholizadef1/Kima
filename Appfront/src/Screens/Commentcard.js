@@ -203,7 +203,7 @@ const Commentcard = (prop) => {
                   // prop.INFO(prop.quoteid)
                   // console.log(prop.INFO)
                   // console.log(prop.lastinfo);
-                  axiosinst.delete('book/' + prop.bookid + 'comment/' + prop.commentid , {
+                  axiosinst.delete('book/' + prop.bookid + '/comment/' + prop.commentid , {
                     "headers":
                     {
                       "Content-Type": "application/json",

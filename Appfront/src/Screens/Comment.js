@@ -69,6 +69,7 @@ const Comment = (prop) => {
     // await setinformation([])
     const id = prop.route.params.id
     console.log(id)
+    console.log(await (await AsyncStorage.getItem('token')).toString())
     console.log(await (await AsyncStorage.getItem('id')).toString())
 
     try {
@@ -86,8 +87,12 @@ const Comment = (prop) => {
         }
 
       })
-       console.log(response.data)
+      console.log(count+'  count   dfajd;lfkjs;lkfj')
+       console.log(response.data.comments)
       await setcount(response.data.count);
+      //console.log(response)
+      console.log(count+' COUNT COUNT COUNT COUNT COUTN')
+      console.log(response.data.count+' COUNTTTTTTTTTTTT')
       if (response.data.detail === 'Invalid page.')
         settheend(true);
       else {
@@ -95,15 +100,16 @@ const Comment = (prop) => {
         console.log(IDD + 'IDDresponse');
         //  console.log(response.data)
          console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
-         console.log(information)
+        // console.log(information)
          console.log('RESPONSE DATE')
-         console.log(response.date)
+         //console.log(response.date)
          console.log(response.data.comments+' RESPONSE DATA COMMENTS')
-         page===1?setinformation(response.data):setinformation(information.concat(response.data))
+         //page===1?setinformation(response.data):setinformation(information.concat(response.data))
+         await setinformation(information=>[...information,...response.data])
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
-        console.log(information)
+        //console.log(information)
         setrefresh(false)
-        //     setloading(false);
+         //     setloading(false);
       }
       //  console.log(information[0])
     }
@@ -137,6 +143,8 @@ const Comment = (prop) => {
   const handleLoadMore = async() => {
     console.log('END OF THE LIST')
     if(page<count){
+      console.log(page+'PAGEDEEFFDHASKDFJLSKFH')
+      console.log(count+'C OUNT ASKDFJ;LKSFJ')
      if(theend===false)
      response(page+1);
     }
