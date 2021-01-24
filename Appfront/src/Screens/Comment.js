@@ -98,7 +98,8 @@ const Comment = (prop) => {
          console.log(information)
          console.log('RESPONSE DATE')
          console.log(response.date)
-         page===1?setinformation(response.data.comments):setinformation(information.concat(response.data.comments))
+         console.log(response.data.comments+' RESPONSE DATA COMMENTS')
+         page===1?setinformation(response.data):setinformation(information.concat(response.data))
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         console.log(information)
         setrefresh(false)
@@ -144,7 +145,7 @@ const Comment = (prop) => {
     }
     };
   const [showbutton, setshowbutton] = useState(true);
-  console.log(prop.route.params.title)
+  console.log(prop.route.params.title+' TILTE BOOK TO HEADER COMMENTT')
   const [reset, setreset] = useState(false);
   const bs = React.createRef()
   const fall = new Animated.Value(1);

@@ -13,6 +13,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const Commentcard = (prop) => {
+  const bookid=prop.bookid;
   console.log('COMMENT CARD')
   const [like, setlike] = useState('lightblue')
   const [dislike, setdislike] = useState('#F2A4A3')
@@ -312,14 +313,17 @@ const Commentcard = (prop) => {
 
           // console.log((await AsyncStorage.getItem('token')).toString());
           // alert(prop.quoteid)
+
           console.log((await AsyncStorage.getItem('token')).toString())
           console.log(prop.commentid + 'PROP QUOTE ID');
+       
           // // console.log(item.account.id);
           const back = {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('book/' + prop.bookid + 'comment/' + prop.commentid, backk, {
+          if(like==='lightblue'){
+          axiosinst.post('book/' + bookid + '/comment/' + prop.commentid, backk, {
             params: {
               feedback: "like",
           
@@ -332,10 +336,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumlike(response.data.LikeCount)
-              if (like === 'lightblue')
+              // if (like === 'lightblue')
                 setlike('#1f7a8c')
-              else
-                setlike('lightblue')
+              // else
+              //   setlike('lightblue')
               setnumdislike(response.data.DislikeCount)
               // console.log(response);
 
@@ -345,6 +349,37 @@ const Commentcard = (prop) => {
               console.log('like error ||||||||||||')
 
             })
+          }
+          else{
+            axiosinst.delete('book/' + bookid + '/comment/' + prop.commentid, {
+            params: {
+              feedback: "like",
+          
+            },
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumlike(response.data.LikeCount)
+              // if (like === 'lightblue')
+              //   setlike('#1f7a8c')
+              // else
+                setlike('lightblue')
+              setnumdislike(response.data.DislikeCount)
+              // console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log(error.response
+              )
+              console.log('like error ||||||||||||')
+
+            })
+          }
           //  getlike(item);
 
 
@@ -364,25 +399,7 @@ const Commentcard = (prop) => {
             console.log('DARE LIKE RO AVAZ MIKONE BEKHATER DISLIKE')
             const backk2 = JSON.stringify(back2);
             setlike('lightblue')
-            // axiosinst.post('comment/' + prop.commentid + '/like', backk2, {
-            //   "headers":
-            //   {
-            //     "Content-Type": "application/json",
-            //     "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-            //   }
-            // })
-            //   .then(async function (response) {
-            //     console.log('MIKHAD LIKE RO BARAYE DISLIKE BARDARE')
-            //     setnumlike(response.data.LikeCount)
-            //     // console.log(response);
-            //     setlike('lightblue')
-
-            //   })
-            //   .catch(function (error) {
-            //     console.log(error);
-            //     console.log('like error ||||||||||||')
-
-            //   })
+         
           }
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
@@ -400,9 +417,11 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('book/' + prop.bookid + 'comment/' + prop.commentid , backk, {
+          if(dislike==='#f2a4a3'){
+            console.log('TOYE IF DISLIKE')
+          axiosinst.post('book/' + bookid + '/comment/' + prop.commentid , backk, {
             params: {
-              feedback: "like",
+              feedback: "dislike",
           
             },
             "headers":
@@ -426,6 +445,36 @@ const Commentcard = (prop) => {
               console.log('dislike error ||||||||||||')
 
             })
+          }
+          else{
+            console.log('TOYE ELSE DISLIKE')
+            axiosinst.delete('book/' + bookid + '/comment/' + prop.commentid , {
+            params: {
+              feedback: "dislike",
+          
+            },
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumdislike(response.data.DislikeCount)
+              if (dislike === '#F2A4A3')
+                setdislike('#E64846')
+              else
+                setdislike('#F2A4A3')
+              setnumlike(response.data.LikeCount)
+              // console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('dislike error ||||||||||||')
+
+            })
+          }
           //  getlike(item);
 
 
