@@ -19,17 +19,7 @@ import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
-const Quizes = ({navigation}) => {
-   
-
-  const [information, setinformation] = useState([]);
-  const [search, setsearch] = useState([])
-  const [refresh,setrefresh]=useState(false);
-  const [opensearch,setopensearch]=useState(false);
-  const [likeotime, setlikeotime] = useState('/filter-time');
-  const [theend,settheend]=useState(false);
-  const[page,setpage]=useState(1);
-  const [count,setcount]=useState(1);
+const Eachquiz = ({navigation}) => {
 
    
   useFocusEffect(
@@ -47,22 +37,6 @@ const Quizes = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  plus: {
-
-    alignSelf: 'center',
-    justifyContent: 'center'
-
-  }, 
-  loader:{
-    alignItems:'center',
-    marginBottom:hp('15%'),
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop:hp('10%')
-  }
+ 
 });
-export default Quizes;
+export default Eachquiz;
