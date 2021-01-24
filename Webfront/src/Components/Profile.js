@@ -208,23 +208,50 @@ function ProFile (props){
     console.log(res);
   })
 }
+const [read,setRead] = useState();
+const[reading,setReading] = useState();
+const[wantto,setWantto] = useState();
 
-const StyledButton = withStyles({
-    root: {
-      background: 'linear-gradient(45deg, #a0a0a0 30%, #a0a0a0 90%)',
-      color: 'black',
-      height: 50,
-      padding: '0 30px',
-      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-      fontWeight:'bolder',
 
-    },
-    label: {
-      textTransform: 'capitalize',
-    },
-  })(Button);
-
-const accent = teal[200]; // #e040fb
+const apiURLRead = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Read`;
+const apiURLReading = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Reading`;
+const apiURLWantto = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/ToRead`;
+useEffect(() => {
+  axios.get(apiURLRead,{
+    headers:{
+      "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    })
+    .then((data) => {
+      console.log(data.data.data);
+      console.log(data.data.Count);
+      setRead(data.data.Count);
+    });
+}, []);
+useEffect(() => {
+    axios.get(apiURLReading,{
+      headers:{
+        "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then((data) => {
+        console.log(data.data.data);
+        console.log(data.data.Count);
+        setReading(data.data.Count);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(apiURLWantto,{
+      headers:{
+        "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then((data) => {
+        console.log(data.data.data);
+        console.log(data.data.Count);
+        setWantto(data.data.Count);
+      });
+  }, []);
 
 useEffect(() => {
   }, [user]);
@@ -257,7 +284,7 @@ useEffect(() => {
                                      onClick={handleShow}
 
 
-                                     aria-label="Toggle navigation"style={{fontFamily:'Yekan',marginTop:10,color:"white"}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Yekan',marginTop:10,color:"white",fontWeight:"bold"}}>
                   ویرایش
 
                                     </button>
@@ -275,17 +302,17 @@ useEffect(() => {
 
                                 <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex heading justify-content-between text-right mt-md-n1 ml-5 mr-5">
-                                        <b className="heading1"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
-                                        <b className="heading2"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
-                                        <b className="heading3"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
+                                        <div className="d-flex heading justify-content-between mt-md-n1 ml-5 mr-5">
+                                        <b className="heading1 mr-n3 "style={{fontFamily:'Iranian Sans'}}>{read}</b>
+                                        <b className="heading2"style={{fontFamily:'Iranian Sans'}}>{wantto}</b>
+                                        <b className="heading3"style={{fontFamily:'Iranian Sans'}}>{reading}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between text-right mt-md-2">
+                                        <div className="d-flex justify-content-between mt-md-2">
+                                        <b className="description decsciptionmine3 ml-3 ">خوانده‌ام</b>
 
-                                        <b className="description decsciptionmine1">می‌خواهم بخوانم</b>
-                                        <b className="description decsciptionmine2">دارم می‌خوانم</b>
-                                        <b className="description decsciptionmine3">خوانده‌ام</b>
-                                        </div>   {/* < FaRegSmileBeam/> */}
+                                        <b className="description decsciptionmine1 ml-n4">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine2 pr-n5 mr-2">دارم می‌خوانم</b>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>

@@ -37,6 +37,7 @@ function Slide(props) {
         })
         .then((data) => {
           console.log(data.data.data);
+          console.log(data.data.Count);
           setBookRead(data.data.data);
         });
     }, []);
