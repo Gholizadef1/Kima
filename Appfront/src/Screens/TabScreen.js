@@ -7,6 +7,7 @@ import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
 import Home from './Home'
 import Profie from './Profile'
 import Search from './Search'
@@ -53,6 +54,11 @@ const Tab = createBottomTabNavigator();
 const TabSreen = (prop) => {
   const [profileoquiz, setprofileoquiz] = React.useState(Profilenavigation)
   const [modalopen, setmodalopen] = React.useState(false)
+  const[profilecolor,setprofilecolor]=React.useState('gray');
+  //state exafe یا حذف یه جور عجیب و متفاوت میشه
+  const[quizcolor,setquizcolor]=React.useState('gray');
+ 
+
   const poq = () => {
     return (profileoquiz)
   }
@@ -93,23 +99,84 @@ const TabSreen = (prop) => {
 
       }} />
 
-      <Tab.Screen name="حساب کاربری" component={poq} options={{
+      <Tab.Screen name="کوییز/پروفایل" component={poq}
+      //stackover flow :)
+      listeners={({ navigation, route }) => ({
+                tabPress: e => {
+                  console.log(' TAB PRESjghkjhgkjhgkjhgkjgSEDDDDDDDD')
+             if(modalopen===true)
+              setmodalopen(false);
+              else
+              setmodalopen(true)
+                },
+            })}
+      //  tabBarButton={prop=>(<TouchableOpacity style={{ 
+      //         //  height: hp('12%'), width: wp('30%'),position:'absolute',
+      //          backgroundColor: 'lightgreen' ,
+      //        }} onPress={() => {
+      //         if(modalopen===true)
+      //         setmodalopen(false);
+      //         else
+      //         setmodalopen(true)
+      //       }}></TouchableOpacity>)}
+            options={{
         tabBarIcon: ({ color, size }) => (
           <View>
-            <MaterialIcons name="person" size={size} color={color} />
+           <Feather name="menu" size={size} color={color} />
+            {/* <TouchableOpacity style={{ 
+               height: hp('12%'), width: wp('30%'),position:'absolute',
+              // backgroundColor: 'lightgreen' ,
+             }} onPress={() => {
+              if(modalopen===true)
+              setmodalopen(false);
+              else
+              setmodalopen(true)
+            }}></TouchableOpacity> */}
             <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, marginBottm: 400, position: 'absolute' }} visible={modalopen} animationType='fade' >
               <View style={{
-                 position:'absolute',
+                //  position:'absolute',
                  backgroundColor:"#EDF2F4",height:hp('20%'),width:wp('20%'),marginTop:hp('74%'),alignSelf:'flex-end',
                  elevation:0,borderTopRightRadius:20,borderTopLeftRadius:20
                  }}>
                 {/* <Text>akdsf;kasjdf;kjsa;lfkj;slkdfjl;ksadjf;lskadjf;lkjsaf;lkjsf</Text> */}
                 {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
-                <TouchableOpacity style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('80%'), right: hp('1%'), height: hp('5%'), width: wp('8%'), backgroundColor: 'white'}} 
+                <TouchableOpacity style={{ 
+                  // position: 'absolute',
+                  // backgroundColor:'#EDF2F4',
+
+                 alignSelf: 'flex-end', top: hp('1.5%'),right:wp('1%'),alignSelf:'center',
+                  height: hp('5%'), width: wp('8%')
+                 }} 
                 onPress={() => setmodalopen(false)}>
-                  <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }}
+                  <AntDesign style={{ position: 'absolute', alignSelf: 'center', top: hp('1%'), right: hp('0%') }}
                    onPress={() => setmodalopen(false)}
-                    name="close" size={23} color="#D75A5A" />
+                    name="close" size={24} color="#D75A5A" />
+
+                </TouchableOpacity>
+                <TouchableOpacity style={{ position: 'absolute', alignSelf: 'center', top: hp('7%'),
+                //  height: hp('5%'), width: wp('8%'),
+                //  position: 'absolute'
+                  }}
+                 onPress={() => {
+                   setquizcolor('gray')   
+                   setprofilecolor('#1f7a8c');      
+                   setprofileoquiz(GroupPageNavigation)
+                 }}>
+                <MaterialIcons name="person" size={24} color={profilecolor} style={{alignSelf:'center'}} />
+                <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:profilecolor}}>حساب کاربری</Text>
+
+                </TouchableOpacity>
+                <TouchableOpacity style={{ alignSelf: 'center', top: hp('9%'),
+                // height: hp('5%'), width: wp('8%'),marginBottom:
+                //  backgroundColor: 'white' 
+                 }}
+                 onPress={() => {
+                   setprofilecolor('gray');     
+                   setquizcolor('#1f7a8c')         
+                   setprofileoquiz(Profilenavigation)
+                   }}>
+                <AntDesign name="questioncircleo" size={24} color={quizcolor} />
+                <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:quizcolor}}>کوییز</Text>
 
                 </TouchableOpacity>
       
@@ -117,19 +184,7 @@ const TabSreen = (prop) => {
               </View>
 
             </Modal>
-            <Button style={{ height: 20, width: 20, backgroundColor: 'lightgreen' }} onPress={() => {
-              if(modalopen===true)
-              setmodalopen(false);
-              else
-              setmodalopen(true)
-              // prop.navigation.navigate("جستجو");
-              // if (profileoquiz != GroupPageNavigation) {
-              //   setprofileoquiz(GroupPageNavigation)
-              // }
-              // else {
-              //   setprofileoquiz(Profilenavigation)
-              // }
-            }}></Button>
+           
           </View>
         ),
       }} />
