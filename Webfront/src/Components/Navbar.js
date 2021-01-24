@@ -158,24 +158,22 @@ useEffect(() => {
               
           </div>
           <div className="d-flex justify-content-between mr-md-5">
-              <div className="btn-group mx-auto dropright" role="group">
-                <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
+              <div className="btn-group mx-auto " >
+                <div type="button" className="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow " />
                 </div>
-                <div className="dropdown-menu px-1 mx-n2"  aria-labelledby="btnGroupDrop1">
-                  <div className="d-flex align-items-end flex-column">
-                  <div className="text-left mx-3" style={{fontSize:18,fontFamily:'Yekan'}} >
+                <div className="dropdown-menu  mx-n2 text-right" >
+                  <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
-                  <div class="dropdown-divider"></div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16,fontFamily:'Yekan'}}>
+                  <div className="dropdown-divider"></div>
+                  <a type="button" className="dropdown-item"  onClick={routeToProfile}  style={{fontSize:16}}>
                     پروفایل
-                  </div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16,fontFamily:'Yekan'}} >
+                  </a>
+                  <a type="button" className="dropdown-item" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
-                  </div>
+                  </a>
                  
-                  </div>
                 </div>
               </div>
           </div>
