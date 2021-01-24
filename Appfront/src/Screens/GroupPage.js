@@ -20,22 +20,23 @@ const GroupPage = (prop) => {
   const [picture, setpicture] = useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState(null);
-  const [message, setmessage] = useState(null);
-  const [owner, setowner] = useState(false);
+  const [owner, setowner] = useState("");
   const [join, setjoin] = useState(false);
-  const [joinedUser, setjoinedUser] = useState(false);
-  const [notjoinedUser, setnotjoinedUser] = useState(false);
+  const [joinedUser, setjoinedUser] = useState("");
+  const [notjoinedUser, setnotjoinedUser] = useState("");
   const [members, setmembers] = useState(null);
   const [groupphoto, setgroupphoto] = useState(null)
   const [reload, setreload] = useState(false)
   const [membernumber, setmembernumber] = useState();
 
-    useEffect(() =>{
-      setjoinedUser(false)
-      setowner(false)
-      setnotjoinedUser(false)
+  useFocusEffect(
+    React.useCallback(() => {
+      // setjoinedUser(true)
+      // setowner(true)
+      // setnotjoinedUser(true)
       getUsername();
-  },[]);
+    }, [])
+  )
 
   useEffect((async) => {
         const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
@@ -44,45 +45,44 @@ const GroupPage = (prop) => {
           setmembernumber(groupinfo.members_count);
           setgroupphoto(`http://5e55eff623ed.ngrok.io${response.data.group_photo}`)
           if (username === response.data.owner.username) {
-            await setowner(true)
+            await setowner("owner")
           }
         })
-  },[join])
+  },[join , owner])
 
   useEffect((async) => {
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {
         setmembers(response.data.members)
-
-        if (username === response.data.owner.username) {
-          await setowner(true)
-        }
-
+ 
         for (let i = 0; i < membernumber; i++) {
-          if (response.data.members[i].user.username === username && owner != true) {
-            setjoinedUser(true)
+          if (response.data.members[i].user.username === username && owner != "owner") {
+            setjoinedUser("joinedUser")
           }
         }
-
-        if (joinedUser === false && owner === false)
-          setnotjoinedUser(true)
+        if (joinedUser != "" && username != response.data.owner.username){
+          setnotjoinedUser("notjoinedUser")
+          console.log("HIII")
+        }
       })
-  } , [join])
+  } , [join , owner])
 
 
-  console.log('joinedd' + joinedUser)
+  console.log('joinedd ' + joinedUser)
+  console.log('notjoined ' + notjoinedUser)
+  console.log('owner ' + owner)
 
   const getUsername = async () => {
     const id = await AsyncStorage.getItem('id');
-    console.log('ID' + id)
+//    console.log('ID' + id)
 
     const response = axiosinst.get('/api/user-profile/' + id)
       .then(function (response) {
-        console.log('ID' + id)
+//        console.log('ID' + id)
         setusername(response.data.username)
-        console.log('USERR' + response.data.username)
-        console.log('hhhkll')
-        console.log('hhh' + prop.route.params.id)
+//        console.log('USERR' + response.data.username)
+//        console.log('hhhkll')
+//        console.log('hhh' + prop.route.params.id)
       })
   };
 
@@ -111,9 +111,9 @@ const GroupPage = (prop) => {
         console.log(error);
       });
   }
-  
+
   const LeaveGroup = async () => {
-    console.log(' OMAD TO LEAVE GROUP')
+//    console.log(' OMAD TO LEAVE GROUP')
     const back = {}
     const backk = JSON.stringify(back);
     axiosinst.post('/api/group/members/' + prop.route.params.id, backk, {
@@ -140,12 +140,12 @@ const GroupPage = (prop) => {
     })
       .then(async function (response) {
         prop.navigation.navigate('Groupmainpage')
-        console.log('delete')
-        console.log('%%%%%%%%%%')
+//        console.log('delete')
+//        console.log('%%%%%%%%%%')
       })
       .catch(function (error) {
         console.log(error);
-        console.log('//////////////////')
+//        console.log('//////////////////')
       });
 
   }
@@ -184,14 +184,15 @@ const GroupPage = (prop) => {
         <Text style={styles.groupname}>{groupinfo.title}</Text>
         <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-        {joinedUser === true ? <Button style={{
+        {joinedUser === "joinedUser" && notjoinedUser === "" && owner === "owner" ? 
+        <Button style={{
           marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
           , backgroundColor: '#1F7A8C'
         }} onPress={() => LeaveGroup()}>
           <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
         </Button> : null}
 
-        {notjoinedUser === true ?
+        {notjoinedUser === "notjoinedUser" && joinedUser === "" && owner === "" ?
           <Button style={{
             marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
             , backgroundColor: '#1F7A8C'
@@ -199,12 +200,21 @@ const GroupPage = (prop) => {
             <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
           </Button> : null}
 
-        {owner === true ? <Button style={{
+        {owner === "owner"  && joinedUser === "" && notjoinedUser === "" ? 
+        <Button style={{
           marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
           , backgroundColor: '#1F7A8C'
         }} onPress={() => deleteGroup()}>
           <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
         </Button> : null}
+
+        {owner=== "" && joinedUser=== "" && notjoinedUser=== "" ?          
+         <Button style={{
+            marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
+            , backgroundColor: '#1F7A8C'
+          }} onPress={() => JoinGroup()}>
+            <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
+          </Button> : null } 
 
         <Text style={{ fontSize: 21, marginLeft: wp('7%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
 
