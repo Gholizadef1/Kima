@@ -123,15 +123,6 @@ const TabSreen = (prop) => {
         tabBarIcon: ({ color, size }) => (
           <View>
            <Feather name="menu" size={size} color={color} />
-            {/* <TouchableOpacity style={{ 
-               height: hp('12%'), width: wp('30%'),position:'absolute',
-              // backgroundColor: 'lightgreen' ,
-             }} onPress={() => {
-              if(modalopen===true)
-              setmodalopen(false);
-              else
-              setmodalopen(true)
-            }}></TouchableOpacity> */}
             <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, marginBottm: 400, position: 'absolute' }} visible={modalopen} animationType='fade' >
               <View style={{
                 //  position:'absolute',
