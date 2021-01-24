@@ -29,7 +29,7 @@ const Eachquiz = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
-
+<Text style={{position:'absolute',marginTop:700}}>;alksfjd;lksjfa;lksj;flkjs;lkdfj</Text>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>

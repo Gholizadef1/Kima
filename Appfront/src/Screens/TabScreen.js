@@ -32,6 +32,7 @@ import { TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Quizes from "./Quizes";
 import Eachquiz from "./Eachquiz";
+import Quiznavigation from "./Quiznavigation";
 // import { useSafeArea } from 'react-native-safe-area-context';
 // import { white } from 'react-native-paper/lib/typescript/src/styles/colors';
 // const SNavigation = createStackNavigator();
@@ -166,7 +167,7 @@ const TabSreen = (prop) => {
                  onPress={() => {
                    setprofilecolor('gray');     
                    setquizcolor('#1f7a8c')         
-                   setprofileoquiz(Quizes)
+                   setprofileoquiz(Quiznavigation)
                    }}>
                 <AntDesign name="questioncircleo" size={24} color={quizcolor} />
                 <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:quizcolor}}>کوییز</Text>

@@ -39,7 +39,7 @@ const Quizes = () => {
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
-        <Text>a;ldjf;slkfjd;lksjf</Text>
+        <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>
