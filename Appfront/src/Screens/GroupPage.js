@@ -22,151 +22,55 @@ const GroupPage = (prop) => {
   const [groupinfo, setgroupinfo] = useState(null);
   const [message, setmessage] = useState(null);
   const [owner, setowner] = useState(false);
-  const [joind, setjoined] = useState(false);
-  const [notjoined, setnotjoined] = useState(false);
+  const [join, setjoin] = useState(false);
+  const [joinedUser, setjoinedUser] = useState(false);
+  const [notjoinedUser, setnotjoinedUser] = useState(false);
   const [members, setmembers] = useState(null);
   const [groupphoto, setgroupphoto] = useState(null)
   const [reload, setreload] = useState(false)
   const [membernumber, setmembernumber] = useState();
-  // if(owner===true)
-  // {
-  //   if(reload===false)
-  //   setreload(true)
-  //   else
-  //   setreload(false)
-  // }
-  // useEffect(() => {
-  //   setjoined(false)
-  //   setowner(false)
-  //   setnotjoined(false)
-  //   const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
-  //     .then(async function (response) {
-  //       if(username===response.data.members.owner.username)
-  //       setowner(true)
 
-  //       await setgroupinfo(response.data);
-  //       setmembernumber(groupinfo.members_count);
-  //       console.log('GROUP PAGE4')
-  //       // console.log(response.data)
-  //       console.log(response.data.group_photo + 'group photo')
-  //       console.log(groupinfo + '*****')
-  //       setgroupphoto(`http://505a2dd8d5cc.ngrok.io${response.data.group_photo}`)
-  //       console.log(groupphoto + '------')
-  //       // console.log(groupinfo.group_photo)
-  //       //      console.log('**'+response.data.title)
-  //     })
-     
-  //   getMembers();
-  //   getUsername();
-  // }, [joind]);
     useEffect(() =>{
-      setjoined(false)
+      setjoinedUser(false)
       setowner(false)
-      setnotjoined(false)
-      getInfo();
-      getMembers();
+      setnotjoinedUser(false)
       getUsername();
   },[]);
-  // useEffect(() =>{
-  //   // setjoined(false)
-  //   setowner(false)
-  //   // setnotjoined(false)
-  //   getInfo();
-  //   getMembers();
-  //   getUsername();
-  // },[owner]);
-  // useEffect(() =>{
-  //   // setjoined(false)
-  //   // setowner(false)
-  //   setnotjoined(false)
-  //   getInfo();
-  //   getMembers();
-  //   getUsername();
-  // },[notjoined]);
 
-  // useFocusEffect(
-  //   React.useCallback(async() => {
-  //      getInfo();
-  //     getMembers();
-  //     getUsername();
-  //   },[]))
+  useEffect((async) => {
+        const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
+        .then(async function (response) {
+          await setgroupinfo(response.data);
+          setmembernumber(groupinfo.members_count);
+          setgroupphoto(`http://5e55eff623ed.ngrok.io${response.data.group_photo}`)
+          if (username === response.data.owner.username) {
+            await setowner(true)
+          }
+        })
+  },[join])
 
-  const getInfo = async () => {
-    const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
-      .then(async function (response) {
-
-        await setgroupinfo(response.data);
-        setmembernumber(groupinfo.members_count);
-        console.log('GROUP PAGE4')
-        // console.log(response.data)
-        console.log(response.data.group_photo + 'group photo')
-        console.log(groupinfo + '*****')
-        setgroupphoto(`http://5e55eff623ed.ngrok.io${response.data.group_photo}`)
-        console.log(groupphoto + '------')
-        // console.log(groupinfo.group_photo)
-        //      console.log('**'+response.data.title)
-      })
-  };
-
-  const getMembers = async () => {
-    console.log('GETMEMBERS')
+  useEffect((async) => {
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {
-        console.log(response.data.members.lenght + '^^^^^^^^^^^^^^^^^^^^')
-        console.log(membernumber + 'MEMBER NUM')
-        console.log(response.data)
         setmembers(response.data.members)
-        console.log('member 0' + response.data.members[0].user.username)
-        console.log('ownerrr ' + response.data.owner.username)
-        console.log('count   ' + response.data.count)
-        //  console.log('member 0'+response.data.members[0].user.username)
+
         if (username === response.data.owner.username) {
           await setowner(true)
         }
-        // getInfo();
-        // navigation.navigate('')
-        // for (var i =0 ; i<response.data.members.length ; i++){
-        //   if (response.data.members[i].user.username === username ){
-        //     console.log('((((((((((')
-        //     if ( response.data.members[i].user.username === response.data.owner.username ){
-        //       setowner(true)
-        //     }
-        //   }
-        // }
-        console.log('INJA HAMM')
-        console.log(response.data.members.count + 'LENGG********GGGGGGGGGGTH')
-        // console.log(groupinfo.members_count +' GROUP INFO .MEMBER_COUNTTTTTT')
-        console.log(membernumber + '  MEMBER NUMBERRRR')
-        for (let i = 0; i < membernumber; i++) {
-          console.log(response.data.members.lenght + 'LENGGGGGGGGGGGGTH')
-          console.log('&&&&&&&&&')
 
+        for (let i = 0; i < membernumber; i++) {
           if (response.data.members[i].user.username === username && owner != true) {
-            //  if (response.data.members[i].user.username != response.data.owner.username){
-            console.log('ghable joined')
-            setjoined(true)
-            console.log('baade join')
+            setjoinedUser(true)
           }
-          console.log('_______')
         }
 
-        if (joind === false && owner === false)
-          setnotjoined(true)
-
-        // }
-        // if ( owner === false && joind === false ){
-        //   setnotjoined(true)
-        // }
-        // for(var i =0 ; i<response.data.count ; i++){
-        //   if(response.data.members[i].user.username != username || response.data.count === 0){
-        //     setnotjoined(true)
-        //   }
-        // }
-
+        if (joinedUser === false && owner === false)
+          setnotjoinedUser(true)
       })
-  };
+  } , [join])
 
-  console.log('joinedd' + joind)
+
+  console.log('joinedd' + joinedUser)
 
   const getUsername = async () => {
     const id = await AsyncStorage.getItem('id');
@@ -199,15 +103,15 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-        //          console.log(await AsyncStorage.getItem('token')).toString()
         console.log('response' + response.data.message)
-        // setjoined(true)
+        setjoin(true)
         getMembers()
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+  
   const LeaveGroup = async () => {
     console.log(' OMAD TO LEAVE GROUP')
     const back = {}
@@ -219,9 +123,7 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-        //          console.log(await AsyncStorage.getItem('token')).toString()
         console.log('response' + response.data.message)
-        // setnotjoined(true)
         getMembers()
       })
       .catch(function (error) {
@@ -282,14 +184,14 @@ const GroupPage = (prop) => {
         <Text style={styles.groupname}>{groupinfo.title}</Text>
         <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-        {joind === true ? <Button style={{
+        {joinedUser === true ? <Button style={{
           marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
           , backgroundColor: '#1F7A8C'
         }} onPress={() => LeaveGroup()}>
           <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
         </Button> : null}
 
-        {notjoined === true ?
+        {notjoinedUser === true ?
           <Button style={{
             marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
             , backgroundColor: '#1F7A8C'
