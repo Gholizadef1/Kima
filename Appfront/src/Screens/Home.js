@@ -16,6 +16,7 @@ const Home = ({navigation}) => {
     const [image,setImage] = useState([])
     const [best,setbest] = useState([])
     const [mostdis,setmostdis] = useState([])
+
     useFocusEffect(
         React.useCallback(() => {
             getImageFromAPI()
@@ -23,7 +24,8 @@ const Home = ({navigation}) => {
             getmostFromAPI();
         }, [])
       )
-      
+
+
     function getImageFromAPI(){
         axiosinst.get('/bookdetail')
         .then(function(response){

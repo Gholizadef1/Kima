@@ -19,12 +19,12 @@ const GroupPage = (prop) => {
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [picture, setpicture] = useState(null);
   const [username, setusername] = useState(null);
-  const [groupinfo, setgroupinfo] = useState(null);
+  const [groupinfo, setgroupinfo] = useState([]);
   const [owner, setowner] = useState("");
   const [join, setjoin] = useState(false);
   const [joinedUser, setjoinedUser] = useState("");
   const [notjoinedUser, setnotjoinedUser] = useState("");
-  const [members, setmembers] = useState(null);
+  const [members, setmembers] = useState([]);
   const [groupphoto, setgroupphoto] = useState(null)
   const [reload, setreload] = useState(false)
   const [membernumber, setmembernumber] = useState();
@@ -43,7 +43,8 @@ const GroupPage = (prop) => {
         .then(async function (response) {
           await setgroupinfo(response.data);
           setmembernumber(groupinfo.members_count);
-          setgroupphoto(`http://5e55eff623ed.ngrok.io${response.data.group_photo}`)
+          setgroupphoto(`http://1799ec2e488e.ngrok.io${response.data.group_photo}`)
+          console.log(groupphoto + '------')
           if (username === response.data.owner.username) {
             await setowner("owner")
           }
@@ -175,7 +176,7 @@ const GroupPage = (prop) => {
 
         </View>
 
-        {picture != 'http://5e55eff623ed.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
+        {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
           source={{ uri: groupphoto }}
         ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={105}
           source={require('../../assets/group.jpg')}
@@ -315,7 +316,7 @@ const GroupPage = (prop) => {
           renderItem={({ item }) => <>
 
             <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-              {picture != 'http://5e55eff623ed.ngrok.io/media/default.png' ? <Avatar.Image style={{}} size={90}
+              {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{}} size={90}
                 source={{ uri: groupphoto }}
               ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
                 source={require('../../assets/group.jpg')}
