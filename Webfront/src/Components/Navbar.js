@@ -1,51 +1,33 @@
-
 import React, { Component } from 'react';
-//import {NavLink} from 'react-router-dom';
 import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
-import {CgProfile} from 'react-icons/cg';
+//import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
-// import "./HelpingNavbar";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
-//import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-
-//import {FaHome} from 'react-icons/fa';
 import {withStyles } from '@material-ui/core/styles';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useParams,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  // Redirect,
+  // Link,
+  // useRouteMatch,
+  // useParams,
   withRouter
 } from "react-router-dom";
- //import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
-
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
-//import ReactNavbar from "react-responsive-animate-navbar";
-//import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
-//import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
-
-
-  // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
-
-
 
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -53,7 +35,7 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+const result = await axios.get(`${API_BASE_URL}dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
   
@@ -61,11 +43,11 @@ const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${us
 }
 
 useEffect(() => {
-  axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+  axios.get(API_BASE_URL + 'user-profile/' + Cookies.get('userId'))
   .then(function (response){
     //console.log(response);
     //console.log(response.data);
-    Cookies.set('userPic',"http://127.0.0.1:8000"+response.data.profile_photo);
+    Cookies.set('userPic',API_BASE_URL+response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {
