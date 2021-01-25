@@ -64,7 +64,7 @@ export default function FullWidthTabs() {
   const useStyles = makeStyles((theme) => ({
     rootg: {
       
-      height: 100,
+      height: 50,
       backgroundColor: theme.palette.background.paper,
      
     },
@@ -91,7 +91,7 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <FixedSizeList className="fixedlist" height={300} width={450} itemSize={150} itemCount={1}>
+          <FixedSizeList className="fixedlist" height={300} width={450} itemSize={50} itemCount={1}>
           {Mygroup}
       </FixedSizeList>
         </TabPanel>
