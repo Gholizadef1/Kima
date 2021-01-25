@@ -200,7 +200,7 @@ class MyQuoteView(APIView,PaginationHandlerMixin):
         if MyQuote.objects.filter(account=user).exists():
             mquote = MyQuote.objects.filter(account=user)
             q_list = self.paginate_queryset(mquote)
-            serializer = CommentProfSerializer(q_list,context={"user": pk},many=True)
+            serializer = QuoteProfSerializer(q_list,context={"user": pk},many=True)
             count = Paginator(mquote,10).num_pages
             return Response({"quotes" : serializer.data, "count": count})
         response = {'message' : 'No Quote!',}

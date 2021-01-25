@@ -80,18 +80,18 @@ const Activityquote = (prop) => {
     }
 
     const response = async (page) => {
-
+            console.log( await(AsyncStorage.getItem('token')))
             const id=await(AsyncStorage.getItem('id'))
-            console.log(id)
+            console.log(id+"ISSSSSSSSSDDDDDDDD")
                  try{
-                 const response = await axiosinst.get('api/user-profile/' + id+'/MyQuotes',{ params:{
+                 const response = await axiosinst.get('user/' + id+'/quote',{ params:{
                     page:page
                     },
-                    "headers":
-                    {
-                      "Content-Type": "application/json",
-                      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-                    }
+                    // "headers":
+                    // {
+                    //   "Content-Type": "application/json",
+                    //   "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                    // }
                  })
                  console.log(response)
                  await setcount(response.data.count);
@@ -113,7 +113,7 @@ const Activityquote = (prop) => {
                     // settheend(false)
                      console.log(IDD+'IDDresponse');
                       //  console.log(response.data)
-                    setinformation(response.data)
+                    setinformation(response.data.quotes)
                       console.log('++++INFO++++'+information+"++++INFO++++")
 
                   //     setloading(false);
