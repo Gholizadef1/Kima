@@ -11,6 +11,7 @@ import Mygroups from './Mygroups';
   // import { SearchBar } from 'react-native-elements';
  import Eachgroup from './Eachgroup';
  import GroupPage from './GroupPage';
+ import Myquizes from './Myquizes';
  
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,7 +28,7 @@ const Quiznavigation =()=>{
       }  >
        {/* <View style={{position:'absolute'}}></View> */}
       <Tab.Screen name="کوییز ها" component={Quizes} elevation={50} style={{}} />
-      <Tab.Screen name="کوییز های من" component={Eachquiz} />
+      <Tab.Screen name="کوییز های من" component={Myquizes} />
     
     </Tab.Navigator>
    
