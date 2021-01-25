@@ -38,10 +38,20 @@ const Quizes = () => {
   //   },[]))
   return (
     <View style={styles.container}>
-      <View style={{ marginLeft: wp('2%') }}>
+     
         <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
-       <View style={{height:hp('2%')}}></View>
-      </View>
+        <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000}} >
+        <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
+        backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('79%'),marginLeft:wp('82%')}} onPress={()=>{
+          console.log('PLUS PRESSED')
+         
+          }} >
+        <Feather style={styles.plus} 
+         name="plus" size={32} color="#EDF2F4" />
+     
+         </Button>
+         </View>
+
     </View>
   );
 }
