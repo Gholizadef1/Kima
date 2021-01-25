@@ -247,7 +247,7 @@ const Quotecard = (prop) => {
             })
             }
             else{
-              axiosinst.delete('book/'+bookid +"/quote/"+ quoteid,backk, {
+              axiosinst.delete('book/'+bookid +"/quote/"+ quoteid, {
             params:{
               feedback:"like"
             },
