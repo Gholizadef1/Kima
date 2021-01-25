@@ -135,7 +135,8 @@ const callbackFunction = async(childData) => {
     settheend(false)
     //  console.log(IDD+'IDDresponse');
       //  console.log(response.data)
-      page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
+      //page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
+      await setinformation(information=>[...information,...response.data.quotes])
       console.log('++++INFO++++'+information+"++++INFO++++")
      
   //     setloading(false);
@@ -158,16 +159,31 @@ const callbackFunction = async(childData) => {
  
   useFocusEffect(
     React.useCallback(() => {
-      // setpage(1);
-      // setloading(false)
-      // settheend(false);
-    
-      // getlike()
-      
-        response(1)
-     console.log(IDD+'IDD');
-    
-    },[]))
+      const a=new Promise(async(resolve,reject)=>{
+        await setinformation([]);
+        await setpage(1);
+        //await setselecttime(true)
+        //با این ظاهرا درست شد :/
+        await setselectedValue('like')
+        //تاثیری نداشتن :/
+        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+        // await settimelable("فیلتر بر اساس تاریخ")
+        if(selectedValue==="none")
+       await setlikeotime("time");
+       else
+       await setlikeotime("like");
+       await setselectedValue('none')
+
+        resolve()
+      }).then(()=>{
+      console.log('++++++++++' + information + '**********')
+      response(1);
+      console.log('++++++++++' + information + '**********')
+      })
+      // //   console.log('Listenn')
+      // alert('in')
+      //   return() => alert('lost')
+    }, [prop.navigation]))
     const renderInner=()=>{
         return(
           // console.log('inner');
