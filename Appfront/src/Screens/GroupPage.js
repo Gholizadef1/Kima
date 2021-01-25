@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail , Item, Input, Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
+import { TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper';
@@ -168,58 +171,57 @@ const GroupPage = (prop) => {
   return (
     <View style={styles.container}>
       <View>
-      <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalopen} animationType='fade' >
+      <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
 
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
-      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
-        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
+      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
+        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setModalVisible(false)}
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>       
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
       initialValues={{Username:'',Discription:'',photo:require('../../assets/group.jpg')}}
       validationSchema={userschema}
 
-      onSubmit={async(values,actions)=>{
-          console.log('ON SUBMIT')
-          const formdata = new FormData();
-          //  const newfile={title:values.Username,summary:values.summary,photo:picture}
-           formdata.append('title',values.Username)
-           formdata.append('summary',values.Discription)
+      // onSubmit={async(values,actions)=>{
+      //     console.log('ON SUBMIT')
+      //     const formdata = new FormData();
+      //      formdata.append('title',values.Username)
+      //      formdata.append('summary',values.Discription)
 
-        console.log(formdata.data+'formdata')
+      //   console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('/api/group',formdata,{
-          headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-          }
-             )
-        .then( function(response){
-          console.log(picture+' PICTURE POST')
+      //   const response=await axiosinst.post('/api/group',formdata,{
+      //     headers:{
+      //       "Content-Type":"application/json",
+      //       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+      //     }
+      //        )
+      //   .then( function(response){
+      //     console.log(picture+' PICTURE POST')
         
-          console.log(response)
-          Alert.alert('','بحث با موفقیت ساخته شد ',[
-            {
-         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-            }
-            ],{cancelable:false},{style:{height:50}})
+      //     console.log(response)
+      //     Alert.alert('','بحث با موفقیت ساخته شد ',[
+      //       {
+      //    text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+      //       }
+      //       ],{cancelable:false},{style:{height:50}})
           
           
-        })
-        .catch( function(error){  
-            {
-              console.log(error)
+      //   })
+      //   .catch( function(error){  
+      //       {
+      //         console.log(error)
             
-              Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+      //         Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
             
 
-            text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-            }],{cancelable:false},{style:{height:50}})
-            }     
-        })
+      //       text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+      //       }],{cancelable:false},{style:{height:50}})
+      //       }     
+      //   })
 
-      }}
+      // }}
      >
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
@@ -382,7 +384,7 @@ const GroupPage = (prop) => {
 
         </List>
 
-        <Button style={{
+        <Button onPress={() => setModalVisible(true)} style={{
           marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
           , backgroundColor: '#1F7A8C'
         }}>
@@ -515,6 +517,17 @@ const styles = StyleSheet.create({
   justifyContent:'center',
   alignSelf:'center',
   marginTop:hp('10%')
+},
+item2:{
+  marginLeft:wp('-2%'),
+  marginRight:wp('-1%'),
+  marginTop:hp('6%'),
+  fontSize:hp('2.5%')
+},
+item:{
+  marginLeft:wp('31%'),
+  marginRight:wp('5%'),
+  height:wp('9.5%') 
 }
 });
 export default GroupPage;
