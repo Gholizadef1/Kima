@@ -42,7 +42,7 @@ const Quizes = () => {
         <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
         <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
-        backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('79%'),marginLeft:wp('82%')}} onPress={()=>{
+        backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>{
           console.log('PLUS PRESSED')
          
           }} >
