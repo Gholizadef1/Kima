@@ -57,7 +57,7 @@ const Tab = createBottomTabNavigator();
 const TabSreen = (prop) => {
   const [profileoquiz, setprofileoquiz] = React.useState(Profilenavigation)
   const [modalopen, setmodalopen] = React.useState(false)
-  const[profilecolor,setprofilecolor]=React.useState('gray');
+  const[profilecolor,setprofilecolor]=React.useState('#1f7a8c');
   //state exafe یا حذف یه جور عجیب و متفاوت میشه
   const[quizcolor,setquizcolor]=React.useState('gray');
  
@@ -126,7 +126,10 @@ const TabSreen = (prop) => {
         tabBarIcon: ({ color, size }) => (
           <View>
            <Feather name="menu" size={size} color={color} />
-            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, marginBottm: 400, position: 'absolute' }} visible={modalopen} animationType='fade' >
+            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, marginBottm: 400,
+             position: 'absolute' }} visible={modalopen} animationType='fade'
+              // activeBackgroundColor="blue"
+              >
               <View style={{
                 //  position:'absolute',
                  backgroundColor:"#EDF2F4",height:hp('20%'),width:wp('20%'),marginTop:hp('74%'),alignSelf:'flex-end',
