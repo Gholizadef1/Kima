@@ -155,6 +155,7 @@ const TabSreen = (prop) => {
                    setquizcolor('gray')   
                    setprofilecolor('#1f7a8c');      
                    setprofileoquiz(Profilenavigation)
+                   setmodalopen(false)
                  }}>
                 <MaterialIcons name="person" size={24} color={profilecolor} style={{alignSelf:'center'}} />
                 <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:profilecolor}}>حساب کاربری</Text>
@@ -168,6 +169,7 @@ const TabSreen = (prop) => {
                    setprofilecolor('gray');     
                    setquizcolor('#1f7a8c')         
                    setprofileoquiz(Quiznavigation)
+                   setmodalopen(false)
                    }}>
                 <AntDesign name="questioncircleo" size={24} color={quizcolor} />
                 <Text style={{fontSize:8,alignSelf:'center',marginTop:hp('0.5%'),color:quizcolor}}>کوییز</Text>
