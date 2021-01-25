@@ -400,7 +400,7 @@ import Tooltip from '@material-ui/core/Tooltip';
        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<Tooltip  title= {<div style={{color: "black",
+<Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
         
@@ -471,7 +471,7 @@ import Tooltip from '@material-ui/core/Tooltip';
         <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<Tooltip  title= {<div style={{color: "black",
+<Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
         
