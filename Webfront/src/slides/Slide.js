@@ -25,7 +25,7 @@ function Slide(props) {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
+    fetch("http://127.0.0.1:8000/book")
       .then((res) => res.json())
       .then((data) => {
         setSuggestions(data);
@@ -33,7 +33,7 @@ function Slide(props) {
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/filter-book-rate")
+    fetch("http://127.0.0.1:8000/book?filter=rate")
 
       .then((res) => res.json())
       .then((data) => {
@@ -43,7 +43,7 @@ function Slide(props) {
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/filter-book-comment")
+    fetch("http://127.0.0.1:8000/book?filter=comment")
 
       .then((res) => res.json())
       .then((data) => {
