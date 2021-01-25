@@ -8,7 +8,7 @@ import teal from '@material-ui/core/colors/teal';
 import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
 import Tabs from '../Tabs/Tabs';
-import MyGroups from '../Tabs/MyGroups';
+import MyGroups from '../Tabs/MyGroupsTab.js';
 function ProFile (props){
     const [state , setState]=useState(
         {

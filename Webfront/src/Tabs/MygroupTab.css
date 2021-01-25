@@ -1,0 +1,14 @@
+@media (min-width:960px){
+    .rootg{
+        height: 500px;
+        width: 535px;
+        background-color:rgb(238, 243, 250);
+        position: fixed;
+        border:16px solid #fff;
+        border-radius: 3%;
+        overflow: hidden;
+        
+        
+        
+    }
+}
