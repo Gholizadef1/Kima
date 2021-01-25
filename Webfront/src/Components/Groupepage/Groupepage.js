@@ -291,9 +291,9 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>
     <div>
         
-    <div className=" name">
+    <div className=" name text-rigth">
   
-    <b className="">نام گروه:  {ginfo.title}</b>
+    <b className="">:نام گروه<div className=" name1">{ginfo.title}</div></b>
     </div>
 
     {joinduser === "You joind this group!" ?

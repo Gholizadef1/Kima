@@ -47,24 +47,11 @@
     transition: 1s;
    
 }
-.slick-prev:before {
-    color: black !important;
-    width: 46px;
 
-position: absolute;
-top: -50px;
-}
-.slick-next:before{
-    color: black !important;
-
-position: absolute;
-top: -50px;
-margin-left: 13px;
-}
 
 
 .sr-only{
-    margin-left: 500px;
+    margin-left: 5z00px;
     color: black;
 }
     @media (min-width :360px)
@@ -202,12 +189,14 @@ margin-left: 13px;
             .container{
               width: 900px;
               margin-left:100px;
-              margin-top: 100px;
+              margin-top: -55px;
+              
               
             }
             .slide{
               margin-left: -310px;
               margin-right: -310px;
+              margin-bottom: -80px;
           }
           .cat{
               width: 130px;
@@ -220,6 +209,7 @@ margin-left: 13px;
           .brand{
               
               margin-left: 500px;
+             
             
           }
           .body{
@@ -247,7 +237,7 @@ margin-left: 13px;
 .slick-prev:before {
     color: black !important;
     font-size: 35px;
-margin-left: -50px;
+
 position: absolute;
 top: -40px;
 
@@ -258,7 +248,7 @@ top: -40px;
     font-size: 35px;
 position: absolute;
 top: -40px;
-margin-left: 13px;
+
 
 }
 
