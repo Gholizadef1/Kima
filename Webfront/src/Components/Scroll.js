@@ -26,9 +26,9 @@ function Slide(props) {
   const [bookReading, setBookReading] = useState([]);
   const [bookWantto, setBookWantto] = useState([]);
  
-    const apiURLRead = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Read`;
-    const apiURLReading = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Reading`;
-    const apiURLWantto = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/ToRead`;
+  const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
+  const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
+  const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
     useEffect(() => {
       axios.get(apiURLRead,{
         headers:{

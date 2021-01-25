@@ -19,7 +19,7 @@ import { red } from "@material-ui/core/colors";
     const { index, style } = props;
     const [quote, setQuote] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
+      fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/quote`,{
         headers:{
     "Content-Type":"application/json",
    }
