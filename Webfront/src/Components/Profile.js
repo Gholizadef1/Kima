@@ -46,7 +46,7 @@ function ProFile (props){
     useEffect(() => {
         console.log(user)
         if (user.token) {       
-            axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+            axios.get('http://127.0.0.1:8000/user/' + Cookies.get('userId'))
                 .then(function (response){
                   console.log(response);
                   console.log(response.data);
@@ -85,7 +85,7 @@ function ProFile (props){
               "username":user.userName
         }
         const back= JSON.stringify(payload)
-        axios.put('http://127.0.0.1:8000/api/update-profile/',
+        axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/update-profile`,
         back,{
             headers:{
 
@@ -128,7 +128,7 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put('http://127.0.0.1:8000/api/change-password/',
+            axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/change-password`,
              back
              ,{
               headers:{
@@ -187,7 +187,7 @@ function ProFile (props){
   var formdata = new FormData()
   formdata.append('profile_photo',state.file)
   // formdata.append('username','file')
-   axios.put('http://127.0.0.1:8000/api/update-profile/'
+   axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/update-profile`
    ,formdata,{
      headers:{
        
@@ -213,9 +213,9 @@ const[reading,setReading] = useState();
 const[wantto,setWantto] = useState();
 
 
-const apiURLRead = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Read`;
-const apiURLReading = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Reading`;
-const apiURLWantto = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/ToRead`;
+const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
+const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
+const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
 useEffect(() => {
   axios.get(apiURLRead,{
     headers:{
