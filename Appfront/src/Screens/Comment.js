@@ -46,7 +46,10 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
-  const [likeotime, setlikeotime] = useState('/time');
+  const[selecttime,setselecttime]=useState(true)
+  const [likeotime, setlikeotime] = useState('time');
+  const [timelable,settimelable]=useState('فیلتر بر اساس تاریخ')
+  const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
   const [page, setpage] = useState(1);
 
@@ -105,7 +108,7 @@ const Comment = (prop) => {
          //console.log(response.date)
          console.log(response.data.comments+' RESPONSE DATA COMMENTS')
          //page===1?setinformation(response.data):setinformation(information.concat(response.data))
-         await setinformation(information=>[...information,...response.data])
+         await setinformation(information=>[...information,...response.data.comments])
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         //console.log(information)
         setrefresh(false)
@@ -130,14 +133,31 @@ const Comment = (prop) => {
   }
   useFocusEffect(
     React.useCallback(() => {
+      const a=new Promise(async(resolve,reject)=>{
+        await setinformation([]);
+        await setpage(1);
+        await setselecttime(true)
+        //با این ظاهرا درست شد :/
+        await setselectedValue('like')
+        //تاثیری نداشتن :/
+        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+        // await settimelable("فیلتر بر اساس تاریخ")
+        if(selectedValue==="none")
+       await setlikeotime("time");
+       else
+       await setlikeotime("like");
+       await setselectedValue('none')
 
+        resolve()
+      }).then(()=>{
       console.log('++++++++++' + information + '**********')
       response(1);
       console.log('++++++++++' + information + '**********')
+      })
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [])
+    }, [prop.navigation])
 
   )
   const handleLoadMore = async() => {
@@ -288,8 +308,9 @@ const Comment = (prop) => {
       }}>
       { (information!=undefined) ?    <DropDownPicker
           items={[
-            { label: 'فیلتر بر اساس تاریخ', value: 'none' },
-            { label: 'فیلتر بر اساس تعداد پسند ها', value: 'like' },
+            //انگار عوض میشن :/ ست سلکتد ولیو توی یوز ایفکت به نان تغییری ایجاد 
+            { label:timelable, value: 'none', selected: selecttime },
+            { label:likelable, value: 'like'},
           ]}
           defaultValue={selectedValue}
           containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
@@ -300,17 +321,33 @@ const Comment = (prop) => {
           itemStyle={{
             justifyContent: 'flex-start'
           }}
+      
+          // initialValues={'none'}
           dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
           onChangeItem={async (item) => {
-
+          
             if (item.value === 'none') {
+              const a=new Promise(async(resolve,reject)=>{
+                console.log(item.value + 'VALUE')
+              console.log('to none')
+              await setlikeotime('time')
+              await setselecttime('none');
+       
+       
+        resolve()
+      })
+      // .then(()=>{
+      // console.log('++++++++++' + information + '**********')
+      // response(1);
+      // console.log('++++++++++' + information + '**********')
+      // })
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/time')
+             // await setlikeotime('time')
               // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
-              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/like')
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + 'like')
               //   console.log(response.data)
 
               //   setrefresh(false)
@@ -325,13 +362,23 @@ const Comment = (prop) => {
               // }
             }
             else if (item.value === 'like') {
+              const a=new Promise(async(resolve,reject)=>{
+                console.log(item.value + 'VALUE')
+              console.log('to none')
+              await setlikeotime('like')
+              await setselecttime('like');
+       
+       
+       
+        resolve()
+      })
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/like')
+             // await setlikeotime('like')
               // await response(1);
               // try {
               //   setIDD(await(await AsyncStorage.getItem('id')).toString())
-              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + '/time')
+              //   const response = await axiosinst.get("bookdetail/" + prop.route.params.id + 'time')
               //   console.log(response.data)
               //   console.log('FILTER TIME')
               //   setrefresh(false)
