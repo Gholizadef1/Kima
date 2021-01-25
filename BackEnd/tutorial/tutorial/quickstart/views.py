@@ -184,20 +184,27 @@ class UserRatingview(APIView):
         return Response({'error': 'failed'},
                         status=HTTP_404_NOT_FOUND)
 
-class MyQuoteView(generics.ListAPIView,PaginationHandlerMixin):
-
+class MyQuoteView(APIView,PaginationHandlerMixin):
+    model=MyQuote
     serializer_class=QuoteSerializer
     pagination_class = BasicPagination
 
-    def get_queryset(self,pk):
+    def get_object(self, pk):
+        try:
+            return MyQuote.objects.get(pk=pk)
+        except MyComment.DoesNotExist:
+            raise Http404
+
+    def get(self,request,pk):
         user=Account.objects.get(pk=pk)
-        return MyQuote.objects.filter(account=user)
-
-
-    def list(self, request,pk):
-        queryset = self.get_queryset(pk=pk)
-        serializer = QuoteProfSerializer(queryset,context={"user": pk}, many=True)
-        return Response(serializer.data)
+        if MyQuote.objects.filter(account=user).exists():
+            mquote = MyQuote.objects.filter(account=user)
+            q_list = self.paginate_queryset(mquote)
+            serializer = CommentProfSerializer(q_list,context={"user": pk},many=True)
+            count = Paginator(mquote,10).num_pages
+            return Response({"quotes" : serializer.data, "count": count})
+        response = {'message' : 'No Quote!',}
+        return Response(response)
 
 class QuoteView(APIView,PaginationHandlerMixin):
 
@@ -231,8 +238,9 @@ class QuoteView(APIView,PaginationHandlerMixin):
         
             mquote = MyQuote.objects.filter(current_book=this_book)
             quote_list = self.paginate_queryset(mquote)
-            serilalizer = QuoteSerializer(quote_list,context={"request": request},many=True)
-            return Response(serilalizer.data)
+            serializer = QuoteSerializer(quote_list,context={"request": request},many=True)
+            count = Paginator(mquote,10).num_pages
+            return Response({"quotes" : serializer.data, "count": count})
 
         response = {'message' : 'No Quote!',}
         return Response(response)
@@ -370,9 +378,11 @@ class CommentProfileView(APIView,PaginationHandlerMixin):
     def get(self,request,pk):
         user=Account.objects.get(pk=pk)
         if MyComment.objects.filter(account=user).exists():
-            comment_list = MyComment.objects.filter(account=user)
-            serilalizer = CommentProfSerializer(comment_list,context={"user": pk},many=True)
-            return Response(serilalizer.data)
+            mcomment = MyComment.objects.filter(account=user)
+            comment_list = self.paginate_queryset(mcomment)
+            serializer = CommentProfSerializer(comment_list,context={"user": pk},many=True)
+            count = Paginator(mcomment,10).num_pages
+            return Response({"comments" : serializer.data, "count": count})
         response = {'message' : 'No Comment!',}
         return Response(response)
 
