@@ -35,7 +35,7 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(`${API_BASE_URL}dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+const result = await axios.get(`${API_BASE_URL}/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
   
@@ -43,7 +43,7 @@ const result = await axios.get(`${API_BASE_URL}dyanmicsearch/?search=${user.user
 }
 
 useEffect(() => {
-  axios.get(API_BASE_URL + 'user-profile/' + Cookies.get('userId'))
+  axios.get(API_BASE_URL + '/user/' + Cookies.get('userId'))
   .then(function (response){
     //console.log(response);
     //console.log(response.data);

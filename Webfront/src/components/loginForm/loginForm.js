@@ -38,7 +38,7 @@ function LoginForm(props) {
         //console.log(back);
         //console.log(props);
         //console.log(state);
-        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" }})
+        axios.post(API_BASE_URL+'/login',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
                 console.log(response);
                 //console.log(response.status);
