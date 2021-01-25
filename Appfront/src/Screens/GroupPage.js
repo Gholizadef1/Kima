@@ -246,15 +246,11 @@ const GroupPage = (prop) => {
         <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
         <TouchableOpacity>
                 <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
-                  // selectTextOnFocus={true}
-
                   borderColor={'lightgray'}
                   onChangeText={props.handleChange('Discription')}
                   onBlur={props.handleBlur('Discription')}
-                  value={props.values.Discription}
-                 
+                  value={props.values.Discription}                 
                   placeholder={'توضیحات بحث ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
-
                 </Textarea>
                 </TouchableOpacity>
                 <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
@@ -415,23 +411,19 @@ const GroupPage = (prop) => {
 
 
         <FlatList
-          // horizontal={true}s
           style={{ marginBottom: hp('5%') }}
           showsVerticalScrollIndicator={false}
           onEndReached={() => {
-
-            console.log('-----AKHAR LIST')
+          console.log('-----AKHAR LIST')
           }}
           onEndReachedThreshold={0.5}
           keyExtractor={(item) => item.id}
           refreshing={refreshmembers}
           onRefresh={async () => {
-            console.log('refresh')
+          console.log('refresh')
           }}
-
           data={members}
           renderItem={({ item }) => <>
-
             <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
               {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{}} size={90}
                 source={{ uri: groupphoto }}
@@ -445,13 +437,12 @@ const GroupPage = (prop) => {
               </Body> */}
           </>
           }
-        // extraData={finfo}
         >
         </FlatList>
-
+        {groupinfo.members_count>4 ?         
         <Button style={{ marginLeft: wp('90%') }} transparent>
           <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-        </Button>
+        </Button> : null}
 
       </ScrollView>
 
