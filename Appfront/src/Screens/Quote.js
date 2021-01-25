@@ -77,7 +77,7 @@ const callbackFunction = async(childData) => {
    };
   const [theend,settheend]=useState(false)
   const [count,setcount]=useState(1);
-  const [likeotime, setlikeotime] = useState('/quote-filter-time');
+  const [likeotime, setlikeotime] = useState('time');
   const [selectedValue, setselectedValue] = useState('none')
   const [selectedIndex, setSelectedIndex] = useState([]);
   const[loading ,setloading]=useState(false);
@@ -117,8 +117,9 @@ const callbackFunction = async(childData) => {
      console.log(page+'PAGE')
      try{
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-     const response = await axiosinst.get('bookdetail/'+id+likeotime,{ params:{
-     page:page
+     const response = await axiosinst.get('book/'+id+"/quote",{ params:{
+       filter:likeotime,
+       page:page
      },
      "headers":
      {
@@ -188,7 +189,7 @@ const callbackFunction = async(childData) => {
                 const backk=JSON.stringify(back);
                 const params=JSON.stringify({username:'Hi'});
                 // await setTimeout(() => {  console.log("World!"); }, 5000);
-                axiosinst.post('api/quotes/'+prop.route.params.id,backk,{"headers":
+                axiosinst.post('book/'+prop.route.params.id+"/quote",backk,{"headers":
                {
                 "Content-Type":"application/json",
                 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
@@ -323,13 +324,13 @@ const callbackFunction = async(childData) => {
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
-              await setlikeotime('/quote-filter-time')
+              await setlikeotime('time')
            
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
-              await setlikeotime('/quote-filter-like')
+              await setlikeotime('like')
       
             }
 
@@ -363,14 +364,14 @@ const callbackFunction = async(childData) => {
     //         if (item.value === 'none') {
     //           console.log(item.value + 'VALUE')
     //           console.log('to none')
-    //           await setlikeotime('/quote-filter-time')
+    //           await setlikeotime('time')
     //           response(1)
            
     //         }
     //         else if (item.value === 'like') {
     //           console.log('tolike')
     //           console.log(item.value + 'VALUE')
-    //           await setlikeotime('/quote-filter-like')
+    //           await setlikeotime('like')
     //           response(1)
       
     //         }
@@ -399,7 +400,7 @@ const callbackFunction = async(childData) => {
      
     renderItem={({item})=>(<><Quotecrad  name={item.account.username} 
     isliked={item.isliked}
-    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} 
+    date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} 
     picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
     
 
