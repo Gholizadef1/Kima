@@ -53,7 +53,7 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+const result = await axios.get(`http://127.0.0.1:8000/book/search?key=${user.user}&search-fields=author&search-fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
   
