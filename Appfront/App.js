@@ -12,7 +12,7 @@ import Loadingscreen from './src/Screens/Loadingscreen';
 import {NavigationContainer} from '@react-navigation/native';
 import { I18nManager } from 'react-native';
 import { SplashScreen } from 'expo';
-import AppLoading from 'expo-app-loading';
+// import AppLoading from 'expo-app-loading';
 
 // import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
 // import {Context as AuthContext} from './src/context/Authcontext'

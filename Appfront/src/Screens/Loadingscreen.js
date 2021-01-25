@@ -4,7 +4,7 @@ import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity,Alert } 
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { Feather } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
-import { Video } from 'expo-av';
+// import { Video } from 'expo-av';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import AuthContext from '../context/Authcontext';
 // import { View } from 'react-native-animatable';
