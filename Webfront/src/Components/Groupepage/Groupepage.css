@@ -625,14 +625,24 @@
             .name{
                 font-family: 'Yekan';
                 font-size: 25px;
-                margin-right: -300px;
+                margin-right: -200px;
                 margin-top: -50px;
-
+            
             }
-            .name1{
-                margin-right: 240px;
-                margin-top: -37px;
+            .btnD{
+               
+                font-family: 'Yekan';
+                
             }
+            .btnbale{
+                margin-left: 365px;
+            }
+            
+           .btnDE{
+           size: 100px;
+            font-family: 'Yekan';
+            margin-left: 187px;
+           }
             .btn-d{
                 font-family: 'Yekan';
                 margin-right: -520px;

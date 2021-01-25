@@ -32,19 +32,7 @@ import {
 import Tooltip from '@material-ui/core/Tooltip';
 
   function GroupPage (props){
-    const BlueOnGreenTooltip = withStyles({
-      tooltip: {
-        color: "black",
-        fontFamily:"Yekan",
-        fontSize:16,
-        backgroundColor: '#b7dee4',
-        width:170,
-        height:80,
-        textAlign:"center",
-        marginLeft:20,
-        paddingTop:20,
-      }
-    })(Tooltip);
+    
     console.log(props)
 
     const [ginfo, setGinfo] = useState([]);
@@ -291,10 +279,11 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>
     <div>
         
-    <div className=" name text-rigth">
+    <div className=" name">
   
-    <b className="">:نام گروه<div className=" name1">{ginfo.title}</div></b>
-    </div>
+  <b className="">نام گروه:  {ginfo.title}</b>
+  </div>
+
 
     {joinduser === "You joind this group!" ?
     <div className="group-info">
@@ -358,43 +347,46 @@ import Tooltip from '@material-ui/core/Tooltip';
                    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                      <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
                      <DialogContent >
-   
-                     <form >
-                       <TextField
-                         autoFocus
-                         margin="dense"
-                         id="name"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.name}
-                         placeholder="عنوان بحث"
-                         type="title"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       <TextField
-                         
-                       margin="dense"
-                         id="description"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.description}
-                         placeholder="دربارهٔ بحث"
-                         type="description"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       </form>
+           <div class=" p-4">
+                   <form>
+                       <div class="form-group align-items-center text-right">
+                           <div class="my-1">
+                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
+                               <input type="text"
+                                 class="form-control rounded-pill"
+                                
+                                 id="name"
+                                 value={newDiscussion.name}
+                                 
+                                 type="title"
+                                 onChange={handleChange}/>
+                           </div>
+                           <div class=" my-2">
+                               <div class="my-1">
+                               <label style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
+                               <input type="password"
+                                
+                                 id="description"
+                                 style={{fontFamily:"Yekan"}}
+                                 value={newDiscussion.description}
+                                 
+                                 type="description"
+                                 onChange={handleChange}
+                                 class="form-control rounded-pill"/>
+                           </div>   
+                           </div>
+                           </div>
+                           </form>
+                           </div>
+                   
                      </DialogContent>
                      <DialogActions>
-                       <Button onClick={handleCloseCreateGroup} color="black">
+                       <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
                        انصراف
-                       </Button>
-                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                       </button>
+                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
                          ثبت
-                       </Button>
+                       </button>
                      </DialogActions>
                    </Dialog>
    </div>
@@ -408,11 +400,20 @@ import Tooltip from '@material-ui/core/Tooltip';
        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
-<div className="btn btn-d bg-primary ml-4" style={{color:"white"}}>
+<Tooltip  title= {<div style={{color: "black",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ساخت بحث جدید باید در گروه عضو باشید</div>}> 
+<div className="btn btn-d bg-info ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
-                </BlueOnGreenTooltip>
+                </Tooltip>
+                
   <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
@@ -470,11 +471,19 @@ import Tooltip from '@material-ui/core/Tooltip';
         <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<BlueOnGreenTooltip title="برای ساخت بحث جدید باید در گروه عضو باشید"> 
-<div className="btn btn-d bg-primary ml-4" style={{color:"white"}}>
+<Tooltip  title= {<div style={{color: "black",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ساخت بحث جدید باید در گروه عضو باشید</div>}> 
+<div className="btn btn-d bg-info ml-4" style={{color:"white"}}>
  بحث جدید
                 </div>
-                </BlueOnGreenTooltip>
+                </Tooltip>
   <b className="title-d">بحث‌ها</b>
    
     <div class="card card-discussion">
@@ -535,7 +544,7 @@ import Tooltip from '@material-ui/core/Tooltip';
        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-peimary ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-info ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
   <b className="title-d">بحث‌ها</b>
@@ -586,46 +595,51 @@ import Tooltip from '@material-ui/core/Tooltip';
 
     </div>  
                    
-                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                   
+                      
+    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
                      <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
                      <DialogContent >
-   
-                     <form >
-                       <TextField
-                         autoFocus
-                         margin="dense"
-                         id="name"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.name}
-                         placeholder="عنوان بحث"
-                         type="title"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       <TextField
-                         
-                       margin="dense"
-                         id="description"
-                         style={{fontFamily:"Yekan"}}
-                         value={newDiscussion.description}
-                         placeholder="دربارهٔ بحث"
-                         type="description"
-                         onChange={handleChange}
-                         fullWidth
-                         variant="outlined"
-   
-                       />
-                       </form>
+           <div class=" p-4">
+                   <form>
+                       <div class="form-group align-items-center text-right">
+                           <div class="my-1">
+                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
+                               <input type="text"
+                                 class="form-control rounded-pill"
+                                
+                                 id="name"
+                                 value={newDiscussion.name}
+                                
+                                 type="title"
+                                 onChange={handleChange}/>
+                           </div>
+                           <div class=" my-2">
+                               <div class="my-1">
+                               <label style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
+                               <input type="password"
+                                
+                                 id="description"
+                                 style={{fontFamily:"Yekan"}}
+                                 value={newDiscussion.description}
+                                
+                                 type="description"
+                                 onChange={handleChange}
+                                 class="form-control rounded-pill"/>
+                           </div>   
+                           </div>
+                           </div>
+                           </form>
+                           </div>
+                   
                      </DialogContent>
                      <DialogActions>
-                       <Button onClick={handleCloseCreateGroup} color="black">
+                     <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
                        انصراف
-                       </Button>
-                       <Button onClick={handleCreateDiscussionSubmit} color="black">
+                       </button>
+                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
                          ثبت
-                       </Button>
+                       </button>
                      </DialogActions>
                    </Dialog>
    </div>
@@ -653,8 +667,8 @@ import Tooltip from '@material-ui/core/Tooltip';
        !آیا مطمئن هستید که می‌خواهید گروه را حذف کنید؟
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info rounded-lg" data-dismiss="modal">!خیر</button>
-        <button onClick={deletGroup} data-dismiss="modal"  type="button" class="btn btn-info rounded-lg">!بله</button>
+        <button type="button" class="btn btnno btn-info rounded-lg" data-dismiss="modal">!خیر</button>
+        <button onClick={deletGroup} data-dismiss="modal"  type="button" class=" btn btnbale btn-info rounded-lg">!بله</button>
       </div>
     </div>
   </div>
@@ -663,7 +677,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
-<div className="btn btn-d bg-primary ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
+<div className="btn btn-d bg-info ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
  بحث جدید
                 </div>
     <b className="title-d">بحث‌ها</b>
@@ -713,49 +727,52 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 
     </div>  
-  
-                
-                <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                  <DialogContent >
 
-                  <form >
-                    <TextField
-                    autoFocus
-                      margin="dense"
-                      id="name"
-                      value={newDiscussion.name}
-                      label="عنوان بحث"
-                      type="title"
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-
-                    />
-                    <TextField
-                      margin="dense"
-                      id="description"
-                      value={newDiscussion.description} 
-                      label="توضیحات"
-                      type="description"
-                      
-                      onChange={handleChange}
-                      fullWidth
-                      multiline
-                      variant="outlined"
-
-                    />
-                    </form>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseCreateGroup} color="black">
-                    انصراف
-                    </Button>
-                    <Button onClick={handleCreateDiscussionSubmit} color="black">
-                      ثبت
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
+                     <DialogContent >
+           <div class=" p-4">
+                   <form>
+                       <div class="form-group align-items-center text-right">
+                           <div class="my-1">
+                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
+                               <input type="text"
+                                 class="form-control rounded-pill"
+                                
+                                 id="name"
+                                 value={newDiscussion.name}
+                                 
+                                 type="title"
+                                 onChange={handleChange}/>
+                           </div>
+                           <div class=" my-2">
+                               <div class="my-1">
+                               <label  style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
+                               <input type="password"
+                                
+                                 id="description"
+                                 style={{fontFamily:"Yekan"}}
+                                 value={newDiscussion.description}
+                                 
+                                 type="description"
+                                 onChange={handleChange}
+                                 class="form-control rounded-pill"/>
+                           </div>   
+                           </div>
+                           </div>
+                           </form>
+                           </div>
+                   
+                     </DialogContent>
+                     <DialogActions>
+                     <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
+                       انصراف
+                       </button>
+                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
+                         ثبت
+                       </button>
+                     </DialogActions>
+                   </Dialog>
 </div>
     :
     <div>       
