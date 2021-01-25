@@ -227,7 +227,7 @@ const GroupPage = (prop) => {
      <View style={{ marginTop:hp('5%')}}>
      <View style={{borderColor:'blue'}}>
     
-     <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>موضوع بحث</Text>
+     <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('2%'),marginLeft:wp('1%') , marginTop:hp('-2%')}}>موضوع بحث</Text>
      <Item style={styles.item} rounded >
      
      <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
@@ -243,9 +243,9 @@ const GroupPage = (prop) => {
     
       </View>
      <View>
-        <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
+        <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
         <TouchableOpacity>
-                <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
                   // selectTextOnFocus={true}
 
                   borderColor={'lightgray'}
@@ -253,7 +253,7 @@ const GroupPage = (prop) => {
                   onBlur={props.handleBlur('Discription')}
                   value={props.values.Discription}
                  
-                  placeholder={'توضیحات بحث ...'}  placeholderTextColor='gray' fontSize={hp('1.6.5%')}  style={styles.item2}>
+                  placeholder={'توضیحات بحث ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
 
                 </Textarea>
                 </TouchableOpacity>
@@ -262,7 +262,7 @@ const GroupPage = (prop) => {
          <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت گروه</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت بحث</Text>
         </Button>    
      </View>
      )}
@@ -495,11 +495,21 @@ const styles = StyleSheet.create({
     height:hp('40%'),
     marginTop:hp('15%'),
   },
+  button:{
+    marginTop:hp('1%'),
+    alignSelf:'center',
+    width:wp('41%'),
+    backgroundColor:'#1f7a8c',
+    borderColor:'#BFDBF7',
+    borderRadius:50
+    
+  },
   modalView: {
-    margin: 10,
+    margin: 13,
+    marginTop:20,
     backgroundColor: "white",
-    borderRadius: 10,
-    padding: 35,
+    borderRadius: 15,
+    padding: 15,
     height:hp('65%'),
     elevation: 300
   },
@@ -518,6 +528,15 @@ const styles = StyleSheet.create({
   alignSelf:'center',
   marginTop:hp('10%')
 },
+Input:{
+  left:wp('8%'),
+  fontSize:hp('1.5%'),
+  fontWeight:'bold',
+  marginRight:wp('10%'),
+  position:'absolute',
+  height:wp('9.5%'),
+  width:wp('31.5%')
+},
 item2:{
   marginLeft:wp('-2%'),
   marginRight:wp('-1%'),
@@ -525,8 +544,8 @@ item2:{
   fontSize:hp('2.5%')
 },
 item:{
-  marginLeft:wp('31%'),
-  marginRight:wp('5%'),
+  marginLeft:wp('-2%'),
+  marginRight:wp('45%'),
   height:wp('9.5%') 
 }
 });
