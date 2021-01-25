@@ -54,7 +54,7 @@ import { red } from "@material-ui/core/colors";
                 
               <img  className="squere img-responsive"  src={current.current_book.smallimgurl} style={{width:63, height:100}} />
               <div className="  ml-auto mr-3">
-                <h5 className="booktitle">
+                <h5 className="booktitle" style={{fontFamily:"Yekan"}}>
                 {current.current_book.title}
                 </h5>
                 <small className="date">
@@ -69,7 +69,7 @@ import { red } from "@material-ui/core/colors";
               </div>
              </div>
  
-             <p className="quote">
+             <p className="quote" style={{fontFamily:"Yekan"}}>
             {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>

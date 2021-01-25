@@ -50,7 +50,7 @@ import { red } from "@material-ui/core/colors";
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
               <img  className="squere img-responsive"  src={current.current_book.smallimgurl} style={{width:63, height:100}} />
-              <div className="booktitle ml-auto mr-3">
+              <div className="booktitle ml-auto mr-3"style={{fontFamily:"Yekan"}}>
                 <h5>
                 {current.current_book.title}
                 </h5>
@@ -72,7 +72,7 @@ import { red } from "@material-ui/core/colors";
               </div>
              </div>
  
-             <p  className="quote">
+             <p  className="quote"style={{fontFamily:"Yekan"}}>
             {current.comment_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>
