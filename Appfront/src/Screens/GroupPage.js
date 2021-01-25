@@ -439,16 +439,21 @@ const GroupPage = (prop) => {
           }
         >
         </FlatList>
-        {groupinfo.members_count>4 ?         
+        <Button style={{ marginLeft: wp('90%') }} transparent 
+         onPress={() => prop.navigation.navigate('ShowMembersPage')}>
+          <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+        </Button >
+        {/* {groupinfo.members_count>4 ?         
         <Button style={{ marginLeft: wp('90%') }} transparent>
           <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-        </Button> : null}
+        </Button> : null} */}
 
       </ScrollView>
 
     </View>
   );
 }
+//prop.navigation.navigate('Groupmainpage')
 
 const styles = StyleSheet.create({
   container: {
@@ -504,14 +509,14 @@ const styles = StyleSheet.create({
     height:hp('65%'),
     elevation: 300
   },
-  avatar: {
-    height: hp('14%'),
-    marginTop:hp('-1.5%'),
-    width: wp('28%'),
-    marginLeft:wp('-1%'),
-    borderRadius: 20,
-    position:'absolute'
-  },
+  // avatar: {
+  //   height: hp('14%'),
+  //   marginTop:hp('-1.5%'),
+  //   width: wp('28%'),
+  //   marginLeft:wp('-1%'),
+  //   borderRadius: 20,
+  //   position:'absolute'
+  // },
   loader:{
   alignItems:'center',
   marginBottom:hp('5%'),
