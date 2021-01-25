@@ -646,6 +646,7 @@ class DynamicGroupAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = Group.objects.all()
     serializer_class = GroupDetSerializer
+    search_fields = ['title']
   
 class DeleteChatView(APIView):    
     def delete(self,request,group_pk,discussion_pk,chat_pk):
