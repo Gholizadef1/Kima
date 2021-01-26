@@ -136,7 +136,12 @@ const callbackFunction = async(childData) => {
     //  console.log(IDD+'IDDresponse');
       //  console.log(response.data)
       //page===1?setinformation(response.data.quotes):setinformation(information.concat(response.data.quotes))
+      if(response.data.message!="No Quote!"){
       await setinformation(information=>[...information,...response.data.quotes])
+      }
+      else{
+        setinformation(undefined)
+      }
       console.log('++++INFO++++'+information+"++++INFO++++")
      
   //     setloading(false);
