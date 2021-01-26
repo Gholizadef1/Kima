@@ -111,7 +111,7 @@ const Mygroups = (prop) => {
     const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
     const [selectedValue, setselectedValue] = useState('none')
-    const [information, setinformation] = useState();
+    const [information, setinformation] = useState([]);
     const [refresh,setrefresh]=useState(false);
     const [likeotime, setlikeotime] = useState('time');
     const [theend,settheend]=useState(false);
@@ -131,7 +131,7 @@ const Mygroups = (prop) => {
     console.log(theend+'  THE END RESOPONSE AVAL')
     if(page===1){
       await settheend(false)
-      await setinformation()
+      await setinformation([])
       // if(inforamtionchange===false)
       // setinfromationchange(true)
       // else
@@ -164,22 +164,22 @@ const Mygroups = (prop) => {
      
    })
    //console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-   for(let i=0;response.data.groups[i]!=null;i++){
-     setnumberofgp(numberofgp+1);
-   }
-   if(numberofgp===0)
-   settheend(true)
+  //  for(let i=0;response.data.groups[i]!=null;i++){
+  //    setnumberofgp(numberofgp+1);
+  //  }
+  //  if(numberofgp===0)
+  //  settheend(true)
 
    console.log(numberofgp/10+'number of group ////////10')
    console.log(numberofgp+'   !!!!!!!!!  '+numberofgp)
    console.log(response.data)
    console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
-   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
-  await settheend(true)
-  await setrefresh(false)
-   console.log('#########')
-   }
-   else{
+  //  if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+  // await settheend(true)
+  // await setrefresh(false)
+  //  console.log('#########')
+  //  }
+  //  else{
   console.log(response.data+'RESPONSE.DATA')
   console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
@@ -188,19 +188,27 @@ const Mygroups = (prop) => {
    console.log((page===count)+' PAGE===COUNT')
 
     settheend(false)
-   console.log('omade inja')
+   //console.log('omade inja')
    console.log('++++INFOGHABLESET++++'+information+"++++INFOGHABLESET++++")
     //await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
     // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
-    await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
+    console.log(response.data.groups)
+    if(response.data.message!="No Group!"){
+      await setinformation(information => [...information, ...response.data.groups])
+   //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
+    }
+    else{
+      await setinformation(undefined);
+      console.log(" KHALIIIII;KAJF;LKJ;LKJ")
+    }
      setrefresh(false)
-    console.log(response.data.groups.id+'  INFORMATION.ID')
+   // console.log(response.data.groups.id+'  INFORMATION.ID')
     
       console.log('++++INFO++++'+information+"++++INFO++++")
      
      }
-    }
+   // }
     //  }
    catch(err){
     Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
@@ -222,27 +230,44 @@ const Mygroups = (prop) => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<numberofgp/10+1){
-     response(page+1);
-     }
-     else
-     {
-       console.log(page+'handlemore page')
-       console.log(count +'handlemore count')
-       console.log('*********')
-       settheend(true)
+    //  if(page<numberofgp/10+1){
+      if (page < count) {
+        if (theend === false)
+          response(page + 1);
       }
+      else {
+        settheend(true)
+      }
+   
     };
    
     useFocusEffect(
       React.useCallback(() => {   
-        // setselectedValue('none')
-        // setinformation(undefined);
-        console.log(information+'INFORMATION USE EFFECT')
-        // setpage(1)      
-          response(1)
-          // setlikeotime('filter-time')
-      },[]))
+        const a = new Promise(async (resolve, reject) => {
+          await setinformation([]);
+          await setpage(1);
+          //await setselecttime(true)
+          //با این ظاهرا درست شد :/
+          await setselectedValue('like')
+          //تاثیری نداشتن :/
+          // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          // await settimelable("فیلتر بر اساس تاریخ")
+          if (selectedValue === "none")
+            await setlikeotime("time");
+          else
+            await setlikeotime("like");
+          await setselectedValue('none')
+  
+          resolve()
+        }).then(() => {
+          console.log('++++++++++' + information + '**********')
+          response(1);
+          console.log('++++++++++' + information + '**********')
+        })
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
+      }, [prop.navigation]))
     return(
      
      
@@ -464,7 +489,7 @@ const Mygroups = (prop) => {
          <View style={{marginLeft:wp('2%')}}>
       
 
-         {numberofgp!=0? <DropDownPicker
+         {information!=undefined? <DropDownPicker
           items={[
             { label: 'معروف ترین گروه ها', value: 'like' },
             { label: 'جدید ترین گروه ها', value: 'none' },
@@ -520,7 +545,7 @@ const Mygroups = (prop) => {
          <View style={{height:hp('2%')}}></View>
         {/* {(information.length >= 0) ? */}
 
-        <FlatList
+        {(information != undefined) ?<FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom:hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
             style={{ marginBottom: hp('7%') }}
@@ -530,7 +555,7 @@ const Mygroups = (prop) => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
-              await setinformation()
+              //await setinformation()
               await setrefresh(true)
               response(1)
             }}
@@ -539,19 +564,22 @@ const Mygroups = (prop) => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
+           
              {/* <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}> */}
              <TouchableOpacity 
            //activeOpacity={1}
             style={{backgroundColor:'white',marginBottom:0}}
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
+            {/* {item.is_owner||item.is_member? */}
+            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>
+            {/* :null} */}
             </TouchableOpacity>
             </>
             )}
           // extraData={finfo}
           >
-          </FlatList> 
+          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
