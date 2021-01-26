@@ -163,7 +163,7 @@ class Chat(models.Model):
     send_time = models.DateTimeField(default=timezone.now, editable=False)
 
 class Quiz(models.Model):
-    title = models.CharField(max_length=100,unique=True)
+    title = models.CharField(max_length=100)
     description = models.TextField()
     creator = models.ForeignKey(Account, on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now, editable=False)

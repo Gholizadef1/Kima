@@ -227,7 +227,7 @@ class MyGroupSerializer(serializers.ModelSerializer):
     def to_representation(self,value):
         return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
 
-class CreateQuizSerializer(serializers.ModelSerializer):
+class CreateQuizSerializer(serializers.Serializer):
 
     title = serializers.CharField(max_length=100,required=True)
     description = serializers.CharField(required=True)

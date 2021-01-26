@@ -53,5 +53,6 @@ urlpatterns = [
     path('bookinfo', kyma.views.BookListView.as_view()),
     path('register',RegistrationView.as_view()),
     path('login',LoginView.as_view()),
+    path('quiz',QuizView.as_view()),
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
