@@ -125,9 +125,19 @@ const Groups = ({navigation}) => {
   const [count,setcount]=useState(1);
   const [pageone,setpageone]=useState(false);
   const [searchterm,setsearchterm]=useState('');
+  // const idd=await(AsyncStorage.getItem('id');
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
   const [moreclicked,setmoreclicked]=useState(false);
+  const [isowner,setisowner]=useState(false);
+  const checkisowner=async(ID)=>{
+    const id=await(AsyncStorage.getItem('id'))
+    if(id===ID){
+      return true;
+    }
+    else
+    return false
+  }
   const response=async (page)=>{
     // await setinformation([])
     setopensearch(false)

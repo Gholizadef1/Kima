@@ -19,6 +19,7 @@ const Eachgroup = (prop) => {
 
   const [more, setmore] = useState(false);
   console.log(prop.groupphoto);
+  console.log(prop.isownerid+";kasfj;lsf;lkjsf;lakj;slk;lskfj;lkj")
   const [showmore, setshowmore] = useState('بیشتر...');
   const commentt = `${prop.discription}`.toString();
   // const [moreclicked,setmoreclicked]=useState(false);
@@ -89,7 +90,7 @@ const Eachgroup = (prop) => {
      {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
 
      <Text style={styles.username}>{prop.title}</Text>
-
+     {/* prop.isownerid===new Promise(async(resolve,reject)=>{return(await AsyncStorage.getItem("id"))}) */}
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
     

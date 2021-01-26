@@ -110,6 +110,15 @@ const Mygroups = (prop) => {
   }
     const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
+    const checkisowner=async(ID)=>{
+      console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
+      const id=await(AsyncStorage.getItem('id'))
+      if(id===ID){
+        return true;
+      }
+      else
+      return false
+    }
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState([]);
     const [refresh,setrefresh]=useState(false);
@@ -580,7 +589,7 @@ const Mygroups = (prop) => {
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {/* {item.is_owner||item.is_member? */}
-            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>
+            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
             {/* :null} */}
             </TouchableOpacity>
             </>
