@@ -79,7 +79,8 @@ const Quotecard = (prop) => {
 
       <Card style={{ marginLeft: wp('5%'), marginTop: hp('14%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
 
-        {prop.IDD.toString() === prop.id.toString() ? <AntDesign name="delete"
+        {/* {prop.IDD.toString() === prop.id.toString() ? */}
+        <AntDesign name="delete"
           size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
           onPress={async () => {
             await Alert.alert(
@@ -98,7 +99,8 @@ const Quotecard = (prop) => {
                     prop.INFO(prop.quoteid)
                     console.log(prop.INFO)
                     console.log(prop.lastinfo);
-                    axiosinst.delete('api/quotes/' + prop.quoteid, {
+                    axiosinst.delete('book/' + bookid + "/quote/" + prop.quoteid, {
+                    
                       "headers":
                       {
                         "Content-Type": "application/json",
@@ -125,7 +127,8 @@ const Quotecard = (prop) => {
 
             //  response();
           }}
-          color="#e56b6f" /> : null}
+          color="#e56b6f" />
+        {/* : null} */}
         <View style={{
           flex: 1,
           flexDirection: 'row',
@@ -199,9 +202,9 @@ const Quotecard = (prop) => {
             console.log((await AsyncStorage.getItem('token')).toString())
             console.log(prop.quoteid + 'PROP QUOTE ID');
             // // console.log(item.account.id);
-            axiosinst.post('book/' + bookid + "/quote/" + prop.quoteid ,backk, {
-              params:{
-                feedback:"like"
+            axiosinst.post('book/' + bookid + "/quote/" + prop.quoteid, backk, {
+              params: {
+                feedback: "like"
               },
               "headers":
               {
