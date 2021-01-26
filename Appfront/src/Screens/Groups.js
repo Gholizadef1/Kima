@@ -317,6 +317,8 @@ const Groups = ({navigation}) => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      onEndEditing={()=>{setinformation([])
+        searchpost(1)}}
       onIconPress={()=>{
         setinformation([])
         searchpost(1)}}
