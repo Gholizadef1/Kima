@@ -691,7 +691,6 @@ class MyGroupView(APIView,PaginationHandlerMixin):
                     count = Paginator(serializer.data,10).num_pages
                     return Response({"groups" : gp_list, "count": count})
 
-
                 if filter=="member":
                     sorted_q = sorted(serializer.data, key=lambda x: -x['members_count'])
                     gp_list=self.paginate_queryset(sorted_q)
@@ -722,6 +721,6 @@ class QuizView(APIView,PaginationHandlerMixin):
                 else:
                     new_quiz = Quiz(creator=user,title=title,description=description)
                     new_quiz.save()
-                    return Response({"data"QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+                    return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
             return Response({"message":"A quiz with this name exists!"})
         return Response(serializer.errors)
