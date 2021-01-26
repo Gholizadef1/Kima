@@ -75,13 +75,11 @@ margin-left: 13px;
   font-size: 18px;
 }
 
-.brand2{
-  font-size: 20px;
-}
   .subbrand1{
-      margin-top: 300px;
+    
       margin-left: -430px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+      margin-top: -100px;
   }
   .subbrand2{
       margin-top: -120px;
@@ -93,6 +91,7 @@ margin-left: 13px;
       margin-left: -430px;
       margin-bottom: 30px;
   }
+
         }
   
   
@@ -188,9 +187,17 @@ margin-left: -200px;
 }.card-title2{
     font-size: 18px;
 }
-
+.brand1{
+    font-size: 20px;
+    text-align: right;
+} 
+.brand3{
+    font-size: 20px;
+    text-align: right;
+} 
 .brand2{
     font-size: 20px;
+    text-align: right;
 }  }
     
     

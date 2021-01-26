@@ -23,10 +23,20 @@
         
      }
      .username{
-         margin-top: -18px;
-     }
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: -1rem;
+       
+        
+    }
+    .email{
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 13px;
+    }
      .btn1{
-        width: 69px;
+        width: 70px;
         height: 40px;
     }
     .line{
@@ -51,11 +61,33 @@
     .heading3{
     margin-left: 70px;
     }
+
+    .decsciptionmine1{
+        font-size: 15px;
+        font-family: 'Yekan';
+        
+        
+    }
+    .decsciptionmine2{
+        font-size: 15px;
+        font-family: 'Yekan';
+        margin-left: -30px;
+       
+    }
+
+    .decsciptionmine3{
+        font-size: 15px;
+        font-family: 'Yekan';
+        
+    }
     .Tabz{
 
     margin-left: 14px;
-    margin-top: 5px;
+    margin-top: -15px;
     
+}
+.mygroups{
+    margin-left: 10px;
 }
   }
 
@@ -100,17 +132,17 @@
         font-size: 13px;
     }
     .decsciptionmine1{
-        font-size: 12px;
+        font-size: 15px;
         font-family: 'Yekan';
         margin-left: -5px;
     }
     .decsciptionmine2{
-        font-size: 12px;
+        font-size: 15px;
         font-family: 'Yekan';
         margin-left: -30px;
     }
     .decsciptionmine3{
-        font-size: 12px;
+        font-size: 15px;
         font-family: 'Yekan';
         margin-left: 15px;
     }
@@ -134,8 +166,8 @@
     
     .Tabz{
     
-        margin-left: 50px;
-        margin-top: 20px;
+        margin-left: 40px;
+        margin-top: 260px;
         
     }
     
@@ -153,7 +185,8 @@
     margin-left: -100px;
     }
     .mygroups{
-        margin-left: 1px;
+        margin-left: 35px;
+        margin-top: -240px;
     
     }
 

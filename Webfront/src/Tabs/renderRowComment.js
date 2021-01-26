@@ -32,7 +32,7 @@ import { red } from "@material-ui/core/colors";
     return (
       <div>
       {comment.message==="No Comment!" ? (                   
-      <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
+      <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نظری برای نمایش وجود ندارد</div>
 
         
        ) : (

@@ -58,7 +58,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     console.log(props.match.params.groupId)
     if (props.match.params.groupId) {
 
-    axios.get("http://127.0.0.1:8000/api/group/details/" + props.match.params.groupId)
+    axios.get("http://127.0.0.1:8000/group/" + props.match.params.groupId)
       
       .then((data) => {
          console.log(data);

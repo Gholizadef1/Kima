@@ -1,14 +1,5 @@
-import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import "./Tabs.css";
-import RenderRowquote from"./renderRowQuote";
-import RenderRowcomment from "./renderRowComment";
+
+import "./Mygroup.css";
 import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -30,7 +21,7 @@ const[mygroup,setMygroup] = useState([]);
               })
           .then((res) => res.json())
           .then((data) => {
-             console.log(data.data);
+             console.log(data.Count);
             setMygroup(data.data);
             setMygroupc(data.Count);
           });
@@ -38,7 +29,7 @@ const[mygroup,setMygroup] = useState([]);
       return(     
           <div>
       {groupcount===0 ? (                   
-      <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>گروهی برای نمایش وجود ندارد</div>
+      <div className="Nogroup" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>گروهی برای نمایش وجود ندارد</div>
 
         
        ) : (

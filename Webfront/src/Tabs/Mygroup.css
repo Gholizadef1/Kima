@@ -19,6 +19,10 @@
 
 @media (min-width :360px) 
 {
+    .Nogroup{
+        margin-top:80px;
+        margin-left: -150px;
+    }
     .cardc{
         overflow-x: scroll;
         width: 300px;
@@ -54,9 +58,17 @@
         margin-top: -170px;
         margin-left: 40px;
     }
-
+    .Nogroup{
+        margin-top:70px;
+        margin-left: -150px;
+    }
   }
   @media (min-width:960px){
+      .Nogroup{
+          
+          margin-top: 100px;
+          margin-left: 60px;
+      }
     .cardc {
         overflow-x: scroll;
         

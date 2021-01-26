@@ -241,7 +241,7 @@ const Sendrequest =()=>{
     let back= JSON.stringify(payload);
     console.log(back);
     console.log(value);
-    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    axios.post(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
 payload,{
 headers:{
 "Content-Type":"application/json",
@@ -261,7 +261,7 @@ headers:{
     console.log(bookId);
     console.log(bac);
     console.log(value);
-    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    axios.put(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
     load,{
     headers:{
     "Content-Type":"application/json",
@@ -275,7 +275,7 @@ headers:{
 
 
 useEffect(() => {
-  axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+  axios.get(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`
   ,{
   headers:{
   "Content-Type":"application/json",

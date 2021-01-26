@@ -1,3 +1,29 @@
+
+@media (min-width :360px) 
+{
+    .rootg{
+        height: 300px;
+        width: 340px;
+        background-color:rgb(238, 243, 250);
+        border:16px solid #fff;
+        border-radius: 3%;
+    }
+   
+
+  }
+@media (min-width :768px) 
+{
+    .rootg{
+        height: 260px;
+        width: 350px;
+        background-color:rgb(238, 243, 250);
+        position: fixed;
+        border:16px solid #fff;
+        border-radius: 3%;
+    }
+   
+
+  }
 @media (min-width:960px){
     .rootg{
         height: 355px;
