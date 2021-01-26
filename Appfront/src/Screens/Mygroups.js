@@ -163,7 +163,7 @@ const Mygroups = (prop) => {
       }
      
    })
-   console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+   //console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
    for(let i=0;response.data.groups[i]!=null;i++){
      setnumberofgp(numberofgp+1);
    }
@@ -291,7 +291,7 @@ const Mygroups = (prop) => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('http://c56f3ca733ca.ngrok.io/api/group',formdata,{
+        const response=await axiosinst.post('/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -371,13 +371,15 @@ const Mygroups = (prop) => {
          </ImageBackground>
      </TouchableOpacity>}
     
-     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('12%'),
-      marginTop:hp('-2%'),
-      width: wp('25%'),elevation:0}}     onPress={() => {pickfromgallery(props,props.handleChange)}}>
+     {props.values.photo===require('../../assets/group.jpg')?
+     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('14%'),
+      marginTop:hp('-3%'),marginLeft:wp("-2%"),
+      width: wp('28%'),elevation:0}}     onPress={() => {pickfromgallery(props,props.handleChange)}}>
      </TouchableOpacity>
-     <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('7%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
+     :null}
+     {/* <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('8%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
       <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     
     
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
@@ -396,7 +398,7 @@ const Mygroups = (prop) => {
       </Item>
     
       </View>
-      <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('7%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
+      <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('8%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
       <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
       </TouchableOpacity>
      
