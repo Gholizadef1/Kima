@@ -162,9 +162,10 @@ class Chat(models.Model):
     chat_text = models.TextField()
     send_time = models.DateTimeField(default=timezone.now, editable=False)
 
-    
-
-
-
-
-
+class Quiz(models.Model):
+    title = models.CharField(max_length=100,unique=True)
+    description = models.TextField()
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE)
+    create_time = models.DateTimeField(default=timezone.now, editable=False)
+    quiz_photo = models.ImageField(upload_to='quiz_photos',default='default.png')
+    question_count = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(15)])
