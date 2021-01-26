@@ -703,18 +703,3 @@ class MyGroupView(APIView,PaginationHandlerMixin):
             return Response({"groups" : gp_list, "count": count})
         response = {'message' : 'No Group!',}
         return Response(response)
-
-    
-
-                if filter=="member":
-                    groups = sorted(gps,  key=lambda m: -m.members_count)
-                    gp_list=self.paginate_queryset(groups)
-                    serializer = GroupSerializer(gp_list,context={"request": request},many=True)
-                    count = Paginator(groups,10).num_pages
-                    return Response({"groups" : serializer.data, "count": count})
-            gp_list=self.paginate_queryset(gps)
-            serializer2 = GroupDetSerializer(gp_list,context={"request": request},many=True)
-            count = Paginator(gps,10).num_pages
-            return Response({"groups" : serializer2.data, "count": count})
-        response = {'message' : 'No Group!',}
-        return Response(response)
