@@ -86,7 +86,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   };
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId)
+    axios.get(`http://127.0.0.1:8000/group/${props.match.params.groupId}/member`)
       .then((data) => {
          console.log(data.data.members);
         setMembers(data.data.members);
@@ -117,7 +117,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }, [join,props.match.params.groupId]);
   const joinGroup =()=> { 
     axios.post(
-      "http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId,
+      `http://127.0.0.1:8000/group/${props.match.params.groupId}/member`,
     {},
     {
       headers:{
@@ -140,8 +140,8 @@ import Tooltip from '@material-ui/core/Tooltip';
     });
   }
   const leaveGroup = ()=>{
-    axios.post(
-      "http://127.0.0.1:8000/api/group/members/" + props.match.params.groupId,
+    axios.delete(
+      `http://127.0.0.1:8000/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
     {},
     {
       headers:{
@@ -163,7 +163,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }
   const deletGroup =()=>{
     axios.delete(
-      "http://127.0.0.1:8000/api/group/details/" + props.match.params.groupId,
+      "http://127.0.0.1:8000/group/" + props.match.params.groupId,
     
     {
       headers:{
@@ -212,7 +212,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     //console.log(backsummary);
     useEffect(() => {
       axios.get(
-        "http://127.0.0.1:8000/api/group/" + props.match.params.groupId+"/discussion",
+        `http://127.0.0.1:8000/group/${props.match.params.groupId}/discussion`,
       {
         headers:{
           "Content-Type":"application/json",
@@ -228,7 +228,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
     const handleCreateDiscussionSubmit =(e) =>{
       axios.post(
-        "http://127.0.0.1:8000/api/group/"+ props.match.params.groupId+"/discussion",backtitle,
+        `http://127.0.0.1:8000/group/${props.match.params.groupId}/discussion`,backtitle,
       {
         headers:{
           "Content-Type":"application/json",
