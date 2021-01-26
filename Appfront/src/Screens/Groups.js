@@ -26,7 +26,7 @@ const Groups = ({navigation}) => {
      await setpage(page)
      console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
     const back = {
-      key:searchterm,
+      search:searchterm,
 
     }
     await settheend(false)
@@ -38,10 +38,10 @@ const Groups = ({navigation}) => {
     }
     const backk = JSON.stringify(back);
     try{
-    const response = await axiosinst.get('group/search',{
+    const response = await axiosinst.get('groups',{
       params: {
        
-        key: searchterm,
+        search: searchterm,
         search_fields:'title',
         page:page,
       },
