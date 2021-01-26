@@ -77,20 +77,20 @@ function LoginForm(props) {
         props.history.push('/register'); 
         props.updateTitle('Register');
     }
-    const StyledButton = withStyles({
-        root: {
-          background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-          borderRadius: 3,
-          border: 0,
-          color: 'black',
-          height: 48,
-          padding: '0 30px',
-          boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
-        },
-        label: {
-          textTransform: 'capitalize',
-        },
-      })(Button);
+    // const StyledButton = withStyles({
+    //     root: {
+    //       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+    //       borderRadius: 3,
+    //       border: 0,
+    //       color: 'black',
+    //       height: 48,
+    //       padding: '0 30px',
+    //       boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+    //     },
+    //     label: {
+    //       textTransform: 'capitalize',
+    //     },
+    //   })(Button);
     return(
         <div className="d-flex justify-content-center py-sm-4 color4">
         <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
@@ -105,7 +105,7 @@ function LoginForm(props) {
                 <h1 >ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1">ایمیل</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -122,7 +122,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1">رمز</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputPassword1">رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 

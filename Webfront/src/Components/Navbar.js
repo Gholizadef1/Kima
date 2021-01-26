@@ -105,10 +105,10 @@ useEffect(() => {
     return(   
       <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
-          <GiBookshelf color="white" />
+          <GiBookshelf color="lightskyblue" />
         </h1>
         <b className="mx-1 my-n2 " 
-         style = {{fontSize:33,fontWeight:"bold",color:"white"}}
+         style = {{fontSize:33,fontWeight:"bold",color:"lightskyblue"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,7 +134,7 @@ useEffect(() => {
               <Button variant="gray" className="mr-md-5" onClick={handleShow}>
                 <GoSearch className="" size="30" color="white" />
               </Button>
-              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1"  type="text" name="name" placeholder="   جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1 px-3"  type="text" name="name" placeholder="جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
               
                />  
               
@@ -144,7 +144,7 @@ useEffect(() => {
                 <div type="button" className="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <Avatar alt="" src={Cookies.get('userPic')} className="shadow " />
                 </div>
-                <div className="dropdown-menu  mx-n2 text-right" >
+                <div className="dropdown-menu text-right" >
                   <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
