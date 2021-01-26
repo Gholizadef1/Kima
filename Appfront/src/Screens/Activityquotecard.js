@@ -165,7 +165,7 @@ const Quotecard = (prop) => {
 
               </Image>
               <View style={{ bottom: hp('27%'), width: wp('40%'), right: wp('30%') }}>
-                <Text style={{ color: '#1f7a8c', fontSize: 12, fontWeight: 'bold', borderLeftColor: 'black' }}>{prop.booktitle}</Text>
+                <Text style={{ color: '#1f7a8c', fontSize: 12, fontWeight: 'bold', borderLeftColor: 'black',elevation:0 }}>{prop.booktitle}</Text>
               </View>
               <View style={{ alignSelf: 'center', bottom: hp('-3%'), width: wp('40%') }}>
 
