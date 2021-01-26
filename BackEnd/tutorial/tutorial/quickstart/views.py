@@ -704,3 +704,24 @@ class MyGroupView(APIView,PaginationHandlerMixin):
         response = {'message' : 'No Group!',}
         return Response(response)
 
+class QuizView(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+    model = Quiz
+
+    def post(self,request):
+        user = request.user
+        serializer = CreateQuizSerializer(data=request.data)
+        if serializer.is_valid():
+            title = serializer.data.get("title")
+            description = serializer.data.get("description")
+            if  not Quiz.objects.filter(title=title).exists():
+                if 'photo' in request.FILES:
+                    new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"])
+                    new_quiz.save()
+                    return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+                else:
+                    new_quiz = Quiz(creator=user,title=title,description=description)
+                    new_quiz.save()
+                    return Response({"data"QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+            return Response({"message":"A quiz with this name exists!"})
+        return Response(serializer.errors)
