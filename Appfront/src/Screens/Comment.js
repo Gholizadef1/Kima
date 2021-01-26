@@ -108,7 +108,13 @@ const Comment = (prop) => {
          //console.log(response.date)
          console.log(response.data.comments+' RESPONSE DATA COMMENTS')
          //page===1?setinformation(response.data):setinformation(information.concat(response.data))
-         await setinformation(information=>[...information,...response.data.comments])
+         if(response.data.message!="No Comment!"){
+          await setinformation(information=>[...information,...response.data.comments])
+          }
+          else{
+            setinformation(undefined)
+          }
+       
         console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
         //console.log(information)
         setrefresh(false)
