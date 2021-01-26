@@ -43,15 +43,16 @@ const GroupPage = (prop) => {
   const [reload, setreload] = useState(false)
   const [modalVisible, setModalVisible] = useState(false);
   const [membernumber, setmembernumber] = useState();
+  const [discussion, setdiscussion] = useState();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      // setjoinedUser(true)
+  useEffect(() =>{
+            // setjoinedUser(true)
       // setowner(true)
       // setnotjoinedUser(true)
       getUsername();
-    }, [])
-  )
+      getDiscussion();
+  }, []);
+
 
   useEffect((async) => {
         const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
@@ -163,7 +164,28 @@ const GroupPage = (prop) => {
         console.log(error);
 //        console.log('//////////////////')
       });
+  }
 
+  const getDiscussion = async () => {
+
+    axiosinst.get('/api/group/'+ prop.route.params.id +'/discussion', {
+        "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+        })
+      .then(function(response){
+          console.log('^^^^^^^^^^^^^^^')
+          console.log('response data : ', response.data) 
+          console.log(response.data.discussions)
+//          setdiscussion(response.data.discussions) 
+
+      })
+      
+      .catch( async function (error) {
+          console.log(error);
+          console.log(error.code+'ERROR CODE')      
+      });
   }
 
 
