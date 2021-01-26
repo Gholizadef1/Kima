@@ -250,7 +250,7 @@ const Activityquote = (prop) => {
 
                         renderItem={({ item }) => (<><Activityquotecard name={item.account.username}
                             isliked={item.isliked}
-                            date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} booktitle={item.current_book.title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
+                            date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} bookid={item.current_book.id} booktitle={item.current_book.title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
 
                            
 
