@@ -127,9 +127,6 @@ function Slide(props) {
 
       {bookRead.length === 0 ? (
 <div>
-<div className="spinner-border" role="status">
-          <div className="sr-only">Loading...</div>
-        </div>
         <div className="subbrand1 mt-sm-n4 ml-sm-5 pt-md-3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>!کتابی اضافه نشده‌است </div>
 </div>
       ) : (
@@ -167,9 +164,7 @@ function Slide(props) {
     <div className="brand2 text-right mb-5 mt-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
         <div>
-        <div className="spinner-border" role="status">
-                  <div className="sr-only">Loading...</div>
-                </div>
+       
         <div className="subbrand2 mt-1 mt-sm-n4 ml-sm-5 pb-2" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red",fontSize:20}}>!کتابی اضافه نشده‌است</div>
 </div>
       ) : (
@@ -208,9 +203,7 @@ function Slide(props) {
 
       {bookWantto.length === 0 ? (
         <div>
-        <div className="spinner-border" role="status">
-                  <div className="sr-only">Loading...</div>
-                </div>
+       
           <div className="subbrand3  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red",fontSize:20}}>  !کتابی اضافه نشده‌است</div>
 </div>
       ) : (
