@@ -180,48 +180,48 @@ const GroupPage = (prop) => {
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>       
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:'',Discription:'',photo:require('../../assets/group.jpg')}}
+      initialValues={{Username:'',Discription:''}}
       validationSchema={userschema}
 
-      // onSubmit={async(values,actions)=>{
-      //     console.log('ON SUBMIT')
-      //     const formdata = new FormData();
-      //      formdata.append('title',values.Username)
-      //      formdata.append('summary',values.Discription)
+      onSubmit={async(values,actions)=>{
+          console.log('ON SUBMIT')
+          const formdata = new FormData();
+           formdata.append('title',values.Username)
+           formdata.append('description',values.Discription)
 
-      //   console.log(formdata.data+'formdata')
+        console.log(formdata.data+'formdata')
 
-      //   const response=await axiosinst.post('/api/group',formdata,{
-      //     headers:{
-      //       "Content-Type":"application/json",
-      //       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-      //     }
-      //        )
-      //   .then( function(response){
-      //     console.log(picture+' PICTURE POST')
+        const response=await axiosinst.post('/api/group/'+ prop.route.params.id +'/discussion',formdata,{
+          headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+          }
+             )
+        .then( function(response){
+          console.log(picture+' PICTURE POST')
         
-      //     console.log(response)
-      //     Alert.alert('','بحث با موفقیت ساخته شد ',[
-      //       {
-      //    text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-      //       }
-      //       ],{cancelable:false},{style:{height:50}})
+          console.log(response)
+          Alert.alert('','بحث با موفقیت ساخته شد ',[
+            {
+         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+            }
+            ],{cancelable:false},{style:{height:50}})
           
           
-      //   })
-      //   .catch( function(error){  
-      //       {
-      //         console.log(error)
+        })
+        .catch( function(error){  
+            {
+              console.log(error)
             
-      //         Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+              Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
             
 
-      //       text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-      //       }],{cancelable:false},{style:{height:50}})
-      //       }     
-      //   })
+            text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+            }],{cancelable:false},{style:{height:50}})
+            }     
+        })
 
-      // }}
+      }}
      >
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
