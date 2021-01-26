@@ -113,7 +113,7 @@ const Mygroups = (prop) => {
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState();
     const [refresh,setrefresh]=useState(false);
-    const [likeotime, setlikeotime] = useState('/filter-time');
+    const [likeotime, setlikeotime] = useState('time');
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
@@ -150,9 +150,10 @@ const Mygroups = (prop) => {
        console.log('  omad to response')
        console.log('api/group'+likeotime)
 
-
-      const response = await axiosinst.get('api/group'+ likeotime,{
+      const id= await(AsyncStorage.getItem('id'))
+      const response = await axiosinst.get("user/"+id+"/group",{
         params: {
+          filter:likeotime,
           page: page
         },
       "headers":
@@ -488,7 +489,7 @@ const Mygroups = (prop) => {
               // await setinformation()
               // settheend(false)
               // response(1)
-              await setlikeotime('/filter-time')
+              await setlikeotime('time')
               // setselectedValue('none')
         
             }
@@ -499,7 +500,7 @@ const Mygroups = (prop) => {
               // await setinformation()
               // settheend(false)
               // response(1)
-              await setlikeotime('/filter-member')
+              await setlikeotime('member')
          
             }
 
