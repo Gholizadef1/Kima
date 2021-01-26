@@ -59,6 +59,7 @@ class DynamicBookAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = book.objects.all()
     serializer_class = bookSerializer
+    search_fields = ['title','author']
 
 class BookViewPage(APIView):
     def get_object(self, pk):
