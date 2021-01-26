@@ -681,28 +681,24 @@ class MyGroupView(APIView,PaginationHandlerMixin):
     def get(self, request,pk):
         queryset = self.get_queryset(pk=pk)
         serializer = MyGroupSerializer(queryset, many=True)
-        if queryset is not None:
+        if queryset.exists():
             filter = self.request.query_params.get('filter', None)
             if filter is not None:
             
                 if filter=="time":
                     sorted_q = sorted(serializer.data, key=lambda x: x['create_time'],reverse=True)
                     gp_list = self.paginate_queryset(sorted_q)
-                    # serializer2 = GroupSerializer(gp_list,context={"request": request},many=True)
                     count = Paginator(serializer.data,10).num_pages
                     return Response({"groups" : gp_list, "count": count})
 
 
                 if filter=="member":
                     sorted_q = sorted(serializer.data, key=lambda x: -x['members_count'])
-                    # groups = sorted(gps,  key=lambda m: -m.members_count)
                     gp_list=self.paginate_queryset(sorted_q)
-                    # serializer2 = GroupSerializer(gp_list,context={"request": request},many=True)
                     count = Paginator(serializer.data,10).num_pages
                     return Response({"groups" : gp_list, "count": count})
             
             gp_list=self.paginate_queryset(serializer.data)
-            # serializer2 = GroupDetSerializer(gp_list,context={"request": request},many=True)
             count = Paginator(serializer.data,10).num_pages
             return Response({"groups" : gp_list, "count": count})
         response = {'message' : 'No Group!',}
