@@ -323,6 +323,14 @@ const Mygroups = (prop) => {
           }
              )
         .then( function(response){
+          if(response.data.message==="A group with this name exists!"){
+            Alert.alert('','گروهی با این نام از قبل وجود دارد ',[
+            {
+         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+            }
+            ],{cancelable:false},{style:{height:50}})
+          }
+          else{
           console.log(picture+' PICTURE POST')
         
           console.log(response)
@@ -332,7 +340,7 @@ const Mygroups = (prop) => {
             }
             ],{cancelable:false},{style:{height:50}})
           
-          
+          }
         })
         .catch( function(error){  
             {

@@ -18,6 +18,7 @@ import Groups from './Groups';
 const Eachgroup = (prop) => {
 
   const [more, setmore] = useState(false);
+  console.log(prop.groupphoto);
   const [showmore, setshowmore] = useState('بیشتر...');
   const commentt = `${prop.discription}`.toString();
   // const [moreclicked,setmoreclicked]=useState(false);
