@@ -228,5 +228,14 @@ class MyGroupSerializer(serializers.ModelSerializer):
         return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
 
 class CreateQuizSerializer(serializers.ModelSerializer):
+
     title = serializers.CharField(max_length=100,required=True)
     description = serializers.CharField(required=True)
+
+class QuizSerializer(serializers.ModelSerializer):
+
+    creator = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Quiz
+        fields = ['id','title','description','creator','quiz_photo','create_time']
