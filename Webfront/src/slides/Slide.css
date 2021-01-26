@@ -1,4 +1,5 @@
 
+
 .card-title2{
     font-size: 14px;
     direction: rtl;
@@ -19,8 +20,6 @@
   
    
 }
-
-
 .cat{
     
     
@@ -33,25 +32,9 @@
     margin-top: 20px;
     
 }
-.squere:hover{
-    box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
-    transform:scale(1, 1);
-
-}
-.squere {
-  
-    width: 150px;
-    height: 240px;
-   border-radius: 3%;
-    transform:scale(1, 1);
-    transition: 1s;
-   
-}
-
-
 
 .sr-only{
-    margin-left: 5z00px;
+    margin-left: 500px;
     color: black;
 }
     @media (min-width :360px)
@@ -65,11 +48,13 @@
         .slide{
             margin-left: 20px;
             margin-right: 20px;
+            
           
         }
         .cat{
             width: 80px;
-            height: 140px;
+            height: 128px;
+           
         
         }
         .squere:hover{
@@ -79,7 +64,7 @@
         }
         .squere{
             width: 80px;
-            height: 140px;
+            height: 128px;
         }
         .card-title1{
            
@@ -91,10 +76,10 @@
         .slick-prev:before {
             
         top: -30px;
-        left: 20px;
+        left: 10px;
         }
         .slick-next:before{
-         right: -25px;
+         right: -40px;
         top: -30px;
         }
         .brand{
@@ -102,7 +87,7 @@
            padding-left: 70px;
            margin-bottom: 10px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 17px;
             direction: rtl;
             overflow:hidden; 
             white-space:nowrap; 
@@ -124,9 +109,137 @@
              top: -40px;
             margin-left: 13px;
         }
+
+.card-title2{
+    font-size: 15px;
+    direction: rtl;
+    text-align: center;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+    font-family: 'Yekan';  
+
+}.card-title1{
+    font-family: 'Yekan';
+    color: #000000;
+    padding-top: 10px;
+    padding-right: -30px;
+    font-size: 16px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+  
+   
+}
       }
   
-
+      @media (min-width :414px)
+      {
+          .container{
+              width: 390px;
+              margin-left:-10px;
+              margin-top: 20px;
+             
+          }
+          .slide{
+              margin-left: 10px;
+              margin-right: 10px;
+              
+            
+          }
+          .cat{
+              width: 70px;
+              height: 112px;
+             
+          
+          }
+          .squere:hover{
+              box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
+              transform:scale(1, 1);
+          
+          }
+          .squere{
+              width: 70px;
+              height: 112px;
+          }
+          
+          .body{
+              margin-right: 1px;
+          }
+          .slick-prev:before {
+              
+          top: -90px;
+          left: 10px;
+          }
+          .slick-next:before{
+           right: -40px;
+          top: -30px;
+          }
+          .brand{
+              margin-top: 10px;
+             padding-left: 70px;
+             margin-bottom: 10px;
+              font-weight: bold;
+              font-size: 17px;
+              direction: rtl;
+              overflow:hidden; 
+              white-space:nowrap; 
+              text-overflow: ellipsis;
+          
+          }
+          .slick-prev:before {
+              color: black !important;
+            font-size: 5px;
+              position: absolute;
+              top: -40px;
+              margin-left: -25px;
+          }
+          .slick-next:before{
+              
+              color: black !important;
+              font-size: x-small;
+               position: absolute;
+               top: -40px;
+              margin-left: 13px;
+          }
+  
+  .card-title2{
+      font-size: 13px;
+      direction: rtl;
+      text-align: center;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+      font-family: 'Yekan';  
+  
+  }.card-title1{
+      font-family: 'Yekan';
+      color: #000000;
+      padding-top: 10px;
+      padding-right: -30px;
+      font-size: 14px;
+      direction: rtl;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+  }
+  .card-titl{
+    font-family: 'Yekan';
+    color: #000000;
+    padding-top: 10px;
+    margin-left: 19px;
+    text-align: center;
+    font-size: 14px;
+    direction: rtl;
+ 
+  
+   
+}
+        }
+    
+  
+        
       @media (min-width :768px) 
       {
           .container{
@@ -220,7 +333,7 @@
     font-size: 16px; 
 
 }.card-title1{
-    font-size: 18px;
+    font-size: 16px;
 }
 .brand{
     margin-top: 100px;
@@ -251,6 +364,7 @@ top: -40px;
 
 
 }
+
 
 
 

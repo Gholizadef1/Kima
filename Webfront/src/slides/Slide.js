@@ -83,9 +83,9 @@ function Slide(props) {
       },
      
       {
-        breakpoint: 768,
+        breakpoint: 360,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 2,
         },
       },
@@ -128,16 +128,15 @@ function Slide(props) {
 
               </div>
               <div className="body">
-              {current.title.length >17 ?
+              {current.title.length >20 ?
 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
-        
-        width:190,
+        width:180,
         height:80,
         textAlign:"center",
         marginLeft:-9,
-        paddingTop:20,}}>{current.title} </div>}> 
+        paddingTop:30,}}>{current.title} </div>}> 
     <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </Tooltip>
       : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
