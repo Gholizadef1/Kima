@@ -27,8 +27,6 @@ const userschema=yup.object({
 
 })
 
-
-
 const GroupPage = (prop) => {
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
@@ -160,12 +158,9 @@ const GroupPage = (prop) => {
     })
       .then(async function (response) {
         prop.navigation.navigate('Groupmainpage')
-//        console.log('delete')
-//        console.log('%%%%%%%%%%')
       })
       .catch(function (error) {
         console.log(error);
-//        console.log('//////////////////')
       });
   }
 
@@ -364,14 +359,14 @@ const GroupPage = (prop) => {
   
           <Text style={{ fontSize: 21, marginLeft: wp('7%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
   
-          <Text style={{ textAlign: 'left', marginTop: hp('2'), marginLeft: wp('6%'), marginRight: wp('1%') }}>
+          <Text style={{ textAlign: 'left', marginTop: hp('2'), marginLeft: wp('10%'), marginRight: wp('1%') }}>
             {groupinfo.summary}
           </Text>
   
           <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
   
-          {/* {discussion.length === 0 ? 
-          <Text>بحثی برای نمایش وحود ندارد</Text> : null } */}
+          {discussion.length === 0 ? 
+          <Text style ={{marginLeft:wp('10%') , marginTop:hp('2%')}}>بحثی برای نمایش وحود ندارد...</Text> : null }
   
           <FlatList
             style={{ marginBottom: hp('5%') }}
@@ -388,7 +383,7 @@ const GroupPage = (prop) => {
             data={discussion}
             renderItem={({ item }) => <>
               <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                <Text style={{ alignSelf: 'flex-start', left: wp('5%') , fontSize: 20 }}>{item.title}</Text>
+                <Text style={{ alignSelf: 'flex-start', left: wp('5%') , fontSize: 18 }}>{item.title}</Text>
                 <Text style={{color: '#a9a9a9' , marginLeft:wp('4%') , marginTop:hp('1%')}}>{item.description}</Text>
                 <Button style={{ marginLeft: wp('80%') , marginTop:wp('-11%') }} transparent 
                   onPress={() => prop.navigation.navigate('ShowMembersPage')}>
@@ -434,12 +429,12 @@ const GroupPage = (prop) => {
             data={members}
             renderItem={({ item }) => <>
               <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{}} size={90}
+                {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{marginLeft:wp('2%')}} size={90}
                   source={{ uri: groupphoto }}
                 ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
                   source={require('../../assets/group.jpg')}
                 ></Avatar.Image>}
-                <Text style={{ alignSelf: 'flex-start', left: wp('5%') }}>{item.user.username}</Text>
+                <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop:hp('1%') }}>{item.user.username}</Text>
               </View>
             </>
             }
@@ -482,7 +477,7 @@ const styles = StyleSheet.create({
   avatar: {
     elevation: 5,
     marginTop: hp('-10%'),
-    marginLeft: wp('15%')
+    marginLeft: wp('20%')
 
   },
   groupname: {
