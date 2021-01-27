@@ -103,7 +103,7 @@ const TabSreen = (prop) => {
 
       }} />
 
-      <Tab.Screen name="کوییز/پروفایل" component={poq}
+      <Tab.Screen name="بیشتر" component={poq}
       //stackover flow :)
       listeners={({ navigation, route }) => ({
                 tabPress: e => {
