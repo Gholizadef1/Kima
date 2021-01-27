@@ -49,6 +49,8 @@ const GroupPage = (prop) => {
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {    
         setmembers(response.data.members)
+//        console.log('HIIIIIIIIIIIIIIIIII'+response.data.members[0].user.profile_photo)
+//        console.log('HIIIIIIIIIIIIIIIIII'+response.data.members[0].user.username)
 //        setloading(false)
  
         for (let i = 0; i < membernumber; i++) {
