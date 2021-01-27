@@ -45,11 +45,11 @@ const GroupPage = (prop) => {
   const [membernumber, setmembernumber] = useState();
   const [discussion, setdiscussion] = useState();
 
-  useEffect((async) => {
+  useEffect((async) => { 
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {    
         setmembers(response.data.members)
-        setloading(false)
+//        setloading(false)
  
         for (let i = 0; i < membernumber; i++) {
           if (response.data.members[i].user.username === username && owner != "owner") {
@@ -90,9 +90,9 @@ const GroupPage = (prop) => {
 
 
 
-  console.log('j' + joinedUser)
-  console.log('n ' + notjoinedUser)
-  console.log('o ' + owner)
+  // console.log('j' + joinedUser)
+  // console.log('n ' + notjoinedUser)
+  // console.log('o ' + owner)
 
   const getUsername = async () => {
     const id = await AsyncStorage.getItem('id');
@@ -121,7 +121,7 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-        console.log('response' + response.data.message)
+//        console.log('response' + response.data.message)
         setjoin(true)
         getMembers()
       })
@@ -176,6 +176,7 @@ const GroupPage = (prop) => {
 //          console.log('^^^^^^^^^^^^^^^')
 //          console.log('MMMMMM'+response.data.discussions[0].description)
           setdiscussion(response.data.discussions)
+          setloading(false)
 //          console.log('numberss'+discussion.length)
 //          console.log('MMMMMM'+response.data.discussions[0].title)
 
@@ -233,7 +234,8 @@ const GroupPage = (prop) => {
            text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
               }
               ],{cancelable:false},{style:{height:50}})
-            
+
+            getDiscussion();
             
           })
           .catch( function(error){  
@@ -441,11 +443,16 @@ const GroupPage = (prop) => {
           >
           </FlatList>
   
-          {groupinfo.members_count>4 ?         
+          {/* {groupinfo.members_count>4 ?         
           <Button style={{ marginLeft: wp('90%') }} transparent 
           onPress={() => prop.navigation.navigate('ShowMembersPage')}>
            <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-         </Button > : null}
+         </Button > : null} */}
+
+         <Button style={{ marginLeft: wp('90%') }} transparent 
+          onPress={() => prop.navigation.navigate('ShowMembersPage' , {id : prop.route.params.id})}>
+           <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+         </Button >
   
         </ScrollView>
   
