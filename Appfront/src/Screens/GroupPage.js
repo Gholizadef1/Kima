@@ -50,7 +50,7 @@ const GroupPage = (prop) => {
       // setowner(true)
       // setnotjoinedUser(true)
       getUsername();
-      getDiscussion();
+      getDiscussion(); 
   }, []);
 
 
@@ -176,9 +176,9 @@ const GroupPage = (prop) => {
         })
       .then(function(response){
           console.log('^^^^^^^^^^^^^^^')
-          console.log('response data : ', response.data) 
-          console.log(response.data.discussions)
-//          setdiscussion(response.data.discussions) 
+          console.log('MMMMMM'+response.data.discussions[0].description)
+          setdiscussion(response.data.discussions)
+//          console.log('MMMMMM'+response.data.discussions[0].title)
 
       })
       
