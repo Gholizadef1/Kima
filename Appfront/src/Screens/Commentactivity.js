@@ -188,7 +188,7 @@ const Commentactivity = (prop) => {
             response(1);
 
           }}
-          renderItem={({ item }) => (<Commentcard name={item.account.username}
+          renderItem={({ item }) => (<Commentcard name={item.current_book.title}
             isitactivity={false}
             pictureborder={8}
              picutrehieght={90}
@@ -198,7 +198,8 @@ const Commentactivity = (prop) => {
 
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id}
+             dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.current_book.imgurl}`} comment={item.comment_text} ></Commentcard>)}
         >
 
