@@ -251,14 +251,15 @@ const Commentcard = (prop) => {
      
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={100}
+       
+       {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={prop.pictureborder}
 
             source={require('../../assets/avatar.png')}
             style={styles.avatar}
 
           >
 
-          </ImageBackground> : <ImageBackground borderRadius={100}
+          </ImageBackground> : <ImageBackground borderRadius={prop.pictureborder}
 
             source={{ uri: prop.picture }}
             style={styles.avatar}

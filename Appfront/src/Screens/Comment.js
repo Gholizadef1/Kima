@@ -422,6 +422,8 @@ const Comment = (prop) => {
 
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
+            isitactivity={false}
+            pictureborder={100}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
