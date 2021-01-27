@@ -9,6 +9,7 @@ import App from '../../App';
 import AuthContext,{AuthProvider} from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import Animated from 'react-native-reanimated';
@@ -61,19 +62,19 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://505a2dd8d5cc.ngrok.io/api/user-profile/"+id)
+    const response = await axiosinst.get("http://f93716f20ee8.ngrok.io/user/"+id)
 
         
     
   //  console.log(response)
   console.log('*****')
 
-        console.log(`http://505a2dd8d5cc.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://505a2dd8d5cc.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://505a2dd8d5cc.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://f93716f20ee8.ngrok.io/media/default.jpg"))
 
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
@@ -126,8 +127,9 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
+           const id=await AsyncStorage.getItem('id');
+          const response=await axiosinst.put('http://f93716f20ee8.ngrok.io/user/'+id+'/update-profile',formdata,{
 
-          const response=await axiosinst.put('http://505a2dd8d5cc.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -216,8 +218,9 @@ useFocusEffect(
             profile_photo:data
           }
            const backk=JSON.stringify(back);
+           const id=await (await AsyncStorage.getItem('id')).toString();
+          const response=await axiosinst.put('http://f93716f20ee8.ngrok.io/user/'+id+'/update-profile',formdata,{
 
-          const response=await axiosinst.put('http://505a2dd8d5cc.ngrok.io/api/update-profile/',formdata,{
 
             headers:{
               "Content-Type":"application/json",
@@ -357,7 +360,7 @@ useFocusEffect(
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
 
-      {picture==='http://505a2dd8d5cc.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://f93716f20ee8.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}
@@ -373,6 +376,12 @@ useFocusEffect(
       >
 
       </ImageBackground>}
+      {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
+      
+      <TouchableOpacity  onPress={async()=>await bs.current.snapTo(0)} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
+      <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
+      </TouchableOpacity>
+      {/* </TouchableOpacity> */}
       {/* <Feather style={{position:'absolute',Top:'70%',Left:'40%',
                       opacity: 0.7,
                       alignItems: 'center',
@@ -401,8 +410,8 @@ useFocusEffect(
          const backk=JSON.stringify(back);
         const params=JSON.stringify({username:'Hi'});
 
-
-        const response=await axiosinst.put('/api/update-profile/',backk,{
+        const id=await (await AsyncStorage.getItem('id')).toString();
+        const response=await axiosinst.put('user/'+id+'/update-profile',backk,{
 
 
           headers:{
@@ -501,11 +510,11 @@ useFocusEffect(
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
 
-        const response=axiosinst.put('/api/change-password/',backk,{
+        const response=axiosinst.put('user/'+id+'/change-password',backk,{
 
           headers:{
             "Content-Type":"application/json",
-            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()},
+            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()} , 
           })
          
         .then( function(response){

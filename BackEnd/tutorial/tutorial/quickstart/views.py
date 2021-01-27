@@ -703,6 +703,3 @@ class MyGroupView(APIView,PaginationHandlerMixin):
             return Response({"groups" : gp_list, "count": count})
         response = {'message' : 'No Group!',}
         return Response(response)
-
-    
-
