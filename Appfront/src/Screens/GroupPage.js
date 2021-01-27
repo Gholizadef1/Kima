@@ -31,6 +31,7 @@ const userschema=yup.object({
 
 const GroupPage = (prop) => {
   const [refreshmembers, setrefreshmembers] = useState(false)
+  const [refreshdiscussions, setrefreshdiscussions] = useState(false)
   const [picture, setpicture] = useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState([]);
@@ -359,48 +360,42 @@ const GroupPage = (prop) => {
         </Text>
 
         <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
-        <List style={{ marginTop: '8%' }}>
-          <ListItem thumbnail>
-            <Left>
-              <Thumbnail style={{ borderRadius: 6 }} square source={require('../../assets/girl.jpg')} />
-            </Left>
-            <Body style={{ top: hp('0.5%'), marginLeft: wp('6%') }} >
-              <Text>بحث اول</Text>
-            </Body>
-            <Right style={{ marginRight: wp('6%') }}>
-              <Button transparent >
-                <Text>مشاهده</Text>
-              </Button>
-            </Right>
-          </ListItem>
-          <ListItem thumbnail>
-            <Left>
-              <Thumbnail style={{ borderRadius: 6 }} square source={require('../../assets/index.jpg')} />
-            </Left>
-            <Body style={{ top: hp('0.5%') }}>
-              <Text>بحث سوم</Text>
-            </Body>
-            <Right style={{ marginRight: wp('6%') }}>
-              <Button transparent >
-                <Text>مشاهده</Text>
-              </Button>
-            </Right>
-          </ListItem>
-          <ListItem thumbnail>
-            <Left>
-              <Thumbnail square source={require('../../assets/tea.jpg')} />
-            </Left>
-            <Body style={{ top: hp('0.5%') }}>
-              <Text>بحث سوم </Text>
-            </Body>
-            <Right style={{ marginRight: wp('6%') }}>
-              <Button transparent >
-                <Text>مشاهده</Text>
-              </Button>
-            </Right>
-          </ListItem>
 
-        </List>
+        <FlatList
+          style={{ marginBottom: hp('5%') }}
+          showsVerticalScrollIndicator={true}
+          onEndReached={() => {
+          console.log('-----AKHAR LIST')
+          }}
+          onEndReachedThreshold={0.5}
+          keyExtractor={(item) => item.id}
+          refreshing={refreshdiscussions}
+          onRefresh={async () => {
+          console.log('refresh')
+          }}
+          data={discussion}
+          renderItem={({ item }) => <>
+            <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
+              <Text style={{ alignSelf: 'flex-start', left: wp('5%') , fontSize: 20 }}>{item.title}</Text>
+              <Text style={{color: '#a9a9a9' , marginLeft:wp('4%') , marginTop:hp('1%')}}>{item.description}</Text>
+              <View
+                    style={{
+                      width:310,
+                      marginLeft:wp('5%'),
+                      marginTop:hp('2%'),
+                      borderBottomColor: 'black',
+                      borderBottomWidth: 1
+                    }}
+                    />
+            </View>
+            {/* <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
+                <Text style={{marginTop:hp('-4%')}}>{item.user.username}</Text>
+              </Body> */}
+          </>
+          }
+        >
+        </FlatList>
+
 
         <Button onPress={() => setModalVisible(true)} style={{
           marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
@@ -411,32 +406,11 @@ const GroupPage = (prop) => {
 
         <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
 
-        {/* <List>
-            <ListItem  style={{marginTop:hp('1%')}} avatar>
-              <Left>
-                <Thumbnail source={require('../../assets/sea.jpg')} />
-              </Left>
-              <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
-                <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
-              </Body>
-            </ListItem>
-            <ListItem avatar >
-              <Left>
-                <Thumbnail source={require('../../assets/sea.jpg')} />
-              </Left>
-              <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
-                <Text style={{marginTop:hp('-4%')}}>مرضیه</Text>
-              </Body>
-            </ListItem>
-          </List> */}
-
-
-
         <FlatList
           style={{ marginBottom: hp('5%') }}
           showsVerticalScrollIndicator={false}
           onEndReached={() => {
-          console.log('-----AKHAR LIST')
+//          console.log('-----AKHAR LIST')
           }}
           onEndReachedThreshold={0.5}
           keyExtractor={(item) => item.id}
