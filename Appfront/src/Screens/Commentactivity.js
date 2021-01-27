@@ -190,9 +190,12 @@ const Commentactivity = (prop) => {
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
             isitactivity={false}
-            pictureborder={20}
-            // picutrehieght={hp("4%")}
-            // picturewidth={wp("4%")}
+            pictureborder={8}
+             picutrehieght={90}
+             picturewidth={60}
+             commentmargintop={hp("5%")}
+            avatar={styles.avatar}
+
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
@@ -228,6 +231,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('10%')
-  }
+  },
+  avatar: {
+    height: hp("5%"),
+    width: wp("3%"),
+    borderRadius: 20,
+    position: 'absolute'
+
+  },
 });
 export default Commentactivity;

@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
 
+
 const Commentcard = (prop) => {
   
   console.log('COMMENT CARD')
@@ -255,15 +256,25 @@ const Commentcard = (prop) => {
        {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={prop.pictureborder}
 
             source={require('../../assets/avatar.png')}
-            style={styles.avatar}
+            
+           // style={prop.avatar}
+            style={{
+            height: prop.picutrehieght,
+            width: prop.picturewidth,
+            //borderRadius: 100,
+            position: 'absolute'}}
 
           >
 
           </ImageBackground> : <ImageBackground borderRadius={prop.pictureborder}
 
             source={{ uri: prop.picture }}
-            style={styles.avatar}
-
+           // style={prop.avatar}
+           style={{
+            height: prop.picutrehieght,
+            width: prop.picturewidth,
+            //borderRadius: 100,
+            position: 'absolute'}}
           >
 
             </ImageBackground>}
@@ -271,7 +282,10 @@ const Commentcard = (prop) => {
         <Text style={styles.username}>{prop.name} </Text>
         <Text style={styles.date}>{prop.date}</Text>
       </View>
-      <View style={styles.comment}>
+      <View style={{ 
+        marginTop:prop.commentmargintop,
+        marginRight: '5%',
+        marginLeft: '5%',}}>
 
         {!more ? <Text>{comment4}</Text> : <Text>{prop.comment}</Text>}
       </View>
@@ -560,7 +574,8 @@ const styles = StyleSheet.create({
   comment: {
 
 
-    marginTop: 20,
+   // marginTop: 20,
+  //  marginTop:prop.commentmargintop,
     marginRight: '5%',
     marginLeft: '5%',
   },

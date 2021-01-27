@@ -424,6 +424,10 @@ const Comment = (prop) => {
           renderItem={({ item }) => (<Commentcard name={item.account.username}
             isitactivity={false}
             pictureborder={100}
+             picutrehieght={hp("4%")}
+             picturewidth={wp("4%")}
+             commentmargintop={20}
+            avatar={styles.avatar}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
@@ -513,6 +517,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('10%')
-  }
+  }, avatar: {
+    height: hp("4%"),
+    width: wp("3.5%"),
+    borderRadius: 20,
+    position: 'absolute'
+
+  },
 });
 export default Comment;
