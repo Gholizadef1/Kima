@@ -5,13 +5,15 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import { Container, Header, Title, Form, Item, Input, Button, Icon, CheckBox, Body, ActionSheet, Textarea, Content } from 'native-base';
 import { TextInput } from 'react-native-paper';
+import { Formik, formik } from 'formik';
+import * as yup from 'yup';
 import { useFocusEffect } from '@react-navigation/native';
 import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const Comment = (prop) => {
+const Commentactivity = (prop) => {
   const [selectedValue, setselectedValue] = useState('none')
   console.log('COMMENT')
   const callbackFunction = async (childData) => {
@@ -36,7 +38,86 @@ const Comment = (prop) => {
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
   const [page, setpage] = useState(1);
- 
+
+  console.log('AVAL')
+  const response = async(page) => {
+    console.log('PAGEEEE'+ page)
+    console.log('DOVOM')
+    await setpage(page)
+    console.log('PAGEEEE'+ page)
+    if (page === 1) {
+      console.log('PAGE 111')
+      await settheend(false)
+      await setinformation([])
+
+      console.log('IT IS HEAR SET INFO []')
+      console.log(information)
+
+    }
+    // await settheend(false)
+    // await setinformation([])
+    const id = prop.route.params.id
+    console.log(id)
+    console.log(await (await AsyncStorage.getItem('token')).toString())
+    console.log(await (await AsyncStorage.getItem('id')).toString())
+
+    try {
+      // await setTimeout(() => {  console.log("World!"); }, 5000);
+      setIDD(await (await AsyncStorage.getItem('id')).toString())
+      const response = await axiosinst.get("book/" + prop.route.params.id+'/comment' , {
+        params: {
+          filter:likeotime,
+          page: page
+        },
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+
+      })
+      console.log(count+'  count   dfajd;lfkjs;lkfj')
+       console.log(response.data.comments)
+      await setcount(response.data.count);
+      //console.log(response)
+      console.log(count+' COUNT COUNT COUNT COUNT COUTN')
+      console.log(response.data.count+' COUNTTTTTTTTTTTT')
+      if (response.data.detail === 'Invalid page.')
+        settheend(true);
+      else {
+        settheend(false)
+        console.log(IDD + 'IDDresponse');
+        //  console.log(response.data)
+         console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
+        // console.log(information)
+         console.log('RESPONSE DATE')
+         //console.log(response.date)
+         console.log(response.data.comments+' RESPONSE DATA COMMENTS')
+         //page===1?setinformation(response.data):setinformation(information.concat(response.data))
+         if(response.data.message!="No Comment!"){
+          await setinformation(information=>[...information,...response.data.comments])
+          }
+          else{
+            setinformation(undefined)
+          }
+       
+        console.log('++++INFO++++' + information + "++++INFO++++"+'22222')
+        //console.log(information)
+        setrefresh(false)
+         //     setloading(false);
+      }
+      //  console.log(information[0])
+    }
+    catch (err) {
+      setrefresh(false)
+      console.log(err.toString().split('\n')[0])
+      if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
+        settheend(true);
+      console.log(theend + 'THE ENDDD')
+      console.log(err);
+
+    }
+  }
   useFocusEffect(
     React.useCallback(() => {
       const a=new Promise(async(resolve,reject)=>{
@@ -45,6 +126,9 @@ const Comment = (prop) => {
         await setselecttime(true)
         //با این ظاهرا درست شد :/
         await setselectedValue('like')
+        //تاثیری نداشتن :/
+        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+        // await settimelable("فیلتر بر اساس تاریخ")
         if(selectedValue==="none")
        await setlikeotime("time");
        else
@@ -74,16 +158,51 @@ const Comment = (prop) => {
     }
     };
   const [showbutton, setshowbutton] = useState(true);
+  //console.log(prop.route.params.title+' TILTE BOOK TO HEADER COMMENTT')
   const [reset, setreset] = useState(false);
   const bs = React.createRef()
   const fall = new Animated.Value(1);
 
   return (
     <View style={styles.container}>
+     
       <Animated.View style={{
+
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
+      { (information!=undefined) ? <FlatList
+          style={{ marginBottom: '17%' }}
+          removeClippedSubviews={true} 
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          data={information}
+          refreshing={refresh}
+          onEndReached={() => handleLoadMore()}
+          onEndReachedThreshold={0.7}
+          ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
+           <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+          style={{ marginBottom: hp('15.5%') }}
+          onRefresh={async () => {
+            await setrefresh(true)
+
+            response(1);
+
+          }}
+          renderItem={({ item }) => (<Commentcard name={item.account.username}
+            isitactivity={false}
+            pictureborder={100}
+            isliked={item.isliked}
+            isdisliked={item.isdisliked}
+            date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+        >
+
+        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
+
+
       </Animated.View>
+      
+
     </View>
   );
 }
@@ -109,4 +228,4 @@ const styles = StyleSheet.create({
     marginTop: hp('10%')
   }
 });
-export default Comment;
+export default Commentactivity;
