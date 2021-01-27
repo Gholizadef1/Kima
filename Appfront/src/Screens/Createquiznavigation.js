@@ -23,6 +23,8 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import Quizes from "./Quizes";
 import Eachquiz from "./Eachquiz";
+import Createquiz from "./Createquiz";
+import Quiznavigation from "./Quiznavigation";
 
 
 
@@ -33,8 +35,8 @@ const Createquiznavigation=(prop)=>{
   return(
 
    <profilenav.Navigator initialRouteName={'Profile'}>
-     <profilenav.Screen name='کوییز های من' component={Myquizes} options={{headerShown:false}} ></profilenav.Screen>
-     <profilenav.Screen name="ساخت کوییز جدید"   component={Eachquiz}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
+     <profilenav.Screen name='Allquizes' component={Quiznavigation} options={{headerShown:false}} ></profilenav.Screen>
+     <profilenav.Screen name="createnewquiz"   component={Createquiz}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4'},headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
    
    </profilenav.Navigator>
  

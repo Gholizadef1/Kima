@@ -18,8 +18,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
+import Createquiz from "./Createquiz";
 // import { Button } from 'react-native-paper';
-const Quizes = () => {
+const Quizes = (prop) => {
    
 
   // const [information, setinformation] = useState([]);
@@ -44,7 +45,7 @@ const Quizes = () => {
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
         backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>{
           console.log('PLUS PRESSED')
-         
+           prop.navigation.navigate("createnewquiz")
           }} >
         <Feather style={styles.plus} 
          name="plus" size={32} color="#EDF2F4" />

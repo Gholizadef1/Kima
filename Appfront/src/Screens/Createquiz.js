@@ -19,7 +19,7 @@ import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
-const Quizes = () => {
+const Createquiz = () => {
    
   // useFocusEffect(
   //   React.useCallback(() => {   
@@ -28,6 +28,8 @@ const Quizes = () => {
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
+        <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
+        <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
         <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
        <View style={{height:hp('2%')}}></View>
       </View>
@@ -54,4 +56,4 @@ const styles = StyleSheet.create({
     marginTop:hp('10%')
   }
 });
-export default Quizes;
+export default Createquiz;

@@ -46,7 +46,7 @@ const Quiznavigation =()=>{
       }  >
        {/* <View style={{position:'absolute'}}></View> */}
       <Tab.Screen name="کوییز ها" component={Quizes} elevation={50} style={{}}  />
-      <Tab.Screen name="کوییز های من" component={Createquiznavigation} />
+      <Tab.Screen name="کوییز های من" component={Myquizes} />
     
     </Tab.Navigator>
     // {/* </View> */}
