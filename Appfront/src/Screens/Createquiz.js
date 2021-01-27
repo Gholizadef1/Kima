@@ -40,6 +40,15 @@ const Createquiz = () => {
                     // validationSchema={userschema}
                     onSubmit={async (values, actions) => {
                         console.log('ON SUBMIT')
+                        const formdata = new FormData();
+                        formdata.append('title', values.Username)
+                        formdata.append('summary', values.Discription)
+                        if (picture.uri === '../../assets/group.jpg') {      
+                        }
+                        else
+                            formdata.append('photo', picture)
+                       
+                        console.log(formdata.data + 'formdata')
                     }}
                 >
                     {(props) => (
@@ -62,6 +71,19 @@ const Createquiz = () => {
                                 </Item>
                                 <Image source={require("../../assets/quizicon.png")} style={{height:hp("3.5%"),width:wp("7%"),position:'absolute',marginTop:hp("3.8%"),marginLeft:wp("33%")}}></Image>
 
+                            </View>
+                            <View>
+                                <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('5%'), marginLeft: wp('3%') }}>توضیحات</Text>
+                                <TouchableOpacity>
+                                    <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                        borderColor={'lightgray'}
+                                        onChangeText={props.handleChange('Discription')}
+                                        onBlur={props.handleBlur('Discription')}
+                                        value={props.values.Discription}
+                                        placeholder={'توضیحات کوییز ...'} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={styles.item2}>
+
+                                    </Textarea>
+                                </TouchableOpacity>
                             </View>
                         
                         </View>
@@ -135,5 +157,13 @@ const styles = StyleSheet.create({
         height:wp('9.5%'),
          width:wp('31.5%')
       }, 
+      avatar: {
+        height: hp('14%'),
+        marginTop:hp('-1.5%'),
+        width: wp('28%'),
+        marginLeft:wp('-1%'),
+        borderRadius: 20,
+        position:'absolute'
+      },
 });
 export default Createquiz;
