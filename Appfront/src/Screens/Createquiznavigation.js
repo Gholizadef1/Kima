@@ -25,6 +25,8 @@ import Quizes from "./Quizes";
 import Eachquiz from "./Eachquiz";
 import Createquiz from "./Createquiz";
 import Quiznavigation from "./Quiznavigation";
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
@@ -36,7 +38,7 @@ const Createquiznavigation=(prop)=>{
 
    <profilenav.Navigator initialRouteName={'Profile'}>
      <profilenav.Screen name='Allquizes' component={Quiznavigation} options={{headerShown:false}} ></profilenav.Screen>
-     <profilenav.Screen name="createnewquiz"   component={Createquiz}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4'},headerTitle:'کیما',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold'}}}></profilenav.Screen>
+     <profilenav.Screen name="createnewquiz"   component={Createquiz}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4'},headerTitle:'ساخت کوییز جدید',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',fontSize:hp("1.7%")}}}></profilenav.Screen>
    
    </profilenav.Navigator>
  

@@ -18,6 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
+import Createquiz from "./Createquiz";
 // import { Button } from 'react-native-paper';
 const Quizes = () => {
    
