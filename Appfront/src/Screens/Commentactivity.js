@@ -56,15 +56,15 @@ const Commentactivity = (prop) => {
     }
     // await settheend(false)
     // await setinformation([])
-    const id = prop.route.params.id
-    console.log(id)
+    //const id = prop.route.params.id
+   // console.log(id)
     console.log(await (await AsyncStorage.getItem('token')).toString())
     console.log(await (await AsyncStorage.getItem('id')).toString())
 
     try {
       // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
-      const response = await axiosinst.get("book/" + prop.route.params.id+'/comment' , {
+      const response = await axiosinst.get("user/" +await AsyncStorage.getItem('id')+'/comment' , {
         params: {
           filter:likeotime,
           page: page
@@ -190,11 +190,13 @@ const Commentactivity = (prop) => {
           }}
           renderItem={({ item }) => (<Commentcard name={item.account.username}
             isitactivity={false}
-            pictureborder={100}
+            pictureborder={20}
+            // picutrehieght={hp("4%")}
+            // picturewidth={wp("4%")}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
-            picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
+            date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            picture={`${item.current_book.imgurl}`} comment={item.comment_text} ></Commentcard>)}
         >
 
         </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
