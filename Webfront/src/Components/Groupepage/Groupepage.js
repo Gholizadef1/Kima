@@ -227,15 +227,40 @@ import Tooltip from '@material-ui/core/Tooltip';
     }, [showdiscussion,props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
+      e.preventDefault();
+
+      if(newDiscussion.name === ""){
+        setMassage("اسم بحث نمی‌تواند خالی باشد")
+        setOpenSnack(true);
+      }
+      else if(newDiscussion.description === ""){
+        setMassage("توضیحات بحث نمی‌تواند خالی باشد")
+        setOpenSnack(true);
+      }
+      else{
       axios.post(
         `http://127.0.0.1:8000/group/${props.match.params.groupId}/discussion`,backtitle,
       {
         headers:{
           "Content-Type":"application/json",
          "Authorization":"Token "+Cookies.get("userToken")}
+          }).then(response=>{
+            console.log(response);
+        
+              setMassage('بحث با موفقیت ساخته شد')
+              setOpenSnack(true);
+              handleCloseCreateGroup();
+             
+            
           })
+          .catch(error=>{
+            console.log(error);
+            setMassage("مشکلی پیش آمده دوباره امتحان کنید")
+            setOpenSnack(true);
+          });
+        
           setNewDiscussion("");
-         
+      }
     }
     
   const handleClickOpenCreateDiscussion = () => {
@@ -259,7 +284,7 @@ import Tooltip from '@material-ui/core/Tooltip';
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
               open={openSnack}
 
-              autoHideDuration={5000}
+              autoHideDuration={3000}
 
               onClose={handleCloseSnack}
               message={massage}
@@ -279,9 +304,9 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>
     <div>
         
-    <div className=" name">
+    <div className="name">
   
-  <b className="">نام گروه:  {ginfo.title}</b>
+  <b className="">نام گروه:  <b style={{position:'fixed'}}>{ginfo.title}</b></b>
   </div>
 
 
@@ -438,8 +463,10 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3" style={{fontFamily:"Yekan",fontSize:19}}>{current.title}</h6>
-            </div>
+               
+               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+                           
+                           </div>
               </div>
               
             <h5 className="description" style={{fontFamily:"Yekan",fontSize:20}}>
@@ -508,8 +535,10 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3">{current.title}</h6>
-            </div>
+               
+               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+                           
+                           </div>
               </div>
               
             <h5 className="description" style={{fontFamily:"Yekan",fontSize:20}}>
@@ -571,8 +600,10 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3">{current.title}</h6>
-            </div>
+               
+               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+                           
+                           </div>
               </div>
               
             <h5 className="description" style={{fontFamily:"Yekan",fontSize:20}}>
@@ -704,8 +735,10 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
-            <h6 className="pt-n3">{current.title}</h6>
-            </div>
+               
+               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+                           
+                           </div>
               </div>
               
             <h5 className="description" style={{fontFamily:"Yekan",fontSize:20}}>

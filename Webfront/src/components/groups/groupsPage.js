@@ -20,6 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
+import {API_BASE_URL} from '../../constants/apiContants';
 
 
 
@@ -49,7 +50,7 @@ function GroupsPage (props){
 
     // }
     // else{
-      axios.get('http://127.0.0.1:8000/api/group/filter-'+filterBase+'?page='+page
+      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'?page='+page
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -136,7 +137,7 @@ const handleCreateGroupSubmit =(e) =>{
   formdata.append('summary',newGroup.description)
   formdata.append('photo',state.file)
 
-  axios.post('http://127.0.0.1:8000/api/group',formdata,
+  axios.post(API_BASE_URL+ '/group',formdata,
   {
     headers:{
    "Content-Type":"application/json",
@@ -211,7 +212,7 @@ const handleCloseSnack = (event, reason) => {
   const handleGoSearchGroup = ( ) => {
     console.log( searchWord);
     setPagesNumber(1);
-    axios.get(`http://127.0.0.1:8000/api/group/search/?search=${searchWord}&search_fields=title`,{
+    axios.get(`${API_BASE_URL}/group?search=${searchWord}&search-fields=title`,{
       headers:{
      "Authorization":"Token "+Cookies.get("userToken")}
       })
@@ -231,9 +232,9 @@ const handleCloseSnack = (event, reason) => {
 
 
     return(
-        <div className="container-fluid rTOl px-md-5">
-            <div className="d-flex  my-4 flex-wrap mx-md-5 px-md-4">
-              <div className="d-flex ml-auto">
+        <div className="container-fluid rTOl my-md-5 px-md-5">
+            <div className="d-flex  my-4 flex-wrap mx-md-5 px-md-4 ">
+              <div className="d-flex ml-auto ">
                 <div variant="gray" className="btn" onClick={handleGoSearchGroup} >
                   <GoSearch size="30" color="black"/>
                 </div>
@@ -392,3 +393,4 @@ const handleCloseSnack = (event, reason) => {
 } 
 
 export default withRouter(GroupsPage);
+

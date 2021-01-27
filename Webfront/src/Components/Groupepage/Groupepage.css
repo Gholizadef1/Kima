@@ -13,7 +13,6 @@
         margin-left: 115px;
         margin-top: -40px;
         border-radius: 3%;
-        background-color: rgb(232, 243, 243);
     }
     .imageg{
         width: 70px;
@@ -120,7 +119,6 @@
         margin-left: 115px;
         margin-top: -40px;
         border-radius: 3%;
-        background-color: rgb(232, 243, 243);
     }
     .imageg{
         width: 70px;
@@ -227,7 +225,6 @@
         margin-left: 155px;
         margin-top: -40px;
         border-radius: 3%;
-        background-color: rgb(232, 243, 243);
     }
     .imageg{
         width: 70px;
@@ -334,7 +331,6 @@
             margin-left: 280px;
             margin-top: -55px;
             border-radius: 3%;
-            background-color: rgb(232, 243, 243);
         }
         .imageg{
             width: 80px;
@@ -441,7 +437,6 @@
                 margin-left: 300px;
                 margin-top: -55px;
                 border-radius: 3%;
-                background-color: rgb(232, 243, 243);
             }
             .imageg{
                 width: 80px;
@@ -549,7 +544,7 @@
                 margin-left: 800px;
                 margin-top: -70px;
                 border-radius: 3%;
-                background-color: rgb(232, 243, 243);
+                
             }
             .imageg{
                 width: 100px;
@@ -625,7 +620,9 @@
             .name{
                 font-family: 'Yekan';
                 font-size: 25px;
-                margin-right: -200px;
+                margin-right: -340px;
+                direction: rtl;
+                position: relative;
                 margin-top: -50px;
             
             }
