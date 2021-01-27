@@ -424,8 +424,8 @@ const Comment = (prop) => {
           renderItem={({ item }) => (<Commentcard name={item.account.username}
             isitactivity={false}
             pictureborder={100}
-             picutrehieght={hp("4%")}
-             picturewidth={wp("4%")}
+             picutrehieght={hp("8%")}
+             picturewidth={wp("16.4%")}
              commentmargintop={20}
             avatar={styles.avatar}
             isliked={item.isliked}
