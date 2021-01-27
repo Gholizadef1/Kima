@@ -54,6 +54,16 @@ const MembersPage = (prop) => {
                   source={require('../../assets/group.jpg')}
                 ></Avatar.Image>}
                 <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop:hp('1%') }}>{item.user.username}</Text>
+                <View
+                      style={{
+                        width:320,
+                        color: '#a9a9a9',
+                        marginLeft:wp('5%'),
+                        marginTop:hp('2%'),
+                        borderBottomColor:'#a9a9a9',
+                        borderBottomWidth: 1
+                      }}
+                      />
               </View>
             </>
             }
@@ -62,5 +72,40 @@ const MembersPage = (prop) => {
     </View>
     );
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    kima: {
+      color: '#1F7A8C',
+      marginTop: hp('8%'),
+      marginLeft: wp('5%'),
+      fontSize: 20,
+      fontWeight: 'bold',
+      position: 'absolute'
+    },
+    backpic: {
+  
+      width: wp('100%'),
+      height: hp('32%')
+    },
+    avatar: {
+      elevation: 20,
+      marginTop: hp('-10%'),
+      marginLeft: wp('20%')
+  
+    }
+    // avatar: {
+    //   height: hp('14%'),
+    //   marginTop:hp('-1.5%'),
+    //   width: wp('28%'),
+    //   marginLeft:wp('-1%'),
+    //   borderRadius: 20,
+    //   position:'absolute'
+    // },
+  });
 
 export default MembersPage;

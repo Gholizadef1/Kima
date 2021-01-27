@@ -420,7 +420,7 @@ const GroupPage = (prop) => {
   
           <FlatList
             style={{ marginBottom: hp('5%') }}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             onEndReached={() => {
   //          console.log('-----AKHAR LIST')
             }}
@@ -434,11 +434,21 @@ const GroupPage = (prop) => {
             renderItem={({ item }) => <>
               <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
                 {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{marginLeft:wp('2%')}} size={90}
-                  source={{ uri: groupphoto }}
-                ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
+                  source={{ uri: item.user.profile_photo }}
+                ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={10}
                   source={require('../../assets/group.jpg')}
                 ></Avatar.Image>}
                 <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop:hp('1%') }}>{item.user.username}</Text>
+                <View
+                      style={{
+                        width:320,
+                        color: '#a9a9a9',
+                        marginLeft:wp('5%'),
+                        marginTop:hp('2%'),
+                        borderBottomColor:'#a9a9a9',
+                        borderBottomWidth: 1
+                      }}
+                      />
               </View>
             </>
             }
@@ -484,7 +494,7 @@ const styles = StyleSheet.create({
     height: hp('32%')
   },
   avatar: {
-    elevation: 5,
+    elevation: 20,
     marginTop: hp('-10%'),
     marginLeft: wp('20%')
 
