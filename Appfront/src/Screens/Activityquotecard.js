@@ -77,7 +77,7 @@ const Quotecard = (prop) => {
   return (
     <View style={styles.container}>
 
-      <Card style={{ marginLeft: wp('5%'), marginTop: hp('14%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
+      <Card style={{ marginLeft: wp('5%'), marginTop: hp('9%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
 
         {/* {prop.IDD.toString() === prop.id.toString() ? */}
         <AntDesign name="delete"

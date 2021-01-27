@@ -293,7 +293,9 @@ const Activityquote = (prop) => {
                         <View style={styles.loader}>
                             <Text style={{ color: 'gray', alignSelf: 'center' }}>نقل قول دیگری وجود ندارد</Text>
                         </View>)}
-                    style={{ marginBottom: '0%' }}
+                    style={{ marginBottom: '0%',marginTop:hp("2%")
+                    // ,position:'absolute'
+                     }}
                     showsVerticalScrollIndicator={false}
                     onEndReached={() => handleLoadMore()}
                     onEndReachedThreshold={0}
