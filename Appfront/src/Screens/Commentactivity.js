@@ -74,7 +74,6 @@ const Comment = (prop) => {
     }
     };
   const [showbutton, setshowbutton] = useState(true);
-  console.log(prop.route.params.title+' TILTE BOOK TO HEADER COMMENTT')
   const [reset, setreset] = useState(false);
   const bs = React.createRef()
   const fall = new Animated.Value(1);

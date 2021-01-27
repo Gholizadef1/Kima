@@ -196,7 +196,8 @@ import { Entypo } from '@expo/vector-icons';
          <Card style={{backgroundColor:'#F8F8F8',marginTop:hp('8%'),marginLeft:wp('3%'),marginRight:wp('3%'),borderRadius:10}}>
          <Text style={{fontSize:15,fontWeight:'bold',alignSelf:'flex-start',marginBottom:hp('2%'),marginTop:hp('1%'),left:wp('3%'),color:"#1f7a8c"}}>فعالیت های من</Text>
       
-         <TouchableOpacity>
+         <TouchableOpacity
+          onPress={()=>navigation.navigate('mycomment')}>
              <Button style={styles.lastquote}>
                  <Text style={styles.lastquotetext}>
                      نظر های من
