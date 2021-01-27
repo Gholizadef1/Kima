@@ -14,6 +14,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper';
 import {Formik,formik} from 'formik';
 import * as yup from 'yup';
+import { not } from 'react-native-reanimated';
 
 
 const userschema=yup.object({
@@ -201,102 +202,109 @@ const GroupPage = (prop) => {
     return (
       <View style={styles.container}>
         <View>
-        <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
+          {notjoinedUser != "notjoinedUser" ? 
+                  <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
   
-          <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-        <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
-          <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setModalVisible(false)}
-           name="close" size={23} color="#D75A5A" />
-           </TouchableOpacity>       
-       <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-        initialValues={{Username:'',Discription:''}}
-        validationSchema={userschema}
-  
-        onSubmit={async(values,actions)=>{
-            console.log('ON SUBMIT')
-            const formdata = new FormData();
-             formdata.append('title',values.Username)
-             formdata.append('description',values.Discription)
-  
-          console.log(formdata.data+'formdata')
-  
-          const response=await axiosinst.post('/api/group/'+ prop.route.params.id +'/discussion',formdata,{
-            headers:{
-              "Content-Type":"application/json",
-              "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-            }
-               )
-          .then( function(response){
-            console.log(picture+' PICTURE POST')
+                  <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
+                  <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setModalVisible(false)}
+                   name="close" size={23} color="#D75A5A" />
+                   </TouchableOpacity>       
+               <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
+                initialValues={{Username:'',Discription:''}}
+                validationSchema={userschema}  
+        
+                onSubmit={async(values,actions)=>{
+                    console.log('ON SUBMIT')
+                    const formdata = new FormData();
+                     formdata.append('title',values.Username)
+                     formdata.append('description',values.Discription)
           
-            console.log(response)
-            Alert.alert('','بحث با موفقیت ساخته شد ',[
-              {
-           text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-              }
-              ],{cancelable:false},{style:{height:50}})
+                  console.log(formdata.data+'formdata')
+          
+                  const response=await axiosinst.post('/api/group/'+ prop.route.params.id +'/discussion',formdata,{
+                    headers:{
+                      "Content-Type":"application/json",
+                      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+                    }
+                       )
+                  .then( function(response){
+                    console.log(picture+' PICTURE POST')
+                  
+                    console.log(response)
+                    Alert.alert('','بحث با موفقیت ساخته شد ',[
+                      {
+                   text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+                      }
+                      ],{cancelable:false},{style:{height:50}})
+        
+                    getDiscussion();
+                    
+                  })
+                  .catch( function(error){  
+                      {
+                        console.log(error)
+                      
+                        Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+                      
+          
+                      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+                      }],{cancelable:false},{style:{height:50}})
+                      }     
+                  })
+          
+                }}
+               >
+                {(props)=>(
+               <View style={{ marginTop:hp('5%')}}>
+               <View style={{borderColor:'blue'}}>
+              
+               <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('2%'),marginLeft:wp('1%') , marginTop:hp('-2%')}}>موضوع بحث</Text>
+               <Item style={styles.item} rounded >
+               
+               <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
+                   onChangeText={props.handleChange('Username')}
+                   onBlur={props.handleBlur('Username')}
+                   value={props.values.Username}
+                   placeholder={'موضوع بحث ...'} placeholderTextColor='gray' >
+                   </Input>
+                   <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" />
+                 
+            <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
+                </Item>
+              
+                </View>
+               <View>
+                  <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
+                  <TouchableOpacity>
+                          <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
+                            borderColor={'lightgray'}
+                            onChangeText={props.handleChange('Discription')}
+                            onBlur={props.handleBlur('Discription')}
+                            value={props.values.Discription}                 
+                            placeholder={'توضیحات بحث ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
+                          </Textarea>
+                          </TouchableOpacity>
+                          <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
+                        </View>     
+                   <Button bordered rounded style={styles.button}
+                 onPress={props.handleSubmit}
+                 >
+                   <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت بحث</Text>
+                  </Button>    
+               </View>
+               )}
+               </Formik>  
+                  </View>
+                  </View>
+                  </Modal>
+           :Alert.alert('',' فقط اعضای گروه میتونن بحث تشکیل بدن ',[
+            {
+         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+            }
+            ],{cancelable:false},{style:{height:50}})}
 
-            getDiscussion();
-            
-          })
-          .catch( function(error){  
-              {
-                console.log(error)
-              
-                Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-              
-  
-              text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-              }],{cancelable:false},{style:{height:50}})
-              }     
-          })
-  
-        }}
-       >
-        {(props)=>(
-       <View style={{ marginTop:hp('5%')}}>
-       <View style={{borderColor:'blue'}}>
-      
-       <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('2%'),marginLeft:wp('1%') , marginTop:hp('-2%')}}>موضوع بحث</Text>
-       <Item style={styles.item} rounded >
-       
-       <Input  style={styles.Input} autoCapitalize='words' autoCorrect={true}
-           onChangeText={props.handleChange('Username')}
-           onBlur={props.handleBlur('Username')}
-           value={props.values.Username}
-           placeholder={'موضوع بحث ...'} placeholderTextColor='gray' >
-           </Input>
-           <MaterialCommunityIcons name="account-group" size={hp('2.8%')} style={{left:wp('2%')}} color="#BFDBF7" />
-         
-    <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
-        </Item>
-      
-        </View>
-       <View>
-          <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>توضیحات</Text>
-          <TouchableOpacity>
-                  <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
-                    borderColor={'lightgray'}
-                    onChangeText={props.handleChange('Discription')}
-                    onBlur={props.handleBlur('Discription')}
-                    value={props.values.Discription}                 
-                    placeholder={'توضیحات بحث ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
-                  </Textarea>
-                  </TouchableOpacity>
-                  <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
-                </View>     
-           <Button bordered rounded style={styles.button}
-         onPress={props.handleSubmit}
-         >
-           <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}>ساخت بحث</Text>
-          </Button>    
-       </View>
-       )}
-       </Formik>  
-          </View>
-          </View>
-          </Modal>
         </View>
         <ScrollView>
           <Text style={styles.kima}>کیما</Text>
