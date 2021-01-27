@@ -9,6 +9,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const ResultsList = ({stylee,title,listresult,navigation}) => {
+   // console.log(listresult)
     return(
         <View>
             <Text style={styles.title}>
