@@ -96,7 +96,7 @@ function GroupsPage (props){
   const handleCloseCreateGroup = () => {
     setOpenCreateGroup(false);
     setNewGroup({
-      picture: "fae8d917da344e6eb3b832a4b706ff49..jpg",
+      picture: "defualt.jpg",
       name : "",
       description :""
      // backError : ""
@@ -256,9 +256,28 @@ const handleCloseSnack = (event, reason) => {
                 <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup}>
                   گروه جدید
                 </div>
-                <Dialog open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle id="form-dialog-title">گروه جدید بسازید</DialogTitle>
-                  <DialogContent >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+                <Dialog  open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                  <DialogTitle className="yekanfont" id="form-dialog-title">گروه جدید بسازید</DialogTitle>
+                  <DialogContent className="yekanfont">
                     
 
                   <input class="form-control" 
@@ -275,30 +294,32 @@ const handleCloseSnack = (event, reason) => {
                   </svg>
                 </div>
 
-                  <form >
-                    <TextField
+                  <form className="yekanfont">
+                    <label className="mt-2 mb-n1 ">نام گروه</label>
+                    {/* <TextField
                       autoFocus
                       margin="dense"
                       id="name"
                       value={newGroup.name}
-                      label="نام گروه"
                       type="title"
                       onChange={handleChange}
                       fullWidth
                       variant="outlined"
+                    /> */}
+                    <input 
+                    className="form-control" 
+                      id="name"
+                      value={newGroup.name}
+                      type="title"
+                      onChange={handleChange}></input>
 
-                    />
-                    <TextField
-                      margin="dense"
-                      id="description"
+
+                    <label className="mt-2 mb-n1">توضیحات</label>
+                    <textarea className="form-control" rows="3"id="description"
                       value={newGroup.description}
-                      label="توضیحات"
                       type="description"
-                      onChange={handleChange}
-                      fullWidth
-                      multiline
-                      variant="outlined"
-                    />
+                      onChange={handleChange}></textarea>
+
                     </form>
                   </DialogContent>
                   <DialogActions>
