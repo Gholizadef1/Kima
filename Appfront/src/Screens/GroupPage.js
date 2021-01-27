@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList , Alert } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail , Item, Input, Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -378,9 +378,13 @@ const GroupPage = (prop) => {
             <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
               <Text style={{ alignSelf: 'flex-start', left: wp('5%') , fontSize: 20 }}>{item.title}</Text>
               <Text style={{color: '#a9a9a9' , marginLeft:wp('4%') , marginTop:hp('1%')}}>{item.description}</Text>
+              <Button style={{ marginLeft: wp('80%') , marginTop:wp('-11%') }} transparent 
+                onPress={() => prop.navigation.navigate('ShowMembersPage')}>
+                <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
+              </Button >
               <View
                     style={{
-                      width:310,
+                      width:320,
                       marginLeft:wp('5%'),
                       marginTop:hp('2%'),
                       borderBottomColor: 'black',
@@ -388,9 +392,6 @@ const GroupPage = (prop) => {
                     }}
                     />
             </View>
-            {/* <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
-                <Text style={{marginTop:hp('-4%')}}>{item.user.username}</Text>
-              </Body> */}
           </>
           }
         >
@@ -428,21 +429,16 @@ const GroupPage = (prop) => {
               ></Avatar.Image>}
               <Text style={{ alignSelf: 'flex-start', left: wp('5%') }}>{item.user.username}</Text>
             </View>
-            {/* <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
-                <Text style={{marginTop:hp('-4%')}}>{item.user.username}</Text>
-              </Body> */}
           </>
           }
         >
         </FlatList>
+
+        {groupinfo.members_count>4 ?         
         <Button style={{ marginLeft: wp('90%') }} transparent 
-         onPress={() => prop.navigation.navigate('ShowMembersPage')}>
-          <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-        </Button >
-        {/* {groupinfo.members_count>4 ?         
-        <Button style={{ marginLeft: wp('90%') }} transparent>
-          <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-        </Button> : null} */}
+        onPress={() => prop.navigation.navigate('ShowMembersPage')}>
+         <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+       </Button > : null}
 
       </ScrollView>
 
