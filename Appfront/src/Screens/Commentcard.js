@@ -565,7 +565,7 @@ const styles = StyleSheet.create({
   username: {
     position: 'absolute',
     marginTop: '5%',
-    left: 80,
+    marginLeft: wp("20%"),
     fontSize: 15,
     fontWeight: 'bold'
 
@@ -593,7 +593,7 @@ const styles = StyleSheet.create({
   date: {
     position: 'absolute',
     marginTop: '17%',
-    left: 80,
+    marginLeft: wp("20%"),
     fontSize: 12,
     color: 'gray'
   },

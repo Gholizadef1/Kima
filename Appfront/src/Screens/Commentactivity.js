@@ -193,7 +193,7 @@ const Commentactivity = (prop) => {
             pictureborder={8}
              picutrehieght={90}
              picturewidth={60}
-             commentmargintop={hp("5%")}
+             commentmargintop={hp("5.5%")}
             avatar={styles.avatar}
 
             isliked={item.isliked}
