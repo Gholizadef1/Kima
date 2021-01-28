@@ -11,101 +11,94 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import axios from 'axios'
-//import Star from 'react-native-star-view';
-import { color } from 'react-native-reanimated';
-import Animated, { set } from 'react-native-reanimated';
-import Commentcard from './Commentcard';
+
 
 const Bookview = (prop) => {
-    console.log('BOOKVIEW')
+  console.log('BOOKVIEW')
   const [rate , setrate] = useState(true);
-
   const [ratenum , setratenum] = useState(null);
-
   const [loading,setloading]=useState(true);
   const [result , setResult] = useState(null);
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
   const getResult = async (id) => {
-  const response = await axiosinst.get('/bookdetail/'+id);
-  setloading(false)
-  setResult(response.data);
-  };
-  useEffect(() =>{
-    getResult(id);
-  }, []);
+    const response = await axiosinst.get('/book/'+id);
+      setloading(false)
+      setResult(response.data);
+       };
 
-  if (!result) {
-    return null;
-  }
+    useEffect(() =>{
+      getResult(id);
+    }, []);
 
-const getPicker = async () => {
-axiosinst.get('/bookdetail/'+id +'/getstate', {
-"headers": {
-"content-type": "application/json",
-"Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-}
-})
-.then(function(response){
-console.log('Pickerr'+response.data.book_state)
-setSelectedValue(response.data.book_state)
-})
-.catch(function(error){
-console.log(error)
-})
-};
+    if (!result) {
+      return null;
+    }
+
+    const getPicker = async () => {
+      axiosinst.get('/book/'+id, {
+      "headers": {
+      "content-type": "application/json",
+      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+      })
+      .then(function(response){
+      console.log('Pickerr'+response.data.book_state)
+      setSelectedValue(response.data.book_state)
+      })
+      .catch(function(error){
+      console.log(error)
+      })
+    };
 getPicker();
 
-const PostPicker = async (value) => {
-if (value != "") {
-const payload = {
-"book_state": value,
-}
-const back = JSON.stringify(payload);
-axiosinst.post('/bookdetail/' +id, back, {
-"headers": {
-"content-type": "application/json",
-"Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-}
-})
-.then(async function (response) {
-  // setloading(false)
-console.log(response.data)
-getPicker();
-})
-.catch(function (error) {
-console.log(error);
+    const PostPicker = async (value) => {
+      if (value != "") {
+      const payload = {
+      "book_state": value,
+      }
+      const back = JSON.stringify(payload);
+      axiosinst.post('/book/' +id, back, {
+      "headers": {
+      "content-type": "application/json",
+      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+      })
+      .then(async function (response) {
+        // setloading(false)
+      console.log(response.data)
+      getPicker();
+      })
+      .catch(function (error) {
+      console.log(error);
+      });
+      }
+    }
 
 
-});
-}
-}
+    const getRate = async()=>{
+    axiosinst.get('/book/'+id +'/rate', {
+    "headers": {
+    "content-type": "application/json",
+    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+    }
+    })
+    .then(function(response){
+    console.log('response data : ', response.data)
+    console.log(response.message)
+    console.log('$$$$'+response.data.data)
+    setratenum(response.data.data)
+    console.log(response.data.code+'NEMIAD')
+
+    })
+
+    .catch( async function (error) {
+    console.log(error);
+    console.log(error.code+'ERROR CODE')
 
 
-const getRate = async()=>{
-axiosinst.get('/api/bookrating/'+id, {
-"headers": {
-"content-type": "application/json",
-"Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-}
-})
-.then(function(response){
-console.log('response data : ', response.data)
-console.log(response.message)
-console.log('$$$$'+response.data.data)
-setratenum(response.data.data)
-console.log(response.data.code+'NEMIAD')
-
-})
-
-.catch( async function (error) {
-console.log(error);
-console.log(error.code+'ERROR CODE')
-
-
-});
-}
+    });
+    }
 getRate();
 
 console.log('**' +rate)
@@ -116,7 +109,7 @@ const payload={
 "rate": rate,
 }
 const back= JSON.stringify(payload);
-axiosinst.post('/api/bookrating/'+id ,back,{
+axiosinst.post('/book/'+id+'/rate' ,back,{
 "headers":{"content-type":"application/json",
 "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
 }
@@ -128,7 +121,7 @@ setratenum(rate);
 console.log('&&'+rate);
 if(response.data.message==="You rated this book already!!"){
 console.log('TOYE PUTTTTT')
-axiosinst.put('/api/bookrating/'+id, back, {
+axiosinst.put('/book/'+id+'/rate', back, {
 "headers": {
 "content-type": "application/json",
 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
