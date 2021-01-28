@@ -239,3 +239,5 @@ justifyContent: 'center',
 });
 
 export default Bookview;
+
+

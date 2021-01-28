@@ -1,4 +1,3 @@
-
 import React , {useState , useEffect} from 'react';
 import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
 TouchableOpacity , FlatList , TextInput} from 'react-native';
@@ -17,21 +16,15 @@ const Home = ({navigation}) => {
     const [image,setImage] = useState([])
     const [best,setbest] = useState([])
     const [mostdis,setmostdis] = useState([])
+
     useFocusEffect(
         React.useCallback(() => {
             getImageFromAPI()
             getbestsFromAPI()
             getmostFromAPI();
         }, [])
-    
       )
 
-    // useEffect(() =>{
-    //     getImageFromAPI()
-    //     getbestsFromAPI()
-    //     getmostFromAPI();
-    // },[])
-    
 
     function getImageFromAPI(){
         axiosinst.get('/bookdetail')
@@ -201,9 +194,3 @@ const styles = StyleSheet.create({
   });
   export default Home;
 
-
-
-
-
-                    
-            
