@@ -274,7 +274,7 @@ const Createquiz = () => {
                                     <RadioButton color={"#1f7a8c"} value="3" />
                                     </View>
                                     </View>
-                                    <View style={{marginTop:hp("3%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
+                                    <View style={{marginTop:hp("3%"),marginBottom:hp("5%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
                                         <TouchableOpacity>
                                         
                                         <Item rounded style={{marginLeft:wp("14%"),borderColor:"white"}}>
@@ -291,19 +291,23 @@ const Createquiz = () => {
                                    
                                     </Item>
                                     </TouchableOpacity>
-                                    <View style={{position:'absolute',marginTop:hp("0%"),marginLeft:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
+                                    <View style={{position:'absolute',marginTop:hp("0%"),left:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
                                     <RadioButton color={"#1f7a8c"} value="4" />
                                     </View>
                                     </View>
                                 </RadioButton.Group>
-                                <TouchableOpacity style={{marginTop:hp("5%"),marginLeft:wp("5%"),marginBottom:hp("-1%")}}>
+                                <View style={{flexDirection:"row"}}>
+                                <TouchableOpacity style={{marginTop:hp("0%"),right:wp("-5%"),backgroundColor:"lightgreen",width:wp("23%"),marginBottom:hp("-1%")}}>
                                 <Text style={{color:"#1f7a8c",fontWeight:"bold",fontSize:hp("1.5.5%")}}>اضافه کردن سوال</Text>
                                 </TouchableOpacity>
+                                <Text style={{marginTop:hp("0%"),alignSelf:"flex-start",marginLeft:wp("7%"),color:"#1f7a8c",fontWeight:"bold",fontSize:hp("1.5.5%")}}>/</Text>
                                 {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
-                                <TouchableOpacity style={{marginTop:hp("-1.3%"),marginLeft:wp("31.5%"),backgroundColor:"white"}}>
+                                {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
+                                <TouchableOpacity style={{marginTop:hp("0%"),marginLeft:wp("2%"),backgroundColor:"lightblue"}}>
                                     <Text style={{color:"#1f7a8c",fontSize:hp("1.5.5%"),fontWeight:"bold"}}>حذف کردن سوال</Text>
                                 </TouchableOpacity>
-                                <Text style={{marginTop:hp("-2.4%"),alignSelf:"flex-start",marginBottom:hp("10%"),marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",fontSize:hp("1.5.5%")}}>/</Text>
+                                
+                                </View>
                                 {/* <TouchableOpacity style={{marginTop:hp("-2.5%"),fontWeight:"bold",fontSize:hp("1.5.5%")
                                 ,marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",marginBottom:hp("10%")}}>
                                 <Text style={{fontSize:hp("1.5.5%"),color:"#1f7a8c",
