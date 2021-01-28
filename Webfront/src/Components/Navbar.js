@@ -105,10 +105,10 @@ useEffect(() => {
     return(   
       <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
-          <GiBookshelf color="lightskyblue" />
+          <GiBookshelf color="white" />
         </h1>
         <b className="mx-1 my-n2 " 
-         style = {{fontSize:33,fontWeight:"bold",color:"lightskyblue"}}
+         style = {{fontSize:33,fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
         <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
