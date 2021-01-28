@@ -6,7 +6,7 @@ export default axios.create({
 
 
 
-    baseURL:'http://2e7bd654174c.ngrok.io/'
+    baseURL:'http://7b40aa0dd776.ngrok.io/'
 
 
 })
