@@ -1,3 +1,4 @@
+import {AiFillStar} from "react-icons/ai";
 
 import "./Mygroup.css";
 import Scroll from "../Components/Scroll";
@@ -51,10 +52,24 @@ const[mygroup,setMygroup] = useState([]);
               <div>
               <b className="">نام گروه:  {current.title}</b>
               </div>
+             
                 <small className=" dislike mr-2" style={{fontSize:20,fontFamily:"Yekan"}}>
                     تعداد اعضا: {current.members_count}
                 
                 </small>
+                {current.owner.username === Cookies.get("userName") ?
+                <p className="mr-2 mb-1" style={{fontSize:20,fontFamily:"Yekan"}}>
+                <AiFillStar></AiFillStar>
+                سازنده: {current.owner.username}
+                
+            
+            </p>
+                :
+                <p className="mr-2 mb-1" style={{fontSize:20,fontFamily:"Yekan"}}>
+                    سازنده: {current.owner.username}
+                
+                </p>
+            }
                 <p  className="quote"style={{fontFamily:"Yekan",fontSize:20}}>
                      توضیحات گروه: {current.summary}
 
