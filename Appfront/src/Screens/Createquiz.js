@@ -82,7 +82,7 @@ const Createquiz = () => {
     }
     const [value, setValue] = React.useState('1');
     const [questions, setquestions] = useState([{id:1,name:"اول"},{id:2,name:"دوم"}])
-    const [numofquestion,setnumofquestion]=useState("3")
+    const [numofquestion,setnumofquestion]=useState(3)
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -317,10 +317,13 @@ const Createquiz = () => {
                                 <View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
                                     <TouchableOpacity
                                      onPress={async()=>{
-                                         console.log(questions);
+                                         
+                                         //toye groups mygroups avali javab nemidad :\
+                                       
                                         //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
                                        await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
                                           await setnumofquestion(numofquestion+1);
+                                          console.log(questions);
                                           }}
                                      style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
                                         <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
@@ -328,7 +331,20 @@ const Createquiz = () => {
                                     <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
                                     {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
                                     {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
-                                    <TouchableOpacity style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                    <TouchableOpacity 
+                                      onPress={async()=>{
+                                        //  console.log(questions);
+                                        //  console.log(questions.pop());
+                                        //  console.log(questions);
+                                        const temp=await questions.pop();
+                                        console.log(temp);
+                                        //await  setquestions(temp);
+                                        console.log(questions[numofquestion-1].id+"id");
+                                        //inex nan
+                                        //await setquestions(await questions.pop())
+                                          await setnumofquestion(numofquestion-1);
+                                          }}
+                                    style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
                                         <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
                                     </TouchableOpacity>
 
