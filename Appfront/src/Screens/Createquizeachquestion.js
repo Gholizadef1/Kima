@@ -34,7 +34,7 @@ const Createquizeachquestion = (prop) => {
                 onChangeText={prop.pr.handleChange('Discription')}
                 onBlur={prop.pr.handleBlur('Discription')}
                 value={prop.pr.values.Discription}
-                placeholder={'سوال ...' } placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
+                placeholder={'سوال '+prop.itemidd+" ... " } placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
                     marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "white"
                 }}>
 

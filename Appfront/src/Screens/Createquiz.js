@@ -82,7 +82,7 @@ const Createquiz = () => {
 
     }
     const [value, setValue] = React.useState('1');
-    const [itemid,setitemid]=useState(2);
+    const [itemid,setitemid]=useState(1);
     const [values,setvalues]=useState(["1"])
     const [questions, setquestions] = useState([{id:1,name:"اول"}])
     const [numofquestion,setnumofquestion]=useState(3)
@@ -211,7 +211,7 @@ const Createquiz = () => {
                                     renderItem={(item) =>{
                                        // const [values,setvalues]=useState("1")
                                          return(<>
-                                      <Createquizeachquestion pr={props}></Createquizeachquestion>
+                                      <Createquizeachquestion pr={props} itemidd={itemid}></Createquizeachquestion>
                                     </>)
                                     }}
                                 >
