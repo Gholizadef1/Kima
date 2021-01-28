@@ -169,14 +169,14 @@ class Quiz(models.Model):
     create_time = models.DateTimeField(default=timezone.now, editable=False)
     quiz_photo = models.ImageField(upload_to='quiz_photos',default='default.png')
     question_count = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(15)],default=0)
-    questions = models.ManyToManyField('questions')
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
-    question_num = models.IntegerField(default=5)
+    question_num = models.IntegerField(default=1)
     question_text = models.TextField()
     a_text = models.TextField()
     b_text = models.TextField()
     c_text = models.TextField()
     d_text = models.TextField()
     key = models.CharField(max_length=1)
+    
