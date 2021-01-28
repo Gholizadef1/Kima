@@ -183,15 +183,17 @@ const addBookToMineHandler = (choices)=>{
 setUserCoice(choices.target.value);
 //console.log(userCoice);
 const payload={
-"book_state": choices.target.value,
+"book_id": props.match.params.bookId,
 }
 const back= JSON.stringify(payload);
-axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
-back,{
+axios.post(API_BASE_URL + '/user/' + Cookies.get("userId") + '/collection?type=' + choices.target.value,
+back
+,{
 headers:{
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
-})
+"Content-Type":"application/json"
+}
+}
+)
 .then(function (response){
 
 if(response.data=== "successfully added"){
