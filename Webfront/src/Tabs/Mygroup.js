@@ -70,7 +70,7 @@ const[mygroup,setMygroup] = useState([]);
                 
                 </p>
             }
-                <p  className="quote"style={{fontFamily:"Yekan",fontSize:20}}>
+                <p  className="quote mr-2"style={{fontFamily:"Yekan",fontSize:20}}>
                      توضیحات گروه: {current.summary}
 
              </p>

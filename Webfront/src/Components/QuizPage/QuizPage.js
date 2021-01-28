@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Feature = () => {
+function QuizePage (props){
     return(
         <div className="App">
             <h1>Feature HOURS</h1>
@@ -8,4 +8,4 @@ const Feature = () => {
     )
 }
 
-export default Feature;
+export default QuizePage;
