@@ -98,49 +98,55 @@ const classes = useStyles();
 //const {bookId} = props.match.params;
 useEffect(() => {
 if (props.match.params.bookId) {
-axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId)
+axios.get(API_BASE_URL + '/book/' + props.match.params.bookId,
+{
+  headers:{
+ "Authorization":"Token "+Cookies.get("userToken")}
+  })
 .then(response => {
-//console.log(response);
+console.log(response);
 //console.log(response.data);
 //console.log(response.data.title);
 setState({
-author: response.data.author,
-average_rating_count:response.data.average_rating_count,
-average_rating:response.data.average_rating,
-
-avgrating: response.data.avgrating,
-description: response.data.description,
-id: response.data.id,
-imgurl: response.data.imgurl,
-numpages: response.data.numpages,
-publisher: response.data.publisher,
-ratecount: response.data.ratecount,
-smallimgurl: response.data.smallimgurl,
-title:response.data.title
+author: response.data.data.author,
+average_rating_count:response.data.data.average_rating_count,
+average_rating:response.data.data.average_rating,
+avgrating: response.data.data.avgrating,
+description: response.data.data.description,
+id: response.data.data.id,
+imgurl: response.data.data.imgurl,
+numpages: response.data.data.numpages,
+publisher: response.data.data.publisher,
+ratecount: response.data.data.ratecount,
+smallimgurl: response.data.data.smallimgurl,
+title:response.data.data.title
 });
 
-})
-.catch(function (error) {
-console.log(error);
-
-});
-axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId+'/getstate',
-{headers:{
-
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
-}
-)
-.then(function (response) {
-//console.log(response);
 setUserCoice(response.data.book_state);
-//console.log(response.data.book_state);
 document.getElementById(response.data.book_state).selected=true;
+
 })
 .catch(function (error) {
 console.log(error);
 
 });
+// axios.get(API_BASE_URL + '/book/' + props.match.params.bookId+'/getstate',
+// {headers:{
+
+// "Content-Type":"application/json",
+// "Authorization":"Token "+Cookies.get("userToken")}
+// }
+// )
+// .then(function (response) {
+// //console.log(response);
+// setUserCoice(response.data.book_state);
+// //console.log(response.data.book_state);
+// document.getElementById(response.data.book_state).selected=true;
+// })
+// .catch(function (error) {
+// console.log(error);
+
+// });
 
 
 }
