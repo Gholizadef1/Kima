@@ -413,9 +413,9 @@ export default function FullWidthTabs(props) {
            variant="fullWidth"
           //aria-label="full width tabs example"
         >
-          <Tab label="خلاصه کتاب" {...a11yProps(0)} />
-          <Tab label="نظر‌ها" {...a11yProps(1)} />
-          <Tab label="نقل‌قول‌ها" {...a11yProps(2)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="خلاصه کتاب" {...a11yProps(0)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="نظر‌ها" {...a11yProps(1)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="نقل‌قول‌ها" {...a11yProps(2)} />
           
         </Tabs>
       </AppBar>
@@ -444,9 +444,9 @@ export default function FullWidthTabs(props) {
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitCommentClick}style={{color:"white",fontWeight:"bold"}}
-                >ثبت</StyledButton>
+                <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
+                onClick={handleSubmitCommentClick}
+                >ثبت</div>
                 </div>
                 </div>
               </div>
@@ -571,9 +571,9 @@ export default function FullWidthTabs(props) {
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitQuoteClick} style={{color:"white",fontWeight:"bold"}}
-                >ثبت</StyledButton>
+                <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
+                onClick={handleSubmitQuoteClick}
+                >ثبت</div>
                 </div>
                 </div>
               </div>

@@ -253,7 +253,7 @@ const handleCloseSnack = (event, reason) => {
                 </select>
               </div>
               <div>
-                <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup}>
+                <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup} >
                   گروه جدید
                 </div>
 
@@ -336,7 +336,7 @@ const handleCloseSnack = (event, reason) => {
                   
 
                   <div class="col mb-4">
-                    <div class="card h-100 shadow-lg" >
+                    <div class="card h-100 shadow" >
                       <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title} onClick={() => routeToGroupHandler(current.id)}/>
                       <div class="card-body">
                         <h5 class="card-title btn m-n2" onClick={() => routeToGroupHandler(current.id)} style={{fontSize:25}}>{current.title}</h5>

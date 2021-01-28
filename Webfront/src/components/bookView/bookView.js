@@ -319,7 +319,7 @@ return(
                  <div className={classes.root}>
                  <button onClick={Sendrequest} className="btn bg-primary" style={{
               height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
-                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white",fontWeight:"bold"}}>
+                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white"}}>
                   ثبت
                   </div>
                  </button>
