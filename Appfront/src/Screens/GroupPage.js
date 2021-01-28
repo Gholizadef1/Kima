@@ -50,9 +50,6 @@ const GroupPage = (prop) => {
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {    
         setmembers(response.data.members)
-//        console.log('HIIIIIIIIIIIIIIIIII'+response.data.members[0].user.profile_photo)
-//        console.log('HIIIIIIIIIIIIIIIIII'+response.data.members[0].user.username)
-//        setloading(false)
  
         for (let i = 0; i < membernumber; i++) {
           if (response.data.members[i].user.username === username && owner != "owner") {
@@ -60,7 +57,7 @@ const GroupPage = (prop) => {
             console.log('%%%%%%%%%%%%%%%%%%%joineduser')
           }
         }
-        if (joinedUser === "" && username != response.data.owner.username){
+        if (joinedUser === false && username != response.data.owner.username){
           setnotjoinedUser("notjoinedUser")
           console.log("###############notjoineduser")
         }
@@ -90,17 +87,12 @@ const GroupPage = (prop) => {
         })
   },[join , owner , joinedUser , notjoinedUser])
 
-
-
-
-  // console.log('j' + joinedUser)
-  // console.log('n ' + notjoinedUser)
-  // console.log('o ' + owner)
+  console.log('j' + joinedUser)
+  console.log('n ' + notjoinedUser)
+  console.log('o ' + owner)
 
   const getUsername = async () => {
     const id = await AsyncStorage.getItem('id');
-//    console.log('ID' + id)
-
     const response = axiosinst.get('/api/user-profile/' + id)
       .then(function (response) {
         setusername(response.data.username)
@@ -113,7 +105,6 @@ const GroupPage = (prop) => {
 
 
   const JoinGroup = async () => {
-
     console.log(' OMAD TO JOIN GROUP')
     const back = {}
     const backk = JSON.stringify(back);
@@ -124,7 +115,6 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-//        console.log('response' + response.data.message)
         setjoin(true)
         getMembers()
       })
@@ -176,13 +166,8 @@ const GroupPage = (prop) => {
         }
         })
       .then(function(response){
-//          console.log('^^^^^^^^^^^^^^^')
-//          console.log('MMMMMM'+response.data.discussions[0].description)
           setdiscussion(response.data.discussions)
           setloading(false)
-//          console.log('numberss'+discussion.length)
-//          console.log('MMMMMM'+response.data.discussions[0].title)
-
       })
       
       .catch( async function (error) {
@@ -202,7 +187,6 @@ const GroupPage = (prop) => {
     return (
       <View style={styles.container}>
         <View>
-          {notjoinedUser != "notjoinedUser" ? 
                   <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
   
                   <View style={styles.centeredView}>
@@ -299,12 +283,6 @@ const GroupPage = (prop) => {
                   </View>
                   </View>
                   </Modal>
-           :Alert.alert('',' فقط اعضای گروه میتونن بحث تشکیل بدن ',[
-            {
-         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-            }
-            ],{cancelable:false},{style:{height:50}})}
-
         </View>
         <ScrollView>
           <Text style={styles.kima}>کیما</Text>
@@ -415,14 +393,25 @@ const GroupPage = (prop) => {
             }
           >
           </FlatList>
+
+          {notjoinedUser != "notjoinedUser" ?
+            <Button onPress={() => setModalVisible(true)} style={{
+              marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
+                , backgroundColor: '#1F7A8C'
+                }}>
+              <Text style={{ marginLeft: wp('17%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
+            </Button>
+             : <Button onPress={() => Alert.alert('',' برای ایجاد یک بحث جدید باید عضو گروه باشید',[{          
+              text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+              }],{cancelable:false},{style:{height:50}})} style={{
+                marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
+                  , backgroundColor: '#1F7A8C'
+                  }}>
+                 <Text style={{ marginLeft: wp('17%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
+               </Button>}
   
   
-          <Button onPress={() => setModalVisible(true)} style={{
-            marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
-            , backgroundColor: '#1F7A8C'
-          }}>
-            <Text style={{ marginLeft: wp('17%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
-          </Button>
+
   
           <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
   
