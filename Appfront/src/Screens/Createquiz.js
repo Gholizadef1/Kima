@@ -30,7 +30,55 @@ const Createquiz = () => {
     //   React.useCallback(() => {   
 
     //   },[]))
-   
+    const pickfromgallery = async (props, change) => {
+        await console.log(await AsyncStorage.getItem('token'));
+        console.log('gallery')
+        const { granted } = await permissions.askAsync(permissions.CAMERA_ROLL)
+        if (granted) {
+            console.log(granted)
+            let data = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 1
+            })
+            console.log(data);
+            console.log(data.uri)
+            const formdata = new FormData();
+
+            const newfile = {
+                uri: data.uri,
+                type: `test/${data.uri.split(".")[3]}`,
+                name: `test.${data.uri.split(".")[3]}`
+            }
+            console.log(newfile)
+
+            formdata.append('photo', newfile)
+
+            if (data.cancelled === false) {
+                const back = {
+                    photo: data
+                }
+                const backk = JSON.stringify(back);
+                console.log(props.values.photo + 'formik photo1')
+                props.values.photo = data.uri
+                //baraye in ke rerender beshe va photo formik form taghir kone
+
+                props.handleChange('photo')
+                setpicture(newfile)
+
+                console.log(picture + '  PICTURE')
+                // change(data.uri)
+                console.log(props.values.photo + 'formik photo2')
+            }
+        }
+        else {
+            Alert.alert('oops', ' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید', [{
+                Title: 'فهمیدم', onPress: () => console.log('alert closed')
+            }])
+        }
+
+    }
     return (
         <View style={styles.container}>
 
