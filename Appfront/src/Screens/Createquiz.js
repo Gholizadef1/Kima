@@ -223,10 +223,10 @@ const Createquiz = () => {
                                     <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
 
                                         {/* <Text>First</Text> */}
-                                        <View style={{ marginTop: hp("3%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
+                                        <View style={{ marginTop: hp("3%"),marginRight:wp("12%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                                             <TouchableOpacity>
 
-                                                <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
+                                                <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white",backgroundColor:"white" }}>
                                                     <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                                         borderColor={'white'}
                                                         onChangeText={props.handleChange('Discription')}
@@ -244,7 +244,7 @@ const Createquiz = () => {
                                                 <RadioButton color={"#1f7a8c"} value="1" />
                                             </View>
                                         </View>
-                                        <View style={{ marginTop: hp("3%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
+                                        <View style={{ marginTop: hp("3%"),marginRight:wp("12%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                                             <TouchableOpacity>
 
                                                 <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
@@ -265,7 +265,7 @@ const Createquiz = () => {
                                                 <RadioButton color={"#1f7a8c"} value="2" />
                                             </View>
                                         </View>
-                                        <View style={{ marginTop: hp("3%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
+                                        <View style={{ marginTop: hp("3%"), marginHorizontal: wp("5%"), marginRight:wp("12%"),borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                                             <TouchableOpacity>
 
                                                 <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
@@ -286,7 +286,7 @@ const Createquiz = () => {
                                                 <RadioButton color={"#1f7a8c"} value="3" />
                                             </View>
                                         </View>
-                                        <View style={{ marginTop: hp("3%"), marginBottom: hp("5%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
+                                        <View style={{ marginTop: hp("3%"), marginBottom: hp("5%"),marginRight:wp("12%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                                             <TouchableOpacity>
 
                                                 <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
