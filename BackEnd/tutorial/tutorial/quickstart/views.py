@@ -709,16 +709,15 @@ class QuizView(APIView,PaginationHandlerMixin):
 
     def post(self,request):
         user = request.user
-        serializer = CreateQuizSerializer(data=request.data)
-        if serializer.is_valid():
-            title = serializer.data.get("title")
-            description = serializer.data.get("description")
-            if 'photo' in request.FILES:
-                new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"])
-                new_quiz.save()
-                return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
-            else:
-                new_quiz = Quiz(creator=user,title=title,description=description)
-                new_quiz.save()
-                return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
-        return Response(serializer.errors)
+        title = request.data.get("title")
+        description = request.data.get("description")
+        questions = CreateQuestionSerializer(request.data.get("questions"),many=True)
+        if 'photo' in request.FILES:
+            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"])
+            new_quiz.save()
+            return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+        else:
+            new_quiz = Quiz(creator=user,title=title,description=description)
+            new_quiz.save()
+            return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+        

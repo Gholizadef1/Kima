@@ -227,10 +227,10 @@ class MyGroupSerializer(serializers.ModelSerializer):
     def to_representation(self,value):
         return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
 
-class CreateQuizSerializer(serializers.Serializer):
+# class CreateQuizSerializer(serializers.Serializer):
 
-    title = serializers.CharField(max_length=100,required=True)
-    description = serializers.CharField(required=True)
+#     title = serializers.CharField(max_length=100,required=True)
+#     description = serializers.CharField(required=True)
 
 class QuizSerializer(serializers.ModelSerializer):
 
@@ -239,3 +239,9 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
         fields = ['id','title','description','creator','quiz_photo','create_time']
+
+class CreateQuestionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = "__all__"
