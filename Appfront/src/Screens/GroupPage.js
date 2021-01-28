@@ -48,6 +48,14 @@ const GroupPage = (prop) => {
   const [membernumber, setmembernumber] = useState();
   const [discussion, setdiscussion] = useState();
 
+  useEffect(() =>{
+    setjoinedUser(false)
+    setowner(false)
+    setnotjoinedUser(false)
+    getUsername();
+    getDiscussion(); 
+}, [join]);
+
   useEffect((async) => { 
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {    
@@ -59,7 +67,7 @@ const GroupPage = (prop) => {
             console.log('%%%%%%%%%%%%%%%%%%%joineduser')
           }
         }
-        if (joinedUser === false && username != response.data.owner.username){
+        if (joinedUser != "joinedUser" && username != response.data.owner.username){
           setnotjoinedUser("notjoinedUser")
           console.log("###############notjoineduser")
         }
@@ -67,13 +75,7 @@ const GroupPage = (prop) => {
       })
   } , [join , owner , joinedUser , notjoinedUser])
 
-  useEffect(() =>{
-      setjoinedUser(false)
-      setowner(false)
-      setnotjoinedUser(false)
-      getUsername();
-      getDiscussion(); 
-  }, [join]);
+
 
 
   useEffect((async) => {
@@ -180,14 +182,7 @@ const GroupPage = (prop) => {
       });
   }
 
-  if (loading1 === true || loading2 === true || loading3 === true) {
-    return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
-    </View>
-    )
-  }
-  else {
+  if (loading1 === false && loading2 === false && loading3 === false) {
     return (
       <View style={styles.container}>
         <View>
@@ -319,7 +314,7 @@ const GroupPage = (prop) => {
           <Text style={styles.groupname}>{groupinfo.title}</Text>
           <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
   
-          {joinedUser === "joinedUser" && join === true ? 
+          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false ? 
           <Button style={{
             marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
             , backgroundColor: '#1F7A8C'
@@ -343,13 +338,13 @@ const GroupPage = (prop) => {
             <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
           </Button> : null}
   
-          {/* {owner=== "" && joinedUser=== "" && notjoinedUser=== "" ?          
+          {owner=== "" && joinedUser=== "" && notjoinedUser=== "" ?          
            <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => JoinGroup()}>
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
-            </Button> : null }  */}
+            </Button> : null } 
   
           <Text style={{ fontSize: 21, marginLeft: wp('7%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
   
@@ -471,6 +466,13 @@ const GroupPage = (prop) => {
   
       </View>
     );
+  }
+  else {
+    return(
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+    </View>
+    )
   }
 }
 
