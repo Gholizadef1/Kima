@@ -82,8 +82,9 @@ const Createquiz = () => {
 
     }
     const [value, setValue] = React.useState('1');
+    const [itemid,setitemid]=useState(2);
     const [values,setvalues]=useState(["1"])
-    const [questions, setquestions] = useState([{id:1,name:"اول"},{id:2,name:"دوم"}])
+    const [questions, setquestions] = useState([{id:1,name:"اول"}])
     const [numofquestion,setnumofquestion]=useState(3)
     return (
         <View style={styles.container}>
@@ -205,7 +206,7 @@ const Createquiz = () => {
                                 <FlatList
                                 //بعدا لیست هدر بالایی ها
                                 scrollEnabled={false}
-                                  keyExtractor={(item) => item.id}
+                                  keyExtractor={()=>itemid}
                                     data={questions}
                                     renderItem={(item) =>{
                                        // const [values,setvalues]=useState("1")
@@ -228,6 +229,7 @@ const Createquiz = () => {
                                        await setvalues(values.concat(numofquestion.toString()));
                                           await setnumofquestion(numofquestion+1);
                                           await setvalues(values.concat(numofquestion));
+                                          await setitemid(itemid+1);
                                           console.log(questions);
                                           }}
                                      style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
