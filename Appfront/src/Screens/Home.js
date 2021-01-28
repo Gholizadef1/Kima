@@ -27,7 +27,7 @@ const Home = ({navigation}) => {
 
 
     function getImageFromAPI(){
-        axiosinst.get('/bookdetail')
+        axiosinst.get('/book')
         .then(function(response){
             setImage(response.data)
             // console.log(response)
@@ -37,7 +37,7 @@ const Home = ({navigation}) => {
         })
     }
     function getbestsFromAPI(){
-        axiosinst.get('/filter-book-rate')
+        axiosinst.get('/book ?filter=rate')
         .then(function(response){
             setbest(response.data)
             // console.log(response)
@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
         })
     }
     function getmostFromAPI(){
-        axiosinst.get('/filter-book-comment')
+        axiosinst.get('/book ?filter=comment')
         .then(function(response){
             setmostdis(response.data)
             // console.log(response)
