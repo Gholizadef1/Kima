@@ -31,7 +31,9 @@ const userschema=yup.object({
 const GroupPage = (prop) => {
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
-  const [loading , setloading] = useState(true)
+  const [loading1 , setloading1] = useState(true)
+  const [loading2 , setloading2] = useState(true)
+  const [loading3 , setloading3] = useState(true)
   const [picture, setpicture] = useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState([]);
@@ -50,7 +52,7 @@ const GroupPage = (prop) => {
     const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
       .then(async function (response) {    
         setmembers(response.data.members)
- 
+        
         for (let i = 0; i < membernumber; i++) {
           if (response.data.members[i].user.username === username && owner != "owner") {
             setjoinedUser("joinedUser")
@@ -61,6 +63,7 @@ const GroupPage = (prop) => {
           setnotjoinedUser("notjoinedUser")
           console.log("###############notjoineduser")
         }
+        setloading1(false)
       })
   } , [join , owner , joinedUser , notjoinedUser])
 
@@ -76,6 +79,7 @@ const GroupPage = (prop) => {
   useEffect((async) => {
         const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
         .then(async function (response) {
+          setloading2(false)
           await setgroupinfo(response.data);
           setmembernumber(groupinfo.members_count);
           setgroupphoto(`http://2e7bd654174c.ngrok.io${response.data.group_photo}`)
@@ -167,7 +171,7 @@ const GroupPage = (prop) => {
         })
       .then(function(response){
           setdiscussion(response.data.discussions)
-          setloading(false)
+          setloading3(false)
       })
       
       .catch( async function (error) {
@@ -176,7 +180,7 @@ const GroupPage = (prop) => {
       });
   }
 
-  if (loading) {
+  if (loading1 === true || loading2 === true || loading3 === true) {
     return(
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
@@ -315,7 +319,7 @@ const GroupPage = (prop) => {
           <Text style={styles.groupname}>{groupinfo.title}</Text>
           <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
   
-          {joinedUser === "joinedUser" ? 
+          {joinedUser === "joinedUser" && join === true ? 
           <Button style={{
             marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
             , backgroundColor: '#1F7A8C'
