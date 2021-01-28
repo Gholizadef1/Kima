@@ -44,30 +44,15 @@ function App(props) {
             </Route>
 
             <ProtectedRoute path="/home" component={Slide}>
-               {/* <NavBar/>
-               <Slide/> */}
             </ProtectedRoute>
 
-            <Route path="/profile">
-              <NavBar/>
-              <Profile/>
-            </Route>
+            <ProtectedRoute path="/profile" component={Profile}/>
 
-            <Route path="/group/:groupId">
-                <NavBar/>
-              <Grouppage/>
-            </Route>
-             
+            <ProtectedRoute path="/group/:groupId" component={Grouppage}/>
             
-            <Route path="/book/:bookId">
-              <NavBar/>
-              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
-            </Route>
+            <ProtectedRoute path="/book/:bookId" component={BookView}/>
 
-            <Route path="/groups">
-              <NavBar/>
-              <Groups />
-            </Route>
+            <ProtectedRoute path="/groups" component={Groups}/>
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">

@@ -44,7 +44,7 @@ function RegistrationForm(props) {
                         }))
                         Cookies.set('userToken',response.data.token);
                         Cookies.set('userName',state.userName);
-                        Cookies.set('userId',response.data.userid);
+                        Cookies.set('userId',response.data.id);
                         redirectToHome();
                         props.showError(null)
                     } else{
