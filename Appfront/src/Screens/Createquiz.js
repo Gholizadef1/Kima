@@ -83,6 +83,7 @@ const Createquiz = () => {
     const [value, setValue] = React.useState('1');
     return (
         <View style={styles.container}>
+         <ScrollView>
 
             {/* <TouchableOpacity style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%'), height: hp('5%'), width: wp('8%'), backgroundColor: 'white', position: 'absolute' }} onPress={() => setmodalopen(false)}>
                 <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }} onPress={() => setmodalopen(false)}
@@ -90,14 +91,14 @@ const Createquiz = () => {
             </TouchableOpacity> */}
 
             <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
-                initialValues={{ Username: '', Discription: '', photo: require('../../assets/quiz2.jpg') }}
+                initialValues={{ Username: '', Discription: '', photo: require('../../assets/tea.jpg') }}
                 // validationSchema={userschema}
                 onSubmit={async (values, actions) => {
                     console.log('ON SUBMIT')
                     const formdata = new FormData();
                     formdata.append('title', values.Username)
                     formdata.append('summary', values.Discription)
-                    if (picture.uri === '../../assets/quiz2.jpg') {
+                    if (picture.uri === '../../assets/tea.jpg') {
                     }
                     else
                         formdata.append('photo', picture)
@@ -109,11 +110,11 @@ const Createquiz = () => {
 
                     <View style={{ marginTop: hp('5%') }}>
                         <View style={{ borderColor: 'blue' }}>
-                            <ScrollView>
+                           
 
                                 {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
                                 {/* bedoone view nemishod in barr */}
-                                {props.values.photo === require('../../assets/quiz2.jpg') ? <TouchableOpacity style={{
+                                {props.values.photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
                                     height: hp('14%'),
                                     marginTop: hp('0%'),
                                     width: wp('28%'),
@@ -295,17 +296,27 @@ const Createquiz = () => {
                                     </View>
                                     </View>
                                 </RadioButton.Group>
-                                <Text>ladkjfhlksajhflkj</Text>
-                                <Text>ladkjfhlksajhflkj</Text>
-                                <Text>ladkjfhlksajhflkj</Text>
-                                <Text>ladkjfhlksajhflkj</Text>
-                            </ScrollView>
+                                <TouchableOpacity style={{marginTop:hp("5%"),marginLeft:wp("5%"),marginBottom:hp("-1%")}}>
+                                <Text style={{color:"#1f7a8c",fontWeight:"bold",fontSize:hp("1.5.5%")}}>اضافه کردن سوال</Text>
+                                </TouchableOpacity>
+                                {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
+                                <TouchableOpacity style={{marginTop:hp("-1.3%"),marginLeft:wp("31.5%"),backgroundColor:"white"}}>
+                                    <Text style={{color:"#1f7a8c",fontSize:hp("1.5.5%"),fontWeight:"bold"}}>حذف کردن سوال</Text>
+                                </TouchableOpacity>
+                                <Text style={{marginTop:hp("-2.4%"),alignSelf:"flex-start",marginBottom:hp("10%"),marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",fontSize:hp("1.5.5%")}}>/</Text>
+                                {/* <TouchableOpacity style={{marginTop:hp("-2.5%"),fontWeight:"bold",fontSize:hp("1.5.5%")
+                                ,marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",marginBottom:hp("10%")}}>
+                                <Text style={{fontSize:hp("1.5.5%"),color:"#1f7a8c",
+                                // ,height:20,width:30
+                                }}>حذف کردن سوال</Text>
+                                </TouchableOpacity> */}
                         </View>
                     </View>
                 )}
 
 
             </Formik>
+            </ScrollView>
         </View>
 
         // <View style={styles.container}>
@@ -362,7 +373,9 @@ const styles = StyleSheet.create({
     item: {
         marginLeft: wp('37%'),
         marginRight: wp('9%'),
-        height: wp('9.5%')
+        height: wp('9.5%'),
+        borderColor:"lightblue",
+        borderWidth:hp("0.1%")
     },
     Input: {
         left: wp('8%'),
