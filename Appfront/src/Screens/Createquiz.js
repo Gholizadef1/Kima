@@ -207,7 +207,94 @@ const Createquiz = () => {
                                     </Textarea>
 
                                 </TouchableOpacity>
-                               
+                                <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
+                                   
+                                        {/* <Text>First</Text> */}
+                                        <View style={{marginTop:hp("3%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
+                                        <TouchableOpacity>
+                                        
+                                        <Item rounded style={{marginLeft:wp("14%"),borderColor:"white"}}>
+                                    <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                        borderColor={'white'}
+                                        onChangeText={props.handleChange('Discription')}
+                                        onBlur={props.handleBlur('Discription')}
+                                        value={props.values.Discription}
+                                        placeholder={'گزینه اول ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
+                                            marginTop: hp("0%"),marginLeft:wp("1%"), height: hp("4%"),fontSize:hp("1.4%")
+                                        }}>
+                                     {/* <RadioButton value="5" /> */}
+                                    </Input>
+                                   
+                                    </Item>
+                                    </TouchableOpacity>
+                                    <View style={{position:'absolute',marginTop:hp("0%"),marginLeft:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
+                                    <RadioButton color={"#1f7a8c"} value="1" />
+                                    </View>
+                                    </View>
+                                    <View style={{marginTop:hp("3%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
+                                        <TouchableOpacity>
+                                        
+                                        <Item rounded style={{marginLeft:wp("14%"),borderColor:"white"}}>
+                                    <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                        borderColor={'white'}
+                                        onChangeText={props.handleChange('Discription')}
+                                        onBlur={props.handleBlur('Discription')}
+                                        value={props.values.Discription}
+                                        placeholder={'گزینه دوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
+                                            marginTop: hp("0%"),marginLeft:wp("1%"), height: hp("4%"),fontSize:hp("1.4%")
+                                        }}>
+                                     {/* <RadioButton value="5" /> */}
+                                    </Input>
+                                   
+                                    </Item>
+                                    </TouchableOpacity>
+                                    <View style={{position:'absolute',marginTop:hp("0%"),marginLeft:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
+                                    <RadioButton color={"#1f7a8c"} value="2" />
+                                    </View>
+                                    </View>
+                                    <View style={{marginTop:hp("3%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
+                                        <TouchableOpacity>
+                                        
+                                        <Item rounded style={{marginLeft:wp("14%"),borderColor:"white"}}>
+                                    <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                        borderColor={'white'}
+                                        onChangeText={props.handleChange('Discription')}
+                                        onBlur={props.handleBlur('Discription')}
+                                        value={props.values.Discription}
+                                        placeholder={'گزینه سوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
+                                            marginTop: hp("0%"),marginLeft:wp("1%"), height: hp("4%"),fontSize:hp("1.4%")
+                                        }}>
+                                     {/* <RadioButton value="5" /> */}
+                                    </Input>
+                                   
+                                    </Item>
+                                    </TouchableOpacity>
+                                    <View style={{position:'absolute',marginTop:hp("0%"),marginLeft:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
+                                    <RadioButton color={"#1f7a8c"} value="3" />
+                                    </View>
+                                    </View>
+                                    <View style={{marginTop:hp("3%"),marginHorizontal:wp("5%"),borderColor:"lightgray",backgroundColor:"white",borderRadius:20,borderWidth:hp("0.1%")}}>
+                                        <TouchableOpacity>
+                                        
+                                        <Item rounded style={{marginLeft:wp("14%"),borderColor:"white"}}>
+                                    <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                        borderColor={'white'}
+                                        onChangeText={props.handleChange('Discription')}
+                                        onBlur={props.handleBlur('Discription')}
+                                        value={props.values.Discription}
+                                        placeholder={'گزینه چهارم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
+                                            marginTop: hp("0%"),marginLeft:wp("1%"), height: hp("4%"),fontSize:hp("1.4%")
+                                        }}>
+                                     {/* <RadioButton value="5" /> */}
+                                    </Input>
+                                   
+                                    </Item>
+                                    </TouchableOpacity>
+                                    <View style={{position:'absolute',marginTop:hp("0%"),marginLeft:wp("0%"),width:wp("15%"),borderRadius:20,height:hp("4%"),backgroundColor:"#EDF2F4"}}>
+                                    <RadioButton color={"#1f7a8c"} value="4" />
+                                    </View>
+                                    </View>
+                                </RadioButton.Group>
                                 <Text>ladkjfhlksajhflkj</Text>
                                 <Text>ladkjfhlksajhflkj</Text>
                                 <Text>ladkjfhlksajhflkj</Text>
