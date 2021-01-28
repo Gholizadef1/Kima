@@ -82,6 +82,7 @@ const Createquiz = () => {
     }
     const [value, setValue] = React.useState('1');
     const [questions, setquestions] = useState([{id:1,name:"اول"},{id:2,name:"دوم"}])
+    const [numofquestion,setnumofquestion]=useState("3")
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -200,6 +201,8 @@ const Createquiz = () => {
                                         
                              
                                 <FlatList
+                                //بعدا لیست هدر بالایی ها
+                                scrollEnabled={false}
                                   keyExtractor={(item) => item.id}
                                     data={questions}
                                     renderItem={(item) => <>
@@ -210,7 +213,7 @@ const Createquiz = () => {
                                         onChangeText={props.handleChange('Discription')}
                                         onBlur={props.handleBlur('Discription')}
                                         value={props.values.Discription}
-                                        placeholder={'سوال اول ...'} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
+                                        placeholder={'سوال ...'+item.id} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
                                             marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "white"
                                         }}>
 
@@ -312,7 +315,14 @@ const Createquiz = () => {
                                 </FlatList>
 
                                 <View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
-                                    <TouchableOpacity style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
+                                    <TouchableOpacity
+                                     onPress={async()=>{
+                                         console.log(questions);
+                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                       await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
+                                          await setnumofquestion(numofquestion+1);
+                                          }}
+                                     style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
                                         <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
                                     </TouchableOpacity>
                                     <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
