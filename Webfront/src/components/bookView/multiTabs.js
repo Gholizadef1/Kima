@@ -138,7 +138,11 @@ export default function FullWidthTabs(props) {
     //   setEndQuote("نقل قول دیگری وجود ندارد");
     // });
 
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-" + filterBaseQuote +"?page="+quotesPage)
+      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-" + filterBaseQuote +"?page="+quotesPage,
+      {
+        headers:{
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
     .then(response=>{
      setQuotes(response.data.quotes);
      setQuotesPagesNumber(response.data.count);
