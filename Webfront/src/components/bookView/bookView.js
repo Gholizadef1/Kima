@@ -308,11 +308,11 @@ return(
   <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
     <div className="mx-md-5">
     <div className=" row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
-      <div className="col-md-4 mb-md-0 p-4 rounded-lg" >
-        <img src={state.imgurl} className="img-fluid float-right rounded-lg" alt="" style={{width:'100%',height:'auto',boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
+     
+        <img src={state.imgurl} 
+        className="img-fluid mx-auto my-4 float-right rounded-lg" alt="" style={{width:270,boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
 
-      </div>
-      <div className=" position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
+      <div className="mx-auto position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
         <h2 className="p-3 mt-2" >{state.title}</h2>
         <div>
               <div className="ml-auto">
@@ -342,7 +342,7 @@ return(
 
 
 
-          <table className="mt-auto table table-hover text-right " >
+          <table className="m-auto table table-hover text-right " >
             <tbody className="">
               <tr>
               <th >
@@ -376,11 +376,11 @@ return(
           </table>
           <div className="row mb-auto" >
           <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-          <select className="form-control mr-4 rounded-pill" style={{width:170,fontSize:12}} id="bookMood" onChange={ addBookToMineHandler} >
-          <option id="none" value="none">هیچکدام</option>
-          <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
-          <option id="Reading" value="Reading">دارم می‌خوانم</option>
-          <option id="Read" value="Read">خوانده‌ام</option>
+          <select className="form-control mr-4 rounded-pill shadow" style={{width:170}} id="bookMood" onChange={ addBookToMineHandler} >
+            <option id="none" value="none">هیچکدام</option>
+            <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+            <option id="Reading" value="Reading">دارم می‌خوانم</option>
+            <option id="Read" value="Read">خوانده‌ام</option>
           </select>
           <div>
           <Snackbar
