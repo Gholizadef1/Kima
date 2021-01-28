@@ -395,11 +395,9 @@ export default function FullWidthTabs(props) {
          <Snackbar
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
               open={openSnack}
-
-              autoHideDuration={2000}
-
+              autoHideDuration={2500}
               onClose={handleCloseSnack}
-              message={massage}
+              message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
             />
       </div>
       <AppBar position="static" color="default"  >

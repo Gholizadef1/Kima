@@ -13,7 +13,7 @@ import {
   import {GoSearch} from 'react-icons/go';
 
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+//import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -257,42 +257,24 @@ const handleCloseSnack = (event, reason) => {
                   گروه جدید
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
                 <Dialog  open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle className="yekanfont" id="form-dialog-title">گروه جدید بسازید</DialogTitle>
+                  <DialogTitle  id="form-dialog-title">
+                    <h5 style={{fontFamily:'Yekan'}}> گروه جدید بسازید</h5>
+                  </DialogTitle>
                   <DialogContent className="yekanfont">
-                    
-
+                  <div>
                   <input class="form-control" 
-                type="file" accept="image/*" 
-                onChange={handleImageUpload} 
-                ref={imageUploader} 
+                  type="file" accept="image/*" 
+                  onChange={handleImageUpload} 
+                  ref={imageUploader} 
+                  style={{ display: "none",color:"white" }} />
 
-                style={{ display: "none",color:"white" }} />
-
-                <img src={newGroup.picture} ref={uploadedImage} alt=" انتخاب عکس" className="rounded-lg mx-auto d-block text-center"/>
-                <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
-                  <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
-                  </svg>
-                </div>
+                  <img src={newGroup.picture} ref={uploadedImage} style={{width:270}} alt=" انتخاب عکس" className="rounded-lg d-block text-center mx-md-5"/>
+                  <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
+                    <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
+                    </svg>
+                  </div>
 
                   <form className="yekanfont">
                     <label className="mt-2 mb-n1 ">نام گروه</label>
@@ -321,12 +303,13 @@ const handleCloseSnack = (event, reason) => {
                       onChange={handleChange}></textarea>
 
                     </form>
+                    </div>
                   </DialogContent>
                   <DialogActions>
-                    <Button onClick={handleCloseCreateGroup} color="black">
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseCreateGroup} color="black">
                       انصراف
                     </Button>
-                    <Button onClick={handleCreateGroupSubmit} color="black">
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCreateGroupSubmit} color="black">
                       ثبت
                     </Button>
                   </DialogActions>
@@ -400,9 +383,9 @@ const handleCloseSnack = (event, reason) => {
             <Snackbar
           anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
           open={openSnack}
-          autoHideDuration={3000}
+          autoHideDuration={2500}
           onClose={handleCloseSnack}
-          message={massage}
+          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
           />
         </div>
 
