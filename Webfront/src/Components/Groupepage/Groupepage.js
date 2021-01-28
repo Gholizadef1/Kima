@@ -11,6 +11,7 @@ import { Modal, Form } from "react-bootstrap";
 import './Groupepage.css';
 import React, { useState, useEffect } from "react";
 import Divider from '@material-ui/core/Divider';
+import {AiFillStar} from "react-icons/ai";
 import Snackbar from '@material-ui/core/Snackbar';
 import Cookies from 'js-cookie';
 
@@ -42,6 +43,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     const[user,setUser]= useState("");
     const[summary,setSummary]=useState({user:null});
     const [member,setMembers] = useState([]);
+    const [creatoreg,setCreatorg]=useState();
     const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -70,6 +72,7 @@ import Tooltip from '@material-ui/core/Tooltip';
           console.log("cjd");
           console.log(user);
         }
+        setCreatorg(data.data.owner.username)
         console.log(ginfo.group_photo);
       });
       
@@ -267,7 +270,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     setOpenCreateDiscussion(true);
     setJoin(true);
   };
-  const [massage,setMassage]=useState("");
+  const [massage,setMassage]=useState(<h5></h5>);
   const[openSnack,setOpenSnack]=useState(false);
   const handleCloseSnack = (event, reason) => {
     if (reason === 'clickaway') {
@@ -280,15 +283,13 @@ import Tooltip from '@material-ui/core/Tooltip';
       
       <div className="mx-md-1 pt-5 px-md-5">
        <div>
-         <Snackbar
-              anchorOrigin={{ vertical:'top', horizontal:'center'}}
-              open={openSnack}
-
-              autoHideDuration={3000}
-
-              onClose={handleCloseSnack}
-              message={massage}
-            />
+       <Snackbar
+          anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
+          open={openSnack}
+          autoHideDuration={2500}
+          onClose={handleCloseSnack}
+          message={<div style={{fontFamily:'Yekan',fontSize:17,marginLeft:36}}>{massage}</div>}
+          />
       </div>
       <div className="container-fluid text-center px-md-5 py-md-5" >
         <div className="mx-md-5">
@@ -306,9 +307,17 @@ import Tooltip from '@material-ui/core/Tooltip';
         
     <div className="name">
   
-  <b className="">نام گروه:  <b style={{position:'fixed'}}>{ginfo.title}</b></b>
+  <b className=""style={{position:'relative'}}>نام گروه:  
+  </b>
+  <b style={{position:'relative'}}>{ginfo.title}</b>
   </div>
-
+  <div className="">
+                <small className="creator">
+                {creatoreg}
+                :سازنده
+                <AiFillStar style={{color:'skyblue'}}></AiFillStar>
+                </small>
+               </div>
 
     {joinduser === "You joind this group!" ?
     <div className="group-info">
@@ -370,49 +379,33 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>  
                    
                    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                     <DialogContent >
-           <div class=" p-4">
-                   <form>
-                       <div class="form-group align-items-center text-right">
-                           <div class="my-1">
-                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
-                               <input type="text"
-                                 class="form-control rounded-pill"
-                                
-                                 id="name"
-                                 value={newDiscussion.name}
-                                 
-                                 type="title"
-                                 onChange={handleChange}/>
-                           </div>
-                           <div class=" my-2">
-                               <div class="my-1">
-                               <label style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
-                               <input type="password"
-                                
-                                 id="description"
-                                 style={{fontFamily:"Yekan"}}
-                                 value={newDiscussion.description}
-                                 
-                                 type="description"
-                                 onChange={handleChange}
-                                 class="form-control rounded-pill"/>
-                           </div>   
-                           </div>
-                           </div>
-                           </form>
-                           </div>
-                   
-                     </DialogContent>
-                     <DialogActions>
-                       <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
-                       انصراف
-                       </button>
-                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
-                         ثبت
-                       </button>
-                     </DialogActions>
+                     <DialogTitle id="form-dialog-title">  <h5 style={{fontFamily:'Yekan'}}> بحث جدید بسازید</h5></DialogTitle>
+                     <DialogContent className="yekanfont" >
+           <div>
+           <form className="yekanfont">  <label className="mt-2 mb-n1 ">عنوان بحث</label>
+                    <input 
+                    className="form-control" 
+                      id="name"
+                      value={newDiscussion.name}
+                      type="title"
+                      onChange={handleChange}></input>
+                    <label className="mt-2 mb-n1">توضیحات</label>
+                    <textarea className="form-control" rows="3"id="description"
+                      value={newDiscussion.description}
+                      type="description"
+                      onChange={handleChange}></textarea>
+
+                    </form>
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseCreateGroup} color="black">
+                      انصراف
+                    </Button>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCreateDiscussionSubmit} color="black">
+                      ثبت
+                    </Button>
+                  </DialogActions>
                    </Dialog>
    </div>
 
@@ -421,7 +414,7 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
      {user ==="" && joinduser==="" && owner==="" ?
      <div className="group-info">      
-       <button onClick={joinGroup}  className="btn btn-g btn-info rounded-lg" style={{color:'white'}}>اضافه‌شدن به گروه</button>
+       <button onClick={joinGroup} type="button" className="btn btn-g btn-info rounded-lg" style={{color:'white'}}>اضافه‌شدن به گروه</button>
        <b className="title-g">:دربارهٔ گروه</b>
   <p className="text-right summary" >{ginfo.summary}
 </p>
@@ -628,50 +621,34 @@ import Tooltip from '@material-ui/core/Tooltip';
                    
                    
                       
-    <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                     <DialogContent >
-           <div class=" p-4">
-                   <form>
-                       <div class="form-group align-items-center text-right">
-                           <div class="my-1">
-                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
-                               <input type="text"
-                                 class="form-control rounded-pill"
-                                
-                                 id="name"
-                                 value={newDiscussion.name}
-                                
-                                 type="title"
-                                 onChange={handleChange}/>
-                           </div>
-                           <div class=" my-2">
-                               <div class="my-1">
-                               <label style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
-                               <input type="password"
-                                
-                                 id="description"
-                                 style={{fontFamily:"Yekan"}}
-                                 value={newDiscussion.description}
-                                
-                                 type="description"
-                                 onChange={handleChange}
-                                 class="form-control rounded-pill"/>
-                           </div>   
-                           </div>
-                           </div>
-                           </form>
-                           </div>
-                   
-                     </DialogContent>
-                     <DialogActions>
-                     <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
-                       انصراف
-                       </button>
-                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
-                         ثبت
-                       </button>
-                     </DialogActions>
+                   <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
+                     <DialogTitle id="form-dialog-title">  <h5 style={{fontFamily:'Yekan'}}> بحث جدید بسازید</h5></DialogTitle>
+                     <DialogContent className="yekanfont" >
+           <div>
+           <form className="yekanfont">  <label className="mt-2 mb-n1 ">عنوان بحث</label>
+                    <input 
+                    className="form-control" 
+                      id="name"
+                      value={newDiscussion.name}
+                      type="title"
+                      onChange={handleChange}></input>
+                    <label className="mt-2 mb-n1">توضیحات</label>
+                    <textarea className="form-control" rows="3"id="description"
+                      value={newDiscussion.description}
+                      type="description"
+                      onChange={handleChange}></textarea>
+
+                    </form>
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseCreateGroup} color="black">
+                      انصراف
+                    </Button>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCreateDiscussionSubmit} color="black">
+                      ثبت
+                    </Button>
+                  </DialogActions>
                    </Dialog>
    </div>
 
@@ -698,8 +675,8 @@ import Tooltip from '@material-ui/core/Tooltip';
        !آیا مطمئن هستید که می‌خواهید گروه را حذف کنید؟
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btnno btn-info rounded-lg" data-dismiss="modal">!خیر</button>
-        <button onClick={deletGroup} data-dismiss="modal"  type="button" class=" btn btnbale btn-info rounded-lg">!بله</button>
+        <button type="button" class="btn rounded-lg" data-dismiss="modal">!خیر</button>
+        <button onClick={deletGroup} data-dismiss="modal"  type="button" class=" btn rounded-lg">!بله</button>
       </div>
     </div>
   </div>
@@ -762,49 +739,33 @@ import Tooltip from '@material-ui/core/Tooltip';
     </div>  
 
     <Dialog open={openCreateDiscussion} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                     <DialogTitle id="form-dialog-title">ساخت بحث جدید</DialogTitle>
-                     <DialogContent >
-           <div class=" p-4">
-                   <form>
-                       <div class="form-group align-items-center text-right">
-                           <div class="my-1">
-                               <label  style={{fontFamily:'Yekan'}}>عنوان بحث</label>
-                               <input type="text"
-                                 class="form-control rounded-pill"
-                                
-                                 id="name"
-                                 value={newDiscussion.name}
-                                 
-                                 type="title"
-                                 onChange={handleChange}/>
-                           </div>
-                           <div class=" my-2">
-                               <div class="my-1">
-                               <label  style={{fontFamily:"Yekan"}}>دربارهٔ بحث</label>
-                               <input type="password"
-                                
-                                 id="description"
-                                 style={{fontFamily:"Yekan"}}
-                                 value={newDiscussion.description}
-                                 
-                                 type="description"
-                                 onChange={handleChange}
-                                 class="form-control rounded-pill"/>
-                           </div>   
-                           </div>
-                           </div>
-                           </form>
-                           </div>
-                   
-                     </DialogContent>
-                     <DialogActions>
-                     <button className="btn btnDE btn-info rounded-lg" onClick={handleCloseCreateGroup} color="black">
-                       انصراف
-                       </button>
-                       <button className="btn btnD btn-info rounded-lg" onClick={handleCreateDiscussionSubmit} color="black">
-                         ثبت
-                       </button>
-                     </DialogActions>
+                     <DialogTitle id="form-dialog-title">  <h5 style={{fontFamily:'Yekan'}}> بحث جدید بسازید</h5></DialogTitle>
+                     <DialogContent className="yekanfont" >
+           <div>
+           <form className="yekanfont">  <label className="mt-2 mb-n1 ">عنوان بحث</label>
+                    <input 
+                    className="form-control" 
+                      id="name"
+                      value={newDiscussion.name}
+                      type="title"
+                      onChange={handleChange}></input>
+                    <label className="mt-2 mb-n1">توضیحات</label>
+                    <textarea className="form-control" rows="3"id="description"
+                      value={newDiscussion.description}
+                      type="description"
+                      onChange={handleChange}></textarea>
+
+                    </form>
+                    </div>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseCreateGroup} color="black">
+                      انصراف
+                    </Button>
+                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCreateDiscussionSubmit} color="black">
+                      ثبت
+                    </Button>
+                  </DialogActions>
                    </Dialog>
 </div>
     :

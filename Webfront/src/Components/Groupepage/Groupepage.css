@@ -563,7 +563,7 @@
                 font-size:20px;
                 font-family: "Yekan";
                 margin-top: 30px;
-                margin-right: 250px;
+                margin-right: 220px;
             }
             .creator{
                 font-family: 'Yekan';
@@ -613,17 +613,16 @@
                 
                 font-family: 'Yekan';
                 margin-right: 500px;
-               margin-top: -230px;
+               margin-top: -275px;
                 height: 45px;
              
             }
             .name{
-                font-family: 'Yekan';
-                font-size: 25px;
-                margin-right: -340px;
-                direction: rtl;
-                position: relative;
+                font-size:25px;
+                font-family: "Yekan";
                 margin-top: -50px;
+                margin-right: -10px;
+                direction: rtl;
             
             }
             .btnD{
