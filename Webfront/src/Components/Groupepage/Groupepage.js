@@ -311,11 +311,12 @@ import Tooltip from '@material-ui/core/Tooltip';
   </b>
   <b style={{position:'relative'}}>{ginfo.title}</b>
   </div>
-  <div className="">
+  <div className="ml-3">
                 <small className="creator">
+                <AiFillStar></AiFillStar>
                 {creatoreg}
                 :سازنده
-                <AiFillStar style={{color:'skyblue'}}></AiFillStar>
+                <AiFillStar></AiFillStar>
                 </small>
                </div>
 
