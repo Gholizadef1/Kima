@@ -28,6 +28,7 @@ function NavBar (props){
   const [user,setUser] = useState({user:null});
   const [search,setSearch] = useState([]);
   const [error,setError] = useState("");
+  const [userpic,setuserpic] = useState("");
 
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -48,6 +49,7 @@ useEffect(() => {
     //console.log(response);
     //console.log(response.data);
     Cookies.set('userPic',API_BASE_URL+response.data.profile_photo);
+    setuserpic(API_BASE_URL+response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {
@@ -56,7 +58,7 @@ useEffect(() => {
   });
 
   searchUsers();
-  }, [user]);
+  }, [user,Cookies.get('userPic')]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -143,7 +145,7 @@ useEffect(() => {
           <div className="d-flex justify-content-between mr-md-5">
               <div className="btn-group mx-auto " >
                 <div type="button" className="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow " />
+                  <Avatar alt="" src={userpic} className="shadow " />
                 </div>
                 <div className="dropdown-menu text-right" >
                   <div className="text-center" style={{fontSize:18}} >
