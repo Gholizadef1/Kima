@@ -388,7 +388,7 @@ return(
           open={openSnack}
           autoHideDuration={3000}
           onClose={handleCloseSnack}
-          message={selectMassage}
+          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{selectMassage}</div>}
           />
       </div>
     </div>
