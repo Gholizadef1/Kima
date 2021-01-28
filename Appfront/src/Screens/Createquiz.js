@@ -81,6 +81,7 @@ const Createquiz = () => {
 
     }
     const [value, setValue] = React.useState('1');
+    const [values,setvalues]=useState(["1"])
     const [questions, setquestions] = useState([{id:1,name:"اول"},{id:2,name:"دوم"}])
     const [numofquestion,setnumofquestion]=useState(3)
     return (
@@ -205,7 +206,9 @@ const Createquiz = () => {
                                 scrollEnabled={false}
                                   keyExtractor={(item) => item.id}
                                     data={questions}
-                                    renderItem={(item) => <>
+                                    renderItem={(item) =>{
+                                        const [values,setvalues]=useState("1")
+                                         return(<>
                                         <TouchableOpacity>
                                     <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                                         borderColor={'lightblue'}
@@ -220,7 +223,7 @@ const Createquiz = () => {
                                     </Textarea>
 
                                 </TouchableOpacity>
-                                    <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
+                                    <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={values}>
 
                                         {/* <Text>First</Text> */}
                                         <View style={{ marginTop: hp("3%"),marginRight:wp("12%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
@@ -308,8 +311,8 @@ const Createquiz = () => {
                                             </View>
                                         </View>
                                     </RadioButton.Group>
-                                    </>
-                                    }
+                                    </>)
+                                    }}
                                 >
 
                                 </FlatList>
@@ -322,7 +325,9 @@ const Createquiz = () => {
                                        
                                         //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
                                        await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
+                                       await setvalues(values.concat(numofquestion.toString()));
                                           await setnumofquestion(numofquestion+1);
+                                          await setvalues(values.concat(numofquestion));
                                           console.log(questions);
                                           }}
                                      style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
@@ -339,7 +344,7 @@ const Createquiz = () => {
                                         const temp=await questions.pop();
                                         console.log(temp);
                                         //await  setquestions(temp);
-                                        console.log(questions[numofquestion-1].id+"id");
+                                      //  console.log(questions[numofquestion-1].id+"id");
                                         //inex nan
                                         //await setquestions(await questions.pop())
                                           await setnumofquestion(numofquestion-1);
