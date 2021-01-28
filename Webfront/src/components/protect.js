@@ -4,41 +4,38 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation
 //  Link,
 //  useRouteMatch,
 //  useParams,
 //  withRouter
 } from "react-router-dom";
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import NavBar from "../Components/Navbar";
 
 
-function protectedRoute({ children, ...rest}){
-    let auth;
-    console.log(Cookies.get('userToken'));
-    console.log(auth);
-    if(Cookies.get('userToken')==undefined){
-      auth=true;}
-      else {auth=false;}
+const ProtectedRoute=({ component: Component, ...rest})=>{
+  const location = useLocation();
       
       console.log(Cookies.get('userToken'));
       return(
         <Route
-        {...rest}
-        
-        render={({ location }) =>
-          auth ? (
-            children
-          ) : (
+        {...rest}>
+        {Cookies.get('userToken') !== undefined ?
+        <div>
+        <NavBar/>
+        <Component />
+        </div>
+        : 
             <Redirect
               to={{
                 pathname: "/login",
                 state: { from: location }
               }}
             />
-          )
         }
-      />
+      </Route>
     );
   }
 
-  export default protectedRoute;
+  export default ProtectedRoute;
