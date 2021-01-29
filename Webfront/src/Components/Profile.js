@@ -351,7 +351,7 @@ useEffect(() => {
                                             <div class="my-1">
                                                 <label  for="userName"style={{fontFamily:'Yekan'}}>نام کاربری</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
                                                   id="userName"
                                                 //   placeholder={user.userName}
                                                   value={user.userName}
@@ -372,7 +372,7 @@ useEffect(() => {
                                                 <label for="password" style={{fontFamily:"Yekan"}}>رمز قبلی</label>
                                                 <input type="password"
 
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
 
                                                   id="oldPass"
 
@@ -384,7 +384,7 @@ useEffect(() => {
                                                 <label for="password"style={{fontFamily:"Yekan"}}>رمز جدید</label>
                                                 <input type="password"
 
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
 
 
                                                   id="newPass"
@@ -422,7 +422,7 @@ useEffect(() => {
         <Modal.Footer>
 
         
-          <button className="btn btn-info rounded-lg mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"white"}}>
+          <button className="btn rounded-lg mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"black"}}>
 
             بستن
           </button>
