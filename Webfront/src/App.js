@@ -20,6 +20,7 @@ import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
 import QuizesPage from "./Components/Quizespage/QuizesPage";
+import CreateQuiz from './Components/Quizespage/CreateQuiz';
 function App(props) {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
@@ -76,6 +77,10 @@ function App(props) {
             <Route path="/quizes">
               <NavBar/>
               <QuizesPage />
+            </Route>
+            <Route path="/creatquize">
+            <NavBar/>
+            <CreateQuiz/>
             </Route>
             <Route path="*">
               <div class="alert alert-warning" role="alert">

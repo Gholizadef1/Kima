@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import {
-    // BrowserRouter as Router,
-    // Switch,
-    // Route,
-    // Redirect,
-    // Link,
-    // useRouteMatch,
-    // useParams,
-    withRouter
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+  useRouteMatch,
+  useParams,
+  withRouter
+} from "react-router-dom";
   import {GoSearch} from 'react-icons/go';
 
 import Button from '@material-ui/core/Button';
@@ -89,8 +89,10 @@ function Quizespage (props){
 
   const [openCreateGroup, setOpenCreateGroup] = useState(false);
 
-  const handleClickOpenCreateGroup = () => {
-    setOpenCreateGroup(true);
+  const routeToCreateQuize = () => {
+    
+        props.history.push('/creatquize');
+      
   };
 
   const handleCloseCreateGroup = () => {
@@ -252,7 +254,7 @@ const handleCloseSnack = (event, reason) => {
                 </select>
               </div>
               <div>
-                <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup}>
+                <div className="btn btn-info rounded-lg  shadow" onClick={routeToCreateQuize}>
                   آزمون جدید
                 </div>
 
