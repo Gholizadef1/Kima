@@ -18,7 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
-import { FastField, Formik, formik } from 'formik';
+import { FastField, Formik, formik, Form, FieldArray } from 'formik';
 import * as yup from 'yup';
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -89,6 +89,7 @@ const Createquiz = () => {
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
     const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
+    //  const [soalha,setsoalha]=[{question:"",a:"",b:"",c:"",d:"",correct:""}];
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -99,7 +100,10 @@ const Createquiz = () => {
             </TouchableOpacity> */}
 
                 <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
-                    initialValues={{ Username: '', Discription: '', photo: require('../../assets/tea.jpg') }}
+                    initialValues={{
+                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "", a: "", b: "", c: "", d: "", correct: "1" }]
+                        // soal:soalha 
+                    }}
                     // validationSchema={userschema}
                     onSubmit={async (values, actions) => {
                         console.log('ON SUBMIT')
@@ -115,7 +119,7 @@ const Createquiz = () => {
                     }}
                 >
                     {(props) => (
-
+                        //<Form> 
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
@@ -222,144 +226,160 @@ const Createquiz = () => {
 
 
 
+                                <FieldArray name={"soalha"}>
+                                {({push,pop})=>(
+                                    <FlatList
+                                        //بعدا لیست هدر بالایی ها
+                                        // ListHeaderComponent={()=>(
 
-                                <FlatList
-                                    //بعدا لیست هدر بالایی ها
-                                    // ListHeaderComponent={()=>(
+                                        // )}
+                                        name={"soalha"}
+                                        scrollEnabled={false}
+                                        keyExtractor={(item) => {
+                                            return (item.id)
+                                            //   undefined
+                                            //   questions[numofquestion-1].id
+                                        }}
+                                        data={questions}
+                                        renderItem={({ item }) => {
+                                            console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
+                                            // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
+                                            // const [values,setvalues]=useState("1")
+                                            return (<>
+                                                <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
+                                                <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
+                                                     {/* //  propp={propss} */}
+                                            </>)
+                                        }}
+                                        ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
+                                            <TouchableOpacity
+                                                onPress={async () => {
+                                                    if (numofquestion <= 20) {
+                                                        push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+                                                        for(var i=numofquestion-1;i>=0;i--){
+                                                            console.log(props.values.soalha[i].question+"   aksdfj;lkj");
+                                                            console.log(props.values.soalha[i].a+"  sfa;slkfj");
+                                                            console.log(props.values.soalha[i].correct+"  sfa;slkfj");
+                                                        }
+                                                        console.log(props.values.soalha[0]+" VALUESSSS")
+                                                        console.log(props.values.soalha[1]+" VALUESSSS")
+                                                        //toye groups mygroups avali javab nemidad :\
+                                                        await setitemid(itemid + 1);
+                                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                                        await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
+                                                        //    await setvalues(values.concat(numofquestion.toString()));
+                                                        await setnumofquestion(numofquestion + 1);
+                                                        //      // await setvalues(values.concat(numofquestion));
+                                                        //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
+                                                        console.log(questions);
+                                                    }
+                                                    else {
+                                                        new Promise(async (resolve, refect) => {
+                                                            await setmaxnumquestion(true);
 
-                                    // )}
-                                    scrollEnabled={false}
-                                    keyExtractor={(item) => {
-                                        return (item.id)
-                                        //   undefined
-                                        //   questions[numofquestion-1].id
-                                    }}
-                                    data={questions}
-                                    renderItem={({ item }) => {
-                                        console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
-                                        // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
-                                        // const [values,setvalues]=useState("1")
-                                        return (<>
-                                            <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
-                                            <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
-                                        </>)
-                                    }}
-                                    ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
-                                        <TouchableOpacity
-                                            onPress={async () => {
-                                                if (numofquestion <= 20) {
-                                                    //toye groups mygroups avali javab nemidad :\
-                                                    await setitemid(itemid + 1);
-                                                    //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                                    await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
-                                                    //    await setvalues(values.concat(numofquestion.toString()));
-                                                    await setnumofquestion(numofquestion + 1);
-                                                    //      // await setvalues(values.concat(numofquestion));
-
-                                                    console.log(questions);
-                                                }
-                                                else {
-                                                    new Promise(async (resolve, refect) => {
-                                                        await setmaxnumquestion(true);
-                                                        await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
-                                                        // .then( resolve())
-                                                        //  await setminnumquestion(false);
-
-
-                                                    })
-                                                        .then(console.log("then!"))
-                                                }
-                                            }}
-                                            style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
-                                            <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
-                                        </TouchableOpacity>
-                                        <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
-                                        {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
-                                        {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
-                                        <TouchableOpacity
-                                            onPress={async () => {
-                                                if (numofquestion > 2) {
-                                                    await setitemid(itemid - 1);
-                                                    //  console.log(questions);
-                                                    //  console.log(questions.pop());
-                                                    // console.log(questions);
-                                                    const temp = await questions.pop();
-                                                    console.log(temp);
-                                                    //await  setquestions(temp);
-                                                    //  console.log(questions[numofquestion-1].id+"id");
-                                                    //inex nan
-                                                    //await setquestions(await questions.pop())
-
-                                                    await setnumofquestion(numofquestion - 1);
-                                                }
-                                                else {
-                                                    new Promise(async (resolve, refect) => {
-                                                        await setminnumquestion(true);
-                                                        await setTimeout(async () => { await setminnumquestion(false); }, 5000)
-                                                        // .then( resolve())
-                                                        //  await setminnumquestion(false);
+                                                            await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
+                                                            // .then( resolve())
+                                                            //  await setminnumquestion(false);
 
 
-                                                    })
-                                                        .then(console.log("then!"))
+                                                        })
+                                                            .then(console.log("then!"))
+                                                    }
+                                                }}
+                                                style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
+                                                <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
+                                            </TouchableOpacity>
+                                            <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
+                                            {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
+                                            {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
+                                            <TouchableOpacity
+                                                onPress={async () => {
+                                                    if (numofquestion > 2) {
+                                                        pop();
+                                                        for(var i=numofquestion-1;i>=0;i--){
+                                                            console.log(props.values[i]);
+                                                        }
+                                                        await setitemid(itemid - 1);
+                                                        //  console.log(questions);
+                                                        //  console.log(questions.pop());
+                                                        // console.log(questions);
+                                                        const temp = await questions.pop();
+                                                        console.log(temp);
+                                                        //await  setquestions(temp);
+                                                        //  console.log(questions[numofquestion-1].id+"id");
+                                                        //inex nan
+                                                        //await setquestions(await questions.pop())
+
+                                                        await setnumofquestion(numofquestion - 1);
+                                                    }
+                                                    else {
+                                                        new Promise(async (resolve, refect) => {
+                                                            await setminnumquestion(true);
+                                                            await setTimeout(async () => { await setminnumquestion(false); }, 5000)
+                                                            // .then( resolve())
+                                                            //  await setminnumquestion(false);
+
+
+                                                        })
+                                                            .then(console.log("then!"))
 
 
 
-                                                    //   return(<Text>پیاین سوالا</Text>)
-                                                    //setminnumquestion(true);
-                                                }
-                                            }}
-                                            style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
-                                            <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
-                                        </TouchableOpacity>
-                                        {minnumquestion === true ?
-                                            <View style={{
-                                                backgroundColor: "#FEEBEC",
-                                                borderRadius: 10,
-                                                height: hp('4%'),
-                                                elevation: 300,
-                                                marginTop: hp("5.5%"),
-                                                right: hp("25%"),
-                                                width: wp("55.5%"),
-                                                marginBottom: hp("0%")
-                                                // alignSelf: "flex-end",
-                                            }}>
+                                                        //   return(<Text>پیاین سوالا</Text>)
+                                                        //setminnumquestion(true);
+                                                    }
+                                                }}
+                                                style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                                <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
+                                            </TouchableOpacity>
+                                            {minnumquestion === true ?
+                                                <View style={{
+                                                    backgroundColor: "#FEEBEC",
+                                                    borderRadius: 10,
+                                                    height: hp('4%'),
+                                                    elevation: 300,
+                                                    marginTop: hp("5.5%"),
+                                                    right: hp("25%"),
+                                                    width: wp("55.5%"),
+                                                    marginBottom: hp("0%")
+                                                    // alignSelf: "flex-end",
+                                                }}>
 
-                                                <Text style={{
-                                                    color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                    marginBottom: 0, top: hp("1%"),
-                                                    alignSelf: "center",
-                                                    // alignSelf: "flex-end", right: hp("25%"),
-                                                    position: "relative"
-                                                }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
-                                            </View>
-                                            : null}
-                                        {maxnumquestion === true ?
-                                            <View style={{
-                                                backgroundColor: "#FEEBEC",
-                                                borderRadius: 10,
-                                                height: hp('4%'),
-                                                elevation: 300,
-                                                marginTop: hp("5.5%"),
-                                                right: hp("25%"),
-                                                width: wp("58%"),
-                                                marginBottom: hp("0%")
-                                            }}>
+                                                    <Text style={{
+                                                        color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                        marginBottom: 0, top: hp("1%"),
+                                                        alignSelf: "center",
+                                                        // alignSelf: "flex-end", right: hp("25%"),
+                                                        position: "relative"
+                                                    }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                                </View>
+                                                : null}
+                                            {maxnumquestion === true ?
+                                                <View style={{
+                                                    backgroundColor: "#FEEBEC",
+                                                    borderRadius: 10,
+                                                    height: hp('4%'),
+                                                    elevation: 300,
+                                                    marginTop: hp("5.5%"),
+                                                    right: hp("25%"),
+                                                    width: wp("58%"),
+                                                    marginBottom: hp("0%")
+                                                }}>
 
-                                                <Text style={{
-                                                    color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                    marginBottom: 0, top: hp("1%"),
-                                                    alignSelf: "center",
-                                                    // alignSelf: "flex-end", right: hp("25%"),
-                                                    position: "relative"
-                                                }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
-                                            </View>
-                                            : null}
+                                                    <Text style={{
+                                                        color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                        marginBottom: 0, top: hp("1%"),
+                                                        alignSelf: "center",
+                                                        // alignSelf: "flex-end", right: hp("25%"),
+                                                        position: "relative"
+                                                    }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
+                                                </View>
+                                                : null}
 
-                                        {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
+                                            {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
 
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                        {/* <View style={styles.centeredView}>
+                                            {/* <View style={styles.centeredView}>
                                                     <View style={styles.modalView}>
 
                                                         <Text style={{
@@ -375,10 +395,10 @@ const Createquiz = () => {
 
 
 
-                                        {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
+                                            {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
 
                                             {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                        {/* <View style={styles.centeredView}>
+                                            {/* <View style={styles.centeredView}>
                                                 <View style={styles.modalView}>
 
                                                     <Text style={{
@@ -392,15 +412,17 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                        {minnumquestion === false && maxnumquestion === false ? <Button bordered rounded style={styles.button}
-                                            onPress={props.handleSubmit}
-                                        >
-                                            <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                        </Button> : null}
-                                    </View>)}
-                                >
+                                            {minnumquestion === false && maxnumquestion === false ? <Button bordered rounded style={styles.button}
+                                                onPress={props.handleSubmit}
+                                            >
+                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                            </Button> : null}
+                                        </View>)}
+                                    >
 
-                                </FlatList>
+                                    </FlatList>
+                                )}
+                                </FieldArray>
 
 
                                 {/* <TouchableOpacity style={{marginTop:hp("-2.5%"),fontWeight:"bold",fontSize:hp("1.5.5%")
@@ -411,7 +433,9 @@ const Createquiz = () => {
                                 </TouchableOpacity> */}
                             </View>
                         </View>
+                    //</Form>
                     )}
+                    
 
 
                 </Formik>

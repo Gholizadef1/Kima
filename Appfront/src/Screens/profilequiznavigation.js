@@ -18,11 +18,11 @@ const Drawer = createDrawerNavigator();
 const Profilequiznavigation=()=>{
   return (
   
- 
-    <Drawer.Navigator initialRouteName="Profile">
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="createquiznavigation" component={Createquiznavigation} />
-    </Drawer.Navigator>
+     null
+    // <Drawer.Navigator initialRouteName="Profile">
+    //   <Drawer.Screen name="Profile" component={Profile} />
+    //   <Drawer.Screen name="createquiznavigation" component={Createquiznavigation} />
+    // </Drawer.Navigator>
  
   );
 }

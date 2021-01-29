@@ -31,9 +31,11 @@ const Createquizeachquestion = (prop) => {
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                 borderColor={'lightblue'}
                 elevation={0}
-                onChangeText={prop.pr.handleChange('Discription')}
-                onBlur={prop.pr.handleBlur('Discription')}
-                value={prop.pr.values.Discription}
+                //onChangeText={prop.pr.handleChange(soalha[itemidd].question)}
+                onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].question`)}
+                //name...
+                onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].question`)}
+                value={prop.pr.values.soalha.question}
                 placeholder={'سوال '+prop.itemidd+" ... " } placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
                     marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "white"
                 }}>
@@ -41,7 +43,16 @@ const Createquizeachquestion = (prop) => {
             </Textarea>
 
         </TouchableOpacity>
-        <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
+        <RadioButton.Group onValueChange={newValue => {
+            
+            setValue(newValue)
+            prop.pr.values.soalha.correct=newValue;
+            //prop.pr(`soalha[${prop.itemidd}].correct`);
+        }} value={value}
+            //()=>{
+           // value=prop.pr.values.soalha.correct;
+           // return(value)
+          >
 
             {/* <Text>First</Text> */}
             <View style={{ marginTop: hp("3%"), marginRight: wp("12%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
@@ -50,9 +61,9 @@ const Createquizeachquestion = (prop) => {
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white", backgroundColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange('Discription')}
-                            onBlur={prop.pr.handleBlur('Discription')}
-                            value={prop.pr.values.Discription}
+                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].a`)}
+                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].a`)}
+                            value={prop.pr.values.soalha.a}
                             placeholder={'گزینه اول ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -71,9 +82,9 @@ const Createquizeachquestion = (prop) => {
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange('Discription')}
-                            onBlur={prop.pr.handleBlur('Discription')}
-                            value={prop.pr.values.Discription}
+                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].b`)}
+                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].b`)}
+                            value={prop.pr.values.soalha.b}
                             placeholder={'گزینه دوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -92,9 +103,9 @@ const Createquizeachquestion = (prop) => {
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange('Discription')}
-                            onBlur={prop.pr.handleBlur('Discription')}
-                            value={prop.pr.values.Discription}
+                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].c`)}
+                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].c`)}
+                            value={prop.pr.values.soalha.c}
                             placeholder={'گزینه سوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -116,9 +127,9 @@ const Createquizeachquestion = (prop) => {
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange('Discription')}
-                            onBlur={prop.pr.handleBlur('Discription')}
-                            value={prop.pr.values.Discription}
+                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].d`)}
+                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].d`)}
+                            value={prop.pr.values.soalha.d}
                             placeholder={'گزینه چهارم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
