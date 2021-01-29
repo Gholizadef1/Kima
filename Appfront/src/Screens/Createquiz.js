@@ -295,11 +295,31 @@ const Createquiz = () => {
                                             <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
                                         </TouchableOpacity>
                                         {minnumquestion === true ?
+                                            <View style={{
+                                                backgroundColor: "#FEEBEC",
+                                                borderRadius: 10,
+                                                height: hp('4%'),
+                                                elevation: 300,
+                                                marginTop:hp("5.5%"),
+                                                right: hp("25%"),
+                                                width: wp("55.5%"),
+                                                // alignSelf: "flex-end",
+                                            }}>
 
-                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={minnumquestion} animationType='fade' >
+                                                <Text style={{
+                                                    color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                    marginBottom: 0, top: hp("1%"),
+                                                     alignSelf: "center",
+                                                    // alignSelf: "flex-end", right: hp("25%"),
+                                                     position: "relative"
+                                                }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                            </View>
+                                            : null}
+
+                                        {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
 
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                                <View style={styles.centeredView}>
+                                        {/* <View style={styles.centeredView}>
                                                     <View style={styles.modalView}>
 
                                                         <Text style={{
@@ -309,10 +329,10 @@ const Createquiz = () => {
                                                         }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
                                                     </View>
                                                 </View>
-                                            </Modal>
+                                            </Modal> :) */}
 
-                                            : null}
-                                       
+
+
                                         {maxnumquestion === true ?
 
                                             <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
@@ -323,15 +343,20 @@ const Createquiz = () => {
 
                                                         <Text style={{
                                                             color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                            marginBottom: 0, top: hp("1%"), alignSelf: "center"
-                                                            // alignSelf: "flex-end", right: hp("25%"), position: "relative"
+                                                            marginBottom: 0, top: hp("1%"),
+                                                            // alignSelf: "center",
+                                                            //  alignSelf: "flex-end", right: hp("25%"), position: "relative"
                                                         }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
                                                     </View>
                                                 </View>
                                             </Modal>
 
                                             : null}
-                                      
+                                        <Button bordered rounded style={styles.button}
+                                            onPress={props.handleSubmit}
+                                        >
+                                            <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت گروه</Text>
+                                        </Button>
                                     </View>)}
                                 >
 
@@ -373,11 +398,24 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    button: {
+        //  position:'absolute',
+        marginTop: hp('10%'),
+
+        alignSelf: 'center',
+        width: wp('41%'),
+        backgroundColor: '#1f7a8c',
+        borderColor: '#BFDBF7',
+        // marginLeft:wp('18%'),
+        borderRadius: 50
+
+    },
     centeredView: {
+        position: "relative",
         height: hp('40%'),
         width: wp("55.5%"),
         marginLeft: wp("5%"),
-        marginTop: hp('86.9%'),
+        marginTop: hp('84.9%'),
     },
     modalView: {
         // margin: 10,

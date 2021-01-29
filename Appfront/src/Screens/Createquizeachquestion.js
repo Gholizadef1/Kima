@@ -26,7 +26,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 const Createquizeachquestion = (prop) => {
     const [value, setValue] = React.useState("1");
-    return (<View>
+    return (<View style={{marginBottom:hp("2%")}}>
         <TouchableOpacity>
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                 borderColor={'lightblue'}
