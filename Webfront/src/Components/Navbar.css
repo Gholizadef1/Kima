@@ -1,80 +1,105 @@
-/* 
-       
-       .header{
-        padding-left: 225px;
-        font-weight: bolder;
-       font-size: 20px;
 
+         @media (min-width :360px) 
+         {
+           
+        .squer{
+            width: 100px;
+            height: 160px;
+            margin-left: 110px;
         }
-
-    .cat1:hover{
-        box-shadow: 1px 5px 30px 1px rgb(214, 208, 223) !important; 
-    }
-    .cat1{
-    padding-top: 10px;
-    height: 260px;
-    opacity: 1;
-    width: 200px;
-   padding-bottom: 200px;
-    margin-left: 140px;
-    margin-bottom: 20px;
-
-    }
-    .squere1{
-        margin-left: -12px;
-        margin-right: -12px;
-        width: 180px;
-        height: 180px;
-        padding-top:4px;
-        padding-left:5px;
-        padding-right:5px;
-    }
-    .card-title3{
-        font-size: 15px;
-        color: black;
-        font-weight: bold;
-       text-align: center;
-       margin-left: -20px;
-    }
-    .card-title4{
+        .squer:hover{
+            box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
+            transform:scale(1, 1);
         
-        color: black;
-        font-weight: bold;
-        text-align: center;
-        margin-left: -20px;
-    }
-    @media (max-width :420px) 
-    {
-        .modal{
-            width: 300px;
-           margin: 35px;
+        }
+        
+        .bod{
+            text-align: center;
+            margin-left: 10px;
         }
         .header{
-            padding-left: 105px;
-            font-weight: bolder;
-           font-size: 15px;
+            font-size: 23px;
+            margin-left: 140px;
         }
-        .cat1{
-            padding-top: 10px;
-            height: 200px;
-            opacity: 1;
-            width: 150px;
-           padding-bottom: 200px;
-            margin-left: 40px;
-            margin-bottom: 20px;
-        
-            }
-            .squere1{
-                margin-left: -15px;
-              margin-top: -5px;
-                width: 140px;
-                height: 140px;
-                padding-top:6px;
-                padding-left:5px;
-                padding-right:5px;
-            }
+         } 
+         @media (min-width :386px) 
+         {
+           
+        .squer{
+            width: 100px;
+            height: 160px;
+            margin-left: 120px;
+        }
+        .bod{
+            text-align: center;
+            margin-left: 10px;
+        }
+        .header{
+            font-size: 23px;
+            margin-left: 150px;
+        }
+         } 
+  
+         @media (min-width :414px) 
+         {
+           
+        .squer{
+            width: 100px;
+            height: 160px;
+            margin-left: 120px;
+        }
+        .bod{
+            text-align: center;
+            margin-left: -10px;
+        }
+        .header{
+            font-size: 23px;
+            margin-left: 150px;
+        }
+         } 
+  
+         
+         @media (min-width :768px) 
+         {
+           
+        .squer{
+            width: 130px;
+            height: 208px;
+            margin-left: 170px;
+        }
+        .bod{
+            text-align: center;
+            margin-left: 5px;
             
+        }
+        .header{
+            font-size: 23px;
+            margin-left: 220px;
+        }
+         } 
+  
+        @media (min-width :960px) 
+        {
+          
+        
+        .squer{
+            width: 130px;
+            height: 190px;
+            margin-left: 175px;
+        }
+        .bod{
+            text-align: center;
+            margin-left: 10px;
+        }
+        .header{
+            font-size: 23px;
+            margin-left: 220px;
+        }
 
-      }
 
-     */
+  }
+
+
+
+    
+

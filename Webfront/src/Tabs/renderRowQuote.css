@@ -1,5 +1,16 @@
 
-@media (max-width :500px) 
+@media (min-width :360px) 
+{
+    .Noqoute{
+        margin-top: 170px;
+        margin-left: -400px;
+    } 
+   
+  }
+
+
+
+@media (min-width :768px) 
 {
     .booktitle{
         font-size: 14px;
@@ -13,5 +24,19 @@
     .quote{
         width: 300px;
     }
+    .Noqoute{
+        margin-top: 170px;
+        margin-left: -100px;
+    } 
    
   }
+  @media (min-width :960px) 
+{
+    .Noqoute{
+        margin-top: 200px;
+        margin-left: 10px;
+    } 
+   
+  }
+
+

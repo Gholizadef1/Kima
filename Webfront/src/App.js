@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
 import Profile from "./Components/Profile"; 
+import QuizesPage from "./Components/QuizesPage/QuizesPage";
 import Slide from './slides/Slide';
 import NavBar from "./Components/Navbar";
 import BookView from './components/bookView/bookView'
@@ -59,7 +60,10 @@ function App(props) {
                 <NavBar/>
               <Grouppage/>
             </Route>
-             
+            <Route path="/quizepage">
+                <NavBar/>
+              <QuizesPage/>
+            </Route>
             
             <Route path="/book/:bookId">
               <NavBar/>
