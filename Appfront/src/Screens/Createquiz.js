@@ -229,16 +229,28 @@ const Createquiz = () => {
                                     ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
                                         <TouchableOpacity
                                             onPress={async () => {
+                                                if (numofquestion <= 20) {
+                                                    //toye groups mygroups avali javab nemidad :\
+                                                    await setitemid(itemid + 1);
+                                                    //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                                    await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
+                                                    //    await setvalues(values.concat(numofquestion.toString()));
+                                                    await setnumofquestion(numofquestion + 1);
+                                                    //      // await setvalues(values.concat(numofquestion));
 
-                                                //toye groups mygroups avali javab nemidad :\
-                                                await setitemid(itemid + 1);
-                                                //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                                await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
-                                                //    await setvalues(values.concat(numofquestion.toString()));
-                                                await setnumofquestion(numofquestion + 1);
-                                                //      // await setvalues(values.concat(numofquestion));
+                                                    console.log(questions);
+                                                }
+                                                else {
+                                                    new Promise(async (resolve, refect) => {
+                                                        await setmaxnumquestion(true);
+                                                        await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
+                                                        // .then( resolve())
+                                                        //  await setminnumquestion(false);
 
-                                                console.log(questions);
+
+                                                    })
+                                                        .then(console.log("then!"))
+                                                }
                                             }}
                                             style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
                                             <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
@@ -284,7 +296,7 @@ const Createquiz = () => {
                                         </TouchableOpacity>
                                         {minnumquestion === true ?
 
-                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40, position: 'absolute' }} visible={true} animationType='fade' >
+                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={minnumquestion} animationType='fade' >
 
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
                                                 <View style={styles.centeredView}>
@@ -292,7 +304,7 @@ const Createquiz = () => {
 
                                                         <Text style={{
                                                             color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                             marginBottom: 0, top: hp("1%"),alignSelf:"center"
+                                                            marginBottom: 0, top: hp("1%"), alignSelf: "center"
                                                             // alignSelf: "flex-end", right: hp("25%"), position: "relative"
                                                         }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
                                                     </View>
@@ -300,7 +312,26 @@ const Createquiz = () => {
                                             </Modal>
 
                                             : null}
-                                        {maxnumquestion === true ? <Text>حداکثر سوالات</Text> : null}
+                                       
+                                        {maxnumquestion === true ?
+
+                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
+
+                                                {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
+                                                <View style={styles.centeredView}>
+                                                    <View style={styles.modalView}>
+
+                                                        <Text style={{
+                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                            marginBottom: 0, top: hp("1%"), alignSelf: "center"
+                                                            // alignSelf: "flex-end", right: hp("25%"), position: "relative"
+                                                        }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
+                                                    </View>
+                                                </View>
+                                            </Modal>
+
+                                            : null}
+                                      
                                     </View>)}
                                 >
 
@@ -344,17 +375,17 @@ const styles = StyleSheet.create({
     },
     centeredView: {
         height: hp('40%'),
-        width:wp("55.5%"),
-        marginLeft:wp("5%"),
+        width: wp("55.5%"),
+        marginLeft: wp("5%"),
         marginTop: hp('86.9%'),
     },
     modalView: {
         // margin: 10,
         backgroundColor: "#FEEBEC",
-    //    borderTopLeftRadius:10,
-    //    borderTopRightRadius:10,
+        //    borderTopLeftRadius:10,
+        //    borderTopRightRadius:10,
         // padding: 35,
-        borderRadius:10,
+        borderRadius: 10,
         height: hp('4%'),
         elevation: 300
     },
