@@ -37,7 +37,7 @@ const Home = ({navigation}) => {
         })
     }
     function getbestsFromAPI(){
-        axiosinst.get('/book ?filter=rate')
+        axiosinst.get('/book?filter=rate')
         .then(function(response){
             setbest(response.data)
             // console.log(response)
@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
         })
     }
     function getmostFromAPI(){
-        axiosinst.get('/book ?filter=comment')
+        axiosinst.get('/book?filter=comment')
         .then(function(response){
             setmostdis(response.data)
             // console.log(response)
