@@ -82,12 +82,12 @@ const Createquiz = () => {
 
     }
     const [value, setValue] = React.useState('1');
-    const [itemid,setitemid]=useState(1);
-    const [values,setvalues]=useState(["1"])
-    const [questions, setquestions] = useState([{id:1,name:"اول"}])
-    const [numofquestion,setnumofquestion]=useState(2)
-    const [minnumquestion,setminnumquestion]=useState(false);
-    const [maxnumquestion,setmaxnumquestion]=useState(false);
+    const [itemid, setitemid] = useState(1);
+    const [values, setvalues] = useState(["1"])
+    const [questions, setquestions] = useState([{ id: 1, name: "اول" }])
+    const [numofquestion, setnumofquestion] = useState(2)
+    const [minnumquestion, setminnumquestion] = useState(false);
+    const [maxnumquestion, setmaxnumquestion] = useState(false);
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -201,95 +201,112 @@ const Createquiz = () => {
                                     </TouchableOpacity>
                                 </View>
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
-                               
-                               
-                                        
-                             
+
+
+
+
                                 <FlatList
-                                //بعدا لیست هدر بالایی ها
-                                // ListHeaderComponent={()=>(
+                                    //بعدا لیست هدر بالایی ها
+                                    // ListHeaderComponent={()=>(
 
-                                // )}
-                                scrollEnabled={false}
-                                  keyExtractor={(item)=> {return(item.id)
-                                //   undefined
-                                //   questions[numofquestion-1].id
-                                   }}
-                                    data={questions}
-                                    renderItem={({item}) =>{
-                                        console.log(item.id+" ITEM IDDDDDDDDDDDDDDDDDD")
-                                       // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
-                                       // const [values,setvalues]=useState("1")
-                                         return(<>
-                                         <Text style={{fontSize:14,color:"green",width:100,height:20,position:"absolute",marginTop:100}}>{item.id}</Text>
-                                      <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
-                                    </>)
+                                    // )}
+                                    scrollEnabled={false}
+                                    keyExtractor={(item) => {
+                                        return (item.id)
+                                        //   undefined
+                                        //   questions[numofquestion-1].id
                                     }}
-                                    ListFooterComponent={()=>(<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
-                                    <TouchableOpacity
-                                     onPress={async()=>{
-                                         
-                                         //toye groups mygroups avali javab nemidad :\
-                                          await setitemid(itemid+1);
-                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                          await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
-                                    //    await setvalues(values.concat(numofquestion.toString()));
-                                           await setnumofquestion(numofquestion+1);
-                                    //      // await setvalues(values.concat(numofquestion));
-                                         
-                                          console.log(questions);
-                                          }}
-                                     style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
-                                        <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
-                                    </TouchableOpacity>
-                                    <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
-                                    {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
-                                    {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
-                                    <TouchableOpacity 
-                                      onPress={async()=>{
-                                          if(numofquestion>2){
-                                        await setitemid(itemid-1);
-                                        //  console.log(questions);
-                                        //  console.log(questions.pop());
-                                         // console.log(questions);
-                                        const temp=await questions.pop();
-                                        console.log(temp);
-                                        //await  setquestions(temp);
-                                      //  console.log(questions[numofquestion-1].id+"id");
-                                        //inex nan
-                                        //await setquestions(await questions.pop())
-                                    
-                                          await setnumofquestion(numofquestion-1);
-                                          }
-                                          else
-                                          {
-                                        new Promise(async(resolve,refect)=>{
-                                            await setminnumquestion(true);
-                                            await setTimeout(async() => {  await setminnumquestion(false); }, 5000)
-                                           // .then( resolve())
-                                          //  await setminnumquestion(false);
-                                         
+                                    data={questions}
+                                    renderItem={({ item }) => {
+                                        console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
+                                        // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
+                                        // const [values,setvalues]=useState("1")
+                                        return (<>
+                                            <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
+                                            <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
+                                        </>)
+                                    }}
+                                    ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
+                                        <TouchableOpacity
+                                            onPress={async () => {
 
-                                        })
-                                        .then(console.log("then!"))
+                                                //toye groups mygroups avali javab nemidad :\
+                                                await setitemid(itemid + 1);
+                                                //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                                await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
+                                                //    await setvalues(values.concat(numofquestion.toString()));
+                                                await setnumofquestion(numofquestion + 1);
+                                                //      // await setvalues(values.concat(numofquestion));
 
-                                        
-                                        
-                                            //   return(<Text>پیاین سوالا</Text>)
-                                            //setminnumquestion(true);
-                                          }
-                                          }}
-                                    style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
-                                        <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
-                                    </TouchableOpacity>
-                                    {minnumquestion===true?<Text style={{color:"#f94144",fontSize:hp("1.3%"),fontWeight:"bold",marginBottom:0,top:hp("4%"),alignSelf:"flex-end",right:hp("25%"),position:"relative"}}>هر کوییز حداقل باید یک سوال داشته باشد</Text>:null}
-                                    {maxnumquestion===true?<Text>حداکثر سوالات</Text>:null}
-                                </View>)}
+                                                console.log(questions);
+                                            }}
+                                            style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
+                                            <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
+                                        </TouchableOpacity>
+                                        <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
+                                        {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
+                                        {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
+                                        <TouchableOpacity
+                                            onPress={async () => {
+                                                if (numofquestion > 2) {
+                                                    await setitemid(itemid - 1);
+                                                    //  console.log(questions);
+                                                    //  console.log(questions.pop());
+                                                    // console.log(questions);
+                                                    const temp = await questions.pop();
+                                                    console.log(temp);
+                                                    //await  setquestions(temp);
+                                                    //  console.log(questions[numofquestion-1].id+"id");
+                                                    //inex nan
+                                                    //await setquestions(await questions.pop())
+
+                                                    await setnumofquestion(numofquestion - 1);
+                                                }
+                                                else {
+                                                    new Promise(async (resolve, refect) => {
+                                                        await setminnumquestion(true);
+                                                        await setTimeout(async () => { await setminnumquestion(false); }, 5000)
+                                                        // .then( resolve())
+                                                        //  await setminnumquestion(false);
+
+
+                                                    })
+                                                        .then(console.log("then!"))
+
+
+
+                                                    //   return(<Text>پیاین سوالا</Text>)
+                                                    //setminnumquestion(true);
+                                                }
+                                            }}
+                                            style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                            <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
+                                        </TouchableOpacity>
+                                        {minnumquestion === true ?
+
+                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40, position: 'absolute' }} visible={true} animationType='fade' >
+
+                                                {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
+                                                <View style={styles.centeredView}>
+                                                    <View style={styles.modalView}>
+
+                                                        <Text style={{
+                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                             marginBottom: 0, top: hp("1%"),alignSelf:"center"
+                                                            // alignSelf: "flex-end", right: hp("25%"), position: "relative"
+                                                        }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                                    </View>
+                                                </View>
+                                            </Modal>
+
+                                            : null}
+                                        {maxnumquestion === true ? <Text>حداکثر سوالات</Text> : null}
+                                    </View>)}
                                 >
 
                                 </FlatList>
 
-                              
+
                                 {/* <TouchableOpacity style={{marginTop:hp("-2.5%"),fontWeight:"bold",fontSize:hp("1.5.5%")
                                 ,marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",marginBottom:hp("10%")}}>
                                 <Text style={{fontSize:hp("1.5.5%"),color:"#1f7a8c",
@@ -327,14 +344,18 @@ const styles = StyleSheet.create({
     },
     centeredView: {
         height: hp('40%'),
-        marginTop: hp('15%'),
+        width:wp("55.5%"),
+        marginLeft:wp("5%"),
+        marginTop: hp('86.9%'),
     },
     modalView: {
-        margin: 10,
-        backgroundColor: "white",
-        borderRadius: 10,
-        padding: 35,
-        height: hp('65%'),
+        // margin: 10,
+        backgroundColor: "#FEEBEC",
+    //    borderTopLeftRadius:10,
+    //    borderTopRightRadius:10,
+        // padding: 35,
+        borderRadius:10,
+        height: hp('4%'),
         elevation: 300
     },
     plus: {
