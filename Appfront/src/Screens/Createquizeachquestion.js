@@ -18,7 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
-import { Formik, formik } from 'formik';
+import { Formik, formik,Field } from 'formik';
 import * as yup from 'yup';
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -43,11 +43,13 @@ const Createquizeachquestion = (prop) => {
             </Textarea>
 
         </TouchableOpacity>
-        <RadioButton.Group onValueChange={newValue => {
+        {/* <Field> */}
+        <RadioButton.Group name={`soalha[${prop.itemidd}].correct`} onValueChange={newValue => {
             
             setValue(newValue)
-            prop.pr.values.soalha.correct=newValue;
+            prop.pr.values.soalha[prop.itemidd].correct=newValue;
             //prop.pr(`soalha[${prop.itemidd}].correct`);
+           
         }} value={value}
             //()=>{
            // value=prop.pr.values.soalha.correct;
@@ -143,6 +145,7 @@ const Createquizeachquestion = (prop) => {
                 </View>
             </View>
         </RadioButton.Group>
+        {/* </Field> */}
     </View>
     )
 }

@@ -242,7 +242,7 @@ const Createquiz = () => {
                                         }}
                                         data={questions}
                                         renderItem={({ item }) => {
-                                            console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
+                                          //  console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
                                             // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
                                             // const [values,setvalues]=useState("1")
                                             return (<>
@@ -257,12 +257,15 @@ const Createquiz = () => {
                                                     if (numofquestion <= 20) {
                                                         push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
                                                         for(var i=numofquestion-1;i>=0;i--){
-                                                            console.log(props.values.soalha[i].question+"   aksdfj;lkj");
-                                                            console.log(props.values.soalha[i].a+"  sfa;slkfj");
-                                                            console.log(props.values.soalha[i].correct+"  sfa;slkfj");
+                                                            console.log(props.values.soalha[i].question+" QQQQ");
+                                                            console.log(props.values.soalha[i].a+" aaaaa");
+                                                            console.log(props.values.soalha[i].b+" bbbbb");
+                                                            console.log(props.values.soalha[i].c+" ccccc");
+                                                            console.log(props.values.soalha[i].d+" ddddd");
+                                                            console.log(props.values.soalha[i].correct+" correct");
                                                         }
-                                                        console.log(props.values.soalha[0]+" VALUESSSS")
-                                                        console.log(props.values.soalha[1]+" VALUESSSS")
+                                                        //console.log(props.values.soalha[0]+" VALUESSSS")
+                                                        //console.log(props.values.soalha[1]+" VALUESSSS")
                                                         //toye groups mygroups avali javab nemidad :\
                                                         await setitemid(itemid + 1);
                                                         //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
@@ -271,7 +274,7 @@ const Createquiz = () => {
                                                         await setnumofquestion(numofquestion + 1);
                                                         //      // await setvalues(values.concat(numofquestion));
                                                         //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
-                                                        console.log(questions);
+                                                        //console.log(questions);
                                                     }
                                                     else {
                                                         new Promise(async (resolve, refect) => {
