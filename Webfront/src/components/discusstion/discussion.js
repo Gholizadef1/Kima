@@ -38,9 +38,28 @@ import {API_BASE_URL} from '../../constants/apiContants';
 
 function Discussion(props) {
 
-    const[userComment,setUserComment]=useState("")
-    
+    const [comments, setComments] = useState([]);
+    const [commentsPage, setCommentsPage] = useState(1);
+    const [commentsPagesNumber, setCommentsPagesNumber] = useState();
+    const [commentAgain,setcommentAgain] = useState(0);
+    useEffect(()=>{
+          axios.get(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
+          {
+            headers:{
+           "Authorization":"Token "+Cookies.get("userToken")}
+            })
+        .then(response=>{
+         setComments(response.data.comments);
+         setCommentsPagesNumber(response.data.count)
+          console.log(response);
+        })
+        .catch(error=>{
+          console.log(error);
+        });
+      },[props.gruopid,commentAgain,commentsPage]);
 
+
+    const[userComment,setUserComment]=useState("")
     const handleChangeComment = (e) => {
         const {value} = e.target   
         setUserComment(value);
@@ -54,15 +73,13 @@ function Discussion(props) {
     
         if(userComment.length){
           const payload={
-            "textcomment": userComment
+            "chat_text": userComment
           }
     
           console.log(payload);
           const back= JSON.stringify(payload);
           console.log(back);
-          axios.post(
-            API_BASE_URL + "/book/"+props.book+'/comment',
-    
+          axios.post(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
           back
           ,{
            headers:{
@@ -91,6 +108,15 @@ function Discussion(props) {
          }
     
       }
+
+      const [massage,setMassage]=useState("");
+      const[openSnack,setOpenSnack]=useState(false);
+      const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnack(false);
+    };
 
 
   return(
