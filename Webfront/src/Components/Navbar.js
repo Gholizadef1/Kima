@@ -91,6 +91,9 @@ useEffect(() => {
   const routeToGroups = ()=>{
     props.history.push('/groups');
   }
+  const routeToQuizes = ()=>{
+    props.history.push('/quizes');
+  }
 
   const accent= { backgroundColor: purple[500], color: '#000' }
 
@@ -141,7 +144,7 @@ useEffect(() => {
             </li>
             <li  class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a >آزمونک</a>
+              <a onClick={routeToQuizes}>آزمونک</a>
             </li>
             <li class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
