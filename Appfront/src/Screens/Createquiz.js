@@ -88,6 +88,7 @@ const Createquiz = () => {
     const [numofquestion, setnumofquestion] = useState(2)
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
+    const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -154,12 +155,29 @@ const Createquiz = () => {
 
                                     </ImageBackground>
 
-                                </TouchableOpacity> : <TouchableOpacity style={styles.avatar}
+                                </TouchableOpacity> : <TouchableOpacity style={{
+                                    height: hp('14%'),
+                                    marginTop: hp('0%'),
+                                    width: wp('28%'),
+                                    marginLeft: wp('5%'),
+                                    borderRadius: 100,
+                                    // position: 'absolute',
+                                    borderColor: 'blue',
+                                    backgroundColor: "lightgreen"
+                                }}
                                     onPress={() => { pickfromgallery(props, props.handleChange) }}>
                                         <ImageBackground borderRadius={100}
                                             source={{ uri: `${props.values.photo}` }}
                                             onChangeItem={props.handleChange('photo')}
-                                            style={styles.avatar}
+                                            style={{
+                                                height: hp('14%'),
+
+                                                marginTop: hp('0%'),
+                                                width: wp('28%'),
+                                                marginLeft: wp('0%'),
+                                                borderRadius: 20,
+                                                position: 'absolute',
+                                            }}
                                         //  onBlur={props.handleBlur('photo')}
 
 
@@ -303,7 +321,7 @@ const Createquiz = () => {
                                                 marginTop: hp("5.5%"),
                                                 right: hp("25%"),
                                                 width: wp("55.5%"),
-                                                marginBottom:hp("0%")
+                                                marginBottom: hp("0%")
                                                 // alignSelf: "flex-end",
                                             }}>
 
@@ -316,7 +334,7 @@ const Createquiz = () => {
                                                 }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
                                             </View>
                                             : null}
-                                            {maxnumquestion === true ?
+                                        {maxnumquestion === true ?
                                             <View style={{
                                                 backgroundColor: "#FEEBEC",
                                                 borderRadius: 10,
@@ -325,11 +343,11 @@ const Createquiz = () => {
                                                 marginTop: hp("5.5%"),
                                                 right: hp("25%"),
                                                 width: wp("58%"),
-                                                marginBottom:hp("0%")
+                                                marginBottom: hp("0%")
                                             }}>
 
                                                 <Text style={{
-                                                   color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                    color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
                                                     marginBottom: 0, top: hp("1%"),
                                                     alignSelf: "center",
                                                     // alignSelf: "flex-end", right: hp("25%"),
@@ -355,12 +373,12 @@ const Createquiz = () => {
 
 
 
-                                    
+
 
                                         {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
 
                                             {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                            {/* <View style={styles.centeredView}>
+                                        {/* <View style={styles.centeredView}>
                                                 <View style={styles.modalView}>
 
                                                     <Text style={{
@@ -371,14 +389,14 @@ const Createquiz = () => {
                                                     }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
                                                 </View>
                                             </View>
-                                        </Modal> */} 
+                                        </Modal> */}
 
 
-                                       {minnumquestion===false && maxnumquestion===false? <Button bordered rounded style={styles.button}
+                                        {minnumquestion === false && maxnumquestion === false ? <Button bordered rounded style={styles.button}
                                             onPress={props.handleSubmit}
                                         >
                                             <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                        </Button>:null}
+                                        </Button> : null}
                                     </View>)}
                                 >
 
@@ -423,10 +441,10 @@ const styles = StyleSheet.create({
     button: {
         //  position:'absolute',
         marginTop: hp('8%'),
-        marginBottom:hp("-4%"),
-       // alignSelf: 'center',
+        marginBottom: hp("-4%"),
+        // alignSelf: 'center',
         width: wp('41%'),
-        right:wp("26.4%"),
+        right: wp("26.4%"),
         backgroundColor: '#1f7a8c',
         borderColor: '#BFDBF7',
         // marginLeft:wp('18%'),

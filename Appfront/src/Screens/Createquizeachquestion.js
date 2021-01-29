@@ -103,7 +103,10 @@ const Createquizeachquestion = (prop) => {
 
                     </Item>
                 </TouchableOpacity>
-                <View style={{ position: 'absolute', marginTop: hp("0%"), marginLeft: wp("0%"), width: wp("15%"), borderRadius: 20, height: hp("4%"), backgroundColor: "#EDF2F4" }}>
+                <View style={{ position: 'absolute', marginTop: hp("0%"), marginLeft: wp("0%"), width: wp("15%"), borderRadius: 20, height: hp("4%"), 
+                // backgroundColor: "#e0fbfc" 
+                backgroundColor:"#EDF2F4"
+                }}>
                     <RadioButton color={"#1f7a8c"} value="3" />
                 </View>
             </View>
