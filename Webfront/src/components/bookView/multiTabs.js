@@ -19,6 +19,7 @@ import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
+import { API_BASE_URL } from "../../constants/apiContants";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -93,7 +94,7 @@ export default function FullWidthTabs(props) {
   //for comment
   useEffect(()=>{
     //console.log(props)
-    console.log(props.book)
+    //console.log(props.book)
     // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     // .then(response=>{
     //   setComments(response.data);
@@ -105,7 +106,7 @@ export default function FullWidthTabs(props) {
     //   setEndComment("نظر دیگری وجود ندارد");
     // });
 
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-"+filterBaseComment+"?page="+commentsPage,
+      axios.get(API_BASE_URL +"/book/"+props.book+"/comment?filter="+filterBaseComment+"?page="+commentsPage,
       {
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -125,8 +126,8 @@ export default function FullWidthTabs(props) {
   
 //for quote
   useEffect(()=>{
-    console.log(props.book)
-    console.log(quotesPage);
+    //console.log(props.book)
+    //console.log(quotesPage);
     // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
     // .then(response=>{
     //  //setQuotes(quotes.concat(response.data));
@@ -138,7 +139,7 @@ export default function FullWidthTabs(props) {
     //   setEndQuote("نقل قول دیگری وجود ندارد");
     // });
 
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-" + filterBaseQuote +"?page="+quotesPage,
+      axios.get(API_BASE_URL +"/book/"+props.book+"/quote?filter=" + filterBaseQuote +"?page="+quotesPage,
       {
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -189,7 +190,7 @@ export default function FullWidthTabs(props) {
       const back= JSON.stringify(payload);
       console.log(back);
       axios.post(
-        "http://127.0.0.1:8000/bookdetail/"+props.book+'/comment',
+        API_BASE_URL + "/book/"+props.book+'/comment',
 
       back
       ,{
@@ -226,7 +227,7 @@ export default function FullWidthTabs(props) {
       "textquote": userQuote
     }
     const back= JSON.stringify(payload);
-    axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
+    axios.post(API_BASE_URL + '/book/' +props.book+'/quote/',
     back
     ,{
      headers:{
@@ -253,7 +254,7 @@ export default function FullWidthTabs(props) {
 }
 
   const handleDeleteQuote = (id) => {
-    axios.delete('http://127.0.0.1:8000/api/quotes/'+id,
+    axios.delete(API_BASE_URL +'/book/'+ props.book +'/quote/'+id,
     {
       headers:{
      "Content-Type":"application/json",
@@ -272,7 +273,7 @@ export default function FullWidthTabs(props) {
   }
 
   const handleDeleteComment = (id) => {
-    axios.delete("http://127.0.0.1:8000/comment/"+id+'/delete',
+    axios.delete(API_BASE_URL + "/book/"+ props.book +"/comment/"+id,
     {
       headers:{
      "Content-Type":"application/json",
@@ -293,7 +294,7 @@ export default function FullWidthTabs(props) {
     //const payload={}
     //const back= JSON.stringify(payload);
       axios.post(
-        "http://127.0.0.1:8000/comment/"+id+"/like",
+         API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=like",
       {},
       {
        headers:{
@@ -317,7 +318,7 @@ export default function FullWidthTabs(props) {
    const handleDislikeClick = (id) => {
       
       axios.post(
-        "http://127.0.0.1:8000/comment/"+id+'/dislike',
+        API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=dislike",
       {},
       {
        headers:{
@@ -345,7 +346,7 @@ export default function FullWidthTabs(props) {
     // console.log(Cookies.get("userToken"));
     // const payload={}
     //const back= JSON.stringify(payload);
-    axios.post('http://127.0.0.1:8000/api/quotes/like/'+id,
+    axios.post( API_BASE_URL+'/book/'+props.book+'/quote/'+id +'?feedback=like',
     {},
     {
      headers:{
@@ -479,7 +480,7 @@ export default function FullWidthTabs(props) {
                     
                <div className="" style={{direction:"rtl"}}>
                   <div className="d-flex px-md-3 py-3">
-                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
@@ -604,7 +605,7 @@ export default function FullWidthTabs(props) {
               
               <div className="" style={{direction:"rtl"}}>
                   <div className="d-flex px-md-3 py-3">
-                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
