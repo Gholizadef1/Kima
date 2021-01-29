@@ -18,7 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
-import { Formik, formik } from 'formik';
+import { FastField, Formik, formik } from 'formik';
 import * as yup from 'yup';
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -86,6 +86,8 @@ const Createquiz = () => {
     const [values,setvalues]=useState(["1"])
     const [questions, setquestions] = useState([{id:1,name:"اول"}])
     const [numofquestion,setnumofquestion]=useState(2)
+    const [minnumquestion,setminnumquestion]=useState(false);
+    const [maxnumquestion,setmaxnumquestion]=useState(false);
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -245,6 +247,7 @@ const Createquiz = () => {
                                     {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
                                     <TouchableOpacity 
                                       onPress={async()=>{
+                                          if(numofquestion>2){
                                         await setitemid(itemid-1);
                                         //  console.log(questions);
                                         //  console.log(questions.pop());
@@ -255,12 +258,32 @@ const Createquiz = () => {
                                       //  console.log(questions[numofquestion-1].id+"id");
                                         //inex nan
                                         //await setquestions(await questions.pop())
+                                    
                                           await setnumofquestion(numofquestion-1);
+                                          }
+                                          else
+                                          {
+                                        new Promise(async(resolve,refect)=>{
+                                            await setminnumquestion(true);
+                                            await setTimeout(async() => {  await setminnumquestion(false); }, 5000)
+                                           // .then( resolve())
+                                          //  await setminnumquestion(false);
+                                         
+
+                                        })
+                                        .then(console.log("then!"))
+
+                                        
+                                        
+                                            //   return(<Text>پیاین سوالا</Text>)
+                                            //setminnumquestion(true);
+                                          }
                                           }}
                                     style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
                                         <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
                                     </TouchableOpacity>
-
+                                    {minnumquestion===true?<Text style={{color:"#f94144",fontSize:hp("1.3%"),fontWeight:"bold",marginBottom:0,top:hp("4%"),alignSelf:"flex-end",right:hp("25%"),position:"relative"}}>هر کوییز حداقل باید یک سوال داشته باشد</Text>:null}
+                                    {maxnumquestion===true?<Text>حداکثر سوالات</Text>:null}
                                 </View>)}
                                 >
 
