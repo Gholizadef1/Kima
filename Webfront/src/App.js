@@ -20,6 +20,8 @@ import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
 import ProtectedRoute  from "./components/protect";
+import Discussion  from "./components/discusstion/discussion";
+
 
 function App(props) {
   const [title, updateTitle] = useState(null);
@@ -53,6 +55,8 @@ function App(props) {
             <ProtectedRoute path="/book/:bookId" component={BookView}/>
 
             <ProtectedRoute path="/groups" component={Groups}/>
+
+            <ProtectedRoute path="/discussion" component={Discussion}/>
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">

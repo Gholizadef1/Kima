@@ -38,13 +38,97 @@ import {API_BASE_URL} from '../../constants/apiContants';
 
 function Discussion(props) {
 
+    const[userComment,setUserComment]=useState("")
+    
+
+    const handleChangeComment = (e) => {
+        const {value} = e.target   
+        setUserComment(value);
+        //console.log(e);
+        //console.log(userComment);
+      }
+
+    const handleSubmitCommentClick = (e) => {
+        //e.preventDefault();
+        //console.log(userComment);
+    
+        if(userComment.length){
+          const payload={
+            "textcomment": userComment
+          }
+    
+          console.log(payload);
+          const back= JSON.stringify(payload);
+          console.log(back);
+          axios.post(
+            API_BASE_URL + "/book/"+props.book+'/comment',
+    
+          back
+          ,{
+           headers:{
+          "Content-Type":"application/json",
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
+          .then(response=>{
+            console.log(response);
+    
+            if(response.data.status==="success"){
+              setOpenSnack(true);
+              setMassage("نظر شما با موفقیت ثبت شد")
+              setUserComment("");
+              setcommentAgain(commentAgain+1);
+    
+            }
+          })
+          .catch(error=>{
+            console.log(error);
+          });
+      
+    
+         }else{
+          setOpenSnack(true);
+          setMassage("نظر خالی است لطفاً چیزی بنویسید")
+         }
+    
+      }
 
 
-
-    return(
-        <div>
-            
+  return(
+    <div>
+      <div className="mx-md-5 px-md-5">
+        <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
+          <div className="mx-md-5 my-5">
+              <div>
+                <h3 className="my-1 mx-md-5 rounded-lg" >عنوان</h3>
+                <hr className="border border-dark"></hr>
+                <div className="">
+                  <h3 className="text-center" >نظر شما چیست؟</h3>
+                  <div className="d-flex flex-wrap p-3  ">
+                    <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
+                    <div className="d-flex  flex-column mt-2 flex-fill">
+                    <div className="d-flex flex-wrap">
+                    <div className="flex-fill form-group mx-3">
+    
+                      <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>
+    
+                    </div>
+                    
+                    <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
+                    onClick={handleSubmitCommentClick}
+                    >ثبت</div>
+                    </div>
+                    </div>
+                  </div>
+                  <Divider className="mt-3" variant="fullWidth" />
+                </div>
+              </div>
+              <div>
+                  
+              </div>
+          </div> 
         </div> 
+      </div> 
+    </div> 
     )
 
 
