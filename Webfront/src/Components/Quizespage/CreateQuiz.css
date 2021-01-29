@@ -617,6 +617,10 @@ text-decoration: underline;
         }
         .rowin{
             margin-left: 400px;
+            margin-top: 10px;
+        }
+        .name{
+            margin-top: 10px;
         }
         .btnD{
            
