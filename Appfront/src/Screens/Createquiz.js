@@ -303,6 +303,7 @@ const Createquiz = () => {
                                                 marginTop: hp("5.5%"),
                                                 right: hp("25%"),
                                                 width: wp("55.5%"),
+                                                marginBottom:hp("0%")
                                                 // alignSelf: "flex-end",
                                             }}>
 
@@ -324,6 +325,7 @@ const Createquiz = () => {
                                                 marginTop: hp("5.5%"),
                                                 right: hp("25%"),
                                                 width: wp("58%"),
+                                                marginBottom:hp("0%")
                                             }}>
 
                                                 <Text style={{
@@ -372,11 +374,11 @@ const Createquiz = () => {
                                         </Modal> */} 
 
 
-                                        <Button bordered rounded style={styles.button}
+                                       {minnumquestion===false && maxnumquestion===false? <Button bordered rounded style={styles.button}
                                             onPress={props.handleSubmit}
                                         >
-                                            <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت گروه</Text>
-                                        </Button>
+                                            <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                        </Button>:null}
                                     </View>)}
                                 >
 
@@ -420,10 +422,11 @@ const styles = StyleSheet.create({
     },
     button: {
         //  position:'absolute',
-        marginTop: hp('10%'),
-
-        alignSelf: 'center',
+        marginTop: hp('8%'),
+        marginBottom:hp("-4%"),
+       // alignSelf: 'center',
         width: wp('41%'),
+        right:wp("26.4%"),
         backgroundColor: '#1f7a8c',
         borderColor: '#BFDBF7',
         // marginLeft:wp('18%'),
