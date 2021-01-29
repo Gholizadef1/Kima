@@ -122,11 +122,11 @@ const handleCreateGroupSubmit =(e) =>{
   e.preventDefault();
 
   if(newGroup.name === ""){
-    setMassage("اسم گروه نمی‌تواند خالی باشد")
+    setMassage("اسم آزمونک نمی‌تواند خالی باشد")
     setOpenSnack(true);
   }
   else if(newGroup.description === ""){
-    setMassage("توضیحات گروه نمی‌تواند خالی باشد")
+    setMassage("توضیحات آزمونک نمی‌تواند خالی باشد")
     setOpenSnack(true);
   }
 
@@ -148,13 +148,13 @@ const handleCreateGroupSubmit =(e) =>{
     console.log(response);
 
     if(response.data.message === "Your group is succesfully created!"){
-      setMassage('گروه با موفقیت ساخته شد')
+      setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
       handleCloseCreateGroup();
       routeToGroupHandler(response.data.data.id);
     }
     else{
-      setMassage("گروه از قبل وجود دارد")
+      setMassage("آزمونک از قبل وجود دارد")
       setOpenSnack(true);
     }
   })
@@ -239,22 +239,21 @@ const handleCloseSnack = (event, reason) => {
                   <GoSearch size="30" color="black"/>
                 </div>
                 <input className=" shadow form-control rounded-pill px-4 text-right "
-                 type="title" name="group" placeholder="جستجوی گروه... " 
+                 type="title" name="group" placeholder="جستجوی آزمونک... " 
                  value={searchWord}
                  onChange={handleChangeSearchWord}/>  
                 <div variant="gray" className="btn">
                 </div>
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
-                <select className="form-control rounded-pill shadow" onClick={handleChangeList} >
-                  <option value="time">جدیدترین گروه ها</option>
-                  <option value="member">محبوب‌ترین گروه ها</option>
-                  <option value="mine">گروه‌های من</option>
+                <select className="form-control rounded-pill shadow yekanfont" onClick={handleChangeList} >
+                  <option class="yekanfont" value="all">همهٔ آزمونک‌ها</option>
+                  <option value="mine">آزمونک‌های من</option>
                 </select>
               </div>
               <div>
                 <div className="btn btn-info rounded-lg  shadow" onClick={handleClickOpenCreateGroup}>
-                  گروه جدید
+                  آزمون جدید
                 </div>
 
                 <Dialog  open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
@@ -336,27 +335,33 @@ const handleCloseSnack = (event, reason) => {
                   
 
                   <div class="col mb-4">
-                    <div class="card h-100 shadow-lg" >
-                      <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title} onClick={() => routeToGroupHandler(current.id)}/>
+                    <div class="card h-100 text-right shadow-lg" >
+                      <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
-                        <h5 class="card-title btn m-n2" onClick={() => routeToGroupHandler(current.id)} style={{fontSize:25}}>{current.title}</h5>
-                        
-                        {current.summary.length >= 80 ?(
+                        <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.summary.length >= 80 ?(
                           <div>
-                           <p class="card-text ">{current.summary.substring(0, 60)}</p>
-                           <div className="btn my-n3 text-muted"  onClick={() => routeToGroupHandler(current.id)}>بیشتر...</div>
+                           <p class="card-text yekanfont mt-3" style={{fontSize:20}}>توضیحات: {current.summary.substring(0, 60)}</p>
+                           <div className="btn text-muted" onClick={() => routeToGroupHandler(current.id)}>بیشتر...</div>
                            </div>
                         ):(
-                          <p class="card-text">{current.summary}</p>
+                          <p class="card-text  yekanfont mt-3"style={{fontSize:20}}>توضیحات: {current.summary}</p>
                         )}
                         
                       </div>
                       <div className="align-items-center m-3">
-                            <svg style={{width:24,height:24}} className="mx-1" viewBox="0 0 24 24">
-                                <path fill="#00BCD4" d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z" />
-                            </svg>
-                            <h6 class="card-subtitle mt-1 text-muted">{current.members_count}عضو</h6>
+                        <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.members_count}</h6>
+                        {isMine === true?
+                        <div className="text-left mt-n3 ">
+                        <button onClick={() => routeToGroupHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
+                        </div>
+                        :
+                        <div className="text-left mt-n3 ">
+                        <button onClick={() => routeToGroupHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
+                        </div>
+                         }
+                       
                       </div>
+                      
                     </div>
                   </div>
                ))}
