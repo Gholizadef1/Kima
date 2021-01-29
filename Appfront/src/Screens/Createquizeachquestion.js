@@ -25,7 +25,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { EvilIcons } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 const Createquizeachquestion = (prop) => {
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState("1");
     return (<View>
         <TouchableOpacity>
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}

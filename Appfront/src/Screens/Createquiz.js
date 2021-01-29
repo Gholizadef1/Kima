@@ -85,7 +85,7 @@ const Createquiz = () => {
     const [itemid,setitemid]=useState(1);
     const [values,setvalues]=useState(["1"])
     const [questions, setquestions] = useState([{id:1,name:"اول"}])
-    const [numofquestion,setnumofquestion]=useState(3)
+    const [numofquestion,setnumofquestion]=useState(2)
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -205,31 +205,36 @@ const Createquiz = () => {
                              
                                 <FlatList
                                 //بعدا لیست هدر بالایی ها
+                                // ListHeaderComponent={()=>(
+
+                                // )}
                                 scrollEnabled={false}
-                                  keyExtractor={()=>itemid}
+                                  keyExtractor={(item)=> {return(item.id)
+                                //   undefined
+                                //   questions[numofquestion-1].id
+                                   }}
                                     data={questions}
-                                    renderItem={(item) =>{
+                                    renderItem={({item}) =>{
+                                        console.log(item.id+" ITEM IDDDDDDDDDDDDDDDDDD")
+                                       // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
                                        // const [values,setvalues]=useState("1")
                                          return(<>
-                                      <Createquizeachquestion pr={props} itemidd={itemid}></Createquizeachquestion>
+                                         <Text style={{fontSize:14,color:"green",width:100,height:20,position:"absolute",marginTop:100}}>{item.id}</Text>
+                                      <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
                                     </>)
                                     }}
-                                >
-
-                                </FlatList>
-
-                                <View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
+                                    ListFooterComponent={()=>(<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
                                     <TouchableOpacity
                                      onPress={async()=>{
                                          
                                          //toye groups mygroups avali javab nemidad :\
-                                       
-                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                       await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
-                                       await setvalues(values.concat(numofquestion.toString()));
-                                          await setnumofquestion(numofquestion+1);
-                                          await setvalues(values.concat(numofquestion));
                                           await setitemid(itemid+1);
+                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                          await  setquestions(questions.concat({id:numofquestion,name:"ad;fk"}));
+                                    //    await setvalues(values.concat(numofquestion.toString()));
+                                           await setnumofquestion(numofquestion+1);
+                                    //      // await setvalues(values.concat(numofquestion));
+                                         
                                           console.log(questions);
                                           }}
                                      style={{ marginTop: hp("0%"), right: wp("-5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
@@ -240,9 +245,10 @@ const Createquiz = () => {
                                     {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
                                     <TouchableOpacity 
                                       onPress={async()=>{
+                                        await setitemid(itemid-1);
                                         //  console.log(questions);
                                         //  console.log(questions.pop());
-                                        //  console.log(questions);
+                                         // console.log(questions);
                                         const temp=await questions.pop();
                                         console.log(temp);
                                         //await  setquestions(temp);
@@ -255,7 +261,12 @@ const Createquiz = () => {
                                         <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
                                     </TouchableOpacity>
 
-                                </View>
+                                </View>)}
+                                >
+
+                                </FlatList>
+
+                              
                                 {/* <TouchableOpacity style={{marginTop:hp("-2.5%"),fontWeight:"bold",fontSize:hp("1.5.5%")
                                 ,marginLeft:wp("29%"),color:"#1f7a8c",fontWeight:"bold",marginBottom:hp("10%")}}>
                                 <Text style={{fontSize:hp("1.5.5%"),color:"#1f7a8c",
