@@ -26,9 +26,9 @@ function Slide(props) {
   const [bookReading, setBookReading] = useState([]);
   const [bookWantto, setBookWantto] = useState([]);
  
-    const apiURLRead = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Read`;
-    const apiURLReading = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/Reading`;
-    const apiURLWantto = `http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/ToRead`;
+  const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
+  const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
+  const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
     useEffect(() => {
       axios.get(apiURLRead,{
         headers:{
@@ -37,6 +37,7 @@ function Slide(props) {
         })
         .then((data) => {
           console.log(data.data.data);
+          console.log(data.data.Count);
           setBookRead(data.data.data);
         });
     }, []);
@@ -119,18 +120,20 @@ function Slide(props) {
     
       <ListItemText style={{textAlign:"right"}}
         primary={
-          <List >
-             <div className="brand1 text-center mb-md-3 ml-sm-5 mt-sm-1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
+          <List  >
+            <div className="">
+              
+             <div className="brand1 mb-md-3 ml-sm-5 mt-sm-1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> خوانده‌ام</div> 
 
       {bookRead.length === 0 ? (
-
-        <div className="subbrand1 text-center mt-sm-n4 ml-sm-5 pt-md-3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
-
+<div>
+        <div className="subbrand1 mt-sm-n4 ml-sm-5 pt-md-3" style={{fontFamily:'Yekan',fontSize:20,fontWeight:"bold",color:"red"}}>کتابی اضافه نشده‌است </div>
+</div>
       ) : (
-       <div className = "slid">
+       <div className = "slid ">
         <Slider {...settings}>
           {bookRead.map((current) => (
-            <div className="out" key={current.id}>
+            <div className="out"  key={current.id}>
               <div className="card car"onClick={() => bookSelectedHandler( current )}>
                 <img
                   className="squer img-responsive" 
@@ -158,10 +161,12 @@ function Slide(props) {
       )
         }
     
-    <div className="brand2 text-center mb-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
+    <div className="brand2 mb-5 mt-5 ml-sm-5 mt-sm-2" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> دارم می‌خوانم</div> 
       {bookReading.length === 0 ? (
-        <div className="subbrand2 text-center mt-3 mt-sm-n4 ml-sm-5 pb-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
-
+        <div>
+       
+        <div className="subbrand2 mt-1 mt-sm-n4 ml-sm-5 pb-2" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red",fontSize:20}}>کتابی اضافه نشده‌است</div>
+</div>
       ) : (
          <div className = "slid">
           <Slider {...settings}>
@@ -193,13 +198,14 @@ function Slide(props) {
               </div>
       )
           }
-      
-      
-           <div className="brand3 text-center ml-1 ml-sm-5 mb-5 mt-sm-n4 pt-5" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
+
+           <div className="brand3 text-right ml-1 ml-sm-5 mb-5 pb-1 mt-1" style={{fontFamily: 'Yekan',fontWeight:"bold",color:"black",fontSize:22}}> می‌خواهم بخوانم</div> 
 
       {bookWantto.length === 0 ? (
-          <div className="subbrand3 text-center  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red"}}>چیزی اضافه نشده‌است</div>
-
+        <div>
+       
+          <div className="subbrand3  mt-sm-n4 ml-sm-5" style={{fontFamily:'Yekan',fontWeight:"bold",color:"red",fontSize:20}}>کتابی اضافه نشده‌است</div>
+</div>
       ) : (
          <div className = "slid">
           <Slider {...settings}>
@@ -233,7 +239,7 @@ function Slide(props) {
           }
       
       
-
+</div>
 </List>
              }
             />

@@ -59,7 +59,10 @@ function App(props) {
                 <NavBar/>
               <Grouppage/>
             </Route>
-             
+            <Route path="/quizepage">
+                <NavBar/>
+              <QuizesPage/>
+            </Route>
             
             <Route path="/book/:bookId">
               <NavBar/>
