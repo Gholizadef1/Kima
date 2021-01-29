@@ -1,106 +1,537 @@
-
-@media (min-width:360px){
     .avatar{
-        width: 200px;
+        width: 190px;
         height: 100px;
-        margin-top: -50px;
+        margin-top: -40px;
         margin-left: -5px;
         border-radius: 3%;
-
     }
     .cardG{
-        width: 70px;
-        height: 70px;
-        margin-left: 170px;
-        margin-top: -30px;
+        width: 80px;
+        height: 80px;
+        margin-left: 115px;
+        margin-top: -40px;
         border-radius: 3%;
-        background-color: lightsteelblue;
     }
     .imageg{
-        width: 50px;
-        height: 50px;
-        margin-left: -10px;
-        margin-top: -10px; 
+        width: 70px;
+        height: 70px;
+        margin-left: -15px;
+        margin-top: -15px; 
         border-radius: 3%;
         
     }
-    .title-g{
+    .summary{
+        font-size: 15px;
+        margin-top: 10px;
+        margin-right: 70px;
+        direction: rtl;
+    }
+    .creator{
         font-family: 'Yekan';
         font-size: 13px;
-        top: 4px;
+    }
+    .name-d{
+        margin-top: -20px;
+        font-family: "Yekan";
+        font-size: 15px;
+    }
+   
+    .title-g{
+        font-family: 'Yekan';
+        font-size: 15px;
         position: relative;
-        left: -30px;
+        left: 55px;
+    }
+    .title-d{
+        font-family: 'Yekan';
+        font-size: 15px;
+        top:20px;
+        position: relative;
+        left: 30px;
     }
     
-    .line-g{
-        margin-top: 10px;
-        margin-right: 385px;
-    }
-    .cardb{
-        width: 310px;
+
+    .card-discussion{
+        width: 300px;
         height: 150px;
-        margin-left: 355px;
-        margin-top: 10px;
+        margin-left: 7px;
+        margin-top: 20px;
+        margin-bottom: 250px;
         border-radius: 3%;
         border-color: white;
+        
     }
-    .card-discussion{
-        width: 500px;
-        height: 150px;
-        margin-left: 290px;
-        margin-top: 15px;
-        border-radius: 3%;
-        border-color: whitesmoke;
+    .no-discussion{
+        margin-top: 10px;
+        margin-left: 100px;
     }
-    .line-g1{
-        margin-left: 290px;
-    }
+
+   .more{
+       border-radius: 3%;
+   }
     .btn-g{
-        color: white;
         font-family: 'Yekan';
-        margin-right: 545px;
-        margin-top: -8px;
-     
+        margin-right: -60px;
+       margin-top: -130px;
+        height: 32px;
     }
-    .out{
-       
-        margin-left: -350px;
-        margin-top: -6px; 
+    
+        .name{
+            font-family: 'Yekan';
+            font-size: 15px;
+            margin-right: -10px;
+            margin-top: 10px;
+        
+    }
+    .btn-d{
+        font-family: 'Yekan';
+        margin-right: -10px;
+        margin-top: 40px;
+
+        height: 32px;
+    }
+   .group-info{
+       margin-top: 80px;
+   }
+   a {
+    color: black;
+   text-decoration: underline;
+      }
+      a:hover {
+        color: black;
+      
+          }
+
+
+@media (min-width:374px){
+    .avatar{
+        width: 190px;
+        height: 100px;
+        margin-top: -40px;
+        margin-left: -5px;
         border-radius: 3%;
-       padding-left: 10px;
     }
+    .cardG{
+        width: 80px;
+        height: 80px;
+        margin-left: 115px;
+        margin-top: -40px;
+        border-radius: 3%;
     }
-    @media (min-width:768px){
+    .imageg{
+        width: 70px;
+        height: 70px;
+        margin-left: -15px;
+        margin-top: -15px; 
+        border-radius: 3%;
+        
+    }
+    .summary{
+        font-size: 15px;
+        margin-top: 10px;
+        margin-right: 70px;
+        direction: rtl;
+    }
+    .creator{
+        font-family: 'Yekan';
+        font-size: 13px;
+    }
+    .name-d{
+        margin-top: -20px;
+        font-family: "Yekan";
+        font-size: 15px;
+    }
+   
+    .title-g{
+        font-family: 'Yekan';
+        font-size: 15px;
+        position: relative;
+        left: 55px;
+    }
+    .title-d{
+        font-family: 'Yekan';
+        font-size: 15px;
+        top:20px;
+        position: relative;
+        left: 30px;
+    }
+    
+
+    .card-discussion{
+        width: 300px;
+        height: 150px;
+        margin-left: 7px;
+        margin-top: 20px;
+        margin-bottom: 250px;
+        border-radius: 3%;
+        border-color: white;
+        
+    }
+    .no-discussion{
+        margin-top: 10px;
+        margin-left: 100px;
+    }
+
+   .more{
+       border-radius: 3%;
+   }
+    .btn-g{
+        font-family: 'Yekan';
+        margin-right: -60px;
+       margin-top: -130px;
+        height: 32px;
+    }
+    
+        .name{
+            font-family: 'Yekan';
+            font-size: 15px;
+            margin-right: -10px;
+            margin-top: 10px;
+        
+    }
+    .btn-d{
+        font-family: 'Yekan';
+        margin-right: -10px;
+        margin-top: 40px;
+
+        height: 32px;
+    }
+   .group-info{
+       margin-top: 80px;
+   }
+   a {
+    color: black;
+   text-decoration: underline;
+      }
+      a:hover {
+        color: black;
+      
+          }
+}
+
+@media (min-width:448px){
+    .avatar{
+        width: 190px;
+        height: 100px;
+        margin-top: -40px;
+        margin-left: -5px;
+        border-radius: 3%;
+    }
+    .cardG{
+        width: 80px;
+        height: 80px;
+        margin-left: 155px;
+        margin-top: -40px;
+        border-radius: 3%;
+    }
+    .imageg{
+        width: 70px;
+        height: 70px;
+        margin-left: -15px;
+        margin-top: -15px; 
+        border-radius: 3%;
+        
+    }
+    .summary{
+        font-size: 15px;
+        margin-top: 10px;
+        margin-right: 100px;
+        direction: rtl;
+    }
+    .creator{
+        font-family: 'Yekan';
+        font-size: 13px;
+    }
+    .name-d{
+        margin-top: -20px;
+        font-family: "Yekan";
+        font-size: 15px;
+    }
+   
+    .title-g{
+        font-family: 'Yekan';
+        font-size: 15px;
+        position: relative;
+        left: 55px;
+    }
+    .title-d{
+        font-family: 'Yekan';
+        font-size: 15px;
+        top:20px;
+        position: relative;
+        left: 30px;
+    }
+    
+
+    .card-discussion{
+        width: 300px;
+        height: 150px;
+        margin-left: 50px;
+        margin-top: 20px;
+        margin-bottom: 250px;
+        border-radius: 3%;
+        border-color: white;
+        
+    }
+    .no-discussion{
+        margin-top: 10px;
+        margin-left: 100px;
+    }
+
+   .more{
+       border-radius: 3%;
+   }
+    .btn-g{
+        font-family: 'Yekan';
+        margin-right: -60px;
+       margin-top: -130px;
+        height: 32px;
+    }
+    
+        .name{
+            font-family: 'Yekan';
+            font-size: 15px;
+            margin-right: -10px;
+            margin-top: 10px;
+        
+    }
+    .btn-d{
+        font-family: 'Yekan';
+        margin-right: -10px;
+        margin-top: 40px;
+
+        height: 32px;
+    }
+   .group-info{
+       margin-top: 80px;
+   }
+   a {
+    color: black;
+   text-decoration: underline;
+      }
+      a:hover {
+        color: black;
+      
+          }
+    
+}
+    @media (min-width:764px){
         .avatar{
-            width: 500px;
-            height: 220px;
-            margin-top: 20px;
+            width: 350px;
+            height: 130px;
+            margin-top: -70px;
+            margin-left: -5px;
+            border-radius: 3%;
         }
         .cardG{
             width: 100px;
-            height: 160px;
-            margin-left: 148px;
-            margin-top: -60px;
+            height: 100px;
+            margin-left: 280px;
+            margin-top: -55px;
+            border-radius: 3%;
         }
+        .imageg{
+            width: 80px;
+            height: 80px;
+            margin-left: -11px;
+            margin-top: -11px; 
+            border-radius: 3%;
+            
         }
+        .summary{
+            font-size: larger;
+            margin-top: 10px;
+            margin-right: 71px;
+            direction: rtl;
+        }
+        .creator{
+            font-family: 'Yekan';
+            font-size: 13px;
+        }
+        .name-d{
+            margin-top: -20px;
+            font-family: "Yekan";
+            font-size: 15px;
+        }
+       
+        .title-g{
+            font-family: 'Yekan';
+            font-size: 20px;
+            position: relative;
+            left: 105px;
+        }
+        .title-d{
+            font-family: 'Yekan';
+            font-size: 20px;
+            top:20px;
+            position: relative;
+            left: 160px;
+        }
+        
+
+        .card-discussion{
+            width: 340px;
+            height: 150px;
+            margin-left: 80px;
+            margin-top: 20px;
+            margin-bottom: 250px;
+            border-radius: 3%;
+            border-color: white;
+            
+        }
+        .no-discussion{
+            margin-top: 10px;
+            margin-left: 100px;
+        }
+
+       .more{
+           border-radius: 3%;
+       }
+        .btn-g{
+            font-family: 'Yekan';
+            margin-right: -50px;
+           margin-top: -130px;
+            height: 45px;
+        }
+        
+            .name{
+                font-family: 'Yekan';
+                font-size: 20px;
+                margin-right: 50px;
+                margin-top: -40px;
+            
+        }
+        .btn-d{
+            font-family: 'Yekan';
+            margin-right: -150px;
+            margin-top: 40px;
+            height: 40px;
+            width: 81px;
+        }
+       .group-info{
+           margin-top: 80px;
+       }
+       a {
+        color: black;
+       text-decoration: underline;
+          }
+          a:hover {
+            color: black;
+          
+              }
+        
+}
         @media (min-width:800px){
             .avatar{
-                width: 500px;
-                height: 220px;
-                margin-top: 20px;
+                width: 350px;
+                height: 130px;
+                margin-top: -70px;
+                margin-left: -5px;
+                border-radius: 3%;
             }
             .cardG{
                 width: 100px;
-                height: 160px;
-                margin-left: 165px;
-                margin-top: -60px;
+                height: 100px;
+                margin-left: 300px;
+                margin-top: -55px;
+                border-radius: 3%;
             }
+            .imageg{
+                width: 80px;
+                height: 80px;
+                margin-left: -11px;
+                margin-top: -11px; 
+                border-radius: 3%;
+                
             }
+            .summary{
+                font-size: larger;
+                margin-top: 10px;
+                margin-right: 86px;
+                direction: rtl;
+            }
+            .creator{
+                font-family: 'Yekan';
+                font-size: 13px;
+            }
+            .name-d{
+                margin-top: -20px;
+                font-family: "Yekan";
+                font-size: 15px;
+            }
+           
+            .title-g{
+                font-family: 'Yekan';
+                font-size: 20px;
+                position: relative;
+                left: 105px;
+            }
+            .title-d{
+                font-family: 'Yekan';
+                font-size: 20px;
+                top:20px;
+                position: relative;
+                left: 160px;
+            }
+            
+
+            .card-discussion{
+                width: 340px;
+                height: 150px;
+                margin-left: 80px;
+                margin-top: 20px;
+                margin-bottom: 250px;
+                border-radius: 3%;
+                border-color: white;
+                
+            }
+            .no-discussion{
+                margin-top: 10px;
+                margin-left: 100px;
+            }
+
+           .more{
+               border-radius: 3%;
+           }
+            .btn-g{
+                font-family: 'Yekan';
+                margin-right: -50px;
+               margin-top: -130px;
+                height: 45px;
+            }
+            
+                .name{
+                    font-family: 'Yekan';
+                    font-size: 20px;
+                    margin-right: 50px;
+                    margin-top: -40px;
+                
+            }
+            .btn-d{
+                font-family: 'Yekan';
+                margin-right: -150px;
+                margin-top: 40px;
+                height: 40px;
+                width: 81px;
+            }
+           .group-info{
+               margin-top: 80px;
+           }
+           a {
+            color: black;
+           text-decoration: underline;
+              }
+              a:hover {
+                color: black;
+              
+                  }
+            
+    }
         @media (min-width:960px){
             .avatar{
                 width: 750px;
                 height: 200px;
-                margin-top: -100px;
+                margin-top: -90px;
                 margin-left: 10px;
                 border-radius: 3%;
 
@@ -111,12 +542,13 @@
                 margin-left: 800px;
                 margin-top: -70px;
                 border-radius: 3%;
+                
             }
             .imageg{
                 width: 100px;
                 height: 100px;
-                margin-left: -5px;
-                margin-top: -12px; 
+                margin-left: -6px;
+                margin-top: -6px; 
                 border-radius: 3%;
                 
             }
@@ -126,27 +558,50 @@
             }
             
             .summary{
-                font-size: larger;
+                font-size:20px;
+                font-family: "Yekan";
                 margin-top: 30px;
-                margin-right: 180px;
+                margin-right: 220px;
             }
+            .creator{
+                font-family: 'Yekan';
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .name-d{
+                margin-top: -25px;
+                font-family: "Yekan";
+                font-size: 19px;
+            }
+           
             .title-g{
                 font-family: 'Yekan';
                 font-size: 25px;
-                
                 position: relative;
-                left: 60px;
+                left: 10px;
+            }
+            .title-d{
+                font-family: 'Yekan';
+                font-size: 25px;
+                top:20px;
+                position: relative;
+                left: 540px;
             }
             
 
             .card-discussion{
-                width: 630px;
-                height: 150px;
+                width: 620px;
+                height: 320px;
                 margin-left: 312px;
-                margin-top: 36px;
+                margin-top: 20px;
                 margin-bottom: 250px;
                 border-radius: 3%;
-                border-color: whitesmoke;
+                border-color: white;
+                
+            }
+            .no-discussion{
+                margin-top: 10px;
+                margin-left: 100px;
             }
 
            .more{
@@ -155,21 +610,52 @@
             .btn-g{
                 
                 font-family: 'Yekan';
-                margin-right: 600px;
-               margin-top: -50px;
-                height: 50px;
+                margin-right: 500px;
+               margin-top: -275px;
+                height: 45px;
              
             }
+            .name{
+                font-size:25px;
+                font-family: "Yekan";
+                margin-top: -50px;
+                margin-right: -10px;
+                direction: rtl;
+            
+            }
+            .btnD{
+               
+                font-family: 'Yekan';
+                
+            }
+            .btnbale{
+                margin-left: 365px;
+            }
+            
+           .btnDE{
+           size: 100px;
+            font-family: 'Yekan';
+            margin-left: 186px;
+           }
             .btn-d{
                 font-family: 'Yekan';
-                margin-right: 600px;
-               
-                height: 40px;
-            }
-           
-            .modal {
-                margin-top: 200px;
+                margin-right: -520px;
+                margin-top: 40px;
                 
-             }
+            }
+           .group-info{
+               margin-top: 80px;
+           }
+           a {
+        color: black;
+       text-decoration: underline;
+          }
+          a:hover {
+            color: black;
+          
+              }
              
             }
+
+   
+
