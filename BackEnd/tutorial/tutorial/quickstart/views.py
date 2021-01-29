@@ -705,19 +705,31 @@ class MyGroupView(APIView,PaginationHandlerMixin):
 
 class QuizView(APIView,PaginationHandlerMixin):
     pagination_class = BasicPagination
-    model = Quiz
 
     def post(self,request):
         user = request.user
         title = request.data.get("title")
         description = request.data.get("description")
-        questions = CreateQuestionSerializer(request.data.get("questions"),many=True)
+        question_count = request.data.get("question_count")
         if 'photo' in request.FILES:
-            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"])
-            new_quiz.save()
-            return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"],question_count=question_count)
+            
         else:
-            new_quiz = Quiz(creator=user,title=title,description=description)
-            new_quiz.save()
-            return Response({"data":QuizSerializer(new_quiz,many=False).data,"message":"Your quiz is succesfully created!",})
+            new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
+
+        counter = 0
+        questions = request.data.get("questions")
+        new_quiz.save()
+        while counter < question_count:
+            question = questions[counter]
+            counter+=1
+            new_que = Question(quiz=new_quiz,question_num=counter,question_text=question['question_text'],a_text=question['a_text']
+                ,b_text=question['b_text'],c_text=question['c_text'],d_text=question['d_text'],key=question['key'])
+            new_que.save()
+        
+        q_list = Question.objects.filter(quiz=new_quiz).order_by('-question_num')
+        question_list=QuestionSerializer(q_list,many=True)
+        quiz = QuizSerializer(new_quiz,many=False).data
+        return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
+            
         

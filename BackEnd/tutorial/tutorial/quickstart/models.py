@@ -168,7 +168,7 @@ class Quiz(models.Model):
     creator = models.ForeignKey(Account, on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now, editable=False)
     quiz_photo = models.ImageField(upload_to='quiz_photos',default='default.png')
-    question_count = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(15)],default=0)
+    question_count = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(15)])
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

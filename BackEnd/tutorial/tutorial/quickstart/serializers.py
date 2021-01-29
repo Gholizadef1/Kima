@@ -240,8 +240,8 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quiz
         fields = ['id','title','description','creator','quiz_photo','create_time']
 
-class CreateQuestionSerializer(serializers.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = "__all__"
+        fields = ['question_num','question_text','a_text','b_text','c_text','d_text','key']
