@@ -21,6 +21,7 @@ const Bookview = (prop) => {
   const [result , setResult] = useState(null);
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
+ 
 
   const getResult = async () => {
     axiosinst.get('/book/'+id, {
@@ -51,19 +52,37 @@ const Bookview = (prop) => {
     }
 
     const PostPicker = async (value) => {
-      if (value != "") {
+      const userid = await AsyncStorage.getItem('id');
+      if (value === "none") {
+        const payload = {
+          "book_id": id,
+          }
+          const back = JSON.stringify(payload);
+          axiosinst.post('/user/'+userid+'/collection', back, {
+            "headers": {
+            "content-type": "application/json"
+            }
+          })
+          .then(async function (response) {
+          console.log(response.data)
+          getPicker();
+          })
+          .catch(function (error) {
+          console.log(error);
+          });
+      }
+      
+      else if (value != "") {
       const payload = {
-      "book_state": value,
+      "book_id": id,
       }
       const back = JSON.stringify(payload);
-      axiosinst.post('/book/' +id, back, {
-      "headers": {
-      "content-type": "application/json",
-      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
+      axiosinst.post('/user/'+userid+'/collection?type='+value, back, {
+        "headers": {
+        "content-type": "application/json"
+        }
       })
       .then(async function (response) {
-        // setloading(false)
       console.log(response.data)
       getPicker();
       })
