@@ -19,6 +19,10 @@
 
 @media (min-width :360px) 
 {
+    .Nogroup{
+        margin-top:80px;
+        margin-left: -150px;
+    }
     .cardc{
         overflow-x: scroll;
         width: 300px;
@@ -54,26 +58,52 @@
         margin-top: -170px;
         margin-left: 40px;
     }
-
+    .Nogroup{
+        margin-top:70px;
+        margin-left: -150px;
+    }
   }
   @media (min-width:960px){
+      .Nogroup{
+          
+          margin-top: 100px;
+          margin-left: 60px;
+      }
     .cardc {
         overflow-x: scroll;
-        max-height: 300px;
-        padding: 3rem;
+        
+        
         background-color:rgb(238, 243, 250);
         margin-left: 55rem;
         margin-top: 55px;
         width: 500px;
+       height: 280px;
     
     }
-    
-    .my-groups{
-        font-family: 'Yekan';
-        font-size: 15px;
-        font-weight: bold;
-        margin-top: -170px;
-        margin-left: 40px;
+    .group{
+        margin-top: -50px;
+        padding-bottom: 25px;
+        position: fixed;
+        color: blanchedalmond;
+        margin-left: -50px;
+        width: 500px;
+        border-radius: 5%;
+        height: 5px;
+        font-size: 19px;
+        background-size: 100px;
+
     }
+    .g-line{
+        margin-top: 15px;
+    
+    font-size: 30px;
+    font-family: "Yekan";
+    font-weight: bold;
+    color: black;
+ 
+        
+    }
+    
+    
     
   }

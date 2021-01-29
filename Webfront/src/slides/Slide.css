@@ -1,4 +1,5 @@
 
+
 .card-title2{
     font-size: 14px;
     direction: rtl;
@@ -19,8 +20,6 @@
   
    
 }
-
-
 .cat{
     
     
@@ -33,35 +32,6 @@
     margin-top: 20px;
     
 }
-.squere:hover{
-    box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
-    transform:scale(1, 1);
-
-}
-.squere {
-  
-    width: 150px;
-    height: 240px;
-   border-radius: 3%;
-    transform:scale(1, 1);
-    transition: 1s;
-   
-}
-.slick-prev:before {
-    color: black !important;
-    width: 46px;
-
-position: absolute;
-top: -50px;
-}
-.slick-next:before{
-    color: black !important;
-
-position: absolute;
-top: -50px;
-margin-left: 13px;
-}
-
 
 .sr-only{
     margin-left: 500px;
@@ -78,11 +48,13 @@ margin-left: 13px;
         .slide{
             margin-left: 20px;
             margin-right: 20px;
+            
           
         }
         .cat{
             width: 80px;
-            height: 140px;
+            height: 128px;
+           
         
         }
         .squere:hover{
@@ -92,7 +64,7 @@ margin-left: 13px;
         }
         .squere{
             width: 80px;
-            height: 140px;
+            height: 128px;
         }
         .card-title1{
            
@@ -104,10 +76,10 @@ margin-left: 13px;
         .slick-prev:before {
             
         top: -30px;
-        left: 20px;
+        left: 10px;
         }
         .slick-next:before{
-         right: -25px;
+         right: -40px;
         top: -30px;
         }
         .brand{
@@ -115,7 +87,7 @@ margin-left: 13px;
            padding-left: 70px;
            margin-bottom: 10px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 17px;
             direction: rtl;
             overflow:hidden; 
             white-space:nowrap; 
@@ -137,9 +109,234 @@ margin-left: 13px;
              top: -40px;
             margin-left: 13px;
         }
-      }
-  
 
+.card-title2{
+    font-size: 15px;
+    direction: rtl;
+    text-align: center;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+    font-family: 'Yekan';  
+
+}.card-title1{
+    font-family: 'Yekan';
+    color: #000000;
+    padding-top: 10px;
+    padding-right: -30px;
+    font-size: 16px;
+    direction: rtl;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+  
+   
+}
+      }
+      @media (min-width :386px)
+      {
+          .container{
+              width: 400px;
+              margin-left:-40px;
+              margin-top: 20px;
+             
+          }
+          .slide{
+              margin-left: 10px;
+              margin-right: 20px;
+              
+            
+          }
+          .cat{
+              width: 70px;
+              height: 112px;
+              
+             
+          
+          }
+          .squere:hover{
+              box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
+              transform:scale(1, 1);
+          
+          }
+          .squere{
+              width: 70px;
+              height: 112px;
+          }
+          .card-title1{
+             
+              font-size: 11px;
+          }
+          .body{
+              margin-right: 1px;
+          }
+          .slick-prev:before {
+              
+          top: -30px;
+          left: 20px;
+          }
+          .slick-next:before{
+           right: -40px;
+          top: -30px;
+          }
+          .brand{
+              margin-top: 10px;
+             padding-left: 70px;
+             margin-bottom: 10px;
+              font-weight: bold;
+              font-size: 17px;
+              direction: rtl;
+              overflow:hidden; 
+              white-space:nowrap; 
+              text-overflow: ellipsis;
+          
+          }
+          .slick-prev:before {
+              color: black !important;
+            font-size: 5px;
+              position: absolute;
+              top: -40px;
+              margin-left: -25px;
+          }
+          .slick-next:before{
+              
+              color: black !important;
+              font-size: x-small;
+               position: absolute;
+               top: -40px;
+              margin-left: 13px;
+          }
+  
+  .card-title2{
+      font-size: 15px;
+      direction: rtl;
+      text-align: center;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+      font-family: 'Yekan';  
+  
+  }.card-title1{
+      font-family: 'Yekan';
+      color: #000000;
+      padding-top: 10px;
+      padding-right: -30px;
+      font-size: 16px;
+      direction: rtl;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+    
+     
+  }
+        }
+    
+      @media (min-width :414px)
+      {
+          .container{
+              width: 390px;
+              margin-left:-20px;
+              margin-top: 20px;
+             
+          }
+          .slide{
+              margin-left: 10px;
+              margin-right: 10px;
+              
+            
+          }
+          .cat{
+              width: 70px;
+              height: 112px;
+             
+          
+          }
+          .squere:hover{
+              box-shadow: 0 1px 10px rgb(63, 63, 63) !important; 
+              transform:scale(1, 1);
+          
+          }
+          .squere{
+              width: 70px;
+              height: 112px;
+          }
+          
+          .body{
+              margin-right: 1px;
+          }
+          .slick-prev:before {
+              
+          top: -90px;
+          left: 20px;
+          }
+          .slick-next:before{
+           right: -30px;
+          top: -30px;
+          }
+          .brand{
+              margin-top: 10px;
+             padding-left: 70px;
+             margin-bottom: 10px;
+              font-weight: bold;
+              font-size: 17px;
+              direction: rtl;
+              overflow:hidden; 
+              white-space:nowrap; 
+              text-overflow: ellipsis;
+          
+          }
+          .slick-prev:before {
+              color: black !important;
+            font-size: 5px;
+              position: absolute;
+              top: -40px;
+              margin-left: -25px;
+          }
+          .slick-next:before{
+              
+              color: black !important;
+              font-size: x-small;
+               position: absolute;
+               top: -40px;
+              margin-left: 13px;
+          }
+  
+  .card-title2{
+      font-size: 13px;
+      direction: rtl;
+      text-align: center;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+      font-family: 'Yekan';  
+  
+  }.card-title1{
+      font-family: 'Yekan';
+      color: #000000;
+      padding-top: 10px;
+      padding-right: -30px;
+      font-size: 14px;
+      direction: rtl;
+      overflow:hidden; 
+      white-space:nowrap; 
+      text-overflow: ellipsis;
+  }
+  .card-titl{
+    font-family: 'Yekan';
+    color: #000000;
+    padding-top: 10px;
+    margin-left: 19px;
+    text-align: center;
+    font-size: 14px;
+    direction: rtl;
+ 
+  
+   
+}
+        }
+    
+  
+        
       @media (min-width :768px) 
       {
           .container{
@@ -202,12 +399,14 @@ margin-left: 13px;
             .container{
               width: 900px;
               margin-left:100px;
-              margin-top: 100px;
+              margin-top: -55px;
+              
               
             }
             .slide{
               margin-left: -310px;
               margin-right: -310px;
+              margin-bottom: -80px;
           }
           .cat{
               width: 130px;
@@ -220,6 +419,7 @@ margin-left: 13px;
           .brand{
               
               margin-left: 500px;
+             
             
           }
           .body{
@@ -230,7 +430,7 @@ margin-left: 13px;
     font-size: 16px; 
 
 }.card-title1{
-    font-size: 18px;
+    font-size: 16px;
 }
 .brand{
     margin-top: 100px;
@@ -247,17 +447,22 @@ margin-left: 13px;
 .slick-prev:before {
     color: black !important;
     font-size: 35px;
-margin-left: -50px;
+
 position: absolute;
 top: -40px;
+
+
 }
 .slick-next:before{
     color: black !important;
     font-size: 35px;
 position: absolute;
 top: -40px;
-margin-left: 13px;
+
+
 }
+
+
 
 
     
