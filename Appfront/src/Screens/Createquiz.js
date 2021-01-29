@@ -300,7 +300,7 @@ const Createquiz = () => {
                                                 borderRadius: 10,
                                                 height: hp('4%'),
                                                 elevation: 300,
-                                                marginTop:hp("5.5%"),
+                                                marginTop: hp("5.5%"),
                                                 right: hp("25%"),
                                                 width: wp("55.5%"),
                                                 // alignSelf: "flex-end",
@@ -309,10 +309,30 @@ const Createquiz = () => {
                                                 <Text style={{
                                                     color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
                                                     marginBottom: 0, top: hp("1%"),
-                                                     alignSelf: "center",
+                                                    alignSelf: "center",
                                                     // alignSelf: "flex-end", right: hp("25%"),
-                                                     position: "relative"
+                                                    position: "relative"
                                                 }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                            </View>
+                                            : null}
+                                            {maxnumquestion === true ?
+                                            <View style={{
+                                                backgroundColor: "#FEEBEC",
+                                                borderRadius: 10,
+                                                height: hp('4%'),
+                                                elevation: 300,
+                                                marginTop: hp("5.5%"),
+                                                right: hp("25%"),
+                                                width: wp("58%"),
+                                            }}>
+
+                                                <Text style={{
+                                                   color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                    marginBottom: 0, top: hp("1%"),
+                                                    alignSelf: "center",
+                                                    // alignSelf: "flex-end", right: hp("25%"),
+                                                    position: "relative"
+                                                }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
                                             </View>
                                             : null}
 
@@ -333,25 +353,25 @@ const Createquiz = () => {
 
 
 
-                                        {maxnumquestion === true ?
+                                    
 
-                                            <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
+                                        {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
 
-                                                {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                                <View style={styles.centeredView}>
-                                                    <View style={styles.modalView}>
+                                            {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
+                                            {/* <View style={styles.centeredView}>
+                                                <View style={styles.modalView}>
 
-                                                        <Text style={{
-                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                            marginBottom: 0, top: hp("1%"),
-                                                            // alignSelf: "center",
-                                                            //  alignSelf: "flex-end", right: hp("25%"), position: "relative"
-                                                        }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
-                                                    </View>
+                                                    <Text style={{
+                                                        color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                        marginBottom: 0, top: hp("1%"),
+                                                        // alignSelf: "center",
+                                                        //  alignSelf: "flex-end", right: hp("25%"), position: "relative"
+                                                    }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
                                                 </View>
-                                            </Modal>
+                                            </View>
+                                        </Modal> */} 
 
-                                            : null}
+
                                         <Button bordered rounded style={styles.button}
                                             onPress={props.handleSubmit}
                                         >
