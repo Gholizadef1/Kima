@@ -106,7 +106,7 @@ export default function FullWidthTabs(props) {
     //   setEndComment("نظر دیگری وجود ندارد");
     // });
 
-      axios.get(API_BASE_URL +"/book/"+props.book+"/comment?filter="+filterBaseComment+"?page="+commentsPage,
+      axios.get(API_BASE_URL +"/book/"+props.book+"/comment?filter="+filterBaseComment+"&page="+commentsPage,
       {
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -139,7 +139,7 @@ export default function FullWidthTabs(props) {
     //   setEndQuote("نقل قول دیگری وجود ندارد");
     // });
 
-      axios.get(API_BASE_URL +"/book/"+props.book+"/quote?filter=" + filterBaseQuote +"?page="+quotesPage,
+      axios.get(API_BASE_URL +"/book/"+props.book+"/quote?filter=" + filterBaseQuote +"&page="+quotesPage,
       {
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -227,7 +227,7 @@ export default function FullWidthTabs(props) {
       "textquote": userQuote
     }
     const back= JSON.stringify(payload);
-    axios.post(API_BASE_URL + '/book/' +props.book+'/quote/',
+    axios.post(API_BASE_URL + '/book/' +props.book+'/quote',
     back
     ,{
      headers:{
@@ -306,7 +306,8 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         if(response.data.message==="successfully liked!"){
           setMassage("عمل با موفقیت انجام شد");
-        }else setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("شما قبلا این نظر را پسندیده‌اید");
+
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
       })
@@ -330,7 +331,8 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         if(response.data.message==="successfully disliked!"){
           setMassage("عمل با موفقیت انجام شد");
-        }else setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("شما قبلا این نظر را نپسندیده‌اید");
+
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
         
@@ -395,7 +397,7 @@ export default function FullWidthTabs(props) {
 
 
   return (
-    <div>
+    <div >
       <div>
          <Snackbar
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
@@ -558,7 +560,7 @@ export default function FullWidthTabs(props) {
           </div>
         </TabPanel>
 
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel  value={value} index={2} dir={theme.direction}>
           <div style={{fontSize:18,fontFamily:'Yekan',direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">بریده ای از کتاب بنویسید :</h3>
@@ -599,7 +601,7 @@ export default function FullWidthTabs(props) {
                  <p >نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
-                  <div>
+                  <div >
 
                   {quotes.map ((current) => (
               
@@ -644,13 +646,13 @@ export default function FullWidthTabs(props) {
 
                     </div>
                   </div>
-                  <div className="px-md-3 d-flex justify-content-center align-items-center text-center mx-3">
+                  <div className="px-md-3 d-flex justify-content-center align-items-center text-center mx-3 ">
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
                         <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
                       </svg>
                     </div>
-                    <p className="text-right col-11 mx-md-3">
+                    <p className="text-right col-11 mx-md-3 container-fluid">
 
                     {current.quote_text}
 
