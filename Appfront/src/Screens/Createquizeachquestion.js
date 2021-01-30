@@ -34,6 +34,7 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].d`)
     const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].correct`)
     const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)
+  //  console.log(JSON.stringify(getIn(prop.pr.values,`soalha[${prop.itemidd}].correct`))+" correcjhgkjhgttttt");
     // console.log(JSON.stringify(questointouched)+" question touched")
     // console.log(typeof JSON.stringify(aerror)+" aerror typeof")
     // console.log(JSON.stringify(aerror));
@@ -86,8 +87,13 @@ const Createquizeachquestion = (prop) => {
         <RadioButton.Group name={`soalha[${prop.itemidd}].correct`}  onValueChange={newValue => {
 
             setValue(newValue)
+            if(getIn(prop.pr.values,`soalha[${prop.itemidd}].correct`)===undefined){
+                prop.pr.values.soalha[prop.itemidd].correct="1"
+            }
+            else{
 
              prop.pr.values.soalha[prop.itemidd].correct = newValue;
+            }
             //prop.pr(`soalha[${prop.itemidd}].correct`);
 
         }} value={value}
