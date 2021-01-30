@@ -18,6 +18,7 @@ import * as yup from 'yup';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import { EvilIcons } from '@expo/vector-icons';
 // import { TextInput } from 'react-native-paper';
 
 
@@ -37,7 +38,7 @@ const userschema=yup.object({
 
 })
 
-const Mygroups = ({navigation}) => {
+const Mygroups = (prop) => {
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
   
@@ -109,10 +110,19 @@ const Mygroups = ({navigation}) => {
   }
     const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
+    const checkisowner=async(ID)=>{
+      console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
+      const id=await(AsyncStorage.getItem('id'))
+      if(id===ID){
+        return true;
+      }
+      else
+      return false
+    }
     const [selectedValue, setselectedValue] = useState('none')
-    const [information, setinformation] = useState();
+    const [information, setinformation] = useState([]);
     const [refresh,setrefresh]=useState(false);
-    const [likeotime, setlikeotime] = useState('/filter-time');
+    const [likeotime, setlikeotime] = useState('time');
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
@@ -130,7 +140,7 @@ const Mygroups = ({navigation}) => {
     console.log(theend+'  THE END RESOPONSE AVAL')
     if(page===1){
       await settheend(false)
-      await setinformation()
+      await setinformation([])
       // if(inforamtionchange===false)
       // setinfromationchange(true)
       // else
@@ -149,9 +159,10 @@ const Mygroups = ({navigation}) => {
        console.log('  omad to response')
        console.log('api/group'+likeotime)
 
-
-      const response = await axiosinst.get('api/group'+ likeotime,{
+      const id= await(AsyncStorage.getItem('id'))
+      const response = await axiosinst.get("user/"+id+"/group",{
         params: {
+          filter:likeotime,
           page: page
         },
       "headers":
@@ -161,23 +172,23 @@ const Mygroups = ({navigation}) => {
       }
      
    })
-   console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-   for(let i=0;response.data.groups[i]!=null;i++){
-     setnumberofgp(numberofgp+1);
-   }
-   if(numberofgp===0)
-   settheend(true)
+   //console.log(response.data.groups.lenght+'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+  //  for(let i=0;response.data.groups[i]!=null;i++){
+  //    setnumberofgp(numberofgp+1);
+  //  }
+  //  if(numberofgp===0)
+  //  settheend(true)
 
    console.log(numberofgp/10+'number of group ////////10')
    console.log(numberofgp+'   !!!!!!!!!  '+numberofgp)
    console.log(response.data)
    console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
-   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
-  await settheend(true)
-  await setrefresh(false)
-   console.log('#########')
-   }
-   else{
+  //  if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+  // await settheend(true)
+  // await setrefresh(false)
+  //  console.log('#########')
+  //  }
+  //  else{
   console.log(response.data+'RESPONSE.DATA')
   console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
@@ -186,18 +197,27 @@ const Mygroups = ({navigation}) => {
    console.log((page===count)+' PAGE===COUNT')
 
     settheend(false)
-   console.log('omade inja')
+   //console.log('omade inja')
    console.log('++++INFOGHABLESET++++'+information+"++++INFOGHABLESET++++")
-    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+    //await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
     // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
+    console.log(response.data.groups)
+    if(response.data.message!="No Group!"){
+      await setinformation(information => [...information, ...response.data.groups])
+   //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
+    }
+    else{
+      await setinformation(undefined);
+      console.log(" KHALIIIII;KAJF;LKJ;LKJ")
+    }
      setrefresh(false)
-    console.log(response.data.groups.id+'  INFORMATION.ID')
+   // console.log(response.data.groups.id+'  INFORMATION.ID')
     
       console.log('++++INFO++++'+information+"++++INFO++++")
      
      }
-    }
+   // }
     //  }
    catch(err){
     Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
@@ -219,27 +239,44 @@ const Mygroups = ({navigation}) => {
    }
    const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-     if(page<numberofgp/10+1){
-     response(page+1);
-     }
-     else
-     {
-       console.log(page+'handlemore page')
-       console.log(count +'handlemore count')
-       console.log('*********')
-       settheend(true)
+    //  if(page<numberofgp/10+1){
+      if (page < count) {
+        if (theend === false)
+          response(page + 1);
       }
+      else {
+        settheend(true)
+      }
+   
     };
    
     useFocusEffect(
       React.useCallback(() => {   
-        // setselectedValue('none')
-        // setinformation(undefined);
-        console.log(information+'INFORMATION USE EFFECT')
-        // setpage(1)      
-          response(1)
-          // setlikeotime('filter-time')
-      },[]))
+        const a = new Promise(async (resolve, reject) => {
+          await setinformation([]);
+          await setpage(1);
+          //await setselecttime(true)
+          //با این ظاهرا درست شد :/
+          await setselectedValue('like')
+          //تاثیری نداشتن :/
+          // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          // await settimelable("فیلتر بر اساس تاریخ")
+          if (selectedValue === "none")
+            await setlikeotime("time");
+          else
+            await setlikeotime("like");
+          await setselectedValue('none')
+  
+          resolve()
+        }).then(() => {
+          console.log('++++++++++' + information + '**********')
+          response(1);
+          console.log('++++++++++' + information + '**********')
+        })
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
+      }, [prop.navigation]))
     return(
      
      
@@ -288,13 +325,21 @@ const Mygroups = ({navigation}) => {
         // const params=JSON.stringify({username:'Hi'});
         console.log(formdata.data+'formdata')
 
-        const response=await axiosinst.post('/api/group',formdata,{
+        const response=await axiosinst.post('/group',formdata,{
           headers:{
             "Content-Type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
           }
              )
         .then( function(response){
+          if(response.data.message==="A group with this name exists!"){
+            Alert.alert('','گروهی با این نام از قبل وجود دارد ',[
+            {
+         text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+            }
+            ],{cancelable:false},{style:{height:50}})
+          }
+          else{
           console.log(picture+' PICTURE POST')
         
           console.log(response)
@@ -304,7 +349,7 @@ const Mygroups = ({navigation}) => {
             }
             ],{cancelable:false},{style:{height:50}})
           
-          
+          }
         })
         .catch( function(error){  
             {
@@ -323,6 +368,7 @@ const Mygroups = ({navigation}) => {
       {(props)=>(
      <View style={{ marginTop:hp('5%')}}>
      <View style={{borderColor:'blue'}}>
+     
      {props.values.photo===require('../../assets/group.jpg')?<TouchableOpacity style={{  
       height: hp('14%'),
       marginTop:hp('-1.5%'),
@@ -337,13 +383,14 @@ const Mygroups = ({navigation}) => {
          source={props.values.photo}
          
          style={{height: hp('14%'),
+        
       marginTop:hp('-1.5%'),
       width: wp('28%'),
       marginLeft:wp('-1%'),
       borderRadius:20 ,
       position:'absolute',
-      // borderColor:'#1f7a8c',
-      // borderWidth:wp('0.2%')
+       //borderColor:'#1f7a8c',
+       //borderWidth:wp('0.2%')
       }}
         //  onBlur={props.handleBlur('photo')}
      
@@ -351,10 +398,10 @@ const Mygroups = ({navigation}) => {
        >
 
          </ImageBackground>
+
      </TouchableOpacity>:<TouchableOpacity style={styles.avatar}
        onPress={() => { pickfromgallery(props,props.handleChange)}}>
       <ImageBackground borderRadius={20}
-        
          source={{uri:`${props.values.photo}`}}
          onChangeItem={props.handleChange('photo')}
          style={styles.avatar}
@@ -365,6 +412,17 @@ const Mygroups = ({navigation}) => {
 
          </ImageBackground>
      </TouchableOpacity>}
+    
+     {props.values.photo===require('../../assets/group.jpg')?
+     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('14%'),
+      marginTop:hp('-3%'),marginLeft:wp("-2%"),
+      width: wp('28%'),elevation:0}}     onPress={() => {pickfromgallery(props,props.handleChange)}}>
+     </TouchableOpacity>
+     :null}
+     {/* <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('8%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
+      <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
+      </TouchableOpacity> */}
+    
     
      <Text style={{fontSize:hp('1.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('1%'),marginLeft:wp('33%')}}>نام گروه</Text>
      <Item style={styles.item} rounded >
@@ -382,6 +440,9 @@ const Mygroups = ({navigation}) => {
       </Item>
     
       </View>
+      <TouchableOpacity  onPress={() => { pickfromgallery(props,props.handleChange)}} style={{backgroundColor:'#EDF2F4',elevation:1,height:hp('4.2%'),width:wp('8.5%'),top:hp('8%'),left:wp('-3%'),position:'absolute',borderRadius:100}}>
+      <EvilIcons  onPress={() => { pickfromgallery(props,props.handleChange)}}  name="camera" size={25} style={{alignSelf:'center',top:hp('1%')}} color="#1f7a8c" />
+      </TouchableOpacity>
      
      {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
    
@@ -445,7 +506,7 @@ const Mygroups = ({navigation}) => {
          <View style={{marginLeft:wp('2%')}}>
       
 
-         {numberofgp!=0? <DropDownPicker
+         {information!=undefined? <DropDownPicker
           items={[
             { label: 'معروف ترین گروه ها', value: 'like' },
             { label: 'جدید ترین گروه ها', value: 'none' },
@@ -472,7 +533,7 @@ const Mygroups = ({navigation}) => {
               // await setinformation()
               // settheend(false)
               // response(1)
-              await setlikeotime('/filter-time')
+              await setlikeotime('time')
               // setselectedValue('none')
         
             }
@@ -483,7 +544,7 @@ const Mygroups = ({navigation}) => {
               // await setinformation()
               // settheend(false)
               // response(1)
-              await setlikeotime('/filter-member')
+              await setlikeotime('member')
          
             }
 
@@ -501,7 +562,7 @@ const Mygroups = ({navigation}) => {
          <View style={{height:hp('2%')}}></View>
         {/* {(information.length >= 0) ? */}
 
-        <FlatList
+        {(information != undefined) ?<FlatList
             ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> : 
             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom:hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
             style={{ marginBottom: hp('7%') }}
@@ -511,7 +572,7 @@ const Mygroups = ({navigation}) => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
-              await setinformation()
+              //await setinformation()
               await setrefresh(true)
               response(1)
             }}
@@ -520,16 +581,22 @@ const Mygroups = ({navigation}) => {
             onEndReachedThreshold={0.5}
 
             renderItem={({ item }) => (<>
-               <TouchableOpacity onPress={()=>{
-              console.log(item.id+'####')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            {item.is_owner||item.is_member?<Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={item.is_owner} discription={item.summary} title={item.title} ></Eachgroup>:null}
+           
+             {/* <TouchableOpacity onPress={()=>console.log('++++++++++'+item.id+'++++++++++++')}> */}
+             <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'white',marginBottom:0}}
+            onPress={async()=>{
+              prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
+            {/* {item.is_owner||item.is_member? */}
+            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
+            {/* :null} */}
             </TouchableOpacity>
             </>
             )}
           // extraData={finfo}
           >
-          </FlatList> 
+          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
@@ -653,3 +720,4 @@ const styles = StyleSheet.create({
   }
   });
   export default Mygroups;
+
