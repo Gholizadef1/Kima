@@ -727,7 +727,7 @@ class QuizView(APIView,PaginationHandlerMixin):
                 ,b_text=question['b_text'],c_text=question['c_text'],d_text=question['d_text'],key=question['key'])
             new_que.save()
         
-        q_list = Question.objects.filter(quiz=new_quiz).order_by('-question_num')
+        q_list = Question.objects.filter(quiz=new_quiz).order_by('question_num')
         question_list=QuestionSerializer(q_list,many=True)
         quiz = QuizSerializer(new_quiz,many=False).data
         return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
@@ -741,14 +741,27 @@ class TakeQuizView(APIView):
     def post(self,request,pk):
         user = request.user
         quiz = Quiz.objects.get(pk=pk)
-        user_answer = request.data.get("user_answer")
-        score = 0
-        counter = 0
-        q_list = Question.objects.filter(quiz=quiz).order_by('-question_num')
-        while counter < quiz.question_count:
-            if user_answer[counter]==q_list[counter].key:
-                score+=1
+        if not TakeQuiz.objects.filter(quiz=quiz,user=user).exists():
+            user_answer = request.data.get("user_answer")
+            score = 0
+            counter = 0
+            q_list = Question.objects.filter(quiz=quiz).order_by('question_num')
+            while counter < quiz.question_count:
+                if user_answer[counter] == q_list[counter].key:
+                    score+=1
+                counter+=1
+                
         
-        TakeQ = TakeQuiz(user=user,quiz=quiz,score=score,user_answer=user_answer)
-        TakeQ.save()
-        return Response({"message":"You successfully submit your quiz!","Your answers":TakeQ.user_answer,"score":TakeQ.score})
+            TakeQ = TakeQuiz(user=user,quiz=quiz,score=score,user_answer=user_answer)
+            TakeQ.save()
+            return Response({"message":"You successfully submit your quiz!","Your answers":TakeQ.user_answer,"score":TakeQ.score})
+
+        return Response({"message":"You have taken this quiz before"})
+
+    def get(self,request,pk):
+        
+        quiz = Quiz.objects.get(pk=pk)
+        quiz_ser = QuizSerializer(quiz)
+        question_list = Question.objects.filter(quiz=quiz.id).order_by('question_num')
+        q_list = QuestionSerializer(question_list,many=True)
+        return Response({"Quiz":quiz_ser.data,"Questions":q_list.data})

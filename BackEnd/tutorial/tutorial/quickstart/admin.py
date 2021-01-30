@@ -11,5 +11,6 @@ admin.site.register(Group)
 admin.site.register(Discussion)
 admin.site.register(Quiz)
 admin.site.register(Question)
+admin.site.register(TakeQuiz)
 
 
