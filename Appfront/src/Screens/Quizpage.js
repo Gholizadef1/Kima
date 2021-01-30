@@ -79,30 +79,30 @@ const[cansubmit,setcansubmit]=useState("سوال بعدی")
                     }}>{thisquesiton.question_text}</Text>
 
 
-                    <View style={{
+                    <TouchableOpacity activeOpacity={0.5} style={{
                         backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("8%"),
                         borderRadius: 100, alignSelf: "center", justifyContent: "center"
                     }}>
                         <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquesiton.a_text}</Text>
-                    </View>
-                    <View style={{
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.5} style={{
                         backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                         borderRadius: 100, elevation: 5, alignSelf: "center", justifyContent: "center"
                     }}>
                         <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.b_text}</Text>
-                    </View>
-                    <View style={{
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.5} style={{
                         backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                         borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                     }}>
                         <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.c_text}</Text>
-                    </View>
-                    <View style={{
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.5} style={{
                         backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                         borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                     }}>
                         <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.d_text}</Text>
-                    </View>
+                    </TouchableOpacity>
 
                     {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
                     <View style={{ flexDirection: "row" }}>
