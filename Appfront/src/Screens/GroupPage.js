@@ -130,10 +130,10 @@ const GroupPage = (prop) => {
   }
 
   const LeaveGroup = async () => {
-//    console.log(' OMAD TO LEAVE GROUP')
+    const id = await AsyncStorage.getItem('id');
     const back = {}
     const backk = JSON.stringify(back);
-    axiosinst.post('/api/group/members/' + prop.route.params.id, backk, {
+    axiosinst.post('/group/' + prop.route.params.id+'/member/'+id, backk, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
