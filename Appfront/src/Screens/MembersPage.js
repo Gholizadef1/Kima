@@ -18,7 +18,7 @@ const MembersPage = (prop) => {
 
     const getMembers = async () => { 
 
-        const response = axiosinst.get('/api/group/members/' +id)
+        const response = axiosinst.get('/group/' +id+'/member')
           .then(async function (response) {    
             setmembers(response.data.members)
             console.log('IDD' +id)
