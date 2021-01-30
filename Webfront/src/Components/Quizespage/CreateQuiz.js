@@ -243,7 +243,7 @@ function Quizespage (props){
  textAlign:"center",
  marginLeft:-9,
  paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
-         <button className="btn b" style={{color:"blue",fontSize:15}}>
+         <button className="btn b" style={{color:"black",fontSize:15}}>
              حذف سؤال
          </button>
          </Tooltip>
@@ -252,7 +252,7 @@ function Quizespage (props){
      :
      <div>
  
-     <button className="btn b" style={{color:"blue",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
+     <button className="btn b" style={{color:"black",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
        حذف سؤال
  </button>
  </div>
