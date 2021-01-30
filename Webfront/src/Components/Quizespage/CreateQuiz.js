@@ -22,8 +22,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
-
-
+import { v4 as uuidv4 } from 'uuid';
 
 function Quizespage (props){
     const [newGroup,setNewGroup] = useState({
@@ -59,6 +58,33 @@ function Quizespage (props){
           reader.readAsDataURL(file);
         }
     };
+    const [inputFields, setInputFields] = useState([
+      { id: uuidv4(), firstName: '', lastName: '' },
+    ]);
+    const handleChangeInput = (id, event) => {
+      const newInputFields = inputFields.map(i => {
+        if(id === i.id) {
+          i[event.target.name] = event.target.value
+        }
+        return i;
+      })
+        setInputFields(newInputFields);
+        console.log(inputFields);
+    }
+    const handleAddFields = () => {
+      setInputFields([...inputFields, { id: uuidv4(),  firstName: '', lastName: '' }])
+      console.log(inputFields);
+
+    }
+
+  
+    const handleRemoveFields = id => {
+      const values  = [...inputFields];
+      values.splice(values.findIndex(value => value.id === id), 1);
+      setInputFields(values);
+      console.log(inputFields);
+
+    }
     return(
         
         <div className="mx-md-1 pt-5 px-md-5">
@@ -102,10 +128,113 @@ function Quizespage (props){
                     </svg>
                   </div>
                   <label src={newGroup.picture} ref={uploadedImage} style={{fontSize:18}} className="yakanfont" htmlFor="exampleInputEmail1">انتخاب عکس</label>
-
+                  <hr/>
 
                   </div>
-                </div>
+                  <div className="name-Q1">
+  
+  <b className=""style={{position:'relative',fontFamily:"Yekan",fontSize:22}}>سؤالات 
+  </b>
+  </div>
+  { inputFields.map(inputField => (
+    <div key={inputField.id}>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">سوال 1 </label>
+  <textarea className="form-control text-right" rows="1" id="comment" placeholder="...صورت سؤال" name="text"></textarea>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 1</label>
+  <div class="form-check text-right mr-n4 ">
+  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+  </div>
+
+                <input type="email" 
+                       className="form-control input-normal text-right" 
+                       placeholder="...صورت جواب"
+                       required
+                       name="firstName"
+                       value={inputField.firstName}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                />
+
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 2</label>
+  <div class="form-check text-right mr-n4 ">
+  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+</div>
+
+                <input type="email" 
+                       className="form-control input-normal text-right" 
+                       
+                       placeholder="...صورت جواب"
+                       required
+                       name="firstName"
+                       value={inputField.firstName}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                      
+                       
+                />
+
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 3</label>
+  <div class="form-check text-right mr-n4 ">
+  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+</div>
+
+                <input type="email" 
+                       className="form-control input-normal text-right" 
+                       name="firstName"
+                       value={inputField.firstName}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                       placeholder="...صورت جواب"
+                       required
+                      
+                       
+                />
+
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 4</label>
+  <div class="form-check text-right mr-n4 ">
+  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+</div>
+
+                <input type="email" 
+                       className="form-control input-normal text-right" 
+                       name="firstName"
+                       value={inputField.firstName}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                       placeholder="...صورت جواب"
+                       required
+                      
+                       
+                />
+                { inputFields.length === 1 ?
+                <div className="btn">
+nemiitoni          
+ </div>
+            :
+            <div className="btn" onClick={() => handleRemoveFields(inputField.id)}>
+            delete 
+        </div>
+}
+      { inputFields.length === 15 ?
+        <div
+            className="btn"
+            >
+nemitoni            </div>
+            
+            :
+            <div
+            className="btn"
+              onClick={handleAddFields}
+              disabled={inputFields.length === 15 } 
+            >
+              اضافه‌کردن سؤال
+            </div>
+      }
+                 </div>
+          
+       ))}
+       </div>
+               
     </div>  
          </div>
          </div>
