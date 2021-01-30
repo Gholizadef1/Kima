@@ -27,10 +27,14 @@ const DiscussionPage = (prop) => {
     console.log('groupid'+groupid)
 
     return(
-        <View>
-            <Text style ={{fontSize:60}}>Discussion</Text>
-            <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
-  
+        <View style = {styles.container}>
+            <View style={{backgroundColor:'#1F7A8C' , height:hp('12%') , width:'100%' , justifyContent:'center'
+               , alignItems:'center'}}>
+                   <Text style={{marginLeft:wp('-70%') , fontSize:20 ,color:'white',
+                   marginTop:hp('2%')}}>{prop.route.params.title}</Text>
+            </View>
+
+    <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
   <View style={styles.centeredView}>
   <View style={styles.modalView}>
 <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
