@@ -48,14 +48,12 @@ const Quizpage = () => {
        {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
        <View style={{flexDirection:"row"}}>
        <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginTop:hp("10.6.5%"),borderTopRightRadius:50}}>
-       {/* <Button style={{backgroundColor:"lightgreen",height:hp("10%"),width:wp("20%")}}>
-
-       </Button> */}
+       <AntDesign style={{marginTop:hp("2.2%"),marginRight:wp("11%"),color:"#Edf2f4"}} name="arrowright" size={24} color="black" />
+       <Text style={{marginLeft:wp("4.4%"),marginTop:hp("0.4%"),fontSize:hp("1.5.5%"),fontWeight:"bold",color:"#Edf2f4"}}>سوال بعدی</Text>
        </TouchableOpacity>
        <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginLeft:wp("50%"),marginTop:hp("10.6.5%"),borderTopLeftRadius:50,alignSelf:"flex-end"}}>
-       {/* <Button style={{backgroundColor:"lightgreen",height:hp("10%"),width:wp("20%")}}>
-
-       </Button> */}
+       <AntDesign style={{marginTop:hp("2.2%"),marginRight:wp("9%"),color:"#Edf2f4"}} name="arrowleft" size={24} color="black" />
+       <Text style={{marginLeft:wp("6.4%"),marginTop:hp("0.4%"),fontSize:hp("1.5.5%"),fontWeight:"bold",color:"#Edf2f4"}}>سوال قبلی</Text>
        </TouchableOpacity>
        </View>
        {/* </View> */}
