@@ -279,6 +279,11 @@ import Tooltip from '@material-ui/core/Tooltip';
     setOpenSnack(false);
   };
 
+  const bookSelectedHandler = ( d ) => {
+    console.log(d);
+    props.history.push( '/discussion/' + d.id );
+  }
+
     return(
       
       <div className="mx-md-1 pt-5 px-md-5">
@@ -354,7 +359,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-<p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+<p><b><a className="pt-n3" href="" onClick={() => bookSelectedHandler( current )}>{current.title}</a></b></p>
             
             </div>
               </div>
