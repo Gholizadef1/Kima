@@ -732,4 +732,10 @@ class QuizView(APIView,PaginationHandlerMixin):
         quiz = QuizSerializer(new_quiz,many=False).data
         return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
             
-        
+        #def get(self,request):
+
+        #def delete()
+            
+class TakeQuizView(APIView):
+    
+    def post(self,request):

@@ -180,3 +180,8 @@ class Question(models.Model):
     d_text = models.TextField()
     key = models.CharField(max_length=1)
     
+class TakeQuiz(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
+    user_answer = models.ArrayField()
