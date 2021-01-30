@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList , TextI
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail , Item, Input, Textarea } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Avatar } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
@@ -11,7 +12,7 @@ import * as yup from 'yup';
 
 const userschema=yup.object({
   
-    Discription:yup.string()
+    chat_text:yup.string()
     .required(" متن شما نمیتواند خالی باشد")
   
   })
@@ -20,7 +21,10 @@ const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const discussionid = prop.route.params.id;
-    console.log(discussionid)
+    const groupid = prop.route.params.id2;
+
+    console.log('discussionid'+discussionid)
+    console.log('groupid'+groupid)
 
     return(
         <View>
@@ -34,49 +38,45 @@ const DiscussionPage = (prop) => {
    name="close" size={23} color="#D75A5A" />
    </TouchableOpacity>       
 <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-initialValues={{Discription:''}}
+initialValues={{chat_text:''}}
 validationSchema={userschema}  
 
-// onSubmit={async(values,actions)=>{
-//     console.log('ON SUBMIT')
-//     const formdata = new FormData();
-//      formdata.append('title',values.Username)
-//      formdata.append('description',values.Discription)
-
-//   console.log(formdata.data+'formdata')
-
-//   const response=await axiosinst.post('/group/'+ prop.route.params.id +'/discussion',formdata,{
-//     headers:{
-//       "Content-Type":"application/json",
-//       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-//     }
-//        )
-//   .then( function(response){
-//     console.log(picture+' PICTURE POST')
+onSubmit={async(values,actions)=>{
+    console.log('ON SUBMIT')
+    const formdata = new FormData();
+    formdata.append('chat_text',values.chat_text)
+     
+  console.log(formdata.data+'formdata')
+  const response=await axiosinst.post('/group/'+groupid +'/discussion'+discussionid +'/chat',formdata,{
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+    }
+       )
+  .then( function(response){
   
-//     console.log(response)
-//     Alert.alert('','بحث با موفقیت ساخته شد ',[
-//       {
-//    text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-//       }
-//       ],{cancelable:false},{style:{height:50}})
+    console.log(response)
+    Alert.alert('',' پیام شما ارسال شد',[
+      {
+   text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+      }
+      ],{cancelable:false},{style:{height:50}})
 
-//     getDiscussion();
     
-//   })
-//   .catch( function(error){  
-//       {
-//         console.log(error)
+  })
+  .catch( function(error){  
+      {
+        console.log(error)
       
-//         Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+        Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
       
 
-//       text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-//       }],{cancelable:false},{style:{height:50}})
-//       }     
-//   })
+      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+      }],{cancelable:false},{style:{height:50}})
+      }     
+  })
 
-// }}
+}}
 >
 {(props)=>(
 <View style={{ marginTop:hp('5%')}}>
