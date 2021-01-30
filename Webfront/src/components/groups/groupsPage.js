@@ -50,7 +50,7 @@ function GroupsPage (props){
 
     // }
     // else{
-      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'?page='+page
+      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'&page='+page
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -343,8 +343,8 @@ const handleCloseSnack = (event, reason) => {
                         
                         {current.summary.length >= 80 ?(
                           <div>
-                           <p class="card-text ">{current.summary.substring(0, 60)}</p>
-                           <div className="btn my-n3 text-muted"  onClick={() => routeToGroupHandler(current.id)}>بیشتر...</div>
+                           <p class="card-text ">{current.summary.substring(0, 60)}...</p>
+                           <div className="btn my-n3 text-muted"  onClick={() => routeToGroupHandler(current.id)}>بیشتر</div>
                            </div>
                         ):(
                           <p class="card-text">{current.summary}</p>
@@ -367,7 +367,7 @@ const handleCloseSnack = (event, reason) => {
 
             <div className="mb-5">
 
-              {pagesNumber===1 ?(
+              {pagesNumber===1 || pagesNumber === undefined?(
                 <p></p>
 
               ):(

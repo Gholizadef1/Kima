@@ -65,8 +65,7 @@ function Discussion(props) {
         setUserComment(value);
         //console.log(e);
         //console.log(userComment);
-      }
-
+    }
     const handleSubmitCommentClick = (e) => {
         //e.preventDefault();
         //console.log(userComment);
@@ -108,6 +107,24 @@ function Discussion(props) {
          }
     
       }
+    const handleDeleteComment = (id) => {
+        axios.delete(API_BASE_URL ,
+        {
+          headers:{
+         "Content-Type":"application/json",
+        "Authorization":"Token "+Cookies.get("userToken")}
+         }
+        )
+        .then(response=>{
+          console.log(response);
+          setcommentAgain(commentAgain+1);
+        })
+        .catch(error=>{
+          console.log(error);
+        });
+      }
+
+    
 
       const [massage,setMassage]=useState("");
       const[openSnack,setOpenSnack]=useState(false);
@@ -122,13 +139,12 @@ function Discussion(props) {
   return(
     <div>
       <div className="mx-md-5 px-md-5">
-        <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
-          <div className="mx-md-5 my-5">
+        <div className="container-fluid rTOl text-right px-md-5 rounded-lg " >
+          <div className="mx-md-5 my-5 px-md-3">
               <div>
                 <h3 className="my-1 mx-md-5 rounded-lg" >عنوان</h3>
                 <hr className="border border-dark"></hr>
                 <div className="">
-                  <h3 className="text-center" >نظر شما چیست؟</h3>
                   <div className="d-flex flex-wrap p-3  ">
                     <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                     <div className="d-flex  flex-column mt-2 flex-fill">

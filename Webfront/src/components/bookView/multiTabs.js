@@ -555,7 +555,7 @@ export default function FullWidthTabs(props) {
 
             </List>
 
-            {commentsPagesNumber===1 ?(
+            {commentsPagesNumber === 1 || commentsPagesNumber === undefined?(
                 <p></p>
               ):(
             <div className="">
@@ -692,7 +692,7 @@ export default function FullWidthTabs(props) {
             </List>
 
 
-            {quotesPagesNumber===1 ?(
+            {quotesPagesNumber===1 || quotesPagesNumber === undefined?(
                 <p></p>
               ):(
             <div className="">
