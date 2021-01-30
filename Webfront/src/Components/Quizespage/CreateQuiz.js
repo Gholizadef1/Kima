@@ -221,59 +221,60 @@ function Quizespage (props){
                        value={inputField.answer4}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
-                      
-                      
-                       
                 />
-                { inputFields.length === 1 ?
-           
-                  <Tooltip  title= {<div style={{color: "white",
-        fontFamily:"Yekan",
-        fontSize:20,
-        
-        width:190,
-        height:80,
-        textAlign:"center",
-        marginLeft:-9,
-        paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
-                <button className="btn">
-                    حذف سؤال
-                </button>
-                </Tooltip>
-                
-
-            :
-            
-            <button className="btn" onClick={() => handleRemoveFields(inputField.id)}>
-              حذف سؤال
-        </button>
-}
-      { inputFields.length === 15 ?
-       <Tooltip  title= {<div style={{color: "white",
-       fontFamily:"Yekan",
-       fontSize:20,
-       
-       width:190,
-       height:80,
-       textAlign:"center",
-       marginLeft:-9,
-       paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال باشد</div>}> 
-               <button className="btn">
-                        اضافه‌کردن سؤال
-                         </button>
-               </Tooltip>
-            :
-            <button
-            className="btn"
-              onClick={handleAddFields}
-              disabled={inputFields.length === 15 } 
-            >
-              اضافه‌کردن سؤال
-            </button>
-      }
                  </div>
           
        ))}
+          { inputFields.length === 1 ?
+           
+           <Tooltip  title= {<div style={{color: "white",
+ fontFamily:"Yekan",
+ fontSize:20,
+ 
+ width:190,
+ height:80,
+ textAlign:"center",
+ marginLeft:-9,
+ paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
+         <button className="btn" style={{color:"blue",fontSize:15}}>
+             حذف سؤال
+         </button>
+         </Tooltip>
+         
+
+     :
+     <div>
+ 
+     <button className="btn b" style={{color:"blue",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
+       حذف سؤال
+ </button>
+ </div>
+
+}
+{ inputFields.length === 15 ?
+<Tooltip  title= {<div style={{color: "white",
+fontFamily:"Yekan",
+fontSize:20,
+
+width:190,
+height:80,
+textAlign:"center",
+marginLeft:-9,
+paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال باشد</div>}> 
+        <button className="btn" style={{color:"blue",fontSize:15}}>
+                 / اضافه‌کردن سؤال
+                  </button>
+        </Tooltip>
+     :
+     <button
+     className="btn"
+     style={{color:"blue",fontSize:15}}
+       onClick={handleAddFields}
+       disabled={inputFields.length === 15 } 
+     >
+       / اضافه‌کردن سؤال
+     </button>
+}
         
          </div>
          </div>
