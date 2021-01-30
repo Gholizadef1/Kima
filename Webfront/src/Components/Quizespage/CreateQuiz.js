@@ -37,7 +37,6 @@ function Quizespage (props){
             file:null
         }
       )
-    const [countOfQ,setCount] = useState(1);
     const imageUploader = React.useRef(null);
     const uploadedImage = React.useRef(null);
 
@@ -59,37 +58,42 @@ function Quizespage (props){
           reader.readAsDataURL(file);
         }
     };
+    const [countOfQ,setCount] = useState(1);
+    
     const [inputFields, setInputFields] = useState([
-      { id: uuidv4(), question: '', answer1:'',answer2:'',answer3:'',answer4:'',correct:'' },
+      { id: uuidv4(), question:'', answer1:'',answer2:'',answer3:'',answer4:'',correct:1 },
     ]);
+   
+    console.log(inputFields.length);
+      
     const handleChangeInput = (id, event) => {
+      
+      console.log(countOfQ);
       const newInputFields = inputFields.map(i => {
         if(id === i.id) {
           i[event.target.name] = event.target.value
         }
         return i;
       })
+        console.log(inputFields.length+1);
         setInputFields(newInputFields);
         console.log(inputFields);
+       
         console.log(countOfQ);
     }
     const handleAddFields = () => {
-      setInputFields([...inputFields, { id: uuidv4(),  question: '', answer1:'',answer2:'',answer3:'',answer4:'' }])
-      console.log(inputFields);
-      setCount(countOfQ+1);
       console.log(countOfQ);
-
+      setInputFields([...inputFields, { id: uuidv4(),  question:'', answer1:'',answer2:'',answer3:'',answer4:'',correct:inputFields.length+1}])
+      console.log(inputFields);
 
     }
-
-  
     const handleRemoveFields = id => {
+
       const values  = [...inputFields];
-      values.splice(values.findIndex(value => value.id === id), 1);
+      values.splice(values.findIndex(value => value.id === id),1);
       setInputFields(values);
-      setCount(countOfQ-1);
       console.log(inputFields);
-      console.log(countOfQ);
+      
     }
     return(
         
@@ -108,6 +112,7 @@ function Quizespage (props){
          <div class="row rowin">
             
             <div className="form-group-sm text-right col-lg-5">
+              
                 <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">عنوان آزمونک</label>
                 <input type="email" 
                        className="form-control input-normal text-right" 
@@ -144,8 +149,9 @@ function Quizespage (props){
   </div>
   { inputFields.map(inputField => (
     <div key={inputField.id}>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName"  >سوال {countOfQ} </label>
-  <textarea className="form-control text-right" rows="1" value={inputFields.question} placeholder="...صورت سؤال" id="userName" name="question"></textarea>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName">سوال{inputField.correct}</label>
+  <textarea className="form-control input-normal text-right"                       onChange={event => handleChangeInput(inputField.id, event)}
+ rows="1" value={inputField.question} placeholder="...صورت سؤال"  name="question"></textarea>
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 1</label>
   <div class="form-check text-right mr-n4 ">
   <input class="form-check-input mt-3" type="checkbox" value={inputField.answer1} id="defaultCheck1" name="answer1"/>
@@ -223,8 +229,10 @@ function Quizespage (props){
 nemiitoni          
  </div>
             :
+            
             <div className="btn" onClick={() => handleRemoveFields(inputField.id)}>
             delete 
+            
         </div>
 }
       { inputFields.length === 15 ?
@@ -245,9 +253,9 @@ nemitoni            </div>
                  </div>
           
        ))}
-       </div>
-               
-    </div>  
+        
+         </div>
+         </div>
          </div>
          </div>
          </div>
