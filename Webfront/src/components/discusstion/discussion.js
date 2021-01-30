@@ -164,19 +164,19 @@ function Discussion(props) {
         <div className="container-fluid rTOl text-right px-md-5 rounded-lg " >
           <div className="mx-md-5 my-5 px-md-3">
               <div>
-                <div className="d-flex flex-wrap ">
-                  <div>
+                <div className="d-flex flex-wrap mx-2 border rounded-lg pt-3">
+                  <div className="px-2">
                     <Avatar className="" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`} style={{width:60, height:60}} />
-                    <h5 className="text-center m-2">{creator.username}</h5>
+                    <h5 className="text-center mt-2">{creator.username}</h5>
                   </div>
-                  <div className="d-flex  flex-column flex-wrap">
-                    <h3 className="my-1 mx-md-5 rounded-lg" >{discussion.title}</h3>
-                    <p className="my-1 mx-md-5">{discussion.description}</p>
+                  <div className="d-flex flex-column flex-wrap mx-3">
+                    <h3 className="my-1 rounded-lg " >{discussion.title}</h3>
+                    <p className="my-1 ">{discussion.description}</p>
                   </div>
                 </div> 
                 <hr className="border border-dark"></hr>
                 <div className="">
-                  <div className="d-flex flex-wrap p-3  ">
+                  <div className="d-flex flex-wrap p-3 mx-2 ">
                     <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                     <div className="d-flex  flex-column mt-2 flex-fill">
                     <div className="d-flex flex-wrap">
@@ -260,6 +260,15 @@ function Discussion(props) {
                 )}
 
               </div>
+              <div>
+         <Snackbar
+              anchorOrigin={{ vertical:'top', horizontal:'center'}}
+              open={openSnack}
+              autoHideDuration={2500}
+              onClose={handleCloseSnack}
+              message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
+            />
+      </div>
           </div> 
         </div> 
       </div> 
