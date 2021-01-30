@@ -38,14 +38,14 @@ import {API_BASE_URL} from '../../constants/apiContants';
 
 function Discussion(props) {
 
-  console.log(props);
+  //console.log(props);
 
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
     const [commentsPagesNumber, setCommentsPagesNumber] = useState();
     const [commentAgain,setcommentAgain] = useState(0);
     useEffect(()=>{
-          axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
+          axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat'+'?page='+commentsPage,
           {
             headers:{
            "Authorization":"Token "+Cookies.get("userToken")}
@@ -58,7 +58,7 @@ function Discussion(props) {
         .catch(error=>{
           console.log(error);
         });
-      },[props.gruopid,commentAgain,commentsPage]);
+      },[commentAgain,commentsPage]);
 
 
     const[userComment,setUserComment]=useState("")
@@ -90,9 +90,9 @@ function Discussion(props) {
           .then(response=>{
             console.log(response);
     
-            if(response.data.status==="success"){
+            if(response.data.message==="new chat!"){
               setOpenSnack(true);
-              setMassage("نظر شما با موفقیت ثبت شد")
+              setMassage("پاسخ شما با موفقیت ثبت شد")
               setUserComment("");
               setcommentAgain(commentAgain+1);
     
@@ -105,7 +105,7 @@ function Discussion(props) {
     
          }else{
           setOpenSnack(true);
-          setMassage("نظر خالی است لطفاً چیزی بنویسید")
+          setMassage("پاسخ خالی است لطفاً چیزی بنویسید")
          }
     
       }
