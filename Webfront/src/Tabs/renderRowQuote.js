@@ -5,6 +5,8 @@ import {
   import "./renderRowQuote.css";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import {API_BASE_URL} from '../constants/apiContants';
+
 import PropTypes from 'prop-types';
 import {GoHeart} from 'react-icons/go';
 import {AiOutlineLike} from 'react-icons/ai';
@@ -19,7 +21,7 @@ import { red } from "@material-ui/core/colors";
     const { index, style } = props;
     const [quote, setQuote] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/quote`,{
+      fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/quote`,{
         headers:{
     "Content-Type":"application/json",
    }
