@@ -67,6 +67,7 @@ const[cansubmit,setcansubmit]=useState("سوال بعدی")
         <View style={styles.container}>
             <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
                 <ScrollView>
+                <Text style={{position:"absolute",alignSelf:"center",fontSize:hp("1.9%"),color:"#1f7a8c",fontWeight:"bold",marginTop:hp("3.5%")}}>({numofquesiton}/{questions.Questions[0].question_num})</Text>
                     <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={(numofquesiton+1) / questions.Questions[0].question_num} color={"#1f7a8c"} />
 
                     <Text style={{
@@ -113,7 +114,7 @@ const[cansubmit,setcansubmit]=useState("سوال بعدی")
                             if(numofquesiton-1>=0){
                                 await setnumofquestion(numofquesiton-1)
                             await setbuttoncolor("rgba(40,160,184,1)")
-                            setthisquestion(questions.Questions[numofquesiton]);
+                            setthisquestion(questions.Questions[numofquesiton-1]);
                            
 
                             console.log("next pressed")
@@ -140,7 +141,7 @@ const[cansubmit,setcansubmit]=useState("سوال بعدی")
                             if(numofquesiton+1<questions.Questions[0].question_num){
                                 await setnumofquestion(numofquesiton+1);
                                 await setcansubmit("سوال بعدی")
-                                setthisquestion(questions.Questions[numofquesiton]);
+                                setthisquestion(questions.Questions[numofquesiton+1]);
                           
                             console.log("next pressed")
                             }
