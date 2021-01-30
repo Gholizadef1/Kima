@@ -227,7 +227,9 @@ import Tooltip from '@material-ui/core/Tooltip';
             
          
           })
-    }, [showdiscussion,props.match.params.groupId]);
+    }, [
+      // showdiscussion,
+      props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
       e.preventDefault();
@@ -279,9 +281,10 @@ import Tooltip from '@material-ui/core/Tooltip';
     setOpenSnack(false);
   };
 
-  const bookSelectedHandler = ( d ) => {
+  const discussionSelectedHandler = ( d ) => {
     console.log(d);
-    props.history.push( '/discussion/' + d.id );
+    //props.history.push('/home');
+    props.history.push('/discussion/'+props.match.params.groupId +"/"+ d.id );
   }
 
     return(
@@ -359,7 +362,7 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-<p><b><a className="pt-n3" href="" onClick={() => bookSelectedHandler( current )}>{current.title}</a></b></p>
+<p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
             
             </div>
               </div>

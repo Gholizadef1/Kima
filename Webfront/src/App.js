@@ -56,7 +56,7 @@ function App(props) {
 
             <ProtectedRoute path="/groups" component={Groups}/>
 
-            <ProtectedRoute path="/group/:groupId/discussion/:discussionId" component={Discussion}/>
+            <ProtectedRoute path="/discussion/:groupId/:discussionId" component={Discussion}/>
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">

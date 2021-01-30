@@ -24,7 +24,7 @@ import {
     // Redirect,
     // Link,
     // useRouteMatch,
-    // useParams,
+    useParams,
     withRouter
   } from "react-router-dom";
   import {GoSearch} from 'react-icons/go';
@@ -38,12 +38,14 @@ import {API_BASE_URL} from '../../constants/apiContants';
 
 function Discussion(props) {
 
+  console.log(props);
+
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
     const [commentsPagesNumber, setCommentsPagesNumber] = useState();
     const [commentAgain,setcommentAgain] = useState(0);
     useEffect(()=>{
-          axios.get(API_BASE_URL + '/group/'+ 1 +'/discussion/'+ 1 +'/chat',
+          axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
           {
             headers:{
            "Authorization":"Token "+Cookies.get("userToken")}
@@ -78,7 +80,7 @@ function Discussion(props) {
           console.log(payload);
           const back= JSON.stringify(payload);
           console.log(back);
-          axios.post(API_BASE_URL + '/group/'+ 1 +'/discussion/'+1+'/chat',
+          axios.post(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
           back
           ,{
            headers:{
@@ -108,7 +110,7 @@ function Discussion(props) {
     
       }
     const handleDeleteComment = (id) => {
-        axios.delete(API_BASE_URL ,
+        axios.delete(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+id ,
         {
           headers:{
          "Content-Type":"application/json",
