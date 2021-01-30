@@ -14,7 +14,6 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 
 const Bookview = (prop) => {
-  console.log('BOOKVIEW')
   const [rate , setrate] = useState(true);
   const [ratenum , setratenum] = useState(null);
   const [loading,setloading]=useState(true);
@@ -31,7 +30,6 @@ const Bookview = (prop) => {
     }
     })
     .then(function(response){
-      console.log('RESPONSE RESULT === '+response.data.book_state)
       setloading(false)
       setResult(response.data.data);
       setSelectedValue(response.data.book_state)
@@ -101,12 +99,14 @@ const Bookview = (prop) => {
     }
     })
     .then(function(response){
-    console.log('response data : ', response.data)
-    console.log(response.message)
-    console.log('$$$$'+response.data.data)
-    setratenum(response.data.data)
-    console.log(response.data.code+'NEMIAD')
-
+    console.log('response data : ', response.data.data)
+    console.log('$$$$'+response.data.message)
+    if (response.data.message === "No User Rating!"){
+      setratenum(0)
+    }
+    else{
+      setratenum(response.data.data)
+    }
     })
 
     .catch( async function (error) {
@@ -120,124 +120,119 @@ getRate();
 
 console.log('**' +rate)
 
-const postRate = async(rate)=>{
-if(rate!=""){
-const payload={
-"rate": rate,
-}
-const back= JSON.stringify(payload);
-axiosinst.post('/book/'+id+'/rate' ,back,{
-"headers":{"content-type":"application/json",
-"Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
-}
-})
-.then(async function(response){
-console.log(response.data)
-console.log('\n'+'++++++++'+'\n')
-setratenum(rate);
-console.log('&&'+rate);
-if(response.data.message==="You rated this book already!!"){
-console.log('TOYE PUTTTTT')
-axiosinst.put('/book/'+id+'/rate', back, {
-"headers": {
-"content-type": "application/json",
-"Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-}
-})
-.then(async function (response) {
-console.log(response.data)
-getRate()
-})
-.catch(function (error) {
-console.log(error)})}
-
-})
-.catch(function (error) {
-console.log(error);
-
-});
-}
-} 
+  const postRate = async(rate)=>{
+    if(rate!=""){
+    const payload={
+    "rate": rate,
+    }
+    const back= JSON.stringify(payload);
+    axiosinst.post('/book/'+id+'/rate' ,back,{
+    "headers":{"content-type":"application/json",
+    "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
+    }
+    })
+  .then(async function(response){
+    console.log(response.data)
+    console.log('\n'+'++++++++'+'\n')
+    setratenum(rate);
+    console.log('&&'+rate);
+    if(response.data.message==="You rated this book already!!"){
+    console.log('TOYE PUTTTTT')
+      axiosinst.put('/book/'+id+'/rate', back, {
+      "headers": {
+      "content-type": "application/json",
+      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+      })
+    .then(async function (response) {
+      console.log(response.data)
+      getRate()
+    })
+    .catch(function (error) {
+      console.log(error)})}
+    })
+  .catch(function (error) {
+      console.log(error);
+  });
+  }
+  } 
 
 if (loading) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ActivityIndicator size="large" />
+      <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
     </View>
   );
 }
 else{
 return(
-<Container>
-<ScrollView>
-<Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('20%')}}/>
-<Body style={{}}>
-<Image source={{uri : result.imgurl}} style={{marginTop:hp('-15%'), height:220 ,
-width:160 , borderRadius:10 }} />
+  <Container>
+    <ScrollView>
+      <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('20%')}}/>
+        <Body style={{}}>
+          <Image source={{uri : result.imgurl}} style={{marginTop:hp('-15%'), height:220 ,
+            width:160 , borderRadius:10 }} />
+
+          <Text style={{marginTop:hp('1.5%') , fontWeight:'bold',
+           fontSize:27 }}>{result.title}</Text>
+
+          <Text style={{marginTop:hp('0.5%') , fontSize:17 , color:'#1F7A8C'}}>{result.author}</Text>
+          <Text style={{marginTop:hp('1%')}}>امتیاز کتاب {result.average_rating}</Text>
+
+          <Text style={{marginTop:hp('0.5%') , marginBottom:hp('1%')}}>به این کتاب امتیاز دهید</Text>
+          <AirbnbRating style={{marginTop:hp('5%') , borderColor:'#f1c40f'}}
+          count={5}
+          showRating={false}
+          defaultRating={ratenum}
+          onFinishRating={(rating) => postRate(rating)}
+          size={25}
+          />
+
+          <DropDownPicker
+          items={[
+          {label: 'اضافه کنید', value: 'none'},
+          {label: 'میخواهم بخوانم', value: 'ToRead'},
+          {label: 'در حال خواندن', value: 'Reading'},
+          {label: 'قبلا خوانده ام', value: 'Read'},
+          ]} 
+          defaultValue={selectedValue}
+          containerStyle={{height: 40 , width:220 ,marginBottom:hp('4%')}}
+          style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
+          itemStyle={{
+          justifyContent: 'flex-start'
+          }}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={(item) => PostPicker(item.value)}
+          />
 
 
-<Text style={{marginTop:hp('1.5%') , fontWeight:'bold',
-fontSize:27 }}>{result.title}</Text>
+          <Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
+          درباره کتاب :</Text>
+          <Content style={{}}>
+          <Card style={{}}>
 
-<Text style={{marginTop:hp('0.5%') , fontSize:17 , color:'#1F7A8C'}}>{result.author}</Text>
-<Text style={{marginTop:hp('1%')}}>امتیاز کتاب {result.average_rating}</Text>
-{/* <Star score ={result.average_rating} style={{}}/> */}
+          <Text style={{marginTop:hp('2%') , marginLeft:wp('2%') ,
+          textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
+          </Card>
+          </Content>
+        </Body>
 
-<Text style={{marginTop:hp('0.5%') , marginBottom:hp('1%')}}>به این کتاب امتیاز دهید</Text>
-<AirbnbRating style={{marginTop:hp('5%') , borderColor:'#f1c40f'}}
-count={5}
-showRating={false}
-defaultRating={ratenum}
-onFinishRating={(rating) => postRate(rating)}
-size={25}
-/>
+        <Button style={{marginTop:hp('4%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
+                              width:200 , alignSelf:'center' , borderRadius:15}}
+        onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
+        title: response.data.title,
+        });}}><Text style={{marginLeft:wp('12%')}}>صفحه نظرات</Text></Button>
 
-<DropDownPicker
-items={[
-{label: 'اضافه کنید', value: 'none'},
-{label: 'میخواهم بخوانم', value: 'ToRead'},
-{label: 'در حال خواندن', value: 'Reading'},
-{label: 'قبلا خوانده ام', value: 'Read'},
-]} 
-defaultValue={selectedValue}
-containerStyle={{height: 40 , width:220 ,marginBottom:hp('4%')}}
-style={{backgroundColor: '#fafafa' , marginTop:hp('1%') , marginBottom:hp('-1%')}}
-itemStyle={{
-justifyContent: 'flex-start'
-}}
-dropDownStyle={{backgroundColor: '#fafafa'}}
-onChangeItem={(item) => PostPicker(item.value)}
-
-/>
-
-
-<Text style={{fontWeight:'bold' , fontSize:20 , marginTop:hp('2%') ,marginRight:wp('70%') , marginBottom:hp('0.7%')}}>
-درباره کتاب :</Text>
-<Content style={{}}>
-<Card style={{}}>
-
-<Text style={{marginTop:hp('2%') , marginLeft:wp('2%') ,
-textAlign:'left' , alignSelf:'stretch' }}>{result.description}</Text>
-</Card>
-</Content>
-</Body>
-
-<Button style={{marginTop:hp('4%') , marginBottom:hp('1%') , backgroundColor:'#1F7A8C' ,
-                      width:200 , alignSelf:'center' , borderRadius:15}}
-onPress={()=>{prop.navigation.navigate('comment',{title:result.title,imgurl:result.imgurl,id:id})&& prop.navigation.setOptions({
-title: response.data.title,
-});}}><Text style={{marginLeft:wp('12%')}}>صفحه نظرات</Text></Button>
-
-<Button style={{alignSelf:'center' , backgroundColor:'#1F7A8C' , 
-                            width:200 , borderRadius:15 , marginBottom:hp('3%')}}
-onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
-title: response.data.title,
-});}}><Text style={{marginLeft:wp('10%')}}>صفحه نقل قول ها</Text></Button>
-</ScrollView>
-<StatusBar backgroundColor='#BFDBF7' style='light' />
-</Container>
-);
-}
+        <Button style={{alignSelf:'center' , backgroundColor:'#1F7A8C' , 
+                                    width:200 , borderRadius:15 , marginBottom:hp('3%')}}
+        onPress={()=>{prop.navigation.navigate('quote',{title:result.title,imgurl:result.imgurl,id:prop.route.params.id})&& prop.navigation.setOptions({
+        title: response.data.title,
+        });}}><Text style={{marginLeft:wp('10%')}}>صفحه نقل قول ها</Text></Button>
+    </ScrollView>
+      <StatusBar backgroundColor='#BFDBF7' style='light' />
+    </Container>
+    );
+  }
 };
 const styles = StyleSheet.create({
 container: {
