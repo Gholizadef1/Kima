@@ -14,11 +14,13 @@ import Cookies from 'js-cookie';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { red } from "@material-ui/core/colors";
+import {API_BASE_URL} from '../constants/apiContants';
+
  export function RenderRowcomment(props) {
     const { index, style } = props;
     const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/comment`,{
+      fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/comment`,{
         headers:{
     "Content-Type":"application/json",
    }

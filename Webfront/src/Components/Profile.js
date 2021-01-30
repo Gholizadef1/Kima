@@ -214,9 +214,9 @@ const[reading,setReading] = useState();
 const[wantto,setWantto] = useState();
 
 
-const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
-const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
-const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
+const apiURLRead = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=Read`;
+const apiURLReading = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=Reading`;
+const apiURLWantto = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=ToRead`;
 useEffect(() => {
   axios.get(apiURLRead,{
     headers:{

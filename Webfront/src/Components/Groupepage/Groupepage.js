@@ -14,6 +14,8 @@ import Divider from '@material-ui/core/Divider';
 import {AiFillStar} from "react-icons/ai";
 import Snackbar from '@material-ui/core/Snackbar';
 import Cookies from 'js-cookie';
+import {API_BASE_URL} from '../../constants/apiContants';
+
 
 import {
     BrowserRouter as Router,
@@ -60,7 +62,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     console.log(props.match.params.groupId)
     if (props.match.params.groupId) {
 
-    axios.get("http://127.0.0.1:8000/group/" + props.match.params.groupId)
+    axios.get(API_BASE_URL + `/group/${props.match.params.groupId}`)
       
       .then((data) => {
          console.log(data);
@@ -89,7 +91,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   };
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/group/${props.match.params.groupId}/member`)
+    axios.get(API_BASE_URL + `/group/${props.match.params.groupId}/member`)
       .then((data) => {
          console.log(data.data.members);
         setMembers(data.data.members);
@@ -120,7 +122,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }, [join,props.match.params.groupId]);
   const joinGroup =()=> { 
     axios.post(
-      `http://127.0.0.1:8000/group/${props.match.params.groupId}/member`,
+      API_BASE_URL + `/group/${props.match.params.groupId}/member`,
     {},
     {
       headers:{
@@ -144,7 +146,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }
   const leaveGroup = ()=>{
     axios.delete(
-      `http://127.0.0.1:8000/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
+      API_BASE_URL + `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
     {},
     {
       headers:{
@@ -166,7 +168,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }
   const deletGroup =()=>{
     axios.delete(
-      "http://127.0.0.1:8000/group/" + props.match.params.groupId,
+      API_BASE_URL + `/group/${props.match.params.groupId}`,
     
     {
       headers:{
@@ -215,7 +217,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     //console.log(backsummary);
     useEffect(() => {
       axios.get(
-        `http://127.0.0.1:8000/group/${props.match.params.groupId}/discussion`,
+        API_BASE_URL + `/group/${props.match.params.groupId}/discussion`,
       {
         headers:{
           "Content-Type":"application/json",
@@ -242,7 +244,7 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
       else{
       axios.post(
-        `http://127.0.0.1:8000/group/${props.match.params.groupId}/discussion`,backtitle,
+        API_BASE_URL + `/group/${props.match.params.groupId}/discussion`,backtitle,
       {
         headers:{
           "Content-Type":"application/json",

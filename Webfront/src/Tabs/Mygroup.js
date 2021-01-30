@@ -1,5 +1,5 @@
 import {AiFillStar} from "react-icons/ai";
-
+import {API_BASE_URL} from '../constants/apiContants';
 import "./Mygroup.css";
 import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
@@ -15,7 +15,7 @@ export function Mygroup(props) {
 const[mygroup,setMygroup] = useState([]);
     const[groupcount,setMygroupc] = useState();
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/group`,{
+        fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/group`,{
           headers:{
       "Content-Type":"application/json",
      }
