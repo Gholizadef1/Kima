@@ -44,6 +44,9 @@ function Discussion(props) {
     const [commentsPage, setCommentsPage] = useState(1);
     const [commentsPagesNumber, setCommentsPagesNumber] = useState();
     const [commentAgain,setcommentAgain] = useState(0);
+    const [discussion,setDiscussion] = useState([]);
+    const [creator,setCreator] = useState([]);
+
     useEffect(()=>{
           axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat'+'?page='+commentsPage,
           {
@@ -59,6 +62,23 @@ function Discussion(props) {
           console.log(error);
         });
       },[commentAgain,commentsPage]);
+
+    useEffect(()=>{
+        axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId ,
+        {
+          headers:{
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
+      .then(response=>{
+       setDiscussion(response.data);
+       setCreator(response.data.creator);
+        console.log(response);
+      })
+      .catch(error=>{
+        console.log(error);
+      });
+    },[]);
+
 
 
     const[userComment,setUserComment]=useState("")
@@ -144,7 +164,16 @@ function Discussion(props) {
         <div className="container-fluid rTOl text-right px-md-5 rounded-lg " >
           <div className="mx-md-5 my-5 px-md-3">
               <div>
-                <h3 className="my-1 mx-md-5 rounded-lg" >عنوان</h3>
+                <div className="d-flex flex-wrap ">
+                  <div>
+                    <Avatar className="" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`} style={{width:60, height:60}} />
+                    <h5 className="text-center m-2">{creator.username}</h5>
+                  </div>
+                  <div className="d-flex  flex-column flex-wrap">
+                    <h3 className="my-1 mx-md-5 rounded-lg" >{discussion.title}</h3>
+                    <p className="my-1 mx-md-5">{discussion.description}</p>
+                  </div>
+                </div> 
                 <hr className="border border-dark"></hr>
                 <div className="">
                   <div className="d-flex flex-wrap p-3  ">
@@ -160,7 +189,7 @@ function Discussion(props) {
                     </div>
                     </div>
                   </div>
-                  <Divider className="mt-3" variant="fullWidth" />
+                  <Divider className="mt-2" variant="middle" />
                 </div>
               </div>
               <div>
@@ -176,7 +205,7 @@ function Discussion(props) {
                    
                    {comments.map ((current) => (
                    
-                <div className="" style={{direction:"rtl"}}>
+                <div className="border border-dark rounded-lg m-1 px-2 color2" style={{direction:"rtl"}}>
                    <div className="d-flex px-md-3 py-3">
                      <Avatar alt={current.user.username} src={`${API_BASE_URL}${current.user.profile_photo}`} style={{width:60, height:60}} />
                      <div className="ml-auto mr-3">
@@ -207,7 +236,7 @@ function Discussion(props) {
                    
                      {current.chat_text}  
                    </p>
-                   <Divider variant="middle" component="li" />
+                   
                    
                    
                 </div>
