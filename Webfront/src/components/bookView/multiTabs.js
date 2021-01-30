@@ -1,6 +1,4 @@
-
 import React, { useState, useEffect } from "react";
-
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -11,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import {AiOutlineDislike} from 'react-icons/ai';
 import {AiOutlineLike} from 'react-icons/ai';
+import {AiFillLike} from 'react-icons/ai';
+import {AiFillDislike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -19,6 +19,7 @@ import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
+import { API_BASE_URL } from "../../constants/apiContants";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -93,7 +94,7 @@ export default function FullWidthTabs(props) {
   //for comment
   useEffect(()=>{
     //console.log(props)
-    console.log(props.book)
+    //console.log(props.book)
     // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
     // .then(response=>{
     //   setComments(response.data);
@@ -105,7 +106,7 @@ export default function FullWidthTabs(props) {
     //   setEndComment("نظر دیگری وجود ندارد");
     // });
 
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/comment-filter-"+filterBaseComment+"?page="+commentsPage,
+      axios.get(API_BASE_URL +"/book/"+props.book+"/comment?filter="+filterBaseComment+"&page="+commentsPage,
       {
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -125,8 +126,8 @@ export default function FullWidthTabs(props) {
   
 //for quote
   useEffect(()=>{
-    console.log(props.book)
-    console.log(quotesPage);
+    //console.log(props.book)
+    //console.log(quotesPage);
     // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
     // .then(response=>{
     //  //setQuotes(quotes.concat(response.data));
@@ -138,7 +139,11 @@ export default function FullWidthTabs(props) {
     //   setEndQuote("نقل قول دیگری وجود ندارد");
     // });
 
-      axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+"/quote-filter-" + filterBaseQuote +"?page="+quotesPage)
+      axios.get(API_BASE_URL +"/book/"+props.book+"/quote?filter=" + filterBaseQuote +"&page="+quotesPage,
+      {
+        headers:{
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
     .then(response=>{
      setQuotes(response.data.quotes);
      setQuotesPagesNumber(response.data.count);
@@ -185,7 +190,7 @@ export default function FullWidthTabs(props) {
       const back= JSON.stringify(payload);
       console.log(back);
       axios.post(
-        "http://127.0.0.1:8000/bookdetail/"+props.book+'/comment',
+        API_BASE_URL + "/book/"+props.book+'/comment',
 
       back
       ,{
@@ -222,7 +227,7 @@ export default function FullWidthTabs(props) {
       "textquote": userQuote
     }
     const back= JSON.stringify(payload);
-    axios.post('http://127.0.0.1:8000/api/quotes/'+props.book,
+    axios.post(API_BASE_URL + '/book/' +props.book+'/quote',
     back
     ,{
      headers:{
@@ -249,7 +254,7 @@ export default function FullWidthTabs(props) {
 }
 
   const handleDeleteQuote = (id) => {
-    axios.delete('http://127.0.0.1:8000/api/quotes/'+id,
+    axios.delete(API_BASE_URL +'/book/'+ props.book +'/quote/'+id,
     {
       headers:{
      "Content-Type":"application/json",
@@ -268,7 +273,7 @@ export default function FullWidthTabs(props) {
   }
 
   const handleDeleteComment = (id) => {
-    axios.delete("http://127.0.0.1:8000/comment/"+id+'/delete',
+    axios.delete(API_BASE_URL + "/book/"+ props.book +"/comment/"+id,
     {
       headers:{
      "Content-Type":"application/json",
@@ -289,7 +294,7 @@ export default function FullWidthTabs(props) {
     //const payload={}
     //const back= JSON.stringify(payload);
       axios.post(
-        "http://127.0.0.1:8000/comment/"+id+"/like",
+         API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=like",
       {},
       {
        headers:{
@@ -301,7 +306,8 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         if(response.data.message==="successfully liked!"){
           setMassage("عمل با موفقیت انجام شد");
-        }else setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("شما قبلا این نظر را پسندیده‌اید");
+
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
       })
@@ -313,7 +319,7 @@ export default function FullWidthTabs(props) {
    const handleDislikeClick = (id) => {
       
       axios.post(
-        "http://127.0.0.1:8000/comment/"+id+'/dislike',
+        API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=dislike",
       {},
       {
        headers:{
@@ -325,7 +331,8 @@ export default function FullWidthTabs(props) {
         setOpenSnack(true);
         if(response.data.message==="successfully disliked!"){
           setMassage("عمل با موفقیت انجام شد");
-        }else setMassage("عمل با موفقیت انجام شد");
+        }else setMassage("شما قبلا این نظر را نپسندیده‌اید");
+
           setcommentAgain(commentAgain+1);
           console.log(response.data.data);
         
@@ -341,7 +348,7 @@ export default function FullWidthTabs(props) {
     // console.log(Cookies.get("userToken"));
     // const payload={}
     //const back= JSON.stringify(payload);
-    axios.post('http://127.0.0.1:8000/api/quotes/like/'+id,
+    axios.post( API_BASE_URL+'/book/'+props.book+'/quote/'+id +'?feedback=like',
     {},
     {
      headers:{
@@ -353,7 +360,7 @@ export default function FullWidthTabs(props) {
       setOpenSnack(true);
       if(response.data.message==="like success!"){
         setMassage("عمل با موفقیت انجام شد");
-      }else setMassage("عمل با موفقیت انحام شد");
+      }else setMassage("شما قبلا این نظر را پسندیده‌اید");
         setquoteAgain(quoteAgain+1);
         console.log(response.data.data);
     })
@@ -390,16 +397,14 @@ export default function FullWidthTabs(props) {
 
 
   return (
-    <div>
+    <div >
       <div>
          <Snackbar
               anchorOrigin={{ vertical:'top', horizontal:'center'}}
               open={openSnack}
-
-              autoHideDuration={2000}
-
+              autoHideDuration={2500}
               onClose={handleCloseSnack}
-              message={massage}
+              message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
             />
       </div>
       <AppBar position="static" color="default"  >
@@ -411,9 +416,9 @@ export default function FullWidthTabs(props) {
            variant="fullWidth"
           //aria-label="full width tabs example"
         >
-          <Tab label="خلاصه کتاب" {...a11yProps(0)} />
-          <Tab label="نظر‌ها" {...a11yProps(1)} />
-          <Tab label="نقل‌قول‌ها" {...a11yProps(2)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="خلاصه کتاب" {...a11yProps(0)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="نظر‌ها" {...a11yProps(1)} />
+          <Tab style={{fontFamily:'Yekan',fontSize:17}} label="نقل‌قول‌ها" {...a11yProps(2)} />
           
         </Tabs>
       </AppBar>
@@ -442,9 +447,9 @@ export default function FullWidthTabs(props) {
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitCommentClick}style={{color:"white",fontWeight:"bold"}}
-                >ثبت</StyledButton>
+                <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
+                onClick={handleSubmitCommentClick}
+                >ثبت</div>
                 </div>
                 </div>
               </div>
@@ -477,7 +482,7 @@ export default function FullWidthTabs(props) {
                     
                <div className="" style={{direction:"rtl"}}>
                   <div className="d-flex px-md-3 py-3">
-                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
@@ -503,10 +508,16 @@ export default function FullWidthTabs(props) {
                     
                     <div className="d-flex flex-column m-n1">
 
+                      {current.LikeCount ?
+                      <div className="btn "> 
+                      <AiFillLike  color="blue" size="25" onClick={()=> handleLikeClick(current.id)}/>
+                      </div>
+                      :
                       <div className="btn "> 
                       <AiOutlineLike  color="blue" size="25" onClick={()=> handleLikeClick(current.id)}/>
-
                       </div>
+                      }  
+                             
                       <small className="mr-3">
 
                         {current.LikeCount}
@@ -514,10 +525,14 @@ export default function FullWidthTabs(props) {
                     </div>
                     <div className=" d-flex flex-column m-n1">
 
+                      {current.isdisliked ?
                       <div className="btn ">
-                      <AiOutlineDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
-
+                      <AiFillDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
                       </div>
+                      :<div className="btn ">
+                      <AiOutlineDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
+                      </div>
+                      }
                       <small className="mr-3">
 
                         {current.DislikeCount}
@@ -540,7 +555,7 @@ export default function FullWidthTabs(props) {
 
             </List>
 
-            {commentsPagesNumber===1 ?(
+            {commentsPagesNumber === 1 || commentsPagesNumber === undefined?(
                 <p></p>
               ):(
             <div className="">
@@ -555,7 +570,7 @@ export default function FullWidthTabs(props) {
           </div>
         </TabPanel>
 
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel  value={value} index={2} dir={theme.direction}>
           <div style={{fontSize:18,fontFamily:'Yekan',direction:"rtl"}}>
             <div className="">
               <h3 className="text-center">بریده ای از کتاب بنویسید :</h3>
@@ -569,9 +584,9 @@ export default function FullWidthTabs(props) {
 
                 </div>
                 
-                <StyledButton type="submit" className="btn shadow mx-auto align-self-start"
-                onClick={handleSubmitQuoteClick} style={{color:"white",fontWeight:"bold"}}
-                >ثبت</StyledButton>
+                <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
+                onClick={handleSubmitQuoteClick}
+                >ثبت</div>
                 </div>
                 </div>
               </div>
@@ -596,13 +611,13 @@ export default function FullWidthTabs(props) {
                  <p >نقل‌قولی برای نمایش وجود ندارد </p>
 
                 ) : (
-                  <div>
+                  <div >
 
                   {quotes.map ((current) => (
               
               <div className="" style={{direction:"rtl"}}>
                   <div className="d-flex px-md-3 py-3">
-                    <Avatar alt={current.account.username} src={`http://127.0.0.1:8000${current.account.profile_photo}`} style={{width:60, height:60}} />
+                    <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
                     <div className="ml-auto mr-3">
                       <h5>
                         {current.account.username}
@@ -634,20 +649,29 @@ export default function FullWidthTabs(props) {
                       </small>
                       <div className="btn" onClick={()=> handleLoveClick(current.id)}> 
 
+                      {current.isliked ?
+
                         <svg width="1.6em" height="1.6em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
+                        :
+                        <svg width="1.6em" height="1.6em" style={{color:"red"}} xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                          <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                        </svg>
+
+                      }
+                        
                       </div>
 
                     </div>
                   </div>
-                  <div className="px-md-3 d-flex justify-content-center align-items-center text-center mx-3">
+                  <div className="px-md-3 d-flex justify-content-center align-items-center text-center mx-3 ">
                     <div>
                       <svg style={{width:24,height:24}} viewBox="0 0 24 24">
                         <path fill="currentColor" d="M13 6V14H14.88L12.88 18H18.62L21 13.24V6M15 8H19V12.76L17.38 16H16.12L18.12 12H15M3 6V14H4.88L2.88 18H8.62L11 13.24V6M5 8H9V12.76L7.38 16H6.12L8.12 12H5Z" />
                       </svg>
                     </div>
-                    <p className="text-right col-11 mx-md-3">
+                    <p className="text-right col-11 mx-md-3 container-fluid">
 
                     {current.quote_text}
 
@@ -668,7 +692,7 @@ export default function FullWidthTabs(props) {
             </List>
 
 
-            {quotesPagesNumber===1 ?(
+            {quotesPagesNumber===1 || quotesPagesNumber === undefined?(
                 <p></p>
               ):(
             <div className="">
