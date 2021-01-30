@@ -20,7 +20,7 @@ import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 import Createquiz from "./Createquiz";
 // import { Button } from 'react-native-paper';
-const Quizes = () => {
+const Quizes = (prop) => {
    
 
   // const [information, setinformation] = useState([]);
@@ -37,10 +37,12 @@ const Quizes = () => {
   //   React.useCallback(() => {   
      
   //   },[]))
+  console.log(prop.navigation);
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
         <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
+        <Button onPress={()=>prop.navigation.navigate("quizpage")} style={{height:hp("10%"),width:wp("30%"),backgroundColor:"green"}}></Button>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>
