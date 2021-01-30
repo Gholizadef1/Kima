@@ -14,11 +14,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 import Createquiz from "./Createquiz";
+import { ImageBackground } from 'react-native';
 // import { Button } from 'react-native-paper';
 const Quizpage = () => {
    
@@ -26,10 +27,47 @@ const Quizpage = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ marginLeft: wp('2%') }}>
-        <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text>
-       <View style={{height:hp('2%')}}></View>
-      </View>
+    <ImageBackground style={{flex:1}} source={require("../../assets/fantezi.jpg")}>
+    <ScrollView>
+       <Text  style={{color:"black",fontSize:hp("2%"),fontWeight:"bold",alignSelf:"center",width:wp("86%"),marginTop:hp("16%")}}>صورت سوال اول  صورت سوال اول اینه که؟</Text>
+
+
+       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("8%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
+           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+       </View>
+       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
+           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+       </View>
+       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
+           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+       </View>
+       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
+           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+       </View>
+     
+       {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
+       <View style={{flexDirection:"row"}}>
+       <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginTop:hp("10.6.5%"),borderTopRightRadius:50}}>
+       {/* <Button style={{backgroundColor:"lightgreen",height:hp("10%"),width:wp("20%")}}>
+
+       </Button> */}
+       </TouchableOpacity>
+       <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginLeft:wp("50%"),marginTop:hp("10.6.5%"),borderTopLeftRadius:50,alignSelf:"flex-end"}}>
+       {/* <Button style={{backgroundColor:"lightgreen",height:hp("10%"),width:wp("20%")}}>
+
+       </Button> */}
+       </TouchableOpacity>
+       </View>
+       {/* </View> */}
+     
+   
+      
+{/* 
+        <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
+       
+       </ScrollView>
+       </ImageBackground>
+      
     </View>
   );
 }
@@ -37,7 +75,7 @@ const Quizpage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#b5c5e3',
   },
   plus: {
 

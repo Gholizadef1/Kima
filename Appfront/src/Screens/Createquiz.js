@@ -102,7 +102,7 @@ const Createquiz = () => {
             c: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
             d: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
             //مشخص نکنه گزینه ی 1 میشه جواب
-            correct: yup.string().required(),
+            // correct: yup.string().required(),
           })
         ),
         Username:yup.string()
@@ -422,11 +422,7 @@ const Createquiz = () => {
                                                 </View>
                                             </Modal> :) */}
 
-                                            {minnumquestion === false && maxnumquestion === false ? <Button type={"Submit"} bordered rounded style={styles.button}
-                                                onPress={props.handleSubmit}
-                                            >
-                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                            </Button> : null}
+                                        
 
 
 
@@ -459,6 +455,11 @@ const Createquiz = () => {
                                 // ,height:20,width:30
                                 }}>حذف کردن سوال</Text>
                                 </TouchableOpacity> */}
+                                {minnumquestion === false && maxnumquestion === false ? <Button type={"submit"} bordered rounded style={styles.button}
+                                                onPress={console.log(JSON.stringify(props.errors.soalha))}
+                                            >
+                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                            </Button> : null}
                               
                             </View>
                         </View>
@@ -496,7 +497,7 @@ const styles = StyleSheet.create({
     button: {
         //  position:'absolute',
         marginTop: hp('8%'),
-        marginBottom: hp("-4%"),
+        marginBottom: hp("8%"),
         // alignSelf: 'center',
         width: wp('41%'),
         right: wp("26.4%"),
