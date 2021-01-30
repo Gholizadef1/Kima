@@ -184,4 +184,4 @@ class TakeQuiz(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
-    user_answer = models.ArrayField()
+    user_answer = ArrayField(models.CharField(max_length=1))

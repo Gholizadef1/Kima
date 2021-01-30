@@ -738,4 +738,17 @@ class QuizView(APIView,PaginationHandlerMixin):
             
 class TakeQuizView(APIView):
     
-    def post(self,request):
+    def post(self,request,pk):
+        user = request.user
+        quiz = Quiz.objects.get(pk=pk)
+        user_answer = request.data.get("user_answer")
+        score = 0
+        counter = 0
+        q_list = Question.objects.filter(quiz=quiz).order_by('-question_num')
+        while counter < quiz.question_count:
+            if user_answer[counter]==q_list[counter].key:
+                score+=1
+        
+        TakeQ = TakeQuiz(user=user,quiz=quiz,score=score,user_answer=user_answer)
+        TakeQ.save()
+        return Response({"message":"You successfully submit your quiz!","Your answers":TakeQ.user_answer,"score":TakeQ.score})
