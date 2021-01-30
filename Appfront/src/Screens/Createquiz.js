@@ -89,6 +89,28 @@ const Createquiz = () => {
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
     const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
+    const validationSchema = yup.object().shape({
+        soalha: yup.array().of(
+          yup.object().shape({
+            question: yup.string()
+            .required(".متن سوال نمیتواند خالی باشد")
+            .min(10,"متن سوال باید کمی طولانی تر باشد.")
+            .max(70,"متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
+            a: yup.string() .required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+            b: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+            c: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+            d: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+            //مشخص نکنه گزینه ی 1 میشه جواب
+            correct: yup.string().required(),
+          })
+        ),
+        Username:yup.string()
+        .required("اسم گروه نمیتواند خالی باشد")
+        .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
+      
+        Discription:yup.string()
+        .required("توضیحات گروه نمیتواند خالی باشد"),
+      });
     //  const [soalha,setsoalha]=[{question:"",a:"",b:"",c:"",d:"",correct:""}];
     return (
         <View style={styles.container}>
@@ -100,6 +122,7 @@ const Createquiz = () => {
             </TouchableOpacity> */}
 
                 <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
+                validationSchema={validationSchema}
                     initialValues={{
                         Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "", a: "", b: "", c: "", d: "", correct: "1" }]
                         // soal:soalha 
@@ -222,12 +245,13 @@ const Createquiz = () => {
                                         </Textarea>
                                     </TouchableOpacity>
                                 </View>
+                                <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('-3.5%'), marginTop: hp('7%'), color: 'red' }}>{props.touched.Discription && props.errors.Discription}</Text>
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
 
 
 
-                                <FieldArray name={"soalha"}>
-                                {({push,pop})=>(
+                                <FieldArray name={"soalha"} validationSchema={validationSchema.soalha}>
+                                {({push,pop,touched,errors})=>(
                                     <FlatList
                                         //بعدا لیست هدر بالایی ها
                                         // ListHeaderComponent={()=>(
@@ -247,7 +271,7 @@ const Createquiz = () => {
                                             // const [values,setvalues]=useState("1")
                                             return (<>
                                                 <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
-                                                <Createquizeachquestion pr={props} itemidd={item.id}></Createquizeachquestion>
+                                                <Createquizeachquestion touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
                                                      {/* //  propp={propss} */}
                                             </>)
                                         }}
@@ -256,17 +280,19 @@ const Createquiz = () => {
                                                 onPress={async () => {
                                                     if (numofquestion <= 20) {
                                                         push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
-                                                        for(var i=numofquestion-1;i>=0;i--){
-                                                            console.log(props.values.soalha[i].question+" QQQQ");
-                                                            console.log(props.values.soalha[i].a+" aaaaa");
-                                                            console.log(props.values.soalha[i].b+" bbbbb");
-                                                            console.log(props.values.soalha[i].c+" ccccc");
-                                                            console.log(props.values.soalha[i].d+" ddddd");
-                                                            console.log(props.values.soalha[i].correct+" correct");
-                                                        }
+                                                        // for(var i=numofquestion-1;i>=0;i--){
+                                                        //     console.log(props.values.soalha[i].question+" QQQQ");
+                                                        //     console.log(props.values.soalha[i].a+" aaaaa");
+                                                        //     console.log(props.values.soalha[i].b+" bbbbb");
+                                                        //     console.log(props.values.soalha[i].c+" ccccc");
+                                                        //     console.log(props.values.soalha[i].d+" ddddd");
+                                                        //     console.log(props.values.soalha[i].correct+" correct");
+                                                        // }
                                                         //console.log(props.values.soalha[0]+" VALUESSSS")
                                                         //console.log(props.values.soalha[1]+" VALUESSSS")
                                                         //toye groups mygroups avali javab nemidad :\
+                                                        console.log(props.error+"   PROP ERRORS")
+                                                       // if(props.errors===null){
                                                         await setitemid(itemid + 1);
                                                         //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
                                                         await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
@@ -275,6 +301,7 @@ const Createquiz = () => {
                                                         //      // await setvalues(values.concat(numofquestion));
                                                         //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
                                                         //console.log(questions);
+                                                       // }
                                                     }
                                                     else {
                                                         new Promise(async (resolve, refect) => {
