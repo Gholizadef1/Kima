@@ -206,7 +206,7 @@ const GroupPage = (prop) => {
           
                   console.log(formdata.data+'formdata')
           
-                  const response=await axiosinst.post('/api/group/'+ prop.route.params.id +'/discussion',formdata,{
+                  const response=await axiosinst.post('/group/'+ prop.route.params.id +'/discussion',formdata,{
                     headers:{
                       "Content-Type":"application/json",
                       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
