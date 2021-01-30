@@ -23,7 +23,39 @@ import { ImageBackground } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
 const Quizpage = () => {
-
+   const questions={
+       Quiz:{
+         id:15,
+         title:"my first quiz",
+         description:"kima project",
+         creator:{
+             username:"setaysehm",
+             profile_photo:"/media/profile",
+             email:"setayeshm@ss.com",
+             id:2
+         },
+         quiz_photo:"/media/default.png",
+         create_time:"2021-01-29"
+   },
+   Questions:[{
+       question_num:1,
+       question_text:"what?",
+       a_text:"first",
+       b_text:"second",
+       c_text:"third",
+       d_text:"fourth",
+       dey:"a"
+   },
+   {
+   question_num:1,
+   question_text:"سوال دو اینه که ...?",
+   a_text:"جواب اول سوال دو",
+   b_text:"جواب دوم سوال د و اینه که ",
+   c_text:"third",
+   d_text:"جوب آخر سوال شنبکتی",
+   dey:"a"}
+   ]
+}
 
 
     return (
