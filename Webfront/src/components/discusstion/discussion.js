@@ -161,10 +161,10 @@ function Discussion(props) {
   return(
     <div>
       <div className="mx-md-5 px-md-5">
-        <div className="container-fluid rTOl text-right px-md-5 rounded-lg " >
-          <div className="mx-md-5 my-5 px-md-3">
+        <div className="rTOl text-right px-md-5 mx-md-5" >
+          <div className="mx-md-5 my-5 px-md-3 shadow rounded-lg ">
               <div>
-                <div className="d-flex flex-wrap mx-2 border rounded-lg pt-3">
+                <div className="d-flex flex-wrap mx-2  rounded-lg pt-3">
                   <div className="px-2">
                     <Avatar className="" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`} style={{width:60, height:60}} />
                     <h5 className="text-center mt-2">{creator.username}</h5>
