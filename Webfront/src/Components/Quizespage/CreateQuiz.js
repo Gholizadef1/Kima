@@ -62,7 +62,7 @@ function Quizespage (props){
     const [countOfQ,setCount] = useState(1);
     
     const [inputFields, setInputFields] = useState([
-      { id: uuidv4(), question:'', answer1:'',answer2:'',answer3:'',answer4:'',correct:1 },
+      { id: uuidv4(), question:'', answer1:'',answer2:'',answer3:'',answer4:'',count:1,correctAnswer:'' },
     ]);
    
     console.log(inputFields.length);
@@ -84,7 +84,7 @@ function Quizespage (props){
     }
     const handleAddFields = () => {
       console.log(countOfQ);
-      setInputFields([...inputFields, { id: uuidv4(),  question:'', answer1:'',answer2:'',answer3:'',answer4:'',correct:inputFields.length+1}])
+      setInputFields([...inputFields, { id: uuidv4(),  question:'', answer1:'',answer2:'',answer3:'',answer4:'',count:inputFields.length+1}])
       console.log(inputFields);
 
     }
@@ -150,12 +150,11 @@ function Quizespage (props){
   </div>
   { inputFields.map(inputField => (
     <div key={inputField.id}>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName">سوال{inputField.correct}</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName">سوال{inputField.count}</label>
   <textarea className="form-control input-normal text-right"                       onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question} placeholder="...صورت سؤال"  name="question"></textarea>
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 1</label>
   <div class="form-check text-right mr-n4 ">
-  <input class="form-check-input mt-3" type="checkbox" value={inputField.answer1} id="defaultCheck1" name="answer1"/>
   </div>
 
                 <input
@@ -171,7 +170,6 @@ function Quizespage (props){
 
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 2</label>
   <div class="form-check text-right mr-n4 ">
-  <input value={inputField.answer2} class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1" name="answer2"/>
 </div>
 
                 <input
@@ -189,7 +187,6 @@ function Quizespage (props){
 
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 3</label>
   <div class="form-check text-right mr-n4 ">
-  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
 </div>
 
                 <input 
@@ -208,7 +205,6 @@ function Quizespage (props){
 
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 4</label>
   <div class="form-check text-right mr-n4 ">
-  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
 </div>
 
                 <input 
@@ -219,6 +215,17 @@ function Quizespage (props){
                        
                        name="answer4"
                        value={inputField.answer4}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                />
+                <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">عدد گزینهٔ درست</label>
+                <input 
+                     type=""
+                       className="form-control input-normal text-right" 
+                       placeholder="... گزینهٔ درست"
+                       required
+                       name="correctAnswer"
+                       value={inputField.correctAnswer}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                 />
@@ -236,7 +243,7 @@ function Quizespage (props){
  textAlign:"center",
  marginLeft:-9,
  paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
-         <button className="btn" style={{color:"blue",fontSize:15}}>
+         <button className="btn b" style={{color:"blue",fontSize:15}}>
              حذف سؤال
          </button>
          </Tooltip>
