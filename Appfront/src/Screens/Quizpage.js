@@ -20,6 +20,7 @@ import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 import Createquiz from "./Createquiz";
 import { ImageBackground } from 'react-native';
+import { ProgressBar, Colors } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
 const Quizpage = () => {
    
@@ -29,7 +30,8 @@ const Quizpage = () => {
     <View style={styles.container}>
     <ImageBackground style={{flex:1}} source={require("../../assets/fantezi.jpg")}>
     <ScrollView>
-       <Text  style={{color:"black",fontSize:hp("2%"),fontWeight:"bold",alignSelf:"center",width:wp("86%"),marginTop:hp("16%")}}>صورت سوال اول  صورت سوال اول اینه که؟</Text>
+    <ProgressBar style={{top:hp("7%"),marginHorizontal:wp("7%"),borderRadius:20,height:hp("1%")}} progress={0.5} color={"#1f7a8c"} />
+       <Text  style={{color:"black",fontSize:hp("2%"),fontWeight:"bold",alignSelf:"center",width:wp("86%"),marginTop:hp("15%")}}>صورت سوال اول  صورت سوال اول اینه که؟</Text>
 
 
        <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("8%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
