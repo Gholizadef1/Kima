@@ -37,6 +37,7 @@ function Quizespage (props){
             file:null
         }
       )
+    const [countOfQ,setCount] = useState(1);
     const imageUploader = React.useRef(null);
     const uploadedImage = React.useRef(null);
 
@@ -59,7 +60,7 @@ function Quizespage (props){
         }
     };
     const [inputFields, setInputFields] = useState([
-      { id: uuidv4(), firstName: '', lastName: '' },
+      { id: uuidv4(), question: '', answer1:'',answer2:'',answer3:'',answer4:'',correct:'' },
     ]);
     const handleChangeInput = (id, event) => {
       const newInputFields = inputFields.map(i => {
@@ -70,10 +71,14 @@ function Quizespage (props){
       })
         setInputFields(newInputFields);
         console.log(inputFields);
+        console.log(countOfQ);
     }
     const handleAddFields = () => {
-      setInputFields([...inputFields, { id: uuidv4(),  firstName: '', lastName: '' }])
+      setInputFields([...inputFields, { id: uuidv4(),  question: '', answer1:'',answer2:'',answer3:'',answer4:'' }])
       console.log(inputFields);
+      setCount(countOfQ+1);
+      console.log(countOfQ);
+
 
     }
 
@@ -82,8 +87,9 @@ function Quizespage (props){
       const values  = [...inputFields];
       values.splice(values.findIndex(value => value.id === id), 1);
       setInputFields(values);
+      setCount(countOfQ-1);
       console.log(inputFields);
-
+      console.log(countOfQ);
     }
     return(
         
@@ -138,71 +144,77 @@ function Quizespage (props){
   </div>
   { inputFields.map(inputField => (
     <div key={inputField.id}>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">سوال 1 </label>
-  <textarea className="form-control text-right" rows="1" id="comment" placeholder="...صورت سؤال" name="text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 1</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName"  >سوال {countOfQ} </label>
+  <textarea className="form-control text-right" rows="1" value={inputFields.question} placeholder="...صورت سؤال" id="userName" name="question"></textarea>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 1</label>
   <div class="form-check text-right mr-n4 ">
-  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+  <input class="form-check-input mt-3" type="checkbox" value={inputField.answer1} id="defaultCheck1" name="answer1"/>
   </div>
 
-                <input type="email" 
+                <input
                        className="form-control input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
-                       name="firstName"
-                       value={inputField.firstName}
+                       name="answer1"
+                       type="name"
+                       value={inputField.answer1}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 2</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 2</label>
   <div class="form-check text-right mr-n4 ">
-  <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
+  <input value={inputField.answer2} class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1" name="answer2"/>
 </div>
 
-                <input type="email" 
+                <input
                        className="form-control input-normal text-right" 
-                       
                        placeholder="...صورت جواب"
                        required
-                       name="firstName"
-                       value={inputField.firstName}
+                       name="answer2"
+                       type="name"
+                       value={inputField.answer2}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                       
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 3</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 3</label>
   <div class="form-check text-right mr-n4 ">
   <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
 </div>
 
-                <input type="email" 
+                <input 
                        className="form-control input-normal text-right" 
-                       name="firstName"
-                       value={inputField.firstName}
+                       name="answer3"
+                       placeholder="...صورت جواب"
+                       type="name"
+                       required
+                       value={inputField.answer3}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
-                       placeholder="...صورت جواب"
-                       required
+                       
                       
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">جواب 4</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 4</label>
   <div class="form-check text-right mr-n4 ">
   <input class="form-check-input mt-3" type="checkbox" value="" id="defaultCheck1"/>
 </div>
 
-                <input type="email" 
+                <input 
+                     type="name"
                        className="form-control input-normal text-right" 
-                       name="firstName"
-                       value={inputField.firstName}
-                       onChange={event => handleChangeInput(inputField.id, event)}
-                       
                        placeholder="...صورت جواب"
                        required
+                       
+                       name="answer4"
+                       value={inputField.answer4}
+                       onChange={event => handleChangeInput(inputField.id, event)}
+                       
+                      
                       
                        
                 />
