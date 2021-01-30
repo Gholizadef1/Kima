@@ -10,6 +10,7 @@ import {
   useParams,
   withRouter
 } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
   import {GoSearch} from 'react-icons/go';
 import "./CreateQuiz.css";
 import Button from '@material-ui/core/Button';
@@ -225,30 +226,42 @@ function Quizespage (props){
                        
                 />
                 { inputFields.length === 1 ?
-                <div className="btn">
-nemiitoni          
- </div>
+           
+                  <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
+                <button className="btn">
+                    حذف سؤال
+                </button>
+                </Tooltip>
+                
+
             :
             
-            <div className="btn" onClick={() => handleRemoveFields(inputField.id)}>
-            delete 
-            
-        </div>
+            <button className="btn" onClick={() => handleRemoveFields(inputField.id)}>
+              حذف سؤال
+        </button>
 }
       { inputFields.length === 15 ?
-        <div
+        <button
             className="btn"
             >
-nemitoni            </div>
+nemitoni            </button>
             
             :
-            <div
+            <button
             className="btn"
               onClick={handleAddFields}
               disabled={inputFields.length === 15 } 
             >
               اضافه‌کردن سؤال
-            </div>
+            </button>
       }
                  </div>
           
