@@ -12,7 +12,7 @@ import * as yup from 'yup';
 
 const userschema=yup.object({
   
-    chat_text:yup.string()
+    Description:yup.string()
     .required(" متن شما نمیتواند خالی باشد")
   
   })
@@ -38,16 +38,16 @@ const DiscussionPage = (prop) => {
    name="close" size={23} color="#D75A5A" />
    </TouchableOpacity>       
 <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-initialValues={{chat_text:''}}
+initialValues={{Description:''}}
 validationSchema={userschema}  
 
 onSubmit={async(values,actions)=>{
     console.log('ON SUBMIT')
     const formdata = new FormData();
-    formdata.append('chat_text',values.chat_text)
+    formdata.append('chat_text',values.Description)
      
   console.log(formdata.data+'formdata')
-  const response=await axiosinst.post('/group/'+groupid +'/discussion'+discussionid +'/chat',formdata,{
+  const response=await axiosinst.post('/group/'+groupid +'/discussion/'+discussionid +'/chat',formdata,{
     headers:{
       "Content-Type":"application/json",
       "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
@@ -90,13 +90,13 @@ onSubmit={async(values,actions)=>{
   <TouchableOpacity>
           <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
             borderColor={'lightgray'}
-            onChangeText={props.handleChange('Discription')}
-            onBlur={props.handleBlur('Discription')}
-            value={props.values.Discription}                 
+            onChangeText={props.handleChange('Description')}
+            onBlur={props.handleBlur('Description')}
+            value={props.values.Description}                 
             placeholder={' پیام شما ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
           </Textarea>
           </TouchableOpacity>
-          <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Discription&&props.errors.Discription}</Text>
+          <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Description&&props.errors.Description}</Text>
         </View>     
    <Button bordered rounded style={styles.button}
  onPress={props.handleSubmit}

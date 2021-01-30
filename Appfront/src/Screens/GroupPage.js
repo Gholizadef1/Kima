@@ -56,6 +56,15 @@ const GroupPage = (prop) => {
     getDiscussion(); 
 }, [join]);
 
+const getUsername = async () => {
+  const id = await AsyncStorage.getItem('id');
+  const response = axiosinst.get('/user/' + id)
+    .then(function (response) {
+      console.log('USERNAME'+ response.data.username)
+      setusername(response.data.username)
+    })
+};
+
   useEffect((async) => { 
     const response = axiosinst.get('/group/' + prop.route.params.id+'/member')
       .then(async function (response) {    
@@ -85,7 +94,7 @@ const GroupPage = (prop) => {
           await setgroupinfo(response.data);
           setmembernumber(groupinfo.members_count);
           setgroupphoto(`http://2e7bd654174c.ngrok.io${response.data.group_photo}`)
-          console.log(groupphoto + '------')
+//          console.log(groupphoto + '------')
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
             await setowner("owner")
@@ -93,17 +102,11 @@ const GroupPage = (prop) => {
         })
   },[join , owner , joinedUser , notjoinedUser])
 
-  console.log('j' + joinedUser)
-  console.log('n ' + notjoinedUser)
-  console.log('o ' + owner)
+  console.log( joinedUser)
+  console.log( notjoinedUser)
+  console.log(owner)
 
-  const getUsername = async () => {
-    const id = await AsyncStorage.getItem('id');
-    const response = axiosinst.get('/user/' + id)
-      .then(function (response) {
-        setusername(response.data.username)
-      })
-  };
+
 
   if (!groupinfo) {
     return null;
@@ -111,7 +114,7 @@ const GroupPage = (prop) => {
 
 
   const JoinGroup = async () => {
-    console.log(' OMAD TO JOIN GROUP')
+//    console.log(' OMAD TO JOIN GROUP')
     const back = {}
     const backk = JSON.stringify(back);
     axiosinst.post('/group/'+ prop.route.params.id +'/member', backk, {
@@ -140,7 +143,7 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-        console.log('response' + response.data.message)
+//        console.log('response' + response.data.message)
         getMembers()
       })
       .catch(function (error) {
@@ -148,7 +151,7 @@ const GroupPage = (prop) => {
       });
   }
   const deleteGroup = async () => {
-    console.log('delete')
+//    console.log('delete')
     axiosinst.delete('/group/' + prop.route.params.id, {
       "headers": {
         "content-type": "application/json",
@@ -199,12 +202,12 @@ const GroupPage = (prop) => {
                 validationSchema={userschema}  
         
                 onSubmit={async(values,actions)=>{
-                    console.log('ON SUBMIT')
+//                    console.log('ON SUBMIT')
                     const formdata = new FormData();
                      formdata.append('title',values.Username)
                      formdata.append('description',values.Discription)
           
-                  console.log(formdata.data+'formdata')
+//                  console.log(formdata.data+'formdata')
           
                   const response=await axiosinst.post('/group/'+ prop.route.params.id +'/discussion',formdata,{
                     headers:{
@@ -213,9 +216,9 @@ const GroupPage = (prop) => {
                     }
                        )
                   .then( function(response){
-                    console.log(picture+' PICTURE POST')
+//                    console.log(picture+' PICTURE POST')
                   
-                    console.log(response)
+//                    console.log(response)
                     Alert.alert('','بحث با موفقیت ساخته شد ',[
                       {
                    text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
@@ -361,13 +364,13 @@ const GroupPage = (prop) => {
             style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={true}
             onEndReached={() => {
-            console.log('-----AKHAR LIST')
+//            console.log('-----AKHAR LIST')
             }}
             onEndReachedThreshold={0.5}
             keyExtractor={(item) => item.id}
             refreshing={refreshdiscussions}
             onRefresh={async () => {
-            console.log('refresh')
+//            console.log('refresh')
             }}
             data={discussion}
             renderItem={({ item }) => <>
@@ -424,7 +427,7 @@ const GroupPage = (prop) => {
             keyExtractor={(item) => item.id}
             refreshing={refreshmembers}
             onRefresh={async () => {
-            console.log('refresh')
+//            console.log('refresh')
             }}
             data={members}
             renderItem={({ item }) => <>
