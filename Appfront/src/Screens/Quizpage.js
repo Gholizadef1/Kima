@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
- import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
+import { StyleSheet, Text, View, Modal, FlatList, ActivityIndicator, TextPropTypes, Alert } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
@@ -23,72 +23,91 @@ import { ImageBackground } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
 const Quizpage = () => {
-   
 
 
-  return (
-    <View style={styles.container}>
-    <ImageBackground style={{flex:1}} source={require("../../assets/fantezi.jpg")}>
-    <ScrollView>
-    <ProgressBar style={{top:hp("7%"),marginHorizontal:wp("7%"),borderRadius:20,height:hp("1%")}} progress={0.5} color={"#1f7a8c"} />
-       <Text  style={{color:"black",fontSize:hp("2%"),fontWeight:"bold",alignSelf:"center",width:wp("86%"),marginTop:hp("15%")}}>صورت سوال اول  صورت سوال اول اینه که؟</Text>
+
+    return (
+        <View style={styles.container}>
+            <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
+                <ScrollView>
+                    <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={11 / 12} color={"#1f7a8c"} />
+
+                    <Text style={{
+                        color: "black", fontSize: hp("2%"), fontWeight: "bold", alignSelf: "center", width: wp("86%"), marginTop: hp("15%"), elevation: 5,
+                        //  textShadowOffset: { width: 1, height: 1 },
+                        // textShadowRadius: 10,
+                        // textShadowColor: 'gray',
+                        marginRight:wp("1%")
+                    }}>صورت سوال اول  صورت سوال اول  که؟</Text>
 
 
-       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("8%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
-           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
-       </View>
-       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
-           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
-       </View>
-       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
-           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
-       </View>
-       <View style={{backgroundColor:'rgba(237,242,244,0.7)',height:hp("8%"),width:wp("86%"),marginTop:hp("2.5%"),borderRadius:100,alignSelf:"center",justifyContent:"center"}}>
-           <Text style={{fontSize:hp("1.8%"),alignSelf:"flex-start",marginHorizontal:wp("5%")}}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
-       </View>
-     
-       {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
-       <View style={{flexDirection:"row"}}>
-       <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginTop:hp("10.6.5%"),borderTopRightRadius:50}}>
-       <AntDesign style={{marginTop:hp("2.2%"),marginRight:wp("11%"),color:"#Edf2f4"}} name="arrowright" size={24} color="black" />
-       <Text style={{marginLeft:wp("4.4%"),marginTop:hp("0.4%"),fontSize:hp("1.5.5%"),fontWeight:"bold",color:"#Edf2f4"}}>سوال بعدی</Text>
-       </TouchableOpacity>
-       <TouchableOpacity style={{height:hp("10%"),width:wp("25%"),backgroundColor:"#1f7a8c",marginLeft:wp("50%"),marginTop:hp("10.6.5%"),borderTopLeftRadius:50,alignSelf:"flex-end"}}>
-       <AntDesign style={{marginTop:hp("2.2%"),marginRight:wp("9%"),color:"#Edf2f4"}} name="arrowleft" size={24} color="black" />
-       <Text style={{marginLeft:wp("6.4%"),marginTop:hp("0.4%"),fontSize:hp("1.5.5%"),fontWeight:"bold",color:"#Edf2f4"}}>سوال قبلی</Text>
-       </TouchableOpacity>
-       </View>
-       {/* </View> */}
-     
-   
-      
-{/* 
+                    <View style={{
+                        backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("8%"),
+                        borderRadius: 100, alignSelf: "center", justifyContent: "center"
+                    }}>
+                        <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+                    </View>
+                    <View style={{
+                        backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        borderRadius: 100, elevation: 5, alignSelf: "center", justifyContent: "center"
+                    }}>
+                        <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+                    </View>
+                    <View style={{
+                        backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
+                    }}>
+                        <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+                    </View>
+                    <View style={{
+                        backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
+                    }}>
+                        <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> پاسخ اول اینه که این پاسخ اول akfdlfنمتکنکتمنتمنتمکبشکنمتنکتمسنمکتشبنتمکسبنکمتسنبتمسنبتهست</Text>
+                    </View>
+
+                    {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
+                    <View style={{ flexDirection: "row" }}>
+                        <TouchableOpacity style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "#1f7a8c", marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
+                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
+                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوال قبلی</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "#1f7a8c", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوال بعدی</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {/* </View> */}
+
+
+
+                    {/* 
         <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
-       
-       </ScrollView>
-       </ImageBackground>
-      
-    </View>
-  );
+
+                </ScrollView>
+            </ImageBackground>
+
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#b5c5e3',
-  },
-  plus: {
+    container: {
+        flex: 1,
+        backgroundColor: '#b5c5e3',
+    },
+    plus: {
 
-    alignSelf: 'center',
-    justifyContent: 'center'
+        alignSelf: 'center',
+        justifyContent: 'center'
 
-  }, 
-  loader:{
-    alignItems:'center',
-    marginBottom:hp('15%'),
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop:hp('10%')
-  }
+    },
+    loader: {
+        alignItems: 'center',
+        marginBottom: hp('15%'),
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop: hp('10%')
+    }
 });
 export default Quizpage;
