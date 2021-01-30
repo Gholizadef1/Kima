@@ -375,7 +375,7 @@ const GroupPage = (prop) => {
                 <Text style={{ alignSelf: 'flex-start', left: wp('5%') , fontSize: 18 }}>{item.title}</Text>
                 <Text style={{color: '#a9a9a9' , marginLeft:wp('4%') , marginTop:hp('1%')}}>{item.description}</Text>
                 <Button style={{ marginLeft: wp('80%') , marginTop:wp('-11%') }} transparent 
-                  onPress={() => prop.navigation.navigate('ShowMembersPage')}>
+                  onPress={() => prop.navigation.navigate('ShowDiscussionPage' , {id : item.id} )}>
                   <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
                 </Button >
                 <View

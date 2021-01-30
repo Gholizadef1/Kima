@@ -6,9 +6,12 @@ import { Avatar } from 'react-native-paper';
 
 const DiscussionPage = (prop) => {
 
+    const discussionid = prop.route.params.id;
+    console.log(discussionid)
+
     return(
         <View>
-            <Text>Discussion</Text>
+            <Text style ={{fontSize:60}}>Discussion</Text>
         </View>
     )
 
