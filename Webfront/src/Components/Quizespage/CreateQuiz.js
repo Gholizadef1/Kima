@@ -249,11 +249,19 @@ function Quizespage (props){
         </button>
 }
       { inputFields.length === 15 ?
-        <button
-            className="btn"
-            >
-nemitoni            </button>
-            
+       <Tooltip  title= {<div style={{color: "white",
+       fontFamily:"Yekan",
+       fontSize:20,
+       
+       width:190,
+       height:80,
+       textAlign:"center",
+       marginLeft:-9,
+       paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال باشد</div>}> 
+               <button className="btn">
+                        اضافه‌کردن سؤال
+                         </button>
+               </Tooltip>
             :
             <button
             className="btn"
