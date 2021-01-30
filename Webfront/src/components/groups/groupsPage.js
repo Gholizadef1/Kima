@@ -79,7 +79,7 @@ function GroupsPage (props){
     }else {
       // const newList = groups.filter((item)=>item.is_member === true);
       // setGroups(newList);
-      // //setPagesNumber(0)
+      setPagesNumber(1)
       setIsMine(true);
     }
 
