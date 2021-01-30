@@ -8,6 +8,7 @@ import teal from '@material-ui/core/colors/teal';
 import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
 import Tabs from '../Tabs/Tabs';
+import {API_BASE_URL} from '../constants/apiContants';
 import MyGroups from '../Tabs/MyGroupsTab.js';
 function ProFile (props){
     const [state , setState]=useState(
@@ -46,7 +47,7 @@ function ProFile (props){
     useEffect(() => {
         console.log(user)
         if (user.token) {       
-            axios.get('http://127.0.0.1:8000/user/' + Cookies.get('userId'))
+            axios.get(API_BASE_URL + '/user/' + Cookies.get('userId'))
                 .then(function (response){
                   console.log(response);
                   console.log(response.data);
@@ -54,7 +55,7 @@ function ProFile (props){
                     ...prevState,
                     userName: response.data.username,
                     email: response.data.email,
-                    picture : "http://127.0.0.1:8000"+response.data.profile_photo
+                    picture : API_BASE_URL +response.data.profile_photo
                     }));
                     console.log(user);
                 })
@@ -85,7 +86,7 @@ function ProFile (props){
               "username":user.userName
         }
         const back= JSON.stringify(payload)
-        axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/update-profile`,
+        axios.put(API_BASE_URL+ '/user/'+Cookies.get('userId')+'/update-profile',
         back,{
             headers:{
 
@@ -128,7 +129,7 @@ function ProFile (props){
             const back= JSON.stringify(payload);
             console.log(back);
 
-            axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/change-password`,
+            axios.put( API_BASE_URL+ '/user/'+Cookies.get('userId')+'/change-password',
              back
              ,{
               headers:{
@@ -187,7 +188,7 @@ function ProFile (props){
   var formdata = new FormData()
   formdata.append('profile_photo',state.file)
   // formdata.append('username','file')
-   axios.put(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/update-profile`
+   axios.put(API_BASE_URL+ '/user/'+Cookies.get('userId')+'/update-profile'
    ,formdata,{
      headers:{
        

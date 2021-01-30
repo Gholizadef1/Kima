@@ -20,6 +20,9 @@ import BookView from './components/bookView/bookView'
 import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
+import ProtectedRoute  from "./components/protect";
+import Discussion  from "./components/discusstion/discussion";
+
 
 function App(props) {
   const [title, updateTitle] = useState(null);
@@ -32,8 +35,6 @@ function App(props) {
           {/* <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/> */}
           <Switch>
             <Route path="/" exact={true}>
-              {/* <NavBar/>
-               <Slide showError={updateErrorMessage} updateTitle={updateTitle}/> */}
                <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
 
@@ -45,35 +46,20 @@ function App(props) {
                <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
 
-            <Route path="/home">
-               <NavBar/>
-               <Slide/>
-            </Route>
+            <ProtectedRoute path="/home" component={Slide}>
+            </ProtectedRoute>
 
-           
-            <Route path="/profile">
-              <NavBar/>
-              <Profile/>
-            </Route>
+            <ProtectedRoute path="/profile" component={Profile}/>
 
-            <Route path="/group/:groupId">
-                <NavBar/>
-              <Grouppage/>
-            </Route>
-            <Route path="/quizepage">
-                <NavBar/>
-              <QuizesPage/>
-            </Route>
+            <ProtectedRoute path="/group/:groupId" component={Grouppage}/>
+    
+            <ProtectedRoute path="/quizepage" component={QuizesPage}/>
             
-            <Route path="/book/:bookId">
-              <NavBar/>
-              <BookView showError={updateErrorMessage} updateTitle={updateTitle}/>
-            </Route>
+            <ProtectedRoute path="/book/:bookId" component={BookView}/>
 
-            <Route path="/groups">
-              <NavBar/>
-              <Groups />
-            </Route>
+            <ProtectedRoute path="/groups" component={Groups}/>
+
+            <ProtectedRoute path="/discussion" component={Discussion}/>
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">
@@ -86,75 +72,6 @@ function App(props) {
     </div>
     </Router>
   );
-  
-function protectedRoute({ children, ...rest}){
-   let auth=false;
-  // if(Cookies.get('userToken')==undefined){
-  //   auth=true;}
-  //   else {auth=false;}
-    
-    console.log(Cookies.get('userToken'));
-    return(
-      <Route
-      {...rest}
-      
-      render={({ location }) =>
-        auth ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
 }
-  //</Router>return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
-}
-
-
-// = ()=>{
-//   console.log(Cookies.get('userToken'));
-//   return(
-//     // <Route
-//     // render={()=>(
-//     //   <Component/> 
-//     // )}
-//     // />
-//     <Route
-//     render={()=>
-//     Cookies.get('userToken')==undefined?(
-//       <Redirect to={{path:"/login"}}/>
-//     ):(
-//       <Route/>
-//     )
-//     }
-//     />
-
-//   )
-
-
-// }
 
 export default App;
