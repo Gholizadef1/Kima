@@ -167,7 +167,7 @@ function Discussion(props) {
                 {comments === undefined ? (
                 
                 
-                  <p >نطری برای نمایش وجود ندارد</p>
+                  <p >پاسخی برای نمایش وجود ندارد</p>
                 
                  ) : (
                    <div>
@@ -176,18 +176,18 @@ function Discussion(props) {
                    
                 <div className="" style={{direction:"rtl"}}>
                    <div className="d-flex px-md-3 py-3">
-                     <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
+                     <Avatar alt={current.user.username} src={`${API_BASE_URL}${current.user.profile_photo}`} style={{width:60, height:60}} />
                      <div className="ml-auto mr-3">
                        <h5>
-                         {current.account.username}
+                         {current.user.username}
                        </h5>
                        <small>
-                       {`${current.sendtime.toString().split('T')[0]}`}
+                       {`${current.send_time.toString().split('T')[0]}`}
                        </small>
                      </div>
                 
                 
-                     {current.account.id != Cookies.get("userId") ?(
+                     {current.user.id != Cookies.get("userId") ?(
                        <div></div>
                      ):(
                        <div className="btn m-n1" onClick={()=> handleDeleteComment(current.id)}>
@@ -203,7 +203,7 @@ function Discussion(props) {
                    </div>
                    <p className="px-md-3">
                    
-                     {current.comment_text}  
+                     {current.chat_text}  
                    </p>
                    <Divider variant="middle" component="li" />
                    
