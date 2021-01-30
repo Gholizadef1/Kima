@@ -65,7 +65,7 @@ import { red } from "@material-ui/core/colors";
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className=" like mr-4">
+                <small className=" likec mr-4">
                 {current.LikeCount}
                 <AiOutlineLike  color="blue" size="25"/>
                 </small>
