@@ -99,7 +99,7 @@ const GroupPage = (prop) => {
 
   const getUsername = async () => {
     const id = await AsyncStorage.getItem('id');
-    const response = axiosinst.get('/api/user-profile/' + id)
+    const response = axiosinst.get('/user/' + id)
       .then(function (response) {
         setusername(response.data.username)
       })
@@ -165,7 +165,7 @@ const GroupPage = (prop) => {
 
   const getDiscussion = async () => {
 
-    axiosinst.get('/api/group/'+ prop.route.params.id +'/discussion', {
+    axiosinst.get('/group/'+ prop.route.params.id +'/discussion', {
         "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
