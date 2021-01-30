@@ -345,6 +345,7 @@ const handleCloseSnack = (event, reason) => {
                           <div>
                            <p class="card-text ">{current.summary.substring(0, 60)}...</p>
                            <div className="btn my-n3 text-muted"  onClick={() => routeToGroupHandler(current.id)}>بیشتر</div>
+
                            </div>
                         ):(
                           <p class="card-text">{current.summary}</p>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 //import {CgProfile} from 'react-icons/cg';
@@ -6,6 +7,7 @@ import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
+ import "../slides/Slide.css";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
@@ -37,6 +39,7 @@ function NavBar (props){
 const searchUsers = async () => {
 
 const result = await axios.get(`${API_BASE_URL}/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+
  ).then((res)=> {
  setSearch(res.data.results)
   
@@ -74,6 +77,9 @@ useEffect(() => {
 
   const routeToGroups = ()=>{
     props.history.push('/groups');
+  }
+  const routeToQuizPage = ()=>{
+    props.history.push('/quizepage');
   }
 
   const accent= { backgroundColor: purple[500], color: '#000' }
@@ -126,7 +132,7 @@ useEffect(() => {
             </li>
             <li  class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a >آزمونک</a>
+              <a onClick={routeToQuizPage} >آزمونک</a>
             </li>
             <li class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
@@ -166,7 +172,7 @@ useEffect(() => {
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header">
+           <div className="header"style={{fontFamily:"Yekan"}}>
           نتایج
           </div>
         </Modal.Header>
@@ -174,19 +180,35 @@ useEffect(() => {
           {search != 0 ?
           <div>
        {search.map((item) => (
-     <div className="out1" key={item.id} onClick={() => bookSelectedHandler( item)} >
-       <div className="card cat1">
+     <div className="out" key={item.id} onClick={() => bookSelectedHandler( item)} >
+       <div className="">
          <img
-           className="squere1"
+           className="squer img-responsive"
            src={item.imgurl}
          /> 
-         <small className= "title">
-         <h5 className="card-title3" >{item.title}</h5>
-         <h5 className="card-title4" >{item.author}</h5>
+         </div>
+         <div className="bod">
+              {item.title.length >20 ?
+<Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        width:180,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:30,}}>{item.title} </div>}> 
+    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{item.title}</div>
+      </Tooltip>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{item.title}</div>
+      
+} 
+                <small className= "title">
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{item.author}</h5>
 
-          </small>
-          </div>
-       </div>
+                   </small>
+            </div>
+            </div>
+       
        ))}
        </div>
        :

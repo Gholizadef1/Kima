@@ -16,19 +16,7 @@ import {
 //import BookView from "../components/bookView/bookView";
 
 import Tooltip from '@material-ui/core/Tooltip';
-const BlueOnGreenTooltip = withStyles({
-  tooltip: {
-    color: "black",
-    fontFamily:"Mitra",
-    fontSize:20,
-    backgroundColor: '#b7dee4',
-    width:170,
-    height:80,
-    textAlign:"center",
-    marginLeft:20,
-    paddingTop:20,
-  }
-})(Tooltip);
+
 function Slide(props) {
   console.log(props);
   const [suggestions, setSuggestions] = useState([]);
@@ -37,7 +25,7 @@ function Slide(props) {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/bookdetail/")
+    fetch("http://127.0.0.1:8000/book")
       .then((res) => res.json())
       .then((data) => {
         setSuggestions(data);
@@ -45,16 +33,17 @@ function Slide(props) {
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/filter-book-rate")
+    fetch("http://127.0.0.1:8000/book?filter=rate")
 
       .then((res) => res.json())
       .then((data) => {
         setFavorite(data);
+        console.log(data);
       });
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/filter-book-comment")
+    fetch("http://127.0.0.1:8000/book?filter=comment")
 
       .then((res) => res.json())
       .then((data) => {
@@ -65,23 +54,14 @@ function Slide(props) {
   const bookSelectedHandler = ( b ) => {
         console.log(b);
         props.history.push( '/book/' + b.id );
-      //   return (
-      //     <div>
-      //         <Link to={'/book/' + b.id} key={b.id}> </Link>
-      //         {/* <section className="Posts">
-      //             {suggestions}
-      //         </section>
-      //         <Route path={props.match.url + '/:id'} exact component={BookView} /> */}
-      //     </div>
-      // );
   }
 
   let settings = {
-    infinite: false,
+    infinite:false,
     speed: 10,
-    arrows: true,
     slidesToShow: 7,
     slidesToScroll: 4,
+    
 
     responsive: [
       {
@@ -101,21 +81,15 @@ function Slide(props) {
           slidesToScroll: 2,
         },
       },
+     
       {
-        breakpoint: 800,
+        breakpoint: 360,
         settings: {
-
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 2,
         },
       },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 2,
-        },
-      },
+      
       {
         breakpoint: 800,
         settings: {
@@ -149,16 +123,23 @@ function Slide(props) {
                 <img
                   className="squere img-responsive" 
                   src={current.imgurl}
-                  
+                
                 />
    
 
               </div>
               <div className="body">
-              {current.title.length >17 ?
-<BlueOnGreenTooltip title={current.title}>
+              {current.title.length >5 ?
+<Tooltip  title= {<div type="btn" style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        width:180,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:30,}}>{current.title} </div>}> 
     <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-      </BlueOnGreenTooltip>
+      </Tooltip>
       : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
@@ -202,10 +183,18 @@ function Slide(props) {
 
               </div>
               <div className="body">
-              {current.title.length >17 ?
-<BlueOnGreenTooltip title={current.title}>
+              {current.title.length >5 ?
+                <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>{current.title} </div>}> 
     <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-      </BlueOnGreenTooltip>
+      </Tooltip>
       : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
@@ -247,10 +236,18 @@ function Slide(props) {
       
                     </div>
                     <div className="body">
-                    {current.title.length >17 ?
-      <BlueOnGreenTooltip title={current.title}>
-          <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
-            </BlueOnGreenTooltip>
+                    {current.title.length >5 ?
+      <Tooltip  title= {<div style={{color: "white",
+      fontFamily:"Yekan",
+      fontSize:20,
+      
+      width:190,
+      height:80,
+      textAlign:"center",
+      marginLeft:-9,
+      paddingTop:20,}}>{current.title} </div>}> 
+  <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+    </Tooltip>
             : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
             
       } 
