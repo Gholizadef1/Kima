@@ -57,7 +57,7 @@ const GroupPage = (prop) => {
 }, [join]);
 
   useEffect((async) => { 
-    const response = axiosinst.get('/api/group/members/' + prop.route.params.id)
+    const response = axiosinst.get('/group/' + prop.route.params.id+'/member')
       .then(async function (response) {    
         setmembers(response.data.members)
         
@@ -133,7 +133,7 @@ const GroupPage = (prop) => {
     const id = await AsyncStorage.getItem('id');
     const back = {}
     const backk = JSON.stringify(back);
-    axiosinst.post('/group/' + prop.route.params.id+'/member/'+id, backk, {
+    axiosinst.delete('/group/' + prop.route.params.id+'/member/'+id, backk, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -149,7 +149,7 @@ const GroupPage = (prop) => {
   }
   const deleteGroup = async () => {
     console.log('delete')
-    axiosinst.delete('/api/group/details/' + prop.route.params.id, {
+    axiosinst.delete('/group/' + prop.route.params.id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
