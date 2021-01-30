@@ -1,0 +1,20 @@
+
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Quiznavigation from "./Quiznavigation";
+import Quizpage from "./Quizpage";
+
+const Quizpagenav = createStackNavigator();
+
+const Quizpagenavigation = () => {
+
+  return (
+      <Quizpagenav.Navigator initialRouteName={'Groups'}>
+      {/* <Quizpagenav.Screen name = 'Groups' component={Groups} options={{headerShown: false}} ></Quizpagenav.Screen> */}
+      <Quizpagenav.Screen name = "quiznavigaiton" component={Quiznavigation} options={{headerShown: false}} />
+      <Quizpagenav.Screen name = "quizpage" component={Quizpage} options={{headerShown: false}} />
+   
+      </Quizpagenav.Navigator>
+  );
+}
+export default Quizpagenavigation;

@@ -20,14 +20,14 @@ import { number } from 'yup';
 import { set } from 'react-native-reanimated';
 import Createquiz from "./Createquiz";
 // import { Button } from 'react-native-paper';
-const Quizes = () => {
+const Quizpage = () => {
    
 
 
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
-        <Text style={{position:'absolute',marginTop:300}}>a;ldjf;slkfjd;lksjf</Text>
+        <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     marginTop:hp('10%')
   }
 });
-export default Quizes;
+export default Quizpage;
