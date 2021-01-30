@@ -43,13 +43,13 @@ function Discussion(props) {
     const [commentsPagesNumber, setCommentsPagesNumber] = useState();
     const [commentAgain,setcommentAgain] = useState(0);
     useEffect(()=>{
-          axios.get(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
+          axios.get(API_BASE_URL + '/group/'+ 1 +'/discussion/'+ 1 +'/chat',
           {
             headers:{
            "Authorization":"Token "+Cookies.get("userToken")}
             })
         .then(response=>{
-         setComments(response.data.comments);
+         setComments(response.data.chats);
          setCommentsPagesNumber(response.data.count)
           console.log(response);
         })
@@ -78,7 +78,7 @@ function Discussion(props) {
           console.log(payload);
           const back= JSON.stringify(payload);
           console.log(back);
-          axios.post(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
+          axios.post(API_BASE_URL + '/group/'+ 1 +'/discussion/'+1+'/chat',
           back
           ,{
            headers:{
@@ -150,11 +150,8 @@ function Discussion(props) {
                     <div className="d-flex  flex-column mt-2 flex-fill">
                     <div className="d-flex flex-wrap">
                     <div className="flex-fill form-group mx-3">
-    
-                      <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>
-    
+                      <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>    
                     </div>
-                    
                     <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
                     onClick={handleSubmitCommentClick}
                     >ثبت</div>
@@ -165,7 +162,72 @@ function Discussion(props) {
                 </div>
               </div>
               <div>
-                  
+                <List >
+
+                {comments === undefined ? (
+                
+                
+                  <p >نطری برای نمایش وجود ندارد</p>
+                
+                 ) : (
+                   <div>
+                   
+                   {comments.map ((current) => (
+                   
+                <div className="" style={{direction:"rtl"}}>
+                   <div className="d-flex px-md-3 py-3">
+                     <Avatar alt={current.account.username} src={`${API_BASE_URL}${current.account.profile_photo}`} style={{width:60, height:60}} />
+                     <div className="ml-auto mr-3">
+                       <h5>
+                         {current.account.username}
+                       </h5>
+                       <small>
+                       {`${current.sendtime.toString().split('T')[0]}`}
+                       </small>
+                     </div>
+                
+                
+                     {current.account.id != Cookies.get("userId") ?(
+                       <div></div>
+                     ):(
+                       <div className="btn m-n1" onClick={()=> handleDeleteComment(current.id)}>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                         </svg>
+                       </div>
+                     )
+                   }
+
+               
+                     
+                   </div>
+                   <p className="px-md-3">
+                   
+                     {current.comment_text}  
+                   </p>
+                   <Divider variant="middle" component="li" />
+                   
+                   
+                </div>
+                ))}
+                </div>
+
+                    )} 
+
+                </List>
+                   
+                {commentsPagesNumber === 1 || commentsPagesNumber === undefined?(
+                 <p></p>
+                ):(
+                <div className="">
+                {Array.from(Array(commentsPagesNumber),(e,i)=>{
+                 return <div className="btn btn-light" 
+                 onClick={()=>{setCommentsPage(i+1)}}
+                 > {i+1} </div>
+                })}
+                </div>
+                )}
+
               </div>
           </div> 
         </div> 
