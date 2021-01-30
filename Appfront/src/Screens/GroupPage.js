@@ -79,7 +79,7 @@ const GroupPage = (prop) => {
 
 
   useEffect((async) => {
-        const response = axiosinst.get('/api/group/details/' + prop.route.params.id)
+        const response = axiosinst.get('/group/' + prop.route.params.id)
         .then(async function (response) {
           setloading2(false)
           await setgroupinfo(response.data);
