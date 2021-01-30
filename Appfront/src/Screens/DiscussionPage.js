@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useDebugValue } from 'react';
-import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList , TextInput, TouchableOpacity  } from 'react-native';
+import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList , TextInput, TouchableOpacity,ActivityIndicator } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail , Item, Input, Textarea } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
@@ -20,6 +20,8 @@ const userschema=yup.object({
 const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [loading , setloading] = useState(true)
+    const [refreshchats, setrefreshchats] = useState(false)
     const [chats, setChats] = useState();
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
@@ -37,9 +39,11 @@ const DiscussionPage = (prop) => {
             }
             })
           .then(function(response){
-              console.log('CHATT'+response.data.chats[0].chat_text)
-              console.log('USERR'+response.data.chats[0].user.username)
+              setloading(false)
+            //   console.log('CHATT'+response.data.chats[0].chat_text)
+            //   console.log('USERR'+response.data.chats[0].user.username)
               setChats(response.data.chats)
+              console.log('CHATT'+chats[0].user.username)
           })
           
           .catch( async function (error) {
@@ -47,107 +51,150 @@ const DiscussionPage = (prop) => {
               console.log(error.code+'ERROR CODE')      
           });
       }
+    //   console.log('CHATT'+chats.chat_text)
+    //   console.log('USERR'+chats.user.username)
 
-    return(
-        <View style = {styles.container}>
-            <View style={{backgroundColor:'#1F7A8C' , height:hp('12%') , width:'100%' , justifyContent:'center'
-               , alignItems:'center'}}>
-                   <Text style={{marginLeft:wp('-70%') , fontSize:20 ,color:'white',
-                   marginTop:hp('2%')}}>{prop.route.params.title}</Text>
-            </View>
-
-    <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
-  <View style={styles.centeredView}>
-  <View style={styles.modalView}>
-<TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
-  <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setModalVisible(false)}
-   name="close" size={23} color="#D75A5A" />
-   </TouchableOpacity>       
-<Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-initialValues={{Description:''}}
-validationSchema={userschema}  
-
-onSubmit={async(values,actions)=>{
-    console.log('ON SUBMIT')
-    const formdata = new FormData();
-    formdata.append('chat_text',values.Description)
-     
-  console.log(formdata.data+'formdata')
-  const response=await axiosinst.post('/group/'+groupid +'/discussion/'+discussionid +'/chat',formdata,{
-    headers:{
-      "Content-Type":"application/json",
-      "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-    }
-       )
-  .then( function(response){
-  
-    console.log(response)
-    Alert.alert('',' پیام شما ارسال شد',[
-      {
-   text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+      if (loading) {
+        return (
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+          </View>
+        );
       }
-      ],{cancelable:false},{style:{height:50}})
-
+      else{
+        return(
+            <View style = {styles.container}>
+                <View style={{backgroundColor:'#1F7A8C' , height:hp('12%') , width:'100%' , justifyContent:'center'
+                   , alignItems:'center'}}>
+                       <Text style={{marginLeft:wp('-70%') , fontSize:20 ,color:'white',
+                       marginTop:hp('2%')}}>{prop.route.params.title}</Text>
+                </View>
     
-  })
-  .catch( function(error){  
-      {
-        console.log(error)
+        <Modal transparent={true} StatusBar={{backgroundColor:'blue'}} style={{bottom:100,margin:20,position:'absolute'}} visible={modalVisible} animationType='fade' >
+      <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+    <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setModalVisible(false)}>
+      <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setModalVisible(false)}
+       name="close" size={23} color="#D75A5A" />
+       </TouchableOpacity>       
+    <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
+    initialValues={{Description:''}}
+    validationSchema={userschema}  
+    
+    onSubmit={async(values,actions)=>{
+        console.log('ON SUBMIT')
+        const formdata = new FormData();
+        formdata.append('chat_text',values.Description)
+         
+      console.log(formdata.data+'formdata')
+      const response=await axiosinst.post('/group/'+groupid +'/discussion/'+discussionid +'/chat',formdata,{
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+        }
+           )
+      .then( function(response){
       
-        Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-      
-
-      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-      }],{cancelable:false},{style:{height:50}})
-      }     
-  })
-
-}}
->
-{(props)=>(
-<View style={{ marginTop:hp('5%')}}>
-<View style={{borderColor:'blue'}}>
-
-
-
-</View>
-<View>
-  <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>متن خود را وارد کنید</Text>
-  <TouchableOpacity>
-          <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
-            borderColor={'lightgray'}
-            onChangeText={props.handleChange('Description')}
-            onBlur={props.handleBlur('Description')}
-            value={props.values.Description}                 
-            placeholder={' پیام شما ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
-          </Textarea>
-          </TouchableOpacity>
-          <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Description&&props.errors.Description}</Text>
-        </View>     
-   <Button bordered rounded style={styles.button}
- onPress={props.handleSubmit}
- >
-   <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}> ارسال پیام</Text>
-  </Button>    
-</View>
-)}
-</Formik>  
-  </View>
-  </View>
-  </Modal>
-  <Button onPress={() => setModalVisible(true)} style={{
-              marginLeft: wp('28%'), width: 180, borderRadius: 20, marginTop: hp('70%')
-                , backgroundColor: '#1F7A8C'
-                }}>
-              <Text style={{ marginLeft: wp('15%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> ارسال پیام </Text>
-            </Button>
-
-            {/* <TouchableOpacity>
-                <MaterialIcons name="send" size={24} color="black" style={{}} />
-            </TouchableOpacity> */}
-        </View>
-    )
-
+        console.log(response)
+        Alert.alert('',' پیام شما ارسال شد',[
+          {
+       text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+          }
+          ],{cancelable:false},{style:{height:50}})
+    
+        
+      })
+      .catch( function(error){  
+          {
+            console.log(error)
+          
+            Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+          
+    
+          text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+          }],{cancelable:false},{style:{height:50}})
+          }     
+      })
+    
+    }}
+    >
+    {(props)=>(
+    <View style={{ marginTop:hp('5%')}}>
+    <View style={{borderColor:'blue'}}>
+    
+    
+    
+    </View>
+    <View>
+      <Text style={{fontSize:hp('2.5%'),fontWeight:'bold', color:'#1f7a8c',marginBottom:hp('-5%'),marginTop:hp('5%'),marginLeft:wp('1%')}}>متن خود را وارد کنید</Text>
+      <TouchableOpacity>
+              <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
+                borderColor={'lightgray'}
+                onChangeText={props.handleChange('Description')}
+                onBlur={props.handleBlur('Description')}
+                value={props.values.Description}                 
+                placeholder={' پیام شما ...'}  placeholderTextColor='gray' fontSize={hp('1.8%')}  style={styles.item2}>
+              </Textarea>
+              </TouchableOpacity>
+              <Text style={{fontSize:hp('1.2%'),marginTop:hp('0.5%'), color:'red'}}>{props.touched.Description&&props.errors.Description}</Text>
+            </View>     
+       <Button bordered rounded style={styles.button}
+     onPress={props.handleSubmit}
+     >
+       <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',left:wp('11%'),width:wp('40%')}}> ارسال پیام</Text>
+      </Button>    
+    </View>
+    )}
+    </Formik>  
+      </View>
+      </View>
+      </Modal>
+      <Text>{chats[0].user.username}</Text>
+    
+      <FlatList
+                style={{ marginBottom: hp('5%') }}
+                showsVerticalScrollIndicator={true}
+                onEndReached={() => {
+    //            console.log('-----AKHAR LIST')
+                }}
+                onEndReachedThreshold={0.5}
+                keyExtractor={(item) => item.id}
+                refreshing={refreshchats}
+                onRefresh={async () => {
+                console.log('refresh')
+                }}
+                data={chats}
+                renderItem={({ item }) => <>
+                  <View style={{  }}>
+                    <Text style={{ alignSelf: 'flex-start', fontSize: 18 }}>{item.user.username}</Text>
+                    <Text style={{color: '#a9a9a9'}}>{item.chat_text}</Text>
+                    <View
+                          style={{
+                            width:320,
+                            marginLeft:wp('5%'),
+                            marginTop:hp('2%'),
+                            borderBottomColor: 'black',
+                            borderBottomWidth: 1
+                          }}
+                          />
+                  </View>
+                </>
+                }
+              >
+              </FlatList>
+      <Button onPress={() => setModalVisible(true)} style={{
+                  marginLeft: wp('28%'), width: 180, borderRadius: 20, marginTop: hp('70%')
+                    , backgroundColor: '#1F7A8C'
+                    }}>
+                  <Text style={{ marginLeft: wp('15%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> ارسال پیام </Text>
+                </Button>
+    
+                {/* <TouchableOpacity>
+                    <MaterialIcons name="send" size={24} color="black" style={{}} />
+                </TouchableOpacity> */}
+            </View>
+        )
+      }
 }
 
 const styles = StyleSheet.create({
