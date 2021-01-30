@@ -60,6 +60,8 @@ const Quizpage = () => {
 const [numofquesiton,setnumofquestion]=useState(0);
 const[answers,setanswers]=useState([]);
 const [thisquesiton,setthisquestion]=useState(questions.Questions[0])
+const [buttoncolor,setbuttoncolor]=useState("rgba(40,160,184,1)")
+const[cansubmit,setcansubmit]=useState("سوال بعدی")
 
     return (
         <View style={styles.container}>
@@ -105,23 +107,53 @@ const [thisquesiton,setthisquestion]=useState(questions.Questions[0])
                     <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity
                         onPress={async()=>{
-                            await setnumofquestion(numofquesiton-1)
+                            await setcansubmit("سوال بعدی")
+                           
+                            console.log(numofquesiton);
+                            if(numofquesiton-1>=0){
+                                await setnumofquestion(numofquesiton-1)
+                            await setbuttoncolor("rgba(40,160,184,1)")
                             setthisquestion(questions.Questions[numofquesiton]);
+                           
+
                             console.log("next pressed")
+                            }
+                            //update nemishe chon :\
+                            if((numofquesiton-1)===1){
+                                await setnumofquestion(numofquesiton-1)
+                               await setbuttoncolor("rgba(31,122,140,1)")
+                            }
                             }}
-                         style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "#1f7a8c", marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
+                         style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor:buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
                             <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
                             <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوال قبلی</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                         onPress={async()=>{
-                            await setnumofquestion(numofquesiton+1)
-                            setthisquestion(questions.Questions[numofquesiton]);
+                            // new Promise(async(resolve,reject)=>{
+                            //     await setnumofquestion(numofquesiton+1);
+                            //    resolve();
+                            // }).then(async()=>{
+                           
+                                await setbuttoncolor("rgba(31,122,140,1)")
+                            console.log(numofquesiton);
+                            if(numofquesiton+1<questions.Questions[0].question_num){
+                                await setnumofquestion(numofquesiton+1);
+                                await setcansubmit("سوال بعدی")
+                                setthisquestion(questions.Questions[numofquesiton]);
+                          
                             console.log("next pressed")
+                            }
+                            if(numofquesiton+1===questions.Questions[0].question_num-1){
+                                await setnumofquestion(numofquesiton+1);
+                                await setcansubmit("ثبت پاسخ")
+                            }
+                            console.log(numofquesiton);
+                            // })
                         }}
-                         style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "#1f7a8c", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                         style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor:"rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
                             <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوال بعدی</Text>
+                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
                         </TouchableOpacity>
                     </View>
                     {/* </View> */}
