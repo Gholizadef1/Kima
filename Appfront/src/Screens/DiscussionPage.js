@@ -20,11 +20,33 @@ const userschema=yup.object({
 const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [chats, setChats] = useState();
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
 
-    console.log('discussionid'+discussionid)
-    console.log('groupid'+groupid)
+    useEffect(() =>{
+        getChats()
+    }, []);
+
+    const getChats = async () => {
+
+        axiosinst.get('/group/'+groupid +'/discussion/'+discussionid +'/chat', {
+            "headers": {
+            "content-type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+            })
+          .then(function(response){
+              console.log('CHATT'+response.data.chats[0].chat_text)
+              console.log('USERR'+response.data.chats[0].user.username)
+              setChats(response.data.chats)
+          })
+          
+          .catch( async function (error) {
+              console.log(error);
+              console.log(error.code+'ERROR CODE')      
+          });
+      }
 
     return(
         <View style = {styles.container}>
