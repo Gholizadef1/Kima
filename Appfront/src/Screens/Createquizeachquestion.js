@@ -34,6 +34,7 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].d`)
     const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].correct`)
     const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)
+    //console.log(prop.showallerr+" show all error");
   //  console.log(JSON.stringify(getIn(prop.pr.values,`soalha[${prop.itemidd}].correct`))+" correcjhgkjhgttttt");
     // console.log(JSON.stringify(questointouched)+" question touched")
     // console.log(typeof JSON.stringify(aerror)+" aerror typeof")
@@ -59,6 +60,7 @@ const Createquizeachquestion = (prop) => {
     //  console.log(JSON.stringify(prop.pr.errors.soalha[prop.itemidd].question));
 
     return (<View style={{ marginBottom: hp("1.5%") }}>
+
         <TouchableOpacity>
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                 borderColor={'lightblue'}
@@ -75,6 +77,7 @@ const Createquizeachquestion = (prop) => {
             </Textarea>
 
         </TouchableOpacity>
+  
         {/* <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{prop.error}</Text>     getIn(prop.touched,`soalha[${prop.itemidd}].question`) */}
         {/* {prop.errors.Username!=undefined? <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{prop.errors.Username}</Text>:null} */}
         {/* {typeof prop.error.soalha === 'string' */}

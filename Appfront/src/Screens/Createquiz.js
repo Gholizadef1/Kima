@@ -89,6 +89,7 @@ const Createquiz = () => {
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
     const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
+    const [showallerror,setshowallerror]=useState(false);
     const validationSchema = yup.object().shape({
         soalha: yup.array().of(
           yup.object().shape({
@@ -124,11 +125,12 @@ const Createquiz = () => {
                 <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                 validationSchema={validationSchema}
                     initialValues={{
-                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "", a: "", b: "", c: "", d: "", correct: "1" }]
+                        Username: 's', Discription: 's', photo: require('../../assets/tea.jpg'), soalha: [{ question: "s", a: "s", b: "s", c: "s", d: "s", correct: "1" }]
                         // soal:soalha 
                     }}
                     // validationSchema={userschema}
                     onSubmit={async (values, actions) => {
+                      
                         console.log('ON SUBMIT')
                         const formdata = new FormData();
                         formdata.append('title', values.Username)
@@ -142,7 +144,7 @@ const Createquiz = () => {
                     }}
                 >
                     {(props) => (
-                        //<Form> 
+                        /* <Form onSubmit={props.handleSubmit}> */
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
@@ -271,7 +273,7 @@ const Createquiz = () => {
                                             // const [values,setvalues]=useState("1")
                                             return (<>
                                                 <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
-                                                <Createquizeachquestion touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
+                                                <Createquizeachquestion showallerr={showallerror} touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
                                                      {/* //  propp={propss} */}
                                             </>)
                                         }}
@@ -292,6 +294,7 @@ const Createquiz = () => {
                                                         //console.log(props.values.soalha[1]+" VALUESSSS")
                                                         //toye groups mygroups avali javab nemidad :\
                                                         console.log(props.error+"   PROP ERRORS")
+                                                        
                                                        // if(props.errors===null){
                                                         await setitemid(itemid + 1);
                                                         //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
@@ -407,11 +410,9 @@ const Createquiz = () => {
                                                 : null}
 
                                             {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
-
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
                                             {/* <View style={styles.centeredView}>
                                                     <View style={styles.modalView}>
-
                                                         <Text style={{
                                                             color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
                                                             marginBottom: 0, top: hp("1%"), alignSelf: "center"
@@ -421,16 +422,18 @@ const Createquiz = () => {
                                                 </View>
                                             </Modal> :) */}
 
-
+                                            {minnumquestion === false && maxnumquestion === false ? <Button type={"Submit"} bordered rounded style={styles.button}
+                                                onPress={props.handleSubmit}
+                                            >
+                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                            </Button> : null}
 
 
 
                                             {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
-
                                             {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
                                             {/* <View style={styles.centeredView}>
                                                 <View style={styles.modalView}>
-
                                                     <Text style={{
                                                         color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
                                                         marginBottom: 0, top: hp("1%"),
@@ -442,11 +445,6 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                            {minnumquestion === false && maxnumquestion === false ? <Button bordered rounded style={styles.button}
-                                                onPress={props.handleSubmit}
-                                            >
-                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                            </Button> : null}
                                         </View>)}
                                     >
 
@@ -461,13 +459,16 @@ const Createquiz = () => {
                                 // ,height:20,width:30
                                 }}>حذف کردن سوال</Text>
                                 </TouchableOpacity> */}
+                              
                             </View>
                         </View>
-                    //</Form>
+                      /* </Form> */
+                    
                     )}
                     
 
-
+                        
+                  
                 </Formik>
             </ScrollView>
         </View>
