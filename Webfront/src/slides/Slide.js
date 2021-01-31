@@ -137,13 +137,13 @@ function Slide(props) {
         textAlign:"center",
         marginLeft:-9,
         paddingTop:30,}}>{current.title} </div>}> 
-    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+    <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </Tooltip>
-      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+      : <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
                 <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+                   <h5 className="bookauthor"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
 
                    </small>
             </div>
@@ -192,13 +192,13 @@ function Slide(props) {
         textAlign:"center",
         marginLeft:-9,
         paddingTop:20,}}>{current.title} </div>}> 
-    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+    <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       </Tooltip>
-      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+      : <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
       
 } 
                 <small className= "title">
-                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+                   <h5 className="bookauthor"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
 
                    </small>
             </div>
@@ -234,7 +234,7 @@ function Slide(props) {
          
       
                     </div>
-                    <div className="body">
+                    <div className="bodyHome">
                     {current.title.length >5 ?
       <Tooltip  title= {<div style={{color: "white",
       fontFamily:"Yekan",
@@ -245,13 +245,13 @@ function Slide(props) {
       textAlign:"center",
       marginLeft:-9,
       paddingTop:20,}}>{current.title} </div>}> 
-  <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+  <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
     </Tooltip>
-            : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
+            : <div className="bookname" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{current.title}</div>
             
       } 
                       <small className= "title">
-                         <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
+                         <h5 className="bookauthor"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{current.author}</h5>
       
                          </small>
                   </div>

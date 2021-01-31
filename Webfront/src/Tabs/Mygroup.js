@@ -22,14 +22,14 @@ const[mygroup,setMygroup] = useState([]);
               })
           .then((res) => res.json())
           .then((data) => {
-             console.log(data.Count);
-            setMygroup(data.data);
+             console.log(data);
+            setMygroup(data);
             setMygroupc(data.Count);
           });
       }, []);
       return(     
           <div>
-      {groupcount===0 ? (                   
+      {mygroup.message ==="No Group!" ? (                   
       <div className="Nogroup" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>گروهی برای نمایش وجود ندارد</div>
 
         

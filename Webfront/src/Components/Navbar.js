@@ -7,6 +7,7 @@ import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
+import {API_BASE_URL} from '../constants/apiContants';
  import "./UsersList.css";
  import "../slides/Slide.css";
 import "./Navbar.css";
@@ -53,7 +54,7 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(`http://127.0.0.1:8000/book/search?key=${user.user}&search-fields=author&search-fields=title`,
+const result = await axios.get(API_BASE_URL+ `/book/search?key=${user.user}&search-fields=author&search-fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
   
@@ -61,11 +62,11 @@ const result = await axios.get(`http://127.0.0.1:8000/book/search?key=${user.use
 }
 
 useEffect(() => {
-  axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+  axios.get(API_BASE_URL+ `/api/user-profile/' + ${Cookies.get('userId')}`)
   .then(function (response){
     //console.log(response);
     //console.log(response.data);
-    Cookies.set('userPic',"http://127.0.0.1:8000"+response.data.profile_photo);
+    Cookies.set('userPic',API_BASE_URL+ response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {

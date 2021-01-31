@@ -26,9 +26,9 @@ import {API_BASE_URL} from '../../constants/apiContants';
 import { v4 as uuidv4 } from 'uuid';
 
 function Quizespage (props){
-    const [newGroup,setNewGroup] = useState({
-        picture: "",
-        name : "",
+    const [newQuiz,setNewQuiz] = useState({
+        quiz_photo: "",
+        title : "",
         description :""
        // backError : ""
       })
@@ -50,23 +50,29 @@ function Quizespage (props){
           current.file = file;
           reader.onload = e => {
             //current.src = e.target.result;
-            setNewGroup(prevState => ({
+            setNewQuiz(prevState => ({
               ...prevState,
-              picture : e.target.result
+              quiz_photo : e.target.result
           }));
       
           };
           reader.readAsDataURL(file);
         }
     };
-    const [countOfQ,setCount] = useState(1);
-    
+    const [valid,setValid] = useState(false);
+    const[countOfQ,setCount]=useState();
     const [inputFields, setInputFields] = useState([
       { id: uuidv4(), question:'', answer1:'',answer2:'',answer3:'',answer4:'',count:1,correctAnswer:'' },
     ]);
    
     console.log(inputFields.length);
-      
+    const handleChange = (e) => {
+      const {id , value} = e.target   
+      setNewQuiz(prevState => ({
+          ...prevState,
+          [id] : value
+      }))
+  }
     const handleChangeInput = (id, event) => {
       
       console.log(countOfQ);
@@ -96,6 +102,37 @@ function Quizespage (props){
       console.log(inputFields);
       
     }
+    const sendQuestion = inputFields => {
+      const fd = new FormData();
+      fd.append("title",newQuiz.title);
+      fd.append("description",newQuiz.description);
+      fd.append("question_count",inputFields.length);
+      fd.append("quiz_photo",state.file);
+      inputFields.forEach((item) => {
+        fd.append('question_text', item.question);
+        fd.append('a_text',item.answer1);
+        fd.append('b_text',item.answer2);
+        fd.append('c_text',item.answer3);
+        fd.append('d_text',item.answer4);
+        fd.append('key',item.correctAnswer)
+     })
+     let back= JSON.stringify(fd);
+     console.log(fd);
+     return dispatch => {
+      axios.post(API_BASE_URL+'/quiz',back,
+  {
+    headers:{
+   "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    }
+  )
+}
+      
+        // console.log(fd);
+        // console.log(payload)
+        // let back= JSON.stringify(payload);
+    
+    }
     return(
         
         <div className="mx-md-1 pt-5 px-md-5">
@@ -111,38 +148,46 @@ function Quizespage (props){
   </b>
   </div>
          <div class="row rowin">
-            
-            <div className="form-group-sm text-right col-lg-5">
-              
-                <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputEmail1">عنوان آزمونک</label>
-                <input type="email" 
-                       className="form-control input-normal text-right" 
-                       id="email" 
-                       //aria-describedby="emailHelp" 
-                       //placeholder="Enter email" 
-                       placeholder="...عنوان"
-                       required
+
+            <div className="form-group-sm text-right  col-lg-5">
+                        <div>
+                        <form className="yekanfont">
+                    <label className="mt-2 mb-n1 ">نام آزمونک</label>
+                    <input 
+                    className="form-control text-right " 
+                      id="name"
+                      value={newQuiz.name}
+                      type="title"
+                      onChange={handleChange}
+                      placeholder="...عنوان"
+                      >
                       
-                       
-                />
-                <label style={{fontSize:18}} className="mt-2 mb-n1 yejanfont" htmlFor="exampleInputEmail1">توضیحات</label>
-                <textarea className="form-control text-right" rows="1" id="comment" placeholder="...توضیح" name="text"></textarea>
-                <div>
+                      </input>
+
+
+                    <label className="mt-2 mb-n1"> توضیحات آزمونک</label>
+                    <textarea className="form-control text-right" rows="3"id="description"
+                      value={newQuiz.description}
+                      type="description"
+                      onChange={handleChange}
+                      placeholder="...توضیحات"
+                      ></textarea>
+                    </form>
                   <input class="form-control" 
                   type="file" accept="image/*" 
                   onChange={handleImageUpload} 
                   ref={imageUploader} 
                   style={{ display: "none",color:"white" }} />
-
                   <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
                     <svg className="mt-4"  style={{width:30,height:30}} viewBox="0 0 24 24">
                       <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
                     </svg>
                   </div>
-                  <label src={newGroup.picture} ref={uploadedImage} style={{fontSize:18}} className="yakanfont" htmlFor="exampleInputEmail1">انتخاب عکس</label>
+                  <label src={newQuiz.quiz_photo} ref={uploadedImage} style={{fontSize:18}} className="yakanfont" htmlFor="exampleInputEmail1">انتخاب عکس</label>
                   <hr/>
 
                   </div>
+       
                   <div className="name-Q1">
   
   <b className=""style={{position:'relative',fontFamily:"Yekan",fontSize:22}}>سؤالات 
@@ -227,7 +272,7 @@ function Quizespage (props){
                        name="correctAnswer"
                        value={inputField.correctAnswer}
                        onChange={event => handleChangeInput(inputField.id, event)}
-                       
+
                 />
                  </div>
           
@@ -282,6 +327,7 @@ paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال ب�
        / اضافه‌کردن سؤال
      </button>
 }
+<button onClick={sendQuestion(inputFields)}>ثبت</button>
         
          </div>
          </div>

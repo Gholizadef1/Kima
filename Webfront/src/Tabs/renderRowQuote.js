@@ -33,7 +33,7 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
-      {quote.length===0 ? (
+      {quote.message==="No Quote!" ? (
                  
         <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
