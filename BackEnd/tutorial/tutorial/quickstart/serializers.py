@@ -245,3 +245,12 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ['question_num','question_text','a_text','b_text','c_text','d_text','key']
+
+class MyQuizSerializer(serializers.ModelSerializer):
+    quiz_info = serializers.RelatedField(source='quiz',read_only=True)
+    class Meta:
+        model = TakeQuiz
+        fields = ['quiz']
+
+    def to_representation(self,value):
+        return QuizSerializer(Quiz.objects.get(pk=value.quiz.id),).data

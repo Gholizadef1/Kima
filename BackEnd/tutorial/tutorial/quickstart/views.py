@@ -738,7 +738,6 @@ class QuizView(APIView,PaginationHandlerMixin):
         serializer = QuizSerializer(quiz,many=True)
         return Response({"Quiz":serializer.data})
 
-        #def delete()
             
 class TakeQuizView(APIView):
     
@@ -770,6 +769,14 @@ class TakeQuizView(APIView):
         q_list = QuestionSerializer(question_list,many=True)
         return Response({"Quiz":quiz_ser.data,"Questions":q_list.data})
 
+    def delete(self,request,pk):
+        user = request.user
+        quiz = Quiz.objects.get(pk=pk)
+        if user == quiz.creator:
+            quiz.delete()
+            return Response({"message":"You successfully deleted your quiz!"})
+        return Response({"message":"You are not allowed to delete this quiz!"})
+
 class QuizResultView(APIView):
 
     def get(self,request,user_pk,quiz_pk):
@@ -781,3 +788,14 @@ class QuizResultView(APIView):
         user_answer = TakeQuiz.objects.get(user=user,quiz=quiz).user_answer
         score = TakeQuiz.objects.get(user=user,quiz=quiz).score
         return Response({"Quiz":quiz_ser.data,"Questions":q_list.data,"user_answer":user_answer,"score":score})
+
+class MyQuizView(APIView):
+    
+    def get(self,request,pk):
+        user = Account.objects.get(pk=pk)
+        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
+        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
+        myquiz.append(taken_quiz)
+        if myquiz is None:
+            return Response({"message":"No Quiz!"})
+        return Response({"Quiz":myquiz})
