@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, FlatList, ActivityIndicator, TextPropTypes, Alert } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar,Spinner } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar, Spinner } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
@@ -26,7 +26,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons';
 // import { Button } from 'react-native-paper';
 
 const Quizpage = (prop) => {
-    
+
     console.log(prop.route.params.id)
     //     useEffect(async()=>{
     //         try{
@@ -101,20 +101,20 @@ const Quizpage = (prop) => {
     //        }
     // }
     const [questions, setquestions] = useState(undefined);
-    const getquiz=(async()=>{
+    const getquiz = (async () => {
         try {
-            const response =await axiosinst.get('quiz/1' )
-           //console.log(JSON.stringify( response.data)+" RESPONSE")
-           //console.log(response.data+"      response.data")
-         //  console.log(JSON.stringify(response)+"    response")
-           // await setquestions(response.data)
-           setquestions(response.data)
-            await console.log(questions+" QUESTIONSS")
+            const response = await axiosinst.get('quiz/1')
+            //console.log(JSON.stringify( response.data)+" RESPONSE")
+            //console.log(response.data+"      response.data")
+            //  console.log(JSON.stringify(response)+"    response")
+            // await setquestions(response.data)
+            setquestions(response.data)
+            await console.log(questions + " QUESTIONSS")
             // if(questions!=undefined){
             //     setthisquestion(questions.Questions[0])
             // }
-       }
-        catch(err) {
+        }
+        catch (err) {
             console.log(err)
             Alert.alert('', 'مشکلی پیش اومده ', [{
 
@@ -123,91 +123,93 @@ const Quizpage = (prop) => {
             }], { cancelable: false }, { style: { height: 50 } })
 
 
-       }
- })
-
-const postquiz=async()=>{
-   console.log("here")
-   console.log(JSON.stringify(answers))
-   const back={
-       user_answer:answers
-   }
-    const response=await axiosinst.post('quiz/'+prop.route.params.id,JSON.stringify(back),{
-        headers:{
-          "Content-Type":"application/json",
-          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
         }
-           )
-      .then( function(response){
-        
-        prop.navigation.navigate("quizresult",{id:prop.route.params.id})
-        console.log(response)
-        Alert.alert('','جواب شما با موفقیت ثبت شد ',[
-          {
-       text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
-          }
-          ],{cancelable:false},{style:{height:50}})
-        
-        
-      })
-      .catch( function(error){  
-          {
-            console.log(error)
-          
-            Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-          
+    })
 
-          text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-          }],{cancelable:false},{style:{height:50}})
-          }     
-      })
+    const postquiz = async () => {
+        console.log("here")
+        console.log(JSON.stringify(answers))
+        const back = {
+            user_answer: answers
+        }
+        const response = await axiosinst.post('quiz/' + prop.route.params.id, JSON.stringify(back), {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+        }
+        )
+            .then(function (response) {
 
-}
-const [numofquesiton, setnumofquestion] = useState(-1);
-const [answers, setanswers] = useState([]);
-const [thisquestion, setthisquestion] = useState()
-const [buttoncolor, setbuttoncolor] = useState("rgba(40,160,184,1)")
-const [cansubmit, setcansubmit] = useState("سوال بعدی")
-const [seedisc, setseedis] = useState("سوال قبلی")
-const [oneofthem, setoneofthem] = useState("")
-const [answersc, setannswersc] = useState(['rgba(237,242,244,0.9)', "rgba(237,242,244,0.9)",
-    "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
-const [colora, setcolora] = useState("rgba(237,242,244,0.9)")
-const [colorb, setcolorb] = useState("rgba(237,242,244,0.9)")
-const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
-const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
-// useFocusEffect(
-//     React.useCallback(() => {   
-    
-    useEffect(()=>{
-        
-            getquiz();
-    },[prop.navigation])
-// const a = new Promise(async (resolve, reject) => {
-//     try {
-//         const response = await axiosinst.get('quiz/' + prop.route.params.id)
-//         console.log(response.data + " RESPONSE")
-//         await setquestions(response.data)
-//         await console.log(questions + " QUESTIONSS")
-//     }
-//     catch {
-//         console.log(err)
-//         Alert.alert('', 'مشکلی پیش اومده ', [{
+                prop.navigation.navigate("quizresult", { id: prop.route.params.id })
+                console.log(response)
+                Alert.alert('', 'جواب شما با موفقیت ثبت شد ', [
+                    {
+                        text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+                    }
+                ], { cancelable: false }, { style: { height: 50 } })
 
 
-//             text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-//         }], { cancelable: false }, { style: { height: 50 } })
+            })
+            .catch(function (error) {
+                {
+                    console.log(error)
+
+                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
 
 
-//     }
+                        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                    }], { cancelable: false }, { style: { height: 50 } })
+                }
+            })
 
-// }).then()
+    }
+    const [numofquesiton, setnumofquestion] = useState(-1);
+    const [answers, setanswers] = useState([]);
+    const [thisquestion, setthisquestion] = useState()
+    const [buttoncolor, setbuttoncolor] = useState("rgba(40,160,184,1)")
+    const [cansubmit, setcansubmit] = useState("سوال بعدی")
+    const [seedisc, setseedis] = useState("سوال قبلی")
+    const [oneofthem, setoneofthem] = useState("")
+    const [answersc, setannswersc] = useState(['rgba(237,242,244,0.9)', "rgba(237,242,244,0.9)",
+        "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
+    const [colora, setcolora] = useState("rgba(237,242,244,0.9)")
+    const [colorb, setcolorb] = useState("rgba(237,242,244,0.9)")
+    const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
+    const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
+    // useFocusEffect(
+    //     React.useCallback(() => {   
+
+    useEffect(() => {
+
+        getquiz();
+    }, [prop.navigation])
+    // const a = new Promise(async (resolve, reject) => {
+    //     try {
+    //         const response = await axiosinst.get('quiz/' + prop.route.params.id)
+    //         console.log(response.data + " RESPONSE")
+    //         await setquestions(response.data)
+    //         await console.log(questions + " QUESTIONSS")
+    //     }
+    //     catch {
+    //         console.log(err)
+    //         Alert.alert('', 'مشکلی پیش اومده ', [{
+
+
+    //             text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+    //         }], { cancelable: false }, { style: { height: 50 } })
+
+
+    //     }
+
+    // }).then()
 
 
     return (<View style={styles.container}>
-          <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
-         { questions!=undefined ? (<ScrollView>
-               <>
+        <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
+            {questions != undefined ? (<ScrollView>
+                <View style={{marginBottom:hp("17%")}}>
+                    <>
                         {numofquesiton > -1 ? <Text style={{ position: "absolute", alignSelf: "center", fontSize: hp("1.9%"), color: "#1f7a8c", fontWeight: "bold", marginTop: hp("3.5%") }}>({numofquesiton + 1}/{questions.Quiz.question_count})</Text> : null}
                         {numofquesiton > -1 ? <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={(numofquesiton + 1) / questions.Quiz.question_count} color={"#1f7a8c"} /> : null}
 
@@ -417,94 +419,6 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 
 
                     {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
-                    {numofquesiton > -1 ?
-                        <View style={{ flexDirection: "row" }}>
-                            <TouchableOpacity
-                                onPress={async () => {
-                                    var a = answers;
-                                    a[numofquesiton] = oneofthem;
-                                    console.log(a);
-                                    setanswers(a);
-                                    await setcolora("rgba(237,242,244,0.9)")
-                                    await setcolorb("rgba(237,242,244,0.9)")
-                                    await setcolorc("rgba(237,242,244,0.9)")
-                                    await setcolord("rgba(237,242,244,0.9)")
-                                    await setcansubmit("سوال بعدی")
-
-                                    console.log(numofquesiton);
-                                    if (numofquesiton - 1 >= 0) {
-                                        await setseedis("سوال قبلی")
-                                        await setnumofquestion(numofquesiton - 1)
-                                        await setbuttoncolor("rgba(40,160,184,1)")
-                                        setthisquestion(questions.Questions[numofquesiton - 1]);
-
-
-                                        console.log("next pressed")
-                                    }
-                                    //update nemishe chon :\
-                                    if ((numofquesiton - 1) === 1) {
-                                        await setnumofquestion(numofquesiton - 1)
-                                        await setbuttoncolor("rgba(31,122,140,1)")
-                                        await setseedis(" توضیحات")
-
-                                    }
-                                    if (numofquesiton === 0 || numofquesiton === 1) {
-                                        // await setnumofquestion(-1);
-                                        await setseedis(" توضیحات")
-                                    }
-                                    if (numofquesiton === 0) {
-                                        await setnumofquestion(-1);
-                                    }
-                                }}
-                                style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
-                                <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
-                                <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={async () => {
-
-                                  
-                                    var a = answers;
-                                    a[numofquesiton] = oneofthem;
-                                    console.log(a);
-                                    setanswers(a);
-                                    await setcolora("rgba(237,242,244,0.9)")
-                                    await setcolorb("rgba(237,242,244,0.9)")
-                                    await setcolorc("rgba(237,242,244,0.9)")
-                                    await setcolord("rgba(237,242,244,0.9)")
-                                    await setseedis("سوال قبلی")
-                                    // new Promise(async(resolve,reject)=>{
-                                    //     await setnumofquestion(numofquesiton+1);
-                                    //    resolve();
-                                    // }).then(async()=>{
-
-                                    await setbuttoncolor("rgba(31,122,140,1)")
-                                    console.log(numofquesiton);
-                                    if (numofquesiton + 1 < questions.Quiz.question_count) {
-                                        await setnumofquestion(numofquesiton + 1);
-                                        await setcansubmit("سوال بعدی")
-                                        setthisquestion(questions.Questions[numofquesiton + 1]);
-
-                                        console.log("next pressed")
-                                    }
-                                    if(cansubmit==="ثبت پاسخ"){
-                                        await postquiz();
-                                    }
-                                    if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
-                                        await setnumofquestion(numofquesiton + 1);
-                                        await setcansubmit("ثبت پاسخ")
-                                    }
-                                    console.log(numofquesiton);
-                                 
-                                    // })
-                                }}
-                                style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
-                                <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                                <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
-                            </TouchableOpacity>
-                        </View> : null}
-                    {/* </View> */}
-
 
                     {numofquesiton === -1 ?
                         <View style={{ justifyContent: "center" }}>
@@ -559,19 +473,19 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 }}
                                 >
                                         <ImageBackground borderRadius={100}
-                                            source={{ uri: "http://fb9ce5eee469.ngrok.io"+`${questions.Quiz.quiz_photo}` }}
+                                            source={{ uri: "http://fb9ce5eee469.ngrok.io" + `${questions.Quiz.quiz_photo}` }}
 
                                             style={{
-                                            height: hp('14%'),
+                                                height: hp('14%'),
 
-                                            marginTop: hp('0%'),
-                                            width: wp('28%'),
-                                            marginLeft: wp('0%'),
-                                            borderRadius: 20,
-                                            position: 'absolute',
-                                            //borderColor:'#1f7a8c',
-                                            //borderWidth:wp('0.2%')
-                                        }}
+                                                marginTop: hp('0%'),
+                                                width: wp('28%'),
+                                                marginLeft: wp('0%'),
+                                                borderRadius: 20,
+                                                position: 'absolute',
+                                                //borderColor:'#1f7a8c',
+                                                //borderWidth:wp('0.2%')
+                                            }}
                                         //  onBlur={props.handleBlur('photo')}
 
 
@@ -613,7 +527,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 onPress={async () => {
 
                                     setthisquestion(questions.Questions[0])
-            
+
                                     // new Promise(async(resolve,reject)=>{
                                     //     await setnumofquestion(numofquesiton+1);
                                     //    resolve();
@@ -636,11 +550,100 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 
                     {/* 
         <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
+                </View>
+            </ScrollView>) : <Spinner size={"large"} style={{ alignSelf: "center", marginTop: hp("30%") }} color={"#1f7a8c"}></Spinner>}
+            {numofquesiton > -1 ?
+                <View style={{ flexDirection: "row", position: "absolute", marginTop: hp("66.7%") }}>
+                    <TouchableOpacity
+                        onPress={async () => {
+                            var a = answers;
+                            a[numofquesiton] = oneofthem;
+                            console.log(a);
+                            setanswers(a);
+                            await setcolora("rgba(237,242,244,0.9)")
+                            await setcolorb("rgba(237,242,244,0.9)")
+                            await setcolorc("rgba(237,242,244,0.9)")
+                            await setcolord("rgba(237,242,244,0.9)")
+                            await setcansubmit("سوال بعدی")
 
-                </ScrollView>):<Spinner size={"large"}  style={{alignSelf:"center",marginTop:hp("30%")}} color={"#1f7a8c"}></Spinner>}
-            </ImageBackground>
+                            console.log(numofquesiton);
+                            if (numofquesiton - 1 >= 0) {
+                                await setseedis("سوال قبلی")
+                                await setnumofquestion(numofquesiton - 1)
+                                await setbuttoncolor("rgba(40,160,184,1)")
+                                setthisquestion(questions.Questions[numofquesiton - 1]);
 
-        </View>
+
+                                console.log("next pressed")
+                            }
+                            //update nemishe chon :\
+                            if ((numofquesiton - 1) === 1) {
+                                await setnumofquestion(numofquesiton - 1)
+                                await setbuttoncolor("rgba(31,122,140,1)")
+                                await setseedis(" توضیحات")
+
+                            }
+                            if (numofquesiton === 0 || numofquesiton === 1) {
+                                // await setnumofquestion(-1);
+                                await setseedis(" توضیحات")
+                            }
+                            if (numofquesiton === 0) {
+                                await setnumofquestion(-1);
+                            }
+                        }}
+                        style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
+                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
+                        <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={async () => {
+
+
+                            var a = answers;
+                            a[numofquesiton] = oneofthem;
+                            console.log(a);
+                            setanswers(a);
+                            await setcolora("rgba(237,242,244,0.9)")
+                            await setcolorb("rgba(237,242,244,0.9)")
+                            await setcolorc("rgba(237,242,244,0.9)")
+                            await setcolord("rgba(237,242,244,0.9)")
+                            await setseedis("سوال قبلی")
+                            // new Promise(async(resolve,reject)=>{
+                            //     await setnumofquestion(numofquesiton+1);
+                            //    resolve();
+                            // }).then(async()=>{
+
+                            await setbuttoncolor("rgba(31,122,140,1)")
+                            console.log(numofquesiton);
+                            if (numofquesiton + 1 < questions.Quiz.question_count) {
+                                await setnumofquestion(numofquesiton + 1);
+                                await setcansubmit("سوال بعدی")
+                                setthisquestion(questions.Questions[numofquesiton + 1]);
+
+                                console.log("next pressed")
+                            }
+                            if (cansubmit === "ثبت پاسخ") {
+                                await postquiz();
+                            }
+                            if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
+                                await setnumofquestion(numofquesiton + 1);
+                                await setcansubmit("ثبت پاسخ")
+                            }
+                            console.log(numofquesiton);
+
+                            // })
+                        }}
+                        style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                        <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
+                    </TouchableOpacity>
+                </View> : null}
+            {/* </View> */}
+
+
+        </ImageBackground>
+
+    </View>
     );
 }
 
