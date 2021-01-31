@@ -38,9 +38,11 @@ function Quizespage (props){
             file:null
         }
       )
+      console.log(state.title);
     const imageUploader = React.useRef(null);
     const uploadedImage = React.useRef(null);
-
+    var sendpic = new FormData()
+    sendpic.append("",newQuiz.quiz_photo)
     const handleImageUpload = e => {
         setState({file:e.target.files[0]});
         const [file] = e.target.files;
@@ -62,7 +64,10 @@ function Quizespage (props){
     const [valid,setValid] = useState(false);
     const[countOfQ,setCount]=useState();
     const [inputFields, setInputFields] = useState([
-      { id: uuidv4(), question:'', answer1:'',answer2:'',answer3:'',answer4:'',count:1,correctAnswer:'' },
+      { id: uuidv4(), question_text:'',a_text:'',b_text:'',c_text:'',d_text:'',count:1,key:'' },
+    ]);
+    const [input, setInput] = useState([
+      {question_text:'',a_text:'',b_text:'',c_text:'',d_text:'',key:'' },
     ]);
    
     console.log(inputFields.length);
@@ -73,9 +78,12 @@ function Quizespage (props){
           [id] : value
       }))
   }
+   
+
     const handleChangeInput = (id, event) => {
       
-      console.log(countOfQ);
+     
+      console.log(input);
       const newInputFields = inputFields.map(i => {
         if(id === i.id) {
           i[event.target.name] = event.target.value
@@ -84,13 +92,15 @@ function Quizespage (props){
       })
         console.log(inputFields.length+1);
         setInputFields(newInputFields);
+        setInput(newInputFields);
+        console.log(input);
         console.log(inputFields);
        
-        console.log(countOfQ);
+        console.log(input);
     }
     const handleAddFields = () => {
       console.log(countOfQ);
-      setInputFields([...inputFields, { id: uuidv4(),  question:'', answer1:'',answer2:'',answer3:'',answer4:'',count:inputFields.length+1}])
+      setInputFields([...inputFields, { id: uuidv4(),  question_text:'', a_text:'',b_text:'',c_text:'',d_text:'',count:inputFields.length+1,key:''}])
       console.log(inputFields);
 
     }
@@ -102,23 +112,18 @@ function Quizespage (props){
       console.log(inputFields);
       
     }
-    const sendQuestion = inputFields => {
-      const fd = new FormData();
-      fd.append("title",newQuiz.title);
-      fd.append("description",newQuiz.description);
-      fd.append("question_count",inputFields.length);
-      fd.append("quiz_photo",state.file);
-      inputFields.forEach((item) => {
-        fd.append('question_text', item.question);
-        fd.append('a_text',item.answer1);
-        fd.append('b_text',item.answer2);
-        fd.append('c_text',item.answer3);
-        fd.append('d_text',item.answer4);
-        fd.append('key',item.correctAnswer)
-     })
+    console.log(inputFields);
+    const sendQuestion = (e)=> {
+    const fd = {
+    "title":newQuiz.title,
+    "description":newQuiz.description,
+    "question_count":inputFields.length,
+    "quiz_photo":state.file,
+    "questions":inputFields
+    }
+     console.log(input);
      let back= JSON.stringify(fd);
      console.log(fd);
-     return dispatch => {
       axios.post(API_BASE_URL+'/quiz',back,
   {
     headers:{
@@ -126,11 +131,6 @@ function Quizespage (props){
    "Authorization":"Token "+Cookies.get("userToken")}
     }
   )
-}
-      
-        // console.log(fd);
-        // console.log(payload)
-        // let back= JSON.stringify(payload);
     
     }
     return(
@@ -155,16 +155,12 @@ function Quizespage (props){
                     <label className="mt-2 mb-n1 ">نام آزمونک</label>
                     <input 
                     className="form-control text-right " 
-                      id="name"
-                      value={newQuiz.name}
+                      value={newQuiz.title}
+                      id="title"
                       type="title"
                       onChange={handleChange}
                       placeholder="...عنوان"
-                      >
-                      
-                      </input>
-
-
+                      />
                     <label className="mt-2 mb-n1"> توضیحات آزمونک</label>
                     <textarea className="form-control text-right" rows="3"id="description"
                       value={newQuiz.description}
@@ -173,19 +169,18 @@ function Quizespage (props){
                       placeholder="...توضیحات"
                       ></textarea>
                     </form>
+                  
                   <input class="form-control" 
                   type="file" accept="image/*" 
                   onChange={handleImageUpload} 
                   ref={imageUploader} 
                   style={{ display: "none",color:"white" }} />
+                  <img src={newQuiz.quiz_photo} ref={uploadedImage} style={{width:270}} alt=" انتخاب عکس" className="rounded-lg d-block text-center mx-md-5"/>
                   <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
-                    <svg className="mt-4"  style={{width:30,height:30}} viewBox="0 0 24 24">
+                    <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
                       <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
                     </svg>
                   </div>
-                  <label src={newQuiz.quiz_photo} ref={uploadedImage} style={{fontSize:18}} className="yakanfont" htmlFor="exampleInputEmail1">انتخاب عکس</label>
-                  <hr/>
-
                   </div>
        
                   <div className="name-Q1">
@@ -195,9 +190,9 @@ function Quizespage (props){
   </div>
   { inputFields.map(inputField => (
     <div key={inputField.id}>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont" htmlFor="exampleInputUserName">سوال{inputField.count}</label>
-  <textarea className="form-control input-normal text-right"                       onChange={event => handleChangeInput(inputField.id, event)}
- rows="1" value={inputField.question} placeholder="...صورت سؤال"  name="question"></textarea>
+  <label style={{fontSize:18}} className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
+  <textarea className="form-control input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
+ rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 1</label>
   <div class="form-check text-right mr-n4 ">
   </div>
@@ -206,24 +201,21 @@ function Quizespage (props){
                        className="form-control input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
-                       name="answer1"
-                       type="name"
-                       value={inputField.answer1}
+                       name="a_text"
+                       value={inputField.a_text}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                 />
 
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 2</label>
-  <div class="form-check text-right mr-n4 ">
-</div>
+
 
                 <input
                        className="form-control input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
-                       name="answer2"
-                       type="name"
-                       value={inputField.answer2}
+                       name="b_text"
+                       value={inputField.b_text}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                       
@@ -236,11 +228,10 @@ function Quizespage (props){
 
                 <input 
                        className="form-control input-normal text-right" 
-                       name="answer3"
+                       name="c_text"
                        placeholder="...صورت جواب"
-                       type="name"
                        required
-                       value={inputField.answer3}
+                       value={inputField.c_text}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                        
@@ -249,17 +240,15 @@ function Quizespage (props){
                 />
 
   <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 4</label>
-  <div class="form-check text-right mr-n4 ">
-</div>
 
                 <input 
-                     type="name"
+                     type=""
                        className="form-control input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
                        
-                       name="answer4"
-                       value={inputField.answer4}
+                       name="d_text"
+                       value={inputField.d_text}
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                 />
@@ -269,8 +258,8 @@ function Quizespage (props){
                        className="form-control input-normal text-right" 
                        placeholder="... گزینهٔ درست"
                        required
-                       name="correctAnswer"
-                       value={inputField.correctAnswer}
+                       name="key"
+                       value={inputField.key}
                        onChange={event => handleChangeInput(inputField.id, event)}
 
                 />
