@@ -157,18 +157,20 @@ const DiscussionPage = (prop) => {
                         renderItem={({ item }) => <>
                             <View style={{}}>
                                 <Text style={{ alignSelf: 'flex-start', fontSize: 20 }}>{item.user.username}</Text>
-                                <Text style={{ color: '#a9a9a9' }}>{item.chat_text}</Text>
-
+                                <Card style={styles.cardChat}>
+                                    <Text style={{ color: '#a9a9a9' }}>{item.chat_text}</Text>
+                                </Card>
                             </View>
                         </>
                         }
                     >
                     </FlatList>
-                    <Button onPress={() => setModalVisible(true)} style={{marginTop:hp('57%'),
-                        width: 180, borderRadius: 20, marginLeft:wp('28%')
+                    <Button onPress={() => setModalVisible(true)} style={{
+                        marginTop: hp('57%'),
+                        width: 180, borderRadius: 20, marginLeft: wp('28%')
                         , backgroundColor: '#1F7A8C'
                     }}>
-                        <Text style={{fontSize:15, fontWeight:'bold', color:'white', marginLeft:wp('16%') }}> ارسال پیام </Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginLeft: wp('16%') }}> ارسال پیام </Text>
                     </Button>
                 </ScrollView>
 
@@ -195,31 +197,14 @@ const styles = StyleSheet.create({
         padding: 13,
         marginTop: hp('71')
     },
-    kima: {
-        color: '#1F7A8C',
-        marginTop: hp('8%'),
-        marginLeft: wp('5%'),
-        fontSize: 20,
-        fontWeight: 'bold',
-        position: 'absolute'
-    },
-    backpic: {
 
-        width: wp('100%'),
-        height: hp('32%')
-    },
     avatar: {
         elevation: 20,
         marginTop: hp('-10%'),
         marginLeft: wp('20%')
 
     },
-    groupname: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        marginLeft: wp('19%'),
-        marginTop: hp('3%'),
-    },
+
     centeredView: {
         height: hp('40%'),
         marginTop: hp('15%'),
@@ -276,6 +261,15 @@ const styles = StyleSheet.create({
         marginLeft: wp('-2%'),
         marginRight: wp('45%'),
         height: wp('9.5%')
+    },
+    cardChat :{
+        height:hp('10%'),
+        width:wp('50%'),
+        marginLeft:wp('20%'),
+        borderTopRightRadius:15,
+        borderTopLeftRadius:15,
+        borderBottomRightRadius:15,
+        backgroundColor:'#e6e6fa'
     }
 })
 export default DiscussionPage;
