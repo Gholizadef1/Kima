@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useDebugValue } from 'react';
-import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList, TextInput, TouchableOpacity, ActivityIndicator,Alert } from 'react-native';
+import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail, Item, Input, Textarea } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
@@ -37,11 +37,11 @@ const DiscussionPage = (prop) => {
     const getUsername = async () => {
         const id = await AsyncStorage.getItem('id');
         const response = axiosinst.get('/user/' + id)
-          .then(function (response) {
-            console.log('USERNAME'+ response.data.username)
-            setusername(response.data.username)
-          })
-      };
+            .then(function (response) {
+                console.log('USERNAME' + response.data.username)
+                setusername(response.data.username)
+            })
+    };
 
     const getChats = async () => {
 
@@ -53,7 +53,7 @@ const DiscussionPage = (prop) => {
         })
             .then(function (response) {
 
-                console.log('DATEE' +response.data.chats[0].send_time)
+                console.log('DATEE' + response.data.chats[0].send_time)
 
                 //   console.log('CHATT'+response.data.chats[0].chat_text)
                 //   console.log('USERR'+response.data.chats[0].user.username)
@@ -110,7 +110,7 @@ const DiscussionPage = (prop) => {
                                                     {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
-                                                ],{cancelable:false}, {style:{height:50}})
+                                                ], { cancelable: false }, { style: { height: 50 } })
                                                 getChats();
                                             })
                                             .catch(function (error) {
@@ -170,17 +170,29 @@ const DiscussionPage = (prop) => {
                         }}
                         data={chats}
                         renderItem={({ item }) => <>
-                            <View style={{}}>
+                            {username != item.user.username ?
+                                <View style={{}}>
                                     {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
                                         source={{ uri: item.user.profile_photo }}
                                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
-                                <Card style={styles.cardChat}>
-                                <Text style={{ alignSelf: 'flex-start', fontSize: 14,marginLeft:wp('38%'),marginTop:hp('0.5%') }}>{item.user.username}</Text>
-                                    <Text style={{ color: '#a9a9a9', marginLeft:wp('4%'),marginTop:hp('0.5%'), marginBottom:hp('6%') }}>{item.chat_text}</Text>
-                                </Card>
-                            </View>
+                                    <Card style={styles.cardChat}>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
+                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                    </Card>
+                                </View>
+                                : <View style={{}}>
+                                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
+                                        source={{ uri: item.user.profile_photo }}
+                                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                                        source={require('../../assets/group.jpg')}
+                                    ></Avatar.Image>}
+                                    <Card style={styles.cardChat2}>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
+                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                    </Card>
+                                </View>}
                         </>
                         }
                     >
@@ -212,11 +224,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     avatar: {
-        marginLeft:wp('2%'),
+        marginLeft: wp('2%'),
+        top: hp('3%'),
+        width: wp('14%'),
+        height: hp('8%'),
+        marginTop: hp('5%')
+    },
+    avatar2: {
+        marginLeft: wp('82%'),
         top:hp('3%'),
-        width:wp('14%') , 
-        height:hp('8%') ,
-        marginTop:hp('5%')
+        width: wp('14%'),
+        height: hp('8%'),
+        marginTop: hp('5%')
     },
 
     centeredView: {
@@ -255,12 +274,24 @@ const styles = StyleSheet.create({
     cardChat: {
         width: wp('50%'),
         marginLeft: wp('20%'),
-        marginTop:hp('-5%'),
-        top:hp('-5%'),
-        marginBottom:hp('-5%'),
+        marginTop: hp('-5%'),
+        top: hp('-5%'),
+        marginBottom: hp('-5%'),
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
         borderBottomRightRadius: 15,
+        backgroundColor: '#EDF2F4',
+
+    },
+    cardChat2: {
+        width: wp('50%'),
+        marginLeft: wp('27%'),
+        marginTop: hp('-5%'),
+        top: hp('-5%'),
+        marginBottom: hp('-4%'),
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
         backgroundColor: '#EDF2F4',
 
     }
