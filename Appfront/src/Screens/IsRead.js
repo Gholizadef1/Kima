@@ -22,8 +22,9 @@ const IsRead = ({navigation}) => {
 
     const id=await AsyncStorage.getItem('id');    
 
-    axiosinst.get('/api/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
+    axiosinst.get('/user/'+id+'/collection?type=Read',{
 
+    "headers":{"content-type":"application/json",
     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
     }})
     .then(function(response){
