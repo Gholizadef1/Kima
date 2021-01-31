@@ -538,6 +538,25 @@ const Quizpage = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
+                                   
+                                    console.log(" rang negah ghabli")
+                                  //  setcolor{answers[numofquesiton-1]}()
+                                  if(answers[numofquesiton+1]==="a"){
+                                    await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
+                                  }
+                                  if(answers[numofquesiton+1]==="b"){
+                                    await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
+                                  }
+                                  if(answers[numofquesiton+1]==="c"){
+                                    await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
+                                  }
+                                  if(answers[numofquesiton+1]==="d"){
+                                    await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
+                                  }
                                     // })
                                 }}
                                 style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
