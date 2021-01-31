@@ -67,7 +67,7 @@ const Quizpage = () => {
     const [buttoncolor, setbuttoncolor] = useState("rgba(40,160,184,1)")
     const [cansubmit, setcansubmit] = useState("سوال بعدی")
     const [seedisc, setseedis] = useState("سوال قبلی")
-    const [oneofthem, setoneofthem] = useState({ key: "", numberofq: "" })
+    const [oneofthem, setoneofthem] = useState("")
     const [answersc, setannswersc] = useState(['rgba(237,242,244,0.9)', "rgba(237,242,244,0.9)",
         "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
         const [colora,setcolora]=useState("rgba(237,242,244,0.9)")
@@ -100,17 +100,19 @@ const Quizpage = () => {
                                 //a[0] = "rgba(40,160,184,1)"
                                 await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)"])
                                 await setcolora("rgba(40,160,184,1)")
-                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                await setoneofthem("a")
                                 console.log(colora+" rangi")
                                 }
 
                                // if (oneofthem.key != "") {
                                     var a = answersc;
                                     
-                                    const b = parseInt(oneofthem.key)-1
+                                    const b = parseInt(oneofthem)-1
                                     console.log(b+"  b")
+                                    
                                    
                                     if(colora==="rgba(40,160,184,1)"){
+                                        // await setoneofthem("")
                                         console.log("a uncolor")
                                         await setcolora("rgba(237,242,244,0.9)")
                                         console.log(colora)
@@ -126,6 +128,7 @@ const Quizpage = () => {
                                     }
                                     a[b] = "rgba(40,160,184,1)"
                                     await setannswersc(a)
+                                    
 
                              //   }
                               
@@ -148,7 +151,7 @@ const Quizpage = () => {
                                 //a[0] = "rgba(40,160,184,1)"
                                 await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)"])
                                 await setcolorb("rgba(40,160,184,1)")
-                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                await setoneofthem("b")
                                 console.log(colorb+" rangi")
                                 }
                                 
@@ -193,7 +196,7 @@ const Quizpage = () => {
                                 //a[0] = "rgba(40,160,184,1)"
                                 await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)"])
                                 await setcolorc("rgba(40,160,184,1)")
-                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                await setoneofthem("c")
                                 console.log(colorc+" rangi")
                                 }
                                 
@@ -241,8 +244,9 @@ const Quizpage = () => {
                                 //a[0] = "rgba(40,160,184,1)"
                                 await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)","rgba(237,242,244,0.9)"])
                                 await setcolord("rgba(40,160,184,1)")
-                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                              
                                 console.log(colord+" rangi")
+                                await setoneofthem("d")
                                 }
                                 
                                // if (oneofthem.key != "") {
@@ -288,6 +292,14 @@ const Quizpage = () => {
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity
                                 onPress={async () => {
+                                    var a=answers;
+                                    a[numofquesiton]=oneofthem;
+                                    console.log(a);
+                                    setanswers(a);
+                                    await setcolora("rgba(237,242,244,0.9)")
+                                    await setcolorb("rgba(237,242,244,0.9)")
+                                    await setcolorc("rgba(237,242,244,0.9)")
+                                    await setcolord("rgba(237,242,244,0.9)")
                                     await setcansubmit("سوال بعدی")
 
                                     console.log(numofquesiton);
@@ -321,6 +333,14 @@ const Quizpage = () => {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={async () => {
+                                    var a=answers;
+                                    a[numofquesiton]=oneofthem;
+                                    console.log(a);
+                                    setanswers(a);
+                                    await setcolora("rgba(237,242,244,0.9)")
+                                    await setcolorb("rgba(237,242,244,0.9)")
+                                    await setcolorc("rgba(237,242,244,0.9)")
+                                    await setcolord("rgba(237,242,244,0.9)")
                                     await setseedis("سوال قبلی")
                                     // new Promise(async(resolve,reject)=>{
                                     //     await setnumofquestion(numofquesiton+1);
