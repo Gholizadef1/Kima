@@ -22,6 +22,7 @@ import Createquiz from "./Createquiz";
 import { ImageBackground } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Dimensions } from 'react-native'
+import { createIconSetFromFontello } from 'react-native-vector-icons';
 // import { Button } from 'react-native-paper';
 
 const Quizpage = () => {
@@ -66,7 +67,13 @@ const Quizpage = () => {
     const [buttoncolor, setbuttoncolor] = useState("rgba(40,160,184,1)")
     const [cansubmit, setcansubmit] = useState("سوال بعدی")
     const [seedisc, setseedis] = useState("سوال قبلی")
-
+    const [oneofthem, setoneofthem] = useState({ key: "", numberofq: "" })
+    const [answersc, setannswersc] = useState(['rgba(237,242,244,0.7)', "rgba(237,242,244,0.7)",
+        "rgba(237,242,244,0.7)", "rgba(237,242,244,0.7)"])
+        const [colora,setcolora]=useState("rgba(237,242,244,0.7)")
+        const [colorb,setcolorb]=useState("rgba(237,242,244,0.7)")
+        const [colorc,setcolorc]=useState("rgba(237,242,244,0.7)")
+        const [colord,setcolord]=useState("rgba(237,242,244,0.7)")
     return (
         <View style={styles.container}>
             <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
@@ -84,26 +91,191 @@ const Quizpage = () => {
                         }}>{thisquesiton.question_text}</Text> : null}
 
 
-                        {numofquesiton > -1 ? <TouchableOpacity activeOpacity={0.5} style={{
-                            backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("8%"),
-                            borderRadius: 100, alignSelf: "center", justifyContent: "center"
-                        }}>
+                        {numofquesiton > -1 ? <TouchableOpacity
+                            onPress={async () => {
+                                await new Promise(async()=>{
+                                    if(colora=== "rgba(237,242,244,0.7)"){
+                                //var a = answersc;
+                                //const b = parseInt(oneofthem.numberofq)
+                                //a[0] = "rgba(40,160,184,1)"
+                                await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)"])
+                                await setcolora("rgba(40,160,184,1)")
+                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                console.log(colora+" rangi")
+                                }
+
+                               // if (oneofthem.key != "") {
+                                    var a = answersc;
+                                    
+                                    const b = parseInt(oneofthem.key)-1
+                                    console.log(b+"  b")
+                                   
+                                    if(colora==="rgba(40,160,184,1)"){
+                                        console.log("a uncolor")
+                                        await setcolora("rgba(237,242,244,0.7)")
+                                        console.log(colora)
+                                    }
+                                    if(colorb==="rgba(40,160,184,1)"){
+                                        await setcolorb("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colorc==="rgba(40,160,184,1)"){
+                                        await setcolorc("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colord==="rgba(40,160,184,1)"){
+                                        await setcolord("rgba(237,242,244,0.7)")
+                                    }
+                                    a[b] = "rgba(40,160,184,1)"
+                                    await setannswersc(a)
+
+                             //   }
+                              
+                                })
+                                
+
+                            }}
+                            activeOpacity={0.5} style={{
+                                backgroundColor: colora, height: hp("8%"), width: wp("86%"), marginTop: hp("8%"),
+                                borderRadius: 100, alignSelf: "center", justifyContent: "center"
+                            }}>
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquesiton.a_text}</Text>
                         </TouchableOpacity> : null}
-                        {numofquesiton > -1 ? <TouchableOpacity activeOpacity={0.5} style={{
-                            backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        {numofquesiton > -1 ? <TouchableOpacity 
+                          onPress={async () => {
+                                await new Promise(async()=>{
+                                    if(colorb=== "rgba(237,242,244,0.7)"){
+                                //var a = answersc;
+                                //const b = parseInt(oneofthem.numberofq)
+                                //a[0] = "rgba(40,160,184,1)"
+                                await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)"])
+                                await setcolorb("rgba(40,160,184,1)")
+                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                console.log(colorb+" rangi")
+                                }
+                                
+                               // if (oneofthem.key != "") {
+                                    var a = answersc;
+                                    
+                                    const b = parseInt(oneofthem.key)-1
+                                    console.log(b+"  b")
+                                   
+                                    if(colora==="rgba(40,160,184,1)"){
+                                        console.log("a uncolor")
+                                        await setcolora("rgba(237,242,244,0.7)")
+                                        console.log(colora)
+                                    }
+                                    if(colorb==="rgba(40,160,184,1)"){
+                                        await setcolorb("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colorc==="rgba(40,160,184,1)"){
+                                        await setcolorc("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colord==="rgba(40,160,184,1)"){
+                                        await setcolord("rgba(237,242,244,0.7)")
+                                    }
+                                    a[b] = "rgba(40,160,184,1)"
+                                    await setannswersc(a)
+                                })
+                                
+
+                            }}
+                        activeOpacity={0.5} style={{
+                            backgroundColor: colorb, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                             borderRadius: 100, elevation: 5, alignSelf: "center", justifyContent: "center"
                         }}>
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.b_text}</Text>
                         </TouchableOpacity> : null}
-                        {numofquesiton > -1 ? <TouchableOpacity activeOpacity={0.5} style={{
-                            backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        {numofquesiton > -1 ? <TouchableOpacity
+                          onPress={async () => {
+                                await new Promise(async()=>{
+                                    if(colorc=== "rgba(237,242,244,0.7)"){
+                                //var a = answersc;
+                                //const b = parseInt(oneofthem.numberofq)
+                                //a[0] = "rgba(40,160,184,1)"
+                                await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)"])
+                                await setcolorc("rgba(40,160,184,1)")
+                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                console.log(colorc+" rangi")
+                                }
+                                
+                               // if (oneofthem.key != "") {
+                                    var a = answersc;
+                                    
+                                    const b = parseInt(oneofthem.key)-1
+                                    console.log(b+"  b")
+                                   
+                                    if(colora==="rgba(40,160,184,1)"){
+                                        console.log("a uncolor")
+                                        await setcolora("rgba(237,242,244,0.7)")
+                                        console.log(colora)
+                                    }
+                                    if(colorb==="rgba(40,160,184,1)"){
+                                        await setcolorb("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colorc==="rgba(40,160,184,1)"){
+                                        await setcolorc("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colord==="rgba(40,160,184,1)"){
+                                        await setcolord("rgba(237,242,244,0.7)")
+                                    }
+                                    a[b] = "rgba(40,160,184,1)"
+                                    await setannswersc(a)
+
+                             //   }
+                              
+                                })
+                                
+
+                            }}
+                         activeOpacity={0.5} style={{
+                            backgroundColor:colorc, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                             borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                         }}>
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.c_text}</Text>
                         </TouchableOpacity> : null}
-                        {numofquesiton > -1 ? <TouchableOpacity activeOpacity={0.5} style={{
-                            backgroundColor: 'rgba(237,242,244,0.7)', height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
+                        {numofquesiton > -1 ? <TouchableOpacity
+                          onPress={async () => {
+                                await new Promise(async()=>{
+                                    if(colord=== "rgba(237,242,244,0.7)"){
+                                //var a = answersc;
+                                //const b = parseInt(oneofthem.numberofq)
+                                //a[0] = "rgba(40,160,184,1)"
+                                await setannswersc(["rgba(40,160,184,1)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)","rgba(237,242,244,0.7)"])
+                                await setcolord("rgba(40,160,184,1)")
+                                await setoneofthem({key:"1",numberofq:numofquesiton-1})
+                                console.log(colord+" rangi")
+                                }
+                                
+                               // if (oneofthem.key != "") {
+                                    var a = answersc;
+                                    
+                                    const b = parseInt(oneofthem.key)-1
+                                    console.log(b+"  b")
+                                   
+                                    if(colora==="rgba(40,160,184,1)"){
+                                        console.log("a uncolor")
+                                        await setcolora("rgba(237,242,244,0.7)")
+                                        console.log(colora)
+                                    }
+                                    if(colorb==="rgba(40,160,184,1)"){
+                                        await setcolorb("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colorc==="rgba(40,160,184,1)"){
+                                        await setcolorc("rgba(237,242,244,0.7)")
+                                    }
+                                    if(colord==="rgba(40,160,184,1)"){
+                                        await setcolord("rgba(237,242,244,0.7)")
+                                    }
+                                    a[b] = "rgba(40,160,184,1)"
+                                    await setannswersc(a)
+
+                             //   }
+                              
+                                })
+                                
+
+                            }}
+                         activeOpacity={0.5} style={{
+                            backgroundColor:colord, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                             borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                         }}>
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.d_text}</Text>
@@ -112,159 +284,159 @@ const Quizpage = () => {
 
 
                     {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
-                    {numofquesiton > -1 ? 
-                    <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity
-                            onPress={async () => {
-                                await setcansubmit("سوال بعدی")
-
-                                console.log(numofquesiton);
-                                if (numofquesiton - 1 >= 0) {
-                                    await setseedis("سوال قبلی")
-                                    await setnumofquestion(numofquesiton - 1)
-                                    await setbuttoncolor("rgba(40,160,184,1)")
-                                    setthisquestion(questions.Questions[numofquesiton - 1]);
-
-
-                                    console.log("next pressed")
-                                }
-                                //update nemishe chon :\
-                                if ((numofquesiton - 1) === 1) {
-                                    await setnumofquestion(numofquesiton - 1)
-                                    await setbuttoncolor("rgba(31,122,140,1)")
-                                    await setseedis("دیدن توضیحات")
-                                 
-                                }
-                                if(numofquesiton===0){
-                                    await setnumofquestion(-1);
-                                }
-                            }}
-                            style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
-                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={async () => {
-                                await setseedis("سوال قبلی")
-                                // new Promise(async(resolve,reject)=>{
-                                //     await setnumofquestion(numofquesiton+1);
-                                //    resolve();
-                                // }).then(async()=>{
-
-                                await setbuttoncolor("rgba(31,122,140,1)")
-                                console.log(numofquesiton);
-                                if (numofquesiton + 1 < questions.Questions[0].question_num) {
-                                    await setnumofquestion(numofquesiton + 1);
+                    {numofquesiton > -1 ?
+                        <View style={{ flexDirection: "row" }}>
+                            <TouchableOpacity
+                                onPress={async () => {
                                     await setcansubmit("سوال بعدی")
-                                    setthisquestion(questions.Questions[numofquesiton + 1]);
 
-                                    console.log("next pressed")
-                                }
-                                if (numofquesiton + 1 === questions.Questions[0].question_num - 1) {
-                                    await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("ثبت پاسخ")
-                                }
-                                console.log(numofquesiton);
-                                // })
-                            }}
-                            style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
-                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
-                        </TouchableOpacity>
-                    </View> : null}
+                                    console.log(numofquesiton);
+                                    if (numofquesiton - 1 >= 0) {
+                                        await setseedis("سوال قبلی")
+                                        await setnumofquestion(numofquesiton - 1)
+                                        await setbuttoncolor("rgba(40,160,184,1)")
+                                        setthisquestion(questions.Questions[numofquesiton - 1]);
+
+
+                                        console.log("next pressed")
+                                    }
+                                    //update nemishe chon :\
+                                    if ((numofquesiton - 1) === 1) {
+                                        await setnumofquestion(numofquesiton - 1)
+                                        await setbuttoncolor("rgba(31,122,140,1)")
+                                        await setseedis("دیدن توضیحات")
+
+                                    }
+                                    if (numofquesiton === 0) {
+                                        await setnumofquestion(-1);
+                                    }
+                                }}
+                                style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
+                                <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
+                                <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={async () => {
+                                    await setseedis("سوال قبلی")
+                                    // new Promise(async(resolve,reject)=>{
+                                    //     await setnumofquestion(numofquesiton+1);
+                                    //    resolve();
+                                    // }).then(async()=>{
+
+                                    await setbuttoncolor("rgba(31,122,140,1)")
+                                    console.log(numofquesiton);
+                                    if (numofquesiton + 1 < questions.Questions[0].question_num) {
+                                        await setnumofquestion(numofquesiton + 1);
+                                        await setcansubmit("سوال بعدی")
+                                        setthisquestion(questions.Questions[numofquesiton + 1]);
+
+                                        console.log("next pressed")
+                                    }
+                                    if (numofquesiton + 1 === questions.Questions[0].question_num - 1) {
+                                        await setnumofquestion(numofquesiton + 1);
+                                        await setcansubmit("ثبت پاسخ")
+                                    }
+                                    console.log(numofquesiton);
+                                    // })
+                                }}
+                                style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                                <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                                <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
+                            </TouchableOpacity>
+                        </View> : null}
                     {/* </View> */}
 
-                            
+
                     {numofquesiton === -1 ?
-                <View style={{justifyContent:"center"}}>
-                     <TouchableOpacity activeOpacity={0.5} style={{
-                        //  height:hp("40%"),width:200,
-                        //  position:"absolute",
-                        backgroundColor: 'rgba(237,242,244,0.9)',alignself:"center", width: wp("90%"), marginHorizontal: wp("5%"),
-                        borderRadius: 10, elevation: 5,marginBottom:hp("0%"),marginVertical:hp("5%")
-                    }}>
-                        {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
-                            height: hp('14%'),
-                            marginTop: hp('5%'),
-                            width: wp('28%'),
-                            marginLeft: wp('8%'),
-                            borderRadius: 100,
-                            // position: 'absolute',
-                            borderColor: 'blue',
-                            backgroundColor: "lightgreen"
-                        }}
-                        >
-                            <ImageBackground borderRadius={100}
-
-                                source={require("../../assets/tea.jpg")}
-
-                                style={{
+                        <View style={{ justifyContent: "center" }}>
+                            <TouchableOpacity activeOpacity={0.5} style={{
+                                //  height:hp("40%"),width:200,
+                                //  position:"absolute",
+                                backgroundColor: 'rgba(237,242,244,1)', alignself: "center", width: wp("90%"), marginHorizontal: wp("5%"),
+                                borderRadius: 10, elevation: 5, marginBottom: hp("0%"), marginVertical: hp("5%")
+                            }}>
+                                {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
                                     height: hp('14%'),
+                                    marginTop: hp('5%'),
+                                    width: wp('28%'),
+                                    marginLeft: wp('8%'),
+                                    borderRadius: 100,
+                                    // position: 'absolute',
+                                    borderColor: 'blue',
+                                    backgroundColor: "lightgreen"
+                                }}
+                                >
+                                    <ImageBackground borderRadius={100}
 
+                                        source={require("../../assets/tea.jpg")}
+
+                                        style={{
+                                            height: hp('14%'),
+
+                                            marginTop: hp('0%'),
+                                            width: wp('28%'),
+                                            marginLeft: wp('0%'),
+                                            borderRadius: 20,
+                                            position: 'absolute',
+                                            //borderColor:'#1f7a8c',
+                                            //borderWidth:wp('0.2%')
+                                        }}
+                                    //  onBlur={props.handleBlur('photo')}
+
+
+                                    >
+
+                                    </ImageBackground>
+
+                                </TouchableOpacity> : <TouchableOpacity style={{
+                                    height: hp('14%'),
                                     marginTop: hp('0%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('0%'),
-                                    borderRadius: 20,
-                                    position: 'absolute',
-                                    //borderColor:'#1f7a8c',
-                                    //borderWidth:wp('0.2%')
+                                    marginLeft: wp('5%'),
+                                    borderRadius: 100,
+                                    // position: 'absolute',
+                                    borderColor: 'blue',
+                                    backgroundColor: "lightgreen"
                                 }}
-                            //  onBlur={props.handleBlur('photo')}
-
-
-                            >
-
-                            </ImageBackground>
-
-                        </TouchableOpacity> : <TouchableOpacity style={{
-                            height: hp('14%'),
-                            marginTop: hp('0%'),
-                            width: wp('28%'),
-                            marginLeft: wp('5%'),
-                            borderRadius: 100,
-                            // position: 'absolute',
-                            borderColor: 'blue',
-                            backgroundColor: "lightgreen"
-                        }}
-                        >
-                                <ImageBackground borderRadius={100}
-                                    source={{ uri: `${question.Quiz.quiz_photo}` }}
-
-                                    style={{
-                                        height: hp('14%'),
-
-                                        marginTop: hp('0%'),
-                                        width: wp('28%'),
-                                        marginLeft: wp('0%'),
-                                        borderRadius: 20,
-                                        position: 'absolute',
-                                    }}
-                                //  onBlur={props.handleBlur('photo')}
-
-
                                 >
+                                        <ImageBackground borderRadius={100}
+                                            source={{ uri: `${question.Quiz.quiz_photo}` }}
 
-                                </ImageBackground>
-                            </TouchableOpacity>}
+                                            style={{
+                                                height: hp('14%'),
+
+                                                marginTop: hp('0%'),
+                                                width: wp('28%'),
+                                                marginLeft: wp('0%'),
+                                                borderRadius: 20,
+                                                position: 'absolute',
+                                            }}
+                                        //  onBlur={props.handleBlur('photo')}
 
 
-                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', alignSelf: "flex-start", left: wp("40%"), top: hp("-10.3%") }}
-                        >
-                            {questions.Quiz.title}
+                                        >
+
+                                        </ImageBackground>
+                                    </TouchableOpacity>}
+
+
+                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', alignSelf: "flex-start", left: wp("40%"), top: hp("-10.3%") }}
+                                >
+                                    {questions.Quiz.title}
+                                </Text>
+                                <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
+                                    {questions.Quiz.create_time} (تاریخ ساخت)
                         </Text>
-                        <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
-                            {questions.Quiz.create_time} (تاریخ ساخت)
-                        </Text>
 
-                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'),alignSelf:"flex-start", marginTop: hp('-1%'), marginHorizontal:wp("5%") }}>#<Text style={{color:"#1f7a8c"}}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
-                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>تعداد سوال<Text style={{color:"lightblue"}}> -- <Text style={{color:"#1f7a8c"}}> {questions.Questions[0].question_num}</Text></Text></Text>
+                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
+                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Questions[0].question_num}</Text></Text></Text>
 
-                        {/* <View> */}
-                            <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>توضیحات:</Text>
-                            <Text style={{ fontSize: hp('1.6.5%'), color: 'black', marginBottom: hp('5%'), marginTop: hp('7%'), marginHorizontal:wp("5%") }}>    {questions.Quiz.description}</Text>
-                          
-                          
-                            {/* <TouchableOpacity>
+                                {/* <View> */}
+                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>توضیحات:</Text>
+                                <Text style={{ fontSize: hp('1.6.5%'), color: 'black', marginBottom: hp('5%'), marginTop: hp('7%'), marginHorizontal: wp("5%") }}>    {questions.Quiz.description}</Text>
+
+
+                                {/* <TouchableOpacity>
                                 <Text rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                     borderColor={'#EDF2F4'}
                                     fontSize={hp('1.6.5%')} style={styles.item2}>
@@ -272,28 +444,28 @@ const Quizpage = () => {
                                 </Text>
                             </TouchableOpacity>
                         </View> */}
-                    </TouchableOpacity>
-                  {/* <View style={{
+                            </TouchableOpacity>
+                            {/* <View style={{
                     //   alignItems:"flex-end",alignContent:"center"
                       }}> */}
-                      <TouchableOpacity
-                            onPress={async () => {
-                                // new Promise(async(resolve,reject)=>{
-                                //     await setnumofquestion(numofquesiton+1);
-                                //    resolve();
-                                // }).then(async()=>{
-                                await setnumofquestion(0);
-                                console.log(numofquesiton);
-                                // })
-                            }}
-                            style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)",borderRadius:50,marginTop:hp("11%"),alignSelf:"center" }}>
-                            {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
-                            <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4",alignSelf:"center" }}>مشاهده ی سوالات</Text>
-                        </TouchableOpacity>
-                        {/* </View> */}
-                    
-                    </View> 
-                    : null}
+                            <TouchableOpacity
+                                onPress={async () => {
+                                    // new Promise(async(resolve,reject)=>{
+                                    //     await setnumofquestion(numofquesiton+1);
+                                    //    resolve();
+                                    // }).then(async()=>{
+                                    await setnumofquestion(0);
+                                    console.log(numofquesiton);
+                                    // })
+                                }}
+                                style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
+                                {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
+                                <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4", alignSelf: "center" }}>مشاهده ی سوالات</Text>
+                            </TouchableOpacity>
+                            {/* </View> */}
+
+                        </View>
+                        : null}
 
 
 
