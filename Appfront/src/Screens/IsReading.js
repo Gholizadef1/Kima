@@ -29,8 +29,7 @@ const IsReading = ({navigation}) => {
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})
             .then(function(response){
-            setreadImage(response.data)
-            console.log(response)
+            setreadImage(response.data.data)
             })
             .catch(function(error){
             console.log(error)
