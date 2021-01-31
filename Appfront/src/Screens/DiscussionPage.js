@@ -42,6 +42,8 @@ const DiscussionPage = (prop) => {
         })
             .then(function (response) {
 
+                console.log('DATEE' +response.data.chats[0].send_time)
+
                 //   console.log('CHATT'+response.data.chats[0].chat_text)
                 //   console.log('USERR'+response.data.chats[0].user.username)
                 setChats(response.data.chats)
@@ -163,9 +165,9 @@ const DiscussionPage = (prop) => {
                                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
-                                <Text style={{ alignSelf: 'flex-start', fontSize: 14,marginLeft:wp('5%') }}>{item.user.username}</Text>
                                 <Card style={styles.cardChat}>
-                                    <Text style={{ color: '#a9a9a9', marginLeft:wp('4%'),marginTop:hp('0.5%') }}>{item.chat_text}</Text>
+                                <Text style={{ alignSelf: 'flex-start', fontSize: 14,marginLeft:wp('38%'),marginTop:hp('0.5%') }}>{item.user.username}</Text>
+                                    <Text style={{ color: '#a9a9a9', marginLeft:wp('4%'),marginTop:hp('0.5%'), marginBottom:hp('6%') }}>{item.chat_text}</Text>
                                 </Card>
                             </View>
                         </>
@@ -198,17 +200,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    input: {
-        borderWidth: 1,
-        borderColor: '#777',
-        padding: 13,
-        marginTop: hp('71')
-    },
-
     avatar: {
         marginLeft:wp('2%'),
-        width:wp('16%') , 
-        height:hp('9%') ,
+        top:hp('3%'),
+        width:wp('14%') , 
+        height:hp('8%') ,
         marginTop:hp('5%')
     },
 
@@ -234,22 +230,6 @@ const styles = StyleSheet.create({
         height: hp('65%'),
         elevation: 300
     },
-    loader: {
-        alignItems: 'center',
-        marginBottom: hp('5%'),
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: hp('10%')
-    },
-    Input: {
-        left: wp('8%'),
-        fontSize: hp('1.5%'),
-        fontWeight: 'bold',
-        marginRight: wp('10%'),
-        position: 'absolute',
-        height: wp('9.5%'),
-        width: wp('31.5%')
-    },
     item2: {
         marginLeft: wp('-2%'),
         marginRight: wp('-1%'),
@@ -263,14 +243,14 @@ const styles = StyleSheet.create({
     },
     cardChat: {
         width: wp('50%'),
-        marginLeft: wp('25%'),
+        marginLeft: wp('20%'),
         marginTop:hp('-5%'),
         top:hp('-5%'),
-        marginBottom:hp('1%'),
+        marginBottom:hp('-5%'),
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
         borderBottomRightRadius: 15,
-        backgroundColor: '#e6e6fa',
+        backgroundColor: '#EDF2F4',
 
     }
 })
