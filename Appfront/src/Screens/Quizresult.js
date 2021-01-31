@@ -129,41 +129,7 @@ const Quizresult = (prop) => {
 
     const postquiz = async () => {
         console.log("here")
-        console.log(JSON.stringify(answers))
-        const back = {
-            user_answer: answers
-        }
-        const response = await axiosinst.post('quiz/' + prop.route.params.id, JSON.stringify(back), {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-            }
-        }
-        )
-            .then(function (response) {
-
-                prop.navigation.navigate("quizresult", { id: prop.route.params.id })
-                console.log(response)
-                Alert.alert('', 'جواب شما با موفقیت ثبت شد ', [
-                    {
-                        text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
-                    }
-                ], { cancelable: false }, { style: { height: 50 } })
-
-
-            })
-            .catch(function (error) {
-                {
-                    console.log(error)
-
-                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
-
-
-                        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-                    }], { cancelable: false }, { style: { height: 50 } })
-                }
-            })
-
+        prop.navigation.navigate("quiznavigaiton")
     }
     const [numofquesiton, setnumofquestion] = useState(-1);
     const [answers, setanswers] = useState([]);

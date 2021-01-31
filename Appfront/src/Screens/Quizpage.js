@@ -23,6 +23,7 @@ import { ImageBackground } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Dimensions } from 'react-native'
 import { createIconSetFromFontello } from 'react-native-vector-icons';
+import { StackActions } from '@react-navigation/native';
 // import { Button } from 'react-native-paper';
 
 const Quizpage = (prop) => {
@@ -139,9 +140,11 @@ const Quizpage = (prop) => {
             }
         }
         )
-            .then(function (response) {
+            .then(async function (response) {
+                const popAction = StackActions.pop(1);
 
-                prop.navigation.navigate("quizresult", { id: prop.route.params.id })
+                await prop.navigation.dispatch(popAction);
+                await prop.navigation.navigate("quizresult", { id: prop.route.params.id })
                 console.log(response)
                 Alert.alert('', 'جواب شما با موفقیت ثبت شد ', [
                     {
