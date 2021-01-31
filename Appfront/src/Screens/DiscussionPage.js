@@ -21,6 +21,7 @@ const userschema = yup.object({
 const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [username, setusername] = useState(null);
     const [loading, setloading] = useState(true)
     const [refreshchats, setrefreshchats] = useState(false)
     const [picture, setpicture] = useState(null);
@@ -30,7 +31,17 @@ const DiscussionPage = (prop) => {
 
     useEffect(() => {
         getChats()
+        getUsername()
     }, []);
+
+    const getUsername = async () => {
+        const id = await AsyncStorage.getItem('id');
+        const response = axiosinst.get('/user/' + id)
+          .then(function (response) {
+            console.log('USERNAME'+ response.data.username)
+            setusername(response.data.username)
+          })
+      };
 
     const getChats = async () => {
 
