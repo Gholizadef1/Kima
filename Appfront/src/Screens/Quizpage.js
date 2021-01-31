@@ -566,21 +566,24 @@ const Quizpage = (prop) => {
                             await setcolord("rgba(237,242,244,0.9)")
                             await setcansubmit("سوال بعدی")
 
-                            console.log(numofquesiton);
-                            if (numofquesiton - 1 >= 0) {
+                            console.log(numofquesiton+" numofquestion");
+                            if (numofquesiton - 1 >= 1) {
+                                console.log("here ghabli b tar az 1")
                                 await setseedis("سوال قبلی")
                                 await setnumofquestion(numofquesiton - 1)
-                                await setbuttoncolor("rgba(40,160,184,1)")
+                                await setbuttoncolor("rgba(31,122,140,1)")
+                             
                                 setthisquestion(questions.Questions[numofquesiton - 1]);
 
 
                                 console.log("next pressed")
                             }
                             //update nemishe chon :\
-                            if ((numofquesiton - 1) === 1) {
-                                await setnumofquestion(numofquesiton - 1)
-                                await setbuttoncolor("rgba(31,122,140,1)")
-                                await setseedis(" توضیحات")
+                            if ((numofquesiton - 1) === 0) {
+                                console.log("here too")
+                                 await setnumofquestion(numofquesiton - 1)
+                                 await setbuttoncolor("rgba(40,160,184,1)")
+                                // await setseedis(" توضیحات")
 
                             }
                             if (numofquesiton === 0 || numofquesiton === 1) {
@@ -597,7 +600,7 @@ const Quizpage = (prop) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={async () => {
-
+                            await setseedis(" سوال قبلی")
 
                             var a = answers;
                             a[numofquesiton] = oneofthem;
