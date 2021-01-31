@@ -110,9 +110,9 @@ const Quizpage = (prop) => {
            // await setquestions(response.data)
            setquestions(response.data)
             await console.log(questions+" QUESTIONSS")
-            if(questions!=undefined){
-                setthisquestion(questions.Questions[0])
-            }
+            // if(questions!=undefined){
+            //     setthisquestion(questions.Questions[0])
+            // }
        }
         catch(err) {
             console.log(err)
@@ -127,7 +127,7 @@ const Quizpage = (prop) => {
  })
 const [numofquesiton, setnumofquestion] = useState(-1);
 const [answers, setanswers] = useState([]);
-const [thisquesiton, setthisquestion] = useState()
+const [thisquestion, setthisquestion] = useState()
 const [buttoncolor, setbuttoncolor] = useState("rgba(40,160,184,1)")
 const [cansubmit, setcansubmit] = useState("سوال بعدی")
 const [seedisc, setseedis] = useState("سوال قبلی")
@@ -169,8 +169,8 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
           <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
          { questions!=undefined ? (<ScrollView>
                <>
-                        {numofquesiton > -1 ? <Text style={{ position: "absolute", alignSelf: "center", fontSize: hp("1.9%"), color: "#1f7a8c", fontWeight: "bold", marginTop: hp("3.5%") }}>({numofquesiton + 1}/{questions.Questions[0].question_num})</Text> : null}
-                        {numofquesiton > -1 ? <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={(numofquesiton + 1) / questions.Questions[0].question_num} color={"#1f7a8c"} /> : null}
+                        {numofquesiton > -1 ? <Text style={{ position: "absolute", alignSelf: "center", fontSize: hp("1.9%"), color: "#1f7a8c", fontWeight: "bold", marginTop: hp("3.5%") }}>({numofquesiton + 1}/{questions.Quiz.question_count})</Text> : null}
+                        {numofquesiton > -1 ? <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={(numofquesiton + 1) / questions.Quiz.question_count} color={"#1f7a8c"} /> : null}
 
                         {numofquesiton > -1 ? <Text style={{
                             color: "black", fontSize: hp("2%"), fontWeight: "bold", alignSelf: "center", width: wp("86%"), marginTop: hp("15%"), elevation: 5,
@@ -178,7 +178,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                             // textShadowRadius: 10,
                             // textShadowColor: 'gray',
                             marginRight: wp("1%")
-                        }}>{thisquesiton.question_text}</Text> : null}
+                        }}>{thisquestion.question_text}</Text> : null}
 
 
                         {numofquesiton > -1 ? <TouchableOpacity
@@ -230,7 +230,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 backgroundColor: colora, height: hp("8%"), width: wp("86%"), marginTop: hp("8%"),
                                 borderRadius: 100, alignSelf: "center", justifyContent: "center"
                             }}>
-                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquesiton.a_text}</Text>
+                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquestion.a_text}</Text>
                         </TouchableOpacity> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
                             onPress={async () => {
@@ -275,7 +275,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 backgroundColor: colorb, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, elevation: 5, alignSelf: "center", justifyContent: "center"
                             }}>
-                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.b_text}</Text>
+                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquestion.b_text}</Text>
                         </TouchableOpacity> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
                             onPress={async () => {
@@ -323,7 +323,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 backgroundColor: colorc, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                             }}>
-                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.c_text}</Text>
+                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquestion.c_text}</Text>
                         </TouchableOpacity> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
                             onPress={async () => {
@@ -372,7 +372,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 backgroundColor: colord, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
                             }}>
-                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquesiton.d_text}</Text>
+                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquestion.d_text}</Text>
                         </TouchableOpacity> : null}
                     </>
 
@@ -439,14 +439,14 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 
                                     await setbuttoncolor("rgba(31,122,140,1)")
                                     console.log(numofquesiton);
-                                    if (numofquesiton + 1 < questions.Questions[0].question_num) {
+                                    if (numofquesiton + 1 < questions.Quiz.question_count) {
                                         await setnumofquestion(numofquesiton + 1);
                                         await setcansubmit("سوال بعدی")
                                         setthisquestion(questions.Questions[numofquesiton + 1]);
 
                                         console.log("next pressed")
                                     }
-                                    if (numofquesiton + 1 === questions.Questions[0].question_num - 1) {
+                                    if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
                                         await setnumofquestion(numofquesiton + 1);
                                         await setcansubmit("ثبت پاسخ")
                                     }
@@ -545,7 +545,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                         </Text>
 
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
-                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Questions[0].question_num}</Text></Text></Text>
+                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
                                 {/* <View> */}
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>توضیحات:</Text>
@@ -566,6 +566,9 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                       }}> */}
                             <TouchableOpacity
                                 onPress={async () => {
+
+                                    setthisquestion(questions.Questions[0])
+            
                                     // new Promise(async(resolve,reject)=>{
                                     //     await setnumofquestion(numofquesiton+1);
                                     //    resolve();
