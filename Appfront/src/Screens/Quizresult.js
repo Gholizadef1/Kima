@@ -178,6 +178,7 @@ const Quizresult = (prop) => {
     const [colorb, setcolorb] = useState("rgba(237,242,244,0.9)")
     const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
     const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
+    const [pasocknadadid, setpasokhnadadid] = useState(false);
     // useFocusEffect(
     //     React.useCallback(() => {   
 
@@ -220,8 +221,10 @@ const Quizresult = (prop) => {
                             // textShadowRadius: 10,
                             // textShadowColor: 'gray',
                             marginRight: wp("1%")
-                        }}>{thisquestion.question_text}</Text> : null}
+                        }}>{thisquestion.question_text}</Text>
 
+                            : null}
+                        {pasocknadadid & numofquesiton!=-1 ? (<Text style={{marginTop:hp("1%"),marginLeft:hp("4%"),fontSize:hp("1.6.5%"),fontWeight:"bold",color:"#1B4332"}}>(پاسخ ندادید)</Text>) : null}
 
                         {numofquesiton > -1 ?
                             <View style={{ marginTop: hp("8%") }}>
@@ -348,7 +351,7 @@ const Quizresult = (prop) => {
                                 <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
                                     {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
-                                <Text style={{fontSize:hp("1.8"),color:"#83c5be",fontWeight:"bold",alignSelf:"flex-end",position:"absolute",marginTop:hp("22.9%"),right:wp("10%")}}><Text style={{color:"#1f7a8c",fontSize:hp("1.6%")}}>( امتیاز شما :</Text>{questions.score} <Text style={{color:"#1f7a8c",fontSize:hp("1.6%")}}>) </Text></Text>
+                                <Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
@@ -383,33 +386,39 @@ const Quizresult = (prop) => {
                                     await setseedis(" توضیحات")
 
                                     if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#caffbf")
+                                        setcolora("#95D5B2")
                                     }
+
                                     if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#caffbf")
+                                        setcolorb("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#caffbf")
+                                        setcolorc("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#caffbf")
+                                        setcolord("#95D5B2")
                                     }
                                     // f28482
                                     if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
                                         if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#FEEBEC")
+                                            setcolora("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#FEEBEC")
+                                            setcolorb("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#FEEBEC")
+                                            setcolorc("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#FEEBEC")
+                                            setcolord("#EF8089")
                                         }
                                     }
-
+                                    if (questions.user_answer[numofquesiton + 1] === "") {
+                                        setpasokhnadadid(true)
+                                    }
+                                    else{
+                                        setpasokhnadadid(false)
+                                    }
 
 
                                     console.log(" rang negah ghabli")
@@ -465,33 +474,39 @@ const Quizresult = (prop) => {
 
                                     console.log("next pressed")
                                 }
-                                if (numofquesiton-1 >= 0) {
+                                if (numofquesiton - 1 >= 0) {
                                     if (questions.Questions[numofquesiton - 1].key === "a") {
-                                        setcolora("#caffbf")
+                                        setcolora("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton - 1].key === "b") {
-                                        setcolorb("#caffbf")
+                                        setcolorb("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton - 1].key === "c") {
-                                        setcolorc("#caffbf")
+                                        setcolorc("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton - 1].key === "d") {
-                                        setcolord("#caffbf")
+                                        setcolord("#95D5B2")
                                     }
                                     // f28482
                                     if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
                                         if (questions.user_answer[numofquesiton - 1] === "a") {
-                                            setcolora("#FEEBEC")
+                                            setcolora("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton - 1] === "b") {
-                                            setcolorb("#FEEBEC")
+                                            setcolorb("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton - 1] === "c") {
-                                            setcolorc("#FEEBEC")
+                                            setcolorc("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton - 1] === "d") {
-                                            setcolord("#FEEBEC")
+                                            setcolord("#EF8089")
                                         }
+                                    }
+                                    if (questions.user_answer[numofquesiton - 1] === "") {
+                                        setpasokhnadadid(true)
+                                    }
+                                    else{
+                                        setpasokhnadadid(false)
                                     }
                                 }
                                 //update nemishe chon :\
@@ -544,30 +559,30 @@ const Quizresult = (prop) => {
                                 console.log(numofquesiton + " num of question");
                                 if (numofquesiton + 1 < questions.Quiz.question_count) {
                                     if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#caffbf")
+                                        setcolora("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#caffbf")
+                                        setcolorb("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#caffbf")
+                                        setcolorc("#95D5B2")
                                     }
                                     if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#caffbf")
+                                        setcolord("#95D5B2")
                                     }
                                     // f28482
                                     if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
                                         if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#FEEBEC")
+                                            setcolora("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#FEEBEC")
+                                            setcolorb("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#FEEBEC")
+                                            setcolorc("#EF8089")
                                         }
                                         if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#FEEBEC")
+                                            setcolord("#EF8089")
                                         }
                                     }
                                     await setnumofquestion(numofquesiton + 1);
@@ -576,14 +591,20 @@ const Quizresult = (prop) => {
 
                                     console.log("next pressed")
                                 }
-                                if (cansubmit === "ثبت پاسخ") {
+                                if (cansubmit === "صفحه کوییز") {
                                     await postquiz();
                                 }
                                 if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
                                     await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("ثبت پاسخ")
+                                    await setcansubmit("صفحه کوییز")
                                 }
                                 console.log(numofquesiton);
+                                if (questions.user_answer[numofquesiton + 1] === "") {
+                                        setpasokhnadadid(true)
+                                    }
+                                    else{
+                                        setpasokhnadadid(false)
+                                    }
 
                                 // })
                             }}
