@@ -103,12 +103,13 @@ const Quizresult = (prop) => {
     const [questions, setquestions] = useState(undefined);
     const getquiz = (async () => {
         try {
-            const response = await axiosinst.get('quiz/1')
+            const response = await axiosinst.get('user/'+await AsyncStorage.getItem("id")+'/quiz/1/result')
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
             //  console.log(JSON.stringify(response)+"    response")
             // await setquestions(response.data)
             setquestions(response.data)
+            console.log(response.data)
             await console.log(questions + " QUESTIONSS")
             // if(questions!=undefined){
             //     setthisquestion(questions.Questions[0])
@@ -625,12 +626,12 @@ const Quizresult = (prop) => {
 
                                 console.log("next pressed")
                             }
-                            if (cansubmit === "ثبت پاسخ") {
+                            if (cansubmit === "خارج شدن") {
                                 await postquiz();
                             }
                             if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
                                 await setnumofquestion(numofquesiton + 1);
-                                await setcansubmit("ثبت پاسخ")
+                                await setcansubmit("خارج شدن")
                             }
                             console.log(numofquesiton);
 
