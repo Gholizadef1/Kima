@@ -125,6 +125,44 @@ const Quizpage = (prop) => {
 
        }
  })
+
+const postquiz=async()=>{
+   console.log("here")
+   console.log(JSON.stringify(answers))
+   const back={
+       user_answer:answers
+   }
+    const response=await axiosinst.post('quiz/'+prop.route.params.id,JSON.stringify(back),{
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
+        }
+           )
+      .then( function(response){
+        
+      
+        console.log(response)
+        Alert.alert('','جواب شما با موفقیت ثبت شد ',[
+          {
+       text:'فهمیدم',style:'default',onPress:()=>console.log('alert closed')
+          }
+          ],{cancelable:false},{style:{height:50}})
+        
+        
+      })
+      .catch( function(error){  
+          {
+            console.log(error)
+          
+            Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+          
+
+          text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+          }],{cancelable:false},{style:{height:50}})
+          }     
+      })
+
+}
 const [numofquesiton, setnumofquestion] = useState(-1);
 const [answers, setanswers] = useState([]);
 const [thisquestion, setthisquestion] = useState()
@@ -140,6 +178,7 @@ const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
 const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 // useFocusEffect(
 //     React.useCallback(() => {   
+    
     useEffect(()=>{
         
             getquiz();
@@ -423,6 +462,8 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={async () => {
+
+                                  
                                     var a = answers;
                                     a[numofquesiton] = oneofthem;
                                     console.log(a);
@@ -446,11 +487,15 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 
                                         console.log("next pressed")
                                     }
+                                    if(cansubmit==="ثبت پاسخ"){
+                                        await postquiz();
+                                    }
                                     if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
                                         await setnumofquestion(numofquesiton + 1);
                                         await setcansubmit("ثبت پاسخ")
                                     }
                                     console.log(numofquesiton);
+                                 
                                     // })
                                 }}
                                 style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), marginTop: hp("10.6.5%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
