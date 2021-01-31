@@ -1,10 +1,9 @@
-import Reactfrom from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 //import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal } from "react-bootstrap";
-import{ useState, useEffect } from "react";
  import "./UsersList.css";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
@@ -26,9 +25,9 @@ import Avatar from '@material-ui/core/Avatar';
 import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
-  const [user,setUser] = useState({user:null});
+  const [user,setUser] = useState({user:""});
   const [search,setSearch] = useState([]);
-  const [error,setError] = useState("");
+  //const [error,setError] = useState("");
   const [userpic,setuserpic] = useState("");
 
  const handleChange = event => {
@@ -107,7 +106,7 @@ useEffect(() => {
 }
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
+      <nav className="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
           <GiBookshelf color="white" />
         </h1>
@@ -115,21 +114,21 @@ useEffect(() => {
          style = {{fontSize:33,fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
-        <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon "></span>
+        <button className="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav ml-5">
-            <li  class="nav-link btn"
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul className="navbar-nav ml-5">
+            <li  className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToGroups}>گروه‌ها</a>
             </li>
-            <li  class="nav-link btn"
+            <li  className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
               <a >آزمونک</a>
             </li>
-            <li class="nav-link btn"
+            <li className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
               <a onClick={routeToHome}>خانه</a>
             </li>
