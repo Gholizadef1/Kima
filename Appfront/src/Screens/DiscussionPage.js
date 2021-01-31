@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useDebugValue } from 'react';
-import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList, TextInput, TouchableOpacity, ActivityIndicator,Alert } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail, Item, Input, Textarea } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
@@ -97,7 +97,8 @@ const DiscussionPage = (prop) => {
                                                     {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
-                                                ], { cancelable: false }, { style: { height: 50 } })
+                                                ],{cancelable:false}, {style:{height:50}})
+                                                getChats();
                                             })
                                             .catch(function (error) {
                                                 {
@@ -157,16 +158,14 @@ const DiscussionPage = (prop) => {
                         data={chats}
                         renderItem={({ item }) => <>
                             <View style={{}}>
-                                <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
                                     {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
                                         source={{ uri: item.user.profile_photo }}
                                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
-                                </View>
-                                <Text style={{ alignSelf: 'flex-start', fontSize: 20 }}>{item.user.username}</Text>
+                                <Text style={{ alignSelf: 'flex-start', fontSize: 14,marginLeft:wp('5%') }}>{item.user.username}</Text>
                                 <Card style={styles.cardChat}>
-                                    <Text style={{ color: '#a9a9a9' }}>{item.chat_text}</Text>
+                                    <Text style={{ color: '#a9a9a9', marginLeft:wp('4%'),marginTop:hp('0.5%') }}>{item.chat_text}</Text>
                                 </Card>
                             </View>
                         </>
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
         marginLeft:wp('2%'),
         width:wp('16%') , 
         height:hp('9%') ,
-        marginTop:hp('4%')
+        marginTop:hp('5%')
     },
 
     centeredView: {
@@ -263,13 +262,16 @@ const styles = StyleSheet.create({
         height: wp('9.5%')
     },
     cardChat: {
-        height: hp('10%'),
         width: wp('50%'),
-        marginLeft: wp('20%'),
+        marginLeft: wp('25%'),
+        marginTop:hp('-5%'),
+        top:hp('-5%'),
+        marginBottom:hp('1%'),
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
         borderBottomRightRadius: 15,
-        backgroundColor: '#e6e6fa'
+        backgroundColor: '#e6e6fa',
+
     }
 })
 export default DiscussionPage;
