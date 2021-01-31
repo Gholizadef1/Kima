@@ -271,7 +271,7 @@ const Quizresult = (prop) => {
                             <TouchableOpacity activeOpacity={0.5} style={{
                                 //  height:hp("40%"),width:200,
                                 //  position:"absolute",
-                                backgroundColor: 'rgba(237,242,244,1)', alignself: "center", width: wp("90%"), marginHorizontal: wp("5%"),
+                                backgroundColor: '#F3F8F9', alignself: "center", width: wp("90%"), marginHorizontal: wp("5%"),
                                 borderRadius: 10, elevation: 5, marginBottom: hp("0%"), marginVertical: hp("5%")
                             }}>
                                 {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
@@ -348,7 +348,7 @@ const Quizresult = (prop) => {
                                 <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
                                     {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
-
+                                <Text style={{fontSize:hp("1.8"),color:"#83c5be",fontWeight:"bold",alignSelf:"flex-end",position:"absolute",marginTop:hp("22.9%"),right:wp("10%")}}><Text style={{color:"#1f7a8c",fontSize:hp("1.6%")}}>( امتیاز شما :</Text>{questions.score} <Text style={{color:"#1f7a8c",fontSize:hp("1.6%")}}>) </Text></Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
