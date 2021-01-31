@@ -23,6 +23,7 @@ const DiscussionPage = (prop) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [loading, setloading] = useState(true)
     const [refreshchats, setrefreshchats] = useState(false)
+    const [picture, setpicture] = useState(null);
     const [chats, setChats] = useState();
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
@@ -156,6 +157,13 @@ const DiscussionPage = (prop) => {
                         data={chats}
                         renderItem={({ item }) => <>
                             <View style={{}}>
+                                <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
+                                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
+                                        source={{ uri: item.user.profile_photo }}
+                                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                                        source={require('../../assets/group.jpg')}
+                                    ></Avatar.Image>}
+                                </View>
                                 <Text style={{ alignSelf: 'flex-start', fontSize: 20 }}>{item.user.username}</Text>
                                 <Card style={styles.cardChat}>
                                     <Text style={{ color: '#a9a9a9' }}>{item.chat_text}</Text>
@@ -199,10 +207,10 @@ const styles = StyleSheet.create({
     },
 
     avatar: {
-        elevation: 20,
-        marginTop: hp('-10%'),
-        marginLeft: wp('20%')
-
+        marginLeft:wp('2%'),
+        width:wp('16%') , 
+        height:hp('9%') ,
+        marginTop:hp('4%')
     },
 
     centeredView: {
@@ -227,14 +235,6 @@ const styles = StyleSheet.create({
         height: hp('65%'),
         elevation: 300
     },
-    // avatar: {
-    //   height: hp('14%'),
-    //   marginTop:hp('-1.5%'),
-    //   width: wp('28%'),
-    //   marginLeft:wp('-1%'),
-    //   borderRadius: 20,
-    //   position:'absolute'
-    // },
     loader: {
         alignItems: 'center',
         marginBottom: hp('5%'),
@@ -262,14 +262,14 @@ const styles = StyleSheet.create({
         marginRight: wp('45%'),
         height: wp('9.5%')
     },
-    cardChat :{
-        height:hp('10%'),
-        width:wp('50%'),
-        marginLeft:wp('20%'),
-        borderTopRightRadius:15,
-        borderTopLeftRadius:15,
-        borderBottomRightRadius:15,
-        backgroundColor:'#e6e6fa'
+    cardChat: {
+        height: hp('10%'),
+        width: wp('50%'),
+        marginLeft: wp('20%'),
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        backgroundColor: '#e6e6fa'
     }
 })
 export default DiscussionPage;
