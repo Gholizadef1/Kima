@@ -120,17 +120,17 @@ useEffect(() => {
 
         <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav ml-5">
-            <li  className="nav-link btn"
+            <li  className="nav-link btn" onClick={routeToGroups}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToGroups}>گروه‌ها</a>
+              گروه‌ها
             </li>
             <li  className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a >آزمونک</a>
+              آزمونک
             </li>
-            <li className="nav-link btn"
+            <li className="nav-link btn" onClick={routeToHome}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToHome}>خانه</a>
+              خانه
             </li>
           </ul>
           <div className="d-flex flex-grow-1 mx-md-5 ">
@@ -151,13 +151,13 @@ useEffect(() => {
                   <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
-                  <div className="dropdown-divider"></div>
-                  <a type="button" className="dropdown-item"  onClick={routeToProfile}  style={{fontSize:16}}>
+                  <div className="dropdown-divider "></div>
+                  <p type="button" className="dropdown-item my-n1"  onClick={routeToProfile}  style={{fontSize:16}}>
                     پروفایل
-                  </a>
-                  <a type="button" className="dropdown-item" onClick = {logout} style={{fontSize:16}} >
+                  </p>
+                  <p type="button" className="dropdown-item my-n1" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
-                  </a>
+                  </p>
                  
                 </div>
               </div>
