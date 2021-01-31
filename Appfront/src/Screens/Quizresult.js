@@ -103,11 +103,12 @@ const Quizresult = (prop) => {
     const [questions, setquestions] = useState(undefined);
     const getquiz = (async () => {
         try {
-            const response = await axiosinst.get('quiz/1')
+            const response = await axiosinst.get('user/' + await AsyncStorage.getItem("id") + '/quiz/1/result')
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
             //  console.log(JSON.stringify(response)+"    response")
             // await setquestions(response.data)
+            console.log(response.data + " RESPONSE DATA")
             setquestions(response.data)
             await console.log(questions + " QUESTIONSS")
             // if(questions!=undefined){
@@ -208,7 +209,7 @@ const Quizresult = (prop) => {
     return (<View style={styles.container}>
         <ImageBackground style={{ flex: 1 }} source={require("../../assets/fantezi4.jpg")}>
             {questions != undefined ? (<ScrollView>
-                <View style={{marginBottom:hp("17%")}}>
+                <View style={{ marginBottom: hp("17%") }}>
                     <>
                         {numofquesiton > -1 ? <Text style={{ position: "absolute", alignSelf: "center", fontSize: hp("1.9%"), color: "#1f7a8c", fontWeight: "bold", marginTop: hp("3.5%") }}>({numofquesiton + 1}/{questions.Quiz.question_count})</Text> : null}
                         {numofquesiton > -1 ? <ProgressBar style={{ top: hp("7%"), marginHorizontal: wp("0%"), borderRadius: 20, height: hp("1%"), elevation: 3 }} progress={(numofquesiton + 1) / questions.Quiz.question_count} color={"#1f7a8c"} /> : null}
@@ -223,98 +224,18 @@ const Quizresult = (prop) => {
 
 
                         {numofquesiton > -1 ?
-                        <View style={{marginTop: hp("8%")}}>
-                         <TouchableOpacity
-                            onPress={async () => {
-                                await new Promise(async () => {
-                                    if (colora === "rgba(237,242,244,0.9)") {
-                                        //var a = answersc;
-                                        //const b = parseInt(oneofthem.numberofq)
-                                        //a[0] = "rgba(40,160,184,1)"
-                                        await setannswersc(["rgba(40,160,184,1)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
-                                        await setcolora("rgba(40,160,184,1)")
-                                        await setoneofthem("a")
-                                        console.log(colora + " rangi")
-                                    }
+                            <View style={{ marginTop: hp("8%") }}>
+                                <TouchableOpacity
 
-                                    // if (oneofthem.key != "") {
-                                    var a = answersc;
-
-                                    const b = parseInt(oneofthem) - 1
-                                    console.log(b + "  b")
-
-
-                                    if (colora === "rgba(40,160,184,1)") {
-                                        // await setoneofthem("")
-                                        console.log("a uncolor")
-                                        await setcolora("rgba(237,242,244,0.9)")
-                                        console.log(colora)
-                                    }
-                                    if (colorb === "rgba(40,160,184,1)") {
-                                        await setcolorb("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colorc === "rgba(40,160,184,1)") {
-                                        await setcolorc("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colord === "rgba(40,160,184,1)") {
-                                        await setcolord("rgba(237,242,244,0.9)")
-                                    }
-                                    a[b] = "rgba(40,160,184,1)"
-                                    await setannswersc(a)
-
-
-                                    //   }
-
-                                })
-
-
-                            }}
-                            activeOpacity={0.5} style={{
-                                backgroundColor: colora, height: hp("8%"), width: wp("86%"), 
-                                borderRadius: 100, alignSelf: "center", justifyContent: "center"
-                            }}>
-                            <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquestion.a_text}</Text>
-                        </TouchableOpacity>
-                        </View>: null}
+                                    activeOpacity={0.5} style={{
+                                        backgroundColor: colora, height: hp("8%"), width: wp("86%"),
+                                        borderRadius: 100, alignSelf: "center", justifyContent: "center"
+                                    }}>
+                                    <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}>{thisquestion.a_text}</Text>
+                                </TouchableOpacity>
+                            </View> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
-                            onPress={async () => {
-                                await new Promise(async () => {
-                                    if (colorb === "rgba(237,242,244,0.9)") {
-                                        //var a = answersc;
-                                        //const b = parseInt(oneofthem.numberofq)
-                                        //a[0] = "rgba(40,160,184,1)"
-                                        await setannswersc(["rgba(40,160,184,1)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
-                                        await setcolorb("rgba(40,160,184,1)")
-                                        await setoneofthem("b")
-                                        console.log(colorb + " rangi")
-                                    }
 
-                                    // if (oneofthem.key != "") {
-                                    var a = answersc;
-
-                                    const b = parseInt(oneofthem.key) - 1
-                                    console.log(b + "  b")
-
-                                    if (colora === "rgba(40,160,184,1)") {
-                                        console.log("a uncolor")
-                                        await setcolora("rgba(237,242,244,0.9)")
-                                        console.log(colora)
-                                    }
-                                    if (colorb === "rgba(40,160,184,1)") {
-                                        await setcolorb("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colorc === "rgba(40,160,184,1)") {
-                                        await setcolorc("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colord === "rgba(40,160,184,1)") {
-                                        await setcolord("rgba(237,242,244,0.9)")
-                                    }
-                                    a[b] = "rgba(40,160,184,1)"
-                                    await setannswersc(a)
-                                })
-
-
-                            }}
                             activeOpacity={0.5} style={{
                                 backgroundColor: colorb, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, elevation: 5, alignSelf: "center", justifyContent: "center"
@@ -322,47 +243,8 @@ const Quizresult = (prop) => {
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquestion.b_text}</Text>
                         </TouchableOpacity> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
-                            onPress={async () => {
-                                await new Promise(async () => {
-                                    if (colorc === "rgba(237,242,244,0.9)") {
-                                        //var a = answersc;
-                                        //const b = parseInt(oneofthem.numberofq)
-                                        //a[0] = "rgba(40,160,184,1)"
-                                        await setannswersc(["rgba(40,160,184,1)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
-                                        await setcolorc("rgba(40,160,184,1)")
-                                        await setoneofthem("c")
-                                        console.log(colorc + " rangi")
-                                    }
-
-                                    // if (oneofthem.key != "") {
-                                    var a = answersc;
-
-                                    const b = parseInt(oneofthem.key) - 1
-                                    console.log(b + "  b")
-
-                                    if (colora === "rgba(40,160,184,1)") {
-                                        console.log("a uncolor")
-                                        await setcolora("rgba(237,242,244,0.9)")
-                                        console.log(colora)
-                                    }
-                                    if (colorb === "rgba(40,160,184,1)") {
-                                        await setcolorb("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colorc === "rgba(40,160,184,1)") {
-                                        await setcolorc("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colord === "rgba(40,160,184,1)") {
-                                        await setcolord("rgba(237,242,244,0.9)")
-                                    }
-                                    a[b] = "rgba(40,160,184,1)"
-                                    await setannswersc(a)
-
-                                    //   }
-
-                                })
 
 
-                            }}
                             activeOpacity={0.5} style={{
                                 backgroundColor: colorc, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
@@ -370,48 +252,9 @@ const Quizresult = (prop) => {
                             <Text style={{ fontSize: hp("1.8%"), alignSelf: "flex-start", marginHorizontal: wp("5%") }}> {thisquestion.c_text}</Text>
                         </TouchableOpacity> : null}
                         {numofquesiton > -1 ? <TouchableOpacity
-                            onPress={async () => {
-                                await new Promise(async () => {
-                                    if (colord === "rgba(237,242,244,0.9)") {
-                                        //var a = answersc;
-                                        //const b = parseInt(oneofthem.numberofq)
-                                        //a[0] = "rgba(40,160,184,1)"
-                                        await setannswersc(["rgba(40,160,184,1)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)", "rgba(237,242,244,0.9)"])
-                                        await setcolord("rgba(40,160,184,1)")
-
-                                        console.log(colord + " rangi")
-                                        await setoneofthem("d")
-                                    }
-
-                                    // if (oneofthem.key != "") {
-                                    var a = answersc;
-
-                                    const b = parseInt(oneofthem.key) - 1
-                                    console.log(b + "  b")
-
-                                    if (colora === "rgba(40,160,184,1)") {
-                                        console.log("a uncolor")
-                                        await setcolora("rgba(237,242,244,0.9)")
-                                        console.log(colora)
-                                    }
-                                    if (colorb === "rgba(40,160,184,1)") {
-                                        await setcolorb("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colorc === "rgba(40,160,184,1)") {
-                                        await setcolorc("rgba(237,242,244,0.9)")
-                                    }
-                                    if (colord === "rgba(40,160,184,1)") {
-                                        await setcolord("rgba(237,242,244,0.9)")
-                                    }
-                                    a[b] = "rgba(40,160,184,1)"
-                                    await setannswersc(a)
-
-                                    //   }
-
-                                })
 
 
-                            }}
+
                             activeOpacity={0.5} style={{
                                 backgroundColor: colord, height: hp("8%"), width: wp("86%"), marginTop: hp("2.5%"),
                                 borderRadius: 100, alignSelf: "center", elevation: 5, justifyContent: "center"
@@ -538,30 +381,45 @@ const Quizresult = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
-                                   
+
+                                    if (questions.Questions[numofquesiton + 1].key === "a") {
+                                        setcolora("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "b") {
+                                        setcolorb("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "c") {
+                                        setcolorc("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "d") {
+                                        setcolord("#caffbf")
+                                    }
+                                    // f28482
+                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                        if (questions.user_answer[numofquesiton + 1] === "a") {
+                                            setcolora("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "b") {
+                                            setcolorb("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "c") {
+                                            setcolorc("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "d") {
+                                            setcolord("#FEEBEC")
+                                        }
+                                    }
+
+
+
                                     console.log(" rang negah ghabli")
-                                  //  setcolor{answers[numofquesiton-1]}()
-                                  if(answers[numofquesiton+1]==="a"){
-                                    await setcolora("rgba(40,160,184,1)")
-                                    setoneofthem("a")
-                                  }
-                                  if(answers[numofquesiton+1]==="b"){
-                                    await setcolorb("rgba(40,160,184,1)")
-                                    setoneofthem("b")
-                                  }
-                                  if(answers[numofquesiton+1]==="c"){
-                                    await setcolorc("rgba(40,160,184,1)")
-                                    setoneofthem("c")
-                                  }
-                                  if(answers[numofquesiton+1]==="d"){
-                                    await setcolord("rgba(40,160,184,1)")
-                                    setoneofthem("d")
-                                  }
+
+
                                     // })
                                 }}
                                 style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
                                 {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
-                                <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4", alignSelf: "center" }}>مشاهده ی سوالات</Text>
+                                <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4", alignSelf: "center" }}>مشاهده ی پاسخ ها</Text>
                             </TouchableOpacity>
                             {/* </View> */}
 
@@ -576,149 +434,163 @@ const Quizresult = (prop) => {
             </ScrollView>) : <Spinner size={"large"} style={{ alignSelf: "center", marginTop: hp("30%") }} color={"#1f7a8c"}></Spinner>}
             {numofquesiton > -1 ?
                 <View style={{ flexDirection: "row", position: "absolute", marginTop: hp("66.7%") }}>
-                <View style={{marginTop:hp("10.7")}}>
-                    <TouchableOpacity
-                        onPress={async () => {
-                        
-                            var a = answers;
-                            a[numofquesiton] = oneofthem;
-                            console.log(a);
-                            setoneofthem("")
-                            setanswers(a);
-                            await setcolora("rgba(237,242,244,0.9)")
-                            await setcolorb("rgba(237,242,244,0.9)")
-                            await setcolorc("rgba(237,242,244,0.9)")
-                            await setcolord("rgba(237,242,244,0.9)")
-                            await setcansubmit("سوال بعدی")
-                            if(numofquesiton-1>=0){
-                                console.log(numofquesiton+"ndfkj;kj")
-                                if(answers[numofquesiton-1]!=""){
-                                    console.log(" rang negah ghabli")
-                                  //  setcolor{answers[numofquesiton-1]}()
-                                  if(answers[numofquesiton-1]==="a"){
-                                    await setcolora("rgba(40,160,184,1)")
-                                    setoneofthem("a")
-                                  }
-                                  if(answers[numofquesiton-1]==="b"){
-                                    await setcolorb("rgba(40,160,184,1)")
-                                    setoneofthem("b")
-                                  }
-                                  if(answers[numofquesiton-1]==="c"){
-                                    await setcolorc("rgba(40,160,184,1)")
-                                    setoneofthem("c")
-                                  }
-                                  if(answers[numofquesiton-1]==="d"){
-                                    await setcolord("rgba(40,160,184,1)")
-                                    setoneofthem("d")
-                                  }
-                                }
-                            }
-                            console.log(numofquesiton+" numofquestion");
-                            if (numofquesiton - 1 >= 1) {
-                             
-                                console.log("here ghabli b tar az 1")
-                                await setseedis("سوال قبلی")
-                                await setnumofquestion(numofquesiton - 1)
-                                await setbuttoncolor("rgba(31,122,140,1)")
-                             
-                                setthisquestion(questions.Questions[numofquesiton - 1]);
+                    <View style={{ marginTop: hp("10.7") }}>
+                        <TouchableOpacity
+                            onPress={async () => {
 
-
-                                console.log("next pressed")
-                            }
-                            // if(numofquesiton===1){
-
-                            // }
-                            //update nemishe chon :\
-                            if ((numofquesiton - 1) === 0) {
-                                console.log("here too")
-                                 await setnumofquestion(numofquesiton - 1)
-                                 await setbuttoncolor("rgba(40,160,184,1)")
-                                 setthisquestion(questions.Questions[0]);
-                                // await setseedis(" توضیحات")
-
-                            }
-                            if (numofquesiton === 0 || numofquesiton === 1) {
-                                // await setnumofquestion(-1);
-                                await setseedis(" توضیحات")
-                            }
-                            if (numofquesiton === 0) {
-                                await setnumofquestion(-1);
-                            }
-                        }}
-                        style={{ height: hp("10%"),margin:0, elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, top: hp("0%"), borderTopRightRadius: 50 }}>
-                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
-                        <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View style={{marginLeft:wp("50%"),marginTop:hp("10.7")}}>
-                    <TouchableOpacity
-                        onPress={async () => {
-                           
-                            await setseedis(" سوال قبلی")
-                         
-                            var a = answers;
-                            a[numofquesiton] = oneofthem;
-                            setoneofthem("")
-                            console.log(a);
-                            setanswers(a);
-                            await setcolora("rgba(237,242,244,0.9)")
-                            await setcolorb("rgba(237,242,244,0.9)")
-                            await setcolorc("rgba(237,242,244,0.9)")
-                            await setcolord("rgba(237,242,244,0.9)")
-                            if(numofquesiton + 1 <= questions.Quiz.question_count){
-                                console.log(numofquesiton+"ndfkj;kj")
-                                if(answers[numofquesiton+1]!=""){
-                                    console.log(" rang negah ghabli")
-                                  //  setcolor{answers[numofquesiton-1]}()
-                                  if(answers[numofquesiton+1]==="a"){
-                                    await setcolora("rgba(40,160,184,1)")
-                                    setoneofthem("a")
-                                  }
-                                  if(answers[numofquesiton+1]==="b"){
-                                    await setcolorb("rgba(40,160,184,1)")
-                                    setoneofthem("b")
-                                  }
-                                  if(answers[numofquesiton+1]==="c"){
-                                    await setcolorc("rgba(40,160,184,1)")
-                                    setoneofthem("c")
-                                  }
-                                  if(answers[numofquesiton+1]==="d"){
-                                    await setcolord("rgba(40,160,184,1)")
-                                    setoneofthem("d")
-                                  }
-                                }
-                            }
-                            await setseedis("سوال قبلی")
-                            // new Promise(async(resolve,reject)=>{
-                            //     await setnumofquestion(numofquesiton+1);
-                            //    resolve();
-                            // }).then(async()=>{
-
-                            await setbuttoncolor("rgba(31,122,140,1)")
-                            console.log(numofquesiton+" num of question");
-                            if (numofquesiton + 1 < questions.Quiz.question_count) {
-                                await setnumofquestion(numofquesiton + 1);
+                                var a = answers;
+                                a[numofquesiton] = oneofthem;
+                                console.log(a);
+                                setoneofthem("")
+                                setanswers(a);
+                                await setcolora("rgba(237,242,244,0.9)")
+                                await setcolorb("rgba(237,242,244,0.9)")
+                                await setcolorc("rgba(237,242,244,0.9)")
+                                await setcolord("rgba(237,242,244,0.9)")
                                 await setcansubmit("سوال بعدی")
-                                setthisquestion(questions.Questions[numofquesiton + 1]);
 
-                                console.log("next pressed")
-                            }
-                            if (cansubmit === "ثبت پاسخ") {
-                                await postquiz();
-                            }
-                            if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
-                                await setnumofquestion(numofquesiton + 1);
-                                await setcansubmit("ثبت پاسخ")
-                            }
-                            console.log(numofquesiton);
 
-                            // })
-                        }}
-                        style={{ height: hp("10%"), elevation: 5,margin:0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
-                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                        <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
-                    </TouchableOpacity>
+
+                                console.log(numofquesiton + " numofquestion");
+                                if (numofquesiton - 1 >= 1) {
+
+
+                                    console.log("here ghabli b tar az 1")
+                                    await setseedis("سوال قبلی")
+                                    await setnumofquestion(numofquesiton - 1)
+                                    await setbuttoncolor("rgba(31,122,140,1)")
+
+                                    setthisquestion(questions.Questions[numofquesiton - 1]);
+
+
+                                    console.log("next pressed")
+                                }
+                                if (numofquesiton-1 >= 0) {
+                                    if (questions.Questions[numofquesiton - 1].key === "a") {
+                                        setcolora("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton - 1].key === "b") {
+                                        setcolorb("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton - 1].key === "c") {
+                                        setcolorc("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton - 1].key === "d") {
+                                        setcolord("#caffbf")
+                                    }
+                                    // f28482
+                                    if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
+                                        if (questions.user_answer[numofquesiton - 1] === "a") {
+                                            setcolora("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton - 1] === "b") {
+                                            setcolorb("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton - 1] === "c") {
+                                            setcolorc("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton - 1] === "d") {
+                                            setcolord("#FEEBEC")
+                                        }
+                                    }
+                                }
+                                //update nemishe chon :\
+                                if ((numofquesiton - 1) === 0) {
+                                    console.log("here too")
+                                    await setnumofquestion(numofquesiton - 1)
+                                    await setbuttoncolor("rgba(40,160,184,1)")
+                                    setthisquestion(questions.Questions[0]);
+                                    // await setseedis(" توضیحات")
+
+                                }
+                                if (numofquesiton === 0 || numofquesiton === 1) {
+                                    // await setnumofquestion(-1);
+                                    await setseedis(" توضیحات")
+                                }
+                                if (numofquesiton === 0) {
+                                    await setnumofquestion(-1);
+                                }
+                            }}
+                            style={{ height: hp("10%"), margin: 0, elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, top: hp("0%"), borderTopRightRadius: 50 }}>
+                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
+                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ marginLeft: wp("50%"), marginTop: hp("10.7") }}>
+                        <TouchableOpacity
+                            onPress={async () => {
+
+                                await setseedis(" سوال قبلی")
+
+                                var a = answers;
+                                a[numofquesiton] = oneofthem;
+                                setoneofthem("")
+                                console.log(a);
+                                setanswers(a);
+                                await setcolora("rgba(237,242,244,0.9)")
+                                await setcolorb("rgba(237,242,244,0.9)")
+                                await setcolorc("rgba(237,242,244,0.9)")
+                                await setcolord("rgba(237,242,244,0.9)")
+
+
+
+                                await setseedis("سوال قبلی")
+                                // new Promise(async(resolve,reject)=>{
+                                //     await setnumofquestion(numofquesiton+1);
+                                //    resolve();
+                                // }).then(async()=>{
+
+                                await setbuttoncolor("rgba(31,122,140,1)")
+                                console.log(numofquesiton + " num of question");
+                                if (numofquesiton + 1 < questions.Quiz.question_count) {
+                                    if (questions.Questions[numofquesiton + 1].key === "a") {
+                                        setcolora("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "b") {
+                                        setcolorb("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "c") {
+                                        setcolorc("#caffbf")
+                                    }
+                                    if (questions.Questions[numofquesiton + 1].key === "d") {
+                                        setcolord("#caffbf")
+                                    }
+                                    // f28482
+                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                        if (questions.user_answer[numofquesiton + 1] === "a") {
+                                            setcolora("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "b") {
+                                            setcolorb("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "c") {
+                                            setcolorc("#FEEBEC")
+                                        }
+                                        if (questions.user_answer[numofquesiton + 1] === "d") {
+                                            setcolord("#FEEBEC")
+                                        }
+                                    }
+                                    await setnumofquestion(numofquesiton + 1);
+                                    await setcansubmit("سوال بعدی")
+                                    setthisquestion(questions.Questions[numofquesiton + 1]);
+
+                                    console.log("next pressed")
+                                }
+                                if (cansubmit === "ثبت پاسخ") {
+                                    await postquiz();
+                                }
+                                if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
+                                    await setnumofquestion(numofquesiton + 1);
+                                    await setcansubmit("ثبت پاسخ")
+                                }
+                                console.log(numofquesiton);
+
+                                // })
+                            }}
+                            style={{ height: hp("10%"), elevation: 5, margin: 0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View> : null}
             {/* </View> */}
