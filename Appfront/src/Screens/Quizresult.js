@@ -25,7 +25,7 @@ import { Dimensions } from 'react-native'
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 // import { Button } from 'react-native-paper';
 
-const Quizpage = (prop) => {
+const Quizresult = (prop) => {
     
     console.log(prop.route.params.id)
     //     useEffect(async()=>{
@@ -686,4 +686,4 @@ const styles = StyleSheet.create({
         marginTop: hp('10%')
     }
 });
-export default Quizpage;
+export default Quizresult;

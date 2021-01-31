@@ -140,7 +140,7 @@ const postquiz=async()=>{
            )
       .then( function(response){
         
-      
+        prop.navigation.navigate("quizresult",{id:prop.route.params.id})
         console.log(response)
         Alert.alert('','جواب شما با موفقیت ثبت شد ',[
           {
