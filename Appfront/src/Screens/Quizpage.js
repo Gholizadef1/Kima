@@ -29,7 +29,7 @@ const Quizpage = () => {
         Quiz: {
             id: 15,
             title: " ;slakfj",
-            description: "راجب یه برنامه ایه که توش میتونی بری بایه kima پروژه",
+            description: "راجب یه برنامه ایه که توش  ین نتی ن بمشکیتب مکتنیب ن تبنت نیتبک شنیتب نم بنتیب ن تب نیتثخت بحخه وی ضهقخهردشنکاعثب که خکهضابد نحخضه خه خهع خ میتونی بری بایه kima پروژه",
             creator: {
                 username: "setaysehm",
                 profile_photo: "/media/profile",
@@ -273,10 +273,10 @@ const Quizpage = () => {
                             </TouchableOpacity>
                         </View> */}
                     </TouchableOpacity>
-                  <View style={{
+                  {/* <View style={{
                     //   alignItems:"flex-end",alignContent:"center"
-                      }}>
-                    <TouchableOpacity
+                      }}> */}
+                      <TouchableOpacity
                             onPress={async () => {
                                 // new Promise(async(resolve,reject)=>{
                                 //     await setnumofquestion(numofquesiton+1);
@@ -286,11 +286,11 @@ const Quizpage = () => {
                                 console.log(numofquesiton);
                                 // })
                             }}
-                            style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), borderTopLeftRadius: 50 }}>
-                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("8%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوالات</Text>
+                            style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)",borderRadius:50,marginTop:hp("11%"),alignSelf:"center" }}>
+                            {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
+                            <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4",alignSelf:"center" }}>مشاهده ی سوالات</Text>
                         </TouchableOpacity>
-                        </View>
+                        {/* </View> */}
                     
                     </View> 
                     : null}
