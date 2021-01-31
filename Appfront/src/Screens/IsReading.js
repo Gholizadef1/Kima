@@ -23,7 +23,9 @@ const IsReading = ({navigation}) => {
         async function getreadImageFromAPI1(){
 
             const id=await AsyncStorage.getItem('id');
-            axiosinst.get('/api/user-profile/'+id+'/Reading',{"headers":{"content-type":"application/json",
+            axiosinst.get('/user/'+id+'/collection?type=Reading',{
+            
+            "headers":{"content-type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})
             .then(function(response){
