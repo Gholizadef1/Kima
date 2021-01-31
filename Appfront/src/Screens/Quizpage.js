@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, FlatList, ActivityIndicator, TextPropTypes, Alert } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar,Spinner } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import { useFocusEffect } from '@react-navigation/native';
 // import axiosinst from '../api/axiosinst';
@@ -637,7 +637,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                     {/* 
         <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
 
-                </ScrollView>):null}
+                </ScrollView>):<Spinner size={"large"}  style={{alignSelf:"center",marginTop:hp("30%")}} color={"#1f7a8c"}></Spinner>}
             </ImageBackground>
 
         </View>
