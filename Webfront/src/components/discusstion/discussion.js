@@ -24,6 +24,7 @@ import {
     // Redirect,
     // Link,
     // useRouteMatch,
+    useHistory,
     useParams,
     withRouter
   } from "react-router-dom";
