@@ -44,7 +44,7 @@ const DiscussionPage = (prop) => {
     };
 
     const getChats = async () => {
-
+        
         axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
             "headers": {
                 "content-type": "application/json",
@@ -52,14 +52,9 @@ const DiscussionPage = (prop) => {
             }
         })
             .then(function (response) {
-
-                console.log('DATEE' + response.data.chats[0].send_time)
-
-                //   console.log('CHATT'+response.data.chats[0].chat_text)
-                //   console.log('USERR'+response.data.chats[0].user.username)
                 setChats(response.data.chats)
                 setloading(false)
-                console.log('CHATT' + chats[0].user.username)
+                console.log('DATEE' + response.data.chats[0].send_time)
             })
 
             .catch(async function (error) {
@@ -197,8 +192,12 @@ const DiscussionPage = (prop) => {
                         }
                     >
                     </FlatList>
+
+                    {chats.length === 0 ?
+                    <Text style={{marginLeft:wp('18%'),marginTop:hp('20%'),fontSize:15,color:'#1F7A8C'}}>در این بحث تابحال صحبتی  صورت نگرفته ...</Text>: null }
+
                     <Button onPress={() => setModalVisible(true)} style={{
-                        marginTop: hp('57%'),
+                        marginTop: hp('30%'),
                         width: 180, borderRadius: 20, marginLeft: wp('28%')
                         , backgroundColor: '#1F7A8C'
                     }}>
