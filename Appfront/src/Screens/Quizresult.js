@@ -538,6 +538,25 @@ const Quizresult = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
+                                   
+                                    console.log(" rang negah ghabli")
+                                  //  setcolor{answers[numofquesiton-1]}()
+                                  if(answers[numofquesiton+1]==="a"){
+                                    await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
+                                  }
+                                  if(answers[numofquesiton+1]==="b"){
+                                    await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
+                                  }
+                                  if(answers[numofquesiton+1]==="c"){
+                                    await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
+                                  }
+                                  if(answers[numofquesiton+1]==="d"){
+                                    await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
+                                  }
                                     // })
                                 }}
                                 style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
@@ -560,18 +579,43 @@ const Quizresult = (prop) => {
                 <View style={{marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
+                        
                             var a = answers;
                             a[numofquesiton] = oneofthem;
                             console.log(a);
+                            setoneofthem("")
                             setanswers(a);
                             await setcolora("rgba(237,242,244,0.9)")
                             await setcolorb("rgba(237,242,244,0.9)")
                             await setcolorc("rgba(237,242,244,0.9)")
                             await setcolord("rgba(237,242,244,0.9)")
                             await setcansubmit("سوال بعدی")
-
+                            if(numofquesiton-1>=0){
+                                console.log(numofquesiton+"ndfkj;kj")
+                                if(answers[numofquesiton-1]!=""){
+                                    console.log(" rang negah ghabli")
+                                  //  setcolor{answers[numofquesiton-1]}()
+                                  if(answers[numofquesiton-1]==="a"){
+                                    await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
+                                  }
+                                  if(answers[numofquesiton-1]==="b"){
+                                    await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
+                                  }
+                                  if(answers[numofquesiton-1]==="c"){
+                                    await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
+                                  }
+                                  if(answers[numofquesiton-1]==="d"){
+                                    await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
+                                  }
+                                }
+                            }
                             console.log(numofquesiton+" numofquestion");
                             if (numofquesiton - 1 >= 1) {
+                             
                                 console.log("here ghabli b tar az 1")
                                 await setseedis("سوال قبلی")
                                 await setnumofquestion(numofquesiton - 1)
@@ -610,16 +654,41 @@ const Quizresult = (prop) => {
                     <View style={{marginLeft:wp("50%"),marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
+                           
                             await setseedis(" سوال قبلی")
-
+                         
                             var a = answers;
                             a[numofquesiton] = oneofthem;
+                            setoneofthem("")
                             console.log(a);
                             setanswers(a);
                             await setcolora("rgba(237,242,244,0.9)")
                             await setcolorb("rgba(237,242,244,0.9)")
                             await setcolorc("rgba(237,242,244,0.9)")
                             await setcolord("rgba(237,242,244,0.9)")
+                            if(numofquesiton + 1 <= questions.Quiz.question_count){
+                                console.log(numofquesiton+"ndfkj;kj")
+                                if(answers[numofquesiton+1]!=""){
+                                    console.log(" rang negah ghabli")
+                                  //  setcolor{answers[numofquesiton-1]}()
+                                  if(answers[numofquesiton+1]==="a"){
+                                    await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
+                                  }
+                                  if(answers[numofquesiton+1]==="b"){
+                                    await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
+                                  }
+                                  if(answers[numofquesiton+1]==="c"){
+                                    await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
+                                  }
+                                  if(answers[numofquesiton+1]==="d"){
+                                    await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
+                                  }
+                                }
+                            }
                             await setseedis("سوال قبلی")
                             // new Promise(async(resolve,reject)=>{
                             //     await setnumofquestion(numofquesiton+1);
