@@ -21,13 +21,15 @@ import { set } from 'react-native-reanimated';
 import Createquiz from "./Createquiz";
 import { ImageBackground } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
+import { Dimensions } from 'react-native'
 // import { Button } from 'react-native-paper';
+
 const Quizpage = () => {
     const questions = {
         Quiz: {
             id: 15,
             title: " ;slakfj",
-            description: "راجب یه برنامه ایه که توش میتونی بری به کتاب ها رای بدی و کتاب مورد علاقت رو پیدا کنی مبنتکشسک بمتن منتشکمنتبکمنتس کمنبتکمینت کمنتب کمنستبکمنت کمنت کمنت کمنتکمنت کمنتکمنت نمت کمنت کمنت کمنت کمنتکمنت کمنت کمنت کمنت مکنت کمنت کمنت کمنت کمنت کمنت کمنت کمنت کمنتکمن تکمنت کمنت کمنتکمنتکمنت کمنتکم نتکمنتکمنتکمنت ککمنت نمکت کمنت کمنت کمنت کمنتکمنت کمنت منت کمنت نت نت نت نت ت ت ه هع هع هع هع ه عهع حهعحخهعحخهعحخهعقضصف صق تلبسکمبنلت شکمبدذعق  خهقخه شخه ثخکهش تبکه خهتخهضخهثتق حخه حخهثق ضحخث .من بیکمش ینممکنی بن من ن ن ن ن نو ببینی چه طوریه kima پروژه",
+            description: "راجب یه برنامه ایه که توش میتونی بری بایه kima پروژه",
             creator: {
                 username: "setaysehm",
                 profile_photo: "/media/profile",
@@ -110,13 +112,15 @@ const Quizpage = () => {
 
 
                     {/* <View style={{height:hp("10%"),width:wp("20%"),backgroundColor:"#1f7a8c"}}> */}
-                    {numofquesiton > -1 ? <View style={{ flexDirection: "row" }}>
+                    {numofquesiton > -1 ? 
+                    <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity
                             onPress={async () => {
                                 await setcansubmit("سوال بعدی")
 
                                 console.log(numofquesiton);
                                 if (numofquesiton - 1 >= 0) {
+                                    await setseedis("سوال قبلی")
                                     await setnumofquestion(numofquesiton - 1)
                                     await setbuttoncolor("rgba(40,160,184,1)")
                                     setthisquestion(questions.Questions[numofquesiton - 1]);
@@ -128,15 +132,20 @@ const Quizpage = () => {
                                 if ((numofquesiton - 1) === 1) {
                                     await setnumofquestion(numofquesiton - 1)
                                     await setbuttoncolor("rgba(31,122,140,1)")
-                                    //    await setseedis("دیدن توضیحات")
+                                    await setseedis("دیدن توضیحات")
+                                 
+                                }
+                                if(numofquesiton===0){
+                                    await setnumofquestion(-1);
                                 }
                             }}
                             style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, marginTop: hp("10.6.5%"), borderTopRightRadius: 50 }}>
                             <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوال قبلی</Text>
+                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={async () => {
+                                await setseedis("سوال قبلی")
                                 // new Promise(async(resolve,reject)=>{
                                 //     await setnumofquestion(numofquesiton+1);
                                 //    resolve();
@@ -169,8 +178,10 @@ const Quizpage = () => {
                     {numofquesiton === -1 ?
                 <View style={{justifyContent:"center"}}>
                      <TouchableOpacity activeOpacity={0.5} style={{
+                        //  height:hp("40%"),width:200,
+                        //  position:"absolute",
                         backgroundColor: 'rgba(237,242,244,0.9)',alignself:"center", width: wp("90%"), marginHorizontal: wp("5%"),
-                        borderRadius: 10, elevation: 5,marginBottom:hp("10%"),marginVertical:hp("5%")
+                        borderRadius: 10, elevation: 5,marginBottom:hp("0%"),marginVertical:hp("5%")
                     }}>
                         {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
                             height: hp('14%'),
@@ -246,7 +257,7 @@ const Quizpage = () => {
                         </Text>
 
                         <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'),alignSelf:"flex-start", marginTop: hp('-1%'), marginHorizontal:wp("5%") }}>#<Text style={{color:"#1f7a8c"}}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
-                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>تعداد سوال<Text style={{color:"lightblue"}}> --><Text style={{color:"#1f7a8c"}}> {questions.Questions[0].question_num}</Text></Text></Text>
+                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>تعداد سوال<Text style={{color:"lightblue"}}> -- <Text style={{color:"#1f7a8c"}}> {questions.Questions[0].question_num}</Text></Text></Text>
 
                         {/* <View> */}
                             <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>توضیحات:</Text>
@@ -261,7 +272,28 @@ const Quizpage = () => {
                                 </Text>
                             </TouchableOpacity>
                         </View> */}
-                    </TouchableOpacity></View> : null}
+                    </TouchableOpacity>
+                  <View style={{
+                    //   alignItems:"flex-end",alignContent:"center"
+                      }}>
+                    <TouchableOpacity
+                            onPress={async () => {
+                                // new Promise(async(resolve,reject)=>{
+                                //     await setnumofquestion(numofquesiton+1);
+                                //    resolve();
+                                // }).then(async()=>{
+                                await setnumofquestion(0);
+                                console.log(numofquesiton);
+                                // })
+                            }}
+                            style={{ height: hp("10%"), elevation: 5, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", marginLeft: wp("50%"), borderTopLeftRadius: 50 }}>
+                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                            <Text style={{ marginLeft: wp("8%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>سوالات</Text>
+                        </TouchableOpacity>
+                        </View>
+                    
+                    </View> 
+                    : null}
 
 
 
