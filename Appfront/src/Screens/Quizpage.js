@@ -140,9 +140,9 @@ const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
 const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 // useFocusEffect(
 //     React.useCallback(() => {   
-    useEffect(async()=>{
+    useEffect(()=>{
         
-           await getquiz();
+            getquiz();
     },[prop.navigation])
 // const a = new Promise(async (resolve, reject) => {
 //     try {
@@ -504,9 +504,9 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
 
                                 </TouchableOpacity> : <TouchableOpacity style={{
                                     height: hp('14%'),
-                                    marginTop: hp('0%'),
+                                    marginTop: hp('5%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('5%'),
+                                    marginLeft: wp('8%'),
                                     borderRadius: 100,
                                     // position: 'absolute',
                                     borderColor: 'blue',
@@ -514,17 +514,19 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                 }}
                                 >
                                         <ImageBackground borderRadius={100}
-                                            source={{ uri: `${questions.Quiz.quiz_photo}` }}
+                                            source={{ uri: "http://fb9ce5eee469.ngrok.io"+`${questions.Quiz.quiz_photo}` }}
 
                                             style={{
-                                                height: hp('14%'),
+                                            height: hp('14%'),
 
-                                                marginTop: hp('0%'),
-                                                width: wp('28%'),
-                                                marginLeft: wp('0%'),
-                                                borderRadius: 20,
-                                                position: 'absolute',
-                                            }}
+                                            marginTop: hp('0%'),
+                                            width: wp('28%'),
+                                            marginLeft: wp('0%'),
+                                            borderRadius: 20,
+                                            position: 'absolute',
+                                            //borderColor:'#1f7a8c',
+                                            //borderWidth:wp('0.2%')
+                                        }}
                                         //  onBlur={props.handleBlur('photo')}
 
 
@@ -539,7 +541,7 @@ const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
                                     {questions.Quiz.title}
                                 </Text>
                                 <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
-                                    {questions.Quiz.create_time} (تاریخ ساخت)
+                                    {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
 
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
