@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import {Navbar,Nav,Button} from 'react-bootstrap';
+import Reactfrom from 'react';
+import {Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
 //import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
-import { Modal, Form } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import{ useState, useEffect } from "react";
  import "./UsersList.css";
 import "./Navbar.css";
@@ -18,7 +18,7 @@ import {
   // Link,
   // useRouteMatch,
   // useParams,
-  useHistory,
+  //useHistory,
   withRouter
 } from "react-router-dom";
 import Cookies from 'js-cookie';
