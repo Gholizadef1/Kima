@@ -44,7 +44,7 @@ const Quizes = (prop) => {
         <Text style={{position:'absolute',marginTop:300, textShadowOffset: {width: 2, height: 2},
     textShadowRadius: 10,
     textShadowColor: 'blue',}}>a;ldjf;slkfjd;lksjf</Text>
-        <Button onPress={()=>prop.navigation.navigate("quizpage")} style={{height:hp("10%"),width:wp("30%"),backgroundColor:"green"}}></Button>
+        <Button onPress={()=>prop.navigation.navigate("quizpage",{id:1})} style={{height:hp("10%"),width:wp("30%"),backgroundColor:"green"}}></Button>
        <View style={{height:hp('2%')}}></View>
       </View>
     </View>
