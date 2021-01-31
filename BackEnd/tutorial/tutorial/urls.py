@@ -55,5 +55,6 @@ urlpatterns = [
     path('login',LoginView.as_view()),
     path('quiz',QuizView.as_view()),
     path('quiz/<int:pk>',TakeQuizView.as_view()),
+    path('user/<user_pk>/quiz/<quiz_pk>/result',QuizResultView.as_view()),
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

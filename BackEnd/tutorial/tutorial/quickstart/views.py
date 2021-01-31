@@ -769,3 +769,15 @@ class TakeQuizView(APIView):
         question_list = Question.objects.filter(quiz=quiz.id).order_by('question_num')
         q_list = QuestionSerializer(question_list,many=True)
         return Response({"Quiz":quiz_ser.data,"Questions":q_list.data})
+
+class QuizResultView(APIView):
+
+    def get(self,request,user_pk,quiz_pk):
+        user = Account.objects.get(pk=user_pk)
+        quiz = Quiz.objects.get(pk=quiz_pk)
+        quiz_ser = QuizSerializer(quiz)
+        question_list = Question.objects.filter(quiz=quiz_pk).order_by('question_num')
+        q_list = QuestionSerializer(question_list,many=True)
+        user_answer = TakeQuiz.objects.get(user=user,quiz=quiz).user_answer
+        score = TakeQuiz.objects.get(user=user,quiz=quiz).score
+        return Response({"Quiz":quiz_ser.data,"Questions":q_list.data,"user_answer":user_answer,"score":score})
