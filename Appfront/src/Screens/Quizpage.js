@@ -560,10 +560,11 @@ const Quizpage = (prop) => {
                 <View style={{marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
-                          
+                        
                             var a = answers;
                             a[numofquesiton] = oneofthem;
                             console.log(a);
+                            setoneofthem("")
                             setanswers(a);
                             await setcolora("rgba(237,242,244,0.9)")
                             await setcolorb("rgba(237,242,244,0.9)")
@@ -577,15 +578,19 @@ const Quizpage = (prop) => {
                                   //  setcolor{answers[numofquesiton-1]}()
                                   if(answers[numofquesiton-1]==="a"){
                                     await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
                                   }
                                   if(answers[numofquesiton-1]==="b"){
                                     await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
                                   }
                                   if(answers[numofquesiton-1]==="c"){
                                     await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
                                   }
                                   if(answers[numofquesiton-1]==="d"){
                                     await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
                                   }
                                 }
                             }
@@ -630,10 +635,12 @@ const Quizpage = (prop) => {
                     <View style={{marginLeft:wp("50%"),marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
+                           
                             await setseedis(" سوال قبلی")
                          
                             var a = answers;
                             a[numofquesiton] = oneofthem;
+                            setoneofthem("")
                             console.log(a);
                             setanswers(a);
                             await setcolora("rgba(237,242,244,0.9)")
@@ -647,15 +654,19 @@ const Quizpage = (prop) => {
                                   //  setcolor{answers[numofquesiton-1]}()
                                   if(answers[numofquesiton+1]==="a"){
                                     await setcolora("rgba(40,160,184,1)")
+                                    setoneofthem("a")
                                   }
                                   if(answers[numofquesiton+1]==="b"){
                                     await setcolorb("rgba(40,160,184,1)")
+                                    setoneofthem("b")
                                   }
                                   if(answers[numofquesiton+1]==="c"){
                                     await setcolorc("rgba(40,160,184,1)")
+                                    setoneofthem("c")
                                   }
                                   if(answers[numofquesiton+1]==="d"){
                                     await setcolord("rgba(40,160,184,1)")
+                                    setoneofthem("d")
                                   }
                                 }
                             }
