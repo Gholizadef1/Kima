@@ -26,8 +26,8 @@ const Quizpage = () => {
     const questions = {
         Quiz: {
             id: 15,
-            title: "my first quiz",
-            description: "kima project",
+            title: " ;slakfj",
+            description: "راجب یه برنامه ایه که توش میتونی بری به کتاب ها رای بدی و کتاب مورد علاقت رو پیدا کنی مبنتکشسک بمتن منتشکمنتبکمنتس کمنبتکمینت کمنتب کمنستبکمنت کمنت کمنت کمنتکمنت کمنتکمنت نمت کمنت کمنت کمنت کمنتکمنت کمنت کمنت کمنت مکنت کمنت کمنت کمنت کمنت کمنت کمنت کمنت کمنتکمن تکمنت کمنت کمنتکمنتکمنت کمنتکم نتکمنتکمنتکمنت ککمنت نمکت کمنت کمنت کمنت کمنتکمنت کمنت منت کمنت نت نت نت نت ت ت ه هع هع هع هع ه عهع حهعحخهعحخهعحخهعقضصف صق تلبسکمبنلت شکمبدذعق  خهقخه شخه ثخکهش تبکه خهتخهضخهثتق حخه حخهثق ضحخث .من بیکمش ینممکنی بن من ن ن ن ن نو ببینی چه طوریه kima پروژه",
             creator: {
                 username: "setaysehm",
                 profile_photo: "/media/profile",
@@ -165,57 +165,27 @@ const Quizpage = () => {
                     </View> : null}
                     {/* </View> */}
 
-
-                    {numofquesiton === -1?<TouchableOpacity activeOpacity={0.5} style={{
-                        backgroundColor: 'rgba(237,242,244,0.9)', height: hp("70%"), width: wp("90%"), marginTop: hp("5%"),marginHorizontal:wp("5%"),
-                        borderRadius: 10, elevation: 5
+                            
+                    {numofquesiton === -1 ?
+                <View style={{justifyContent:"center"}}>
+                     <TouchableOpacity activeOpacity={0.5} style={{
+                        backgroundColor: 'rgba(237,242,244,0.9)',alignself:"center", width: wp("90%"), marginHorizontal: wp("5%"),
+                        borderRadius: 10, elevation: 5,marginBottom:hp("10%"),marginVertical:hp("5%")
                     }}>
-                    {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
-                        height: hp('14%'),
-                        marginTop: hp('7%'),
-                        width: wp('28%'),
-                        marginLeft: wp('10%'),
-                        borderRadius: 100,
-                        // position: 'absolute',
-                        borderColor: 'blue',
-                        backgroundColor: "lightgreen"
-                    }}
-                    >
-                        <ImageBackground borderRadius={100}
-
-                            source={require("../../assets/tea.jpg")}
-
-                            style={{
-                                height: hp('14%'),
-
-                                marginTop: hp('0%'),
-                                width: wp('28%'),
-                                marginLeft: wp('0%'),
-                                borderRadius: 20,
-                                position: 'absolute',
-                                //borderColor:'#1f7a8c',
-                                //borderWidth:wp('0.2%')
-                            }}
-                        //  onBlur={props.handleBlur('photo')}
-
-
+                        {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
+                            height: hp('14%'),
+                            marginTop: hp('5%'),
+                            width: wp('28%'),
+                            marginLeft: wp('8%'),
+                            borderRadius: 100,
+                            // position: 'absolute',
+                            borderColor: 'blue',
+                            backgroundColor: "lightgreen"
+                        }}
                         >
-
-                        </ImageBackground>
-
-                    </TouchableOpacity> : <TouchableOpacity style={{
-                        height: hp('14%'),
-                        marginTop: hp('0%'),
-                        width: wp('28%'),
-                        marginLeft: wp('5%'),
-                        borderRadius: 100,
-                        // position: 'absolute',
-                        borderColor: 'blue',
-                        backgroundColor: "lightgreen"
-                    }}
-                    >
                             <ImageBackground borderRadius={100}
-                                source={{ uri: `${question.Quiz.quiz_photo}` }}
+
+                                source={require("../../assets/tea.jpg")}
 
                                 style={{
                                     height: hp('14%'),
@@ -225,6 +195,8 @@ const Quizpage = () => {
                                     marginLeft: wp('0%'),
                                     borderRadius: 20,
                                     position: 'absolute',
+                                    //borderColor:'#1f7a8c',
+                                    //borderWidth:wp('0.2%')
                                 }}
                             //  onBlur={props.handleBlur('photo')}
 
@@ -232,15 +204,68 @@ const Quizpage = () => {
                             >
 
                             </ImageBackground>
-                        </TouchableOpacity>}
 
-                   
-                      
-                        </TouchableOpacity>:null}
+                        </TouchableOpacity> : <TouchableOpacity style={{
+                            height: hp('14%'),
+                            marginTop: hp('0%'),
+                            width: wp('28%'),
+                            marginLeft: wp('5%'),
+                            borderRadius: 100,
+                            // position: 'absolute',
+                            borderColor: 'blue',
+                            backgroundColor: "lightgreen"
+                        }}
+                        >
+                                <ImageBackground borderRadius={100}
+                                    source={{ uri: `${question.Quiz.quiz_photo}` }}
+
+                                    style={{
+                                        height: hp('14%'),
+
+                                        marginTop: hp('0%'),
+                                        width: wp('28%'),
+                                        marginLeft: wp('0%'),
+                                        borderRadius: 20,
+                                        position: 'absolute',
+                                    }}
+                                //  onBlur={props.handleBlur('photo')}
+
+
+                                >
+
+                                </ImageBackground>
+                            </TouchableOpacity>}
+
+
+                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', alignSelf: "flex-start", left: wp("40%"), top: hp("-10.3%") }}
+                        >
+                            {questions.Quiz.title}
+                        </Text>
+                        <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
+                            {questions.Quiz.create_time} (تاریخ ساخت)
+                        </Text>
+
+                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'),alignSelf:"flex-start", marginTop: hp('-1%'), marginHorizontal:wp("5%") }}>#<Text style={{color:"#1f7a8c"}}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
+                        <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>تعداد سوال<Text style={{color:"lightblue"}}> --><Text style={{color:"#1f7a8c"}}> {questions.Questions[0].question_num}</Text></Text></Text>
+
+                        {/* <View> */}
+                            <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal:wp("5%") }}>توضیحات:</Text>
+                            <Text style={{ fontSize: hp('1.6.5%'), color: 'black', marginBottom: hp('5%'), marginTop: hp('7%'), marginHorizontal:wp("5%") }}>    {questions.Quiz.description}</Text>
+                          
+                          
+                            {/* <TouchableOpacity>
+                                <Text rowSpan={hp('0.9.1%')} bordered borderRadius={8}
+                                    borderColor={'#EDF2F4'}
+                                    fontSize={hp('1.6.5%')} style={styles.item2}>
+                                    {questions.Quiz.description}
+                                </Text>
+                            </TouchableOpacity>
+                        </View> */}
+                    </TouchableOpacity></View> : null}
 
 
 
-                        {/* 
+                    {/* 
         <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
 
                 </ScrollView>
@@ -251,26 +276,26 @@ const Quizpage = () => {
 }
 
 const styles = StyleSheet.create({
-                container: {
-                flex: 1,
+    container: {
+        flex: 1,
         backgroundColor: '#b5c5e3',
     },
     item2: {
-                // marginLeft:wp('-2%'),
-                // marginRight:wp('-1%'),
-                marginHorizontal: wp("5%"),
+        // marginLeft:wp('-2%'),
+        // marginRight:wp('-1%'),
+        marginHorizontal: wp("5%"),
         marginTop: hp('6%'),
         fontSize: hp('2.5%'),
     },
     item: {
-                marginLeft: wp('37%'),
+        marginLeft: wp('37%'),
         marginRight: wp('9%'),
         height: wp('9.5%'),
         borderColor: "lightblue",
         borderWidth: hp("0.1%")
     },
     Input: {
-                left: wp('8%'),
+        left: wp('8%'),
         fontSize: hp('1.5%'),
         fontWeight: 'bold',
         marginRight: wp('10%'),
@@ -280,12 +305,12 @@ const styles = StyleSheet.create({
     },
     plus: {
 
-                alignSelf: 'center',
+        alignSelf: 'center',
         justifyContent: 'center'
 
     },
     loader: {
-                alignItems: 'center',
+        alignItems: 'center',
         marginBottom: hp('15%'),
         justifyContent: 'center',
         alignSelf: 'center',
