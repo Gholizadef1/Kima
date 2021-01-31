@@ -578,11 +578,15 @@ const Quizpage = (prop) => {
 
                                 console.log("next pressed")
                             }
+                            // if(numofquesiton===1){
+
+                            // }
                             //update nemishe chon :\
                             if ((numofquesiton - 1) === 0) {
                                 console.log("here too")
                                  await setnumofquestion(numofquesiton - 1)
                                  await setbuttoncolor("rgba(40,160,184,1)")
+                                 setthisquestion(questions.Questions[0]);
                                 // await setseedis(" توضیحات")
 
                             }
@@ -617,7 +621,7 @@ const Quizpage = (prop) => {
                             // }).then(async()=>{
 
                             await setbuttoncolor("rgba(31,122,140,1)")
-                            console.log(numofquesiton);
+                            console.log(numofquesiton+" num of question");
                             if (numofquesiton + 1 < questions.Quiz.question_count) {
                                 await setnumofquestion(numofquesiton + 1);
                                 await setcansubmit("سوال بعدی")

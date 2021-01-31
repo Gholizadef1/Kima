@@ -568,13 +568,14 @@ const Quizresult = (prop) => {
                             await setcansubmit("سوال بعدی")
 
                             console.log(numofquesiton+" numofquestion");
-                            if (numofquesiton - 1 >= 1) {
+                            if (numofquesiton - 1 > 1) {
                                 console.log("here ghabli b tar az 1")
                                 await setseedis("سوال قبلی")
+                                setthisquestion(questions.Questions[numofquesiton - 1]);
                                 await setnumofquestion(numofquesiton - 1)
                                 await setbuttoncolor("rgba(31,122,140,1)")
                              
-                                setthisquestion(questions.Questions[numofquesiton - 1]);
+                               
 
 
                                 console.log("next pressed")
@@ -627,7 +628,8 @@ const Quizresult = (prop) => {
                                 console.log("next pressed")
                             }
                             if (cansubmit === "خارج شدن") {
-                                await postquiz();
+                                prop.navigation.navigate("quiznavigation")
+                                // await postquiz();
                             }
                             if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
                                 await setnumofquestion(numofquesiton + 1);
