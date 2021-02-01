@@ -71,7 +71,7 @@ const Bookview = (prop) => {
         // console.log('response data ===== ', response.data[0].account.username)
         // console.log('response data ::::: ', response.data[0].comment_text)
         // console.log('commentsss===' + comments[0].comment_text)
-        console.log('TEDADDDD===='+comments.length)
+        console.log('TEDADDDD====' + comments.length)
       })
 
 
@@ -276,16 +276,16 @@ const Bookview = (prop) => {
             : null}
 
           {comments != "No Comment!" && comments.length >= 3 ?
-            <Button style={{ marginLeft: wp('83%'),marginTop:hp('-5%'),marginBottom:hp('-3%') }} transparent
-            onPress={() => {
-              prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
-                title: response.data.title,
-              });
-            }}>
+            <Button style={{ marginLeft: wp('83%'), marginTop: hp('-5%'), marginBottom: hp('-3%') }} transparent
+              onPress={() => {
+                prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}>
               <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
             </Button >
             : null}
-            
+
           {comments != "No Comment!" ?
             <FlatList
               style={{ marginBottom: hp('5%') }}
@@ -317,6 +317,20 @@ const Bookview = (prop) => {
               }
             >
             </FlatList> : null}
+
+          {comments != "No Comment!" ?
+            <View
+              style={{
+                width: 320,
+                color: '#a9a9a9',
+                marginLeft: wp('5%'),
+                marginTop: hp('-4%'),
+                marginBottom:hp('1%'),
+                borderBottomColor: '#a9a9a9',
+                borderBottomWidth: 1
+              }}
+            />
+            : null}
 
 
           {/* <Button style={{
