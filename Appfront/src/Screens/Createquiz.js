@@ -89,29 +89,28 @@ const Createquiz = () => {
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
     const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
-    const [showallerror,setshowallerror]=useState(false);
+    const [showallerror, setshowallerror] = useState(false);
     const validationSchema = yup.object().shape({
         soalha: yup.array().of(
-          yup.object().shape({
-            question: yup.string()
-            .required(".متن سوال نمیتواند خالی باشد")
-            .min(10,"متن سوال باید کمی طولانی تر باشد.")
-            .max(70,"متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
-            a: yup.string() .required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-            b: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-            c: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-            d: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3,"هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35,"هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-            //مشخص نکنه گزینه ی 1 میشه جواب
-            // correct: yup.string().required(),
-          })
+            yup.object().shape({
+                question: yup.string()
+                    .min(10, "متن سوال باید حداقل 10 کاراکتر باشد")
+                    .max(70, "متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
+                a: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                b: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                c: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                d: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                //مشخص نکنه گزینه ی 1 میشه جواب
+                // correct: yup.string().required(),
+            })
         ),
-        Username:yup.string()
-        .required("اسم گروه نمیتواند خالی باشد")
-        .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
-      
-        Discription:yup.string()
-        .required("توضیحات گروه نمیتواند خالی باشد"),
-      });
+        Username: yup.string()
+            .required("اسم گروه نمیتواند خالی باشد")
+            .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
+
+        // Discription: yup.string()
+        //     .required("توضیحات گروه نمیتواند خالی باشد"),
+    });
     //  const [soalha,setsoalha]=[{question:"",a:"",b:"",c:"",d:"",correct:""}];
     return (
         <View style={styles.container}>
@@ -122,16 +121,18 @@ const Createquiz = () => {
                     name="close" size={23} color="#D75A5A" />
             </TouchableOpacity> */}
 
-                <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
-                validationSchema={validationSchema}
+                <Formik
+                    //  validateOnChange={false} 
+                    style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
+                    validationSchema={validationSchema}
                     initialValues={{
-                        Username: 's', Discription: 's', photo: require('../../assets/tea.jpg'), soalha: [{ question: "s", a: "s", b: "s", c: "s", d: "s", correct: "1" }]
+                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "s", a: "s", b: "s", c: "s", d: "s", correct: "1" }]
                         // soal:soalha 
                     }}
                     // validationSchema={userschema}
                     onSubmit={async (values, actions) => {
-                      
-                        console.log('ON SUBMIT')
+
+                        console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
                         formdata.append('title', values.Username)
                         formdata.append('summary', values.Discription)
@@ -148,70 +149,40 @@ const Createquiz = () => {
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
-                            <View style={{backgroundColor:"#F2F5F7",marginRight:wp("65%"),borderRadius:100}}>
+                                <View style={{ backgroundColor: "#F2F5F7", marginRight: wp("65%"), borderRadius: 100 }}>
 
-                                {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
-                                {/* bedoone view nemishod in barr */}
-                                {props.values.photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
-                                    height: hp('14%'),
-                                    //marginTop: hp('0%'),
-                                    width: wp('28%'),
-                                    left: wp('5%'),
-                                    marginLeft:wp("0%"),
-                                    //marginRight:wp("-90%"),
-                                    borderRadius: 100,
-                                    margin:0,
-                                    
-                                    // position: 'absolute',
-                                    borderColor: 'blue',
-                                    backgroundColor: "lightgreen"
-                                }}
-                                    onPress={() => { pickfromgallery(props) }}>
-                                    <ImageBackground borderRadius={100}
+                                    {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
+                                    {/* bedoone view nemishod in barr */}
+                                    {props.values.photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
+                                        height: hp('14%'),
+                                        //marginTop: hp('0%'),
+                                        width: wp('28%'),
+                                        left: wp('5%'),
+                                        marginLeft: wp("0%"),
+                                        //marginRight:wp("-90%"),
+                                        borderRadius: 100,
+                                        margin: 0,
 
-                                        source={props.values.photo}
-
-                                        style={{
-                                            height: hp('14%'),
-
-                                            marginTop: hp('0%'),
-                                            width: wp('28%'),
-                                            left: wp('0%'),
-                                            borderRadius: 20,
-                                            margin:0,
-                                            position: 'absolute',
-                                            //borderColor:'#1f7a8c',
-                                            //borderWidth:wp('0.2%')
-                                        }}
-                                    //  onBlur={props.handleBlur('photo')}
-
-
-                                    >
-
-                                    </ImageBackground>
-
-                                </TouchableOpacity> : <TouchableOpacity style={{
-                                    height: hp('14%'),
-                                    marginTop: hp('0%'),
-                                    width: wp('28%'),
-                                    left: wp('5%'),
-                                    borderRadius: 100,
-                                    // position: 'absolute',
-                                    borderColor: 'blue',
-                                    backgroundColor: "lightgreen"
-                                }}
-                                    onPress={() => { pickfromgallery(props, props.handleChange) }}>
+                                        // position: 'absolute',
+                                        borderColor: 'blue',
+                                        backgroundColor: "lightgreen"
+                                    }}
+                                        onPress={() => { pickfromgallery(props) }}>
                                         <ImageBackground borderRadius={100}
-                                            source={{ uri: `${props.values.photo}` }}
-                                            onChangeItem={props.handleChange('photo')}
+
+                                            source={props.values.photo}
+
                                             style={{
                                                 height: hp('14%'),
 
                                                 marginTop: hp('0%'),
                                                 width: wp('28%'),
-                                                marginLeft: wp('0%'),
+                                                left: wp('0%'),
                                                 borderRadius: 20,
+                                                margin: 0,
                                                 position: 'absolute',
+                                                //borderColor:'#1f7a8c',
+                                                //borderWidth:wp('0.2%')
                                             }}
                                         //  onBlur={props.handleBlur('photo')}
 
@@ -219,8 +190,38 @@ const Createquiz = () => {
                                         >
 
                                         </ImageBackground>
-                                    </TouchableOpacity>}
-                                    </View>
+
+                                    </TouchableOpacity> : <TouchableOpacity style={{
+                                        height: hp('14%'),
+                                        marginTop: hp('0%'),
+                                        width: wp('28%'),
+                                        left: wp('5%'),
+                                        borderRadius: 100,
+                                        // position: 'absolute',
+                                        borderColor: 'blue',
+                                        backgroundColor: "lightgreen"
+                                    }}
+                                        onPress={() => { pickfromgallery(props, props.handleChange) }}>
+                                            <ImageBackground borderRadius={100}
+                                                source={{ uri: `${props.values.photo}` }}
+                                                onChangeItem={props.handleChange('photo')}
+                                                style={{
+                                                    height: hp('14%'),
+
+                                                    marginTop: hp('0%'),
+                                                    width: wp('28%'),
+                                                    marginLeft: wp('0%'),
+                                                    borderRadius: 20,
+                                                    position: 'absolute',
+                                                }}
+                                            //  onBlur={props.handleBlur('photo')}
+
+
+                                            >
+
+                                            </ImageBackground>
+                                        </TouchableOpacity>}
+                                </View>
 
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('38%'), marginTop: hp("-11.3%") }}>نام کوییز</Text>
                                 <Item style={styles.item} rounded >
@@ -230,7 +231,7 @@ const Createquiz = () => {
                                         onChangeText={props.handleChange('Username')}
                                         onBlur={props.handleBlur('Username')}
                                         value={props.values.Username}
-                                     
+
                                         placeholder={'نام کوییز ...'} placeholderTextColor='gray' >
                                     </Input>
 
@@ -261,165 +262,165 @@ const Createquiz = () => {
 
 
                                 <FieldArray name={"soalha"} validationSchema={validationSchema.soalha}>
-                                {({push,pop,touched,errors})=>(
-                                    <FlatList
-                                        //بعدا لیست هدر بالایی ها
-                                        // ListHeaderComponent={()=>(
+                                    {({ push, pop, touched, errors }) => (
+                                        <FlatList
+                                            //بعدا لیست هدر بالایی ها
+                                            // ListHeaderComponent={()=>(
 
-                                        // )}
-                                        name={"soalha"}
-                                        scrollEnabled={false}
-                                        keyExtractor={(item) => {
-                                            return (item.id)
-                                            //   undefined
-                                            //   questions[numofquestion-1].id
-                                        }}
-                                        data={questions}
-                                        renderItem={({ item }) => {
-                                          //  console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
-                                            // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
-                                            // const [values,setvalues]=useState("1")
-                                            return (<>
-                                                <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
-                                                <Createquizeachquestion showallerr={showallerror} touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
-                                                     {/* //  propp={propss} */}
-                                            </>)
-                                        }}
-                                        ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
-                                            <TouchableOpacity
-                                                onPress={async () => {
-                                                    if (numofquestion <= 20) {
-                                                        push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
-                                                        // for(var i=numofquestion-1;i>=0;i--){
-                                                        //     console.log(props.values.soalha[i].question+" QQQQ");
-                                                        //     console.log(props.values.soalha[i].a+" aaaaa");
-                                                        //     console.log(props.values.soalha[i].b+" bbbbb");
-                                                        //     console.log(props.values.soalha[i].c+" ccccc");
-                                                        //     console.log(props.values.soalha[i].d+" ddddd");
-                                                        //     console.log(props.values.soalha[i].correct+" correct");
-                                                        // }
-                                                        //console.log(props.values.soalha[0]+" VALUESSSS")
-                                                        //console.log(props.values.soalha[1]+" VALUESSSS")
-                                                        //toye groups mygroups avali javab nemidad :\
-                                                        console.log(props.error+"   PROP ERRORS")
-                                                        
-                                                       // if(props.errors===null){
-                                                        await setitemid(itemid + 1);
-                                                        //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                                        await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
-                                                        //    await setvalues(values.concat(numofquestion.toString()));
-                                                        await setnumofquestion(numofquestion + 1);
-                                                        //      // await setvalues(values.concat(numofquestion));
-                                                        //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
-                                                        //console.log(questions);
-                                                       // }
-                                                    }
-                                                    else {
-                                                        new Promise(async (resolve, refect) => {
-                                                            await setmaxnumquestion(true);
+                                            // )}
+                                            name={"soalha"}
+                                            scrollEnabled={false}
+                                            keyExtractor={(item) => {
+                                                return (item.id)
+                                                //   undefined
+                                                //   questions[numofquestion-1].id
+                                            }}
+                                            data={questions}
+                                            renderItem={({ item }) => {
+                                                //  console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
+                                                // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
+                                                // const [values,setvalues]=useState("1")
+                                                return (<>
+                                                    <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
+                                                    <Createquizeachquestion setshowallerr={setshowallerror} showallerr={showallerror} touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
+                                                    {/* //  propp={propss} */}
+                                                </>)
+                                            }}
+                                            ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
+                                                <TouchableOpacity
+                                                    onPress={async () => {
+                                                        if (numofquestion <= 20) {
+                                                            push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+                                                            // for(var i=numofquestion-1;i>=0;i--){
+                                                            //     console.log(props.values.soalha[i].question+" QQQQ");
+                                                            //     console.log(props.values.soalha[i].a+" aaaaa");
+                                                            //     console.log(props.values.soalha[i].b+" bbbbb");
+                                                            //     console.log(props.values.soalha[i].c+" ccccc");
+                                                            //     console.log(props.values.soalha[i].d+" ddddd");
+                                                            //     console.log(props.values.soalha[i].correct+" correct");
+                                                            // }
+                                                            //console.log(props.values.soalha[0]+" VALUESSSS")
+                                                            //console.log(props.values.soalha[1]+" VALUESSSS")
+                                                            //toye groups mygroups avali javab nemidad :\
+                                                            console.log(props.error + "   PROP ERRORS")
 
-                                                            await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
-                                                            // .then( resolve())
-                                                            //  await setminnumquestion(false);
-
-
-                                                        })
-                                                            .then(console.log("then!"))
-                                                    }
-                                                }}
-                                                style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
-                                                <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
-                                            </TouchableOpacity>
-                                            <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
-                                            {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
-                                            {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
-                                            <TouchableOpacity
-                                                onPress={async () => {
-                                                    if (numofquestion > 2) {
-                                                        pop();
-                                                        for(var i=numofquestion-1;i>=0;i--){
-                                                            console.log(props.values[i]);
+                                                            // if(props.errors===null){
+                                                            await setitemid(itemid + 1);
+                                                            //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                                            await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
+                                                            //    await setvalues(values.concat(numofquestion.toString()));
+                                                            await setnumofquestion(numofquestion + 1);
+                                                            //      // await setvalues(values.concat(numofquestion));
+                                                            //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
+                                                            //console.log(questions);
+                                                            // }
                                                         }
-                                                        await setitemid(itemid - 1);
-                                                        //  console.log(questions);
-                                                        //  console.log(questions.pop());
-                                                        // console.log(questions);
-                                                        const temp = await questions.pop();
-                                                        console.log(temp);
-                                                        //await  setquestions(temp);
-                                                        //  console.log(questions[numofquestion-1].id+"id");
-                                                        //inex nan
-                                                        //await setquestions(await questions.pop())
+                                                        else {
+                                                            new Promise(async (resolve, refect) => {
+                                                                await setmaxnumquestion(true);
 
-                                                        await setnumofquestion(numofquestion - 1);
-                                                    }
-                                                    else {
-                                                        new Promise(async (resolve, refect) => {
-                                                            await setminnumquestion(true);
-                                                            await setTimeout(async () => { await setminnumquestion(false); }, 5000)
-                                                            // .then( resolve())
-                                                            //  await setminnumquestion(false);
+                                                                await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
+                                                                // .then( resolve())
+                                                                //  await setminnumquestion(false);
 
 
-                                                        })
-                                                            .then(console.log("then!"))
+                                                            })
+                                                                .then(console.log("then!"))
+                                                        }
+                                                    }}
+                                                    style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
+                                                    <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
+                                                </TouchableOpacity>
+                                                <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
+                                                {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
+                                                {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
+                                                <TouchableOpacity
+                                                    onPress={async () => {
+                                                        if (numofquestion > 2) {
+                                                            pop();
+                                                            for (var i = numofquestion - 1; i >= 0; i--) {
+                                                                console.log(props.values[i]);
+                                                            }
+                                                            await setitemid(itemid - 1);
+                                                            //  console.log(questions);
+                                                            //  console.log(questions.pop());
+                                                            // console.log(questions);
+                                                            const temp = await questions.pop();
+                                                            console.log(temp);
+                                                            //await  setquestions(temp);
+                                                            //  console.log(questions[numofquestion-1].id+"id");
+                                                            //inex nan
+                                                            //await setquestions(await questions.pop())
+
+                                                            await setnumofquestion(numofquestion - 1);
+                                                        }
+                                                        else {
+                                                            new Promise(async (resolve, refect) => {
+                                                                await setminnumquestion(true);
+                                                                await setTimeout(async () => { await setminnumquestion(false); }, 5000)
+                                                                // .then( resolve())
+                                                                //  await setminnumquestion(false);
+
+
+                                                            })
+                                                                .then(console.log("then!"))
 
 
 
-                                                        //   return(<Text>پیاین سوالا</Text>)
-                                                        //setminnumquestion(true);
-                                                    }
-                                                }}
-                                                style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
-                                                <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
-                                            </TouchableOpacity>
-                                            {minnumquestion === true ?
-                                                <View style={{
-                                                    backgroundColor: "#FEEBEC",
-                                                    borderRadius: 10,
-                                                    height: hp('4%'),
-                                                    elevation: 300,
-                                                    marginTop: hp("5.5%"),
-                                                    right: hp("25%"),
-                                                    width: wp("55.5%"),
-                                                    marginBottom: hp("0%")
-                                                    // alignSelf: "flex-end",
-                                                }}>
+                                                            //   return(<Text>پیاین سوالا</Text>)
+                                                            //setminnumquestion(true);
+                                                        }
+                                                    }}
+                                                    style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                                    <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
+                                                </TouchableOpacity>
+                                                {minnumquestion === true ?
+                                                    <View style={{
+                                                        backgroundColor: "#FEEBEC",
+                                                        borderRadius: 10,
+                                                        height: hp('4%'),
+                                                        elevation: 300,
+                                                        marginTop: hp("5.5%"),
+                                                        right: hp("25%"),
+                                                        width: wp("55.5%"),
+                                                        marginBottom: hp("0%")
+                                                        // alignSelf: "flex-end",
+                                                    }}>
 
-                                                    <Text style={{
-                                                        color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                        marginBottom: 0, top: hp("1%"),
-                                                        alignSelf: "center",
-                                                        // alignSelf: "flex-end", right: hp("25%"),
-                                                        position: "relative"
-                                                    }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
-                                                </View>
-                                                : null}
-                                            {maxnumquestion === true ?
-                                                <View style={{
-                                                    backgroundColor: "#FEEBEC",
-                                                    borderRadius: 10,
-                                                    height: hp('4%'),
-                                                    elevation: 300,
-                                                    marginTop: hp("5.5%"),
-                                                    right: hp("25%"),
-                                                    width: wp("58%"),
-                                                    marginBottom: hp("0%")
-                                                }}>
+                                                        <Text style={{
+                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                            marginBottom: 0, top: hp("1%"),
+                                                            alignSelf: "center",
+                                                            // alignSelf: "flex-end", right: hp("25%"),
+                                                            position: "relative"
+                                                        }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                                    </View>
+                                                    : null}
+                                                {maxnumquestion === true ?
+                                                    <View style={{
+                                                        backgroundColor: "#FEEBEC",
+                                                        borderRadius: 10,
+                                                        height: hp('4%'),
+                                                        elevation: 300,
+                                                        marginTop: hp("5.5%"),
+                                                        right: hp("25%"),
+                                                        width: wp("58%"),
+                                                        marginBottom: hp("0%")
+                                                    }}>
 
-                                                    <Text style={{
-                                                        color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                        marginBottom: 0, top: hp("1%"),
-                                                        alignSelf: "center",
-                                                        // alignSelf: "flex-end", right: hp("25%"),
-                                                        position: "relative"
-                                                    }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
-                                                </View>
-                                                : null}
+                                                        <Text style={{
+                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                            marginBottom: 0, top: hp("1%"),
+                                                            alignSelf: "center",
+                                                            // alignSelf: "flex-end", right: hp("25%"),
+                                                            position: "relative"
+                                                        }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
+                                                    </View>
+                                                    : null}
 
-                                            {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
+                                                {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                            {/* <View style={styles.centeredView}>
+                                                {/* <View style={styles.centeredView}>
                                                     <View style={styles.modalView}>
                                                         <Text style={{
                                                             color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
@@ -430,13 +431,13 @@ const Createquiz = () => {
                                                 </View>
                                             </Modal> :) */}
 
-                                        
 
 
 
-                                            {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
+
+                                                {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
                                             {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                            {/* <View style={styles.centeredView}>
+                                                {/* <View style={styles.centeredView}>
                                                 <View style={styles.modalView}>
                                                     <Text style={{
                                                         color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
@@ -449,11 +450,11 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                        </View>)}
-                                    >
+                                            </View>)}
+                                        >
 
-                                    </FlatList>
-                                )}
+                                        </FlatList>
+                                    )}
                                 </FieldArray>
 
 
@@ -463,21 +464,42 @@ const Createquiz = () => {
                                 // ,height:20,width:30
                                 }}>حذف کردن سوال</Text>
                                 </TouchableOpacity> */}
-                                {minnumquestion === false && maxnumquestion === false ? <Button type={"submit"} bordered rounded style={styles.button}
-                                                onPress={console.log(JSON.stringify(props.errors.soalha))}
-                                            >
-                                                <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                            </Button> : null}
-                              
+                                {minnumquestion === false && maxnumquestion === false ?
+                                    <Button type={"submit"} bordered rounded style={styles.button}
+                                        //har taghiri chap vali onpress error ke function nist
+                                        //onPress={console.log(JSON.stringify(props.errors.soalha))&console.log("button pressed!")}
+                                        onPress={async(resolve,reject) => {
+                                            //new Promise(async()=>{
+                                                await props.setFieldTouched("Discription", true)
+                                            await props.setFieldTouched("Username", true)
+                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                            props.handleChange( `soalha[${itemid}].question`)(" ")
+                                            // resolve()
+                                            // }).then(()=>{
+                                            //     console.log("pressed then")
+                                            
+                                            // })
+                                            // setTimeout(()=>console.log("ehtemalan hameye on touch ha avaz"),5000)
+                                            // setshowallerror(true)
+                                            //setTimeout(()=>setshowallerror(false),5000)
+                                        }}
+                                    >
+                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                    </Button> : null}
+
                             </View>
                         </View>
-                      /* </Form> */
-                    
-                    )}
-                    
+                        /* </Form> */
 
-                        
-                  
+                    )}
+
+
+
+
                 </Formik>
             </ScrollView>
         </View>
@@ -497,7 +519,7 @@ const styles = StyleSheet.create({
     container: {
         //   position:'absolute',
         //   marginTop:-100,
-           backgroundColor:'#F2F5F7',
+        backgroundColor: '#F2F5F7',
         //   height:1000,
         flex: 1,
     },
@@ -546,12 +568,12 @@ const styles = StyleSheet.create({
     }, item2: {
         // marginLeft:wp('-2%'),
         // marginRight:wp('-1%'),
-        backgroundColor:"white",
-        elevation:0,
+        backgroundColor: "white",
+        elevation: 0,
         marginHorizontal: wp("5%"),
         marginTop: hp('6%'),
         fontSize: hp('2.5%'),
-        marginBottom:hp("1%")
+        marginBottom: hp("1%")
     },
     item: {
         marginLeft: wp('37%'),
@@ -559,8 +581,8 @@ const styles = StyleSheet.create({
         height: wp('9.5%'),
         borderColor: "lightblue",
         borderWidth: hp("0.1%"),
-        backgroundColor:"white",
-        elevation:0
+        backgroundColor: "white",
+        elevation: 0
     },
     Input: {
         left: wp('8%'),
@@ -570,7 +592,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: wp('9.5%'),
         width: wp('43.5%'),
-       //  backgroundColor:"#F3F8F9"
+        //  backgroundColor:"#F3F8F9"
     },
     avatar: {
         height: hp('14%'),

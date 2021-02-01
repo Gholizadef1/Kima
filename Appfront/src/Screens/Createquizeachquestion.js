@@ -34,7 +34,38 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].d`)
     const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].correct`)
     const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)
-    //console.log(prop.showallerr+" show all error");
+    console.log(prop.showallerr+" show all error");
+    console.log(questionerror+" question error")
+    console.log(JSON.stringify(prop.pr.values)+" VALUES");
+    console.log(JSON.stringify(prop.pr.errors)+" ERRORS");
+    const [a,seta]=useState(false);
+    console.log(getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)+" quesition value")
+    // if(prop.showallerr){
+    //     seta(true)
+    // }
+    // if(prop.showallerr&&a){
+    
+    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].question`, true)
+    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].a`, true)
+    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].b`, true)
+    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].c`, true)
+    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].d`, true)
+    //     prop.setshowallerr(false);
+    //     setTimeout(() => {
+    //         seta(false);
+    //     }, 500);
+    //    // prop.setshowallerr(false);
+    // }
+    // if(prop.showallerr){
+    //     if( getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)===undefined){
+    //    // questointouched=true;
+    //    prop.pr.handleChange( `soalha[${prop.itemidd}].question`)(" ")
+    //    prop.pr.handleChange( `soalha[${prop.itemidd}].a`)("")
+    //    prop.pr.handleChange( `soalha[${prop.itemidd}].b`)("")
+    //    prop.pr.handleChange( `soalha[${prop.itemidd}].c`)("")
+    //    prop.pr.handleChange( `soalha[${prop.itemidd}].d`)("")
+    //     }
+    // }
   //  console.log(JSON.stringify(getIn(prop.pr.values,`soalha[${prop.itemidd}].correct`))+" correcjhgkjhgttttt");
     // console.log(JSON.stringify(questointouched)+" question touched")
     // console.log(typeof JSON.stringify(aerror)+" aerror typeof")
@@ -85,7 +116,8 @@ const Createquizeachquestion = (prop) => {
         {/* {!(prop.pr.touched.soalha[prop.itemidd].question === undefined) && typeof prop.pr.touched.soalha[prop.itemidd].question === "boolean" && typeof prop.pr.errors.soalha[prop.itemidd].question === "boolean" ? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{prop.pr.errors.soalha[prop.itemidd].question}</Text> : null} */}
           {/* {prop.pr.touched.soalha!=undefined &&( prop.pr.errors.soalha!=undefined && typeof questionerror!=undefined)? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{questionerror}</Text> : null} 
            */}
-           {typeof questionerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)&&questionerror}</Text>:null}
+           {typeof questionerror==="string" && prop.showallerr===false?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)&&questionerror}</Text>:null}
+           {/* { prop.showallerr===true && prop.pr.values.soalha[prop.itemidd].question===""&&questionerror===undefined?<Text style={styles.error}>".متن سوال نمیتواند خالی باشد</Text>:null} */}
         {/* <Field> */}
         <RadioButton.Group name={`soalha[${prop.itemidd}].correct`}  onValueChange={newValue => {
 
