@@ -349,13 +349,13 @@ const handleCloseSnack = (event, reason) => {
  textAlign:"center",
  marginLeft:-9,
  paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
-         <button className="btn b btn-info rounded-lg" style={{color:"white",fontSize:15}}>
+         <button className="btn b btn-info rounded-lg" style={{color:"white"}}>
              حذف سؤال
          </button>
          </Tooltip>
      :
      <div>
-     <button className="btn b btn-info rounded-lg" style={{color:"white",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
+     <button className="btn b btn-info rounded-lg" style={{color:"white"}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
        حذف سؤال
  </button>
  </div>
@@ -372,14 +372,14 @@ height:80,
 textAlign:"center",
 marginLeft:-9,
 paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال باشد</div>}> 
-        <button className="btn b1 btn-info rounded-lg" style={{color:"white",fontSize:15}}>
+        <button className="btn b1 btn-info rounded-lg" style={{color:"white"}}>
                  اضافه‌کردن سؤال
                   </button>
         </Tooltip>
      :
      <button
      className="btn b1 btn-info rounded-lg"
-     style={{color:"white",fontSize:15}}
+     style={{color:"white"}}
        onClick={handleAddFields}
        disabled={inputFields.length === 15 } 
      >
