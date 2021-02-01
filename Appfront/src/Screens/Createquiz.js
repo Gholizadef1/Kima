@@ -148,7 +148,7 @@ const Createquiz = () => {
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
-                            <View style={{backgroundColor:"white",marginRight:wp("65%"),borderRadius:100}}>
+                            <View style={{backgroundColor:"#F2F5F7",marginRight:wp("65%"),borderRadius:100}}>
 
                                 {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
                                 {/* bedoone view nemishod in barr */}
@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
     container: {
         //   position:'absolute',
         //   marginTop:-100,
-           backgroundColor:'#ffff',
+           backgroundColor:'#F2F5F7',
         //   height:1000,
         flex: 1,
     },
