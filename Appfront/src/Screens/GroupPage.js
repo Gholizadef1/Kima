@@ -67,8 +67,9 @@ const GroupPage = (prop) => {
       })
   };
 
-  useEffect((async) => {
-    const response = axiosinst.get('/group/' + prop.route.params.id)
+  useEffect(() => {
+    async function getgroupDetails () {
+      const response = axiosinst.get('/group/' + prop.route.params.id)
       .then(async function (response) {
         await setgroupinfo(response.data);
         setmembernumber(groupinfo.members_count);
@@ -78,27 +79,32 @@ const GroupPage = (prop) => {
           console.log('@@@@@@@@@@owner')
             setowner("owner")
         }
-        setloading2(false)
       })
+    }
+    getgroupDetails()
+    setloading2(false)
   }, [join, owner, joinedUser, notjoinedUser])
 
-  useEffect((async) => {
-    const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
+  useEffect(() => {
+    async function getMembers () {
+      const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
       .then(async function (response) {
-        setmembers(response.data.members)
+        await setmembers(response.data.members)
 
         for (let i = 0; i < membernumber; i++) {
           if (response.data.members[i].user.username === username && owner != "owner") {
-            setjoinedUser("joinedUser")
+            await setjoinedUser("joinedUser")
             console.log('%%%%%%%%%%%%%%%%%%%joineduser')
           }
         }
         if (joinedUser != "joinedUser" && username != response.data.owner.username) {
-          setnotjoinedUser("notjoinedUser")
+          await setnotjoinedUser("notjoinedUser")
           console.log("###############notjoineduser")
         }
-        setloading1(false)
       })
+    }
+    getMembers()
+    setloading1(false)
   }, [join, owner, joinedUser, notjoinedUser])
 
 
@@ -311,7 +317,7 @@ const GroupPage = (prop) => {
           <Text style={styles.groupname}>{groupinfo.title}</Text>
           <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false ?
+          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false && loading1 === false && loading2 === false && loading3 === false && loading4 === false?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -319,7 +325,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
             </Button> : null}
 
-          {notjoinedUser === "notjoinedUser" ?
+          {notjoinedUser === "notjoinedUser" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -327,7 +333,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
-          {owner === "owner" ?
+          {owner === "owner" && loading1 === false && loading2 === false && loading3 === false && loading4 === false?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -335,7 +341,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
             </Button> : null}
 
-          {owner === "" && joinedUser === "" && notjoinedUser === "" ?
+          {owner === "" && joinedUser === "" && notjoinedUser === "" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
