@@ -98,10 +98,10 @@ const Createquiz = () => {
                 question: yup.string()
                     .min(10, "متن سوال باید حداقل 10 کاراکتر باشد")
                     .max(70, "متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
-                a: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                b: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                c: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                d: yup.string().required("گزینه ها نمیتوانند خالی باشند").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                a: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                b: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                c: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                d: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
                 //مشخص نکنه گزینه ی 1 میشه جواب
                 // correct: yup.string().required(),
             })
@@ -283,7 +283,7 @@ const Createquiz = () => {
                                                 // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
                                                 // const [values,setvalues]=useState("1")
                                                 return (<>
-                                         
+
                                                     <Createquizeachquestion setshowallerr={setshowallerror} showallerr={showallerror} touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
                                                     {/* //  propp={propss} */}
                                                 </>)
@@ -314,16 +314,33 @@ const Createquiz = () => {
                                                             await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
                                                             //    await setvalues(values.concat(numofquestion.toString()));
                                                             await setnumofquestion(numofquestion + 1);
+                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
+                                                             if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].a`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
+                                                             if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].b`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
+                                                             if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].c`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
+                                                             if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].d`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
                                                             await props.setFieldTouched(`soalha[${itemid}].question`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].a`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].b`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].c`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].d`, true)
                                                             console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined||getIn(props.values, `soalha[${itemid}].question`)==="") {
-                                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
-                                                            }
+                                                            
                                                             //      // await setvalues(values.concat(numofquestion));
                                                             //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
                                                             //console.log(questions);
@@ -490,20 +507,36 @@ const Createquiz = () => {
                                             console.log(lasttouch + "lasttouch")
                                             await props.setFieldTouched("Username", true)
                                             await props.setFieldTouched("Discription", true)
-                                          //  for (var i = lasttouch + 1; i <= itemid; i++) {
+                                            //  for (var i = lasttouch + 1; i <= itemid; i++) {
 
 
-                                                await props.setFieldTouched(`soalha[${itemid}].question`, true)
-                                                await props.setFieldTouched(`soalha[${itemid}].a`, true)
-                                                await props.setFieldTouched(`soalha[${itemid}].b`, true)
-                                                await props.setFieldTouched(`soalha[${itemid}].c`, true)
-                                                await props.setFieldTouched(`soalha[${itemid}].d`, true)
-                                                console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                                if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
-                                                    await props.handleChange(`soalha[${itemid}].question`)("  ")
-                                                    // await props.handleChange(`soalha[${i}].question`)()
-                                                }
-                                           // }
+                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                            console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
+                                                // await props.handleChange(`soalha[${i}].question`)()
+                                            }
+                                             if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
+                                                await props.handleChange(`soalha[${itemid}].a`)("  ")
+                                                // await props.handleChange(`soalha[${i}].question`)()
+                                            }
+                                             if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
+                                                await props.handleChange(`soalha[${itemid}].b`)("  ")
+                                                // await props.handleChange(`soalha[${i}].question`)()
+                                            }
+                                             if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
+                                                await props.handleChange(`soalha[${itemid}].c`)("  ")
+                                                // await props.handleChange(`soalha[${i}].question`)()
+                                            }
+                                             if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
+                                                await props.handleChange(`soalha[${itemid}].d`)("  ")
+                                                // await props.handleChange(`soalha[${i}].question`)()
+                                            }
+                                            // }
                                             //setlasttouch(itemid)
 
                                             // resolve()
