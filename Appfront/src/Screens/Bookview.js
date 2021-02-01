@@ -341,23 +341,26 @@ const Bookview = (prop) => {
                 color: '#a9a9a9',
                 marginLeft: wp('5%'),
                 marginTop: hp('-4%'),
-                marginBottom:hp('1%'),
+                marginBottom: hp('1%'),
                 borderBottomColor: '#a9a9a9',
                 borderBottomWidth: 1
               }}
             />
             : null}
+          {quotes === "No Quote!" ?
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%'),marginBottom:hp('2%') }}>نقل قولی برای این کتاب وجود ندارد ...</Text> : null}
 
-
-          {/* <Button style={{
-            alignSelf: 'center', backgroundColor: '#1F7A8C',
-            width: 200, borderRadius: 15, marginBottom: hp('3%')
-          }}
-            onPress={() => {
-              prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
-                title: response.data.title,
-              });
-            }}><Text style={{ marginLeft: wp('10%') }}>صفحه نقل قول ها</Text></Button> */}
+          {quotes === "No Quote!" ?
+            <Button style={{
+              alignSelf: 'center', backgroundColor: '#1F7A8C',
+              width: 200, borderRadius: 15, marginBottom: hp('3%')
+            }}
+              onPress={() => {
+                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}><Text style={{ marginLeft: wp('10%') }}> ثبت اولین نقل قول</Text></Button>
+            : null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
