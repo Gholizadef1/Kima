@@ -307,13 +307,13 @@ return(
 
   <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
     <div className="mx-md-5 my-4">
-    <div className=" row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
+    <div className=" row no-gutters position-relative shadow border color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
      
         <img src={state.imgurl} 
         className="img-fluid mx-auto my-4 float-right rounded-lg" alt="" style={{width:270,boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
 
       <div className="mx-auto position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
-        <h2 className="p-3 mt-2" >{state.title}</h2>
+        <h1 className="p-3 mt-2" >{state.title}</h1>
         <div>
               <div className="ml-auto">
                  <div className={classes.root}>
@@ -394,7 +394,7 @@ return(
     </div>
   </div>
 </div>
-<div className="Tab color1 my-1 mb-5 mx-md-5 shadow rounded-lg  ">
+<div className="Tab color1 my-1 mb-5 mx-md-5 shadow border rounded-lg  ">
 <Tabs book={state.id} bookdescription={state.description}/>
 </div>
 </div>

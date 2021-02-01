@@ -144,7 +144,7 @@ function Discussion(props) {
     <div>
       <div className="mx-md-5 px-md-5">
         <div className="rTOl text-right px-md-5 mx-md-5" >
-          <div className="mx-md-5 my-5 px-md-3 shadow rounded-lg ">
+          <div className="mx-md-5 my-5 px-md-3 shadow border rounded-lg ">
               <div>
                 <div className="d-flex flex-wrap mx-2  rounded-lg pt-3">
                   <div className="px-2">
@@ -152,7 +152,7 @@ function Discussion(props) {
                     <h5 className="text-center mt-2">{creator.username}</h5>
                   </div>
                   <div className="d-flex flex-column flex-wrap mx-3">
-                    <h3 className="my-1 rounded-lg " >{discussion.title}</h3>
+                    <h1 className="my-1 rounded-lg " >{discussion.title}</h1>
                     <p className="my-1 ">{discussion.description}</p>
                   </div>
                 </div> 
