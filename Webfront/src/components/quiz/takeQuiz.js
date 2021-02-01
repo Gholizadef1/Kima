@@ -39,9 +39,11 @@ function TakeQuiz(props) {
                     {/* <div className="btn btn-info ml-auto mt-2">شروع آزمونک</div> */}
                   </div>
                   <div className=" px-3 border-right border-dark my-auto">
-                    <Avatar className="mx-auto " alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`}  />
-                    <h5 className="text-center mt-2">فاطمه {creator.username}</h5>
-                    <p>تاریخ ساخت {quiz.creeate_time}</p>
+                    <Avatar className="mx-auto mb-2" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`}  />
+                    <p className="text-center my-n1">سازنده :</p>
+                    <p className="text-center my-n1">فاطمه {creator.username}</p>
+                    <p className="text-center my-n1">تاریخ ساخت :</p>
+                    <p className="text-center my-n1">{quiz.creeate_time}sss</p>
                   </div>
                 </div> 
               </div>
@@ -50,7 +52,7 @@ function TakeQuiz(props) {
 
                   <div className="">
                       <p>{questions.questions_num}</p>
-                      <h4 className="my-4">صورت سوال1 {questions.questions_text}</h4>
+                      <h4 className="my-4 mr-3">صورت سوال1 {questions.questions_text}</h4>
                       <div>
 
                         <div className=" btn-group-toggle d-flex flex-column col-8 mx-auto " data-toggle="buttons">
@@ -77,7 +79,7 @@ function TakeQuiz(props) {
 
                   <div className="">
                       <p>{questions.questions_num}</p>
-                      <h4 className="my-4">صورت سوال1 {questions.questions_text}</h4>
+                      <h4 className="my-4 mr-3">صورت سوال1 {questions.questions_text}</h4>
                       <div>
 
                         <div className=" btn-group-toggle d-flex flex-column col-8 mx-auto " data-toggle="buttons">

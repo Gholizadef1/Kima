@@ -465,8 +465,21 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
+
+                <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
+        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+
+                </Tooltip>
                
-               <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+               
                            
                            </div>
               </div>
@@ -538,7 +551,19 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-               <p><b><a className="pt-n3" href="" >{current.title}</a></b></p>
+               
+                <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
+        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+
+                </Tooltip>
                            
                            </div>
               </div>
