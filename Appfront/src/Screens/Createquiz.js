@@ -237,7 +237,7 @@ const Createquiz = () => {
                                         placeholder={'نام کوییز ...'} placeholderTextColor='gray' >
                                     </Input>
 
-                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('1.5%'), marginTop: hp('8%'), color: 'red' }}>{props.touched.Username && props.errors.Username}</Text>
+                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('1.5%'), marginTop: hp('8%'), color: '#FC4A68' }}>{props.touched.Username && props.errors.Username}</Text>
                                 </Item>
                                 <Image source={require("../../assets/quizicon.png")} style={{ height: hp("3.5%"), width: wp("7%"), position: 'absolute', marginTop: hp("6.6%"), marginLeft: wp("38%") }}></Image>
 
@@ -258,7 +258,7 @@ const Createquiz = () => {
                                         </Textarea>
                                     </TouchableOpacity>
                                 </View>
-                                <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('5%'), marginTop: hp('1%'), color: 'red' }}>{props.touched.Discription && props.errors.Discription}</Text>
+                                <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('5%'), marginTop: hp('1%'), color: '#FC4A68' }}>{props.touched.Discription && props.errors.Discription}</Text>
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
 
 

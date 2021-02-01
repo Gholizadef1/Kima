@@ -211,7 +211,7 @@ const Createquizeachquestion = (prop) => {
                 </View>
             </View>
             {typeof cerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].c`)&&cerror}</Text>:null}
-            <View style={{ marginTop: hp("3%"),marginBottom:hp("5%"), marginRight: wp("5%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
+            <View style={{ marginTop: hp("3%"),marginBottom:hp("4%"), marginRight: wp("5%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                 <TouchableOpacity>
 
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
@@ -232,7 +232,7 @@ const Createquizeachquestion = (prop) => {
                     <RadioButton color={"#1f7a8c"} value="4" />
                 </View>
             </View>
-            {typeof derror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-3%'), marginBottom:hp("-1%"), color: 'red'}}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].d`)&&derror}</Text>:null}
+            {typeof derror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-3%'), marginBottom:hp("-1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].d`)&&derror}</Text>:null}
         </RadioButton.Group>
         {/* </Field> */}
     </View>
@@ -242,9 +242,10 @@ const styles = StyleSheet.create({
     error:{
         fontSize: hp('1.2%'),
          marginLeft: wp('5.5%'),
-          marginTop: hp('1%'),
+          marginTop: hp('0.6%'),
           marginBottom:hp("-1%"),
-           color: 'red'
+           color: '#FC4A68',
+          marginBottom:hp("-2.4%")
     }
   
 });
