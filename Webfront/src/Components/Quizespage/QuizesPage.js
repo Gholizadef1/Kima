@@ -153,7 +153,7 @@ const handleCreateGroupSubmit =(e) =>{
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
       handleCloseCreateGroup();
-      routeToGroupHandler(response.data.data.id);
+      routeToQuizHandler(response.data.data.id);
     }
     else{
       setMassage("آزمونک از قبل وجود دارد")
@@ -227,9 +227,9 @@ const handleCloseSnack = (event, reason) => {
       });
   }
   
-  const routeToGroupHandler = ( id ) => {
+  const routeToQuizHandler = ( id ) => {
     console.log(id);
-    props.history.push( '/group/' + id );
+    props.history.push( '/takequiz/' + id );
   }
 
 
@@ -343,7 +343,7 @@ const handleCloseSnack = (event, reason) => {
                         <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.summary.length >= 80 ?(
                           <div>
                            <p class="card-text yekanfont mt-3" style={{fontSize:20}}>توضیحات: {current.summary.substring(0, 60)}</p>
-                           <div className="btn text-muted" onClick={() => routeToGroupHandler(current.id)}>بیشتر...</div>
+                           <div className="btn text-muted" onClick={() => routeToQuizHandler(current.id)}>بیشتر...</div>
                            </div>
                         ):(
                           <p class="card-text  yekanfont mt-3"style={{fontSize:20}}>توضیحات: {current.summary}</p>
@@ -354,11 +354,11 @@ const handleCloseSnack = (event, reason) => {
                         <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.members_count}</h6>
                         {isMine === true?
                         <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToGroupHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
+                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>
                         :
                         <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToGroupHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
+                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
                         </div>
                          }
                        

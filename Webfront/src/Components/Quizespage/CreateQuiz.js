@@ -42,7 +42,7 @@ function Quizespage (props){
     const imageUploader = React.useRef(null);
     const uploadedImage = React.useRef(null);
     var sendpic = new FormData()
-    sendpic.append("",newQuiz.quiz_photo)
+    sendpic.append("quiz_photo",state.file)
     const handleImageUpload = e => {
         setState({file:e.target.files[0]});
         const [file] = e.target.files;

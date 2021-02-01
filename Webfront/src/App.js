@@ -82,6 +82,10 @@ function App(props) {
             <NavBar/>
             <CreateQuiz/>
             </Route>
+            <Route path="/takeQuiz/:quizId">
+                <NavBar/>
+              
+            </Route>
             <Route path="*">
               <div class="alert alert-warning" role="alert">
                 صفحه وجود ندارد
