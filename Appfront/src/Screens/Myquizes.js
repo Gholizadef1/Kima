@@ -20,6 +20,7 @@ import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { EvilIcons } from '@expo/vector-icons';
 import Quizcard from "./Quizcard";
+import { Octicons } from '@expo/vector-icons'; 
 // import { TextInput } from 'react-native-paper';
 
 
@@ -206,7 +207,7 @@ const Myquizes = (prop) => {
             style={{backgroundColor:'white',marginBottom:0}}
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            <Quizcard quizphoto={item.quiz_photo} membernumber={item.question_count}  discription={item.summary} title={item.description} ></Quizcard>
+            <Quizcard quizphoto={item.quiz_photo} membernumber={item.question_count}  discription={item.description} creator={item.creator} title={item.title} ></Quizcard>
             {/* :null} */}
             </TouchableOpacity>
             </>

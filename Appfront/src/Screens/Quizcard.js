@@ -39,21 +39,21 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.groupphoto === 'http://5d4a663fe10f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.quizphoto === 'http://5d4a663fe10f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
         width: wp('16%'),
-         borderRadius: 20,
+         borderRadius: 100,
         position: 'absolute',borderColor:'#1f7a8c'
         ,borderWidth:wp('0.3%'),
         }}
 
        >
 
-       </ImageBackground> : <ImageBackground borderRadius={20}
+       </ImageBackground> : <ImageBackground borderRadius={100}
 
-         source={{uri:prop.groupphoto}}
+         source={{uri: "http://5d4a663fe10f.ngrok.io" + `${prop.quizphoto}`}}
          style={styles.avatar}
 
        >
@@ -64,17 +64,21 @@ const Eachgroup = (prop) => {
      <Text style={styles.username}>{prop.title}</Text>
     
      {/* {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null} */}
-     <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
+     <Text style={styles.date}><Text style={{color:'gray',fontSize:hp("1.3.9%")}}>تعداد سوال : </Text>{prop.membernumber}</Text>
 
 
-    
+     <TouchableOpacity
+            style={{backgroundColor:"#B7E4C7",height:hp("4.5%"),bottom:hp("1.7%"),marginTop:hp("0%"),width:wp("18%"),borderRadius:50,left:wp("68.5%"),marginBottom:hp("0%"),alignSelf:"flex-end"}}
+            >
+            <Text style={{fontSize:hp("1.5.5%"),color:"#1f7a8c",fontWeight:"bold",alignSelf:"center",marginTop:hp("1.1%")}}>پاسخ ها</Text>
+            </TouchableOpacity>
    </View>
   
    <View style={{ flexDirection: 'row' }}>
 
    <View style={styles.comment}>
 
-       
+   <Text style={{ fontSize: hp('1.6%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('2%'), marginTop: hp('-1%'), marginHorizontal: wp("0%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {prop.creator.username}</Text>  </Text>
         {!more ? <Text style={{color:'black'}}>{comment4}</Text>:<Text style={{color:'black'}}>{prop.discription}</Text>}
         {linenumber>= 250 ? <TouchableOpacity
       
@@ -141,7 +145,7 @@ const styles = StyleSheet.create({
       avatar: {
         height: hp('8%'),
         width: wp('16%'),
-        borderRadius: 20,
+        borderRadius: 100,
         position: 'absolute',
         // borderColor:'#1f7a8c'
     
@@ -149,9 +153,9 @@ const styles = StyleSheet.create({
       date: {
         position: 'absolute',
         marginTop: '17%',
-        left: 80,
-        fontSize: 12,
-        color: 'gray'
+        marginLeft:wp("20%"),
+        fontSize: hp("1.5%"),
+        color: '#1f7a8c'
       },
       avatarname: {
         marginTop: '5%',
