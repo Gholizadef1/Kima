@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -17,9 +17,11 @@ import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
-import {withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import { API_BASE_URL } from "../../constants/apiContants";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -89,22 +91,12 @@ export default function FullWidthTabs(props) {
 
   const [filterBaseComment,setFilterBaseComment]= useState("time");
   const [filterBaseQuote,setFilterBaseQuote]= useState("time");
+
+  
   
 
   //for comment
   useEffect(()=>{
-    //console.log(props)
-    //console.log(props.book)
-    // axios.get("http://127.0.0.1:8000/bookdetail/"+props.book+'/comment')
-    // .then(response=>{
-    //   setComments(response.data);
-    //   console.log(response);
-    //   //setcommentAgain("");
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndComment("نظر دیگری وجود ندارد");
-    // });
 
       axios.get(API_BASE_URL +"/book/"+props.book+"/comment?filter="+filterBaseComment+"&page="+commentsPage,
       {
@@ -123,21 +115,8 @@ export default function FullWidthTabs(props) {
   },[props.book,commentAgain,commentsPage,filterBaseComment]);
 
   
-  
 //for quote
   useEffect(()=>{
-    //console.log(props.book)
-    //console.log(quotesPage);
-    // axios.get("http://127.0.0.1:8000/api/quotes/"+props.book+"?page="+quotesPage)
-    // .then(response=>{
-    //  //setQuotes(quotes.concat(response.data));
-    //  setQuotes(response.data);
-    //   console.log(response);
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   setEndQuote("نقل قول دیگری وجود ندارد");
-    // });
 
       axios.get(API_BASE_URL +"/book/"+props.book+"/quote?filter=" + filterBaseQuote +"&page="+quotesPage,
       {
@@ -155,9 +134,6 @@ export default function FullWidthTabs(props) {
   },[props.book,quoteAgain,quotesPage,filterBaseQuote]);
 
 
-
-
-
   const[userComment,setUserComment]=useState("")
 
   const[userQuote,setUserQuote]=useState("")
@@ -166,15 +142,11 @@ export default function FullWidthTabs(props) {
   const handleChangeComment = (e) => {
     const {value} = e.target   
     setUserComment(value);
-    //console.log(e);
-    //console.log(userComment);
   }
 
   const handleChangeQuote = (e) => {
     const { value} = e.target   
     setUserQuote( value)
-    //console.log(e);
-    //console.log(userQuote);
   }
 
   const handleSubmitCommentClick = (e) => {
@@ -253,8 +225,20 @@ export default function FullWidthTabs(props) {
    }
 }
 
-  const handleDeleteQuote = (id) => {
-    axios.delete(API_BASE_URL +'/book/'+ props.book +'/quote/'+id,
+
+const [deleteId, setDeleteId] = useState();
+const [openDialog, setOpenDialog] = useState(false);
+const handleClickOpenDialog = (id) => {
+  setOpenDialog(true);
+  setDeleteId(id);
+};
+const handleCloseDialog = () => {
+  setOpenDialog(false);
+};
+
+  const handleDeleteQuote = () => {
+    handleCloseDialog();
+    axios.delete(API_BASE_URL +'/book/'+ props.book +'/quote/'+deleteId,
     {
       headers:{
      "Content-Type":"application/json",
@@ -264,7 +248,7 @@ export default function FullWidthTabs(props) {
     .then(response=>{
       console.log(response);
       setquoteAgain(quoteAgain+1);
-
+      setDeleteId();
     })
     .catch(error=>{
       console.log(error);
@@ -272,8 +256,10 @@ export default function FullWidthTabs(props) {
 
   }
 
-  const handleDeleteComment = (id) => {
-    axios.delete(API_BASE_URL + "/book/"+ props.book +"/comment/"+id,
+  const handleDeleteComment = () => {
+    handleCloseDialog();
+
+    axios.delete(API_BASE_URL + "/book/"+ props.book +"/comment/"+deleteId,
     {
       headers:{
      "Content-Type":"application/json",
@@ -283,6 +269,7 @@ export default function FullWidthTabs(props) {
     .then(response=>{
       console.log(response);
       setcommentAgain(commentAgain+1);
+      setDeleteId();
     })
     .catch(error=>{
       console.log(error);
@@ -432,22 +419,6 @@ export default function FullWidthTabs(props) {
   }
 
 
-
-  const StyledButton = withStyles({
-    root: {
-      background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-      borderRadius: 3,
-      border: 0,
-      color: 'black',
-      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-    },
-    label: {
-      textTransform: 'capitalize',
-    },
-  })(Button);
-
-
-
   return (
     <div >
       <div>
@@ -548,13 +519,34 @@ export default function FullWidthTabs(props) {
                     {current.account.id != Cookies.get("userId") ?(
                       <div></div>
                     ):(
-                      <div className="btn m-n1" onClick={()=> handleDeleteComment(current.id)}>
+                      <div className="btn m-n1" onClick={()=> handleClickOpenDialog(current.id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                         </svg>
+                       
                       </div>
                     )
                   }
+<Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <h5 className="text-right yekanfont">آیا از پاک کردن این مورد برای همیشه مطمئن‌اید؟</h5>
+        </DialogTitle>
+        <DialogActions>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
+            خیر
+          </Button>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteComment()} color="black" autoFocus>
+            بله
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
 
 
                     
@@ -618,6 +610,8 @@ export default function FullWidthTabs(props) {
               })}
               </div>
                )}
+
+               
 
           </div>
         </TabPanel>
@@ -684,7 +678,7 @@ export default function FullWidthTabs(props) {
                     {current.account.id != Cookies.get("userId") ?(
                       <div></div>
                     ):(
-                      <div className="btn" onClick={()=> handleDeleteQuote(current.id)}>
+                      <div className="btn" onClick={()=> handleClickOpenDialog(current.id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                         </svg>
@@ -693,7 +687,24 @@ export default function FullWidthTabs(props) {
                     )
                   }
 
-
+<Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <h5 className="text-right yekanfont">آیا از پاک کردن این مورد برای همیشه مطمئن‌اید؟</h5>
+        </DialogTitle>
+        <DialogActions>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
+            خیر
+          </Button>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteQuote()} color="black" autoFocus>
+            بله
+          </Button>
+        </DialogActions>
+      </Dialog>
 
                     <div className="d-flex">
                     <small className=" mt-3">
