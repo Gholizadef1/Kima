@@ -29,6 +29,8 @@ const userschema = yup.object({
 })
 
 const GroupPage = (prop) => {
+
+  console.log('STARTTTTT')
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
   const [loading1, setloading1] = useState(true)
@@ -38,10 +40,10 @@ const GroupPage = (prop) => {
   const [picture, setpicture] = useState(null);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState([]);
-  const [owner, setowner] = useState("");
+  const [owner, setowner] = useState("undefined");
   const [join, setjoin] = useState(false);
-  const [joinedUser, setjoinedUser] = useState("");
-  const [notjoinedUser, setnotjoinedUser] = useState("");
+  const [joinedUser, setjoinedUser] = useState("undefined");
+  const [notjoinedUser, setnotjoinedUser] = useState("undefined");
   const [members, setmembers] = useState([]);
   const [groupphoto, setgroupphoto] = useState(null)
   const [reload, setreload] = useState(false)
@@ -67,7 +69,7 @@ const GroupPage = (prop) => {
       })
   };
 
-  useEffect(() => {
+  useEffect((async) => {
     async function getgroupDetails () {
       const response = axiosinst.get('/group/' + prop.route.params.id)
       .then(async function (response) {
@@ -77,40 +79,41 @@ const GroupPage = (prop) => {
 
         if (username === response.data.owner.username) {
           console.log('@@@@@@@@@@owner')
-            setowner("owner")
+          await setowner("owner")
         }
       })
     }
     getgroupDetails()
     setloading2(false)
-  }, [join, owner, joinedUser, notjoinedUser])
+  }, [join])
 
-  useEffect(() => {
+  useEffect((async) => {
     async function getMembers () {
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
       .then(async function (response) {
         await setmembers(response.data.members)
 
         for (let i = 0; i < membernumber; i++) {
-          if (response.data.members[i].user.username === username && owner != "owner") {
-            await setjoinedUser("joinedUser")
+          if (response.data.members[i].user.username === username && username != response.data.owner.username) {
+            setjoinedUser("joinedUser")
             console.log('%%%%%%%%%%%%%%%%%%%joineduser')
+            break;
           }
         }
-        if (joinedUser != "joinedUser" && username != response.data.owner.username) {
-          await setnotjoinedUser("notjoinedUser")
+        if (joinedUser === "undefined" && username != response.data.owner.username) {
+          setnotjoinedUser("notjoinedUser")
           console.log("###############notjoineduser")
         }
       })
     }
     getMembers()
     setloading1(false)
-  }, [join, owner, joinedUser, notjoinedUser])
+  }, [join])
 
 
-  console.log(joinedUser)
-  console.log(notjoinedUser)
-  console.log(owner)
+  console.log('J==='+joinedUser)
+  console.log('N==='+notjoinedUser)
+  console.log('O==='+owner)
 
 
 
@@ -130,8 +133,8 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
-        setjoin(true)
-        getMembers()
+        await setjoin(true)
+        await getMembers()
       })
       .catch(function (error) {
         console.log(error);
@@ -355,12 +358,14 @@ const GroupPage = (prop) => {
             {groupinfo.summary}
           </Text>
 
-          <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
 
           {discussion.length === 0 ?
             <Text style={{ marginLeft: wp('10%'), marginTop: hp('2%') }}>بحثی برای نمایش وحود ندارد...</Text> : null}
 
-          <FlatList
+            <ScrollView>
+              <View>
+                <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
+                <FlatList
             style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={true}
             onEndReached={() => {
@@ -395,6 +400,9 @@ const GroupPage = (prop) => {
             }
           >
           </FlatList>
+              </View>
+            </ScrollView>
+
 
           {notjoinedUser != "notjoinedUser" ?
             <Button onPress={() => setModalVisible(true)} style={{
@@ -413,11 +421,10 @@ const GroupPage = (prop) => {
             </Button>}
 
 
-
-
-          <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
-
-          <FlatList
+          <ScrollView>
+            <View>
+            <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
+            <FlatList
             style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={true}
             onEndReached={() => {
@@ -453,6 +460,11 @@ const GroupPage = (prop) => {
             }
           >
           </FlatList>
+
+            </View>
+          </ScrollView>
+
+         
 
           {/* {groupinfo.members_count>4 ?         
           <Button style={{ marginLeft: wp('90%') }} transparent 
