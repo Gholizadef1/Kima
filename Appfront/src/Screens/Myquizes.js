@@ -27,73 +27,6 @@ import { EvilIcons } from '@expo/vector-icons';
 const Myquizes = (prop) => {
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
-  
-  const pickfromgallery = async (props,change)=>{
-    await console.log(await AsyncStorage.getItem('token'));
-    console.log('gallery')
-      const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
-      if(granted){
-          console.log(granted)
-          let data=await ImagePicker.launchImageLibraryAsync({
-            mediaTypes:ImagePicker.MediaTypeOptions.Images,
-            allowsEditing:true,
-            aspect:[1,1],
-            quality:1
-          })
-          console.log(data);
-          console.log(data.uri)
-          const formdata = new FormData();
-          
-          const newfile={uri:data.uri,
-            type:`test/${data.uri.split(".")[3]}`,
-            name:`test.${data.uri.split(".")[3]}`}
-          console.log(newfile)
-
-          formdata.append('photo',newfile)
-          
-          if(data.cancelled===false){
-          const back={        
-            photo:data
-          }
-           const backk=JSON.stringify(back);
-           console.log(props.values.photo+'formik photo1')
-            // props.values.photo="{uri:"+data.uri+'}'
-           props.values.photo=data.uri
-           //baraye in ke rerender beshe va photo formik form taghir kone
-        
-             props.handleChange('photo')
-             setpicture(newfile)
-             
-             console.log(picture+'  PICTURE')
-            // change(data.uri)
-           console.log(props.values.photo+'formik photo2')
-           
-          // const response=await axiosinst.put('http://6124bc8043de.ngrok.io/api/update-profile/',formdata,{
-
-          //   headers:{
-          //     "Content-Type":"application/json",
-          //     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-          //   }
-          //      )
-          // .then( function(response){
-          //   const a=response.data.profile_photo
-          //   setpicture(a);
-            
-          // })
-          // .catch( function(error){
-          //   console.log(error)
-          // })
-         
-          }
-      }
-      else
-      {
-        Alert.alert('oops',' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید',[{
-          Title:'فهمیدم',onPress:()=>console.log('alert closed')
-          }])
-      }
-  
-  }
     const[inforamtionchange,setinfromationchange]=useState(false)
 
     const checkisowner=async(ID)=>{
@@ -127,17 +60,10 @@ const Myquizes = (prop) => {
     if(page===1){
       await settheend(false)
       await setinformation([])
-      // if(inforamtionchange===false)
-      // setinfromationchange(true)
-      // else
-      // setinfromationchange(false)
       console.log(information+'BAYAN KHALI BASHEEEEEEEEEE')
       console.log('----------------------PGAE 11111111---------------')
 
     }
-    
-
-    
     console.log('DOVOM')
      console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
      console.log('ALAIK ALIAKDALFKJASFKJAKSFKLJSFH')
