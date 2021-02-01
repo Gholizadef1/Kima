@@ -316,6 +316,26 @@ export default function FullWidthTabs(props) {
       });
    }
 
+   const handleLikeClickAgain = (id) => {
+      axios.delete(
+         API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=like",
+      {
+       headers:{
+      "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then(response=>{
+        console.log(response);
+        setOpenSnack(true);
+        setMassage("عمل با موفقیت انجام شد");
+        setcommentAgain(commentAgain+1);
+        console.log(response.data.data);
+      })
+      .catch(error=>{
+        console.log(error);
+      });
+   }
+
    const handleDislikeClick = (id) => {
       
       axios.post(
@@ -332,22 +352,35 @@ export default function FullWidthTabs(props) {
         if(response.data.message==="successfully disliked!"){
           setMassage("عمل با موفقیت انجام شد");
         }else setMassage("شما قبلا این نظر را نپسندیده‌اید");
-
-          setcommentAgain(commentAgain+1);
-          console.log(response.data.data);
-        
+        setcommentAgain(commentAgain+1);
+        console.log(response.data.data);
       })
       .catch(error=>{
         console.log(error);
       });
-  
    }
 
+   const handleDislikeClickAgain = (id) => {
+      
+    axios.delete(
+      API_BASE_URL + "/book/"+ props.book +"/comment/"+id+"?feedback=dislike",{
+     headers:{
+    "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    })
+    .then(response=>{
+      console.log(response);
+      setOpenSnack(true);
+      setMassage("عمل با موفقیت انجام شد");
+      setcommentAgain(commentAgain+1);
+      console.log(response.data.data);
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+ }
+
    const handleLoveClick=(id)=>{
-     console.log(id);
-    // console.log(Cookies.get("userToken"));
-    // const payload={}
-    //const back= JSON.stringify(payload);
     axios.post( API_BASE_URL+'/book/'+props.book+'/quote/'+id +'?feedback=like',
     {},
     {
@@ -358,11 +391,30 @@ export default function FullWidthTabs(props) {
     .then(response=>{
       console.log(response);
       setOpenSnack(true);
-      if(response.data.message==="like success!"){
+      if(response.data.message==="like success!")
         setMassage("عمل با موفقیت انجام شد");
-      }else setMassage("شما قبلا این نظر را پسندیده‌اید");
-        setquoteAgain(quoteAgain+1);
-        console.log(response.data.data);
+      setquoteAgain(quoteAgain+1);
+      console.log(response.data.data);
+    })
+    .catch(error=>{
+      console.log(error);
+    });
+   }
+
+   const handleLoveClickAgain=(id)=>{
+    axios.delete( API_BASE_URL+'/book/'+props.book+'/quote/'+id +'?feedback=like',
+    {
+     headers:{
+    "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    })
+    .then(response=>{
+      console.log(response);
+      setOpenSnack(true);
+      if(response.data.message==="like success!")
+        setMassage("عمل با موفقیت انجام شد");
+      setquoteAgain(quoteAgain+1);
+      console.log(response.data.data);
     })
     .catch(error=>{
       console.log(error);
@@ -510,7 +562,7 @@ export default function FullWidthTabs(props) {
 
                       {current.LikeCount ?
                       <div className="btn "> 
-                      <AiFillLike  color="blue" size="25" onClick={()=> handleLikeClick(current.id)}/>
+                      <AiFillLike  color="blue" size="25" onClick={()=> handleLikeClickAgain(current.id)}/>
                       </div>
                       :
                       <div className="btn "> 
@@ -527,7 +579,7 @@ export default function FullWidthTabs(props) {
 
                       {current.isdisliked ?
                       <div className="btn ">
-                      <AiFillDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
+                      <AiFillDislike  color="red" size="25"onClick={()=> handleDislikeClickAgain(current.id)}/>
                       </div>
                       :<div className="btn ">
                       <AiOutlineDislike  color="red" size="25"onClick={()=> handleDislikeClick(current.id)}/>
@@ -647,21 +699,24 @@ export default function FullWidthTabs(props) {
                     <small className=" mt-3">
                         {current.Likes}
                       </small>
-                      <div className="btn" onClick={()=> handleLoveClick(current.id)}> 
 
                       {current.isliked ?
 
+                        <div className="btn" onClick={()=> handleLoveClickAgain(current.id)}> 
                         <svg width="1.6em" height="1.6em" style={{color:"red"}} viewBox="0 0 16 16" className="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>
+                        </div>
                         :
+                        <div className="btn" onClick={()=> handleLoveClick(current.id)}> 
                         <svg width="1.6em" height="1.6em" style={{color:"red"}} xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                           <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                         </svg>
+                        </div>
 
                       }
                         
-                      </div>
+                      
 
                     </div>
                   </div>
