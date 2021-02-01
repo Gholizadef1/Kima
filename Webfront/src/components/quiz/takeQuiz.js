@@ -9,14 +9,14 @@ function TakeQuiz(props) {
 
     const [quiz,setQuiz] = useState([])
     const [creator,setCreator] = useState([]);
-    const [question,setQuestion] = useState([]);
+    const [questions,setQuestions] = useState([]);
 
     useEffect(()=>{
         axios.get(API_BASE_URL + "quiz" + props.match.params.quizId)
         .then(response=>{
             setQuiz(response.data.Quiz);
             setCreator(response.data.Quiz.creator);
-            setQuestion(response.data.Question);
+            setQuestions(response.data.Questions);
              console.log(response);
            })
            .catch(error=>{
@@ -42,6 +42,19 @@ function TakeQuiz(props) {
                     <p>تاریخ ساخت {quiz.creeate_time}</p>
                   </div>
                 </div> 
+              </div>
+              <div>
+                  <div>
+                      <p>{questions.questions_num}</p>
+                      <h4>صورت سوال {questions.questions_text}</h4>
+                      <div>
+                          <p>{questions.a_text}</p>
+                          <p>{questions.b_text}</p>
+                          <p>{questions.c_text}</p>
+                          <p>{questions.d_text}</p>
+                      </div>
+
+                  </div>
               </div>
 
           </div>
