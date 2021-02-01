@@ -339,9 +339,9 @@ const Bookview = (prop) => {
             <View
               style={{
                 width: 320,
-                color: 'gray',
+                color: '#dcdcdc',
                 marginLeft: wp('5%'),
-                marginTop: hp('-4%'),
+                marginTop: hp('-3%'),
                 marginBottom: hp('1%'),
                 borderBottomColor: '#a9a9a9',
                 borderBottomWidth: 1
@@ -385,13 +385,13 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
+                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
                       source={{ uri: item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
-                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.quote_text}</Text>
+                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('-20%')}}>{item.quote_text}</Text>
+                    <Text style={{ alignSelf: 'flex-start', fontSize: 14 , top:hp('-5%'),marginHorizontal:wp('16%')}}>{item.account.username}</Text>
                   </Card>
                 </View>
               </>
@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
     top: hp('-6%'),
-    marginBottom: hp('-5%'),
+    marginBottom: hp('-2%'),
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
     backgroundColor: '#EDF2F4',
@@ -432,6 +432,14 @@ const styles = StyleSheet.create({
   avatar: {
     marginLeft: wp('2%'),
     top: hp('-3.5%'),
+    width: wp('14%'),
+    height: hp('8%'),
+    marginTop: hp('5%')
+  },
+  avatar2: {
+    marginLeft: wp('18%'),
+    top: hp('18%'),
+    marginBottom:hp('3%'),
     width: wp('14%'),
     height: hp('8%'),
     marginTop: hp('5%')
