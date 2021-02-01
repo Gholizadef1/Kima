@@ -283,7 +283,7 @@ const Createquiz = () => {
                                                 // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
                                                 // const [values,setvalues]=useState("1")
                                                 return (<>
-                                                    <Text style={{ fontSize: 14, color: "green", width: 100, height: 20, position: "absolute", marginTop: 100 }}>{item.id}</Text>
+                                         
                                                     <Createquizeachquestion setshowallerr={setshowallerror} showallerr={showallerror} touched={touched} pr={props} error={errors} itemidd={item.id}></Createquizeachquestion>
                                                     {/* //  propp={propss} */}
                                                 </>)
@@ -320,7 +320,7 @@ const Createquiz = () => {
                                                             await props.setFieldTouched(`soalha[${itemid}].c`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].d`, true)
                                                             console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined||getIn(props.values, `soalha[${itemid}].question`)==="") {
                                                                 await props.handleChange(`soalha[${itemid}].question`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
