@@ -10,6 +10,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
 import DropDownPicker from 'react-native-dropdown-picker';
+import { Avatar } from 'react-native-paper';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
@@ -21,6 +22,8 @@ const Bookview = (prop) => {
   const [loading2, setloading2] = useState(true);
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
+  const [picture, setpicture] = useState(null);
+  const [refreshcomments, setrefreshcomments] = useState(false)
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
 
@@ -58,7 +61,6 @@ const Bookview = (prop) => {
       }
     })
       .then(function (response) {
-        console.log('response data ===== ', response.data.message)
         if (response.data.message === "No Comment!") {
           setComments("No Comment!")
         }
@@ -66,7 +68,11 @@ const Bookview = (prop) => {
           setComments(response.data)
         }
         setloading2(false)
+        console.log('response data ===== ', response.data[0].account.username)
+        console.log('response data ::::: ', response.data[0].comment_text)
+        console.log('commentsss===' + comments[0].comment_text)
       })
+      
 
       .catch(async function (error) {
         console.log(error);
@@ -264,6 +270,38 @@ const Bookview = (prop) => {
                 });
               }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
 
+            {comments != "No Comment!" ?
+             <FlatList
+             style={{ marginBottom: hp('5%') }}
+             showsVerticalScrollIndicator={false}
+             horizontal={true}
+             onEndReached={() => {
+                 //            console.log('-----AKHAR LIST')
+             }}
+             onEndReachedThreshold={0.5}
+             keyExtractor={(item) => item.id}
+             refreshing={refreshcomments}
+             onRefresh={async () => {
+                 console.log('refresh')
+             }}
+             data={comments}
+             renderItem={({ item }) => <>
+                     <View style={{}}>
+                         {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
+                             source={{ uri: item.account.profile_photo }}
+                         ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                             source={require('../../assets/group.jpg')}
+                         ></Avatar.Image>}
+                         <Card style={styles.cardChat}>
+                             <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.account.username}</Text>
+                             <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
+                         </Card>
+                     </View>
+             </>
+             }
+         >
+         </FlatList> : null}
+
 
           {/* <Button style={{
             alignSelf: 'center', backgroundColor: '#1F7A8C',
@@ -293,7 +331,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  cardChat: {
+    width: wp('50%'),
+    marginLeft: wp('20%'),
+    marginTop: hp('-5%'),
+    top: hp('-5%'),
+    marginBottom: hp('-5%'),
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    backgroundColor: '#EDF2F4',
+
+},
+avatar: {
+  marginLeft: wp('2%'),
+  top: hp('3%'),
+  width: wp('14%'),
+  height: hp('8%'),
+  marginTop: hp('5%')
+}
 });
 
 export default Bookview;
