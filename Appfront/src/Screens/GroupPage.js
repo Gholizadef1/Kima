@@ -70,50 +70,50 @@ const GroupPage = (prop) => {
   };
 
   useEffect((async) => {
-    async function getgroupDetails () {
+    async function getgroupDetails() {
       const response = axiosinst.get('/group/' + prop.route.params.id)
-      .then(async function (response) {
-        await setgroupinfo(response.data);
-        setmembernumber(groupinfo.members_count);
-        setgroupphoto(`http://699170b6d987.ngrok.io${response.data.group_photo}`)
+        .then(async function (response) {
+          await setgroupinfo(response.data);
+          setmembernumber(groupinfo.members_count);
+          setgroupphoto(`http://699170b6d987.ngrok.io${response.data.group_photo}`)
 
-        if (username === response.data.owner.username) {
-          console.log('@@@@@@@@@@owner')
-          await setowner("owner")
-        }
-      })
+          if (username === response.data.owner.username) {
+            console.log('@@@@@@@@@@owner')
+            await setowner("owner")
+          }
+        })
     }
     getgroupDetails()
     setloading2(false)
   }, [join])
 
   useEffect((async) => {
-    async function getMembers () {
+    async function getMembers() {
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
-      .then(async function (response) {
-        await setmembers(response.data.members)
+        .then(async function (response) {
+          await setmembers(response.data.members)
 
-        for (let i = 0; i < membernumber; i++) {
-          if (response.data.members[i].user.username === username && username != response.data.owner.username) {
-            setjoinedUser("joinedUser")
-            console.log('%%%%%%%%%%%%%%%%%%%joineduser')
-            break;
+          for (let i = 0; i < membernumber; i++) {
+            if (response.data.members[i].user.username === username && username != response.data.owner.username) {
+              setjoinedUser("joinedUser")
+              console.log('%%%%%%%%%%%%%%%%%%%joineduser')
+              break;
+            }
           }
-        }
-        if (joinedUser === "undefined" && username != response.data.owner.username) {
-          setnotjoinedUser("notjoinedUser")
-          console.log("###############notjoineduser")
-        }
-      })
+          if (joinedUser === "undefined" && username != response.data.owner.username) {
+            setnotjoinedUser("notjoinedUser")
+            console.log("###############notjoineduser")
+          }
+        })
     }
     getMembers()
     setloading1(false)
   }, [join])
 
 
-  console.log('J==='+joinedUser)
-  console.log('N==='+notjoinedUser)
-  console.log('O==='+owner)
+  console.log('J===' + joinedUser)
+  console.log('N===' + notjoinedUser)
+  console.log('O===' + owner)
 
 
 
@@ -320,7 +320,7 @@ const GroupPage = (prop) => {
           <Text style={styles.groupname}>{groupinfo.title}</Text>
           <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
 
-          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false && loading1 === false && loading2 === false && loading3 === false && loading4 === false?
+          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -336,7 +336,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
-          {owner === "owner" && loading1 === false && loading2 === false && loading3 === false && loading4 === false?
+          {owner === "owner" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -362,46 +362,53 @@ const GroupPage = (prop) => {
           {discussion.length === 0 ?
             <Text style={{ marginLeft: wp('10%'), marginTop: hp('2%') }}>بحثی برای نمایش وحود ندارد...</Text> : null}
 
-            <ScrollView>
-              <View>
-                <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
-                <FlatList
-            style={{ marginBottom: hp('5%') }}
-            showsVerticalScrollIndicator={true}
-            onEndReached={() => {
-              //            console.log('-----AKHAR LIST')
-            }}
-            onEndReachedThreshold={0.5}
-            keyExtractor={(item) => item.id}
-            refreshing={refreshdiscussions}
-            onRefresh={async () => {
-              //            console.log('refresh')
-            }}
-            data={discussion}
-            renderItem={({ item }) => <>
-              <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: 18 }}>{item.title}</Text>
-                <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
-                <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
-                  onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
-                  <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
-                </Button >
-                <View
-                  style={{
-                    width: 320,
-                    marginLeft: wp('5%'),
-                    marginTop: hp('2%'),
-                    borderBottomColor: 'black',
-                    borderBottomWidth: 1
-                  }}
-                />
-              </View>
-            </>
-            }
-          >
-          </FlatList>
-              </View>
-            </ScrollView>
+          <ScrollView>
+            <View>
+              <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
+              <FlatList
+                style={{ marginBottom: hp('5%') }}
+                showsVerticalScrollIndicator={true}
+                onEndReached={() => {
+                  //            console.log('-----AKHAR LIST')
+                }}
+                onEndReachedThreshold={0.5}
+                keyExtractor={(item) => item.id}
+                refreshing={refreshdiscussions}
+                onRefresh={async () => {
+                  //            console.log('refresh')
+                }}
+                data={discussion}
+                renderItem={({ item }) => <>
+                  <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
+                    <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: 18 }}>{item.title}</Text>
+                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
+                    {notjoinedUser != "notjoinedUser" ?
+                      <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
+                        onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
+                        <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
+                      </Button >
+                      : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
+                        onPress={() => Alert.alert('', ' برای دیدن بحث های انجام شده باید عضو گروه باشید', [{
+                          text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                        }], { cancelable: false }, { style: { height: 50 } })}>
+                        <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
+                      </Button >}
+                    <View
+                      style={{
+                        width: 320,
+                        marginLeft: wp('5%'),
+                        marginTop: hp('2%'),
+                        borderBottomColor: 'black',
+                        borderBottomWidth: 1
+                      }}
+                    />
+                  </View>
+                </>
+                }
+              >
+              </FlatList>
+            </View>
+          </ScrollView>
 
 
           {notjoinedUser != "notjoinedUser" ?
@@ -423,48 +430,48 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-            <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
-            <FlatList
-            style={{ marginBottom: hp('5%') }}
-            showsVerticalScrollIndicator={true}
-            onEndReached={() => {
-              //          console.log('-----AKHAR LIST')
-            }}
-            onEndReachedThreshold={0.5}
-            keyExtractor={(item) => item.id}
-            refreshing={refreshmembers}
-            onRefresh={async () => {
-              //            console.log('refresh')
-            }}
-            data={members}
-            renderItem={({ item }) => <>
-              <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{ marginLeft: wp('2%') }} size={90}
-                  source={{ uri: item.user.profile_photo }}
-                ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={10}
-                  source={require('../../assets/group.jpg')}
-                ></Avatar.Image>}
-                <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop: hp('1%') }}>{item.user.username}</Text>
-                <View
-                  style={{
-                    width: 320,
-                    color: '#a9a9a9',
-                    marginLeft: wp('5%'),
-                    marginTop: hp('2%'),
-                    borderBottomColor: '#a9a9a9',
-                    borderBottomWidth: 1
-                  }}
-                />
-              </View>
-            </>
-            }
-          >
-          </FlatList>
+              <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
+              <FlatList
+                style={{ marginBottom: hp('5%') }}
+                showsVerticalScrollIndicator={true}
+                onEndReached={() => {
+                  //          console.log('-----AKHAR LIST')
+                }}
+                onEndReachedThreshold={0.5}
+                keyExtractor={(item) => item.id}
+                refreshing={refreshmembers}
+                onRefresh={async () => {
+                  //            console.log('refresh')
+                }}
+                data={members}
+                renderItem={({ item }) => <>
+                  <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
+                    {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{ marginLeft: wp('2%') }} size={90}
+                      source={{ uri: item.user.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={10}
+                      source={require('../../assets/group.jpg')}
+                    ></Avatar.Image>}
+                    <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop: hp('1%') }}>{item.user.username}</Text>
+                    <View
+                      style={{
+                        width: 320,
+                        color: '#a9a9a9',
+                        marginLeft: wp('5%'),
+                        marginTop: hp('2%'),
+                        borderBottomColor: '#a9a9a9',
+                        borderBottomWidth: 1
+                      }}
+                    />
+                  </View>
+                </>
+                }
+              >
+              </FlatList>
 
             </View>
           </ScrollView>
 
-         
+
 
           {/* {groupinfo.members_count>4 ?         
           <Button style={{ marginLeft: wp('90%') }} transparent 
