@@ -26,6 +26,7 @@ const Bookview = (prop) => {
   const [result, setResult] = useState(null);
   const [picture, setpicture] = useState(null);
   const [refreshcomments, setrefreshcomments] = useState(false)
+  const [refreshquotes, setRefreshquotes] = useState(false);
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
 
@@ -338,7 +339,7 @@ const Bookview = (prop) => {
             <View
               style={{
                 width: 320,
-                color: '#a9a9a9',
+                color: 'gray',
                 marginLeft: wp('5%'),
                 marginTop: hp('-4%'),
                 marginBottom: hp('1%'),
@@ -348,7 +349,7 @@ const Bookview = (prop) => {
             />
             : null}
           {quotes === "No Quote!" ?
-            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%'),marginBottom:hp('2%') }}>نقل قولی برای این کتاب وجود ندارد ...</Text> : null}
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%'), marginBottom: hp('2%') }}>نقل قولی برای این کتاب وجود ندارد ...</Text> : null}
 
           {quotes === "No Quote!" ?
             <Button style={{
@@ -361,6 +362,42 @@ const Bookview = (prop) => {
                 });
               }}><Text style={{ marginLeft: wp('10%') }}> ثبت اولین نقل قول</Text></Button>
             : null}
+
+          {quotes != "No Quote!" ?
+            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نقل قول های کاربران :</Text>
+            : null}
+
+          {quotes != "No Quote!" ?
+            <FlatList
+              style={{ marginBottom: hp('5%') }}
+              showsVerticalScrollIndicator={false}
+              horizontal={true}
+              onEndReached={() => {
+                //            console.log('-----AKHAR LIST')
+              }}
+              onEndReachedThreshold={0.5}
+              keyExtractor={(item) => item.id}
+              refreshing={refreshquotes}
+              onRefresh={async () => {
+                console.log('refresh')
+              }}
+              data={quotes}
+              renderItem={({ item }) => <>
+                <View style={{}}>
+                  <Card style={styles.cardChat}>
+                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
+                      source={{ uri: item.account.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                      source={require('../../assets/group.jpg')}
+                    ></Avatar.Image>}
+                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
+                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.quote_text}</Text>
+                  </Card>
+                </View>
+              </>
+              }
+            >
+            </FlatList> : null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
