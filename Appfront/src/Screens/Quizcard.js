@@ -109,7 +109,7 @@ const Eachgroup = (prop) => {
  
  <Image
      source={require('../../assets/line2.png')}
-     style={{ width: wp('100%'), height: 1}}
+     style={{ width: wp('100%'), height: hp("0.1%")}}
    ></Image>
          </View>
     );
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     },
     username: {
         position: 'absolute',
-        marginTop: '5%',
+        marginTop: hp("1.3%"),
         left: wp('20%'),
         fontSize: hp('1.7%'),
         fontWeight: 'bold'
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     
         marginBottom:hp('2%'),
         marginTop: hp('2%'),
-        marginRight: '5%',
-        marginLeft: '5%',
+        marginRight: wp("5%"),
+        marginLeft: wp('5%'),
       },
       avatar: {
         height: hp('8%'),
@@ -156,18 +156,18 @@ const styles = StyleSheet.create({
       },
       date: {
         position: 'absolute',
-        marginTop: '17%',
+        marginTop: hp("4.2%"),
         marginLeft:wp("20%"),
         fontSize: hp("1.5%"),
         color: '#1f7a8c'
       },
       avatarname: {
-        marginTop: '5%',
-        marginLeft: '5%',
+        marginTop: hp('2.4%'),
+        marginLeft: wp('5%'),
         flexDirection: 'row',
     
-        width: '50%',
-        height: 65,
+        width: wp('50%'),
+        height: hp("7.9%"),
         borderRadius: 100
       },
 
