@@ -84,7 +84,6 @@ function App(props) {
             </Route>
             <Route path="/takeQuiz/:quizId">
                 <NavBar/>
-              
             </Route>
             <Route path="*">
               <div class="alert alert-warning" role="alert">

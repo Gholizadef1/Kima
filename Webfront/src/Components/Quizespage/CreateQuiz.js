@@ -32,6 +32,21 @@ function Quizespage (props){
         description :""
        // backError : ""
       })
+      const [valid,setValid] = useState(false)
+    const [creator,setCreator] = useState([]);
+    const [questions,setQuestions] = useState([]);
+
+    // useEffect(()=>{
+    //     axios.get(API_BASE_URL + "/quiz" + props.match.params.quizId)
+    //     .then(response=>{
+    //         setQuiz(response.data.Quiz);
+    //         setQuestions(response.data.Questions);
+    //          console.log(response);
+    //        })
+    //        .catch(error=>{
+    //          console.log(error);
+    //        });
+    // })
     const [state , setState]=useState(
         {
             navigate:false,
@@ -61,8 +76,8 @@ function Quizespage (props){
           reader.readAsDataURL(file);
         }
     };
-    const [valid,setValid] = useState(false);
-    const[countOfQ,setCount]=useState();
+    const [validation,setValidation] = useState(false);
+
     const [inputFields, setInputFields] = useState([
       { id: uuidv4(), question_text:'',a_text:'',b_text:'',c_text:'',d_text:'',count:1,key:'' },
     ]);
@@ -99,7 +114,6 @@ function Quizespage (props){
         console.log(input);
     }
     const handleAddFields = () => {
-      console.log(countOfQ);
       setInputFields([...inputFields, { id: uuidv4(),  question_text:'', a_text:'',b_text:'',c_text:'',d_text:'',count:inputFields.length+1,key:''}])
       console.log(inputFields);
 
@@ -113,8 +127,42 @@ function Quizespage (props){
       
     }
     console.log(inputFields);
-    const sendQuestion = (e)=> {
-    const fd = {
+    const [massage, setMassage]= useState(<br></br>);
+const[openSnack,setOpenSnack]=useState(false);
+const handleCloseSnack = (event, reason) => {
+  if (reason === 'clickaway') {
+  return;
+  }
+  setOpenSnack(false);
+  };
+
+    const sendQuestion = ()=> {
+
+     inputFields.map((i)=>{
+      if(i.question_text === '' || i.a_text === '' || i.b_text === '' || i.c_text === ''
+      || i.d_text === '' || i.key === '')
+      {
+        setMassage('تمامی فیلدهای مربوط به سؤال باید پر شوند')
+        setOpenSnack(true);
+      }
+      else if(i.question_text.length>=20 || i.a_text.length>=10 || i.b_text.length>=10
+       || i.c_text.length>=10 || i.d_text.length>=10){
+        setMassage('متن سؤال باید حداکثر 20 و متن جواب حداکثر 10 کاراکتر داشته باشد')
+        setOpenSnack(true);
+
+       }
+       else if(i.key !='a' && i.key!='b' && i.key!='c' && i.key!='d'){
+        setMassage(' لطفاً کاراکترهای موردنظر را برای پاسخ درست وارد کنید')
+        setOpenSnack(true);
+        console.log(i.key);
+       }
+      else
+      setValidation(true);
+    })
+    console.log(validation);
+  }
+  const va =()=>{
+  const fd = {
     "title":newQuiz.title,
     "description":newQuiz.description,
     "question_count":inputFields.length,
@@ -124,19 +172,46 @@ function Quizespage (props){
      console.log(input);
      let back= JSON.stringify(fd);
      console.log(fd);
-      axios.post(API_BASE_URL+'/quiz',back,
+         
+     if(newQuiz.title === ""){
+      setMassage("عنوان آزمونک نمی‌تواند خالی باشد")
+      setOpenSnack(true);
+    }
+    else if(newQuiz.description === ""){
+      setMassage("توضیحات آزمونک نمی‌تواند خالی باشد")
+      setOpenSnack(true);
+    }
+    else{
+  axios.post(API_BASE_URL+'/quiz',back,
   {
     headers:{
    "Content-Type":"application/json",
    "Authorization":"Token "+Cookies.get("userToken")}
     }
-  )
+  ).then(response=>{
+    console.log(response.data.Quiz.id);
+    console.log(response.data);
     
+    if(response.data.message === "Your quiz successfully created!"){
+      setMassage('آزمونک با موفقیت ساخته شد')
+      setOpenSnack(true);
     }
+    
+  })
+}
+     }
+    
     return(
         
         <div className="mx-md-1 pt-5 px-md-5">
         <div>
+        <Snackbar
+          anchorOrigin={{ vertical:'bottom', horizontal:'center'}}
+          open={openSnack}
+          autoHideDuration={2500}
+          onClose={handleCloseSnack}
+          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
+          />
        </div>
        <div className="container-fluid text-center px-md-5 py-md-5" >
          <div className="mx-md-5">
@@ -316,8 +391,12 @@ paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال ب�
        / اضافه‌کردن سؤال
      </button>
 }
-<button onClick={sendQuestion(inputFields)}>ثبت</button>
-        
+{validation === false ?
+<button onClick={sendQuestion}>ارزیابی</button>
+:
+<button onClick={va}>ثبت</button>
+
+}
          </div>
          </div>
          </div>
