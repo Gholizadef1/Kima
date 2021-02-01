@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, View, Image, ImageBackground, ScrollView,TouchableOpacity, FlatList, TextInput, ActivityIndicator
+import {
+  StyleSheet, View, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList, TextInput, ActivityIndicator
 } from 'react-native';
-import {Container, Header, Content, Card, CardItem, Text, Button, Icon, Body,Right, Left, Picker, Form, Item} from 'native-base';
+import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body, Right, Left, Picker, Form, Item } from 'native-base';
 import { withNavigation } from 'react-navigation'
 import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
@@ -23,7 +24,7 @@ const Bookview = (prop) => {
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
 
-  
+
   useEffect(() => {
     getResult(id);
     getComments()
@@ -58,10 +59,10 @@ const Bookview = (prop) => {
     })
       .then(function (response) {
         console.log('response data ===== ', response.data.message)
-        if (response.data.message === "No Comment!"){
+        if (response.data.message === "No Comment!") {
           setComments("No Comment!")
         }
-        else{
+        else {
           setComments(response.data)
         }
         setloading2(false)
@@ -250,17 +251,19 @@ const Bookview = (prop) => {
           </Body>
 
           {comments === "No Comment!" ?
-          <Text>نظری در مورد این کتاب ثبت نشده ...</Text> : null}
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%') }}>نظری در مورد این کتاب ثبت نشده ...</Text> : null}
 
-          {/* <Button style={{
-            marginTop: hp('4%'), marginBottom: hp('1%'), backgroundColor: '#1F7A8C',
-            width: 200, alignSelf: 'center', borderRadius: 15
-          }}
-            onPress={() => {
-              prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
-                title: response.data.title,
-              });
-            }}><Text style={{ marginLeft: wp('12%') }}>صفحه نظرات</Text></Button> */}
+          {comments === "No Comment!" ?
+            <Button style={{
+              marginTop: hp('4%'), marginBottom: hp('1%'), backgroundColor: '#1F7A8C',
+              width: 200, alignSelf: 'center', borderRadius: 15
+            }}
+              onPress={() => {
+                prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
+
 
           {/* <Button style={{
             alignSelf: 'center', backgroundColor: '#1F7A8C',
