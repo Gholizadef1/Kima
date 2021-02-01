@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useDebugValue } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Image, FlatList } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Card, List, ListItem, Thumbnail, Item, Input, Textarea } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axiosinst from '../api/axiosinst';
 import { Avatar } from 'react-native-paper';
@@ -32,7 +33,8 @@ const MembersPage = (prop) => {
     return(   
             
     <View>
-        <Text style={{fontSize:50 , marginTop :40}}> HI MEMBERS :)</Text>
+         <Header style={{ backgroundColor: '#1F7A8C', height: hp('15%'), width: wp('100%') }} />
+                    <Title style={{ fontSize: 24, fontWeight: 'bold', color: '#E1E5F2', marginTop: hp('-8%'), marginLeft: 10, marginBottom: hp('3%') }}>اعضای گروه</Title>
         <FlatList
             style={{ marginBottom: hp('5%') }}
             showsVerticalScrollIndicator={false}
