@@ -18,8 +18,10 @@ const Bookview = (prop) => {
   const [rate, setrate] = useState(true);
   const [ratenum, setratenum] = useState(null);
   const [comments, setComments] = useState(null);
+  const [quotes, setQuotes] = useState(null);
   const [loading, setloading] = useState(true);
   const [loading2, setloading2] = useState(true);
+  const [loading3, setloading3] = useState(true);
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
   const [picture, setpicture] = useState(null);
@@ -31,6 +33,7 @@ const Bookview = (prop) => {
   useEffect(() => {
     getResult(id);
     getComments()
+    getQoutes()
   }, [refresh]);
 
 
@@ -68,18 +71,31 @@ const Bookview = (prop) => {
           setComments(response.data)
         }
         setloading2(false)
-        // console.log('response data ===== ', response.data[0].account.username)
-        // console.log('response data ::::: ', response.data[0].comment_text)
-        // console.log('commentsss===' + comments[0].comment_text)
-        console.log('TEDADDDD====' + comments.length)
       })
-
-
       .catch(async function (error) {
         console.log(error);
         console.log(error.code + 'ERROR CODE')
-
-
+      });
+  }
+  const getQoutes = async () => {
+    axiosinst.get('/book/' + id + '/quote', {
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
+    })
+      .then(function (response) {
+        if (response.data.message === "No Quote!") {
+          setQuotes("No Quote!")
+        }
+        else {
+          setQuotes(response.data)
+        }
+        setloading3(false)
+      })
+      .catch(async function (error) {
+        console.log(error);
+        console.log(error.code + 'ERROR CODE')
       });
   }
 
@@ -198,7 +214,7 @@ const Bookview = (prop) => {
 
 
 
-  if (loading === false && loading2 === false) {
+  if (loading === false && loading2 === false && loading3 === false) {
     return (
       <Container>
         <ScrollView>
