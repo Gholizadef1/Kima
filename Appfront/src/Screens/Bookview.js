@@ -243,7 +243,7 @@ const Bookview = (prop) => {
             />
 
 
-            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginRight: wp('70%'), marginBottom: hp('0.7%') }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginRight: wp('67%'), marginBottom: hp('0.7%') }}>
               درباره کتاب :</Text>
             <Content style={{}}>
               <Card style={{}}>
@@ -270,6 +270,10 @@ const Bookview = (prop) => {
                 });
               }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
 
+              {comments  != "No Comment!" ?
+              <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'),  marginBottom: hp('0.7%'),marginLeft:wp('3%') }}>نظرات کاربران :</Text>
+              :null}
+
             {comments != "No Comment!" ?
              <FlatList
              style={{ marginBottom: hp('5%') }}
@@ -287,14 +291,14 @@ const Bookview = (prop) => {
              data={comments}
              renderItem={({ item }) => <>
                      <View style={{}}>
+                         <Card style={styles.cardChat}>
                          {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
                              source={{ uri: item.account.profile_photo }}
                          ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                              source={require('../../assets/group.jpg')}
                          ></Avatar.Image>}
-                         <Card style={styles.cardChat}>
-                             <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.account.username}</Text>
-                             <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
+                             <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
+                             <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
                          </Card>
                      </View>
              </>
@@ -334,19 +338,18 @@ const styles = StyleSheet.create({
   },
   cardChat: {
     width: wp('50%'),
-    marginLeft: wp('20%'),
-    marginTop: hp('-5%'),
-    top: hp('-5%'),
+    marginLeft: wp('5%'),
+    marginTop: hp('8%'),
+    top: hp('-6%'),
     marginBottom: hp('-5%'),
     borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
     backgroundColor: '#EDF2F4',
 
 },
 avatar: {
   marginLeft: wp('2%'),
-  top: hp('3%'),
+  top: hp('-3.5%'),
   width: wp('14%'),
   height: hp('8%'),
   marginTop: hp('5%')
