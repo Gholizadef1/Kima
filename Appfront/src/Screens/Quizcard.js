@@ -39,7 +39,7 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.groupphoto === 'http://505a2dd8d5cc.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.groupphoto === 'http://5d4a663fe10f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
@@ -62,8 +62,8 @@ const Eachgroup = (prop) => {
      </TouchableOpacity>
 
      <Text style={styles.username}>{prop.title}</Text>
-
-     {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
+    
+     {/* {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null} */}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
 
 

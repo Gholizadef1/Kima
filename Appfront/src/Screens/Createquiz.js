@@ -148,15 +148,20 @@ const Createquiz = () => {
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
+                            <View style={{backgroundColor:"white",marginRight:wp("65%"),borderRadius:100}}>
 
                                 {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
                                 {/* bedoone view nemishod in barr */}
                                 {props.values.photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
                                     height: hp('14%'),
-                                    marginTop: hp('0%'),
+                                    //marginTop: hp('0%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('5%'),
+                                    left: wp('5%'),
+                                    marginLeft:wp("0%"),
+                                    //marginRight:wp("-90%"),
                                     borderRadius: 100,
+                                    margin:0,
+                                    
                                     // position: 'absolute',
                                     borderColor: 'blue',
                                     backgroundColor: "lightgreen"
@@ -171,8 +176,9 @@ const Createquiz = () => {
 
                                             marginTop: hp('0%'),
                                             width: wp('28%'),
-                                            marginLeft: wp('0%'),
+                                            left: wp('0%'),
                                             borderRadius: 20,
+                                            margin:0,
                                             position: 'absolute',
                                             //borderColor:'#1f7a8c',
                                             //borderWidth:wp('0.2%')
@@ -188,7 +194,7 @@ const Createquiz = () => {
                                     height: hp('14%'),
                                     marginTop: hp('0%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('5%'),
+                                    left: wp('5%'),
                                     borderRadius: 100,
                                     // position: 'absolute',
                                     borderColor: 'blue',
@@ -214,6 +220,7 @@ const Createquiz = () => {
 
                                         </ImageBackground>
                                     </TouchableOpacity>}
+                                    </View>
 
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('38%'), marginTop: hp("-11.3%") }}>نام کوییز</Text>
                                 <Item style={styles.item} rounded >
@@ -223,6 +230,7 @@ const Createquiz = () => {
                                         onChangeText={props.handleChange('Username')}
                                         onBlur={props.handleBlur('Username')}
                                         value={props.values.Username}
+                                     
                                         placeholder={'نام کوییز ...'} placeholderTextColor='gray' >
                                     </Input>
 
@@ -236,7 +244,7 @@ const Createquiz = () => {
                                 </TouchableOpacity>
                                 <View>
                                     <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginLeft: wp('5%') }}>توضیحات</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity activeOpacity={1}>
                                         <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                             borderColor={'#EDF2F4'}
                                             onChangeText={props.handleChange('Discription')}
@@ -489,10 +497,9 @@ const styles = StyleSheet.create({
     container: {
         //   position:'absolute',
         //   marginTop:-100,
-        //   backgroundColor:'white',
+           backgroundColor:'#ffff',
         //   height:1000,
         flex: 1,
-        backgroundColor: '#fff',
     },
     button: {
         //  position:'absolute',
@@ -539,25 +546,31 @@ const styles = StyleSheet.create({
     }, item2: {
         // marginLeft:wp('-2%'),
         // marginRight:wp('-1%'),
+        backgroundColor:"white",
+        elevation:0,
         marginHorizontal: wp("5%"),
         marginTop: hp('6%'),
         fontSize: hp('2.5%'),
+        marginBottom:hp("1%")
     },
     item: {
         marginLeft: wp('37%'),
         marginRight: wp('9%'),
         height: wp('9.5%'),
         borderColor: "lightblue",
-        borderWidth: hp("0.1%")
+        borderWidth: hp("0.1%"),
+        backgroundColor:"white",
+        elevation:0
     },
     Input: {
         left: wp('8%'),
         fontSize: hp('1.5%'),
         fontWeight: 'bold',
-        marginRight: wp('10%'),
+        marginRight: wp('11%'),
         position: 'absolute',
         height: wp('9.5%'),
-        width: wp('28.5%')
+        width: wp('43.5%'),
+       //  backgroundColor:"#F3F8F9"
     },
     avatar: {
         height: hp('14%'),

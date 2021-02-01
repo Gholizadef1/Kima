@@ -190,7 +190,7 @@ const Quizresult = (prop) => {
                         }}>{thisquestion.question_text}</Text>
 
                             : null}
-                        {pasocknadadid & numofquesiton!=-1 ? (<Text style={{marginTop:hp("1%"),marginLeft:hp("4%"),fontSize:hp("1.6.5%"),fontWeight:"bold",color:"#1B4332"}}>(پاسخ ندادید)</Text>) : null}
+                        {pasocknadadid & numofquesiton != -1 ? (<Text style={{ marginTop: hp("1%"), marginLeft: hp("4%"), fontSize: hp("1.7%"), fontWeight: "bold", color: "#1B4332" }}>(پاسخ ندادید)</Text>) : null}
 
                         {numofquesiton > -1 ?
                             <View style={{ marginTop: hp("8%") }}>
@@ -245,88 +245,89 @@ const Quizresult = (prop) => {
                             }}>
                                 {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
                                     height: hp('14%'),
-                                    marginTop: hp('5%'),
+                                    marginTop: hp('-1.5%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('8%'),
-                                    borderRadius: 100,
-                                    // position: 'absolute',
-                                    borderColor: 'blue',
-                                    backgroundColor: "lightgreen"
+                                    marginLeft: wp('-1%'),
+                                    borderRadius: 20,
+                                    position: 'absolute',
+                                    // borderColor:'#1f7a8c',
+                                    // borderWidth:wp('0.2%')
+                            
                                 }}
                                 >
                                     <ImageBackground borderRadius={100}
 
-                                        source={require("../../assets/tea.jpg")}
+                                    source={require("../../assets/tea.jpg")}
 
-                                        style={{
-                                            height: hp('14%'),
+                                    style={{
+                                        height: hp('14%'),
 
-                                            marginTop: hp('0%'),
-                                            width: wp('28%'),
-                                            marginLeft: wp('0%'),
-                                            borderRadius: 20,
-                                            position: 'absolute',
-                                            //borderColor:'#1f7a8c',
-                                            //borderWidth:wp('0.2%')
-                                        }}
-                                    //  onBlur={props.handleBlur('photo')}
+                                        marginTop: hp('0%'),
+                                        width: wp('28%'),
+                                        marginLeft: wp('0%'),
+                                        borderRadius: 20,
+                                        position: 'absolute',
+                                        //borderColor:'#1f7a8c',
+                                        //borderWidth:wp('0.2%')
+                                    }}
+                                //  onBlur={props.handleBlur('photo')}
 
 
-                                    >
-
-                                    </ImageBackground>
-
-                                </TouchableOpacity> : <TouchableOpacity style={{
-                                    height: hp('14%'),
-                                    marginTop: hp('5%'),
-                                    width: wp('28%'),
-                                    marginLeft: wp('8%'),
-                                    borderRadius: 100,
-                                    // position: 'absolute',
-                                    borderColor: 'blue',
-                                    backgroundColor: "lightgreen"
-                                }}
                                 >
-                                        <ImageBackground borderRadius={100}
-                                            source={{ uri: "http://fb9ce5eee469.ngrok.io" + `${questions.Quiz.quiz_photo}` }}
 
-                                            style={{
-                                                height: hp('14%'),
+                                </ImageBackground>
 
-                                                marginTop: hp('0%'),
-                                                width: wp('28%'),
-                                                marginLeft: wp('0%'),
-                                                borderRadius: 20,
-                                                position: 'absolute',
-                                                //borderColor:'#1f7a8c',
-                                                //borderWidth:wp('0.2%')
-                                            }}
-                                        //  onBlur={props.handleBlur('photo')}
+                            </TouchableOpacity> : <TouchableOpacity style={{
+                                height: hp('14%'),
+                                marginTop: hp('5%'),
+                                width: wp('28%'),
+                                marginLeft: wp('8%'),
+                                borderRadius: 100,
+                                // position: 'absolute',
+                                borderColor: 'blue',
+                                backgroundColor: "lightgreen"
+                            }}
+                            >
+                                <ImageBackground borderRadius={100}
+                                    source={{ uri: "http://fb9ce5eee469.ngrok.io" + `${questions.Quiz.quiz_photo}` }}
+
+                                    style={{
+                                        height: hp('14%'),
+
+                                        marginTop: hp('0%'),
+                                        width: wp('28%'),
+                                        marginLeft: wp('0%'),
+                                        borderRadius: 20,
+                                        position: 'absolute',
+                                        //borderColor:'#1f7a8c',
+                                        //borderWidth:wp('0.2%')
+                                    }}
+                                //  onBlur={props.handleBlur('photo')}
 
 
-                                        >
+                                >
 
-                                        </ImageBackground>
-                                    </TouchableOpacity>}
+                                </ImageBackground>
+                            </TouchableOpacity>}
 
 
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', alignSelf: "flex-start", left: wp("40%"), top: hp("-10.3%") }}
-                                >
-                                    {questions.Quiz.title}
-                                </Text>
-                                <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
-                                    {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
+                            >
+                                {questions.Quiz.title}
+                            </Text>
+                            <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
+                                {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
-                                <Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>
-                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
-                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
+                            <Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>
+                            <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
+                            <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
-                                {/* <View> */}
-                                <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>توضیحات:</Text>
-                                <Text style={{ fontSize: hp('1.6.5%'), color: 'black', marginBottom: hp('5%'), marginTop: hp('7%'), marginHorizontal: wp("5%") }}>    {questions.Quiz.description}</Text>
+                            {/* <View> */}
+                            <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>توضیحات:</Text>
+                            <Text style={{ fontSize: hp('1.6.5%'), color: 'black', marginBottom: hp('5%'), marginTop: hp('7%'), marginHorizontal: wp("5%") }}>    {questions.Quiz.description}</Text>
 
 
-                                {/* <TouchableOpacity>
+                            {/* <TouchableOpacity>
                                 <Text rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                     borderColor={'#EDF2F4'}
                                     fontSize={hp('1.6.5%')} style={styles.item2}>
@@ -338,254 +339,254 @@ const Quizresult = (prop) => {
                             {/* <View style={{
                     //   alignItems:"flex-end",alignContent:"center"
                       }}> */}
-                            <TouchableOpacity
-                                onPress={async () => {
+                    <TouchableOpacity
+                        onPress={async () => {
 
-                                    setthisquestion(questions.Questions[0])
+                            setthisquestion(questions.Questions[0])
 
-                                    // new Promise(async(resolve,reject)=>{
-                                    //     await setnumofquestion(numofquesiton+1);
-                                    //    resolve();
-                                    // }).then(async()=>{
-                                    await setnumofquestion(0);
-                                    console.log(numofquesiton);
-                                    await setseedis(" توضیحات")
+                            // new Promise(async(resolve,reject)=>{
+                            //     await setnumofquestion(numofquesiton+1);
+                            //    resolve();
+                            // }).then(async()=>{
+                            await setnumofquestion(0);
+                            console.log(numofquesiton);
+                            await setseedis(" توضیحات")
 
-                                    if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#95D5B2")
-                                    }
+                            if (questions.Questions[numofquesiton + 1].key === "a") {
+                                setcolora("#95D5B2")
+                            }
 
-                                    if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#95D5B2")
-                                    }
-                                    // f28482
-                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
-                                        if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#EF8089")
-                                        }
-                                    }
-                                    if (questions.user_answer[numofquesiton + 1] === "") {
-                                        setpasokhnadadid(true)
-                                    }
-                                    else{
-                                        setpasokhnadadid(false)
-                                    }
-
-
-                                    console.log(" rang negah ghabli")
+                            if (questions.Questions[numofquesiton + 1].key === "b") {
+                                setcolorb("#95D5B2")
+                            }
+                            if (questions.Questions[numofquesiton + 1].key === "c") {
+                                setcolorc("#95D5B2")
+                            }
+                            if (questions.Questions[numofquesiton + 1].key === "d") {
+                                setcolord("#95D5B2")
+                            }
+                            // f28482
+                            if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                if (questions.user_answer[numofquesiton + 1] === "a") {
+                                    setcolora("#EF8089")
+                                }
+                                if (questions.user_answer[numofquesiton + 1] === "b") {
+                                    setcolorb("#EF8089")
+                                }
+                                if (questions.user_answer[numofquesiton + 1] === "c") {
+                                    setcolorc("#EF8089")
+                                }
+                                if (questions.user_answer[numofquesiton + 1] === "d") {
+                                    setcolord("#EF8089")
+                                }
+                            }
+                            if (questions.user_answer[numofquesiton + 1] === "") {
+                                setpasokhnadadid(true)
+                            }
+                            else {
+                                setpasokhnadadid(false)
+                            }
 
 
-                                    // })
-                                }}
-                                style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
-                                {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
-                                <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4", alignSelf: "center" }}>مشاهده ی پاسخ ها</Text>
-                            </TouchableOpacity>
-                            {/* </View> */}
+                            console.log(" rang negah ghabli")
 
-                        </View>
+
+                            // })
+                        }}
+                        style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
+                        {/* <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" /> */}
+                        <Text style={{ marginTop: hp("2.4%"), fontSize: hp("1.8%"), fontWeight: "bold", color: "#Edf2f4", alignSelf: "center" }}>مشاهده ی پاسخ ها</Text>
+                    </TouchableOpacity>
+                    {/* </View> */}
+
+                </View>
                         : null}
 
 
 
-                    {/* 
+                {/* 
         <Text style={{position:'absolute',marginTop:300}}>   Quiz page  </Text> */}
                 </View>
             </ScrollView>) : <Spinner size={"large"} style={{ alignSelf: "center", marginTop: hp("30%") }} color={"#1f7a8c"}></Spinner>}
-            {numofquesiton > -1 ?
-                <View style={{ flexDirection: "row", position: "absolute", marginTop: hp("66.7%") }}>
-                    <View style={{ marginTop: hp("10.7") }}>
-                        <TouchableOpacity
-                            onPress={async () => {
+        {numofquesiton > -1 ?
+            <View style={{ flexDirection: "row", position: "absolute", marginTop: hp("66.7%") }}>
+                <View style={{ marginTop: hp("10.7") }}>
+                    <TouchableOpacity
+                        onPress={async () => {
 
-                                var a = answers;
-                                a[numofquesiton] = oneofthem;
-                                console.log(a);
-                                setoneofthem("")
-                                setanswers(a);
-                                await setcolora("rgba(237,242,244,0.9)")
-                                await setcolorb("rgba(237,242,244,0.9)")
-                                await setcolorc("rgba(237,242,244,0.9)")
-                                await setcolord("rgba(237,242,244,0.9)")
-                                await setcansubmit("سوال بعدی")
-
-
-
-                                console.log(numofquesiton + " numofquestion");
-                                if (numofquesiton - 1 >= 1) {
-
-
-                                    console.log("here ghabli b tar az 1")
-                                    await setseedis("سوال قبلی")
-                                    await setnumofquestion(numofquesiton - 1)
-                                    await setbuttoncolor("rgba(31,122,140,1)")
-
-                                    setthisquestion(questions.Questions[numofquesiton - 1]);
-
-
-                                    console.log("next pressed")
-                                }
-                                if (numofquesiton - 1 >= 0) {
-                                    if (questions.Questions[numofquesiton - 1].key === "a") {
-                                        setcolora("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton - 1].key === "b") {
-                                        setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton - 1].key === "c") {
-                                        setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton - 1].key === "d") {
-                                        setcolord("#95D5B2")
-                                    }
-                                    // f28482
-                                    if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
-                                        if (questions.user_answer[numofquesiton - 1] === "a") {
-                                            setcolora("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton - 1] === "b") {
-                                            setcolorb("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton - 1] === "c") {
-                                            setcolorc("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton - 1] === "d") {
-                                            setcolord("#EF8089")
-                                        }
-                                    }
-                                    if (questions.user_answer[numofquesiton - 1] === "") {
-                                        setpasokhnadadid(true)
-                                    }
-                                    else{
-                                        setpasokhnadadid(false)
-                                    }
-                                }
-                                //update nemishe chon :\
-                                if ((numofquesiton - 1) === 0) {
-                                    console.log("here too")
-                                    await setnumofquestion(numofquesiton - 1)
-                                    await setbuttoncolor("rgba(40,160,184,1)")
-                                    setthisquestion(questions.Questions[0]);
-                                    // await setseedis(" توضیحات")
-
-                                }
-                                if (numofquesiton === 0 || numofquesiton === 1) {
-                                    // await setnumofquestion(-1);
-                                    await setseedis(" توضیحات")
-                                }
-                                if (numofquesiton === 0) {
-                                    await setnumofquestion(-1);
-                                }
-                            }}
-                            style={{ height: hp("10%"), margin: 0, elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, top: hp("0%"), borderTopRightRadius: 50 }}>
-                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ marginLeft: wp("50%"), marginTop: hp("10.7") }}>
-                        <TouchableOpacity
-                            onPress={async () => {
-
-                                await setseedis(" سوال قبلی")
-
-                                var a = answers;
-                                a[numofquesiton] = oneofthem;
-                                setoneofthem("")
-                                console.log(a);
-                                setanswers(a);
-                                await setcolora("rgba(237,242,244,0.9)")
-                                await setcolorb("rgba(237,242,244,0.9)")
-                                await setcolorc("rgba(237,242,244,0.9)")
-                                await setcolord("rgba(237,242,244,0.9)")
+                            var a = answers;
+                            a[numofquesiton] = oneofthem;
+                            console.log(a);
+                            setoneofthem("")
+                            setanswers(a);
+                            await setcolora("rgba(237,242,244,0.9)")
+                            await setcolorb("rgba(237,242,244,0.9)")
+                            await setcolorc("rgba(237,242,244,0.9)")
+                            await setcolord("rgba(237,242,244,0.9)")
+                            await setcansubmit("سوال بعدی")
 
 
 
+                            console.log(numofquesiton + " numofquestion");
+                            if (numofquesiton - 1 >= 1) {
+
+
+                                console.log("here ghabli b tar az 1")
                                 await setseedis("سوال قبلی")
-                                // new Promise(async(resolve,reject)=>{
-                                //     await setnumofquestion(numofquesiton+1);
-                                //    resolve();
-                                // }).then(async()=>{
-
+                                await setnumofquestion(numofquesiton - 1)
                                 await setbuttoncolor("rgba(31,122,140,1)")
-                                console.log(numofquesiton + " num of question");
-                                if (numofquesiton + 1 < questions.Quiz.question_count) {
-                                    if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#95D5B2")
-                                    }
-                                    // f28482
-                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
-                                        if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#EF8089")
-                                        }
-                                        if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#EF8089")
-                                        }
-                                    }
-                                    await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("سوال بعدی")
-                                    setthisquestion(questions.Questions[numofquesiton + 1]);
 
-                                    console.log("next pressed")
-                                }
-                                if (cansubmit === "صفحه کوییز") {
-                                    await postquiz();
-                                }
-                                if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
-                                    await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("صفحه کوییز")
-                                }
-                                console.log(numofquesiton);
-                                if (questions.user_answer[numofquesiton + 1] === "") {
-                                        setpasokhnadadid(true)
-                                    }
-                                    else{
-                                        setpasokhnadadid(false)
-                                    }
+                                setthisquestion(questions.Questions[numofquesiton - 1]);
 
-                                // })
-                            }}
-                            style={{ height: hp("10%"), elevation: 5, margin: 0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
-                            <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
-                            <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View> : null}
-            {/* </View> */}
+
+                                console.log("next pressed")
+                            }
+                            if (numofquesiton - 1 >= 0) {
+                                if (questions.Questions[numofquesiton - 1].key === "a") {
+                                    setcolora("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton - 1].key === "b") {
+                                    setcolorb("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton - 1].key === "c") {
+                                    setcolorc("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton - 1].key === "d") {
+                                    setcolord("#95D5B2")
+                                }
+                                // f28482
+                                if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
+                                    if (questions.user_answer[numofquesiton - 1] === "a") {
+                                        setcolora("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton - 1] === "b") {
+                                        setcolorb("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton - 1] === "c") {
+                                        setcolorc("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton - 1] === "d") {
+                                        setcolord("#EF8089")
+                                    }
+                                }
+                                if (questions.user_answer[numofquesiton - 1] === "") {
+                                    setpasokhnadadid(true)
+                                }
+                                else {
+                                    setpasokhnadadid(false)
+                                }
+                            }
+                            //update nemishe chon :\
+                            if ((numofquesiton - 1) === 0) {
+                                console.log("here too")
+                                await setnumofquestion(numofquesiton - 1)
+                                await setbuttoncolor("rgba(40,160,184,1)")
+                                setthisquestion(questions.Questions[0]);
+                                // await setseedis(" توضیحات")
+
+                            }
+                            if (numofquesiton === 0 || numofquesiton === 1) {
+                                // await setnumofquestion(-1);
+                                await setseedis(" توضیحات")
+                            }
+                            if (numofquesiton === 0) {
+                                await setnumofquestion(-1);
+                            }
+                        }}
+                        style={{ height: hp("10%"), margin: 0, elevation: 5, width: wp("25%"), backgroundColor: buttoncolor, top: hp("0%"), borderTopRightRadius: 50 }}>
+                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("11%"), color: "#Edf2f4" }} name="arrowright" size={24} color="black" />
+                        <Text style={{ marginLeft: wp("4.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{seedisc}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ marginLeft: wp("50%"), marginTop: hp("10.7") }}>
+                    <TouchableOpacity
+                        onPress={async () => {
+
+                            await setseedis(" سوال قبلی")
+
+                            var a = answers;
+                            a[numofquesiton] = oneofthem;
+                            setoneofthem("")
+                            console.log(a);
+                            setanswers(a);
+                            await setcolora("rgba(237,242,244,0.9)")
+                            await setcolorb("rgba(237,242,244,0.9)")
+                            await setcolorc("rgba(237,242,244,0.9)")
+                            await setcolord("rgba(237,242,244,0.9)")
+
+
+
+                            await setseedis("سوال قبلی")
+                            // new Promise(async(resolve,reject)=>{
+                            //     await setnumofquestion(numofquesiton+1);
+                            //    resolve();
+                            // }).then(async()=>{
+
+                            await setbuttoncolor("rgba(31,122,140,1)")
+                            console.log(numofquesiton + " num of question");
+                            if (numofquesiton + 1 < questions.Quiz.question_count) {
+                                if (questions.Questions[numofquesiton + 1].key === "a") {
+                                    setcolora("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton + 1].key === "b") {
+                                    setcolorb("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton + 1].key === "c") {
+                                    setcolorc("#95D5B2")
+                                }
+                                if (questions.Questions[numofquesiton + 1].key === "d") {
+                                    setcolord("#95D5B2")
+                                }
+                                // f28482
+                                if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                    if (questions.user_answer[numofquesiton + 1] === "a") {
+                                        setcolora("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton + 1] === "b") {
+                                        setcolorb("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton + 1] === "c") {
+                                        setcolorc("#EF8089")
+                                    }
+                                    if (questions.user_answer[numofquesiton + 1] === "d") {
+                                        setcolord("#EF8089")
+                                    }
+                                }
+                                await setnumofquestion(numofquesiton + 1);
+                                await setcansubmit("سوال بعدی")
+                                setthisquestion(questions.Questions[numofquesiton + 1]);
+
+                                console.log("next pressed")
+                            }
+                            if (cansubmit === "صفحه کوییز") {
+                                await postquiz();
+                            }
+                            if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
+                                await setnumofquestion(numofquesiton + 1);
+                                await setcansubmit("صفحه کوییز")
+                            }
+                            console.log(numofquesiton);
+                            if (questions.user_answer[numofquesiton + 1] === "") {
+                                setpasokhnadadid(true)
+                            }
+                            else {
+                                setpasokhnadadid(false)
+                            }
+
+                            // })
+                        }}
+                        style={{ height: hp("10%"), elevation: 5, margin: 0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
+                        <AntDesign style={{ marginTop: hp("2.2%"), marginRight: wp("9%"), color: "#Edf2f4" }} name="arrowleft" size={24} color="black" />
+                        <Text style={{ marginLeft: wp("6.4%"), marginTop: hp("0.4%"), fontSize: hp("1.5.5%"), fontWeight: "bold", color: "#Edf2f4" }}>{cansubmit}</Text>
+                    </TouchableOpacity>
+                </View>
+            </View> : null}
+        {/* </View> */}
 
 
         </ImageBackground>
 
-    </View>
+    </View >
     );
 }
 
