@@ -12,12 +12,19 @@
         height: 200px;
         margin-top: -90px;
         margin-left: 10px;
-        border-radius: 3%;
+        border-radius: 1%;
        }
        .pic{
-           width: 150px;
+           width: 250px;
+           height: 130px;
            margin-top: 20px;
+           margin-left: 170px;
+           border-style: dotted;
          
+       }
+       .mark{
+           margin-left: -220px;
+           margin-top: 40px;
        }
         .rowin{
             margin-left: 280px;
@@ -33,8 +40,8 @@
             margin-bottom: -20px;
         }
         .b{
-            margin-right: 370px;
-            margin-bottom: -50px;
+            margin-right: 363px;
+            margin-bottom: -54px;
             
         }
         .b1{
@@ -43,8 +50,9 @@
             margin-top: -5px;
         }
         .b2{
-            margin-top: -77px;
-            margin-right: 160px;
+            margin-top: -78px;
+            margin-right: 150px;
+            width:80px;
         }
        
     }
