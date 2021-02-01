@@ -10,6 +10,7 @@ import {
   useParams,
   withRouter
 } from "react-router-dom";
+
 import Tooltip from '@material-ui/core/Tooltip';
   import {GoSearch} from 'react-icons/go';
 import "./CreateQuiz.css";
@@ -24,6 +25,7 @@ import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { v4 as uuidv4 } from 'uuid';
+import { data } from "jquery";
 
 function Quizespage (props){
     const [newQuiz,setNewQuiz] = useState({
@@ -32,21 +34,6 @@ function Quizespage (props){
         description :""
        // backError : ""
       })
-      const [valid,setValid] = useState(false)
-    const [creator,setCreator] = useState([]);
-    const [questions,setQuestions] = useState([]);
-
-    // useEffect(()=>{
-    //     axios.get(API_BASE_URL + "/quiz" + props.match.params.quizId)
-    //     .then(response=>{
-    //         setQuiz(response.data.Quiz);
-    //         setQuestions(response.data.Questions);
-    //          console.log(response);
-    //        })
-    //        .catch(error=>{
-    //          console.log(error);
-    //        });
-    // })
     const [state , setState]=useState(
         {
             navigate:false,
@@ -77,7 +64,6 @@ function Quizespage (props){
         }
     };
     const [validation,setValidation] = useState(false);
-
     const [inputFields, setInputFields] = useState([
       { id: uuidv4(), question_text:'',a_text:'',b_text:'',c_text:'',d_text:'',count:1,key:'' },
     ]);
@@ -188,10 +174,7 @@ const handleCloseSnack = (event, reason) => {
    "Content-Type":"application/json",
    "Authorization":"Token "+Cookies.get("userToken")}
     }
-  ).then(response=>{
-    console.log(response.data.Quiz.id);
-    console.log(response.data);
-    
+  ).then(response=>{    
     if(response.data.message === "Your quiz successfully created!"){
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
@@ -199,7 +182,9 @@ const handleCloseSnack = (event, reason) => {
     
   })
 }
+
      }
+
     
     return(
         
@@ -215,29 +200,31 @@ const handleCloseSnack = (event, reason) => {
        </div>
        <div className="container-fluid text-center px-md-5 py-md-5" >
          <div className="mx-md-5">
-         <div className="no-gutters shadow table-borderless my-5 mx-2 ">
+         <div className="no-gutters shadow table-borderless my-5 mx-1 ">
          <img src={image} className="avatar-Q img-responsive"/>
-         <div className="name-Q">
+         <div className="name-Q mt-2">
   
   <b className=""style={{position:'relative',fontFamily:"Yekan",fontSize:25}}>ساخت آزمونک  
   </b>
+  <hr className="border rounded-circle col-2 border-info"></hr>
+
   </div>
          <div class="row rowin">
 
-            <div className="form-group-sm text-right  col-lg-5">
+            <div className="form-group-sm fg text-right">
                         <div>
                         <form className="yekanfont">
-                    <label className="mt-2 mb-n1 ">نام آزمونک</label>
+                    <label className="mt-2 mb-n1 "style={{fontSize:23}}>نام آزمونک</label>
                     <input 
-                    className="form-control text-right " 
+                    className="form-control border-dark text-right " 
                       value={newQuiz.title}
                       id="title"
                       type="title"
                       onChange={handleChange}
                       placeholder="...عنوان"
                       />
-                    <label className="mt-2 mb-n1"> توضیحات آزمونک</label>
-                    <textarea className="form-control text-right" rows="3"id="description"
+                    <label className="mt-2 mb-n1"style={{fontSize:23}}> توضیحات آزمونک</label>
+                    <textarea className="form-control border border-dark text-right" rows="3"id="description"
                       value={newQuiz.description}
                       type="description"
                       onChange={handleChange}
@@ -250,30 +237,28 @@ const handleCloseSnack = (event, reason) => {
                   onChange={handleImageUpload} 
                   ref={imageUploader} 
                   style={{ display: "none",color:"white" }} />
-                  <img src={newQuiz.quiz_photo} ref={uploadedImage} style={{width:270}} alt=" انتخاب عکس" className="rounded-lg d-block text-center mx-md-5"/>
-                  <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
+                  <img src={newQuiz.quiz_photo} ref={uploadedImage} className="rounded-lg d-block text-right pic mx-md-4"/>
+                  <div className="btn mr-5 mt-n5" onClick={() => imageUploader.current.click()}>
                     <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
                       <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
                     </svg>
                   </div>
                   </div>
-       
+                  <hr className="border rounded-circle col-10 border-info"></hr>
                   <div className="name-Q1">
   
-  <b className=""style={{position:'relative',fontFamily:"Yekan",fontSize:22}}>سؤالات 
+  <b className=""style={{position:'relative',fontFamily:"Yekan",fontSize:22}}>:سؤالات 
   </b>
   </div>
   { inputFields.map(inputField => (
     <div key={inputField.id}>
-  <label style={{fontSize:18}} className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
-  <textarea className="form-control input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
+  <label className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
+  <textarea className="form-control border border-dark input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 1</label>
-  <div class="form-check text-right mr-n4 ">
-  </div>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">a جواب</label>
 
                 <input
-                       className="form-control input-normal text-right" 
+                       className="form-control border-dark input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
                        name="a_text"
@@ -282,11 +267,11 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 2</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">b جواب</label>
 
 
                 <input
-                       className="form-control input-normal text-right" 
+                       className="form-control border-dark input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
                        name="b_text"
@@ -297,12 +282,12 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 3</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">c جواب</label>
   <div class="form-check text-right mr-n4 ">
 </div>
 
                 <input 
-                       className="form-control input-normal text-right" 
+                       className="form-control border-dark input-normal text-right" 
                        name="c_text"
                        placeholder="...صورت جواب"
                        required
@@ -314,11 +299,11 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">جواب 4</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">d جواب</label>
 
                 <input 
                      type=""
-                       className="form-control input-normal text-right" 
+                       className="form-control border-dark input-normal text-right" 
                        placeholder="...صورت جواب"
                        required
                        
@@ -327,11 +312,11 @@ const handleCloseSnack = (event, reason) => {
                        onChange={event => handleChangeInput(inputField.id, event)}
                        
                 />
-                <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">عدد گزینهٔ درست</label>
+                <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont"> گزینهٔ درست</label>
                 <input 
                      type=""
-                       className="form-control input-normal text-right" 
-                       placeholder="... گزینهٔ درست"
+                       className="form-control border-dark input-normal text-right" 
+                       placeholder="...a مثلاً"
                        required
                        name="key"
                        value={inputField.key}
@@ -341,6 +326,7 @@ const handleCloseSnack = (event, reason) => {
                  </div>
           
        ))}
+       <div>
           { inputFields.length === 1 ?
            
            <Tooltip  title= {<div style={{color: "white",
@@ -352,21 +338,19 @@ const handleCloseSnack = (event, reason) => {
  textAlign:"center",
  marginLeft:-9,
  paddingTop:20,}}>آزمونک باید حداقل دارای یک سؤال باشد</div>}> 
-         <button className="btn b" style={{color:"black",fontSize:15}}>
+         <button className="btn b btn-info rounded-lg" style={{color:"white",fontSize:15}}>
              حذف سؤال
          </button>
          </Tooltip>
-         
-
      :
      <div>
- 
-     <button className="btn b" style={{color:"black",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
+     <button className="btn b btn-info rounded-lg" style={{color:"white",fontSize:15}} onClick={() => handleRemoveFields(inputFields[inputFields.length-1].id)}>
        حذف سؤال
  </button>
  </div>
 
 }
+</div>
 { inputFields.length === 15 ?
 <Tooltip  title= {<div style={{color: "white",
 fontFamily:"Yekan",
@@ -377,26 +361,28 @@ height:80,
 textAlign:"center",
 marginLeft:-9,
 paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال باشد</div>}> 
-        <button className="btn" style={{color:"blue",fontSize:15}}>
-                 / اضافه‌کردن سؤال
+        <button className="btn b1 btn-info rounded-lg" style={{color:"white",fontSize:15}}>
+                 اضافه‌کردن سؤال
                   </button>
         </Tooltip>
      :
      <button
-     className="btn"
-     style={{color:"blue",fontSize:15}}
+     className="btn b1 btn-info rounded-lg"
+     style={{color:"white",fontSize:15}}
        onClick={handleAddFields}
        disabled={inputFields.length === 15 } 
      >
-       / اضافه‌کردن سؤال
+      اضافه‌کردن سؤال
      </button>
 }
+<div>
 {validation === false ?
-<button onClick={sendQuestion}>ارزیابی</button>
+<button className=" btn b2 btn-info rounded-lg" onClick={sendQuestion}>ارزیابی</button>
 :
-<button onClick={va}>ثبت</button>
+<button className=" btn b2 btn-info rounded-lg" onClick={va}>ثبت</button>
 
 }
+</div>
          </div>
          </div>
          </div>

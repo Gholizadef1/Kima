@@ -14,15 +14,37 @@
         margin-left: 10px;
         border-radius: 3%;
        }
+       .pic{
+           width: 150px;
+           margin-top: 20px;
+         
+       }
         .rowin{
-            margin-left: 400px;
+            margin-left: 280px;
             margin-top: 10px;
         }
-        .name-Q{
-            margin-top: 10px;
+        .fg{
+            width: 600px;
+           
+        }
+       
+        .name-Q1{
+            margin-top: 20px;
+            margin-bottom: -20px;
         }
         .b{
-            margin-right: 100px;
-            margin-bottom: -65px;
+            margin-right: 370px;
+            margin-bottom: -50px;
+            
         }
+        .b1{
+            margin-right: 240px;
+            margin-bottom:10px;
+            margin-top: -5px;
+        }
+        .b2{
+            margin-top: -77px;
+            margin-right: 160px;
+        }
+       
     }
