@@ -95,9 +95,11 @@ function LoginForm(props) {
         <div className="d-flex justify-content-center py-sm-4 color4">
         <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
             <div className="card color2" >
-                <h1 className="mt-5" >به کیما خوش‌آمدید</h1>
-                <p style={{fontSize:24}}>"کتاب یار مهربان است"</p>
-                <p style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
+                <div class="card-body mt-1">
+                    <h1 className="mt-4 card-title" >به کیما خوش‌آمدید</h1>
+                    <p className="card-text" style={{fontSize:24}}>"کتاب یار مهربان است"</p>
+                    <p className="card-text" style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
+                </div>
                 <img src="people&books.png" className="col-12 mt-n5 card-img-bottom hv-center" alt=""/> 
             </div>
             <div className="card color2">
