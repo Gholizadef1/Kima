@@ -19,6 +19,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { EvilIcons } from '@expo/vector-icons';
+import Quizcard from "./Quizcard";
 // import { TextInput } from 'react-native-paper';
 
 
@@ -72,6 +73,7 @@ const Myquizes = (prop) => {
        console.log('api/group'+likeotime)
 
       const id= await(AsyncStorage.getItem('id'))
+      console.log(id +"idf;lkadf;kjf;lkjf")
       const response = await axiosinst.get("user/"+id+"/quiz",{
         params: {
           page: page
@@ -88,7 +90,7 @@ const Myquizes = (prop) => {
    console.log(response.data)
    console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
   console.log(response.data+'RESPONSE.DATA')
-  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+  console.log(response.data.Quiz+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
    console.log(page+' PAGE BAD COUNT')
@@ -99,7 +101,7 @@ const Myquizes = (prop) => {
    console.log('++++INFOGHABLESET++++'+information+"++++INFOGHABLESET++++")
     console.log(response.data.groups)
     if(response.data.message!="No Group!"){
-      await setinformation(information => [...information, ...response.data.groups])
+      await setinformation(information => [...information, ...response.data.Quiz])
    //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
     }
     else{
@@ -204,7 +206,7 @@ const Myquizes = (prop) => {
             style={{backgroundColor:'white',marginBottom:0}}
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
+            <Quizcard quizphoto={item.quiz_photo} membernumber={item.question_count}  discription={item.summary} title={item.description} ></Quizcard>
             {/* :null} */}
             </TouchableOpacity>
             </>
