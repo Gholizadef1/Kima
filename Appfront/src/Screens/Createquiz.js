@@ -18,7 +18,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { number } from 'yup';
 import { set } from 'react-native-reanimated';
-import { FastField, Formik, formik, Form, FieldArray } from 'formik';
+import { FastField, Formik, formik, Form, FieldArray, getIn } from 'formik';
 import * as yup from 'yup';
 import * as permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -90,6 +90,8 @@ const Createquiz = () => {
     const [maxnumquestion, setmaxnumquestion] = useState(false);
     const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
     const [showallerror, setshowallerror] = useState(false);
+    const [stillhaveerror, setstillhaveerror] = useState(false);
+    const [lasttouch, setlasttouch] = useState(0);
     const validationSchema = yup.object().shape({
         soalha: yup.array().of(
             yup.object().shape({
@@ -291,6 +293,8 @@ const Createquiz = () => {
                                                     onPress={async () => {
                                                         if (numofquestion <= 20) {
                                                             push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+
+
                                                             // for(var i=numofquestion-1;i>=0;i--){
                                                             //     console.log(props.values.soalha[i].question+" QQQQ");
                                                             //     console.log(props.values.soalha[i].a+" aaaaa");
@@ -310,6 +314,16 @@ const Createquiz = () => {
                                                             await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
                                                             //    await setvalues(values.concat(numofquestion.toString()));
                                                             await setnumofquestion(numofquestion + 1);
+                                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                                            console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
+                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            }
                                                             //      // await setvalues(values.concat(numofquestion));
                                                             //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
                                                             //console.log(questions);
@@ -317,6 +331,7 @@ const Createquiz = () => {
                                                         }
                                                         else {
                                                             new Promise(async (resolve, refect) => {
+
                                                                 await setmaxnumquestion(true);
 
                                                                 await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
@@ -468,22 +483,49 @@ const Createquiz = () => {
                                     <Button type={"submit"} bordered rounded style={styles.button}
                                         //har taghiri chap vali onpress error ke function nist
                                         //onPress={console.log(JSON.stringify(props.errors.soalha))&console.log("button pressed!")}
-                                        onPress={async(resolve,reject) => {
+                                        onPress={async (resolve, reject) => {
                                             //new Promise(async()=>{
-                                                await props.setFieldTouched("Discription", true)
+                                            console.log("toye subimtttttttttttttttttttttt")
+                                            console.log(itemid + " item iddhfhgj")
+                                            console.log(lasttouch + "lasttouch")
                                             await props.setFieldTouched("Username", true)
-                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
-                                            props.handleChange( `soalha[${itemid}].question`)(" ")
+                                            await props.setFieldTouched("Discription", true)
+                                          //  for (var i = lasttouch + 1; i <= itemid; i++) {
+
+
+                                                await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                                await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                                await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                                await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                                await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                                console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                                if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                                    await props.handleChange(`soalha[${itemid}].question`)("  ")
+                                                    // await props.handleChange(`soalha[${i}].question`)()
+                                                }
+                                           // }
+                                            //setlasttouch(itemid)
+
                                             // resolve()
                                             // }).then(()=>{
                                             //     console.log("pressed then")
-                                            
+
                                             // })
-                                            // setTimeout(()=>console.log("ehtemalan hameye on touch ha avaz"),5000)
+
+                                            // setTimeout(() => {
+                                            //     console.log('ON SUBMITTTTTTTTTTTTTT')
+                                            //     const formdata = new FormData();
+                                            //     console.log(props.values+"    All values for submiting")
+                                            //     console.log("\n"+props.errors)
+                                            //     formdata.append('title', values.Username)
+                                            //     formdata.append('summary', values.Discription)
+                                            //     if (picture.uri === '../../assets/tea.jpg') {
+                                            //     }
+                                            //     else
+                                            //         formdata.append('photo', picture)
+
+                                            //     console.log(formdata.data + 'formdata')
+                                            // }, 5000)
                                             // setshowallerror(true)
                                             //setTimeout(()=>setshowallerror(false),5000)
                                         }}

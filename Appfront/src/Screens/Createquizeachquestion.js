@@ -34,12 +34,12 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].d`)
     const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].correct`)
     const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)
-    console.log(prop.showallerr+" show all error");
-    console.log(questionerror+" question error")
-    console.log(JSON.stringify(prop.pr.values)+" VALUES");
-    console.log(JSON.stringify(prop.pr.errors)+" ERRORS");
-    const [a,seta]=useState(false);
-    console.log(getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)+" quesition value")
+    //console.log(prop.showallerr+" show all error");
+    //console.log(questionerror+" question error")
+    //console.log(JSON.stringify(prop.pr.values)+" VALUES");
+    //console.log(JSON.stringify(prop.pr.errors)+" ERRORS");
+   // const [a,seta]=useState(false);
+    //console.log(getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)+" quesition value")
     // if(prop.showallerr){
     //     seta(true)
     // }
