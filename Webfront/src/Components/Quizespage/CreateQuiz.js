@@ -131,9 +131,9 @@ const handleCloseSnack = (event, reason) => {
         setMassage('تمامی فیلدهای مربوط به سؤال باید پر شوند')
         setOpenSnack(true);
       }
-      else if(i.question_text.length>=20 || i.a_text.length>=10 || i.b_text.length>=10
-       || i.c_text.length>=10 || i.d_text.length>=10){
-        setMassage('متن سؤال باید حداکثر 20 و متن جواب حداکثر 10 کاراکتر داشته باشد')
+      else if(i.question_text.length>=100 || i.a_text.length>=20 || i.b_text.length>=20
+       || i.c_text.length>=20 || i.d_text.length>=20){
+        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 20 کاراکتر داشته باشد')
         setOpenSnack(true);
 
        }
