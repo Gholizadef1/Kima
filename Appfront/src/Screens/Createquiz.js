@@ -151,7 +151,7 @@ const Createquiz = () => {
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
 
-                                <View style={{ backgroundColor: "#F2F5F7", marginRight: wp("65%"), borderRadius: 100 }}>
+                                <View style={{ backgroundColor: "white", marginRight: wp("65%"), borderRadius: 100 }}>
 
                                     {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
                                     {/* bedoone view nemishod in barr */}
@@ -164,7 +164,7 @@ const Createquiz = () => {
                                         //marginRight:wp("-90%"),
                                         borderRadius: 100,
                                         margin: 0,
-
+                                        elevation:10,
                                         // position: 'absolute',
                                         borderColor: 'blue',
                                         backgroundColor: "lightgreen"
@@ -227,6 +227,8 @@ const Createquiz = () => {
 
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('38%'), marginTop: hp("-11.3%") }}>نام کوییز</Text>
                                 <Item style={styles.item} rounded >
+                                    <Image source={require("../../assets/quizicon.png")} style={{ height: hp("3.5%"), width: wp("7%"), marginTop: hp("-5.7%"), marginBottom: hp("-5.5%"), marginLeft: wp("1%") }}></Image>
+
                                     {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
 
                                     <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
@@ -237,15 +239,15 @@ const Createquiz = () => {
                                         placeholder={'نام کوییز ...'} placeholderTextColor='gray' >
                                     </Input>
 
-                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('1.5%'), marginTop: hp('8%'), color: '#FC4A68' }}>{props.touched.Username && props.errors.Username}</Text>
+                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp("0%"), marginTop: hp('8%'), color: '#FC4A68' }}>{props.touched.Username && props.errors.Username}</Text>
+
                                 </Item>
-                                <Image source={require("../../assets/quizicon.png")} style={{ height: hp("3.5%"), width: wp("7%"), position: 'absolute', marginTop: hp("6.6%"), marginLeft: wp("38%") }}></Image>
 
 
                                 <TouchableOpacity onPress={() => { pickfromgallery(props, props.handleChange) }} style={{ backgroundColor: '#EDF2F4', elevation: 1, height: hp('4.2%'), width: wp('8.5%'), top: hp('8%'), left: wp('-3%'), position: 'absolute', borderRadius: 100 }}>
                                     <EvilIcons onPress={() => { pickfromgallery(props, props.handleChange) }} name="camera" size={25} style={{ alignSelf: 'center', top: hp('1%') }} color="#1f7a8c" />
                                 </TouchableOpacity>
-                                <View>
+                                <View style={{}}>
                                     <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginLeft: wp('5%') }}>توضیحات</Text>
                                     <TouchableOpacity activeOpacity={1}>
                                         <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
@@ -318,19 +320,19 @@ const Createquiz = () => {
                                                                 await props.handleChange(`soalha[${itemid}].question`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
-                                                             if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
+                                                            if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
                                                                 await props.handleChange(`soalha[${itemid}].a`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
-                                                             if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
+                                                            if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
                                                                 await props.handleChange(`soalha[${itemid}].b`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
-                                                             if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
+                                                            if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
                                                                 await props.handleChange(`soalha[${itemid}].c`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
-                                                             if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
+                                                            if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
                                                                 await props.handleChange(`soalha[${itemid}].d`)("  ")
                                                                 // await props.handleChange(`soalha[${i}].question`)()
                                                             }
@@ -340,7 +342,7 @@ const Createquiz = () => {
                                                             await props.setFieldTouched(`soalha[${itemid}].c`, true)
                                                             await props.setFieldTouched(`soalha[${itemid}].d`, true)
                                                             console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                                            
+
                                                             //      // await setvalues(values.concat(numofquestion));
                                                             //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
                                                             //console.log(questions);
@@ -520,19 +522,19 @@ const Createquiz = () => {
                                                 await props.handleChange(`soalha[${itemid}].question`)("  ")
                                                 // await props.handleChange(`soalha[${i}].question`)()
                                             }
-                                             if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
+                                            if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
                                                 await props.handleChange(`soalha[${itemid}].a`)("  ")
                                                 // await props.handleChange(`soalha[${i}].question`)()
                                             }
-                                             if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
+                                            if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
                                                 await props.handleChange(`soalha[${itemid}].b`)("  ")
                                                 // await props.handleChange(`soalha[${i}].question`)()
                                             }
-                                             if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
+                                            if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
                                                 await props.handleChange(`soalha[${itemid}].c`)("  ")
                                                 // await props.handleChange(`soalha[${i}].question`)()
                                             }
-                                             if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
+                                            if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
                                                 await props.handleChange(`soalha[${itemid}].d`)("  ")
                                                 // await props.handleChange(`soalha[${i}].question`)()
                                             }
@@ -594,8 +596,9 @@ const styles = StyleSheet.create({
     container: {
         //   position:'absolute',
         //   marginTop:-100,
-        backgroundColor: '#F2F5F7',
+        //backgroundColor: '#F2F5F7',
         //   height:1000,
+        backgroundColor: "white",
         flex: 1,
     },
     button: {
@@ -644,7 +647,7 @@ const styles = StyleSheet.create({
         // marginLeft:wp('-2%'),
         // marginRight:wp('-1%'),
         backgroundColor: "white",
-        elevation: 0,
+        elevation: 5,
         marginHorizontal: wp("5%"),
         marginTop: hp('6%'),
         fontSize: hp('2.5%'),
@@ -656,8 +659,9 @@ const styles = StyleSheet.create({
         height: wp('9.5%'),
         borderColor: "lightblue",
         borderWidth: hp("0.1%"),
-        backgroundColor: "white",
-        elevation: 0
+        backgroundColor: "#f2f5f7",
+
+        elevation: 7
     },
     Input: {
         left: wp('8%'),

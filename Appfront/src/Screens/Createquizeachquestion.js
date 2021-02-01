@@ -92,17 +92,17 @@ const Createquizeachquestion = (prop) => {
 
     return (<View style={{ marginBottom: hp("1.5%") }}>
 
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={1}>
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                 borderColor={'lightblue'}
-                elevation={0}
+               // elevation={0}
                 //onChangeText={prop.pr.handleChange(soalha[itemidd].question)}
                 onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd}].question`)}
                 //name...
                 onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd}].question`)}
                 value={prop.pr.values.soalha.question}
                 placeholder={'سوال ' + prop.itemidd + " ... "} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
-                    marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "white"
+                    marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "#f2f5f7",elevation:3,marginBottom:hp("1%")
                 }}>
 
 
@@ -117,7 +117,7 @@ const Createquizeachquestion = (prop) => {
         {/* {!(prop.pr.touched.soalha[prop.itemidd].question === undefined) && typeof prop.pr.touched.soalha[prop.itemidd].question === "boolean" && typeof prop.pr.errors.soalha[prop.itemidd].question === "boolean" ? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{prop.pr.errors.soalha[prop.itemidd].question}</Text> : null} */}
           {/* {prop.pr.touched.soalha!=undefined &&( prop.pr.errors.soalha!=undefined && typeof questionerror!=undefined)? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{questionerror}</Text> : null} 
            */}
-           {typeof questionerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)&&questionerror}</Text>:null}
+           {typeof questionerror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-0.5%'), marginBottom:hp("-2.1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)&&questionerror}</Text>:null}
            {/* { prop.showallerr===true && prop.pr.values.soalha[prop.itemidd].question===""&&questionerror===undefined?<Text style={styles.error}>".متن سوال نمیتواند خالی باشد</Text>:null} */}
         {/* <Field> */}
     
