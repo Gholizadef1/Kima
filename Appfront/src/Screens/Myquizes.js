@@ -72,9 +72,8 @@ const Myquizes = (prop) => {
        console.log('api/group'+likeotime)
 
       const id= await(AsyncStorage.getItem('id'))
-      const response = await axiosinst.get("user/"+id+"/group",{
+      const response = await axiosinst.get("user/"+id+"/quiz",{
         params: {
-          filter:likeotime,
           page: page
         },
       "headers":
