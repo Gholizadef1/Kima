@@ -68,11 +68,12 @@ const Bookview = (prop) => {
           setComments(response.data)
         }
         setloading2(false)
-        console.log('response data ===== ', response.data[0].account.username)
-        console.log('response data ::::: ', response.data[0].comment_text)
-        console.log('commentsss===' + comments[0].comment_text)
+        // console.log('response data ===== ', response.data[0].account.username)
+        // console.log('response data ::::: ', response.data[0].comment_text)
+        // console.log('commentsss===' + comments[0].comment_text)
+        console.log('TEDADDDD===='+comments.length)
       })
-      
+
 
       .catch(async function (error) {
         console.log(error);
@@ -270,41 +271,52 @@ const Bookview = (prop) => {
                 });
               }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
 
-              {comments  != "No Comment!" ?
-              <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'),  marginBottom: hp('0.7%'),marginLeft:wp('3%') }}>نظرات کاربران :</Text>
-              :null}
+          {comments != "No Comment!" ?
+            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نظرات کاربران :</Text>
+            : null}
 
-            {comments != "No Comment!" ?
-             <FlatList
-             style={{ marginBottom: hp('5%') }}
-             showsVerticalScrollIndicator={false}
-             horizontal={true}
-             onEndReached={() => {
-                 //            console.log('-----AKHAR LIST')
-             }}
-             onEndReachedThreshold={0.5}
-             keyExtractor={(item) => item.id}
-             refreshing={refreshcomments}
-             onRefresh={async () => {
-                 console.log('refresh')
-             }}
-             data={comments}
-             renderItem={({ item }) => <>
-                     <View style={{}}>
-                         <Card style={styles.cardChat}>
-                         {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
-                             source={{ uri: item.account.profile_photo }}
-                         ></Avatar.Image> : <Avatar.Image style={{}} size={10}
-                             source={require('../../assets/group.jpg')}
-                         ></Avatar.Image>}
-                             <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
-                             <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
-                         </Card>
-                     </View>
-             </>
-             }
-         >
-         </FlatList> : null}
+          {comments != "No Comment!" && comments.length >= 3 ?
+            <Button style={{ marginLeft: wp('83%'),marginTop:hp('-5%'),marginBottom:hp('-3%') }} transparent
+            onPress={() => {
+              prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
+                title: response.data.title,
+              });
+            }}>
+              <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+            </Button >
+            : null}
+            
+          {comments != "No Comment!" ?
+            <FlatList
+              style={{ marginBottom: hp('5%') }}
+              showsVerticalScrollIndicator={false}
+              horizontal={true}
+              onEndReached={() => {
+                //            console.log('-----AKHAR LIST')
+              }}
+              onEndReachedThreshold={0.5}
+              keyExtractor={(item) => item.id}
+              refreshing={refreshcomments}
+              onRefresh={async () => {
+                console.log('refresh')
+              }}
+              data={comments}
+              renderItem={({ item }) => <>
+                <View style={{}}>
+                  <Card style={styles.cardChat}>
+                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
+                      source={{ uri: item.account.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                      source={require('../../assets/group.jpg')}
+                    ></Avatar.Image>}
+                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
+                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
+                  </Card>
+                </View>
+              </>
+              }
+            >
+            </FlatList> : null}
 
 
           {/* <Button style={{
@@ -346,14 +358,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     backgroundColor: '#EDF2F4',
 
-},
-avatar: {
-  marginLeft: wp('2%'),
-  top: hp('-3.5%'),
-  width: wp('14%'),
-  height: hp('8%'),
-  marginTop: hp('5%')
-}
+  },
+  avatar: {
+    marginLeft: wp('2%'),
+    top: hp('-3.5%'),
+    width: wp('14%'),
+    height: hp('8%'),
+    marginTop: hp('5%')
+  }
 });
 
 export default Bookview;
