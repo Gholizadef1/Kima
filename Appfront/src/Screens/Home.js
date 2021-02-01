@@ -1,6 +1,5 @@
 import React , {useState , useEffect} from 'react';
-import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , 
-TouchableOpacity , FlatList , TextInput} from 'react-native';
+import { StyleSheet, Text, View , Image , ImageBackground , ScrollView , TouchableOpacity , FlatList , TextInput, ActivityIndicator} from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import { Container, Header, Left, Body, Right, Title, CardItem, Card } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
@@ -16,6 +15,9 @@ const Home = ({navigation}) => {
     const [image,setImage] = useState([])
     const [best,setbest] = useState([])
     const [mostdis,setmostdis] = useState([])
+    const [loading1, setloading1] = useState(true)
+    const [loading2, setloading2] = useState(true)
+    const [loading3, setloading3] = useState(true)
 
     useFocusEffect(
         React.useCallback(() => {
@@ -30,7 +32,7 @@ const Home = ({navigation}) => {
         axiosinst.get('/book')
         .then(function(response){
             setImage(response.data)
-            // console.log(response)
+            setloading1(false)
         })
         .catch(function(error){
             console.log(error)
@@ -40,7 +42,7 @@ const Home = ({navigation}) => {
         axiosinst.get('/book?filter=rate')
         .then(function(response){
             setbest(response.data)
-            // console.log(response)
+            setloading2(false)
         })
         .catch(function(error){
             console.log(error)
@@ -50,7 +52,7 @@ const Home = ({navigation}) => {
         axiosinst.get('/book?filter=comment')
         .then(function(response){
             setmostdis(response.data)
-            // console.log(response)
+            setloading3(false)
         })
         .catch(function(error){
             console.log(error)
@@ -61,112 +63,123 @@ const Home = ({navigation}) => {
     if(!image){
         return null
     }
-    return(      
-        <Container style={styles.frame}>
-            <ScrollView>
-            <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('4.5%')}}/>
-            <Title style={{fontSize:24 , fontWeight:'bold',color:'#E1E5F2' ,marginTop:-44 , marginLeft:10}}>کیما</Title>
-             <ScrollView>
-                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
-                 </View>
-                 <View>
-                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های پیشنهادی</Text>
-                    <FlatList
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    data={image}
-                    renderItem= {({item}) =>{
-                        return(
-                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
-                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
-                                    <CardItem cardBody>
-                                    <Image source={{uri : item.imgurl}} style={{width: 120,
-                                      height: 180 , borderRadius:15}}/>
-                                    </CardItem>
-                                    </Card>                                    
-                                        <CardItem>
-                                        <Text style={styles.ImageText}>{item.title}</Text>
-                                        </CardItem>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    } 
-                }
-                    />
-                 </View>
-             </ScrollView>
 
-              <ScrollView>
-                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
-                 </View>
-                 <View>
-                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های برتر</Text>
-                    <FlatList
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    data={best}
-                    renderItem= {({item}) =>{
-                        return(
-                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
-                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
-                                    <CardItem cardBody>
-                                    <Image source={{uri : item.imgurl}} style={{width: 120,
-                                      height: 180 , borderRadius:15}}/>
-                                    </CardItem>
-                                    </Card>                                    
-                                        <CardItem>
-                                        <Text style={styles.ImageText}>{item.title}</Text>
+    if (loading1 === false && loading2 === false && loading3 === false)
+    {
+        return(      
+            <Container style={styles.frame}>
+                <ScrollView>
+                <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('4.5%')}}/>
+                <Title style={{fontSize:24 , fontWeight:'bold',color:'#E1E5F2' ,marginTop:-44 , marginLeft:10}}>کیما</Title>
+                 <ScrollView>
+                     <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
+                     </View>
+                     <View>
+                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های پیشنهادی</Text>
+                        <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={image}
+                        renderItem= {({item}) =>{
+                            return(
+                                <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
+                                    <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                        <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                        <CardItem cardBody>
+                                        <Image source={{uri : item.imgurl}} style={{width: 120,
+                                          height: 180 , borderRadius:15}}/>
                                         </CardItem>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    } 
-                }
-                    />
-                 </View>
-             </ScrollView>
-
-             <ScrollView>
-                 <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
-                 </View>
-                 <View>
-                 <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
-                 marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>پربحث ترین کتاب ها</Text>
-                    <FlatList
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                    data={mostdis}
-                    renderItem= {({item}) =>{
-                        return(
-                            <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
-                                    <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
-                                    <CardItem cardBody>
-                                    <Image source={{uri : item.imgurl}} style={{width: 120,
-                                      height: 180 , borderRadius:15}}/>
-                                    </CardItem>
-                                    </Card>                                    
-                                        <CardItem>
-                                        <Text style={styles.ImageText}>{item.title}</Text>
+                                        </Card>                                    
+                                            <CardItem>
+                                            <Text style={styles.ImageText}>{item.title}</Text>
+                                            </CardItem>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        } 
+                    }
+                        />
+                     </View>
+                 </ScrollView>
+    
+                  <ScrollView>
+                     <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
+                     </View>
+                     <View>
+                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های برتر</Text>
+                        <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={best}
+                        renderItem= {({item}) =>{
+                            return(
+                                <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
+                                    <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                        <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                        <CardItem cardBody>
+                                        <Image source={{uri : item.imgurl}} style={{width: 120,
+                                          height: 180 , borderRadius:15}}/>
                                         </CardItem>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    } 
-                }
-                    />
-                 </View>
-             </ScrollView>     
-  
-
-        </ScrollView>
-        <StatusBar backgroundColor='#BFDBF7' style='light' />
-        </Container>
-    );
+                                        </Card>                                    
+                                            <CardItem>
+                                            <Text style={styles.ImageText}>{item.title}</Text>
+                                            </CardItem>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        } 
+                    }
+                        />
+                     </View>
+                 </ScrollView>
+    
+                 <ScrollView>
+                     <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
+                     </View>
+                     <View>
+                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>پربحث ترین کتاب ها</Text>
+                        <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                        data={mostdis}
+                        renderItem= {({item}) =>{
+                            return(
+                                <View style={{paddingVertical:hp('3') , paddingLeft:wp('1.5%')}}>
+                                    <TouchableOpacity onPress={() => navigation.navigate('Showbookview' , {id: item.id})}>
+                                        <Card style={{backgroundColor:'#1F7A8C' , borderRadius:15}}>
+                                        <CardItem cardBody>
+                                        <Image source={{uri : item.imgurl}} style={{width: 120,
+                                          height: 180 , borderRadius:15}}/>
+                                        </CardItem>
+                                        </Card>                                    
+                                            <CardItem>
+                                            <Text style={styles.ImageText}>{item.title}</Text>
+                                            </CardItem>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        } 
+                    }
+                        />
+                     </View>
+                 </ScrollView>     
+      
+    
+            </ScrollView>
+            <StatusBar backgroundColor='#BFDBF7' style='light' />
+            </Container>
+        );
+    }
+    else {
+        return (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+          </View>
+        )
+      }
 }
 
 
