@@ -386,6 +386,17 @@ const Bookview = (prop) => {
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نقل قول های کاربران :</Text>
             : null}
 
+          {quotes != "No Quote!" && quotes.length >= 3 ?
+            <Button style={{ marginLeft: wp('83%'), marginTop: hp('-5%'), marginBottom: hp('-3%') }} transparent
+              onPress={() => {
+                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}>
+              <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+            </Button >
+            : null}
+
           {quotes != "No Quote!" ?
             <FlatList
               style={{ marginBottom: hp('5%') }}
@@ -404,10 +415,10 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat2}>
-                  <Text style={{ alignSelf: 'flex-start',color: '#a9a9a9', fontSize: 14,marginLeft:wp('4%'),marginTop:hp('1%')}}>{item.account.username}</Text>
+                    <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.account.username}</Text>
                     {(item.quote_text.toString().length) <= 100 ?
-                      <Text style={{  marginLeft: wp('4%') , top:hp('1%'),marginTop:hp('2%'),marginBottom:hp('7%')}}>{item.quote_text}</Text> :
-                      <Text  style={{  marginLeft: wp('4%') , top:hp('1%'),marginTop:hp('2%')}}>{item.quote_text.toString()}</Text>}
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
                     {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
                       source={{ uri: item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
@@ -441,7 +452,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardChat: {
-    height:hp('22%'),
+    height: hp('22%'),
     width: wp('50%'),
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
@@ -453,7 +464,7 @@ const styles = StyleSheet.create({
 
   },
   cardChat2: {
-    height:hp('32%'),
+    height: hp('32%'),
     width: wp('55%'),
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
@@ -473,11 +484,11 @@ const styles = StyleSheet.create({
   },
   avatar2: {
     top: hp('1%'),
-    marginLeft:wp('20%'),
-//    marginBottom:hp('3%'),
+    marginLeft: wp('20%'),
+    //    marginBottom:hp('3%'),
     width: wp('14%'),
     height: hp('8%'),
-//    marginTop: hp('5%')
+    //    marginTop: hp('5%')
   }
 });
 
