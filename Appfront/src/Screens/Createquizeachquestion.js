@@ -34,6 +34,11 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].d`)
     const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd}].correct`)
     const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd}].question`)
+    console.log(prop.pr.values);
+    console.log("VALUES")
+
+    console.log(prop.pr.errors);
+    console.log("ERRORS")
     //console.log(prop.showallerr+" show all error");
     //console.log(questionerror+" question error")
     //console.log(JSON.stringify(prop.pr.values)+" VALUES");

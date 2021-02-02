@@ -92,6 +92,7 @@ const Createquiz = () => {
     const [showallerror, setshowallerror] = useState(false);
     const [stillhaveerror, setstillhaveerror] = useState(false);
     const [lasttouch, setlasttouch] = useState(0);
+
     const validationSchema = yup.object().shape({
         soalha: yup.array().of(
             yup.object().shape({
@@ -128,7 +129,7 @@ const Createquiz = () => {
                     style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                     validationSchema={validationSchema}
                     initialValues={{
-                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "s", a: "s", b: "s", c: "s", d: "s", correct: "1" }]
+                        Username: '', Discription: 'af', photo: require('../../assets/tea.jpg'), soalha: [{ question: "how are youuu?", a: "afdlk", b: "adlfk", c: "asfd", d: "asdf", correct: "1" }]
                         // soal:soalha 
                     }}
                     // validationSchema={userschema}
@@ -147,6 +148,7 @@ const Createquiz = () => {
                     }}
                 >
                     {(props) => (
+
                         /* <Form onSubmit={props.handleSubmit}> */
                         <View style={{ marginTop: hp('5%') }}>
                             <View style={{ borderColor: 'blue' }}>
@@ -164,7 +166,7 @@ const Createquiz = () => {
                                         //marginRight:wp("-90%"),
                                         borderRadius: 100,
                                         margin: 0,
-                                        elevation:10,
+                                        elevation: 10,
                                         // position: 'absolute',
                                         borderColor: 'blue',
                                         backgroundColor: "lightgreen"
@@ -264,8 +266,89 @@ const Createquiz = () => {
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
 
 
+                                {minnumquestion === false && maxnumquestion === false ?
+                                    <Button type={"submit"} bordered rounded style={styles.button}
+                                        //har taghiri chap vali onpress error ke function nist
+                                        //onPress={console.log(JSON.stringify(props.errors.soalha))&console.log("button pressed!")}
+                                        onPress={
+                                            () => {
+                                               
+                                                    props.handleSubmit()
+                                                if (props.error === undefined) {
 
-                                <FieldArray name={"soalha"} validationSchema={validationSchema.soalha}>
+                                                }
+                                                else {
+                                                    setstillhaveerror(false);
+                                                }
+                                            }}
+                                    //async (resolve, reject) => {
+
+                                    // await setshowallerror(true);
+                                    // //new Promise(async()=>{
+                                    // console.log("toye subimtttttttttttttttttttttt")
+                                    // console.log(itemid + " item iddhfhgj")
+                                    // console.log(lasttouch + "lasttouch")
+                                    // await props.setFieldTouched("Username", true)
+                                    // // await props.setFieldTouched("Discription", true)
+                                    // //  for (var i = lasttouch + 1; i <= itemid; i++) {
+
+
+                                    // // await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                    // // await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                    // // await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                    // // await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                    // // await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                    // console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                    // if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
+                                    //     await props.handleChange(`soalha[${itemid}].question`)("  ")
+                                    //     // await props.handleChange(`soalha[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
+                                    //     await props.handleChange(`soalha[${itemid}].a`)("  ")
+                                    //     // await props.handleChange(`soalha[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
+                                    //     await props.handleChange(`soalha[${itemid}].b`)("  ")
+                                    //     // await props.handleChange(`soalha[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
+                                    //     await props.handleChange(`soalha[${itemid}].c`)("  ")
+                                    //     // await props.handleChange(`soalha[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
+                                    //     await props.handleChange(`soalha[${itemid}].d`)("  ")
+                                    //     // await props.handleChange(`soalha[${i}].question`)()
+                                    // }
+                                    // }
+                                    //setlasttouch(itemid)
+
+                                    // resolve()
+                                    // }).then(()=>{
+                                    //     console.log("pressed then")
+
+                                    // })
+
+                                    // setTimeout(() => {
+                                    //     console.log('ON SUBMITTTTTTTTTTTTTT')
+                                    //     const formdata = new FormData();
+                                    //     console.log(props.values+"    All values for submiting")
+                                    //     console.log("\n"+props.errors)
+                                    //     formdata.append('title', values.Username)
+                                    //     formdata.append('summary', values.Discription)
+                                    //     if (picture.uri === '../../assets/tea.jpg') {
+                                    //     }
+                                    //     else
+                                    //         formdata.append('photo', picture)
+
+                                    //     console.log(formdata.data + 'formdata')
+                                    // }, 5000)
+                                    // setshowallerror(true)
+                                    //setTimeout(()=>setshowallerror(false),5000)
+
+                                    >
+                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                    </Button> : null}
+                                <FieldArray validateOnChange={true}  name={"soalha"}>
                                     {({ push, pop, touched, errors }) => (
                                         <FlatList
                                             //بعدا لیست هدر بالایی ها
@@ -290,171 +373,191 @@ const Createquiz = () => {
                                                     {/* //  propp={propss} */}
                                                 </>)
                                             }}
-                                            ListFooterComponent={() => (<View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
-                                                <TouchableOpacity
-                                                    onPress={async () => {
-                                                        if (numofquestion <= 20) {
-                                                            push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+                                            ListFooterComponent={() => (
+                                                <View style={{ flexDirection: "row", marginBottom: hp("10%") }}>
+                                                    <TouchableOpacity
+                                                        onPress={async () => {
+                                                            if (itemid + 1 <= 15) {
+                                                                push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+                                                                //props.errors.push(validationSchema);
+
+                                                                // for(var i=numofquestion-1;i>=0;i--){
+                                                                //     console.log(props.values.soalha[i].question+" QQQQ");
+                                                                //     console.log(props.values.soalha[i].a+" aaaaa");
+                                                                //     console.log(props.values.soalha[i].b+" bbbbb");
+                                                                //     console.log(props.values.soalha[i].c+" ccccc");
+                                                                //     console.log(props.values.soalha[i].d+" ddddd");
+                                                                //     console.log(props.values.soalha[i].correct+" correct");
+                                                                // }
+                                                                //console.log(props.values.soalha[0]+" VALUESSSS")
+                                                                //console.log(props.values.soalha[1]+" VALUESSSS")
+                                                                //toye groups mygroups avali javab nemidad :\
+                                                                console.log(props.error + "   PROP ERRORS")
+
+                                                                // if(props.errors===null){
+                                                                await setitemid(itemid + 1);
+                                                                //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
+                                                                await setquestions(questions.concat({ id: itemid + 1, name: "ad;fk" }));
+                                                                //    await setvalues(values.concat(numofquestion.toString()));
+                                                                //  await setnumofquestion(numofquestion + 1);
+                                                                // if (getIn(props.values, `soalha[${itemid}].question`) === "") {
+                                                                //     await props.handleChange(`soalha[${itemid}].question`)(" ")
+                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
+                                                                // else if (getIn(props.values, `soalha[${itemid}].a`) === "") {
+                                                                //     await props.handleChange(`soalha[${itemid}].a`)(" ")
+                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
+                                                                // else if (getIn(props.values, `soalha[${itemid}].b`) === "") {
+                                                                //     await props.handleChange(`soalha[${itemid}].b`)(" ")
+                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
+                                                                // else if (getIn(props.values, `soalha[${itemid}].c`) === "") {
+                                                                //     await props.handleChange(`soalha[${itemid}].c`)(" ")
+                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
+                                                                // else if (getIn(props.values, `soalha[${itemid}].d`) === "") {
+                                                                //     await props.handleChange(`soalha[${itemid}].d`)(" ")
+                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
 
 
-                                                            // for(var i=numofquestion-1;i>=0;i--){
-                                                            //     console.log(props.values.soalha[i].question+" QQQQ");
-                                                            //     console.log(props.values.soalha[i].a+" aaaaa");
-                                                            //     console.log(props.values.soalha[i].b+" bbbbb");
-                                                            //     console.log(props.values.soalha[i].c+" ccccc");
-                                                            //     console.log(props.values.soalha[i].d+" ddddd");
-                                                            //     console.log(props.values.soalha[i].correct+" correct");
-                                                            // }
-                                                            //console.log(props.values.soalha[0]+" VALUESSSS")
-                                                            //console.log(props.values.soalha[1]+" VALUESSSS")
-                                                            //toye groups mygroups avali javab nemidad :\
-                                                            console.log(props.error + "   PROP ERRORS")
+                                                                // if(props.errors===undefined){
+                                                                //     setstillhaveerror(false);
 
-                                                            // if(props.errors===null){
-                                                            await setitemid(itemid + 1);
-                                                            //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                                            await setquestions(questions.concat({ id: numofquestion, name: "ad;fk" }));
-                                                            //    await setvalues(values.concat(numofquestion.toString()));
-                                                            await setnumofquestion(numofquestion + 1);
-                                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
-                                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                                // }
+                                                                // else{
+
+                                                                // }
+                                                                // if(getIn(props.touched, `soalha[${itemid}].question`)===false ){
+                                                                // await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                                                // }
+                                                                // else if(getIn(props.touched, `soalha[${itemid}].a`)===false ){
+                                                                // await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                                                // }
+                                                                // else if(getIn(props.touched, `soalha[${itemid}].b`)===false ){
+                                                                // await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                                                // }
+                                                                // else if(getIn(props.touched, `soalha[${itemid}].c`)===false ){
+                                                                // await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                                                // }
+                                                                // else if(getIn(props.touched, `soalha[${itemid}].d`)===false ){
+                                                                // await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                                                // }
+                                                                console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+
+                                                                //      // await setvalues(values.concat(numofquestion));
+                                                                //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
+                                                                //console.log(questions);
+                                                                // }
                                                             }
-                                                            if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
-                                                                await props.handleChange(`soalha[${itemid}].a`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            else {
+                                                                new Promise(async (resolve, refect) => {
+
+                                                                    await setmaxnumquestion(true);
+
+                                                                    await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
+                                                                    // .then( resolve())
+                                                                    //  await setminnumquestion(false);
+
+
+                                                                })
+                                                                    .then(console.log("then!"))
                                                             }
-                                                            if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
-                                                                await props.handleChange(`soalha[${itemid}].b`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                        }}
+                                                        style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
+                                                        <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
+                                                    </TouchableOpacity>
+                                                    <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
+                                                    {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
+                                                    {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
+                                                    <TouchableOpacity
+                                                        onPress={async () => {
+                                                            if (itemid > 2) {
+                                                                pop();
+                                                                for (var i = numofquestion - 1; i >= 0; i--) {
+                                                                    console.log(props.values[i]);
+                                                                }
+                                                                await setitemid(itemid - 1);
+                                                                //  console.log(questions);
+                                                                //  console.log(questions.pop());
+                                                                // console.log(questions);
+                                                                const temp = await questions.pop();
+                                                                console.log(temp);
+                                                                //await  setquestions(temp);
+                                                                //  console.log(questions[numofquestion-1].id+"id");
+                                                                //inex nan
+                                                                //await setquestions(await questions.pop())
+
+                                                                await setnumofquestion(numofquestion - 1);
                                                             }
-                                                            if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
-                                                                await props.handleChange(`soalha[${itemid}].c`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
+                                                            else {
+                                                                new Promise(async (resolve, refect) => {
+                                                                    await setminnumquestion(true);
+                                                                    await setTimeout(async () => { await setminnumquestion(false); }, 5000)
+                                                                    // .then( resolve())
+                                                                    //  await setminnumquestion(false);
+
+
+                                                                })
+                                                                    .then(console.log("then!"))
+
+
+
+                                                                //   return(<Text>پیاین سوالا</Text>)
+                                                                //setminnumquestion(true);
                                                             }
-                                                            if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
-                                                                await props.handleChange(`soalha[${itemid}].d`)("  ")
-                                                                // await props.handleChange(`soalha[${i}].question`)()
-                                                            }
-                                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
-                                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
-                                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
-                                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
-                                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
-                                                            console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                                        }}
+                                                        style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                                        <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
+                                                    </TouchableOpacity>
+                                                    {minnumquestion === true ?
+                                                        <View style={{
+                                                            backgroundColor: "#FEEBEC",
+                                                            borderRadius: 10,
+                                                            height: hp('4%'),
+                                                            elevation: 300,
+                                                            marginTop: hp("5.5%"),
+                                                            right: hp("25%"),
+                                                            width: wp("55.5%"),
+                                                            marginBottom: hp("0%")
+                                                            // alignSelf: "flex-end",
+                                                        }}>
 
-                                                            //      // await setvalues(values.concat(numofquestion));
-                                                            //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
-                                                            //console.log(questions);
-                                                            // }
-                                                        }
-                                                        else {
-                                                            new Promise(async (resolve, refect) => {
+                                                            <Text style={{
+                                                                color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                                marginBottom: 0, top: hp("1%"),
+                                                                alignSelf: "center",
+                                                                // alignSelf: "flex-end", right: hp("25%"),
+                                                                position: "relative"
+                                                            }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
+                                                        </View>
+                                                        : null}
+                                                    {maxnumquestion === true ?
+                                                        <View style={{
+                                                            backgroundColor: "#FEEBEC",
+                                                            borderRadius: 10,
+                                                            height: hp('4%'),
+                                                            elevation: 300,
+                                                            marginTop: hp("5.5%"),
+                                                            right: hp("25%"),
+                                                            width: wp("58%"),
+                                                            marginBottom: hp("0%")
+                                                        }}>
 
-                                                                await setmaxnumquestion(true);
+                                                            <Text style={{
+                                                                color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
+                                                                marginBottom: 0, top: hp("1%"),
+                                                                alignSelf: "center",
+                                                                // alignSelf: "flex-end", right: hp("25%"),
+                                                                position: "relative"
+                                                            }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
+                                                        </View>
+                                                        : null}
 
-                                                                await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
-                                                                // .then( resolve())
-                                                                //  await setminnumquestion(false);
-
-
-                                                            })
-                                                                .then(console.log("then!"))
-                                                        }
-                                                    }}
-                                                    style={{ marginTop: hp("0%"), right: wp("-5.5%"), backgroundColor: "white", width: wp("23%"), marginBottom: hp("-1%") }}>
-                                                    <Text style={{ color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>اضافه کردن سوال</Text>
-                                                </TouchableOpacity>
-                                                <Text style={{ marginTop: hp("0%"), alignSelf: "flex-start", marginLeft: wp("7%"), color: "#1f7a8c", fontWeight: "bold", fontSize: hp("1.5.5%") }}>/</Text>
-                                                {/* margint top in manfi kharab mishe ax 2.4 kharab va gheib mishe be balayi margin bottom dadam ke dorost beshe*/}
-                                                {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
-                                                <TouchableOpacity
-                                                    onPress={async () => {
-                                                        if (numofquestion > 2) {
-                                                            pop();
-                                                            for (var i = numofquestion - 1; i >= 0; i--) {
-                                                                console.log(props.values[i]);
-                                                            }
-                                                            await setitemid(itemid - 1);
-                                                            //  console.log(questions);
-                                                            //  console.log(questions.pop());
-                                                            // console.log(questions);
-                                                            const temp = await questions.pop();
-                                                            console.log(temp);
-                                                            //await  setquestions(temp);
-                                                            //  console.log(questions[numofquestion-1].id+"id");
-                                                            //inex nan
-                                                            //await setquestions(await questions.pop())
-
-                                                            await setnumofquestion(numofquestion - 1);
-                                                        }
-                                                        else {
-                                                            new Promise(async (resolve, refect) => {
-                                                                await setminnumquestion(true);
-                                                                await setTimeout(async () => { await setminnumquestion(false); }, 5000)
-                                                                // .then( resolve())
-                                                                //  await setminnumquestion(false);
-
-
-                                                            })
-                                                                .then(console.log("then!"))
-
-
-
-                                                            //   return(<Text>پیاین سوالا</Text>)
-                                                            //setminnumquestion(true);
-                                                        }
-                                                    }}
-                                                    style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
-                                                    <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
-                                                </TouchableOpacity>
-                                                {minnumquestion === true ?
-                                                    <View style={{
-                                                        backgroundColor: "#FEEBEC",
-                                                        borderRadius: 10,
-                                                        height: hp('4%'),
-                                                        elevation: 300,
-                                                        marginTop: hp("5.5%"),
-                                                        right: hp("25%"),
-                                                        width: wp("55.5%"),
-                                                        marginBottom: hp("0%")
-                                                        // alignSelf: "flex-end",
-                                                    }}>
-
-                                                        <Text style={{
-                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                            marginBottom: 0, top: hp("1%"),
-                                                            alignSelf: "center",
-                                                            // alignSelf: "flex-end", right: hp("25%"),
-                                                            position: "relative"
-                                                        }}>هر کوییز حداقل باید یک سوال داشته باشد</Text>
-                                                    </View>
-                                                    : null}
-                                                {maxnumquestion === true ?
-                                                    <View style={{
-                                                        backgroundColor: "#FEEBEC",
-                                                        borderRadius: 10,
-                                                        height: hp('4%'),
-                                                        elevation: 300,
-                                                        marginTop: hp("5.5%"),
-                                                        right: hp("25%"),
-                                                        width: wp("58%"),
-                                                        marginBottom: hp("0%")
-                                                    }}>
-
-                                                        <Text style={{
-                                                            color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
-                                                            marginBottom: 0, top: hp("1%"),
-                                                            alignSelf: "center",
-                                                            // alignSelf: "flex-end", right: hp("25%"),
-                                                            position: "relative"
-                                                        }}>هر کوییز حداکثر میتواند بیست سوال داشته باشد.</Text>
-                                                    </View>
-                                                    : null}
-
-                                                {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
+                                                    {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                                {/* <View style={styles.centeredView}>
+                                                    {/* <View style={styles.centeredView}>
                                                     <View style={styles.modalView}>
                                                         <Text style={{
                                                             color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
@@ -469,9 +572,9 @@ const Createquiz = () => {
 
 
 
-                                                {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
+                                                    {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 40 }} visible={maxnumquestion} animationType='fade' >
                                             {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
-                                                {/* <View style={styles.centeredView}>
+                                                    {/* <View style={styles.centeredView}>
                                                 <View style={styles.modalView}>
                                                     <Text style={{
                                                         color: "#f94144", fontSize: hp("1.3%"), fontWeight: "bold",
@@ -484,7 +587,8 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                            </View>)}
+                                                    {stillhaveerror === false ? <Text>ابتدا ارور ها را برطرف کنید</Text> : null}
+                                                </View>)}
                                         >
 
                                         </FlatList>
@@ -498,75 +602,7 @@ const Createquiz = () => {
                                 // ,height:20,width:30
                                 }}>حذف کردن سوال</Text>
                                 </TouchableOpacity> */}
-                                {minnumquestion === false && maxnumquestion === false ?
-                                    <Button type={"submit"} bordered rounded style={styles.button}
-                                        //har taghiri chap vali onpress error ke function nist
-                                        //onPress={console.log(JSON.stringify(props.errors.soalha))&console.log("button pressed!")}
-                                        onPress={async (resolve, reject) => {
-                                            //new Promise(async()=>{
-                                            console.log("toye subimtttttttttttttttttttttt")
-                                            console.log(itemid + " item iddhfhgj")
-                                            console.log(lasttouch + "lasttouch")
-                                            await props.setFieldTouched("Username", true)
-                                            await props.setFieldTouched("Discription", true)
-                                            //  for (var i = lasttouch + 1; i <= itemid; i++) {
 
-
-                                            await props.setFieldTouched(`soalha[${itemid}].question`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].a`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].b`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].c`, true)
-                                            await props.setFieldTouched(`soalha[${itemid}].d`, true)
-                                            console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                            if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
-                                                await props.handleChange(`soalha[${itemid}].question`)("  ")
-                                                // await props.handleChange(`soalha[${i}].question`)()
-                                            }
-                                            if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
-                                                await props.handleChange(`soalha[${itemid}].a`)("  ")
-                                                // await props.handleChange(`soalha[${i}].question`)()
-                                            }
-                                            if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
-                                                await props.handleChange(`soalha[${itemid}].b`)("  ")
-                                                // await props.handleChange(`soalha[${i}].question`)()
-                                            }
-                                            if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
-                                                await props.handleChange(`soalha[${itemid}].c`)("  ")
-                                                // await props.handleChange(`soalha[${i}].question`)()
-                                            }
-                                            if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
-                                                await props.handleChange(`soalha[${itemid}].d`)("  ")
-                                                // await props.handleChange(`soalha[${i}].question`)()
-                                            }
-                                            // }
-                                            //setlasttouch(itemid)
-
-                                            // resolve()
-                                            // }).then(()=>{
-                                            //     console.log("pressed then")
-
-                                            // })
-
-                                            // setTimeout(() => {
-                                            //     console.log('ON SUBMITTTTTTTTTTTTTT')
-                                            //     const formdata = new FormData();
-                                            //     console.log(props.values+"    All values for submiting")
-                                            //     console.log("\n"+props.errors)
-                                            //     formdata.append('title', values.Username)
-                                            //     formdata.append('summary', values.Discription)
-                                            //     if (picture.uri === '../../assets/tea.jpg') {
-                                            //     }
-                                            //     else
-                                            //         formdata.append('photo', picture)
-
-                                            //     console.log(formdata.data + 'formdata')
-                                            // }, 5000)
-                                            // setshowallerror(true)
-                                            //setTimeout(()=>setshowallerror(false),5000)
-                                        }}
-                                    >
-                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                    </Button> : null}
 
                             </View>
                         </View>
@@ -578,8 +614,8 @@ const Createquiz = () => {
 
 
                 </Formik>
-            </ScrollView>
-        </View>
+            </ScrollView >
+        </View >
 
         // <View style={styles.container}>
         //   <View style={{ marginLeft: wp('2%') }}>
