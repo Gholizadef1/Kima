@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import {Navbar,Nav,Button} from 'react-bootstrap';
@@ -54,9 +53,10 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(API_BASE_URL+ `/book/search?key=${user.user}&search-fields=author&search-fields=title`,
+const result = await axios.get(API_BASE_URL+ `/books?search=${user.user}&search-fields=author&search-fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
+ console.log(res);
   
 });
 }
