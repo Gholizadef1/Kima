@@ -137,41 +137,49 @@ const Createquiz = () => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
-                        //formdata.append('title', values.title)
-                        //formdata.append('des', values.description)
+                        // formdata.append('title', values.title)
+                        // formdata.append('description', values.description)
+                        // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
                             console.log("defualt toye picture")
                         }
                         else
                            await formdata.append( "quiz_photo",picture)
-                      
+                        console.log((await AsyncStorage.getItem('token')).toString()+"  token");
                         console.log(formdata.data + 'formdata')
                         var all = values;
-                        all["quiz_photo"] = formdata;
+
+                     //   all["quiz_photo"] = formdata;
                         
                         all["question_count"]=numofquestion-1;
                         
-                        console.log(all)
+                       // console.log(all)
                         // var alll=json.stringify({
                         //     title:all.title,
                         //     description:all.description,
                         //     question_count:all.question_count,
                             
                         // })
-                        //formdata.append("Quiz",all)
-                        //formdata.append(all)
-                      
+                       
+                      //  formdata.append("questions",all.questions)
+                      //  formdata.append(all)
+                      console.log(JSON.stringify({"part":all,"quiz_photo":formdata})+"  innnnnnnn")
+                      console.log(JSON.stringify(formdata)+" FORM DATA")
                         console.log(numofquestion+"num of questk;kj");
 
-                        const response = await axiosinst.post('quiz', all, {
+                        const response = await axiosinst.post('quiz', JSON.stringify(all), {
                             headers: {
-                                "Content-Type": "application/json",
+                                 "Content-Type": "Application/json",
                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
                             }
                         }
                         )
-                            .then(function (response) {
+                            .then(async function (response) {
+                                console.log(JSON.stringify(response.data.Quiz)+" RESPONSE DATA")
+                                const id=response.data.Quiz.id;
+                                const response2=await axiosinst.put('quiz/'+id, formdata).then(()=>{
+                           
                                 console.log(picture + ' PICTURE POST')
 
                                 console.log(response)
@@ -180,6 +188,17 @@ const Createquiz = () => {
                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                     }
                                 ], { cancelable: false }, { style: { height: 50 } })
+                                }).catch(function (error) {
+                                {
+                                    console.log(error)
+
+                                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+
+
+                                        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                                    }], { cancelable: false }, { style: { height: 50 } })
+                                }
+                            })
 
 
                             })
