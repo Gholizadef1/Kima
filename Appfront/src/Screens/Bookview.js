@@ -340,9 +340,9 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
-                      source={{ uri: item.account.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                    {item.account.profile_photo != 'http://c4e2a698ddac.ngrok.io/media/default.png' ? <Avatar.Image 
+                      source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.account.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                     <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
@@ -478,8 +478,6 @@ const styles = StyleSheet.create({
   avatar: {
     marginLeft: wp('2%'),
     top: hp('-3.5%'),
-    width: wp('14%'),
-    height: hp('8%'),
     marginTop: hp('5%')
   },
   avatar2: {
