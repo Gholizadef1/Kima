@@ -39,14 +39,15 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => { }}>
-       {prop.quizphoto === 'http://5d4a663fe10f.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {prop.quizphoto === '/media/default.png' ? <ImageBackground borderRadius={100}
 
-         source={require('../../assets/group.jpg')}
+         source={require('../../assets/quizz.png')}
          style={ { height: hp('8%'),
         width: wp('16%'),
          borderRadius: 100,
-        position: 'absolute',borderColor:'#1f7a8c'
-        ,borderWidth:wp('0.3%'),
+        position: 'absolute'
+        //,borderColor:'#1f7a8c'
+       // ,borderWidth:wp('0.3%'),
         }}
 
        >

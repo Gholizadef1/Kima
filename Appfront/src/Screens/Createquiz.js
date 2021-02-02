@@ -145,14 +145,23 @@ const Createquiz = () => {
                         }
                         else
                            await formdata.append( "quiz_photo",picture)
-
+                      
                         console.log(formdata.data + 'formdata')
                         var all = values;
                         all["quiz_photo"] = formdata;
                         
                         all["question_count"]=numofquestion-1;
+                        
                         console.log(all)
+                        // var alll=json.stringify({
+                        //     title:all.title,
+                        //     description:all.description,
+                        //     question_count:all.question_count,
+                            
+                        // })
+                        //formdata.append("Quiz",all)
                         //formdata.append(all)
+                      
                         console.log(numofquestion+"num of questk;kj");
 
                         const response = await axiosinst.post('quiz', all, {

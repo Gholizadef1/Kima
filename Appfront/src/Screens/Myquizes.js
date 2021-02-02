@@ -89,7 +89,7 @@ const Myquizes = (prop) => {
       })
       console.log(numberofgp / 10 + 'number of group ////////10')
       console.log(numberofgp + '   !!!!!!!!!  ' + numberofgp)
-      console.log(response.data)
+      console.log(JSON.stringify(response.data.Quiz)+"  response.data.quiz")
       console.log(page + 'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
       console.log(response.data + 'RESPONSE.DATA')
       console.log(response.data.Quiz + 'RESPONSE.DATA.GROUPS')
@@ -224,7 +224,7 @@ const Myquizes = (prop) => {
                   // await prop.seeresul(true);
                   // setTimeout(() => prop.seeresul(false), 2000)
                 }}
-                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"), bottom: hp("14.3%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-end" }}
+                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"), bottom: hp("11.8%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-end" }}
               >
                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
               </TouchableOpacity>
