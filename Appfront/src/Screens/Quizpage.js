@@ -104,7 +104,7 @@ const Quizpage = (prop) => {
     const [questions, setquestions] = useState(undefined);
     const getquiz = (async () => {
         try {
-            const response = await axiosinst.get('quiz/1')
+            const response = await axiosinst.get('quiz/5')
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
             //  console.log(JSON.stringify(response)+"    response")
@@ -133,7 +133,7 @@ const Quizpage = (prop) => {
         const back = {
             user_answer: answers
         }
-        const response = await axiosinst.post('quiz/' + prop.route.params.id, JSON.stringify(back), {
+        const response = await axiosinst.post('quiz/5' , JSON.stringify(back), {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -541,6 +541,9 @@ const Quizpage = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
+                                    if(questions.Quiz.question_count===1){
+                                        setcansubmit("ثبت پاسخ")
+                                    }
                                    
                                     console.log(" rang negah ghabli")
                                   //  setcolor{answers[numofquesiton-1]}()
@@ -582,7 +585,7 @@ const Quizpage = (prop) => {
                 <View style={{marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
-                        
+                
                             var a = answers;
                             a[numofquesiton] = oneofthem;
                             console.log(a);
@@ -657,6 +660,7 @@ const Quizpage = (prop) => {
                     <View style={{marginLeft:wp("50%"),marginTop:hp("10.7")}}>
                     <TouchableOpacity
                         onPress={async () => {
+                            if(questions.Quiz.question_count!=1||cansubmit!="ثبت پاسخ"){
                            
                             await setseedis(" سوال قبلی")
                          
@@ -715,6 +719,11 @@ const Quizpage = (prop) => {
                                 await setcansubmit("ثبت پاسخ")
                             }
                             console.log(numofquesiton);
+                            }
+                            else{
+                                console.log("کوییز یه سوال دارههههههه")
+                                await postquiz();
+                            }
 
                             // })
                         }}
