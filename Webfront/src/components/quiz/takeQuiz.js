@@ -87,9 +87,8 @@ function TakeQuiz(props) {
                     <p className="my-1 text-break ">{quiz.description}</p>
                   </div>
                   <div className=" px-3 border-right border-dark my-auto">
-                    <p className="text-center my-1">سازنده :</p>
                     <Avatar className="mx-auto mb-2" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`}  />
-                    <p className="text-center my-n1">{creator.username}</p>
+                    <p className="text-center my-n1">{` سازنده : ${creator.username}`}</p>
                     {/* <small className="text-center text-muted my-n1">{`${quiz.create_time.toString().split('T')[0]}`}</small> */}
                   </div>
                 </div> 

@@ -17,6 +17,10 @@ import {
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 function Discussion(props) {
 
@@ -43,7 +47,8 @@ function Discussion(props) {
         .catch(error=>{
           console.log(error);
         });
-      },[commentAgain,commentsPage]);
+      },[commentAgain,commentsPage
+      ,props.match.params.groupId ,props.match.params.discussionId ]);
 
     useEffect(()=>{
         axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId ,
@@ -59,7 +64,7 @@ function Discussion(props) {
       .catch(error=>{
         console.log(error);
       });
-    },[]);
+    },[props.match.params.groupId , props.match.params.discussionId ]);
 
 
 
@@ -111,8 +116,20 @@ function Discussion(props) {
          }
     
       }
-    const handleDeleteComment = (id) => {
-        axios.delete(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+id ,
+
+      const [deleteId, setDeleteId] = useState();
+const [openDialog, setOpenDialog] = useState(false);
+const handleClickOpenDialog = (id) => {
+  setOpenDialog(true);
+  setDeleteId(id);
+};
+const handleCloseDialog = () => {
+  setOpenDialog(false);
+};
+
+    const handleDeleteComment = () => {
+      handleCloseDialog();
+        axios.delete(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+deleteId ,
         {
           headers:{
          "Content-Type":"application/json",
@@ -122,6 +139,7 @@ function Discussion(props) {
         .then(response=>{
           console.log(response);
           setcommentAgain(commentAgain+1);
+          setDeleteId();
         })
         .catch(error=>{
           console.log(error);
@@ -200,10 +218,10 @@ function Discussion(props) {
                      </div>
                 
                 
-                     {current.user.id != Cookies.get("userId") ?(
+                     {current.user.id !== Cookies.get("userId") ?(
                        <div></div>
                      ):(
-                       <div className="btn m-n1" onClick={()=> handleDeleteComment(current.id)}>
+                       <div className="btn m-n1" onClick={()=>  handleClickOpenDialog(current.id)}>
                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                          </svg>
@@ -211,7 +229,26 @@ function Discussion(props) {
                      )
                    }
 
-               
+<Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <h5 className="text-right yekanfont">آیا از پاک کردن این مورد برای همیشه مطمئن‌اید؟</h5>
+        </DialogTitle>
+        <DialogActions>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
+            خیر
+          </Button>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteComment()} color="black" >
+            بله
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
                      
                    </div>
                    <p className="px-md-3">

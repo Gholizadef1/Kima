@@ -516,7 +516,7 @@ const handleCloseDialog = () => {
                     </div>
 
 
-                    {current.account.id != Cookies.get("userId") ?(
+                    {current.account.id !== Cookies.get("userId") ?(
                       <div></div>
                     ):(
                       <div className="btn m-n1" onClick={()=> handleClickOpenDialog(current.id)}>
@@ -540,7 +540,7 @@ const handleCloseDialog = () => {
           <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
             خیر
           </Button>
-          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteComment()} color="black" autoFocus>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteComment()} color="black">
             بله
           </Button>
         </DialogActions>
@@ -675,7 +675,7 @@ const handleCloseDialog = () => {
 
                     
 
-                    {current.account.id != Cookies.get("userId") ?(
+                    {current.account.id !== Cookies.get("userId") ?(
                       <div></div>
                     ):(
                       <div className="btn" onClick={()=> handleClickOpenDialog(current.id)}>
@@ -700,7 +700,7 @@ const handleCloseDialog = () => {
           <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
             خیر
           </Button>
-          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteQuote()} color="black" autoFocus>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteQuote()} color="black" >
             بله
           </Button>
         </DialogActions>
