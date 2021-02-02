@@ -8,10 +8,12 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 const ResultsDetail = ({result}) => {
     const [senoghte,setsenoghte]=useState(false)
     const[kamshodde,setkamshodde]=useState();
+    const[kamshodde2,setkamshodde2]=useState();
 
     var kamshode="";
     useEffect(()=>{
     console.log(result.title.toString().split(''))
+    
     var a=result.title.toString();
     var b=a.lenght;
     for(var i=0;i<=14;i++){
@@ -28,7 +30,27 @@ const ResultsDetail = ({result}) => {
         //setsenoghte(true);
         kamshode+="..."
     }
-    setkamshodde(kamshode);   }, [])
+    setkamshodde(kamshode);  
+
+   var kamshode2="";
+    var c=result.author.toString();
+    var d=a.lenght;
+    for(var i=0;i<=12;i++){
+        if(c[i]!=undefined){
+        kamshode2+=c[i]
+        console.log(kamshode2);
+        }
+    }
+ 
+    if(c===kamshode2){
+      //  setsenoghte(false)
+    }
+    else{
+        //setsenoghte(true);
+        kamshode2+="..."
+    }
+    setkamshodde2(kamshode2);  
+ }, [])
    // console.log(b)
     return(
         <View style={styles.container} >
@@ -41,7 +63,7 @@ const ResultsDetail = ({result}) => {
             <Text style={styles.title}>
                {kamshodde}
             </Text>
-            <Text style={{fontSize:hp("1.3%"),alignSelf:"flex-start",marginLeft:wp("4%"),marginTop:hp("1%"),marginBottom:hp("1.1%")}}>{result.author}</Text>
+            <Text style={{fontSize:hp("1.3%"),alignSelf:"flex-start",marginLeft:wp("4%"),marginTop:hp("1%"),marginBottom:hp("1.1%")}}>{kamshodde2}</Text>
             
           </View> 
     );
