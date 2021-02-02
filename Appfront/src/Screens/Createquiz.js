@@ -97,12 +97,13 @@ const Createquiz = () => {
         soalha: yup.array().of(
             yup.object().shape({
                 question: yup.string()
+                .required("صورت سوال نمیتواند خالی باشد")
                     .min(10, "متن سوال باید حداقل 10 کاراکتر باشد")
                     .max(70, "متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
-                a: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                b: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                c: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                d: yup.string().min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                a: yup.string() .required("گزینه ی اول نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                b: yup.string() .required("گزینه ی دوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                c: yup.string() .required("گزینه ی سوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                d: yup.string() .required("گزینه ی چهارم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
                 //مشخص نکنه گزینه ی 1 میشه جواب
                 // correct: yup.string().required(),
             })
@@ -129,10 +130,10 @@ const Createquiz = () => {
                     style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                     validationSchema={validationSchema}
                     initialValues={{
-                        Username: '', Discription: 'af', photo: require('../../assets/tea.jpg'), soalha: [{ question: "how are youuu?", a: "afdlk", b: "adlfk", c: "asfd", d: "asdf", correct: "1" }]
+                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "", a: "", b: "", c: "", d: "", correct: "1" }]
                         // soal:soalha 
                     }}
-                    // validationSchema={userschema}
+                    validationSchema={validationSchema}
                     onSubmit={async (values, actions) => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
