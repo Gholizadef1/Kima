@@ -145,7 +145,7 @@ const Login = (pro) => {
     >
       {(props) => (
 
-        <View style={{ alignItems: 'center', marginTop: 120 }}>
+        <View style={{ alignItems: 'center',  marginTop:hp("17%"),marginHorizontal:wp("4%") }}>
           <Item style={styles.input}>
             <Input autoCapitalize='none' autoCorrect={false} style={styles.Input}
               autoCapitalize='none'
@@ -154,9 +154,9 @@ const Login = (pro) => {
               onBlur={props.handleBlur('Email')}
               placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
             </Input>
-            <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
+            <Feather name="mail" size={hp("2.9%")} color="#BFDBF7" style={styles.Icon} />
           </Item>
-          <Text style={{ fontSize: 9, color: 'red' }}>{props.touched.Email && props.errors.Email}</Text>
+          <Text style={styles.errorr}>{props.touched.Email && props.errors.Email}</Text>
           <Item style={styles.input}>
             <Input name='passs' style={styles.Input} autoCapitalize='none' autoCorrect={false}
               secureTextEntry
@@ -168,14 +168,14 @@ const Login = (pro) => {
             </Input>
 
 
-            <AntDesign name="lock" size={24} color="#BFDBF7" style={styles.Icon} />
+            <AntDesign name="lock" size={hp("2.9%")} color="#BFDBF7" style={styles.Icon} />
           </Item>
 
 
 
-          <Text style={{ fontSize: 9, color: 'red' }}>{props.touched.Password && props.errors.Password}</Text>
+          <Text style={styles.errorr}>{props.touched.Password && props.errors.Password}</Text>
 
-          <View style={{ flexDirection: 'row', width: 400, marginHorizontal: 15 }}>
+          <View style={{ flexDirection: 'row', width: wp("99%"), marginHorizontal: wp("4%") }}>
 
 
 
@@ -186,15 +186,15 @@ const Login = (pro) => {
                 pro.navigation.navigate('Sign')
               }}
             >
-              <Text style={{ color: '#1F7A8C', fontSize: 13, fontWeight: '300', width: 140, marginTop: 15, marginRight: 25, marginLeft: 25, position: 'absolute' }}>هنوز ثبت نام نکرده اید؟</Text>
-              <Text style={{ color: '#1F7A8C', fontSize: 14, fontWeight: 'bold', marginTop: 15, marginLeft: 157 }}>ثبت نام</Text>
+              <Text style={{ color: '#1F7A8C', fontSize: hp("1.5.6%"), fontWeight: '300', width: wp("35%"), marginTop: hp("1.9%"), marginRight: wp("9%"), marginLeft: wp("8%"), position: 'absolute' }}>هنوز ثبت نام نکرده اید؟</Text>
+              <Text style={{ color: '#1F7A8C', fontSize: hp("1.7"), fontWeight: 'bold', marginTop: hp("1.9%"),marginLeft:wp("39.3%") }}>ثبت نام</Text>
 
             </TouchableOpacity>
             <Button
               bordered rounded style={styles.button}
               onPress={props.handleSubmit}
             >
-              <Text style={{ color: '#1F7A8C', fontSize: 15, fontWeight: 'bold', alignItems: 'center', marginHorizontal: 88 }
+              <Text style={{ color: '#1F7A8C', fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("21.6%"),fontWeight: 'bold',alignSelf:"center" }
               }>ورود</Text>
             </Button>
             {/* <Button bordered success style={{position:'absolute', marginTop:90,marginHorizontal:40,width:300}}>
@@ -231,45 +231,53 @@ const styles = StyleSheet.create({
   // },
   imagee: {
 
-    height: 320,
-    width: 300,
-    marginTop: 450,
-    position: 'absolute',
-    marginLeft: 50
+    height:hp("38%"),
+    width:wp("70%"),
+    marginTop:hp("55%"),
+    position:'absolute',
+    alignSelf:"center"
 
   },
   temp: {
     flexDirection: "row"
   },
   button: {
+    position:'absolute',
+    marginTop:hp("12%"),
+    width:wp("51%"),
+    marginLeft:wp("23%"),
     position: 'absolute',
-    marginTop: 80,
-    width: 210,
+ 
+  
     backgroundColor: '#E1E5F2',
     borderColor: '#BFDBF7',
-    marginLeft: 98,
-    height: 43
+  
+    height: hp("5.5%")
 
 
 
   },
   Input: {
-    fontSize: 14,
-    fontStyle: 'normal',
-    marginLeft: 30
+    fontSize:hp("1.7%"),
+    fontStyle:'normal',
+    // marginLeft:30,
+    marginBottom:hp("-0.5%"),
+    marginLeft:wp("7%"),
 
   },
   input: {
-
-    marginTop: 30,
-    marginLeft: 25,
-    marginRight: 25
+    marginTop:hp("1.5%"),
+    marginLeft:wp("4%"),
+    marginRight:wp("4%")
 
     // fontWeight:'100'
   },
   Icon: {
-    marginRight: 275,
-    position: 'absolute'
+    alignSelf:"center",
+    position:'absolute'
+  },
+  errorr:{
+    fontSize:hp("1.2.7%"), color:'red',marginTop:hp("0.5%"),alignSelf:"flex-start",marginLeft:wp("14.4%")
   }
 });
 export default Login;
