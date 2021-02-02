@@ -66,9 +66,9 @@ const signschema=yup.object({
   isLooping
   style={{ width: wp('100%'), height:wp(hp('15.5%')),position:'absolute'  }}
 ></Video>
- <Text style={{color:'white',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
+ <Text style={{color:'#EDF2F4',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
      
- <AntDesign name="arrowleft" size={hp("2.9%")} color="white"
+ <AntDesign name="arrowleft" size={hp("2.9%")} color="#EDF2F4"
       style={{marginTop:hp('8%'),
       position:'absolute',
       marginRight:wp('5%'),
@@ -287,7 +287,7 @@ const signschema=yup.object({
        
 
        >
-         <Text style={{color:'#1F7A8C', fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("19.4%")}}>ثبت نام</Text>
+         <Text style={{color:'#F0F9F7', fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("19.4%")}}>ثبت نام</Text>
         </Button>
       
      </View>
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     marginTop:hp("3%"),
     width:wp("51%"),
-    backgroundColor:'#E1E5F2',
+    backgroundColor:'#2592A7',
     borderColor:'#BFDBF7',
     marginLeft:wp("23%"),
    
