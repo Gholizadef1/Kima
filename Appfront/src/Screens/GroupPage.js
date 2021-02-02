@@ -431,9 +431,9 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
+              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' ,marginBottom:hp('-4%')}}> اعضای گروه :</Text>
 
-              <Button style={{ marginLeft: wp('90%'),top:hp('-5%') }} transparent
+              <Button style={{ marginLeft: wp('90%'),top:hp('-1%') }} transparent
                 onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
                 <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
               </Button >
@@ -455,7 +455,7 @@ const GroupPage = (prop) => {
                   <View style={{ maginLeft: wp('5%'), marginTop: hp('-4%') }}>
                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image  
                       source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image size={70} style={{marginLeft:wp('4%')}}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{marginLeft:wp('4%'),marginTop:hp('4%')}}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                     <Text style={{ alignSelf: 'flex-start',marginLeft:wp('8%'),marginTop:hp('1%') }}>{item.user.username}</Text>
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
   groupname: {
     fontSize: 15,
     fontWeight: 'bold',
-    marginLeft: wp('19%'),
+    marginLeft: wp('21.5%'),
     marginTop: hp('3%'),
   },
   centeredView: {
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     elevation: 300
   },
   avatar: {
-    marginTop: hp('-7%'),
+    marginTop: hp('-9%'),
     marginLeft:wp('15%')
   },
   loader: {
