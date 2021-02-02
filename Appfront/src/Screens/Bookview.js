@@ -419,9 +419,9 @@ const Bookview = (prop) => {
                     {(item.quote_text.toString().length) <= 100 ?
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
-                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
-                      source={{ uri: item.account.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                    {item.account.profile_photo != 'http://c4e2a698ddac.ngrok.io/media/default.png' ? <Avatar.Image 
+                      source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.account.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar2} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                   </Card>
@@ -482,11 +482,7 @@ const styles = StyleSheet.create({
   },
   avatar2: {
     top: hp('1%'),
-    marginLeft: wp('20%'),
-    //    marginBottom:hp('3%'),
-    width: wp('14%'),
-    height: hp('8%'),
-    //    marginTop: hp('5%')
+    marginLeft: wp('20%')
   }
 });
 
