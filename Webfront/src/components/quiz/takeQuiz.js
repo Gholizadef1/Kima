@@ -28,8 +28,9 @@ function TakeQuiz(props) {
     },[props.match.params.quizId])
 
     const submitAnswer = (e) => {
-      e.target.setAttribute("disabled", "");
-      
+      e.target.setAttribute("hidden", "");
+      //getElementById("handleRuoteToQuizs").setAttribute("hidden", "");
+      document.getElementById("handleRuoteToQuizs").style.display = "block";
       //show true answers
       //document.getElementById("a").style.backgroundColor = "red";
       //document.getElementById("a").style.backgroundColor = "green";
@@ -39,14 +40,11 @@ function TakeQuiz(props) {
         var chosen= document.getElementById(i).getElementsByClassName("active")[0].id;
         document.getElementById(chosen).style.color = "white";
         document.getElementById(chosen).style.backgroundColor = "red";
-        //console.log(chosen);
-        //console.log(questions.questions_num + chosen);
+       
         document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
         document.getElementById(i+questions[i-1].key).style.color = "white";
          setUserAnswers( userAnswers.push(chosen[chosen.length -1]));
-        //console.log(lastChar(chosen));
-        console.log(chosen[chosen.length -1]);
-        
+     
        }
       
       //post answer
@@ -72,12 +70,16 @@ function TakeQuiz(props) {
            });
   }
 
+  const handleRuoteToQuizs=() =>{
+    props.history.push('/quizez');
+  }
+
 
   return(
     <div>
       <div className="mx-md-5 px-md-5">
-        <div className="rTOl text-right px-md-5 mx-md-5" >
-          <div className="mx-md-5 my-5 px-md-3 shadow border rounded-lg ">
+        <div className="container-fluid  rTOl text-right px-md-5 mx-md-5 my-md-5" >
+          <div className=" mx-md-5 my-1 px-md-3 shadow border rounded-lg ">
               <div >
                 <div className="d-flex mx-2 pt-3">
                   <div className="d-flex flex-column flex-wrap ml-auto col-8">
@@ -93,7 +95,7 @@ function TakeQuiz(props) {
                 </div> 
               </div>
               <hr className="border border-dark"></hr>
-              <div className="mx-2 mt-5">
+              <div className="mx-2 mt-3">
 
 
               {questions === undefined ? (
@@ -107,9 +109,9 @@ function TakeQuiz(props) {
                   {questions.map ((current) => (
 
 
-                  <div className="">
+                  <div className="border-left border-right">
                       
-                      <h4 className="my-4 col-8 mx-auto"><p className="badge border-bottom border-left border-dark rounded-pill m-2">{current.question_num}</p>{current.question_text} </h4>
+                      <h4 className="my-3 col-8 mx-auto"><p className="badge border-bottom border-left border-dark rounded-pill m-2">{current.question_num}</p>{current.question_text} </h4>
                       <div>
                         <div className=" btn-group-toggle d-flex flex-column col-8 mx-auto " id={current.question_num} data-toggle="buttons">
                           <label className="btn btn-outline-dark m-1" id={current.question_num+"a"}>
@@ -137,9 +139,10 @@ function TakeQuiz(props) {
 
               </div>
               <div className="d-flex">
-                <button className="btn mx-auto mb-2 btn-info" onClick={submitAnswer}>پایان آزمون</button>
+                <button className="btn mx-auto mb-2 btn-info" onClick={submitAnswer} >پایان آزمون</button>
+                <button className="btn mx-auto mb-2 btn-info" id="handleRuoteToQuizs" onClick={handleRuoteToQuizs} style={{display:"none"}} >خروج</button>
               </div>
-              <h3 className="border-bottom border-top my-1 pt-1 border-success text-center mx-5">{userScore}</h3>
+              <h3 className="border-bottom border-top my-2 pt-2 border-success text-center mx-5 rounded-pill">{userScore}</h3>
 
           </div>
         </div>
