@@ -25,10 +25,25 @@ const Bookview = (prop) => {
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
   const [picture, setpicture] = useState(null);
+  const [more, setmore] = useState(false);
+  const [showmore, setshowmore] = useState('بیشتر...');
   const [refreshcomments, setrefreshcomments] = useState(false)
   const [refreshquotes, setRefreshquotes] = useState(false);
   const [selectedValue, setSelectedValue] = useState('none');
   const id = prop.route.params.id;
+  // const commentt = `${prop.comment}`.toString();
+  // const linenumber = (commentt.split('\n').length)
+  // const commenttt = `${quotes}`.toString().split('\n');
+
+  // let comment4 = '';
+  // if (linenumber > 5) {
+  //   for (let i = 0; i < 4; i++)
+  //     comment4 += commenttt[i] + '\n'
+  //   comment4 += commenttt[4]
+  // }
+  // else {
+  //   comment4 = prop.comment
+  // }
 
 
   useEffect(() => {
@@ -36,6 +51,10 @@ const Bookview = (prop) => {
     getComments()
     getQoutes()
   }, [refresh]);
+
+  // const commentt = `${}`.toString();
+  // const linenumber = (commentt.split('\n').length)
+  // const commenttt = `${prop.comment}`.toString().split('\n');
 
 
   const getResult = async () => {
@@ -385,13 +404,15 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
+                    {/* {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
                       source={{ uri: item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                       source={require('../../assets/group.jpg')}
-                    ></Avatar.Image>}
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('-20%')}}>{item.quote_text}</Text>
-                    <Text style={{ alignSelf: 'flex-start', fontSize: 14 , top:hp('-5%'),marginHorizontal:wp('16%')}}>{item.account.username}</Text>
+                    ></Avatar.Image>} */}
+                    {(item.quote_text.toString().length) <= 100 ?
+                      <Text style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('1%'),marginBottom:hp('5%'),marginTop:hp('1%')}}>{item.quote_text}</Text> :
+                      <Text  style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('1%'),marginBottom:hp('5%'),marginTop:hp('1%')}}>{item.quote_text.toString()}</Text>}
+                    {/* <Text style={{ alignSelf: 'flex-start', fontSize: 14 , top:hp('-5%'),marginHorizontal:wp('16%')}}>{item.account.username}</Text> */}
                   </Card>
                 </View>
               </>
@@ -419,6 +440,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardChat: {
+    height:hp('22%'),
     width: wp('50%'),
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
