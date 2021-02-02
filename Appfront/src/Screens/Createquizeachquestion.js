@@ -26,15 +26,15 @@ import { EvilIcons } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 const Createquizeachquestion = (prop) => {
     const [value, setValue] = React.useState("1");
-    const questionerror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].question`)
+    const questionerror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].question_text`)
     //console.log(JSON.stringify(questionerror) + "     questionerror")
     //-1 :) :|
-    const aerror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].a`)
-    const berror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].b`)
-    const cerror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].c`)
-    const derror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].d`)
-    const correcterror = getIn(prop.pr.errors, `soalha[${prop.itemidd-1}].correct`)
-    const questointouched = getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].question`)
+    const aerror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].a_text`)
+    const berror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].b_text`)
+    const cerror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].c_text`)
+    const derror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].d_text`)
+    const correcterror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].c_textorrect`)
+    const questointouched = getIn(prop.pr.touched, `questions[${prop.itemidd-1}].question_text`)
     console.log(prop.pr.values);
     console.log("VALUES")
 
@@ -45,17 +45,17 @@ const Createquizeachquestion = (prop) => {
     //console.log(JSON.stringify(prop.pr.values)+" VALUES");
     //console.log(JSON.stringify(prop.pr.errors)+" ERRORS");
    // const [a,seta]=useState(false);
-    //console.log(getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)+" quesition value")
+    //console.log(getIn(prop.pr.values, `questions[${prop.itemidd}].question_text`)+" quesition value")
     // if(prop.showallerr){
     //     seta(true)
     // }
     // if(prop.showallerr&&a){
     
-    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].question`, true)
-    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].a`, true)
-    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].b`, true)
-    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].c`, true)
-    //     prop.pr.setFieldTouched(`soalha[${prop.itemidd}].d`, true)
+    //     prop.pr.setFieldTouched(`questions[${prop.itemidd}].question_text`, true)
+    //     prop.pr.setFieldTouched(`questions[${prop.itemidd}].a_text`, true)
+    //     prop.pr.setFieldTouched(`questions[${prop.itemidd}].b_text`, true)
+    //     prop.pr.setFieldTouched(`questions[${prop.itemidd}].c_text`, true)
+    //     prop.pr.setFieldTouched(`questions[${prop.itemidd}].d_text`, true)
     //     prop.setshowallerr(false);
     //     setTimeout(() => {
     //         seta(false);
@@ -63,38 +63,38 @@ const Createquizeachquestion = (prop) => {
     //    // prop.setshowallerr(false);
     // }
     // if(prop.showallerr){
-    //     if( getIn(prop.pr.values, `soalha[${prop.itemidd}].question`)===undefined){
+    //     if( getIn(prop.pr.values, `questions[${prop.itemidd}].question_text`)===undefined){
     //    // questointouched=true;
-    //    prop.pr.handleChange( `soalha[${prop.itemidd}].question`)(" ")
-    //    prop.pr.handleChange( `soalha[${prop.itemidd}].a`)("")
-    //    prop.pr.handleChange( `soalha[${prop.itemidd}].b`)("")
-    //    prop.pr.handleChange( `soalha[${prop.itemidd}].c`)("")
-    //    prop.pr.handleChange( `soalha[${prop.itemidd}].d`)("")
+    //    prop.pr.handleChange( `questions[${prop.itemidd}].question_text`)(" ")
+    //    prop.pr.handleChange( `questions[${prop.itemidd}].a_text`)("")
+    //    prop.pr.handleChange( `questions[${prop.itemidd}].b_text`)("")
+    //    prop.pr.handleChange( `questions[${prop.itemidd}].c_text`)("")
+    //    prop.pr.handleChange( `questions[${prop.itemidd}].d_text`)("")
     //     }
     // }
-  //  console.log(JSON.stringify(getIn(prop.pr.values,`soalha[${prop.itemidd}].correct`))+" correcjhgkjhgttttt");
+  //  console.log(JSON.stringify(getIn(prop.pr.values,`questions[${prop.itemidd}].c_textorrect`))+" correcjhgkjhgttttt");
     // console.log(JSON.stringify(questointouched)+" question touched")
     // console.log(typeof JSON.stringify(aerror)+" aerror typeof")
     // console.log(JSON.stringify(aerror));
   //  console.log(questointouched + "question touchecc")
    // console.log(JSON.stringify(prop.pr.touched) + "  TOUCHED")
-//    if(prop.pr.touched.soalha!=undefined){
-//      console.log(typeof prop.pr.touched.soalha[prop.itemidd].a +"atouchedtype")
-//      // console.log(typeof prop.pr.errors.soalha[prop.itemidd].a +"aerrortype")
-//       console.log(typeof prop.pr.touched.soalha[prop.itemidd].d +"   dtouchedtype")
+//    if(prop.pr.touched.questions!=undefined){
+//      console.log(typeof prop.pr.touched.questions[prop.itemidd].a_text +"atouchedtype")
+//      // console.log(typeof prop.pr.errors.questions[prop.itemidd].a_text +"aerrortype")
+//       console.log(typeof prop.pr.touched.questions[prop.itemidd].d_text +"   dtouchedtype")
 //    }
- //  console.log(JSON.stringify(prop.pr.errors.soalha[prop.itemidd].question))
-//    if(prop.pr.errors.soalha!=undefined){
+ //  console.log(JSON.stringify(prop.pr.errors.questions[prop.itemidd].question_text))
+//    if(prop.pr.errors.questions!=undefined){
   
 //     console.log(typeof  questionerror+"  questionerror typeof");
 //     console.log(questionerror);
     // console.log(JSON.stringify(prop.pr.errors));
 //    }
-   // console.log(prop.pr.touched.soalha[prop.itemidd].question === undefined + "unsefj;slkj")
+   // console.log(prop.pr.touched.questions[prop.itemidd].question_text === undefined + "unsefj;slkj")
 
-  //  console.log(JSON.stringify(prop.pr.touched.soalha[prop.itemidd].question)+"  TOUCHEddddD")
+  //  console.log(JSON.stringify(prop.pr.touched.questions[prop.itemidd].question_text)+"  TOUCHEddddD")
    // console.log(prop.itemidd + "  itemidd")
-    //  console.log(JSON.stringify(prop.pr.errors.soalha[prop.itemidd].question));
+    //  console.log(JSON.stringify(prop.pr.errors.questions[prop.itemidd].question_text));
 
     return (<View style={{ marginBottom: hp("1.5%") }}>
 
@@ -102,11 +102,11 @@ const Createquizeachquestion = (prop) => {
             <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={20}
                 borderColor={'lightblue'}
                // elevation={0}
-                //onChangeText={prop.pr.handleChange(soalha[itemidd].question)}
-                onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd-1}].question`)}
+                //onChangeText={prop.pr.handleChange(questions[itemidd].question_text)}
+                onChangeText={prop.pr.handleChange(`questions[${prop.itemidd-1}].question_text`)}
                 //name...
-                onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd-1}].question`)}
-                value={prop.pr.values.soalha.question}
+                onBlur={prop.pr.handleBlur(`questions[${prop.itemidd-1}].question_text`)}
+                value={prop.pr.values.questions.question_text}
                 placeholder={'سوال ' + prop.itemidd + " ... "} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={{
                     marginTop: hp("0%"), marginHorizontal: wp("5%"), height: hp("8%"), backgroundColor: "#f2f5f7",elevation:3,marginBottom:hp("1%")
                 }}>
@@ -116,32 +116,32 @@ const Createquizeachquestion = (prop) => {
 
         </TouchableOpacity>
   
-        {/* <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{prop.error}</Text>     getIn(prop.touched,`soalha[${prop.itemidd}].question`) */}
+        {/* <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{prop.error}</Text>     getIn(prop.touched,`questions[${prop.itemidd}].question_text`) */}
         {/* {prop.errors.Username!=undefined? <Text style={{fontSize:hp('1.2%'),marginLeft:wp('-3.5%'),marginTop:hp('7%'), color:'red'}}>{prop.errors.Username}</Text>:null} */}
-        {/* {typeof prop.error.soalha === 'string' */}
-        {/* {!(prop.pr.touched.soalha===undefined)&& prop.pr.touched.soalha[prop.itemidd].question===true&& typeof questionerror==="string" ?<Text style={{fontSize:hp('1.2%'),marginLeft:wp('15%'),marginTop:hp('7%'), color:'red'}}>{questionerror}</Text>:null} */}
-        {/* {!(prop.pr.touched.soalha[prop.itemidd].question === undefined) && typeof prop.pr.touched.soalha[prop.itemidd].question === "boolean" && typeof prop.pr.errors.soalha[prop.itemidd].question === "boolean" ? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{prop.pr.errors.soalha[prop.itemidd].question}</Text> : null} */}
-          {/* {prop.pr.touched.soalha!=undefined &&( prop.pr.errors.soalha!=undefined && typeof questionerror!=undefined)? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{questionerror}</Text> : null} 
+        {/* {typeof prop.error.questions === 'string' */}
+        {/* {!(prop.pr.touched.questions===undefined)&& prop.pr.touched.questions[prop.itemidd].question_text===true&& typeof questionerror==="string" ?<Text style={{fontSize:hp('1.2%'),marginLeft:wp('15%'),marginTop:hp('7%'), color:'red'}}>{questionerror}</Text>:null} */}
+        {/* {!(prop.pr.touched.questions[prop.itemidd].question_text === undefined) && typeof prop.pr.touched.questions[prop.itemidd].question_text === "boolean" && typeof prop.pr.errors.questions[prop.itemidd].question_text === "boolean" ? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{prop.pr.errors.questions[prop.itemidd].question_text}</Text> : null} */}
+          {/* {prop.pr.touched.questions!=undefined &&( prop.pr.errors.questions!=undefined && typeof questionerror!=undefined)? <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('15%'), marginTop: hp('7%'), color: 'red' }}>{questionerror}</Text> : null} 
            */}
-           {typeof questionerror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-0.5%'), marginBottom:hp("-2.1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].question`)&&questionerror}</Text>:null}
-           {/* { prop.showallerr===true && prop.pr.values.soalha[prop.itemidd].question===""&&questionerror===undefined?<Text style={styles.error}>".متن سوال نمیتواند خالی باشد</Text>:null} */}
+           {typeof questionerror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-0.5%'), marginBottom:hp("-2.1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `questions[${prop.itemidd-1}].question_text`)&&questionerror}</Text>:null}
+           {/* { prop.showallerr===true && prop.pr.values.questions[prop.itemidd].question_text===""&&questionerror===undefined?<Text style={styles.error}>".متن سوال نمیتواند خالی باشد</Text>:null} */}
         {/* <Field> */}
     
-        <RadioButton.Group name={`soalha[${prop.itemidd-1}].correct`}  onValueChange={newValue => {
+        <RadioButton.Group name={`questions[${prop.itemidd-1}].c_textorrect`}  onValueChange={newValue => {
 
             setValue(newValue)
-            if(getIn(prop.pr.values,`soalha[${prop.itemidd-1}].correct`)===undefined){
-                prop.pr.values.soalha[prop.itemidd-1].correct="1"
+            if(getIn(prop.pr.values,`questions[${prop.itemidd-1}].c_textorrect`)===undefined){
+                prop.pr.values.questions[prop.itemidd-1].c_textorrect="1"
             }
             else{
 
-             prop.pr.values.soalha[prop.itemidd-1].correct = newValue;
+             prop.pr.values.questions[prop.itemidd-1].c_textorrect = newValue;
             }
-            //prop.pr(`soalha[${prop.itemidd}].correct`);
+            //prop.pr(`questions[${prop.itemidd}].c_textorrect`);
 
         }} value={value}
         //()=>{
-        // value=prop.pr.values.soalha.correct;
+        // value=prop.pr.values.questions.c_textorrect;
         // return(value)
         >
 
@@ -152,9 +152,9 @@ const Createquizeachquestion = (prop) => {
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white", backgroundColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd-1}].a`)}
-                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd-1}].a`)}
-                            value={prop.pr.values.soalha.a}
+                            onChangeText={prop.pr.handleChange(`questions[${prop.itemidd-1}].a_text`)}
+                            onBlur={prop.pr.handleBlur(`questions[${prop.itemidd-1}].a_text`)}
+                            value={prop.pr.values.questions.a_text}
                             placeholder={'گزینه اول ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -168,16 +168,16 @@ const Createquizeachquestion = (prop) => {
                     <RadioButton color={"#1f7a8c"} value="1" />
                 </View>
             </View>
-            {typeof aerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].a`)&&aerror}</Text>:null}
+            {typeof aerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `questions[${prop.itemidd-1}].a_text`)&&aerror}</Text>:null}
             <View style={{ marginTop: hp("3%"), marginRight: wp("5%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                 <TouchableOpacity>
 
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd-1}].b`)}
-                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd-1}].b`)}
-                            value={prop.pr.values.soalha.b}
+                            onChangeText={prop.pr.handleChange(`questions[${prop.itemidd-1}].b_text`)}
+                            onBlur={prop.pr.handleBlur(`questions[${prop.itemidd-1}].b_text`)}
+                            value={prop.pr.values.questions.b_text}
                             placeholder={'گزینه دوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -190,16 +190,16 @@ const Createquizeachquestion = (prop) => {
                     <RadioButton color={"#1f7a8c"} value="2" />
                 </View>
             </View>
-            {typeof berror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].b`)&&berror}</Text>:null}
+            {typeof berror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `questions[${prop.itemidd-1}].b_text`)&&berror}</Text>:null}
             <View style={{ marginTop: hp("3%"), marginHorizontal: wp("5%"), marginRight: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                 <TouchableOpacity>
 
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd-1}].c`)}
-                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd-1}].c`)}
-                            value={prop.pr.values.soalha.c}
+                            onChangeText={prop.pr.handleChange(`questions[${prop.itemidd-1}].c_text`)}
+                            onBlur={prop.pr.handleBlur(`questions[${prop.itemidd-1}].c_text`)}
+                            value={prop.pr.values.questions.c_text}
                             placeholder={'گزینه سوم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -216,16 +216,16 @@ const Createquizeachquestion = (prop) => {
                     <RadioButton color={"#1f7a8c"} value="3" />
                 </View>
             </View>
-            {typeof cerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].c`)&&cerror}</Text>:null}
+            {typeof cerror==="string"?<Text style={styles.error}>{getIn(prop.pr.touched, `questions[${prop.itemidd-1}].c_text`)&&cerror}</Text>:null}
             <View style={{ marginTop: hp("3%"),marginBottom:hp("4%"), marginRight: wp("5%"), marginHorizontal: wp("5%"), borderColor: "lightgray", backgroundColor: "white", borderRadius: 20, borderWidth: hp("0.1%") }}>
                 <TouchableOpacity>
 
                     <Item rounded style={{ marginLeft: wp("14%"), borderColor: "white" }}>
                         <Input rounded rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                             borderColor={'white'}
-                            onChangeText={prop.pr.handleChange(`soalha[${prop.itemidd-1}].d`)}
-                            onBlur={prop.pr.handleBlur(`soalha[${prop.itemidd-1}].d`)}
-                            value={prop.pr.values.soalha.d}
+                            onChangeText={prop.pr.handleChange(`questions[${prop.itemidd-1}].d_text`)}
+                            onBlur={prop.pr.handleBlur(`questions[${prop.itemidd-1}].d_text`)}
+                            value={prop.pr.values.questions.d_text}
                             placeholder={'گزینه چهارم ...'} placeholderTextColor='gray' fontSize={hp('1%')} style={{
                                 marginTop: hp("0%"), marginLeft: wp("1%"), height: hp("4%"), fontSize: hp("1.4%")
                             }}>
@@ -238,7 +238,7 @@ const Createquizeachquestion = (prop) => {
                     <RadioButton color={"#1f7a8c"} value="4" />
                 </View>
             </View>
-            {typeof derror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-3%'), marginBottom:hp("-1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `soalha[${prop.itemidd-1}].d`)&&derror}</Text>:null}
+            {typeof derror==="string"?<Text style={{   fontSize: hp('1.2%'), marginLeft: wp('5.5%'), top: hp('-3%'), marginBottom:hp("-1%"), color: '#FC4A68'}}>{getIn(prop.pr.touched, `questions[${prop.itemidd-1}].d_text`)&&derror}</Text>:null}
         </RadioButton.Group>
         {/* </Field> */}
     </View>

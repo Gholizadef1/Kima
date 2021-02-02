@@ -55,23 +55,23 @@ const Createquiz = () => {
             }
             console.log(newfile)
 
-            formdata.append('photo', newfile)
+            formdata.append('quiz_photo', newfile)
 
             if (data.cancelled === false) {
                 const back = {
-                    photo: data
+                    quiz_photo: data
                 }
                 const backk = JSON.stringify(back);
-                console.log(props.values.photo + 'formik photo1')
-                props.values.photo = data.uri
-                //baraye in ke rerender beshe va photo formik form taghir kone
+                console.log(props.values.quiz_photo + 'formik quiz_photo1')
+                props.values.quiz_photo = data.uri
+                //baraye in ke rerender beshe va quiz_photo formik form taghir kone
 
-                props.handleChange('photo')
+                props.handleChange('quiz_photo')
                 setpicture(newfile)
 
                 console.log(picture + '  PICTURE')
                 // change(data.uri)
-                console.log(props.values.photo + 'formik photo2')
+                console.log(props.values.quiz_photo + 'formik quiz_photo2')
             }
         }
         else {
@@ -84,7 +84,7 @@ const Createquiz = () => {
     const [value, setValue] = React.useState('1');
     const [itemid, setitemid] = useState(1);
     const [values, setvalues] = useState(["1"])
-    const [questions, setquestions] = useState([{ id: 1, name: "اول" }])
+    const [questionss, setquestionss] = useState([{ id: 1, name: "اول" }])
     const [numofquestion, setnumofquestion] = useState(2)
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
@@ -94,28 +94,27 @@ const Createquiz = () => {
     const [lasttouch, setlasttouch] = useState(0);
 
     const validationSchema = yup.object().shape({
-        soalha: yup.array().of(
+        questions: yup.array().of(
             yup.object().shape({
-                question: yup.string()
-                .required("صورت سوال نمیتواند خالی باشد")
+                question_text: yup.string().required("صورت سوال نمیتواند خالی باشد")
                     .min(10, "متن سوال باید حداقل 10 کاراکتر باشد")
                     .max(70, "متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
-                a: yup.string() .required("گزینه ی اول نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                b: yup.string() .required("گزینه ی دوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                c: yup.string() .required("گزینه ی سوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                d: yup.string() .required("گزینه ی چهارم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                a_text: yup.string() .required("گزینه ی اول نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                b_text: yup.string() .required("گزینه ی دوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                c_text: yup.string() .required("گزینه ی سوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                d_text: yup.string() .required("گزینه ی چهارم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
                 //مشخص نکنه گزینه ی 1 میشه جواب
-                // correct: yup.string().required(),
+                // key: yup.string().required(),
             })
         ),
-        Username: yup.string()
+        title: yup.string()
             .required("اسم گروه نمیتواند خالی باشد")
             .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
 
-        // Discription: yup.string()
+        // description: yup.string()
         //     .required("توضیحات گروه نمیتواند خالی باشد"),
     });
-    //  const [soalha,setsoalha]=[{question:"",a:"",b:"",c:"",d:"",correct:""}];
+    //  const [questions,setquestions]=[{question:"",a:"",b:"",c:"",d:"",key:""}];
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -130,20 +129,20 @@ const Createquiz = () => {
                     style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                     validationSchema={validationSchema}
                     initialValues={{
-                        Username: '', Discription: '', photo: require('../../assets/tea.jpg'), soalha: [{ question: "", a: "", b: "", c: "", d: "", correct: "1" }]
-                        // soal:soalha 
+                        title: '', description: '', quiz_photo: require('../../assets/tea.jpg'), questions: [{ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "1" }]
+                        // soal:questions 
                     }}
                     validationSchema={validationSchema}
                     onSubmit={async (values, actions) => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
-                        formdata.append('title', values.Username)
-                        formdata.append('summary', values.Discription)
+                        formdata.append('title', values.title)
+                        formdata.append('summary', values.description)
                         if (picture.uri === '../../assets/tea.jpg') {
                         }
                         else
-                            formdata.append('photo', picture)
+                            formdata.append('quiz_photo', picture)
 
                         console.log(formdata.data + 'formdata')
                     }}
@@ -156,9 +155,9 @@ const Createquiz = () => {
 
                                 <View style={{ backgroundColor: "white", marginRight: wp("65%"), borderRadius: 100 }}>
 
-                                    {/* // {props.values.photo === require('../../assets/quizicon.png') ?  */}
+                                    {/* // {props.values.quiz_photo === require('../../assets/quizicon.png') ?  */}
                                     {/* bedoone view nemishod in barr */}
-                                    {props.values.photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
+                                    {props.values.quiz_photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
                                         height: hp('14%'),
                                         //marginTop: hp('0%'),
                                         width: wp('28%'),
@@ -175,7 +174,7 @@ const Createquiz = () => {
                                         onPress={() => { pickfromgallery(props) }}>
                                         <ImageBackground borderRadius={100}
 
-                                            source={props.values.photo}
+                                            source={props.values.quiz_photo}
 
                                             style={{
                                                 height: hp('14%'),
@@ -189,7 +188,7 @@ const Createquiz = () => {
                                                 //borderColor:'#1f7a8c',
                                                 //borderWidth:wp('0.2%')
                                             }}
-                                        //  onBlur={props.handleBlur('photo')}
+                                        //  onBlur={props.handleBlur('quiz_photo')}
 
 
                                         >
@@ -208,8 +207,8 @@ const Createquiz = () => {
                                     }}
                                         onPress={() => { pickfromgallery(props, props.handleChange) }}>
                                             <ImageBackground borderRadius={100}
-                                                source={{ uri: `${props.values.photo}` }}
-                                                onChangeItem={props.handleChange('photo')}
+                                                source={{ uri: `${props.values.quiz_photo}` }}
+                                                onChangeItem={props.handleChange('quiz_photo')}
                                                 style={{
                                                     height: hp('14%'),
 
@@ -219,7 +218,7 @@ const Createquiz = () => {
                                                     borderRadius: 20,
                                                     position: 'absolute',
                                                 }}
-                                            //  onBlur={props.handleBlur('photo')}
+                                            //  onBlur={props.handleBlur('quiz_photo')}
 
 
                                             >
@@ -235,14 +234,14 @@ const Createquiz = () => {
                                     {/* <Label style={{fontWeight:'bold'}}>نام گروه</Label> */}
 
                                     <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
-                                        onChangeText={props.handleChange('Username')}
-                                        onBlur={props.handleBlur('Username')}
-                                        value={props.values.Username}
+                                        onChangeText={props.handleChange('title')}
+                                        onBlur={props.handleBlur('title')}
+                                        value={props.values.title}
 
                                         placeholder={'نام کوییز ...'} placeholderTextColor='gray' >
                                     </Input>
 
-                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp("0%"), marginTop: hp('8%'), color: '#FC4A68' }}>{props.touched.Username && props.errors.Username}</Text>
+                                    <Text style={{ fontSize: hp('1.2%'), marginLeft: wp("0%"), marginTop: hp('8%'), color: '#FC4A68' }}>{props.touched.title && props.errors.title}</Text>
 
                                 </Item>
 
@@ -255,118 +254,37 @@ const Createquiz = () => {
                                     <TouchableOpacity activeOpacity={1}>
                                         <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                             borderColor={'#EDF2F4'}
-                                            onChangeText={props.handleChange('Discription')}
-                                            onBlur={props.handleBlur('Discription')}
-                                            value={props.values.Discription}
+                                            onChangeText={props.handleChange('description')}
+                                            onBlur={props.handleBlur('description')}
+                                            value={props.values.description}
                                             placeholder={'توضیحات کوییز ...'} placeholderTextColor='gray' fontSize={hp('1.6.5%')} style={styles.item2}>
 
                                         </Textarea>
                                     </TouchableOpacity>
                                 </View>
-                                <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('5%'), marginTop: hp('1%'), color: '#FC4A68' }}>{props.touched.Discription && props.errors.Discription}</Text>
+                                <Text style={{ fontSize: hp('1.2%'), marginLeft: wp('5%'), marginTop: hp('1%'), color: '#FC4A68' }}>{props.touched.description && props.errors.description}</Text>
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
 
 
-                                {minnumquestion === false && maxnumquestion === false ?
-                                    <Button type={"submit"} bordered rounded style={styles.button}
-                                        //har taghiri chap vali onpress error ke function nist
-                                        //onPress={console.log(JSON.stringify(props.errors.soalha))&console.log("button pressed!")}
-                                        onPress={
-                                            () => {
-                                               
-                                                    props.handleSubmit()
-                                                if (props.error === undefined) {
-
-                                                }
-                                                else {
-                                                    setstillhaveerror(false);
-                                                }
-                                            }}
-                                    //async (resolve, reject) => {
-
-                                    // await setshowallerror(true);
-                                    // //new Promise(async()=>{
-                                    // console.log("toye subimtttttttttttttttttttttt")
-                                    // console.log(itemid + " item iddhfhgj")
-                                    // console.log(lasttouch + "lasttouch")
-                                    // await props.setFieldTouched("Username", true)
-                                    // // await props.setFieldTouched("Discription", true)
-                                    // //  for (var i = lasttouch + 1; i <= itemid; i++) {
-
-
-                                    // // await props.setFieldTouched(`soalha[${itemid}].question`, true)
-                                    // // await props.setFieldTouched(`soalha[${itemid}].a`, true)
-                                    // // await props.setFieldTouched(`soalha[${itemid}].b`, true)
-                                    // // await props.setFieldTouched(`soalha[${itemid}].c`, true)
-                                    // // await props.setFieldTouched(`soalha[${itemid}].d`, true)
-                                    // console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
-                                    // if (getIn(props.values, `soalha[${itemid}].question`) === undefined) {
-                                    //     await props.handleChange(`soalha[${itemid}].question`)("  ")
-                                    //     // await props.handleChange(`soalha[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `soalha[${itemid}].a`) === undefined) {
-                                    //     await props.handleChange(`soalha[${itemid}].a`)("  ")
-                                    //     // await props.handleChange(`soalha[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `soalha[${itemid}].b`) === undefined) {
-                                    //     await props.handleChange(`soalha[${itemid}].b`)("  ")
-                                    //     // await props.handleChange(`soalha[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `soalha[${itemid}].c`) === undefined) {
-                                    //     await props.handleChange(`soalha[${itemid}].c`)("  ")
-                                    //     // await props.handleChange(`soalha[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `soalha[${itemid}].d`) === undefined) {
-                                    //     await props.handleChange(`soalha[${itemid}].d`)("  ")
-                                    //     // await props.handleChange(`soalha[${i}].question`)()
-                                    // }
-                                    // }
-                                    //setlasttouch(itemid)
-
-                                    // resolve()
-                                    // }).then(()=>{
-                                    //     console.log("pressed then")
-
-                                    // })
-
-                                    // setTimeout(() => {
-                                    //     console.log('ON SUBMITTTTTTTTTTTTTT')
-                                    //     const formdata = new FormData();
-                                    //     console.log(props.values+"    All values for submiting")
-                                    //     console.log("\n"+props.errors)
-                                    //     formdata.append('title', values.Username)
-                                    //     formdata.append('summary', values.Discription)
-                                    //     if (picture.uri === '../../assets/tea.jpg') {
-                                    //     }
-                                    //     else
-                                    //         formdata.append('photo', picture)
-
-                                    //     console.log(formdata.data + 'formdata')
-                                    // }, 5000)
-                                    // setshowallerror(true)
-                                    //setTimeout(()=>setshowallerror(false),5000)
-
-                                    >
-                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                    </Button> : null}
-                                <FieldArray validateOnChange={true}  name={"soalha"}>
+                             
+                                <FieldArray validateOnChange={true}  name={"questions"}>
                                     {({ push, pop, touched, errors }) => (
                                         <FlatList
                                             //بعدا لیست هدر بالایی ها
                                             // ListHeaderComponent={()=>(
 
                                             // )}
-                                            name={"soalha"}
+                                            name={"questions"}
                                             scrollEnabled={false}
                                             keyExtractor={(item) => {
                                                 return (item.id)
                                                 //   undefined
-                                                //   questions[numofquestion-1].id
+                                                //   questionss[numofquestion-1].id
                                             }}
-                                            data={questions}
+                                            data={questionss}
                                             renderItem={({ item }) => {
                                                 //  console.log(item.id + " ITEM IDDDDDDDDDDDDDDDDDD")
-                                                // console.log(questions[numofquestion-1].id+"  ID BA QUESTION")
+                                                // console.log(questionss[numofquestion-1].id+"  ID BA QUESTION")
                                                 // const [values,setvalues]=useState("1")
                                                 return (<>
 
@@ -379,47 +297,47 @@ const Createquiz = () => {
                                                     <TouchableOpacity
                                                         onPress={async () => {
                                                             if (itemid + 1 <= 15) {
-                                                                push({ question: "", a: "", b: "", c: "", d: "", correct: "1" });
+                                                                push({ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "1" });
                                                                 //props.errors.push(validationSchema);
 
                                                                 // for(var i=numofquestion-1;i>=0;i--){
-                                                                //     console.log(props.values.soalha[i].question+" QQQQ");
-                                                                //     console.log(props.values.soalha[i].a+" aaaaa");
-                                                                //     console.log(props.values.soalha[i].b+" bbbbb");
-                                                                //     console.log(props.values.soalha[i].c+" ccccc");
-                                                                //     console.log(props.values.soalha[i].d+" ddddd");
-                                                                //     console.log(props.values.soalha[i].correct+" correct");
+                                                                //     console.log(props.values.questions[i].question+" QQQQ");
+                                                                //     console.log(props.values.questions[i].a+" aaaaa");
+                                                                //     console.log(props.values.questions[i].b+" bbbbb");
+                                                                //     console.log(props.values.questions[i].c+" ccccc");
+                                                                //     console.log(props.values.questions[i].d+" ddddd");
+                                                                //     console.log(props.values.questions[i].key+" key");
                                                                 // }
-                                                                //console.log(props.values.soalha[0]+" VALUESSSS")
-                                                                //console.log(props.values.soalha[1]+" VALUESSSS")
+                                                                //console.log(props.values.questions[0]+" VALUESSSS")
+                                                                //console.log(props.values.questions[1]+" VALUESSSS")
                                                                 //toye groups mygroups avali javab nemidad :\
                                                                 console.log(props.error + "   PROP ERRORS")
 
                                                                 // if(props.errors===null){
                                                                 await setitemid(itemid + 1);
-                                                                //   await setquestions(questions=>[...questions,...{id:numofquestion,name:"اینجا سوم"}])
-                                                                await setquestions(questions.concat({ id: itemid + 1, name: "ad;fk" }));
+                                                                //   await setquestionss(questionss=>[...questionss,...{id:numofquestion,name:"اینجا سوم"}])
+                                                                await setquestionss(questionss.concat({ id: itemid + 1, name: "ad;fk" }));
                                                                 //    await setvalues(values.concat(numofquestion.toString()));
                                                                 //  await setnumofquestion(numofquestion + 1);
-                                                                // if (getIn(props.values, `soalha[${itemid}].question`) === "") {
-                                                                //     await props.handleChange(`soalha[${itemid}].question`)(" ")
-                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // if (getIn(props.values, `questions[${itemid}].question`) === "") {
+                                                                //     await props.handleChange(`questions[${itemid}].question`)(" ")
+                                                                //     // await props.handleChange(`questions[${i}].question`)()
                                                                 // }
-                                                                // else if (getIn(props.values, `soalha[${itemid}].a`) === "") {
-                                                                //     await props.handleChange(`soalha[${itemid}].a`)(" ")
-                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // else if (getIn(props.values, `questions[${itemid}].a`) === "") {
+                                                                //     await props.handleChange(`questions[${itemid}].a`)(" ")
+                                                                //     // await props.handleChange(`questions[${i}].question`)()
                                                                 // }
-                                                                // else if (getIn(props.values, `soalha[${itemid}].b`) === "") {
-                                                                //     await props.handleChange(`soalha[${itemid}].b`)(" ")
-                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // else if (getIn(props.values, `questions[${itemid}].b`) === "") {
+                                                                //     await props.handleChange(`questions[${itemid}].b`)(" ")
+                                                                //     // await props.handleChange(`questions[${i}].question`)()
                                                                 // }
-                                                                // else if (getIn(props.values, `soalha[${itemid}].c`) === "") {
-                                                                //     await props.handleChange(`soalha[${itemid}].c`)(" ")
-                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // else if (getIn(props.values, `questions[${itemid}].c`) === "") {
+                                                                //     await props.handleChange(`questions[${itemid}].c`)(" ")
+                                                                //     // await props.handleChange(`questions[${i}].question`)()
                                                                 // }
-                                                                // else if (getIn(props.values, `soalha[${itemid}].d`) === "") {
-                                                                //     await props.handleChange(`soalha[${itemid}].d`)(" ")
-                                                                //     // await props.handleChange(`soalha[${i}].question`)()
+                                                                // else if (getIn(props.values, `questions[${itemid}].d`) === "") {
+                                                                //     await props.handleChange(`questions[${itemid}].d`)(" ")
+                                                                //     // await props.handleChange(`questions[${i}].question`)()
                                                                 // }
 
 
@@ -430,26 +348,26 @@ const Createquiz = () => {
                                                                 // else{
 
                                                                 // }
-                                                                // if(getIn(props.touched, `soalha[${itemid}].question`)===false ){
-                                                                // await props.setFieldTouched(`soalha[${itemid}].question`, true)
+                                                                // if(getIn(props.touched, `questions[${itemid}].question`)===false ){
+                                                                // await props.setFieldTouched(`questions[${itemid}].question`, true)
                                                                 // }
-                                                                // else if(getIn(props.touched, `soalha[${itemid}].a`)===false ){
-                                                                // await props.setFieldTouched(`soalha[${itemid}].a`, true)
+                                                                // else if(getIn(props.touched, `questions[${itemid}].a`)===false ){
+                                                                // await props.setFieldTouched(`questions[${itemid}].a`, true)
                                                                 // }
-                                                                // else if(getIn(props.touched, `soalha[${itemid}].b`)===false ){
-                                                                // await props.setFieldTouched(`soalha[${itemid}].b`, true)
+                                                                // else if(getIn(props.touched, `questions[${itemid}].b`)===false ){
+                                                                // await props.setFieldTouched(`questions[${itemid}].b`, true)
                                                                 // }
-                                                                // else if(getIn(props.touched, `soalha[${itemid}].c`)===false ){
-                                                                // await props.setFieldTouched(`soalha[${itemid}].c`, true)
+                                                                // else if(getIn(props.touched, `questions[${itemid}].c`)===false ){
+                                                                // await props.setFieldTouched(`questions[${itemid}].c`, true)
                                                                 // }
-                                                                // else if(getIn(props.touched, `soalha[${itemid}].d`)===false ){
-                                                                // await props.setFieldTouched(`soalha[${itemid}].d`, true)
+                                                                // else if(getIn(props.touched, `questions[${itemid}].d`)===false ){
+                                                                // await props.setFieldTouched(`questions[${itemid}].d`, true)
                                                                 // }
-                                                                console.log(getIn(props.values, `soalha[${itemid}].question`) + " question" + itemid)
+                                                              //  console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
 
                                                                 //      // await setvalues(values.concat(numofquestion));
-                                                                //   await setsoalha(soalha.concat({question:"",a:"",b:"",c:"",d:"",correct:""}))
-                                                                //console.log(questions);
+                                                                //   await setquestions(questions.concat({question:"",a:"",b:"",c:"",d:"",key:""}))
+                                                                //console.log(questionss);
                                                                 // }
                                                             }
                                                             else {
@@ -480,15 +398,15 @@ const Createquiz = () => {
                                                                     console.log(props.values[i]);
                                                                 }
                                                                 await setitemid(itemid - 1);
-                                                                //  console.log(questions);
-                                                                //  console.log(questions.pop());
-                                                                // console.log(questions);
-                                                                const temp = await questions.pop();
+                                                                //  console.log(questionss);
+                                                                //  console.log(questionss.pop());
+                                                                // console.log(questionss);
+                                                                const temp = await questionss.pop();
                                                                 console.log(temp);
-                                                                //await  setquestions(temp);
-                                                                //  console.log(questions[numofquestion-1].id+"id");
+                                                                //await  setquestionss(temp);
+                                                                //  console.log(questionss[numofquestion-1].id+"id");
                                                                 //inex nan
-                                                                //await setquestions(await questions.pop())
+                                                                //await setquestionss(await questionss.pop())
 
                                                                 await setnumofquestion(numofquestion - 1);
                                                             }
@@ -556,6 +474,89 @@ const Createquiz = () => {
                                                         </View>
                                                         : null}
 
+                                                        {minnumquestion === false && maxnumquestion === false ?
+                                    <Button type={"submit"} bordered rounded style={styles.button}
+                                        //har taghiri chap vali onpress error ke function nist
+                                        //onPress={console.log(JSON.stringify(props.errors.questions))&console.log("button pressed!")}
+                                        onPress={
+                                            () => {
+                                               
+                                                    props.handleSubmit()
+                                                if (props.error === undefined) {
+
+                                                }
+                                                else {
+                                                    setstillhaveerror(false);
+                                                }
+                                            }}
+                                    //async (resolve, reject) => {
+
+                                    // await setshowallerror(true);
+                                    // //new Promise(async()=>{
+                                    // console.log("toye subimtttttttttttttttttttttt")
+                                    // console.log(itemid + " item iddhfhgj")
+                                    // console.log(lasttouch + "lasttouch")
+                                    // await props.setFieldTouched("title", true)
+                                    // // await props.setFieldTouched("description", true)
+                                    // //  for (var i = lasttouch + 1; i <= itemid; i++) {
+
+
+                                    // // await props.setFieldTouched(`questions[${itemid}].question`, true)
+                                    // // await props.setFieldTouched(`questions[${itemid}].a`, true)
+                                    // // await props.setFieldTouched(`questions[${itemid}].b`, true)
+                                    // // await props.setFieldTouched(`questions[${itemid}].c`, true)
+                                    // // await props.setFieldTouched(`questions[${itemid}].d`, true)
+                                    // console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
+                                    // if (getIn(props.values, `questions[${itemid}].question`) === undefined) {
+                                    //     await props.handleChange(`questions[${itemid}].question`)("  ")
+                                    //     // await props.handleChange(`questions[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `questions[${itemid}].a`) === undefined) {
+                                    //     await props.handleChange(`questions[${itemid}].a`)("  ")
+                                    //     // await props.handleChange(`questions[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `questions[${itemid}].b`) === undefined) {
+                                    //     await props.handleChange(`questions[${itemid}].b`)("  ")
+                                    //     // await props.handleChange(`questions[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `questions[${itemid}].c`) === undefined) {
+                                    //     await props.handleChange(`questions[${itemid}].c`)("  ")
+                                    //     // await props.handleChange(`questions[${i}].question`)()
+                                    // }
+                                    // if (getIn(props.values, `questions[${itemid}].d`) === undefined) {
+                                    //     await props.handleChange(`questions[${itemid}].d`)("  ")
+                                    //     // await props.handleChange(`questions[${i}].question`)()
+                                    // }
+                                    // }
+                                    //setlasttouch(itemid)
+
+                                    // resolve()
+                                    // }).then(()=>{
+                                    //     console.log("pressed then")
+
+                                    // })
+
+                                    // setTimeout(() => {
+                                    //     console.log('ON SUBMITTTTTTTTTTTTTT')
+                                    //     const formdata = new FormData();
+                                    //     console.log(props.values+"    All values for submiting")
+                                    //     console.log("\n"+props.errors)
+                                    //     formdata.append('title', values.title)
+                                    //     formdata.append('summary', values.description)
+                                    //     if (picture.uri === '../../assets/tea.jpg') {
+                                    //     }
+                                    //     else
+                                    //         formdata.append('quiz_photo', picture)
+
+                                    //     console.log(formdata.data + 'formdata')
+                                    // }, 5000)
+                                    // setshowallerror(true)
+                                    //setTimeout(()=>setshowallerror(false),5000)
+
+                                    >
+                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                    </Button> : null}
+
                                                     {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
                                                     {/* <View style={styles.centeredView}>
@@ -588,7 +589,7 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                                    {stillhaveerror === false ? <Text>ابتدا ارور ها را برطرف کنید</Text> : null}
+                                                 
                                                 </View>)}
                                         >
 
