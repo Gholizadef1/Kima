@@ -31,13 +31,14 @@ const userschema = yup.object({
 const GroupPage = (prop) => {
 
   console.log('STARTTTTT')
+  
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
   const [loading1, setloading1] = useState(true)
   const [loading2, setloading2] = useState(true)
   const [loading3, setloading3] = useState(true)
   const [loading4, setloading4] = useState(true)
-  const [picture, setpicture] = useState(null);
+  const [picture, setpicture] = useState(undefined);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState([]);
   const [owner, setowner] = useState("undefined");
@@ -74,13 +75,13 @@ const GroupPage = (prop) => {
       const response = axiosinst.get('/group/' + prop.route.params.id)
         .then(async function (response) {
           await setgroupinfo(response.data);
-          setmembernumber(groupinfo.members_count);
+          await setmembernumber(groupinfo.members_count);
           console.log('PHOTOOO' +response.data.group_photo)
           setgroupphoto(`http://c4e2a698ddac.ngrok.io${response.data.group_photo}`)
 
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
-            setowner("owner")
+            await setowner("owner")
           }
           setloading2(false)
         })
@@ -93,7 +94,7 @@ const GroupPage = (prop) => {
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
         .then(async function (response) {
           setmembers(response.data.members)
-
+          console.log(response.data.members[0].user.profile_photo+" PROFILE PHOTOOOOO")
           for (let i = 0; i < membernumber; i++) {
             if (response.data.members[i].user.username === username && username != response.data.owner.username) {
               setjoinedUser("joinedUser")
@@ -311,7 +312,7 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
+          {picture != 'http://33613d59f2de.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
             source={{ uri: groupphoto }}
           ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={105}
             source={require('../../assets/group.jpg')}
@@ -445,9 +446,9 @@ const GroupPage = (prop) => {
                 }}
                 data={members}
                 renderItem={({ item }) => <>
-                  <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                    {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={{ marginLeft: wp('2%') }} size={90}
-                      source={{ uri: item.user.profile_photo }}
+                <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
+                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image style={{ marginLeft: wp('2%') }} size={90}
+                      source={{ uri: "http://33613d59f2de.ngrok.io"+item.user.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={10}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
@@ -466,7 +467,9 @@ const GroupPage = (prop) => {
                 </>
                 }
               >
+            
               </FlatList>
+              {/* :<ActivityIndicator  animating color={'gray'} size={"large"} style={{ marginTop: hp('5%'),marginBottom:hp("5%"),height:hp("5%"),width:wp("10%"),color:"black",alignSelf:"center"}} anim></ActivityIndicator>} */}
 
             </View>
           </ScrollView>

@@ -301,6 +301,7 @@ Temporary Items
 # expo
 .expo/
 
+assets
 
 ### vscode ###
 .vscode/*
