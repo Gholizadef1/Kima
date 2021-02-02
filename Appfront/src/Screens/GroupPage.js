@@ -31,7 +31,7 @@ const userschema = yup.object({
 const GroupPage = (prop) => {
 
   console.log('STARTTTTT')
-  
+
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
   const [loading1, setloading1] = useState(true)
@@ -76,7 +76,7 @@ const GroupPage = (prop) => {
         .then(async function (response) {
           await setgroupinfo(response.data);
           await setmembernumber(groupinfo.members_count);
-          console.log('PHOTOOO' +response.data.group_photo)
+          console.log('PHOTOOO' + response.data.group_photo)
           setgroupphoto(`http://c4e2a698ddac.ngrok.io/${response.data.group_photo}`)
 
           if (username === response.data.owner.username) {
@@ -94,7 +94,7 @@ const GroupPage = (prop) => {
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
         .then(async function (response) {
           setmembers(response.data.members)
-          console.log(response.data.members[0].user.profile_photo+" PROFILE PHOTOOOOO")
+          console.log(response.data.members[0].user.profile_photo + " PROFILE PHOTOOOOO")
           for (let i = 0; i < membernumber; i++) {
             if (response.data.members[i].user.username === username && username != response.data.owner.username) {
               setjoinedUser("joinedUser")
@@ -312,7 +312,7 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {picture != 'http://33613d59f2de.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
+          {groupphoto != 'http://c4e2a698ddac.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
             source={{ uri: groupphoto }}
           ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={105}
             source={require('../../assets/group.jpg')}
@@ -353,7 +353,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
-          <Text style={{ fontSize: 21, marginLeft: wp('7%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
+          <Text style={{ fontSize: 21, marginLeft: wp('4%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
 
           <Text style={{ textAlign: 'left', marginTop: hp('2'), marginLeft: wp('10%'), marginRight: wp('1%') }}>
             {groupinfo.summary}
@@ -365,7 +365,7 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
+              <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
               <FlatList
                 style={{ marginBottom: hp('5%') }}
                 showsVerticalScrollIndicator={true}
@@ -431,7 +431,13 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('2%'), marginLeft: wp('7%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
+              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}> اعضای گروه :</Text>
+
+              <Button style={{ marginLeft: wp('90%'),top:hp('-5%') }} transparent
+                onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
+                <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+              </Button >
+
               <FlatList
                 style={{ marginBottom: hp('5%') }}
                 showsVerticalScrollIndicator={true}
@@ -446,13 +452,13 @@ const GroupPage = (prop) => {
                 }}
                 data={members}
                 renderItem={({ item }) => <>
-                <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image style={{ marginLeft: wp('2%') }} size={90}
-                      source={{ uri: "http://33613d59f2de.ngrok.io"+item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={10}
+                  <View style={{ maginLeft: wp('5%'), marginTop: hp('-4%') }}>
+                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image  
+                      source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{marginLeft:wp('4%')}}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop: hp('1%') }}>{item.user.username}</Text>
+                    <Text style={{ alignSelf: 'flex-start',marginLeft:wp('8%'),marginTop:hp('1%') }}>{item.user.username}</Text>
                     <View
                       style={{
                         width: 320,
@@ -467,7 +473,7 @@ const GroupPage = (prop) => {
                 </>
                 }
               >
-            
+
               </FlatList>
               {/* :<ActivityIndicator  animating color={'gray'} size={"large"} style={{ marginTop: hp('5%'),marginBottom:hp("5%"),height:hp("5%"),width:wp("10%"),color:"black",alignSelf:"center"}} anim></ActivityIndicator>} */}
 
@@ -482,10 +488,7 @@ const GroupPage = (prop) => {
            <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
          </Button > : null} */}
 
-          <Button style={{ marginLeft: wp('90%') }} transparent
-            onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
-            <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-          </Button >
+
 
         </ScrollView>
 
@@ -521,12 +524,7 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('32%')
   },
-  avatar: {
-    elevation: 20,
-    marginTop: hp('-10%'),
-    marginLeft: wp('20%')
 
-  },
   groupname: {
     fontSize: 15,
     fontWeight: 'bold',
@@ -555,14 +553,11 @@ const styles = StyleSheet.create({
     height: hp('65%'),
     elevation: 300
   },
-  // avatar: {
-  //   height: hp('14%'),
-  //   marginTop:hp('-1.5%'),
-  //   width: wp('28%'),
-  //   marginLeft:wp('-1%'),
-  //   borderRadius: 20,
-  //   position:'absolute'
-  // },
+  avatar: {
+    width: wp('16%'),
+    height: hp('9%'),
+    marginTop: hp('5%')
+  },
   loader: {
     alignItems: 'center',
     marginBottom: hp('5%'),
