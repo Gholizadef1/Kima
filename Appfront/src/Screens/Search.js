@@ -165,8 +165,8 @@ const Search = ({navigation}) => {
           }} />} */}
     {/* /> */}
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        <Text style={{marginTop:200,marginRight:170,marginTop:20,marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
-        {searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]?<ScrollView>
+        <Text style={{marginTop:hp("2.5%"),alignSelf:"flex-start",marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
+        {searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]?<ScrollView style={{}}>
         <ResultsList 
         navigation={navigation}
         listresult={authors}
@@ -174,7 +174,7 @@ const Search = ({navigation}) => {
         stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
           <Image
          source={require('../../assets/line3.png')}
-         style={{marginTop:20,marginHorizontal:10,width:390,height:1}}
+         style={{marginTop:hp("2.5%"),marginHorizontal:wp("2%"),width:wp("96%"),height:1}}
          ></Image>
         <ResultsList 
         navigation={navigation}

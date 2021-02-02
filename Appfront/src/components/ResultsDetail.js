@@ -16,7 +16,7 @@ const ResultsDetail = ({result}) => {
             <Text style={styles.title}>
                {result.title}
             </Text>
-            <Text style={{fontSize:11,marginHorizontal:23,marginTop:15,marginBottom:10}}>{result.author}</Text>
+            <Text style={{fontSize:hp("1.3%"),alignSelf:"flex-start",marginLeft:wp("4%"),marginTop:hp("1%"),marginBottom:hp("1.1%")}}>{result.author}</Text>
             
           </View> 
     );
@@ -31,18 +31,20 @@ const styles = StyleSheet.create({
         marginLeft:hp('2%'),
         marginRight:0,
         
-        marginTop:220,
-        fontSize:12,
+        marginTop:hp("26.3%"),
+        fontSize:hp("1.5.5%"),
         fontWeight:'bold',
-        width:130,
+        //width:130,
         position:'absolute'
     },
     image:{
-        marginTop:20,
-        width:120,
-        height:180,
-        marginBottom:40,
-        borderRadius:10,marginLeft:10
+        marginTop:hp("2.5%"),
+        width:wp("29.2%"),
+        height:hp("21.7%"),
+        marginBottom:hp("4.8%"),
+        borderRadius:10,
+      //  elevation:10,
+       marginHorizontal:wp("1.4%")
     }
   });
   export default ResultsDetail;

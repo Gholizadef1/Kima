@@ -16,10 +16,10 @@ const ResultsList = ({stylee,title,listresult,navigation}) => {
                 {title}
             </Text>
     
-            {listresult.length===0?<View style={{height:200}}>
+            {listresult.length===0?<View style={{height:hp("33%")}}>
 
-            </View>:null}
-
+             </View>:null}
+            {/* <View style={{backgroundColor:"lightblue",height:hp("30%"),width:wp("4%"),marginBottom:hp("-30%"),marginLeft:hp("4%")}}></View> */}
             <FlatList  style={styles.flastlist}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -51,14 +51,16 @@ const styles = StyleSheet.create({
     marginLeft:0
     },
     title:{
-        marginLeft:heightPercentageToDP('2%'),
-        marginTop:30,
-        fontSize:15,
+        marginLeft:wp("4%"),
+        marginTop:hp("3.5%"),
+        fontSize:hp("1.6%"),
         fontWeight:'bold'
     },
     flastlist:{
-        marginHorizontal:5,
-       
+        marginHorizontal:wp("0%"),
+        
+        //حل مشکل شروع شدن از چپ
+        alignSelf:"flex-start",
         marginTop:0
     }
     
