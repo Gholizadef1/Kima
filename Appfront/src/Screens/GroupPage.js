@@ -75,39 +75,39 @@ const GroupPage = (prop) => {
         .then(async function (response) {
           await setgroupinfo(response.data);
           setmembernumber(groupinfo.members_count);
-          setgroupphoto(`http://699170b6d987.ngrok.io${response.data.group_photo}`)
+          console.log('PHOTOOO' +response.data.group_photo)
+          setgroupphoto(`http://c4e2a698ddac.ngrok.io${response.data.group_photo}`)
 
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
-            await setowner("owner")
+            setowner("owner")
           }
+          setloading2(false)
         })
     }
     getgroupDetails()
-    setloading2(false)
   }, [join])
 
   useEffect((async) => {
     async function getMembers() {
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
         .then(async function (response) {
-          await setmembers(response.data.members)
+          setmembers(response.data.members)
 
           for (let i = 0; i < membernumber; i++) {
             if (response.data.members[i].user.username === username && username != response.data.owner.username) {
               setjoinedUser("joinedUser")
               console.log('%%%%%%%%%%%%%%%%%%%joineduser')
-              break;
             }
           }
-          if (joinedUser === "undefined" && username != response.data.owner.username) {
+          if (joinedUser != "joinedUser" && username != response.data.owner.username) {
             setnotjoinedUser("notjoinedUser")
             console.log("###############notjoineduser")
           }
+          setloading1(false)
         })
     }
     getMembers()
-    setloading1(false)
   }, [join])
 
 

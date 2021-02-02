@@ -147,10 +147,10 @@ const DiscussionPage = (prop) => {
                         </View>
                     </Modal>
                 </View>
-
+                
                 <ScrollView>
-                    <Header style={{ backgroundColor: '#1F7A8C', height: hp('15%'), width: wp('100%') }} />
-                    <Title style={{ fontSize: 24, fontWeight: 'bold', color: '#E1E5F2', marginTop: hp('-8%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
+                    <Header style={{ backgroundColor: '#EDF2F4', height: hp('15%'), width: wp('100%'),borderEndColor:'#EDF2F4' }} />
+                    <Title style={{ fontSize: 24, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-8%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
                     <FlatList
                         style={{ marginBottom: hp('5%') }}
                         showsVerticalScrollIndicator={true}
@@ -185,7 +185,8 @@ const DiscussionPage = (prop) => {
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('5%'),marginRight:wp('3%') ,marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{fontSize:12 , color: '#a9a9a9' ,marginRight:'3%'}}>{item.send_time.toString().split('T')[0]}</Text>
                                     </Card>
                                 </View>}
                         </>
