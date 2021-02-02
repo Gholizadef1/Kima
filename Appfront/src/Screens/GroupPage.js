@@ -52,9 +52,9 @@ const GroupPage = (prop) => {
   const [discussion, setdiscussion] = useState();
 
   useEffect(() => {
-    // setjoinedUser(false)
-    // setowner(false)
-    // setnotjoinedUser(false)
+    setjoinedUser(false)
+    setowner(false)
+    setnotjoinedUser(false)
     getUsername();
     getDiscussion();
   }, [join]);
@@ -76,7 +76,7 @@ const GroupPage = (prop) => {
           await setgroupinfo(response.data);
           setmembernumber(groupinfo.members_count);
           console.log('PHOTOOO' +response.data.group_photo)
-          setgroupphoto(`http://c4e2a698ddac.ngrok.io${response.data.group_photo}`)
+          setgroupphoto(`http://c4e2a698ddac.ngrok.io/${response.data.group_photo}`)
 
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
@@ -311,7 +311,7 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {picture != 'http://1799ec2e488e.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
+          {picture != 'http://c4e2a698ddac.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
             source={{ uri: groupphoto }}
           ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={105}
             source={require('../../assets/group.jpg')}
