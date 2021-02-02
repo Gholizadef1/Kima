@@ -77,7 +77,7 @@ const GroupPage = (prop) => {
           await setgroupinfo(response.data);
           await setmembernumber(groupinfo.members_count);
           console.log('PHOTOOO' + response.data.group_photo)
-          setgroupphoto(`http://c4e2a698ddac.ngrok.io/${response.data.group_photo}`)
+          setgroupphoto(response.data.group_photo)
 
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
@@ -312,9 +312,9 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {groupphoto != 'http://c4e2a698ddac.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={105}
-            source={{ uri: groupphoto }}
-          ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={105}
+          {groupphoto != '/media/default.png' ? <Avatar.Image style={styles.avatar} 
+            source={{ uri: "http://c4e2a698ddac.ngrok.io" + groupphoto }}
+          ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
             source={require('../../assets/group.jpg')}
           ></Avatar.Image>}
 
@@ -554,9 +554,8 @@ const styles = StyleSheet.create({
     elevation: 300
   },
   avatar: {
-    width: wp('16%'),
-    height: hp('9%'),
-    marginTop: hp('5%')
+    marginTop: hp('-7%'),
+    marginLeft:wp('15%')
   },
   loader: {
     alignItems: 'center',
