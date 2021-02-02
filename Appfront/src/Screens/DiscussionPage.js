@@ -274,9 +274,9 @@ const DiscussionPage = (prop) => {
                         renderItem={({ item }) => <>
                             {username != item.user.username ?
                                 <View style={{}}>
-                                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar} size={90}
-                                        source={{ uri: item.user.profile_photo }}
-                                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
+                                        source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
+                                    ></Avatar.Image> : <Avatar.Image size={70}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat}>
@@ -285,9 +285,9 @@ const DiscussionPage = (prop) => {
                                     </Card>
                                 </View>
                                 : <View style={{}}>
-                                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
-                                        source={{ uri: item.user.profile_photo }}
-                                    ></Avatar.Image> : <Avatar.Image style={{}} size={10}
+                                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
+                                        source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
+                                    ></Avatar.Image> : <Avatar.Image size={70} style={styles.avatar2}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
@@ -340,8 +340,6 @@ const styles = StyleSheet.create({
     avatar2: {
         marginLeft: wp('82%'),
         top: hp('3%'),
-        width: wp('14%'),
-        height: hp('8%'),
         marginTop: hp('5%')
     },
 
