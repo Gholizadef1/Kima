@@ -1,10 +1,35 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { StyleSheet, Text, View,Image } from 'react-native';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 import { color } from 'react-native-reanimated';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+
 const ResultsDetail = ({result}) => {
+    const [senoghte,setsenoghte]=useState(false)
+    const[kamshodde,setkamshodde]=useState();
+
+    var kamshode="";
+    useEffect(()=>{
+    console.log(result.title.toString().split(''))
+    var a=result.title.toString();
+    var b=a.lenght;
+    for(var i=0;i<=14;i++){
+        if(a[i]!=undefined){
+        kamshode+=a[i]
+        console.log(kamshode);
+        }
+    }
+ 
+    if(a===kamshode){
+      //  setsenoghte(false)
+    }
+    else{
+        //setsenoghte(true);
+        kamshode+="..."
+    }
+    setkamshodde(kamshode);   }, [])
+   // console.log(b)
     return(
         <View style={styles.container} >
         <Image
@@ -14,7 +39,7 @@ const ResultsDetail = ({result}) => {
 
      
             <Text style={styles.title}>
-               {result.title}
+               {kamshodde}
             </Text>
             <Text style={{fontSize:hp("1.3%"),alignSelf:"flex-start",marginLeft:wp("4%"),marginTop:hp("1%"),marginBottom:hp("1.1%")}}>{result.author}</Text>
             
