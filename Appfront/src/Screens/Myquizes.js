@@ -221,11 +221,12 @@ const Myquizes = (prop) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={async () => {
-                  const userid=await AsyncStorage.getItem("id");
+                  const userid=await AsyncStorage.getItem("id")
+                 
                   console.log(userid+" user iddfak;ljdf;lskjf;")
                   await console.log(item.creator.id+" item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
                   console.log((item.creator.id-userid)===0+" a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
-                  if((item.creator.id-userid)===0)
+                  if((item.creator.id-userid===0))
                   {
                     prop.navigation.navigate("quizresult",{id:item.id,ownerr:true})
                   }

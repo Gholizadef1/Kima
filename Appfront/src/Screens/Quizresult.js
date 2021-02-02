@@ -108,20 +108,25 @@ const Quizresult = (prop) => {
 
 
         // })
-        if (prop.route.params.ownerr === true) {
-            await seturl('quiz/' + prop.route.params.id)
-        }
-        else {
-            await seturl('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
-        }
-
-        if(url!=undefined){
+       
+        //     await seturl('quiz/' + prop.route.params.id)
+        // }
+        // else {
+        //     await seturl('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
+        // }
+       console.log("ghabl set kardan url")
+      //  if(url!=undefined){
         try {
-
-
+            var response="";
+            if (prop.route.params.ownerr === true) {
+                response =await axiosinst.get('quiz/' + prop.route.params.id)
+            }
+            else{
+                response=await axiosinst.get('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
+            }
             //  if(url!=undefined){
            
-            const response = await axiosinst.get(url)
+            //const response = await axiosinst.get(url)
             // }
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
@@ -145,7 +150,7 @@ const Quizresult = (prop) => {
 
 
         }
-    }
+   // }
 
     })
 
@@ -267,13 +272,13 @@ const Quizresult = (prop) => {
                             }}>
                                 {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
                                     height: hp('14%'),
-                                    marginTop: hp('-1.5%'),
+                                    marginTop: hp('5%'),
                                     width: wp('28%'),
-                                    marginLeft: wp('-1%'),
-                                    borderRadius: 20,
-                                    position: 'absolute',
-                                    // borderColor:'#1f7a8c',
-                                    // borderWidth:wp('0.2%')
+                                    marginLeft: wp('8%'),
+                                    borderRadius: 100,
+                                    // position: 'absolute',
+                                    borderColor: 'blue',
+                                    backgroundColor: "lightgreen"
 
                                 }}
                                 >
@@ -284,13 +289,11 @@ const Quizresult = (prop) => {
                                         style={{
                                             height: hp('14%'),
 
-                                            marginTop: hp('0%'),
-                                            width: wp('28%'),
-                                            marginLeft: wp('0%'),
-                                            borderRadius: 20,
-                                            position: 'absolute',
-                                            //borderColor:'#1f7a8c',
-                                            //borderWidth:wp('0.2%')
+                                                marginTop: hp('0%'),
+                                                width: wp('28%'),
+                                                marginLeft: wp('0%'),
+                                                borderRadius: 20,
+                                                position: 'absolute',
                                         }}
                                     //  onBlur={props.handleBlur('photo')}
 
@@ -340,7 +343,7 @@ const Quizresult = (prop) => {
                                 <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
                                     {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
-                                <Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>
+                    {prop.route.params.ownerr===false?<Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>:null}
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
@@ -373,7 +376,24 @@ const Quizresult = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
+                                    
+                                    if(questions.Quiz.question_count===1){
+                                        await setcansubmit("صفحه کوییز")
+                                        if (questions.Questions[0].key === "a") {
+                                        await setcolora("#95D5B2")
+                                    }
 
+                                    if (questions.Questions[0 ].key === "b") {
+                                        await setcolorb("#95D5B2")
+                                    }
+                                    if (questions.Questions[0 ].key === "c") {
+                                       await  setcolorc("#95D5B2")
+                                    }
+                                    if (questions.Questions[0 ].key === "d") {
+                                       await setcolord("#95D5B2")
+                                    }
+                                    }
+                                    else{
                                     if (questions.Questions[numofquesiton + 1].key === "a") {
                                         setcolora("#95D5B2")
                                     }
@@ -388,6 +408,8 @@ const Quizresult = (prop) => {
                                         setcolord("#95D5B2")
                                     }
                                     // f28482
+                                    if(prop.route.params.onwnerr===false){
+                                        console.log("    asdfasdf3")
                                     if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
                                         if (questions.user_answer[numofquesiton + 1] === "a") {
                                             setcolora("#EF8089")
@@ -408,7 +430,9 @@ const Quizresult = (prop) => {
                                     else {
                                         setpasokhnadadid(false)
                                     }
-
+                                    }
+                                    }
+                                  
 
                                     console.log(" rang negah ghabli")
 
@@ -476,7 +500,10 @@ const Quizresult = (prop) => {
                                     if (questions.Questions[numofquesiton - 1].key === "d") {
                                         setcolord("#95D5B2")
                                     }
+
                                     // f28482
+                                    if(!prop.route.params.ownerr){
+                                        console.log("    asdfasdf2")
                                     if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
                                         if (questions.user_answer[numofquesiton - 1] === "a") {
                                             setcolora("#EF8089")
@@ -496,6 +523,7 @@ const Quizresult = (prop) => {
                                     }
                                     else {
                                         setpasokhnadadid(false)
+                                    }
                                     }
                                 }
                                 //update nemishe chon :\
@@ -523,7 +551,7 @@ const Quizresult = (prop) => {
                     <View style={{ marginLeft: wp("50%"), marginTop: hp("10.7") }}>
                         <TouchableOpacity
                             onPress={async () => {
-
+                                if(questions.Quiz.question_count!=1||cansubmit!="صفحه کوییز"){
                                 await setseedis(" سوال قبلی")
 
                                 var a = answers;
@@ -560,6 +588,8 @@ const Quizresult = (prop) => {
                                         setcolord("#95D5B2")
                                     }
                                     // f28482
+                                    if(prop.route.params.ownerr===false){
+                                        console.log("    asdfasdf1")
                                     if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
                                         if (questions.user_answer[numofquesiton + 1] === "a") {
                                             setcolora("#EF8089")
@@ -573,6 +603,7 @@ const Quizresult = (prop) => {
                                         if (questions.user_answer[numofquesiton + 1] === "d") {
                                             setcolord("#EF8089")
                                         }
+                                    }
                                     }
                                     await setnumofquestion(numofquesiton + 1);
                                     await setcansubmit("سوال بعدی")
@@ -588,13 +619,21 @@ const Quizresult = (prop) => {
                                     await setcansubmit("صفحه کوییز")
                                 }
                                 console.log(numofquesiton);
+                                if(prop.route.params.ownerr===false){
+                                    console.log("    asdfasdf")
                                 if (questions.user_answer[numofquesiton + 1] === "") {
                                     setpasokhnadadid(true)
                                 }
                                 else {
                                     setpasokhnadadid(false)
                                 }
-
+                                }
+                                }
+                                else{
+                                    console.log("کوییز یه سوال دارههههههه")
+                                await postquiz();
+                                }
+                                
                                 // })
                             }}
                             style={{ height: hp("10%"), elevation: 5, margin: 0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>
