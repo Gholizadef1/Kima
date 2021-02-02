@@ -17,6 +17,7 @@ import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useFocusEffect } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native-paper';
 
 const Search = ({navigation}) => {
     // const [searchterm,setsearchterm]=useState('');
@@ -33,18 +34,19 @@ const Search = ({navigation}) => {
     // if(term===undefined)
     // setStart(false)
     const searchapi=async (searchTerm)=>{
+        console.log(searchTerm+"  SEARCHTERMAPI")
         try{
-        const response = await axiosinst.get('books',{
-            params:{
-               // page:1,
-                search:searchTerm,
-                //nemidonam chetori ham title va ham author ro behesh bedam
-                search_fields:'author',
+        const response = await axiosinst.get('books'+"?search="+searchTerm+"&search-fields=title")
+            // params:{
+            //    // page:1,
+            //     search:searchTerm,
+            //     //nemidonam chetori ham title va ham author ro behesh bedam
+            //     search_fields:'author',
                 
                
-            }
-        })
-        console.log(response.data.results);
+            // }
+       // })
+        console.log(JSON.stringify(response.data));
         setResults(response.data.results);
     }
     catch(err){
@@ -58,17 +60,19 @@ const Search = ({navigation}) => {
     }
 
     const searchauthorapi=async (searchTerm)=>{
+        console.log(searchTerm+"  SEARCHTERMAUTHORAPI")
         try{
-        const response = await axiosinst.get('books',{
-            params:{
-              //  page:1,
-                search:searchTerm,
-                search_fields:'author',
+     
+        const response = await axiosinst.get('books'+"?search="+searchTerm+"&search-fields=author")
+        //     params:{
+        //       //  page:1,
+        //         search:searchTerm,
+        //         search_fields:'author',
                
                
-            }
-        })
-        console.log(response.data.results);
+        //     }
+        // })
+        console.log(JSON.stringify(response.data.results));
         await setAuthors(response.data.results);
     }
     catch(err){
@@ -82,19 +86,21 @@ const Search = ({navigation}) => {
     }
 
     const searchtitleapi=async (searchTerm)=>{
+        console.log(searchTerm+"  SEARCHTERMAPITITLE")
+        
         try{
-        const response = await axiosinst.get('books',{
-            params:{
-               // page:1,
-                search:searchTerm,
-                search_fields:'title',
+            const response = await axiosinst.get('books'+"?search="+searchTerm+"&search-fields=title")
+        //     params:{
+        //        // page:1,
+        //         search:searchTerm,
+        //         search_fields:'title',
             
                
                
-            }
-        })
-        console.log(searchTerm);
-        console.log("\n d;aklfj;lksjf;lksjfl;k+\n"+response.data.results);
+        //     }
+        // })
+        console.log(JSON.stringify(response.data.results)+"title resultssssss");
+       // console.log("\n d;aklfj;lksjf;lksjfl;k+\n"+response.data.results);
         await setTitles(response.data.results);
     }
     catch(err){
@@ -125,9 +131,9 @@ const Search = ({navigation}) => {
     
       <View style={{backgroundColor:'white',flex:1}}>
      
-        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{
+        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={async()=>{
            // searchapi(term)&&
-            searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
+            await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/>
             {/* <Searchbar
       placeholder="Search"
       onChangeText={searching}
@@ -160,7 +166,7 @@ const Search = ({navigation}) => {
     {/* /> */}
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
         <Text style={{marginTop:200,marginRight:170,marginTop:20,marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
-        <ScrollView>
+        {searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]?<ScrollView>
         <ResultsList 
         navigation={navigation}
         listresult={authors}
@@ -174,7 +180,7 @@ const Search = ({navigation}) => {
         navigation={navigation}
         listresult={titles}
         stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>
-        </ScrollView>
+        </ScrollView>:<ActivityIndicator size={"large"} color={"gray"} ></ActivityIndicator>}
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
          {/* <Image
          source={require('../../assets/kima6.jpeg')}
