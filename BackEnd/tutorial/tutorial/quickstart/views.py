@@ -711,8 +711,8 @@ class QuizView(APIView,PaginationHandlerMixin):
         title = request.data.get("title")
         description = request.data.get("description")
         question_count = request.data.get("question_count")
-        if 'photo' in request.FILES:
-            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["photo"],question_count=question_count)
+        if 'quiz_photo' in request.FILES:
+            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["quiz_photo"],question_count=question_count)
             
         else:
             new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
@@ -733,10 +733,15 @@ class QuizView(APIView,PaginationHandlerMixin):
         return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
             
     def get(self,request):
-            
-        quiz = Quiz.objects.all()
-        serializer = QuizSerializer(quiz,many=True)
-        return Response({"Quiz":serializer.data})
+        user = request.user
+        quiz = QuizSerializer(Quiz.objects.all(),many=True)
+        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
+        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
+        myquiz=myquiz + taken_quiz
+        quiz = quiz-myquiz
+        if quiz is None:
+            return Response({"message":"No Quiz!"})
+        return Response({"Quiz":quiz})
 
             
 class TakeQuizView(APIView):
