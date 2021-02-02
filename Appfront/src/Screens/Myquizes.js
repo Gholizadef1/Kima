@@ -49,6 +49,7 @@ const Myquizes = (prop) => {
   const [numberofpage, setnumberofpage] = useState(0);
   const [count, setcount] = useState(1);
   const [seeresult, setseeresult] = useState(false);
+  const[owner,setowner]=useState();
   // let count=0;
   const response = async (page) => {
 
@@ -220,7 +221,20 @@ const Myquizes = (prop) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={async () => {
-                  prop.navigation.navigate("quizresult",{id:item.id})
+                  const userid=await AsyncStorage.getItem("id");
+                  console.log(userid+" user iddfak;ljdf;lskjf;")
+                  await console.log(item.creator.id+" item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
+                  console.log((item.creator.id-userid)===0+" a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
+                  if((item.creator.id-userid)===0)
+                  {
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true})
+                  }
+                  else{
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false})
+                  }
+                  // if(owner!=undefined){
+                
+                  // }
                   // await prop.seeresul(true);
                   // setTimeout(() => prop.seeresul(false), 2000)
                 }}
