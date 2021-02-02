@@ -35,11 +35,11 @@ const Createquizeachquestion = (prop) => {
     const derror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].d_text`)
     const correcterror = getIn(prop.pr.errors, `questions[${prop.itemidd-1}].c_textorrect`)
     const questointouched = getIn(prop.pr.touched, `questions[${prop.itemidd-1}].question_text`)
-    console.log(prop.pr.values);
-    console.log("VALUES")
+    // console.log(prop.pr.values);
+    // console.log("VALUES")
 
-    console.log(prop.pr.errors);
-    console.log("ERRORS")
+    // console.log(prop.pr.errors);
+    // console.log("ERRORS")
     //console.log(prop.showallerr+" show all error");
     //console.log(questionerror+" question error")
     //console.log(JSON.stringify(prop.pr.values)+" VALUES");

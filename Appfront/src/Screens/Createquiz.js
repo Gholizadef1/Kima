@@ -99,10 +99,10 @@ const Createquiz = () => {
                 question_text: yup.string().required("صورت سوال نمیتواند خالی باشد")
                     .min(10, "متن سوال باید حداقل 10 کاراکتر باشد")
                     .max(70, "متن سوال شما بیشتر از جداکثر مقدار قابل قبول است."),
-                a_text: yup.string() .required("گزینه ی اول نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                b_text: yup.string() .required("گزینه ی دوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                c_text: yup.string() .required("گزینه ی سوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
-                d_text: yup.string() .required("گزینه ی چهارم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(35, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                a_text: yup.string().required("گزینه ی اول نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(50, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                b_text: yup.string().required("گزینه ی دوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(50, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                c_text: yup.string().required("گزینه ی سوم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(50, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
+                d_text: yup.string().required("گزینه ی چهارم نمیتواند خالی باشد").min(3, "هر گزینه باید حداقل 3 کاراکتر داشته باشد").max(50, "هر گزینه نمیتواند بیشتر از 35 کاراکتر باشد."),
                 //مشخص نکنه گزینه ی 1 میشه جواب
                 // key: yup.string().required(),
             })
@@ -137,14 +137,56 @@ const Createquiz = () => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
-                        formdata.append('title', values.title)
-                        formdata.append('summary', values.description)
+                        //formdata.append('title', values.title)
+                        //formdata.append('des', values.description)
+                        console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
+                            console.log("defualt toye picture")
                         }
                         else
-                            formdata.append('quiz_photo', picture)
+                           await formdata.append( "quiz_photo",picture)
 
                         console.log(formdata.data + 'formdata')
+                        var all = values;
+                        all["quiz_photo"] = formdata;
+                        
+                        all["question_count"]=numofquestion-1;
+                        console.log(all)
+                        //formdata.append(all)
+                        console.log(numofquestion+"num of questk;kj");
+
+                        const response = await axiosinst.post('quiz', all, {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                            }
+                        }
+                        )
+                            .then(function (response) {
+                                console.log(picture + ' PICTURE POST')
+
+                                console.log(response)
+                                Alert.alert('', 'گروه با موفقیت ساخته شد ', [
+                                    {
+                                        text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+                                    }
+                                ], { cancelable: false }, { style: { height: 50 } })
+
+
+                            })
+                            .catch(function (error) {
+                                {
+                                    console.log(error)
+
+                                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+
+
+                                        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                                    }], { cancelable: false }, { style: { height: 50 } })
+                                }
+                            })
+
+
                     }}
                 >
                     {(props) => (
@@ -266,8 +308,8 @@ const Createquiz = () => {
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('5%'), marginTop: hp("3%") }}>سوالات:</Text>
 
 
-                             
-                                <FieldArray validateOnChange={true}  name={"questions"}>
+
+                                <FieldArray validateOnChange={true} name={"questions"}>
                                     {({ push, pop, touched, errors }) => (
                                         <FlatList
                                             //بعدا لیست هدر بالایی ها
@@ -363,7 +405,7 @@ const Createquiz = () => {
                                                                 // else if(getIn(props.touched, `questions[${itemid}].d`)===false ){
                                                                 // await props.setFieldTouched(`questions[${itemid}].d`, true)
                                                                 // }
-                                                              //  console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
+                                                                //  console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
 
                                                                 //      // await setvalues(values.concat(numofquestion));
                                                                 //   await setquestions(questions.concat({question:"",a:"",b:"",c:"",d:"",key:""}))
@@ -474,88 +516,88 @@ const Createquiz = () => {
                                                         </View>
                                                         : null}
 
-                                                        {minnumquestion === false && maxnumquestion === false ?
-                                    <Button type={"submit"} bordered rounded style={styles.button}
-                                        //har taghiri chap vali onpress error ke function nist
-                                        //onPress={console.log(JSON.stringify(props.errors.questions))&console.log("button pressed!")}
-                                        onPress={
-                                            () => {
-                                               
-                                                    props.handleSubmit()
-                                                if (props.error === undefined) {
+                                                    {minnumquestion === false && maxnumquestion === false ?
+                                                        <Button type={"submit"} bordered rounded style={styles.button}
+                                                            //har taghiri chap vali onpress error ke function nist
+                                                            //onPress={console.log(JSON.stringify(props.errors.questions))&console.log("button pressed!")}
+                                                            onPress={
+                                                                () => {
 
-                                                }
-                                                else {
-                                                    setstillhaveerror(false);
-                                                }
-                                            }}
-                                    //async (resolve, reject) => {
+                                                                    props.handleSubmit()
+                                                                    if (props.error === undefined) {
 
-                                    // await setshowallerror(true);
-                                    // //new Promise(async()=>{
-                                    // console.log("toye subimtttttttttttttttttttttt")
-                                    // console.log(itemid + " item iddhfhgj")
-                                    // console.log(lasttouch + "lasttouch")
-                                    // await props.setFieldTouched("title", true)
-                                    // // await props.setFieldTouched("description", true)
-                                    // //  for (var i = lasttouch + 1; i <= itemid; i++) {
+                                                                    }
+                                                                    else {
+                                                                        setstillhaveerror(false);
+                                                                    }
+                                                                }}
+                                                        //async (resolve, reject) => {
+
+                                                        // await setshowallerror(true);
+                                                        // //new Promise(async()=>{
+                                                        // console.log("toye subimtttttttttttttttttttttt")
+                                                        // console.log(itemid + " item iddhfhgj")
+                                                        // console.log(lasttouch + "lasttouch")
+                                                        // await props.setFieldTouched("title", true)
+                                                        // // await props.setFieldTouched("description", true)
+                                                        // //  for (var i = lasttouch + 1; i <= itemid; i++) {
 
 
-                                    // // await props.setFieldTouched(`questions[${itemid}].question`, true)
-                                    // // await props.setFieldTouched(`questions[${itemid}].a`, true)
-                                    // // await props.setFieldTouched(`questions[${itemid}].b`, true)
-                                    // // await props.setFieldTouched(`questions[${itemid}].c`, true)
-                                    // // await props.setFieldTouched(`questions[${itemid}].d`, true)
-                                    // console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
-                                    // if (getIn(props.values, `questions[${itemid}].question`) === undefined) {
-                                    //     await props.handleChange(`questions[${itemid}].question`)("  ")
-                                    //     // await props.handleChange(`questions[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `questions[${itemid}].a`) === undefined) {
-                                    //     await props.handleChange(`questions[${itemid}].a`)("  ")
-                                    //     // await props.handleChange(`questions[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `questions[${itemid}].b`) === undefined) {
-                                    //     await props.handleChange(`questions[${itemid}].b`)("  ")
-                                    //     // await props.handleChange(`questions[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `questions[${itemid}].c`) === undefined) {
-                                    //     await props.handleChange(`questions[${itemid}].c`)("  ")
-                                    //     // await props.handleChange(`questions[${i}].question`)()
-                                    // }
-                                    // if (getIn(props.values, `questions[${itemid}].d`) === undefined) {
-                                    //     await props.handleChange(`questions[${itemid}].d`)("  ")
-                                    //     // await props.handleChange(`questions[${i}].question`)()
-                                    // }
-                                    // }
-                                    //setlasttouch(itemid)
+                                                        // // await props.setFieldTouched(`questions[${itemid}].question`, true)
+                                                        // // await props.setFieldTouched(`questions[${itemid}].a`, true)
+                                                        // // await props.setFieldTouched(`questions[${itemid}].b`, true)
+                                                        // // await props.setFieldTouched(`questions[${itemid}].c`, true)
+                                                        // // await props.setFieldTouched(`questions[${itemid}].d`, true)
+                                                        // console.log(getIn(props.values, `questions[${itemid}].question`) + " question" + itemid)
+                                                        // if (getIn(props.values, `questions[${itemid}].question`) === undefined) {
+                                                        //     await props.handleChange(`questions[${itemid}].question`)("  ")
+                                                        //     // await props.handleChange(`questions[${i}].question`)()
+                                                        // }
+                                                        // if (getIn(props.values, `questions[${itemid}].a`) === undefined) {
+                                                        //     await props.handleChange(`questions[${itemid}].a`)("  ")
+                                                        //     // await props.handleChange(`questions[${i}].question`)()
+                                                        // }
+                                                        // if (getIn(props.values, `questions[${itemid}].b`) === undefined) {
+                                                        //     await props.handleChange(`questions[${itemid}].b`)("  ")
+                                                        //     // await props.handleChange(`questions[${i}].question`)()
+                                                        // }
+                                                        // if (getIn(props.values, `questions[${itemid}].c`) === undefined) {
+                                                        //     await props.handleChange(`questions[${itemid}].c`)("  ")
+                                                        //     // await props.handleChange(`questions[${i}].question`)()
+                                                        // }
+                                                        // if (getIn(props.values, `questions[${itemid}].d`) === undefined) {
+                                                        //     await props.handleChange(`questions[${itemid}].d`)("  ")
+                                                        //     // await props.handleChange(`questions[${i}].question`)()
+                                                        // }
+                                                        // }
+                                                        //setlasttouch(itemid)
 
-                                    // resolve()
-                                    // }).then(()=>{
-                                    //     console.log("pressed then")
+                                                        // resolve()
+                                                        // }).then(()=>{
+                                                        //     console.log("pressed then")
 
-                                    // })
+                                                        // })
 
-                                    // setTimeout(() => {
-                                    //     console.log('ON SUBMITTTTTTTTTTTTTT')
-                                    //     const formdata = new FormData();
-                                    //     console.log(props.values+"    All values for submiting")
-                                    //     console.log("\n"+props.errors)
-                                    //     formdata.append('title', values.title)
-                                    //     formdata.append('summary', values.description)
-                                    //     if (picture.uri === '../../assets/tea.jpg') {
-                                    //     }
-                                    //     else
-                                    //         formdata.append('quiz_photo', picture)
+                                                        // setTimeout(() => {
+                                                        //     console.log('ON SUBMITTTTTTTTTTTTTT')
+                                                        //     const formdata = new FormData();
+                                                        //     console.log(props.values+"    All values for submiting")
+                                                        //     console.log("\n"+props.errors)
+                                                        //     formdata.append('title', values.title)
+                                                        //     formdata.append('summary', values.description)
+                                                        //     if (picture.uri === '../../assets/tea.jpg') {
+                                                        //     }
+                                                        //     else
+                                                        //         formdata.append('quiz_photo', picture)
 
-                                    //     console.log(formdata.data + 'formdata')
-                                    // }, 5000)
-                                    // setshowallerror(true)
-                                    //setTimeout(()=>setshowallerror(false),5000)
+                                                        //     console.log(formdata.data + 'formdata')
+                                                        // }, 5000)
+                                                        // setshowallerror(true)
+                                                        //setTimeout(()=>setshowallerror(false),5000)
 
-                                    >
-                                        <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
-                                    </Button> : null}
+                                                        >
+                                                            <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', left: wp('11%'), width: wp('40%') }}>ساخت کوییز</Text>
+                                                        </Button> : null}
 
                                                     {/* <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{position:"relative"}} visible={minnumquestion} animationType='fade' >
                                                 {/* <StatusBar backgroundColor='#BFDBF7' style='light' /> */}
@@ -589,7 +631,7 @@ const Createquiz = () => {
                                         </Modal> */}
 
 
-                                                 
+
                                                 </View>)}
                                         >
 
