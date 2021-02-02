@@ -53,9 +53,9 @@ const GroupPage = (prop) => {
   const [discussion, setdiscussion] = useState();
 
   useEffect(() => {
-    // setjoinedUser(false)
-    // setowner(false)
-    // setnotjoinedUser(false)
+    setjoinedUser(false)
+    setowner(false)
+    setnotjoinedUser(false)
     getUsername();
     getDiscussion();
   }, [join]);
@@ -77,7 +77,7 @@ const GroupPage = (prop) => {
           await setgroupinfo(response.data);
           await setmembernumber(groupinfo.members_count);
           console.log('PHOTOOO' +response.data.group_photo)
-          setgroupphoto(`http://c4e2a698ddac.ngrok.io${response.data.group_photo}`)
+          setgroupphoto(`http://c4e2a698ddac.ngrok.io/${response.data.group_photo}`)
 
           if (username === response.data.owner.username) {
             console.log('@@@@@@@@@@owner')
@@ -387,13 +387,13 @@ const GroupPage = (prop) => {
                       <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
-                      </Button >
+                      </Button>
                       : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => Alert.alert('', ' برای دیدن بحث های انجام شده باید عضو گروه باشید', [{
                           text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
                         }], { cancelable: false }, { style: { height: 50 } })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
-                      </Button >}
+                      </Button>}
                     <View
                       style={{
                         width: 320,

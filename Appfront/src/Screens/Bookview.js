@@ -345,8 +345,8 @@ const Bookview = (prop) => {
                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
-                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
+                    <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
+                    <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
                   </Card>
                 </View>
               </>
@@ -386,6 +386,17 @@ const Bookview = (prop) => {
             <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نقل قول های کاربران :</Text>
             : null}
 
+          {quotes != "No Quote!" && quotes.length >= 3 ?
+            <Button style={{ marginLeft: wp('83%'), marginTop: hp('-5%'), marginBottom: hp('-3%') }} transparent
+              onPress={() => {
+                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}>
+              <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+            </Button >
+            : null}
+
           {quotes != "No Quote!" ?
             <FlatList
               style={{ marginBottom: hp('5%') }}
@@ -403,17 +414,18 @@ const Bookview = (prop) => {
               data={quotes}
               renderItem={({ item }) => <>
                 <View style={{}}>
-                  <Card style={styles.cardChat}>
-                    {/* {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
+                  <Card style={styles.cardChat2}>
+                    <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.account.username}</Text>
+                    {(item.quote_text.toString().length) <= 100 ?
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
+                    {picture != 'http://699170b6d987.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar2} size={90}
                       source={{ uri: item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} size={10}
                       source={require('../../assets/group.jpg')}
-                    ></Avatar.Image>} */}
-                    {(item.quote_text.toString().length) <= 100 ?
-                      <Text style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('1%'),marginBottom:hp('5%'),marginTop:hp('1%')}}>{item.quote_text}</Text> :
-                      <Text  style={{ color: '#a9a9a9', marginLeft: wp('4%') , top:hp('1%'),marginBottom:hp('5%'),marginTop:hp('1%')}}>{item.quote_text.toString()}</Text>}
-                    {/* <Text style={{ alignSelf: 'flex-start', fontSize: 14 , top:hp('-5%'),marginHorizontal:wp('16%')}}>{item.account.username}</Text> */}
+                    ></Avatar.Image>}
                   </Card>
+
                 </View>
               </>
               }
@@ -440,14 +452,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardChat: {
-    height:hp('22%'),
+    height: hp('22%'),
     width: wp('50%'),
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
     top: hp('-6%'),
     marginBottom: hp('-2%'),
-    borderTopRightRadius: 15,
-    borderBottomLeftRadius: 15,
+    borderTopRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    backgroundColor: '#EDF2F4',
+
+  },
+  cardChat2: {
+    height: hp('32%'),
+    width: wp('55%'),
+    marginLeft: wp('5%'),
+    marginTop: hp('8%'),
+    top: hp('-6%'),
+    marginBottom: hp('-1%'),
+    borderTopRightRadius: 40,
+    borderBottomLeftRadius: 40,
     backgroundColor: '#EDF2F4',
 
   },
@@ -459,12 +483,12 @@ const styles = StyleSheet.create({
     marginTop: hp('5%')
   },
   avatar2: {
-    marginLeft: wp('18%'),
-    top: hp('18%'),
-    marginBottom:hp('3%'),
+    top: hp('1%'),
+    marginLeft: wp('20%'),
+    //    marginBottom:hp('3%'),
     width: wp('14%'),
     height: hp('8%'),
-    marginTop: hp('5%')
+    //    marginTop: hp('5%')
   }
 });
 

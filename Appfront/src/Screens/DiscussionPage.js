@@ -28,6 +28,107 @@ const DiscussionPage = (prop) => {
     const [chats, setChats] = useState();
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
+    const [theend, settheend] = useState(false)
+    const [information, setinformation] = useState([]);
+    const [count, setcount] = useState(1);
+    const [page, setpage] = useState(1);
+
+    const response = async (page) => {
+        console.log('PAGEEEE' + page)
+        console.log('DOVOM')
+        await setpage(page)
+        console.log('PAGEEEE' + page)
+        if (page === 1) {
+            console.log('PAGE 111')
+            await settheend(false)
+            await setinformation([])
+
+            console.log('IT IS HEAR SET INFO []')
+            console.log(information)
+
+        }
+        // await settheend(false)
+        // await setinformation([])
+        const id = prop.route.params.id
+        console.log(id)
+        console.log(await (await AsyncStorage.getItem('token')).toString())
+        console.log(await (await AsyncStorage.getItem('id')).toString())
+
+        try {
+            // await setTimeout(() => {  console.log("World!"); }, 5000);
+            setIDD(await (await AsyncStorage.getItem('id')).toString())
+            const response = await axiosinst.get("book/" + prop.route.params.id + '/comment', {
+                params: {
+                    filter: likeotime,
+                    page: page
+                },
+                "headers":
+                {
+                    "Content-Type": "application/json",
+                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                }
+
+            })
+            console.log(count + '  count   dfajd;lfkjs;lkfj')
+            console.log(response.data.comments)
+            await setcount(response.data.count);
+            //console.log(response)
+            console.log(count + ' COUNT COUNT COUNT COUNT COUTN')
+            console.log(response.data.count + ' COUNTTTTTTTTTTTT')
+            if (response.data.detail === 'Invalid page.')
+                settheend(true);
+            else {
+                settheend(false)
+                console.log(IDD + 'IDDresponse');
+                //  console.log(response.data)
+                console.log('++++INFO++++' + information + "++++INFO++++" + '11111')
+                // console.log(information)
+                console.log('RESPONSE DATE')
+                //console.log(response.date)
+                console.log(response.data.comments + ' RESPONSE DATA COMMENTS')
+                //page===1?setinformation(response.data):setinformation(information.concat(response.data))
+                if (response.data.message != "No Comment!") {
+                    await setinformation(information => [...information, ...response.data.comments])
+                }
+                else {
+                    setinformation(undefined)
+                }
+
+                console.log('++++INFO++++' + information + "++++INFO++++" + '22222')
+                //console.log(information)
+                setrefresh(false)
+                //     setloading(false);
+            }
+            //  console.log(information[0])
+        }
+        catch (err) {
+
+            // else if(theend===true)
+            // settheend(false)
+            setrefresh(false)
+            console.log(err.toString().split('\n')[0])
+            if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
+                settheend(true);
+            // else if(theend===true)
+            // settheend(false)
+            console.log(theend + 'THE ENDDD')
+            console.log(err);
+
+        }
+    }
+
+    const handleLoadMore = async () => {
+        console.log('END OF THE LIST')
+        if (page < count) {
+            console.log(page + 'PAGEDEEFFDHASKDFJLSKFH')
+            console.log(count + 'C OUNT ASKDFJ;LKSFJ')
+            if (theend === false)
+                response(page + 1);
+        }
+        else {
+            settheend(true)
+        }
+    };
 
     useEffect(() => {
         getChats()
@@ -44,7 +145,7 @@ const DiscussionPage = (prop) => {
     };
 
     const getChats = async () => {
-        
+
         axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
             "headers": {
                 "content-type": "application/json",
@@ -54,7 +155,6 @@ const DiscussionPage = (prop) => {
             .then(function (response) {
                 setChats(response.data.chats)
                 setloading(false)
-                console.log('DATEE' + response.data.chats[0].send_time)
             })
 
             .catch(async function (error) {
@@ -147,23 +247,30 @@ const DiscussionPage = (prop) => {
                         </View>
                     </Modal>
                 </View>
-                
+
                 <ScrollView>
-                    <Header style={{ backgroundColor: '#EDF2F4', height: hp('15%'), width: wp('100%'),borderEndColor:'#EDF2F4' }} />
-                    <Title style={{ fontSize: 24, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-8%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
+                    <Header style={{ backgroundColor: '#EDF2F4', height: hp('13%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
+                    <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
                     <FlatList
                         style={{ marginBottom: hp('5%') }}
                         showsVerticalScrollIndicator={true}
-                        onEndReached={() => {
-                            //            console.log('-----AKHAR LIST')
-                        }}
-                        onEndReachedThreshold={0.5}
                         keyExtractor={(item) => item.id}
                         refreshing={refreshchats}
                         onRefresh={async () => {
                             console.log('refresh')
                         }}
                         data={chats}
+                        onEndReached={() => handleLoadMore()}
+                        onEndReachedThreshold={0.7}
+                        ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
+                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+                        style={{ marginBottom: hp('15.5%') }}
+                        onRefresh={async () => {
+                            await setrefresh(true)
+
+                            response(1);
+
+                        }}
                         renderItem={({ item }) => <>
                             {username != item.user.username ?
                                 <View style={{}}>
@@ -185,8 +292,8 @@ const DiscussionPage = (prop) => {
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('5%'),marginRight:wp('3%') ,marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
-                                        <Text style={{fontSize:12 , color: '#a9a9a9' ,marginRight:'3%'}}>{item.send_time.toString().split('T')[0]}</Text>
+                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%' }}>{item.send_time.toString().split('T')[0]}</Text>
                                     </Card>
                                 </View>}
                         </>
@@ -195,7 +302,7 @@ const DiscussionPage = (prop) => {
                     </FlatList>
 
                     {chats.length === 0 ?
-                    <Text style={{marginLeft:wp('18%'),marginTop:hp('20%'),fontSize:15,color:'#1F7A8C'}}>در این بحث تابحال صحبتی  صورت نگرفته ...</Text>: null }
+                        <Text style={{ marginLeft: wp('18%'), marginTop: hp('20%'), fontSize: 15, color: '#1F7A8C' }}>در این بحث تابحال صحبتی صورت نگرفته ...</Text> : null}
 
                     <Button onPress={() => setModalVisible(true)} style={{
                         marginTop: hp('30%'),
@@ -232,7 +339,7 @@ const styles = StyleSheet.create({
     },
     avatar2: {
         marginLeft: wp('82%'),
-        top:hp('3%'),
+        top: hp('3%'),
         width: wp('14%'),
         height: hp('8%'),
         marginTop: hp('5%')
