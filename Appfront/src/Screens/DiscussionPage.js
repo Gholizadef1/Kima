@@ -263,7 +263,7 @@ const DiscussionPage = (prop) => {
                         onEndReached={() => handleLoadMore()}
                         onEndReachedThreshold={0.7}
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
-                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
+                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center',marginTop:hp('5%') }}>پیام دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: hp('15.5%') }}
                         onRefresh={async () => {
                             await setrefresh(true)
@@ -276,18 +276,19 @@ const DiscussionPage = (prop) => {
                                 <View style={{}}>
                                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                                         source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
-                                    ></Avatar.Image> : <Avatar.Image size={70}
+                                    ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat}>
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
                                         <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%',marginBottom:hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
                                     </Card>
                                 </View>
                                 : <View style={{}}>
                                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                                         source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
-                                    ></Avatar.Image> : <Avatar.Image size={70} style={styles.avatar2}
+                                    ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar2}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
@@ -332,14 +333,12 @@ const styles = StyleSheet.create({
     },
     avatar: {
         marginLeft: wp('2%'),
-        top: hp('3%'),
-        width: wp('14%'),
-        height: hp('8%'),
-        marginTop: hp('5%')
+        top: hp('10%'),
+        marginTop: hp('-1%')
     },
     avatar2: {
         marginLeft: wp('82%'),
-        top: hp('3%'),
+        top: hp('5%'),
         marginTop: hp('5%')
     },
 
@@ -379,24 +378,24 @@ const styles = StyleSheet.create({
     cardChat: {
         width: wp('50%'),
         marginLeft: wp('20%'),
-        marginTop: hp('-5%'),
-        top: hp('-5%'),
+        marginTop: hp('1%'),
+        top: hp('-8%'),
         marginBottom: hp('-5%'),
-        borderTopRightRadius: 15,
-        borderTopLeftRadius: 15,
-        borderBottomRightRadius: 15,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 20,
         backgroundColor: '#EDF2F4',
 
     },
     cardChat2: {
         width: wp('50%'),
-        marginLeft: wp('27%'),
-        marginTop: hp('-5%'),
+        marginLeft: wp('28.5%'),
+        marginTop: hp('-7%'),
         top: hp('-5%'),
         marginBottom: hp('-4%'),
-        borderTopRightRadius: 15,
-        borderTopLeftRadius: 15,
-        borderBottomLeftRadius: 15,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
         backgroundColor: '#EDF2F4',
 
     }
