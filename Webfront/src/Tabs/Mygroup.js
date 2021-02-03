@@ -13,7 +13,7 @@ import List from '@material-ui/core/List';
 export function Mygroup(props) {
 
 const[mygroup,setMygroup] = useState([]);
-    const[groupcount,setMygroupc] = useState();
+    const[groupcount,setMygroupc] = useState("");
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/group`,{
           headers:{
@@ -22,14 +22,18 @@ const[mygroup,setMygroup] = useState([]);
               })
           .then((res) => res.json())
           .then((data) => {
-             console.log(data);
-            setMygroup(data);
-            setMygroupc(data.Count);
+            console.log(data);
+            if(data.message === "No Group!" ){
+            setMygroupc(data.message);
+            }
+            else {
+              setMygroup(data.groups);
+            }
           });
       }, []);
       return(     
           <div>
-      {mygroup.message ==="No Group!" ? (                   
+      {groupcount ==="No Group!" ? (                   
       <div className="Nogroup" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>گروهی برای نمایش وجود ندارد</div>
 
         

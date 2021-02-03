@@ -34,7 +34,7 @@ function Quizespage (props){
 
   useEffect(()=>{
     if(isMine){
-      axios.get(`${API_BASE_URL}/user/${Cookies.get("userId")}/quiz`
+      axios.get(`${API_BASE_URL}/quiz`
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -343,14 +343,26 @@ const handleCloseSnack = (event, reason) => {
                         <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
 
-                        {isMine === true?
+                        {groups.is_owner === true?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>
                         :
+                        <div></div>
+}
+                      {groups.is_none === true ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
                         </div>
+                        :
+                        <div></div>
+                         }
+                         {groups.is_taken === true ?
+                        <div className="text-left mt-n3 ">
+                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>  آزمون</button>
+                        </div>
+                        :
+                        <div></div>
                          }
                        
                       </div>
