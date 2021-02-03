@@ -153,7 +153,14 @@ const Createquiz = () => {
                      //   all["quiz_photo"] = formdata;
                         
                         all["question_count"]=numofquestion-1;
-                        
+                        for(var i=0;i<numofquestion-1;i++){
+                            formdata.append(`questions[${i}]question_text`,all.questions[i].question_text)
+                            formdata.append(`questions[${i}]a_text`,all.questions[i].a_text)
+                            formdata.append(`questions[${i}]b_text`,all.questions[i].b_text)
+                            formdata.append(`questions[${i}]c_text`,all.questions[i].c_text)
+                            formdata.append(`questions[${i}]d_text`,all.questions[i].d_text)
+                            formdata.append(`questions[${i}]key`,all.questions[i].key)
+                        }
                        // console.log(all)
                         // var alll=json.stringify({
                         //     title:all.title,
@@ -168,7 +175,7 @@ const Createquiz = () => {
                       console.log(JSON.stringify(formdata)+" FORM DATA")
                         console.log(numofquestion+"num of questk;kj");
 
-                        const response = await axiosinst.post('quiz', JSON.stringify(all), {
+                        const response = await axiosinst.post('quiz', formdata, {
                             headers: {
                                  "Content-Type": "Application/json",
                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -178,27 +185,8 @@ const Createquiz = () => {
                             .then(async function (response) {
                                 console.log(JSON.stringify(response.data.Quiz)+" RESPONSE DATA")
                                 const id=response.data.Quiz.id;
-                                const response2=await axiosinst.put('quiz/'+id, formdata).then(()=>{
-                           
-                                console.log(picture + ' PICTURE POST')
-
-                                console.log(response)
-                                Alert.alert('', 'گروه با موفقیت ساخته شد ', [
-                                    {
-                                        text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
-                                    }
-                                ], { cancelable: false }, { style: { height: 50 } })
-                                }).catch(function (error) {
-                                {
-                                    console.log(error)
-
-                                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
-
-
-                                        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-                                    }], { cancelable: false }, { style: { height: 50 } })
-                                }
-                            })
+                              
+                            
 
 
                             })
