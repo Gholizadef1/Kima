@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View ,FlatList,TouchableOpacity} from 'react-native';
-import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
+import {Container,Header,Title,Form,Item,Input,Button, Icon, Left} from 'native-base';
 import ResultsDetail from './ResultsDetail';
 import Bookresult from '../Screens/Bookresult';
 import {withNavigation} from 'react-navigation';
@@ -12,6 +12,7 @@ const ResultsList = ({stylee,title,listresult,navigation}) => {
    // console.log(listresult)
     return(
         <View>
+        <Text style={{top:hp("3.5%"),position:"absolute",left:wp("44%"),color:"#1f7a8c",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{listresult.length} </Text>نتیجه)</Text>
             <Text style={styles.title}>
                 {title}
             </Text>

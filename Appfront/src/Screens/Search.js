@@ -148,33 +148,40 @@ const Search = ({navigation}) => {
             <Searchbar
       placeholder="Search"
       onChangeText={searching}
+      
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
       
       onEndEditing={()=>{
-            searchauthorapi(searchterm)&&searchtitleapi(searchterm)&&console.log(searchterm)
+            searchauthorapi(searchterm)&searchtitleapi(searchterm)&console.log(searchterm)
         }}
-      onIconPress={()=>{
-        searchauthorapi(searchterm)&&searchtitleapi(searchterm)&&console.log(searchterm)
+      onIconPress={(name)=>{
+        console.log("icon pressed")
+        searchauthorapi(searchterm)&searchtitleapi(searchterm)&console.log(searchterm)
+        
         }}
+        
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
           placeholder={'نام کتاب نویسنده ...'}
           style={{  borderTopLeftRadius:hp('5%'),
-          marginTop:hp('5%'),
+          marginTop:hp('6.5%'),
           
           // alignSelf:'center',
-          marginLeft:wp('5%'),
+          marginLeft:wp('4%'),
           borderTopRightRadius:hp('5%'),
           borderBottomRightRadius:hp('5%'),
           borderBottomLeftRadius:hp('5%'),
-          
-          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
-          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
         
-          }} />}
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('92%'),marginBottom:hp('0.5%')}}
+      //     clearIcon={<Feather name="cancle" size={24} color="#1f7a8c" style={{left:wp('0%'),marginRight:wp('1%'),
+        
+      // }} />}
+          iconColor={"#1f7a8c"}
+         // icon={"canle"}
+         // icon={ <Feather name="search" size={24} color="#1f7a8c" style={{height:30,width:30,alignSelf:"flex-start"}}  />}
     />
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
         <Text style={{marginTop:hp("2.5%"),alignSelf:"flex-start",marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
