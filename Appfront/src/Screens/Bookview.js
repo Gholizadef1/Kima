@@ -321,17 +321,17 @@ const Bookview = (prop) => {
               }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
 
           {comments != "No Comment!" ?
-            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نظرات کاربران :</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
             : null}
 
           {comments != "No Comment!" && comments.length >= 3 ?
-            <Button style={{ marginLeft: wp('83%'), marginTop: hp('-5%'), marginBottom: hp('-3%') }} transparent
+            <Button style={{ marginLeft: wp('80%'), marginTop: hp('-6%'), marginBottom: hp('-1%') }} transparent
               onPress={() => {
                 prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
                   title: response.data.title,
                 });
               }}>
-              <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+              <Text style={{ color: '#1F7A8C' }}>بیشتر...</Text>
             </Button >
             : null}
 
@@ -396,17 +396,17 @@ const Bookview = (prop) => {
             : null}
 
           {quotes != "No Quote!" ?
-            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('3%') }}>نقل قول های کاربران :</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5.5%') }}>نقل قول های کاربران :</Text>
             : null}
 
           {quotes != "No Quote!" && quotes.length >= 3 ?
-            <Button style={{ marginLeft: wp('83%'), marginTop: hp('-5%'), marginBottom: hp('-3%') }} transparent
+            <Button style={{ marginLeft: wp('80%'), marginTop: hp('-6%'), marginBottom: hp('-1%') }} transparent
               onPress={() => {
                 prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
                   title: response.data.title,
                 });
               }}>
-              <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
+              <Text style={{ color: '#1F7A8C' }}>بیشتر...</Text>
             </Button >
             : null}
 
