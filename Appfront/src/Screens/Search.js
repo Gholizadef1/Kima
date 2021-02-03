@@ -203,6 +203,7 @@ const Search = ({ navigation }) => {
           showtitle={true}
           countt={authorcount}
           numofcolums={0}
+          loadmore={false}
           horizantall={true}
           stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList> : <ActivityIndicator style={{ height: hp("39%") }} size={"small"} color={"gray"} ></ActivityIndicator>}
         <Image
@@ -216,16 +217,17 @@ const Search = ({ navigation }) => {
           countt={titlecount}
           showtitle={true}
           numofcolums={0}
+          loadmore={false}
           horizantall={true}
           stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList> : <ActivityIndicator style={{ height: hp("33%") }} size={"small"} color={"gray"} ></ActivityIndicator>}
 
         {/* <TouchableOpacity style={{ backgroundColor: "lightgreen", height: hp("7%"), position: "absolute", width: wp("10%"), marginBottom: hp("0%"), marginTop: hp("3.7%"), right: wp("4%"), alignSelf: "flex-end" }}>
         </TouchableOpacity> */}
         {authorcount != 0 ? <AntDesign
-          onPress={() => navigation.navigate("allsearchresults", { title: "جستجوی " +`" ${searchterm} "`,searchmode:"author" })}
+          onPress={() => navigation.navigate("allsearchresults", { title: "جستجوی " +`" ${searchterm} "`,searchmode:"author" ,searchterm:searchterm})}
           name="arrowleft" style={{ marginTop: hp("3.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" /> : null}
             {titlecount != 0 ? <AntDesign
-              onPress={() => navigation.navigate("allsearchresults",  { title: "جستجوی " +`" ${searchterm} "`,searchmode:"title" })}
+              onPress={() => navigation.navigate("allsearchresults",  { title: "جستجوی " +`" ${searchterm} "`,searchmode:"title",searchterm:searchterm })}
              name="arrowleft" style={{ marginTop: hp("45.5%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" /> : null}
 
       </ScrollView>

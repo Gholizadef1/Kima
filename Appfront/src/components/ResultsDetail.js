@@ -12,14 +12,14 @@ const ResultsDetail = ({result}) => {
 
     var kamshode="";
     useEffect(()=>{
-    console.log(result.title.toString().split(''))
+   // console.log(result.title.toString().split(''))
     
     var a=result.title.toString();
     var b=a.lenght;
     for(var i=0;i<=14;i++){
         if(a[i]!=undefined){
         kamshode+=a[i]
-        console.log(kamshode);
+       // console.log(kamshode);
         }
     }
  
@@ -38,7 +38,7 @@ const ResultsDetail = ({result}) => {
     for(var i=0;i<=12;i++){
         if(c[i]!=undefined){
         kamshode2+=c[i]
-        console.log(kamshode2);
+       // console.log(kamshode2);
         }
     }
  

@@ -8,7 +8,7 @@ import {withNavigation} from 'react-navigation';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall,showtitle}) => {
+const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall,showtitle,loadmore,onend,next}) => {
    // console.log(listresult)
     return(
         <View>
@@ -16,7 +16,7 @@ const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,hori
             {showtitle?<Text style={styles.title}>
                 {title}
             </Text>:null}
-    
+ 
             {listresult.length===0?<View style={{height:hp("33%")}}>
              </View>:null}
             {/* <View style={{backgroundColor:"lightblue",height:hp("30%"),width:wp("4%"),marginBottom:hp("-30%"),marginLeft:hp("4%")}}></View> */}
@@ -25,6 +25,16 @@ const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,hori
                 numColumns={numofcolums}
                 showsHorizontalScrollIndicator={false}
                 data={listresult}
+                onEndReached={async()=>{
+                    
+                    if(loadmore===true){
+                        if(next!=null){
+                            console.log("hi")
+                        await onend();
+                        }
+                    }
+                }}
+                onEndReachedThreshold={0.7}
                 keyExtractor={(listresult)=>listresult.id}
                 renderItem={({item})=>{
                     return(
