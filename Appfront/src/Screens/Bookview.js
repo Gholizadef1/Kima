@@ -467,11 +467,19 @@ const Bookview = (prop) => {
                 source={require('../../assets/group.jpg')}
               ></Avatar.Image>}
               <Text style={{ top: hp('-7%'), marginRight: wp('32%') }}>{user.username}</Text>
-              <Button style={styles.button} bordered>
+              <Button style={styles.button} bordered onPress={() => {
+                prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}>
                 <Text style={{ color: '#1F7A8C', marginLeft: wp('4%'), fontWeight: 'bold' }}>نوشتن نظر</Text>
                 <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-8%') }} />
               </Button>
-              <Button style={styles.button2} bordered>
+              <Button style={styles.button2} bordered onPress={() => {
+                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
+                  title: response.data.title,
+                });
+              }}>
                 <Text style={{ color: '#1F7A8C', marginLeft: wp('2%'), fontWeight: 'bold' }}>نوشتن نقل قول</Text>
                 <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-6%') }} />
               </Button>
