@@ -30,7 +30,13 @@ const userschema = yup.object({
 
 const GroupPage = (prop) => {
 
+
   console.log('STARTTTTT')
+
+
+  console.log('J===' + joinedUser)
+  console.log('N===' + notjoinedUser)
+  console.log('O===' + owner)
 
   const [refreshmembers, setrefreshmembers] = useState(false)
   const [refreshdiscussions, setrefreshdiscussions] = useState(false)
@@ -41,80 +47,154 @@ const GroupPage = (prop) => {
   const [picture, setpicture] = useState(undefined);
   const [username, setusername] = useState(null);
   const [groupinfo, setgroupinfo] = useState([]);
-  const [owner, setowner] = useState("undefined");
+  const [owner, setowner] = useState(undefined);
   const [join, setjoin] = useState(false);
-  const [joinedUser, setjoinedUser] = useState("undefined");
-  const [notjoinedUser, setnotjoinedUser] = useState("undefined");
+  const [joinedUser, setjoinedUser] = useState(undefined);
+  const [notjoinedUser, setnotjoinedUser] = useState(undefined);
   const [members, setmembers] = useState([]);
   const [groupphoto, setgroupphoto] = useState(null)
   const [reload, setreload] = useState(false)
   const [modalVisible, setModalVisible] = useState(false);
   const [membernumber, setmembernumber] = useState();
-  const [discussion, setdiscussion] = useState();
+  const [discussion, setdiscussion] = useState(undefined);
 
-  useEffect(() => {
-    setjoinedUser(false)
-    setowner(false)
-    setnotjoinedUser(false)
-    getUsername();
-    getDiscussion();
-  }, [join]);
 
-  const getUsername = async () => {
-    const id = await AsyncStorage.getItem('id');
-    const response = axiosinst.get('/user/' + id)
-      .then(function (response) {
-        console.log('USERNAME' + response.data.username)
-        setusername(response.data.username)
-        setloading4(false)
-      })
-  };
 
-  useEffect((async) => {
-    async function getgroupDetails() {
-      const response = axiosinst.get('/group/' + prop.route.params.id)
-        .then(async function (response) {
-          await setgroupinfo(response.data);
-          await setmembernumber(groupinfo.members_count);
-          console.log('PHOTOOO' + response.data.group_photo)
-          setgroupphoto(response.data.group_photo)
-
-          if (username === response.data.owner.username) {
-            console.log('@@@@@@@@@@owner')
-            await setowner("owner")
-          }
-          setloading2(false)
-        })
-    }
-    getgroupDetails()
-  }, [join])
-
-  useEffect((async) => {
-    async function getMembers() {
-      const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
-        .then(async function (response) {
-          setmembers(response.data.members)
-          console.log(response.data.members[0].user.profile_photo + " PROFILE PHOTOOOOO")
-          for (let i = 0; i < membernumber; i++) {
-            if (response.data.members[i].user.username === username && username != response.data.owner.username) {
-              setjoinedUser("joinedUser")
-              console.log('%%%%%%%%%%%%%%%%%%%joineduser')
+  const responses = async () => {
+    const response = axiosinst.get('/group/' + prop.route.params.id)
+      .then(async (response) => {
+        await setgroupinfo(response.data)
+        // await setmembernumber(groupinfo.members_count);
+        console.log('PHOTOOO' + response.data.group_photo)
+        // setgroupphoto(response.data.group_photo)
+        if (id === response.data.owner.id) {
+          console.log('@@@@@@@@@@owner')
+          await setowner("owner")
+          console.log(owner+"owner be la false")
+        }
+        else{
+        const response2 = axiosinst.get('/group/' + prop.route.params.id + '/member')
+          .then(async (response2) => {
+            setmembers(response2.data.members)
+            console.log(response2.data.members[0].user.profile_photo + " PROFILE PHOTOOOOO")
+            const id = await AsyncStorage.getItem("id");
+            console.log(id + " USERNAME")
+            console.log(response.data.owner.id + " RESPONSE.DATA.OWNER.USERNAME")
+            console.log("chera chap nemikoniiii")
+            console.log((id.toString() === response.data.owner.id.toString()) + "id hammoone ya na ")
+         // else{
+            for (let i = 0; i < groupinfo.members_count; i++) {
+              if (response2.data.members[i].user.username === username ) {
+                setjoinedUser("joinedUser")
+                console.log('%%%%%%%%%%%%%%%%%%%joineduser')
+              }
             }
-          }
-          if (joinedUser != "joinedUser" && username != response.data.owner.username) {
-            setnotjoinedUser("notjoinedUser")
-            console.log("###############notjoineduser")
-          }
-          setloading1(false)
-        })
-    }
-    getMembers()
-  }, [join])
+            if (joinedUser != undefined && joinedUser != "joinedUser" ) {
+              setnotjoinedUser("notjoinedUser")
+              console.log("###############notjoineduser")
+            }
+         // }
+           // setloading1(false)
+          }).catch(() => console.log("error aval"))}
+      })
+  }
 
 
-  console.log('J===' + joinedUser)
-  console.log('N===' + notjoinedUser)
-  console.log('O===' + owner)
+  useFocusEffect(
+    React.useCallback(() => {
+      // setjoinedUser(undefined)
+      // setowner(undefined)
+      // setnotjoinedUser(undefined)
+      // getUsername();
+      getDiscussion();
+      responses();
+
+      // console.log('J===' + joinedUser)
+      // console.log('N===' + notjoinedUser)
+      // console.log('O===' + owner)
+      // async function getgroupDetails() {
+      // await getUsername();
+
+    }, [prop.navigation])
+
+  )
+  // }
+  //  setloading2(false)
+  //  })
+  // }
+
+  // async function getMembers() {
+  // const response = 
+  // }
+  // getgroupDetails().then(()=>getMembers())
+  // if (owner === undefined) {
+  //   getMembers()
+  // }
+
+
+
+
+
+
+  // const getUsername = async () => {
+  //   const id = await AsyncStorage.getItem('id');
+  //   const response = axiosinst.get('/user/' + id)
+  //     .then(function (response) {
+  //       console.log('USERNAME' + response.data.username)
+  //       setusername(response.data.username)
+  //       setloading4(false)
+  //     })
+  // };
+
+  // useEffect((async) => {
+  //   async function getgroupDetails() {
+  //     await getUsername();
+  //     const response = axiosinst.get('/group/' + prop.route.params.id)
+  //       .then(async function (response) {
+  //         await setgroupinfo(response.data);
+  //         await setmembernumber(groupinfo.members_count);
+  //         console.log('PHOTOOO' + response.data.group_photo)
+  //         setgroupphoto(response.data.group_photo)
+  //         console.log(username + " USERNAME")
+  //         console.log(response.data.owner.username + " RESPONSE.DATA.OWNER.USERNAME")
+  //         if (username != null) {
+  //           if (username === response.data.owner.username) {
+  //             console.log('@@@@@@@@@@owner')
+  //             await setowner("owner")
+  //           }
+  //         }
+  //         setloading2(false)
+  //       })
+  //   }
+  //   getgroupDetails()
+  // }, [join])
+
+  // useEffect((async) => {
+  //   async function getMembers() {
+  //     const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
+  //       .then(async function (response) {
+  //         setmembers(response.data.members)
+  //         console.log(response.data.members[0].user.profile_photo + " PROFILE PHOTOOOOO")
+  //         for (let i = 0; i < membernumber; i++) {
+  //           if (response.data.members[i].user.username === username && username != response.data.owner.username) {
+  //             setjoinedUser("joinedUser")
+  //             console.log('%%%%%%%%%%%%%%%%%%%joineduser')
+  //           }
+  //         }
+  //         if (joinedUser != undefined && joinedUser != "joinedUser" && username != response.data.owner.username) {
+  //           setnotjoinedUser("notjoinedUser")
+  //           console.log("###############notjoineduser")
+  //         }
+  //         setloading1(false)
+  //       })
+  //   }
+  //   getMembers()
+  // }, [join])
+
+
+  // console.log('J===' + joinedUser)
+  // console.log('N===' + notjoinedUser)
+  // console.log('O===' + owner)
 
 
 
@@ -193,7 +273,7 @@ const GroupPage = (prop) => {
       });
   }
 
-  if (loading1 === false && loading2 === false && loading3 === false && loading4 === false) {
+  if (discussions!=undefined) {
     return (
       <View style={styles.container}>
         <View>
@@ -312,16 +392,16 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {groupphoto != '/media/default.png' ? <Avatar.Image style={styles.avatar} 
-            source={{ uri: "http://c4e2a698ddac.ngrok.io" + groupphoto }}
+          {groupinfo.group_photo != '/media/default.png' ? <Avatar.Image style={styles.avatar}
+            source={{ uri: "http://a59dcb2a4875.ngrok.io" + groupinfo.group_photo }}
           ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
             source={require('../../assets/group.jpg')}
           ></Avatar.Image>}
 
           <Text style={styles.groupname}>{groupinfo.title}</Text>
           <Text style={{ color: '#a9a9a9', marginLeft: wp('19'), marginTop: hp('1') }}>تعداد اعضا :{groupinfo.members_count}</Text>
-
-          {joinedUser === "joinedUser" && notjoinedUser === false && owner === false && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
+          {/* {joinedUser!=undefined&&owner!=undefined && notjoinedUser!=undefined<View> */}
+          {joinedUser === "joinedUser" && notjoinedUser === undefined && owner === undefined ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -329,7 +409,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
             </Button> : null}
 
-          {notjoinedUser === "notjoinedUser" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
+          {owner === undefined && notjoinedUser === "notjoinedUser" && joinedUser === undefined ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -337,7 +417,7 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
-          {owner === "owner" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
+          {owner === "owner" ?
             <Button style={{
               marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
@@ -345,14 +425,14 @@ const GroupPage = (prop) => {
               <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
             </Button> : null}
 
-          {owner === "" && joinedUser === "" && notjoinedUser === "" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
-            <Button style={{
-              marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
-              , backgroundColor: '#1F7A8C'
-            }} onPress={() => JoinGroup()}>
-              <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
-            </Button> : null}
-
+          {/* {owner != undefined && joinedUser != undefined && notjoinedUser != undefined&&notjoinedUser==="notjoinedUser" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
+              <Button style={{
+                marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
+                , backgroundColor: '#1F7A8C'
+              }} onPress={() => JoinGroup()}>
+                <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
+              </Button> : null} */}
+          {/* </View>:<ActivityIndicator></ActivityIndicator>} */}
           <Text style={{ fontSize: 21, marginLeft: wp('4%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
 
           <Text style={{ textAlign: 'left', marginTop: hp('2'), marginLeft: wp('10%'), marginRight: wp('1%') }}>
@@ -431,12 +511,12 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' ,marginBottom:hp('-4%')}}> اعضای گروه :</Text>
+              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold', marginBottom: hp('-4%') }}> اعضای گروه :</Text>
 
-              <Button style={{ marginLeft: wp('90%'),top:hp('-1%') }} transparent
+              <Button style={{ marginLeft: wp('90%'), top: hp('-1%') }} transparent
                 onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
                 <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
-              </Button >
+              </Button>
 
               <FlatList
                 style={{ marginBottom: hp('5%') }}
@@ -453,12 +533,12 @@ const GroupPage = (prop) => {
                 data={members}
                 renderItem={({ item }) => <>
                   <View style={{ maginLeft: wp('5%'), marginTop: hp('-4%') }}>
-                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image  
-                      source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image size={70} style={{marginLeft:wp('4%'),marginTop:hp('4%')}}
+                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://a59dcb2a4875.ngrok.io" + item.user.profile_photo }}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{ marginLeft: wp('4%'), marginTop: hp('4%') }}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start',marginLeft:wp('8%'),marginTop:hp('1%') }}>{item.user.username}</Text>
+                    <Text style={{ alignSelf: 'flex-start', marginLeft: wp('8%'), marginTop: hp('1%') }}>{item.user.username}</Text>
                     <View
                       style={{
                         width: 320,
@@ -555,7 +635,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginTop: hp('-9%'),
-    marginLeft:wp('15%')
+    marginLeft: wp('15%')
   },
   loader: {
     alignItems: 'center',
