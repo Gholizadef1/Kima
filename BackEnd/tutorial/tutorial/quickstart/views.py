@@ -700,7 +700,7 @@ class MyGroupView(APIView,PaginationHandlerMixin):
             
             gp_list=self.paginate_queryset(serializer.data)
             count = Paginator(serializer.data,10).num_pages
-            return Response({"groups" : gp_list, "count": count})
+            return Response({"groups" : gp_list, "count": count,"group":serializer.data})
         response = {'message' : 'No Group!',}
         return Response(response)
 
@@ -795,6 +795,17 @@ class QuizResultView(APIView):
         user_answer = TakeQuiz.objects.get(user=user,quiz=quiz).user_answer
         score = TakeQuiz.objects.get(user=user,quiz=quiz).score
         return Response({"Quiz":quiz_ser.data,"Questions":q_list.data,"user_answer":user_answer,"score":score})
+
+class MyQuizView(APIView):
+
+    def get(self,request,pk):
+        user = Account.objects.get(pk=pk)
+        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
+        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
+        myquiz=myquiz + taken_quiz
+        if myquiz is None:
+            return Response({"message":"No Quiz!"})
+        return Response({"Quiz":myquiz}) 
 
 class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
     serializer_class = SetQuizPhotoSerializer
