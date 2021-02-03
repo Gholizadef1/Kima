@@ -359,7 +359,7 @@ const Bookview = (prop) => {
               style={{
                 width: 320,
                 color: '#dcdcdc',
-                marginLeft: wp('5%'),
+                marginLeft: wp('7%'),
                 marginTop: hp('-3%'),
                 marginBottom: hp('1%'),
                 borderBottomColor: '#a9a9a9',
@@ -431,6 +431,20 @@ const Bookview = (prop) => {
               }
             >
             </FlatList> : null}
+
+            {quotes != "No Quote!" ?
+            <View
+              style={{
+                width: 320,
+                color: '#dcdcdc',
+                marginLeft: wp('7%'),
+                marginTop: hp('-3%'),
+                marginBottom: hp('1%'),
+                borderBottomColor: '#a9a9a9',
+                borderBottomWidth: 1
+              }}
+            />
+            : null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
