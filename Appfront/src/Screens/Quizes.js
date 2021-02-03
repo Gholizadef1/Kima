@@ -49,7 +49,7 @@ const Quizes = (prop) => {
   const [numberofpage, setnumberofpage] = useState(0);
   const [count, setcount] = useState(1);
   const [seeresult, setseeresult] = useState(false);
-  const[owner,setowner]=useState();
+  const [owner, setowner] = useState();
   // let count=0;
   const response = async (page) => {
 
@@ -90,7 +90,7 @@ const Quizes = (prop) => {
       })
       console.log(numberofgp / 10 + 'number of group ////////10')
       console.log(numberofgp + '   !!!!!!!!!  ' + numberofgp)
-      console.log(JSON.stringify(response.data.Quiz)+"  response.data.quiz")
+      console.log(JSON.stringify(response.data.Quiz) + "  response.data.quiz")
       console.log(page + 'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
       console.log(response.data + 'RESPONSE.DATA')
       console.log(response.data.Quiz + 'RESPONSE.DATA.GROUPS')
@@ -204,7 +204,7 @@ const Quizes = (prop) => {
           renderItem={({ item }) => {
 
             return (<>
-              
+
 
               <TouchableOpacity
                 activeOpacity={0}
@@ -219,30 +219,35 @@ const Quizes = (prop) => {
                 <Quizcard quizphoto={item.quiz_photo} seeresul={setseeresult} membernumber={item.question_count} discription={item.description} creator={item.creator} title={item.title} ></Quizcard>
                 {/* :null} */}
               </TouchableOpacity>
-              <TouchableOpacity
+              {item.is_none === false ? <TouchableOpacity
                 onPress={async () => {
-                  const userid=await AsyncStorage.getItem("id")
+                  const userid = await AsyncStorage.getItem("id")
+
+                  console.log(userid + " user iddfak;ljdf;lskjf;")
+                  await console.log(item.creator.id + " item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
+                  console.log((item.creator.id - userid) === 0 + " a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
                  
-                  console.log(userid+" user iddfak;ljdf;lskjf;")
-                  await console.log(item.creator.id+" item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
-                  console.log((item.creator.id-userid)===0+" a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
-                  if((item.creator.id-userid===0))
-                  {
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true})
+                  if (item.is_owner === true) {
+                    prop.navigation.navigate("quizresult", { id: item.id, ownerr: true, title: item.title })
                   }
-                  else{
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false})
+                  else if (item.is_taken === true) {
+                    prop.navigation.navigate("quizresult", { id: item.id, ownerr: false, title: item.title })
                   }
                   // if(owner!=undefined){
-                
+
                   // }
                   // await prop.seeresul(true);
                   // setTimeout(() => prop.seeresul(false), 2000)
                 }}
-                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"),top:hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+                style={{ backgroundColor: "#B7E4C7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
               >
                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> : <TouchableOpacity
+              onPress={()=> prop.navigation.navigate("quizpage", { title: item.title })}
+                style={{ backgroundColor: "#238495", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+              >
+                  <Text style={{ fontSize: hp("1.5.5%"), color: "#EEF9FB", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>
+                </TouchableOpacity>}
             </>
             )
           }}

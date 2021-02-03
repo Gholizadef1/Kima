@@ -14,12 +14,12 @@ const Quizpagenavigation = () => {
       <Quizpagenav.Navigator initialRouteName={'Groups'}>
       {/* <Quizpagenav.Screen name = 'Groups' component={Groups} options={{headerShown: false}} ></Quizpagenav.Screen> */}
       <Quizpagenav.Screen name = "quiznavigaiton" component={Quiznavigation} options={{headerShown: false}} />
-      <Quizpagenav.Screen name = "quizpage" component={Quizpage} options={({route}) => ({title: "کوییز",headerTintColor:'#1f7a8c'
+      <Quizpagenav.Screen name = "quizpage" component={Quizpage} options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
       ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4',elevation:1}
 
       })} />
-       <Quizpagenav.Screen name = "quizresult" component={Quizresult} options={({route}) => ({title: "کوییز",headerTintColor:'#1f7a8c'
+       <Quizpagenav.Screen name = "quizresult" component={Quizresult} options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
       ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4',elevation:1}
 
