@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
+import { AntDesign } from '@expo/vector-icons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Avatar } from 'react-native-paper';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -300,25 +301,17 @@ const Bookview = (prop) => {
 
                 <Text style={{
                   marginTop: hp('2%'), marginLeft: wp('2%'),
-                  textAlign: 'left', alignSelf: 'stretch'
+                  textAlign: 'left', alignSelf: 'stretch',marginBottom:hp('2%')
                 }}>{result.description}</Text>
               </Card>
             </Content>
           </Body>
 
           {comments === "No Comment!" ?
-            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%') }}>نظری در مورد این کتاب ثبت نشده ...</Text> : null}
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('24%'), marginTop: hp('3%') }}>نظری در مورد این کتاب ثبت نشده </Text> : null}
 
           {comments === "No Comment!" ?
-            <Button style={{
-              marginTop: hp('4%'), marginBottom: hp('1%'), backgroundColor: '#1F7A8C',
-              width: 200, alignSelf: 'center', borderRadius: 15
-            }}
-              onPress={() => {
-                prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
-                  title: response.data.title,
-                });
-              }}><Text style={{ marginLeft: wp('12%') }}>ثبت اولین نظر </Text></Button> : null}
+            <AntDesign name="exception1" size={23} color="#1F7A8C" style={{ marginRight: wp('78%'), top: hp('-3.5%') }} /> : null}
 
           {comments != "No Comment!" ?
             <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
@@ -381,19 +374,10 @@ const Bookview = (prop) => {
             />
             : null}
           {quotes === "No Quote!" ?
-            <Text style={{ color: '#1F7A8C', marginLeft: wp('20%'), marginTop: hp('3%'), marginBottom: hp('2%') }}>نقل قولی برای این کتاب وجود ندارد ...</Text> : null}
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('22%'), marginTop: hp('2%'), marginBottom: hp('2%') }}>نقل قولی برای این کتاب وجود ندارد </Text> : null}
 
           {quotes === "No Quote!" ?
-            <Button style={{
-              alignSelf: 'center', backgroundColor: '#1F7A8C',
-              width: 200, borderRadius: 15, marginBottom: hp('3%')
-            }}
-              onPress={() => {
-                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
-                  title: response.data.title,
-                });
-              }}><Text style={{ marginLeft: wp('10%') }}> ثبت اولین نقل قول</Text></Button>
-            : null}
+            <AntDesign name="exception1" size={23} color="#1F7A8C" style={{ marginRight: wp('80%'), top: hp('-6%') }} /> : null}
 
           {quotes != "No Quote!" ?
             <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5.5%') }}>نقل قول های کاربران :</Text>
@@ -459,7 +443,7 @@ const Bookview = (prop) => {
             />
             : null}
 
-          {quotes != "No Quote!" && comments != "No Comment!" ?
+
             <Card style={styles.cardChat3}>
               {user.profile_photo != '/media/default.png' ? <Avatar.Image
                 source={{ uri: "http://62e406c8f854.ngrok.io" + user.profile_photo }}
@@ -483,7 +467,7 @@ const Bookview = (prop) => {
                 <Text style={{ color: '#1F7A8C', marginLeft: wp('2%'), fontWeight: 'bold' }}>نوشتن نقل قول</Text>
                 <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-6%') }} />
               </Button>
-            </Card> : null}
+            </Card> 
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
