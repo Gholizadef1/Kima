@@ -50,7 +50,7 @@ function GroupsPage (props){
 
     // }
     // else{
-      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'?page='+page
+      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'&page='+page
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
@@ -278,16 +278,6 @@ const handleCloseSnack = (event, reason) => {
 
                   <form className="yekanfont">
                     <label className="mt-2 mb-n1 ">نام گروه</label>
-                    {/* <TextField
-                      autoFocus
-                      margin="dense"
-                      id="name"
-                      value={newGroup.name}
-                      type="title"
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-                    /> */}
                     <input 
                     className="form-control" 
                       id="name"

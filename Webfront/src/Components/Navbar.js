@@ -38,7 +38,7 @@ import Avatar from '@material-ui/core/Avatar';
 //import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 function NavBar (props){
-  const [user,setUser] = useState({user:null});
+  const [user,setUser] = useState("");
   const [search,setSearch] = useState([]);
 
 
@@ -52,7 +52,7 @@ function NavBar (props){
   }
 
 const searchUsers = async () => {
-
+console.log(user.user);
 const result = await axios.get(API_BASE_URL+ `/books?search=${user.user}&search-fields=author&search-fields=title`,
  ).then((res)=> {
  setSearch(res.data.results)
@@ -192,7 +192,10 @@ useEffect(() => {
           </div>
         </Modal.Header>
         <Modal.Body>
-          {search != 0 ?
+          {user.user != "" ?
+          <div>
+
+{search != 0 ?
           <div>
        {search.map((item) => (
      <div className="out" key={item.id} onClick={() => bookSelectedHandler( item)} >
@@ -203,7 +206,7 @@ useEffect(() => {
          /> 
          </div>
          <div className="bod">
-              {item.title.length >20 ?
+              {item.title.length >1 ?
 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
@@ -229,6 +232,10 @@ useEffect(() => {
        :
        <div className="not found text-center"> ): نتیجه‌ای یافت نشد</div>
 }
+          </div>
+          :
+          <div className="not found text-center">!چیزی سرچ کنید</div>
+}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleClose}>
@@ -249,3 +256,4 @@ useEffect(() => {
     }
 
     export default withRouter( NavBar);
+

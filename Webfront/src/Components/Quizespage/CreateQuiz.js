@@ -12,27 +12,17 @@ import {
 } from "react-router-dom";
 
 import Tooltip from '@material-ui/core/Tooltip';
-  import {GoSearch} from 'react-icons/go';
 import "./CreateQuiz.css";
-import Button from '@material-ui/core/Button';
-//import TextField from '@material-ui/core/TextField';
 import image from "../../assets/5.jpeg";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { v4 as uuidv4 } from 'uuid';
-import { data } from "jquery";
-
 function Quizespage (props){
     const [newQuiz,setNewQuiz] = useState({
         quiz_photo: "",
         title : "",
         description :""
-       // backError : ""
       })
     const [state , setState]=useState(
         {
@@ -148,13 +138,14 @@ const handleCloseSnack = (event, reason) => {
     console.log(validation);
   }
   const va =()=>{
-  const fd = {
-    "title":newQuiz.title,
-    "description":newQuiz.description,
-    "question_count":inputFields.length,
-    "quiz_photo":state.file,
-    "questions":inputFields
-    }
+
+  const fd ={ 
+  "title":newQuiz.title,
+  "description":newQuiz.description,
+  "question_count":inputFields.length,
+  "quiz_photo":state.file,
+  "questions":inputFields
+  }
      console.log(input);
      let back= JSON.stringify(fd);
      console.log(fd);
@@ -168,13 +159,14 @@ const handleCloseSnack = (event, reason) => {
       setOpenSnack(true);
     }
     else{
-  axios.post(API_BASE_URL+'/quiz',back,
+  axios.post(API_BASE_URL+'/quiz',fd,
   {
     headers:{
-   "Content-Type":"application/json",
+  "Content-Type":"application/json",
    "Authorization":"Token "+Cookies.get("userToken")}
     }
   ).then(response=>{    
+    console.log(response);
     if(response.data.message === "Your quiz successfully created!"){
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);

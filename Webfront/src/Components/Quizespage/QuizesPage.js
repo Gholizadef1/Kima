@@ -33,55 +33,40 @@ function Quizespage (props){
   
 
   useEffect(()=>{
-    // axios.get('http://127.0.0.1:8000/api/group')
-    //   .then(response=>{
-    //     console.log(response);
-    //     setGroups(response.data);
-    //   })
-    //   .catch(error=>{
-    //     console.log(error);
-    //   });
-
-
-    // if(filterBase==="mine"){
-    //   const newList = groups.filter((item)=>item.is_member === true);
-    //   setGroups(newList);
-    //   setPagesNumber(0)
-
-    // }
-    // else{
-      axios.get(API_BASE_URL+ '/group?filter='+filterBase+'?page='+page
+    if(isMine){
+      axios.get(`${API_BASE_URL}/user/${Cookies.get("userId")}/quiz`
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
         })
       .then(response=>{
-        console.log(response);
+        console.log(response.data.Quiz);
         //setGroups(response.data.groups);
-        if(isMine){
-          const newList = response.data.groups.filter((item)=>item.is_member === true);
-          setGroups(newList);
-        }else setGroups(response.data.groups);
-        setPagesNumber(response.data.count)
+        setGroups(response.data.Quiz);
+        console.log("f")
+      
+        // setPagesNumber(response.data.count)
       })
-      .catch(error=>{
-        console.log(error);
-      })
-    //}
+    }
   },[filterBase,page,isMine])
 
 
   const handleChangeList =(e) =>{
     setPage(1);
-    if(e.target.value!=="mine"){
+    if(e.target.value==="all"){
     setFilterBase(e.target.value);
     setIsMine(false)
-    }else {
+    console.log("fj");
+    }else if(e.target.value==="mine") {
       // const newList = groups.filter((item)=>item.is_member === true);
       // setGroups(newList);
       // //setPagesNumber(0)
       setIsMine(true);
+      console.log("fj");
+
     }
+    console.log(e.target.value);
+
 
     
     //console.log(e.target.value);
@@ -231,6 +216,10 @@ const handleCloseSnack = (event, reason) => {
     console.log(id);
     props.history.push( '/takequiz/' + id );
   }
+  const routeToMyQuizHandler = ( id ) => {
+    console.log(id);
+    props.history.push( '/reviw/' + id );
+  }
 
 
     return(
@@ -328,7 +317,7 @@ const handleCloseSnack = (event, reason) => {
                 {groups.length === 0 ? (
                  
 
-                 <p >گروهی برای نمایش وجود ندارد</p>
+                 <p >کوییزی برای نمایش وجود ندارد</p>
 
                 ) : (
                   <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2" style={{textAlign:'right'}}>
@@ -338,23 +327,25 @@ const handleCloseSnack = (event, reason) => {
 
                   <div class="col mb-4">
                     <div class="card h-100 text-right shadow-lg" >
-                      <img src={current.group_photo} class="card-img-top shadow-sm " alt={current.title}/>
+                      <img src={current.quiz_photo} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
-                        <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.summary.length >= 80 ?(
+                        <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.description.length >= 80 ?(
                           <div>
-                           <p class="card-text yekanfont mt-3" style={{fontSize:20}}>توضیحات: {current.summary.substring(0, 60)}</p>
+                           <p class="card-text yekanfont mt-3" style={{fontSize:20}}>توضیحات: {current.description.substring(0, 60)}</p>
                            <div className="btn text-muted" onClick={() => routeToQuizHandler(current.id)}>بیشتر...</div>
                            </div>
                         ):(
-                          <p class="card-text  yekanfont mt-3"style={{fontSize:20}}>توضیحات: {current.summary}</p>
+                          <p class="card-text  yekanfont mt-3"style={{fontSize:20}}>توضیحات: {current.description}</p>
                         )}
                         
                       </div>
                       <div className="align-items-center m-3">
-                        <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.members_count}</h6>
+                        <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
+                        <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
+
                         {isMine === true?
                         <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
+                        <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>
                         :
                         <div className="text-left mt-n3 ">

@@ -127,8 +127,8 @@ function Slide(props) {
    
 
               </div>
-              <div className="body">
-              {current.title.length >5 ?
+              <div className="bodyHome">
+              {current.title.length >1 ?
 <Tooltip  title= {<div type="btn" style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
@@ -181,8 +181,8 @@ function Slide(props) {
    
 
               </div>
-              <div className="body">
-              {current.title.length >5 ?
+              <div className="bodyHome">
+              {current.title.length >1 ?
                 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
@@ -235,7 +235,7 @@ function Slide(props) {
       
                     </div>
                     <div className="bodyHome">
-                    {current.title.length >5 ?
+                    {current.title.length >1 ?
       <Tooltip  title= {<div style={{color: "white",
       fontFamily:"Yekan",
       fontSize:20,
