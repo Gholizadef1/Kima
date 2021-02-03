@@ -47,7 +47,7 @@ urlpatterns = [
     path('user/<int:pk>/comment',CommentProfileView.as_view()),
     path('user/<int:pk>/group',MyGroupView.as_view()),
     path('user/<int:pk>',UserProfileView.as_view()),
-    path('book/search',kyma.views.DynamicBookAPIView.as_view()),
+    path('books',kyma.views.DynamicBookAPIView.as_view()),
     path('user/<int:pk>/change-password', ChangePasswordView.as_view(), name='change-password'),
     path('user/<int:pk>/update-profile', UpdateUserProfileView.as_view(), name='update-profile'),
     path('bookinfo', kyma.views.BookListView.as_view()),

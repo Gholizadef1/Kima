@@ -254,3 +254,9 @@ class MyQuizSerializer(serializers.ModelSerializer):
 
     def to_representation(self,value):
         return QuizSerializer(Quiz.objects.get(pk=value.quiz.id),).data
+
+class PostQuizSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=100,required=True)
+    description = serializers.CharField()
+    question_count = serializers.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(15)])
+    questions = QuestionSerializer(many=True)

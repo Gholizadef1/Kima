@@ -2,7 +2,7 @@ from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
 from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser,MultiPartParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -24,6 +24,7 @@ from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from django.core.paginator import Paginator
+import json
 
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
@@ -705,18 +706,14 @@ class MyGroupView(APIView,PaginationHandlerMixin):
 
 class QuizView(APIView,PaginationHandlerMixin):
     pagination_class = BasicPagination
+    parser_classes = [MultiPartParser]
 
     def post(self,request):
         user = request.user
         title = request.data.get("title")
         description = request.data.get("description")
         question_count = request.data.get("question_count")
-        if 'quiz_photo' in request.FILES:
-            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["quiz_photo"],question_count=question_count)
-            
-        else:
-            new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
-
+        new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
         counter = 0
         questions = request.data.get("questions")
         new_quiz.save()
@@ -781,6 +778,13 @@ class TakeQuizView(APIView):
             quiz.delete()
             return Response({"message":"You successfully deleted your quiz!"})
         return Response({"message":"You are not allowed to delete this quiz!"})
+
+    def put(self,request,pk):
+        quiz = Quiz.objects.get(pk=pk)
+        quiz.quiz_photo = request.FILES["quiz_photo"]
+        quiz.save()
+        return Response({"quiz_photo":quiz.quiz_photo},status=status.HTTP_200_OK)
+
 
 class QuizResultView(APIView):
 
