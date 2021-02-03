@@ -205,7 +205,7 @@ const handleCloseDialog = () => {
                    
                    {comments.map ((current) => (
                    
-                <div className="border border-dark rounded-lg m-1 px-2 color2" style={{direction:"rtl"}}>
+                <div className="border border-dark rounded-lg m-1 px-2 " style={{direction:"rtl",backgroundColor:"rgb(238,243,250)"}}>
                    <div className="d-flex px-md-3 py-3">
                      <Avatar alt={current.user.username} src={`${API_BASE_URL}${current.user.profile_photo}`} style={{width:60, height:60}} />
                      <div className="ml-auto mr-3">
