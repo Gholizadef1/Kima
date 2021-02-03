@@ -19,6 +19,7 @@ const Bookview = (prop) => {
   const [ratenum, setratenum] = useState(null);
   const [comments, setComments] = useState(null);
   const [quotes, setQuotes] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setloading] = useState(true);
   const [loading2, setloading2] = useState(true);
   const [loading3, setloading3] = useState(true);
@@ -124,6 +125,8 @@ const Bookview = (prop) => {
     const id = await AsyncStorage.getItem('id');
     const response = axiosinst.get('/user/' + id)
       .then(function (response) {
+        setUser(response.data)
+        console.log('profile=='+user.profile_photo)
         console.log('USERNAME' + response.data)
       })
   };
@@ -349,7 +352,7 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image 
+                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image
                       source={{ uri: "http://62e406c8f854.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                       source={require('../../assets/group.jpg')}
@@ -428,9 +431,9 @@ const Bookview = (prop) => {
                     {(item.quote_text.toString().length) <= 100 ?
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
-                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image 
+                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image
                       source={{ uri: "http://62e406c8f854.ngrok.io" + item.account.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar2} size={50}
+                    ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                   </Card>
@@ -441,7 +444,7 @@ const Bookview = (prop) => {
             >
             </FlatList> : null}
 
-            {quotes != "No Quote!" ?
+          {quotes != "No Quote!" ?
             <View
               style={{
                 width: 320,
@@ -455,10 +458,14 @@ const Bookview = (prop) => {
             />
             : null}
 
-            {quotes != "No Quote!" && comments != "No Comment!" ?
-            <Card style = {styles.cardChat3}>
-
-            </Card> :null}
+          {quotes != "No Quote!" && comments != "No Comment!" ?
+            <Card style={styles.cardChat3}>
+              {user.profile_photo != '/media/default.png' ? <Avatar.Image
+                source={{ uri: "http://62e406c8f854.ngrok.io" + user.profile_photo }}
+              ></Avatar.Image> : <Avatar.Image  style={styles.avatar3} size={70}
+                source={require('../../assets/group.jpg')}
+              ></Avatar.Image>}
+            </Card> : null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
@@ -504,10 +511,10 @@ const styles = StyleSheet.create({
 
   },
   cardChat3: {
-    height: hp('35%'),
-    width: wp('60%'),
-    marginLeft: wp('21%'),
-    marginTop: hp('8%'),
+    height: hp('30%'),
+    width: wp('75%'),
+    marginLeft: wp('13%'),
+    marginTop: hp('13%'),
     top: hp('-6%'),
     marginBottom: hp('-1%'),
     borderTopRightRadius: 40,
@@ -523,6 +530,11 @@ const styles = StyleSheet.create({
   avatar2: {
     top: hp('1%'),
     marginLeft: wp('20%')
+  },
+  avatar3: {
+    marginTop:hp('3%'),
+    top: hp('-8%'),
+    marginLeft: wp('28%')
   }
 });
 
