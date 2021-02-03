@@ -200,6 +200,7 @@ const Search = ({ navigation }) => {
         {authorloading === false ? <ResultsList
           navigation={navigation}
           listresult={authors}
+          showtitle={true}
           countt={authorcount}
           numofcolums={0}
           horizantall={true}
@@ -213,6 +214,7 @@ const Search = ({ navigation }) => {
           navigation={navigation}
           listresult={titles}
           countt={titlecount}
+          showtitle={true}
           numofcolums={0}
           horizantall={true}
           stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList> : <ActivityIndicator style={{ height: hp("33%") }} size={"small"} color={"gray"} ></ActivityIndicator>}

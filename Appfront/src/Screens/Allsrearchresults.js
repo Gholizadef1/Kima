@@ -10,7 +10,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import axiosinst from '../api/axiosinst';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect } from '@react-navigation/native';
-
+import ResultsList from "../components/ResultsList";
+import { ActivityIndicator } from 'react-native-paper';
 
 const Allsearchresults = (prop) => { 
     const [authorcount, setauthorcount] = useState();
@@ -50,7 +51,28 @@ const Allsearchresults = (prop) => {
           searchauthorapi('')
       }, [])
     return(      
-      <View><Text>All search results</Text></View>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
+
+        {/* <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={async()=>{
+             // searchapi(term)&&
+              await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/> */}
+      
+        {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
+        {authorcount != undefined? <Text style={{ marginTop: hp("2.5%"), alignSelf: "flex-start", marginLeft: hp('2%'), color: "gray" }}>با اطلاعات شما {authorcount } کتاب پیدا شدند</Text> : null}
+        {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
+        <ScrollView style={{marginTop:hp("1.5%")}}>
+  
+  
+          {authorloading === false ? <ResultsList
+            navigation={prop.navigation}
+            listresult={authors}
+            countt={authorcount}
+            numofcolums={3}
+            horizantall={false}
+            showtitle={false}
+            stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList> : <ActivityIndicator style={{ height: hp("39%") }} size={"small"} color={"gray"} ></ActivityIndicator>}
+            </ScrollView>
+         </View>
     );
 }
 

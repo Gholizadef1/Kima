@@ -8,14 +8,14 @@ import {withNavigation} from 'react-navigation';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall}) => {
+const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall,showtitle}) => {
    // console.log(listresult)
     return(
         <View>
         <Text style={{top:hp("3.7%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>
-            <Text style={styles.title}>
+            {showtitle?<Text style={styles.title}>
                 {title}
-            </Text>
+            </Text>:null}
     
             {listresult.length===0?<View style={{height:hp("33%")}}>
              </View>:null}
