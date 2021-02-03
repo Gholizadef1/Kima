@@ -50,6 +50,7 @@ const Bookview = (prop) => {
     getResult(id);
     getComments()
     getQoutes()
+    getUsername()
   }, [refresh]);
 
   // const commentt = `${}`.toString();
@@ -118,6 +119,14 @@ const Bookview = (prop) => {
         console.log(error.code + 'ERROR CODE')
       });
   }
+
+  const getUsername = async () => {
+    const id = await AsyncStorage.getItem('id');
+    const response = axiosinst.get('/user/' + id)
+      .then(function (response) {
+        console.log('USERNAME' + response.data)
+      })
+  };
 
   if (!result) {
     return null;
