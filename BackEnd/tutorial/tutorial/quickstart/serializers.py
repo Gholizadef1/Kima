@@ -242,6 +242,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = ['question_num','question_text','a_text','b_text','c_text','d_text','key']
 
 class MyQuizSerializer(serializers.ModelSerializer):
+    creator = UserProfileSerializer(read_only=True)
     is_taken = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
     is_none = serializers.SerializerMethodField()
