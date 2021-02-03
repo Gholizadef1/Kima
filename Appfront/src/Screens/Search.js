@@ -201,6 +201,8 @@ const Search = ({ navigation }) => {
           navigation={navigation}
           listresult={authors}
           countt={authorcount}
+          numofcolums={0}
+          horizantall={true}
           stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList> : <ActivityIndicator style={{ height: hp("39%") }} size={"small"} color={"gray"} ></ActivityIndicator>}
         <Image
           source={require('../../assets/line3.png')}
@@ -211,6 +213,8 @@ const Search = ({ navigation }) => {
           navigation={navigation}
           listresult={titles}
           countt={titlecount}
+          numofcolums={0}
+          horizantall={true}
           stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList> : <ActivityIndicator style={{ height: hp("33%") }} size={"small"} color={"gray"} ></ActivityIndicator>}
 
         {/* <TouchableOpacity style={{ backgroundColor: "lightgreen", height: hp("7%"), position: "absolute", width: wp("10%"), marginBottom: hp("0%"), marginTop: hp("3.7%"), right: wp("4%"), alignSelf: "flex-end" }}>

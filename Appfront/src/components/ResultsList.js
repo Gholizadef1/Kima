@@ -8,7 +8,7 @@ import {withNavigation} from 'react-navigation';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const ResultsList = ({stylee,title,listresult,navigation,countt}) => {
+const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall}) => {
    // console.log(listresult)
     return(
         <View>
@@ -21,7 +21,8 @@ const ResultsList = ({stylee,title,listresult,navigation,countt}) => {
              </View>:null}
             {/* <View style={{backgroundColor:"lightblue",height:hp("30%"),width:wp("4%"),marginBottom:hp("-30%"),marginLeft:hp("4%")}}></View> */}
             <FlatList  style={styles.flastlist}
-                horizontal={true}
+                horizontal={horizantall}
+                numColumns={numofcolums}
                 showsHorizontalScrollIndicator={false}
                 data={listresult}
                 keyExtractor={(listresult)=>listresult.id}
