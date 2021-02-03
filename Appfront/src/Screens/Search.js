@@ -31,6 +31,8 @@ const Search = ({navigation}) => {
     const [authorloading,setauthorloading]=useState(false);
     const [titleloading,settitleloading]=useState(false);
     // const [errormessage,setErrormessage]=useState('');
+    const [authorcount,setauthorcount]=useState();
+    const[titlecount,settitlecount]=useState();
     // let sumbit =false;
     const serchitem='';
     // if(term===undefined)
@@ -51,6 +53,7 @@ const Search = ({navigation}) => {
        // })
         console.log(JSON.stringify(response.data));
         setResults(response.data.results);
+     
     }
     catch(err){
         console.log(err);
@@ -80,6 +83,7 @@ const Search = ({navigation}) => {
         await setAuthors(response.data.results);
        // if(authors===response.data.results){
         setauthorloading(false);
+        setauthorcount(response.data.count);
         //}
     }
     catch(err){
@@ -112,6 +116,7 @@ const Search = ({navigation}) => {
         await setTitles(response.data.results);
      //   if(titles===response.data.results){
           settitleloading(false);
+          settitlecount(response.data.count);
        // }
     }
     catch(err){
@@ -184,13 +189,13 @@ const Search = ({navigation}) => {
          // icon={ <Feather name="search" size={24} color="#1f7a8c" style={{height:30,width:30,alignSelf:"flex-start"}}  />}
     />
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        <Text style={{marginTop:hp("2.5%"),alignSelf:"flex-start",marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
+        {authorcount!=undefined&&titlecount!=undefined?<Text style={{marginTop:hp("2.5%"),alignSelf:"flex-start",marginLeft:hp('2%'),color:"gray"}}>با اطلاعات شما {authorcount+titlecount} کتاب پیدا شدند</Text>:null}
         {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
         <ScrollView style={{}}>
         {authorloading===false?<ResultsList 
         navigation={navigation}
         listresult={authors}
-        
+        countt={authorcount}
         stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>:<ActivityIndicator style={{height:hp("39%")}} size={"small"} color={"gray"} ></ActivityIndicator>}
           <Image
          source={require('../../assets/line3.png')}
@@ -199,6 +204,7 @@ const Search = ({navigation}) => {
         {titleloading===false?<ResultsList 
         navigation={navigation}
         listresult={titles}
+        countt={titlecount}
         stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>:<ActivityIndicator style={{height:hp("33%")}} size={"small"} color={"gray"} ></ActivityIndicator>}
         </ScrollView>
         {/* <ActivityIndicator size={"large"} color={"gray"} ></ActivityIndicator>} */}

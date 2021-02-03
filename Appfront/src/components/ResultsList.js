@@ -8,11 +8,11 @@ import {withNavigation} from 'react-navigation';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const ResultsList = ({stylee,title,listresult,navigation}) => {
+const ResultsList = ({stylee,title,listresult,navigation,countt}) => {
    // console.log(listresult)
     return(
         <View>
-        <Text style={{top:hp("3.5%"),position:"absolute",left:wp("44%"),color:"#1f7a8c",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{listresult.length} </Text>نتیجه)</Text>
+        <Text style={{top:hp("3.5%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>
             <Text style={styles.title}>
                 {title}
             </Text>
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         marginLeft:wp("4%"),
         marginTop:hp("3.5%"),
         fontSize:hp("1.6%"),
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:"#1f7a8c"
     },
     flastlist:{
         marginHorizontal:wp("0%"),
