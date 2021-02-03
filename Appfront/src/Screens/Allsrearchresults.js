@@ -12,9 +12,43 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const Allsearchresults = ({navigation}) => { 
-
- 
+const Allsearchresults = (prop) => { 
+    const [authorcount, setauthorcount] = useState();
+    const [authorloading, setauthorloading] = useState(false);
+    const [authors, setAuthors] = useState([]);
+    const searchauthorapi = async (searchTerm) => {
+        setauthorloading(true);
+        console.log(searchTerm + "  SEARCHTERMAUTHORAPI")
+        try {
+    
+          const response = await axiosinst.get('books' + "?search=" + searchTerm + "&search-fields="+prop.route.params.searchmode)
+          //     params:{
+          //       //  page:1,
+          //         search:searchTerm,
+          //         search_fields:'author',
+    
+    
+          //     }
+          // })
+          console.log(JSON.stringify(response.data.results));
+          await setAuthors(response.data.results);
+          // if(authors===response.data.results){
+          setauthorloading(false);
+          setauthorcount(response.data.count);
+          //}
+        }
+        catch (err) {
+          console.log(err);
+          Alert.alert('oops', ' حتما اشتباهی شده دوباره امتحان کن :)', [{
+    
+    
+            Title: 'فهمیدم', onPress: () => console.log('alert closed')
+          }])
+        }
+      }
+      useEffect(() => {
+          searchauthorapi('')
+      }, [])
     return(      
       <View><Text>All search results</Text></View>
     );

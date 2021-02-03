@@ -220,10 +220,10 @@ const Search = ({ navigation }) => {
         {/* <TouchableOpacity style={{ backgroundColor: "lightgreen", height: hp("7%"), position: "absolute", width: wp("10%"), marginBottom: hp("0%"), marginTop: hp("3.7%"), right: wp("4%"), alignSelf: "flex-end" }}>
         </TouchableOpacity> */}
         {authorcount != 0 ? <AntDesign
-          onPress={() => navigation.navigate("allsearchresults", { title: "جستجوی " +`" ${searchterm} "` })}
+          onPress={() => navigation.navigate("allsearchresults", { title: "جستجوی " +`" ${searchterm} "`,searchmode:"author" })}
           name="arrowleft" style={{ marginTop: hp("3.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" /> : null}
             {titlecount != 0 ? <AntDesign
-              onPress={() => navigation.navigate("allsearchresults",  { title: "جستجوی " +`" ${searchterm} "` })}
+              onPress={() => navigation.navigate("allsearchresults",  { title: "جستجوی " +`" ${searchterm} "`,searchmode:"title" })}
              name="arrowleft" style={{ marginTop: hp("45.5%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" /> : null}
 
       </ScrollView>
