@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, View, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList, TextInput, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList, TextInput, ActivityIndicator } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body, Right, Left, Picker, Form, Item } from 'native-base';
 import { withNavigation } from 'react-navigation'
 import axiosinst from '../api/axiosinst'
@@ -468,8 +468,12 @@ const Bookview = (prop) => {
               ></Avatar.Image>}
               <Text style={{ top: hp('-7%'), marginRight: wp('32%') }}>{user.username}</Text>
               <Button style={styles.button} bordered>
-                <Text style={{color:'#1F7A8C', marginLeft:wp('4%'),fontWeight:'bold'}}>نوشتن نظر</Text>
-                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{left:wp('-8%')}} />
+                <Text style={{ color: '#1F7A8C', marginLeft: wp('4%'), fontWeight: 'bold' }}>نوشتن نظر</Text>
+                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-8%') }} />
+              </Button>
+              <Button style={styles.button2} bordered>
+                <Text style={{ color: '#1F7A8C', marginLeft: wp('2%'), fontWeight: 'bold' }}>نوشتن نقل قول</Text>
+                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-6%') }} />
               </Button>
             </Card> : null}
         </ScrollView>
@@ -517,7 +521,7 @@ const styles = StyleSheet.create({
 
   },
   cardChat3: {
-    height: hp('30%'),
+    height: hp('33%'),
     width: wp('75%'),
     marginLeft: wp('13%'),
     marginTop: hp('13%'),
@@ -542,14 +546,22 @@ const styles = StyleSheet.create({
     top: hp('-8%'),
     marginLeft: wp('28%')
   },
-  button:{
-    borderRadius:30,
-    height:hp('7%'),
-    width:wp('43%'),
-    marginLeft:wp('16%'),
-    borderColor:'#1F7A8C',
-    top:hp('-5%')
-  }
+  button: {
+    borderRadius: 30,
+    height: hp('7%'),
+    width: wp('43%'),
+    marginLeft: wp('16%'),
+    borderColor: '#1F7A8C',
+    top: hp('-5%')
+  },
+  button2: {
+    borderRadius: 30,
+    height: hp('7%'),
+    width: wp('43%'),
+    marginLeft: wp('16%'),
+    borderColor: '#1F7A8C',
+    top: hp('-3%')
+  },
 });
 
 export default Bookview;
