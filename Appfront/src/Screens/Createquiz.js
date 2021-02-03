@@ -137,8 +137,8 @@ const Createquiz = () => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
-                        // formdata.append('title', values.title)
-                        // formdata.append('description', values.description)
+                         formdata.append('title', values.title)
+                         formdata.append('description', values.description)
                         // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
@@ -168,10 +168,10 @@ const Createquiz = () => {
                         //     question_count:all.question_count,
                             
                         // })
-                       
+                       formdata.append("question_count",numofquestion-1);
                       //  formdata.append("questions",all.questions)
                       //  formdata.append(all)
-                      console.log(JSON.stringify({"part":all,"quiz_photo":formdata})+"  innnnnnnn")
+                     // console.log(JSON.stringify({"part":all,"quiz_photo":formdata})+"  innnnnnnn")
                       console.log(JSON.stringify(formdata)+" FORM DATA")
                         console.log(numofquestion+"num of questk;kj");
 
