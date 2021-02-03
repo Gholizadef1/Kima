@@ -192,8 +192,9 @@ const Search = ({ navigation }) => {
       // icon={ <Feather name="search" size={24} color="#1f7a8c" style={{height:30,width:30,alignSelf:"flex-start"}}  />}
       />
       {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-      {authorcount != undefined && titlecount != undefined ? <Text style={{ marginTop: hp("2.5%"), alignSelf: "flex-start", marginLeft: hp('2%'), color: "gray" }}>با اطلاعات شما {authorcount + titlecount} کتاب پیدا شدند</Text> : null}
+      {authorcount != undefined && titlecount != undefined ? <Text style={{ marginTop: hp("13.5%"), alignSelf: "flex-start",position:"absolute" ,marginLeft: hp('2%'),fontSize:hp("1.4%"), color: "gray" }}>با اطلاعات شما {authorcount + titlecount} کتاب پیدا شدند</Text> : null}
       {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
+      <View style={{marginTop:hp("4%")}}></View>
       <ScrollView style={{}}>
 
 

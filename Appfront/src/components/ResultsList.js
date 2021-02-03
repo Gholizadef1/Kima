@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     title:{
         marginLeft:wp("4%"),
         marginTop:hp("3.5%"),
-        fontSize:hp("1.6%"),
+        fontSize:hp("1.7%"),
         fontWeight:'bold',
         color:"#1f7a8c"
     },
