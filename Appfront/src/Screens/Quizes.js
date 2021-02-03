@@ -77,7 +77,7 @@ const Quizes = (prop) => {
 
       const id = await (AsyncStorage.getItem('id'))
       console.log(id + "idf;lkadf;kjf;lkjf")
-      const response = await axiosinst.get("user/" + id + "/quiz", {
+      const response = await axiosinst.get("quiz", {
         params: {
           page: page
         },
@@ -185,7 +185,7 @@ const Quizes = (prop) => {
 
         {(information != undefined) ? <FlatList
           ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
-            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom: hp('3%') }}>گروه دیگری وجود ندارد</Text></View>)}
+            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom: hp('3%') }}>کوییز دیگری وجود ندارد</Text></View>)}
           style={{ marginBottom: hp('-2%') }}
           showsVerticalScrollIndicator={false}
           onEndReached={() => handleLoadMore()}
@@ -239,7 +239,7 @@ const Quizes = (prop) => {
                   // await prop.seeresul(true);
                   // setTimeout(() => prop.seeresul(false), 2000)
                 }}
-                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"), bottom: hp("11.8%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-end" }}
+                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"),top:hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
               >
                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
               </TouchableOpacity>
@@ -248,7 +248,7 @@ const Quizes = (prop) => {
           }}
 
         >
-        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
+        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز را بسازید</Text>}
         {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
         {/* <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
