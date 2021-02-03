@@ -15,60 +15,42 @@ function ReviewQuiz(props) {
 
 
     useEffect(()=>{
+
+      axios.get(`${API_BASE_URL}/user/${1}/quiz/"${1}/result`)
+      .then(response=>{
+             console.log(response.data);
+             setUserAnswers(response);
+             setUserScore(`امتیاز شما = ${response.data.score}`);
+
+             var i;
+            for(i=1;i < questions.length+1;i++){
+              document.getElementById(i+userAnswers[i-1].key).style.backgroundColor = "red";
+              document.getElementById(i+userAnswers[i-1].key).style.color = "white";
+             }
+           })
+           .catch(error=>{
+             console.log(error);
+           });
+
+
+
         axios.get(API_BASE_URL + "/quiz/" + 1)
         .then(response=>{
             setQuiz(response.data.Quiz);
             setCreator(response.data.Quiz.creator);
             setQuestions(response.data.Questions);
-             console.log(response);
+            console.log(response);
+            var i;
+            for(i=1;i < questions.length+1;i++){
+              document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
+              document.getElementById(i+questions[i-1].key).style.color = "white";
+             }
            })
            .catch(error=>{
              console.log(error);
            });
     },[props.match.params.quizId])
 
-    const submitAnswer = (e) => {
-      e.target.setAttribute("hidden", "");
-      //getElementById("handleRuoteToQuizs").setAttribute("hidden", "");
-      document.getElementById("handleRuoteToQuizs").style.display = "block";
-      //show true answers
-      //document.getElementById("a").style.backgroundColor = "red";
-      //document.getElementById("a").style.backgroundColor = "green";
-      //document.getElementById("a").style.color = "white";
-      var i;
-      for(i=1;i < questions.length+1;i++){
-        var chosen= document.getElementById(i).getElementsByClassName("active")[0].id;
-        document.getElementById(chosen).style.color = "white";
-        document.getElementById(chosen).style.backgroundColor = "red";
-       
-        document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
-        document.getElementById(i+questions[i-1].key).style.color = "white";
-         setUserAnswers( userAnswers.push(chosen[chosen.length -1]));
-     
-       }
-      
-      //post answer
-      const payload={
-        "user_answer": userAnswers
-      }
-      //const back= JSON.stringify(userAnswers);
-      console.log(userAnswers);
-      axios.post(API_BASE_URL + "/quiz/" + 1
-      ,payload
-      ,{
-        headers:{
-        "Content-Type":"application/json",
-       "Authorization":"Token "+Cookies.get("userToken")}
-        })
-        .then(response=>{
-             console.log(response);
-             //setUserScore(response.data.score+"امتیاز شما = ");
-             setUserScore(`امتیاز شما = ${response.data.score}`);
-           })
-           .catch(error=>{
-             console.log(error);
-           });
-  }
 
   const handleRuoteToQuizs=() =>{
     props.history.push('/quizez');
@@ -137,11 +119,11 @@ function ReviewQuiz(props) {
                       )} 
 
               </div>
-              <div className="d-flex">
-                <button className="btn mx-auto mb-2 btn-info" onClick={submitAnswer} >پایان آزمون</button>
-                <button className="btn mx-auto mb-2 btn-info" id="handleRuoteToQuizs" onClick={handleRuoteToQuizs} style={{display:"none"}} >خروج</button>
-              </div>
               <h3 className="border-bottom border-top my-2 pt-2 border-success text-center mx-5 rounded-pill">{userScore}</h3>
+              <div className="d-flex">
+                <button className="btn mx-auto mb-2 btn-info" id="handleRuoteToQuizs" onClick={handleRuoteToQuizs} >خروج</button>
+              </div>
+             
 
           </div>
         </div>

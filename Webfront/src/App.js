@@ -22,7 +22,9 @@ import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
 import ProtectedRoute  from "./components/protect";
 import Discussion  from "./components/discusstion/discussion";
-import TakeQuiz from "./components/quiz/takeQuiz"
+import TakeQuiz from "./components/quiz/takeQuiz";
+import ReviewQuiz from "./components/quiz/reviewQuiz"
+
 
 
 function App(props) {
@@ -61,6 +63,10 @@ function App(props) {
             <ProtectedRoute path="/discussion/:groupId/:discussionId" component={Discussion}/>
 
             <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
+
+            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/>
+
+            
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">
