@@ -50,6 +50,7 @@ const Quizes = (prop) => {
   const [count, setcount] = useState(1);
   const [seeresult, setseeresult] = useState(false);
   const [owner, setowner] = useState();
+
   // let count=0;
   const response = async (page) => {
 
@@ -202,17 +203,18 @@ const Quizes = (prop) => {
           onEndReachedThreshold={0.5}
 
           renderItem={({ item }) => {
+           
 
             return (<>
 
 
               <TouchableOpacity
-                activeOpacity={0}
+                activeOpacity={1}
                 style={{ backgroundColor: 'white', marginBottom: 0 }}
                 onPress={async () => {
                   if (seeresult === true) {
 
-                    prop.navigation.navigate("کوییز ها")
+                    //prop.navigation.navigate("کوییز ها")
                   }
                 }
                 }>
@@ -226,7 +228,7 @@ const Quizes = (prop) => {
                   console.log(userid + " user iddfak;ljdf;lskjf;")
                   await console.log(item.creator.id + " item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
                   console.log((item.creator.id - userid) === 0 + " a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
-                 
+
                   if (item.is_owner === true) {
                     prop.navigation.navigate("quizresult", { id: item.id, ownerr: true, title: item.title })
                   }
@@ -243,7 +245,7 @@ const Quizes = (prop) => {
               >
                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
               </TouchableOpacity> : <TouchableOpacity
-              onPress={()=> prop.navigation.navigate("quizpage", { title: item.title })}
+                onPress={() => prop.navigation.navigate("quizpage", { title: item.title })}
                 style={{ backgroundColor: "#238495", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
               >
                   <Text style={{ fontSize: hp("1.5.5%"), color: "#EEF9FB", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>
