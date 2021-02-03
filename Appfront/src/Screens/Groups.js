@@ -154,7 +154,7 @@ const Groups = ({navigation}) => {
      try{
        console.log('  omad to response')
        console.log('api/group'+likeotime)
-
+console.log(await AsyncStorage.getItem('token'));
 
       const response = await axiosinst.get('/group',{
         params: {
@@ -176,7 +176,7 @@ const Groups = ({navigation}) => {
    }
    else{
   // console.log(response.data+'RESPONSE.DATA')
-  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+  console.log(JSON.stringify(response.data.groups)+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
    console.log(page+' PAGE BAD COUNT')
