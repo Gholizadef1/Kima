@@ -783,7 +783,6 @@ class TakeQuizView(APIView):
     #     quiz.save()
     #     return Response({"quiz_photo":quiz.quiz_photo},status=status.HTTP_200_OK)
 
-
 class QuizResultView(APIView):
 
     def get(self,request,user_pk,quiz_pk):
@@ -819,3 +818,9 @@ class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
 
     def put(self,request,*args,**kwargs):
         return self.partial_update(request, *args, **kwargs)
+
+class DynamicQuizAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = Quiz.objects.all()
+    serializer_class = QuizSerializer
+    search_fields = ['title']

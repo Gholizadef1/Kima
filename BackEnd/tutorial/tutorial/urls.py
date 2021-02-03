@@ -54,6 +54,7 @@ urlpatterns = [
     path('register',RegistrationView.as_view()),
     path('login',LoginView.as_view()),
     path('quiz',QuizView.as_view()),
+    path('quizes',DynamicQuizAPIView.as_view()),
     path('quiz/<int:pk>',TakeQuizView.as_view()),
     path('quiz/<int:pk>/photo',SetQuizPhotoView.as_view()),
     path('user/<user_pk>/quiz/<quiz_pk>/result',QuizResultView.as_view()),
