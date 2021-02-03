@@ -37,6 +37,7 @@ urlpatterns = [
     path('book/<book_pk>/quote/<quote_pk>',LikeQuoteView.as_view()),
     path('group',GroupView.as_view()),
     path('group/<int:pk>/member',MemberGroupView.as_view()),
+    path('group/<group_pk>/member/<member_pk>',LeaveGroupView.as_view()),
     path('group/<int:pk>',GroupDetailsView.as_view()),
     path('groups',DynamicGroupAPIView.as_view()),
     path('group/<int:pk>/discussion',DiscussionView.as_view()),

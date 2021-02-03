@@ -639,15 +639,18 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
         serializer = MemberSerializer(members,many=True)
         return Response({"message":"You joined before!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
-    def delete(self ,request ,pk):
-        user=request.user
-        group = Group.objects.get(id=pk)
+class LeaveGroupView(APIView):
+
+    def delete(self ,request ,group_pk,member_pk):
+        user=Member.objects.get(pk=member_pk).user
+        group = Group.objects.get(id=group_pk)
         if user == group.owner:
             return Response({"message":"You are owner!You can't leave this group!"},status=HTTP_400_BAD_REQUEST)
         Member.objects.get(user=user,group=group).delete()
         members = Member.objects.filter(group=group)
         serializer = MemberSerializer(members,many=True)
         return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
+
 
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
@@ -812,7 +815,7 @@ class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
-        obj = get_object_or_404(queryset,pk=self.request.pk)
+        obj = get_object_or_404(queryset,pk=self.request.data.get('quiz_id'))
         self.check_object_permissions(self.request, obj)
         return obj
 
