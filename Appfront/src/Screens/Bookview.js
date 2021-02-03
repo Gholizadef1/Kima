@@ -445,6 +445,11 @@ const Bookview = (prop) => {
               }}
             />
             : null}
+
+            {quotes != "No Quote!" && comments != "No Comment!" ?
+            <Card style = {styles.cardChat3}>
+
+            </Card> :null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
@@ -481,6 +486,18 @@ const styles = StyleSheet.create({
     height: hp('32%'),
     width: wp('55%'),
     marginLeft: wp('5%'),
+    marginTop: hp('8%'),
+    top: hp('-6%'),
+    marginBottom: hp('-1%'),
+    borderTopRightRadius: 40,
+    borderBottomLeftRadius: 40,
+    backgroundColor: '#EDF2F4',
+
+  },
+  cardChat3: {
+    height: hp('35%'),
+    width: wp('60%'),
+    marginLeft: wp('21%'),
     marginTop: hp('8%'),
     top: hp('-6%'),
     marginBottom: hp('-1%'),
