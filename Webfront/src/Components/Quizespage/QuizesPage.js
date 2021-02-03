@@ -26,52 +26,57 @@ import {API_BASE_URL} from '../../constants/apiContants';
 
 function Quizespage (props){
   const [groups,setGroups] = useState([]);
-  const [filterBase,setFilterBase]= useState("time");
+  const [filterBase,setFilterBase]= useState("all");
   const [isMine,setIsMine]=useState(false);
+  
   const [page, setPage] = useState(1);
   const [pagesNumber, setPagesNumber] = useState();
-  
+  const[me,setMe]=useState("");
+  const[notme,setNotme]=useState("");
+  const handleChangeList =(e) =>{
+    setPage(1);
+    if(e.target.value!=="mine"){
+    setFilterBase(e.target.value);
+    setIsMine(false)
+    console.log(isMine);
+    }else {
+      console.log(groups);
+      const newList = groups.filter((item)=>item.is_none === false);
+      setGroups(newList);
+      setPagesNumber(0)
+      setIsMine(true);
+    }
+  }
 
   useEffect(()=>{
-    if(isMine){
-      axios.get(`${API_BASE_URL}/quiz`
+      axios.get(API_BASE_URL+ "/quiz"
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
         })
       .then(response=>{
-        console.log(response.data.Quiz);
-        //setGroups(response.data.groups);
-        setGroups(response.data.Quiz);
+        console.log(response.data.Quiz)
+        if(isMine){
+          const newList1 = response.data.Quiz.filter((item)=>item.is_none === false);
+          setGroups(newList1);
+          console.log("f")
+          console.log(newList1);
+
+        }else if(isMine === false){
+        const newList2 = response.data.Quiz.filter((item)=>item.is_none === true);
+        setGroups(newList2);
+        setPagesNumber(response.data.count)
+        console.log(groups);
+        console.log(me);
         console.log("f")
+        }
       
         // setPagesNumber(response.data.count)
       })
-    }
   },[filterBase,page,isMine])
 
 
-  const handleChangeList =(e) =>{
-    setPage(1);
-    if(e.target.value==="all"){
-    setFilterBase(e.target.value);
-    setIsMine(false)
-    console.log("fj");
-    }else if(e.target.value==="mine") {
-      // const newList = groups.filter((item)=>item.is_member === true);
-      // setGroups(newList);
-      // //setPagesNumber(0)
-      setIsMine(true);
-      console.log("fj");
-
-    }
-    console.log(e.target.value);
-
-
-    
-    //console.log(e.target.value);
-  }
-
+ 
   const [openCreateGroup, setOpenCreateGroup] = useState(false);
 
   const routeToCreateQuize = () => {
@@ -245,65 +250,7 @@ const handleCloseSnack = (event, reason) => {
               <div>
                 <div className="btn btn-info rounded-lg  shadow" onClick={routeToCreateQuize}>
                   آزمون جدید
-                </div>
-
-                <Dialog  open={openCreateGroup} onClose={handleCloseCreateGroup} aria-labelledby="form-dialog-title" style={{direction:"rtl",textAlign:"right"}}>
-                  <DialogTitle  id="form-dialog-title">
-                    <h5 style={{fontFamily:'Yekan'}}> گروه جدید بسازید</h5>
-                  </DialogTitle>
-                  <DialogContent className="yekanfont">
-                  <div>
-                  <input class="form-control" 
-                  type="file" accept="image/*" 
-                  onChange={handleImageUpload} 
-                  ref={imageUploader} 
-                  style={{ display: "none",color:"white" }} />
-
-                  <img src={newGroup.picture} ref={uploadedImage} style={{width:270}} alt=" انتخاب عکس" className="rounded-lg d-block text-center mx-md-5"/>
-                  <div className="btn mr-5 mt-n4" onClick={() => imageUploader.current.click()}>
-                    <svg className=""  style={{width:30,height:30}} viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M5,3A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z" />
-                    </svg>
-                  </div>
-
-                  <form className="yekanfont">
-                    <label className="mt-2 mb-n1 ">نام گروه</label>
-                    {/* <TextField
-                      autoFocus
-                      margin="dense"
-                      id="name"
-                      value={newGroup.name}
-                      type="title"
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-                    /> */}
-                    <input 
-                    className="form-control" 
-                      id="name"
-                      value={newGroup.name}
-                      type="title"
-                      onChange={handleChange}></input>
-
-
-                    <label className="mt-2 mb-n1">توضیحات</label>
-                    <textarea className="form-control" rows="3"id="description"
-                      value={newGroup.description}
-                      type="description"
-                      onChange={handleChange}></textarea>
-
-                    </form>
-                    </div>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseCreateGroup} color="black">
-                      انصراف
-                    </Button>
-                    <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCreateGroupSubmit} color="black">
-                      ثبت
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                </div>  
               </div>
             </div>
 
@@ -343,27 +290,20 @@ const handleCloseSnack = (event, reason) => {
                         <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
 
-                        {groups.is_owner === true?
+                        {isMine === true  ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>
                         :
-                        <div></div>
-}
-                      {groups.is_none === true ?
-                        <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
+                        
+                         <div className="text-left mt-n3 ">
+                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت آزمون</button>
+                       
                         </div>
-                        :
-                        <div></div>
-                         }
-                         {groups.is_taken === true ?
-                        <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>  آزمون</button>
-                        </div>
-                        :
-                        <div></div>
-                         }
+                        }
+                     
+                        
+                        
                        
                       </div>
                       
