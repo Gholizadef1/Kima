@@ -16,34 +16,55 @@ function ReviewQuiz(props) {
 
     useEffect(()=>{
 
-      axios.get(`${API_BASE_URL}/user/${1}/quiz/${1}/result`)
-      .then(response=>{
-             console.log(response.data);
-             setUserAnswers(response.data.user_answer);
-             setUserScore(`امتیاز شما = ${response.data.score}`);
-             setQuiz(response.data.Quiz);
-             setCreator(response.data.Quiz.creator);
-             setQuestions(response.data.Questions);
 
-             var i;
-            for(i=1;i < response.data.Questions.length+1;i++){
-              document.getElementById(i+response.data.user_answer[i-1]).style.backgroundColor = "red";
-              document.getElementById(i+response.data.user_answer[i-1]).style.color = "white";
-             }
-             var i;
-            for(i=1;i < response.data.Questions.length+1;i++){
-              document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
-              document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
-             }
+        axios.get(API_BASE_URL + "/quiz/" + 1)
+        .then(response=>{
+            setQuiz(response.data.Quiz);
+            setCreator(response.data.Quiz.creator);
+            setQuestions(response.data.Questions);
+             console.log(response);
+             
+             if(response.data.Quiz.creator.id.toString() !== Cookies.get("userId").toString()){
+                axios.get(`${API_BASE_URL}/user/${1}/quiz/${1}/result`)
+                .then(response=>{
+                       console.log(response.data);
+                       console.log(Cookies.get("userId"));
+
+                       setUserAnswers(response.data.user_answer);
+                       setUserScore(`امتیاز شما = ${response.data.score}`);
+                       var i;
+                       for(i=1;i < response.data.Questions.length+1;i++){
+                         document.getElementById(i+response.data.user_answer[i-1]).style.backgroundColor = "red";
+                         document.getElementById(i+response.data.user_answer[i-1]).style.color = "white";
+                        }
+                       var i;
+                       for(i=1;i < response.data.Questions.length+1;i++){
+                         document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
+                         document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
+                        }
+                     
+                     })
+                     .catch(error=>{
+                       console.log(error);
+                     });
+              }
+              else{
+                var i;
+                for(i=1;i < response.data.Questions.length+1;i++){
+                  document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
+                  document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
+                 }
+              }
+            
            })
            .catch(error=>{
              console.log(error);
            })
-           .then(()=>{
-               
-           })
 
-    },[props.match.params.quizId])
+
+          
+
+    },[props.match.params.quizId,Cookies.get("userId")]);
 
 
   const handleRuoteToQuizs=() =>{
