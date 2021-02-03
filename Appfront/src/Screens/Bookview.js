@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet, View, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList, TextInput, ActivityIndicator
-} from 'react-native';
+import {StyleSheet, View, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList, TextInput, ActivityIndicator} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Button, Icon, Body, Right, Left, Picker, Form, Item } from 'native-base';
 import { withNavigation } from 'react-navigation'
 import axiosinst from '../api/axiosinst'
 import { StatusBar } from 'expo-status-bar';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native'
@@ -23,6 +22,7 @@ const Bookview = (prop) => {
   const [loading, setloading] = useState(true);
   const [loading2, setloading2] = useState(true);
   const [loading3, setloading3] = useState(true);
+  const [loading4, setloading4] = useState(true);
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
   const [picture, setpicture] = useState(null);
@@ -126,7 +126,8 @@ const Bookview = (prop) => {
     const response = axiosinst.get('/user/' + id)
       .then(function (response) {
         setUser(response.data)
-        console.log('profile=='+user.profile_photo)
+        setloading4(false)
+        console.log('profile==' + user.profile_photo)
         console.log('USERNAME' + response.data)
       })
   };
@@ -246,7 +247,7 @@ const Bookview = (prop) => {
 
 
 
-  if (loading === false && loading2 === false && loading3 === false) {
+  if (loading === false && loading2 === false && loading3 === false && loading4 === false) {
     return (
       <Container>
         <ScrollView>
@@ -462,9 +463,14 @@ const Bookview = (prop) => {
             <Card style={styles.cardChat3}>
               {user.profile_photo != '/media/default.png' ? <Avatar.Image
                 source={{ uri: "http://62e406c8f854.ngrok.io" + user.profile_photo }}
-              ></Avatar.Image> : <Avatar.Image  style={styles.avatar3} size={70}
+              ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
                 source={require('../../assets/group.jpg')}
               ></Avatar.Image>}
+              <Text style={{ top: hp('-7%'), marginRight: wp('32%') }}>{user.username}</Text>
+              <Button style={styles.button} bordered>
+                <Text style={{color:'#1F7A8C', marginLeft:wp('4%'),fontWeight:'bold'}}>نوشتن نظر</Text>
+                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{left:wp('-8%')}} />
+              </Button>
             </Card> : null}
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
@@ -532,9 +538,17 @@ const styles = StyleSheet.create({
     marginLeft: wp('20%')
   },
   avatar3: {
-    marginTop:hp('3%'),
+    marginTop: hp('3%'),
     top: hp('-8%'),
     marginLeft: wp('28%')
+  },
+  button:{
+    borderRadius:30,
+    height:hp('7%'),
+    width:wp('43%'),
+    marginLeft:wp('16%'),
+    borderColor:'#1F7A8C',
+    top:hp('-5%')
   }
 });
 
