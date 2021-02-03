@@ -380,7 +380,17 @@ paddingTop:20,}}>آزمونک باید حداکثر دارای 15 سؤال ب�
 }
 <div>
 {validation === false ?
-<button className=" btn b2 btn-info rounded-lg" onClick={sendQuestion}>ارزیابی</button>
+ <Tooltip  title= {<div style={{color: "white",
+ fontFamily:"Yekan",
+ fontSize:20,
+ 
+ width:190,
+ height:80,
+ textAlign:"center",
+ marginLeft:-9,
+ paddingTop:20,}}>پس از ارزیابی فیلدها توسط سیستم دکمهٔ ثبت  ظاهر می‌شود</div>}> 
+         <button className=" btn b2 btn-info rounded-lg" onClick={sendQuestion}>ارزیابی</button>
+         </Tooltip>
 :
 <button className=" btn b2 btn-info rounded-lg" onClick={va}>ثبت</button>
 
