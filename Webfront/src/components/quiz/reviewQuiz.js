@@ -16,39 +16,33 @@ function ReviewQuiz(props) {
 
     useEffect(()=>{
 
-      axios.get(`${API_BASE_URL}/user/${1}/quiz/"${1}/result`)
+      axios.get(`${API_BASE_URL}/user/${1}/quiz/${1}/result`)
       .then(response=>{
              console.log(response.data);
-             setUserAnswers(response);
+             setUserAnswers(response.data.user_answer);
              setUserScore(`امتیاز شما = ${response.data.score}`);
+             setQuiz(response.data.Quiz);
+             setCreator(response.data.Quiz.creator);
+             setQuestions(response.data.Questions);
 
              var i;
-            for(i=1;i < questions.length+1;i++){
-              document.getElementById(i+userAnswers[i-1].key).style.backgroundColor = "red";
-              document.getElementById(i+userAnswers[i-1].key).style.color = "white";
+            for(i=1;i < response.data.Questions.length+1;i++){
+              document.getElementById(i+response.data.user_answer[i-1]).style.backgroundColor = "red";
+              document.getElementById(i+response.data.user_answer[i-1]).style.color = "white";
+             }
+             var i;
+            for(i=1;i < response.data.Questions.length+1;i++){
+              document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
+              document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
              }
            })
            .catch(error=>{
              console.log(error);
-           });
-
-
-
-        axios.get(API_BASE_URL + "/quiz/" + 1)
-        .then(response=>{
-            setQuiz(response.data.Quiz);
-            setCreator(response.data.Quiz.creator);
-            setQuestions(response.data.Questions);
-            console.log(response);
-            var i;
-            for(i=1;i < questions.length+1;i++){
-              document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
-              document.getElementById(i+questions[i-1].key).style.color = "white";
-             }
            })
-           .catch(error=>{
-             console.log(error);
-           });
+           .then(()=>{
+               
+           })
+
     },[props.match.params.quizId])
 
 
@@ -95,16 +89,16 @@ function ReviewQuiz(props) {
                       <h4 className="my-3 col-8 mx-auto"><p className="badge border-bottom border-left border-dark rounded-pill m-2">{current.question_num}</p>{current.question_text} </h4>
                       <div>
                         <div className=" btn-group-toggle d-flex flex-column col-8 mx-auto " id={current.question_num} data-toggle="buttons">
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"a"}>
+                          <label className="btn border-dark m-1 " id={current.question_num+"a"} >
                             <input type="radio" name={current.question_num} id="a" /> {current.a_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"b"}>
+                          <label className="btn border-dark m-1" id={current.question_num+"b"}>
                             <input type="radio" name={current.question_num} id="b" /> {current.b_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"c"}>
+                          <label className="btn border-dark m-1" id={current.question_num+"c"}>
                             <input type="radio" name={current.question_num} id="c" />{current.c_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"d"}>
+                          <label className="btn border-dark m-1" id={current.question_num+"d"}>
                             <input type="radio" name={current.question_num} id="d" />{current.d_text}
                           </label>
                           <label className="active" id={current.question_num+"none"} ></label>
