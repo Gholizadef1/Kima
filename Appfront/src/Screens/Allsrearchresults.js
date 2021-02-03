@@ -23,8 +23,9 @@ const Allsearchresults = (prop) => {
     const[page,setpage]=useState(1);
     const searchauthorapi = async (searchTerm,page) => {
        // setAuthors([]);
-       setpage(page);
+       
         setauthorloading(true);
+        await setpage(page);
         //console.log(searchTerm + "  SEARCHTERMAUTHORAPI")
         try {
     
@@ -37,6 +38,7 @@ const Allsearchresults = (prop) => {
     
           //     }
           // })
+        
           setnext(response.data.next)
          // console.log(JSON.stringify(response.data.results));
         //if(authors===undefined)
@@ -69,12 +71,14 @@ const Allsearchresults = (prop) => {
       }
      
       useEffect(() => {
-          setpage(1);
+         // setpage(1);
           if(page===1){
           searchauthorapi(prop.route.params.searchterm,1)
           }
       }, [])
       const handleloadmore=async()=>{
+        //  await setpage(page+1);
+          await setauthorloading(true);
       
           await searchauthorapi(prop.route.params.searchterm,page+1);
          // await setpage(page+1);
@@ -101,14 +105,16 @@ const Allsearchresults = (prop) => {
             countt={authorcount}
             numofcolums={3}
             horizantall={false}
+            page={page}
             loadmore={true}
             onend={handleloadmore}
             onrefreshh={setrefresh}
             showtitle={false}
             next={next}
+            authorloading={authorloading}
             
             stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList> 
-            {authorloading===true? <ActivityIndicator style={{ height: hp("50%") }} size={"small"} color={"gray"} ></ActivityIndicator>:null}
+            {authorloading===true? <ActivityIndicator style={{ height: hp("10%") }} size={"small"} color={"gray"} ></ActivityIndicator>:null}
             </View>
          </View>
     );

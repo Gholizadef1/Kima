@@ -7,12 +7,13 @@ import Bookresult from '../Screens/Bookresult';
 import {withNavigation} from 'react-navigation';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { ActivityIndicator } from 'react-native-paper';
 
-const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall,showtitle,loadmore,onend,next}) => {
+const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,horizantall,showtitle,loadmore,onend,next,authorloading,page}) => {
    // console.log(listresult)
     return(
         <View>
-        <Text style={{top:hp("3.7%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>
+       {horizantall===true?<Text style={{top:hp("3.7%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>:null}
             {showtitle?<Text style={styles.title}>
                 {title}
             </Text>:null}
@@ -28,9 +29,11 @@ const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,hori
                 onEndReached={async()=>{
                     
                     if(loadmore===true){
+                        if(authorloading===false){
                         if(next!=null){
                             console.log("hi")
                         await onend();
+                        }
                         }
                     }
                 }}
@@ -50,6 +53,8 @@ const ResultsList = ({stylee,title,listresult,navigation,countt,numofcolums,hori
 
                 
                 }}
+                ListFooterComponent={(authorloading === true&&page!=1 ?  <ActivityIndicator style={{ height: hp("10%") ,alignSelf:"center"}} size={"small"} color={"gray"} ></ActivityIndicator>
+             :null)}
             />
             
         </View>
