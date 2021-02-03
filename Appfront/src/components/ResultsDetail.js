@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         height:hp("21.7%"),
         marginBottom:hp("4.8%"),
         borderRadius:10,
-      //  elevation:10,
+      // elevation:100,
        marginHorizontal:wp("1.4%")
     }
   });

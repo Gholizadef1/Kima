@@ -17,7 +17,6 @@ const ResultsList = ({stylee,title,listresult,navigation}) => {
             </Text>
     
             {listresult.length===0?<View style={{height:hp("33%")}}>
-
              </View>:null}
             {/* <View style={{backgroundColor:"lightblue",height:hp("30%"),width:wp("4%"),marginBottom:hp("-30%"),marginLeft:hp("4%")}}></View> */}
             <FlatList  style={styles.flastlist}

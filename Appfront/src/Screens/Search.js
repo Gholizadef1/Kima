@@ -5,8 +5,8 @@ import { Feather } from '@expo/vector-icons';
 import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 //searchbar
 import { StatusBar } from 'expo-status-bar';
-import Searchbar from '../components/Searchbar';
-//import { Searchbar } from 'react-native-paper';
+//import Searchbar from '../components/Searchbar';
+import { Searchbar } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Authorresult from './Authorresult';
 import Bookresult from './Bookresult';
@@ -20,20 +20,23 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native-paper';
 
 const Search = ({navigation}) => {
-    // const [searchterm,setsearchterm]=useState('');
-    // const searching=(term)=>setsearchterm(term);
+     const [searchterm,setsearchterm]=useState('');
+     const searching=(term)=>setsearchterm(term);
     //console.log({navigation})
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
     // const [start,setStart]=useState(false);
     const [authors,setAuthors]=useState([]);
     const[titles,setTitles]=useState([]);
+    const [authorloading,setauthorloading]=useState(false);
+    const [titleloading,settitleloading]=useState(false);
     // const [errormessage,setErrormessage]=useState('');
     // let sumbit =false;
     const serchitem='';
     // if(term===undefined)
     // setStart(false)
     const searchapi=async (searchTerm)=>{
+       
         console.log(searchTerm+"  SEARCHTERMAPI")
         try{
         const response = await axiosinst.get('books'+"?search="+searchTerm+"&search-fields=title")
@@ -60,6 +63,7 @@ const Search = ({navigation}) => {
     }
 
     const searchauthorapi=async (searchTerm)=>{
+      setauthorloading(true);
         console.log(searchTerm+"  SEARCHTERMAUTHORAPI")
         try{
      
@@ -74,6 +78,9 @@ const Search = ({navigation}) => {
         // })
         console.log(JSON.stringify(response.data.results));
         await setAuthors(response.data.results);
+       // if(authors===response.data.results){
+        setauthorloading(false);
+        //}
     }
     catch(err){
         console.log(err);
@@ -86,6 +93,7 @@ const Search = ({navigation}) => {
     }
 
     const searchtitleapi=async (searchTerm)=>{
+      settitleloading(true);
         console.log(searchTerm+"  SEARCHTERMAPITITLE")
         
         try{
@@ -102,6 +110,9 @@ const Search = ({navigation}) => {
         console.log(JSON.stringify(response.data.results)+"title resultssssss");
        // console.log("\n d;aklfj;lksjf;lksjfl;k+\n"+response.data.results);
         await setTitles(response.data.results);
+     //   if(titles===response.data.results){
+          settitleloading(false);
+       // }
     }
     catch(err){
         console.log(err);
@@ -131,14 +142,15 @@ const Search = ({navigation}) => {
     
       <View style={{backgroundColor:'white',flex:1}}>
      
-        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={async()=>{
+        {/* <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={async()=>{
            // searchapi(term)&&
-            await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/>
-            {/* <Searchbar
+            await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/> */}
+            <Searchbar
       placeholder="Search"
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      
       onEndEditing={()=>{
             searchauthorapi(searchterm)&&searchtitleapi(searchterm)&&console.log(searchterm)
         }}
@@ -162,25 +174,27 @@ const Search = ({navigation}) => {
           backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
         
-          }} />} */}
-    {/* /> */}
+          }} />}
+    />
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
         <Text style={{marginTop:hp("2.5%"),alignSelf:"flex-start",marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
-        {searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]?<ScrollView style={{}}>
-        <ResultsList 
+        {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
+        <ScrollView style={{}}>
+        {authorloading===false?<ResultsList 
         navigation={navigation}
         listresult={authors}
         
-        stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>
+        stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList>:<ActivityIndicator style={{height:hp("39%")}} size={"small"} color={"gray"} ></ActivityIndicator>}
           <Image
          source={require('../../assets/line3.png')}
          style={{marginTop:hp("2.5%"),marginHorizontal:wp("2%"),width:wp("96%"),height:1}}
          ></Image>
-        <ResultsList 
+        {titleloading===false?<ResultsList 
         navigation={navigation}
         listresult={titles}
-        stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>
-        </ScrollView>:<ActivityIndicator size={"large"} color={"gray"} ></ActivityIndicator>}
+        stylee={{}} title="جستجو بر اساس نام کتاب"></ResultsList>:<ActivityIndicator style={{height:hp("33%")}} size={"small"} color={"gray"} ></ActivityIndicator>}
+        </ScrollView>
+        {/* <ActivityIndicator size={"large"} color={"gray"} ></ActivityIndicator>} */}
          {/* {errormessage?<Text style={{position:'absolute',marginTop:50}}>{errormessage}</Text>:null} */}
          {/* <Image
          source={require('../../assets/kima6.jpeg')}
