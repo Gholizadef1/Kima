@@ -52,7 +52,7 @@ function TakeQuiz(props) {
         "user_answer": userAnswers
       }
       //const back= JSON.stringify(userAnswers);
-      console.log(userAnswers);
+      //console.log(userAnswers);
       axios.post(API_BASE_URL + "/quiz/" + 1
       ,payload
       ,{
@@ -137,11 +137,12 @@ function TakeQuiz(props) {
                       )} 
 
               </div>
+              <h3 className="border-bottom border-top my-2 pt-2 border-success text-center mx-5 rounded-pill">{userScore}</h3>
               <div className="d-flex">
                 <button className="btn mx-auto mb-2 btn-info" onClick={submitAnswer} >پایان آزمون</button>
                 <button className="btn mx-auto mb-2 btn-info" id="handleRuoteToQuizs" onClick={handleRuoteToQuizs} style={{display:"none"}} >خروج</button>
               </div>
-              <h3 className="border-bottom border-top my-2 pt-2 border-success text-center mx-5 rounded-pill">{userScore}</h3>
+             
 
           </div>
         </div>
