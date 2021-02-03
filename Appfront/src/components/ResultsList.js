@@ -12,7 +12,7 @@ const ResultsList = ({stylee,title,listresult,navigation,countt}) => {
    // console.log(listresult)
     return(
         <View>
-        <Text style={{top:hp("3.5%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>
+        <Text style={{top:hp("3.7%"),position:"absolute",left:wp("44%"),color:"gray",fontSize:hp("1.4%")}}>  ( <Text style={{fontWeight:"500"}}>{countt} </Text>نتیجه)</Text>
             <Text style={styles.title}>
                 {title}
             </Text>
