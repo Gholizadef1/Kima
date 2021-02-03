@@ -706,7 +706,7 @@ class MyGroupView(APIView,PaginationHandlerMixin):
 
 class QuizView(APIView,PaginationHandlerMixin):
     pagination_class = BasicPagination
-    parser_classes = [MultiPartParser]
+    model = Quiz
 
     def post(self,request):
         user = request.user
@@ -730,17 +730,15 @@ class QuizView(APIView,PaginationHandlerMixin):
         return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
             
     def get(self,request):
-        user = request.user
-        quiz = QuizSerializer(Quiz.objects.all(),many=True)
-        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
-        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
-        myquiz=myquiz + taken_quiz
-        quiz = quiz-myquiz
+        quiz = Quiz.objects.all()
         if quiz is None:
             return Response({"message":"No Quiz!"})
-        return Response({"Quiz":quiz})
 
-            
+        quiz_list = self.paginate_queryset(quiz)
+        serializer = MyQuizSerializer(quiz_list,context={"request": request},many=True)
+        count = Paginator(quiz,10).num_pages
+        return Response({"Quiz" : serializer.data, "count": count})
+        
 class TakeQuizView(APIView):
     
     def post(self,request,pk):
@@ -779,11 +777,11 @@ class TakeQuizView(APIView):
             return Response({"message":"You successfully deleted your quiz!"})
         return Response({"message":"You are not allowed to delete this quiz!"})
 
-    def put(self,request,pk):
-        quiz = Quiz.objects.get(pk=pk)
-        quiz.quiz_photo = request.FILES["quiz_photo"]
-        quiz.save()
-        return Response({"quiz_photo":quiz.quiz_photo},status=status.HTTP_200_OK)
+    # def put(self,request,pk):
+    #     quiz = Quiz.objects.get(pk=pk)
+    #     quiz.quiz_photo = request.FILES["quiz_photo"]
+    #     quiz.save()
+    #     return Response({"quiz_photo":quiz.quiz_photo},status=status.HTTP_200_OK)
 
 
 class QuizResultView(APIView):
@@ -798,13 +796,15 @@ class QuizResultView(APIView):
         score = TakeQuiz.objects.get(user=user,quiz=quiz).score
         return Response({"Quiz":quiz_ser.data,"Questions":q_list.data,"user_answer":user_answer,"score":score})
 
-class MyQuizView(APIView):
-    
-    def get(self,request,pk):
-        user = Account.objects.get(pk=pk)
-        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
-        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
-        myquiz=myquiz + taken_quiz
-        if myquiz is None:
-            return Response({"message":"No Quiz!"})
-        return Response({"Quiz":myquiz})
+class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
+    serializer_class = SetQuizPhotoSerializer
+    queryset = Quiz.objects.all()
+
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = get_object_or_404(queryset,pk=self.request.pk)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def put(self,request,*args,**kwargs):
+        return self.partial_update(request, *args, **kwargs)
