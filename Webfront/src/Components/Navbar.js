@@ -191,7 +191,7 @@ useEffect(() => {
           نتایج
           </div>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="md">
           {user.user != "" ?
           <div>
 
@@ -238,9 +238,9 @@ useEffect(() => {
 }
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <button type="button" class="btn rounded-lg" onClick={handleClose}>
             بستن
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
 
