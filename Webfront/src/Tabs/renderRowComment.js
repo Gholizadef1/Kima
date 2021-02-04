@@ -28,7 +28,7 @@ import {API_BASE_URL} from '../constants/apiContants';
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
-          setComment(data);
+          setComment(data.comments);
         });
     }, []);
     return (
@@ -61,17 +61,26 @@ import {API_BASE_URL} from '../constants/apiContants';
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className=" dislike mr-3">
-                {current.DislikeCount}
-                <AiOutlineDislike color="red" size="25"/>
-                </small>
-              </div>
-              <div className="d-flex flex-column">
-                <small className=" likec mr-4">
-                {current.LikeCount}
-                <AiOutlineLike  color="blue" size="25"/>
-                </small>
-              </div>
+                   <div className=" mt-n1">
+                   <AiOutlineLike  color="blue" size="25"/>
+
+                   </div>
+                   <small className="mr-2">
+                     {current.LikeCount}
+                     </small>
+                   </div>
+              <div className=" d-flex flex-column mr-3">
+                    <div>                     
+                      <AiOutlineDislike color="red" size="25"/>
+                      </div>
+                           <small className="mr-2">
+                             {current.DislikeCount}
+                           </small>
+                         </div>
+                   
+                     <div>
+                     </div>
+              
              </div>
  
              <p  className="quote"style={{fontFamily:"Yekan"}}>

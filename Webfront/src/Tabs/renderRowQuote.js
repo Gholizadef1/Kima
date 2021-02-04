@@ -30,7 +30,7 @@ import { red } from "@material-ui/core/colors";
         .then((data) => {
            console.log(data);
            console.log(data.message);
-          setQuote(data);
+          setQuote(data.quotes);
         });
     }, []);
     return (
