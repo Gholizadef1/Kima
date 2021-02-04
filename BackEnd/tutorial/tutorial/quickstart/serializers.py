@@ -226,3 +226,53 @@ class MyGroupSerializer(serializers.ModelSerializer):
 
     def to_representation(self,value):
         return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
+
+class QuizSerializer(serializers.ModelSerializer):
+
+    creator = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = Quiz
+        fields = ['id','title','description','question_count','creator','quiz_photo','create_time']
+
+class QuestionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = ['question_num','question_text','a_text','b_text','c_text','d_text','key']
+
+class MyQuizSerializer(serializers.ModelSerializer):
+    creator = UserProfileSerializer(read_only=True)
+    is_taken = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
+    is_none = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Quiz
+        fields = ['title','creator','quiz_photo','description','id','question_count','is_owner','is_taken','is_none']
+
+    def get_is_owner(self, obj):
+        user =  self.context['request'].user
+        if obj.creator == user:
+            return True
+        return False
+    
+    def get_is_taken(self, obj):
+        user =  self.context['request'].user
+        if TakeQuiz.objects.filter(user=user,quiz=obj.id).exists():
+            return True
+        return False
+
+    def get_is_none(self,obj):
+        user = self.context['request'].user
+        if (obj.creator != user) and (not TakeQuiz.objects.filter(user=user,quiz=obj.id).exists()):
+            return True
+        return False
+
+    
+
+class SetQuizPhotoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Quiz
+        fields = ['quiz_photo']
