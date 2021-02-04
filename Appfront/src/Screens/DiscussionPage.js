@@ -285,7 +285,6 @@ const DiscussionPage = (prop) => {
                                         <TouchableOpacity onPress={async () => {
                                             await Alert.alert(
                                                 'از حذف این پیام اطمینان دارید؟',
-
                                                 '',
                                                 [
                                                     {
@@ -303,7 +302,12 @@ const DiscussionPage = (prop) => {
                                                                 }
                                                             })
                                                                 .then(async function (response) {
-                                                                    await (prop.DELETE(true))
+                                                                    Alert.alert('', 'پیام شما حذف شد ', [
+                                                                        {
+                                                                          text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+                                                                        }
+                                                                      ], { cancelable: false }, { style: { height: hp('40%')} })
+                                                                      getChats();
                                                                 })
                                                                 .catch(function (error) {
                                                                     console.log(error);
@@ -318,7 +322,7 @@ const DiscussionPage = (prop) => {
 
                                             //  response();
                                         }}>
-                                            <AntDesign name="delete" size={16} color="#1F7A8C" style={{ marginRight: wp('43%'), marginBottom: hp('1%'), marginTop: hp('-3%') }} />
+                                            <AntDesign name="delete" size={20} color="#1F7A8C" style={{ marginRight: wp('43%'), marginBottom: hp('1%'), marginTop: hp('-3%') }} />
                                         </TouchableOpacity>
                                     </Card>
                                 </View>
