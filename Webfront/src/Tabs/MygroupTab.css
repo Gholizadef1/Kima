@@ -11,6 +11,30 @@
    
 
   }
+  @media (min-width :435px) 
+{
+    .rootg{
+        height: 450px;
+        width: 420px;
+        background-color:rgb(238, 243, 250);
+        border:16px solid #fff;
+        border-radius: 3%;
+    }
+   
+
+  }
+  @media (min-width :600px) 
+  {
+      .rootg{
+          height: 450px;
+          width: 460px;
+          background-color:rgb(238, 243, 250);
+          border:16px solid #fff;
+          border-radius: 3%;
+      }
+     
+  
+    }
 @media (min-width :768px) 
 {
     .rootg{
