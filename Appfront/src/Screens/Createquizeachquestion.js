@@ -127,15 +127,15 @@ const Createquizeachquestion = (prop) => {
            {/* { prop.showallerr===true && prop.pr.values.questions[prop.itemidd].question_text===""&&questionerror===undefined?<Text style={styles.error}>".متن سوال نمیتواند خالی باشد</Text>:null} */}
         {/* <Field> */}
     
-        <RadioButton.Group name={`questions[${prop.itemidd-1}].c_textorrect`}  onValueChange={newValue => {
+        <RadioButton.Group name={`questions[${prop.itemidd-1}].key`}  onValueChange={newValue => {
 
             setValue(newValue)
-            if(getIn(prop.pr.values,`questions[${prop.itemidd-1}].c_textorrect`)===undefined){
-                prop.pr.values.questions[prop.itemidd-1].c_textorrect="1"
+            if(getIn(prop.pr.values,`questions[${prop.itemidd-1}].key`)===undefined){
+                prop.pr.values.questions[prop.itemidd-1].key="1"
             }
             else{
 
-             prop.pr.values.questions[prop.itemidd-1].c_textorrect = newValue;
+             prop.pr.values.questions[prop.itemidd-1].key = newValue;
             }
             //prop.pr(`questions[${prop.itemidd}].c_textorrect`);
 

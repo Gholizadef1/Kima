@@ -129,7 +129,7 @@ const Createquiz = () => {
                     style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                     validationSchema={validationSchema}
                     initialValues={{
-                        title: '', description: '', quiz_photo: require('../../assets/tea.jpg'), questions: [{ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "1" }]
+                        title: '', description: '', quiz_photo: require('../../assets/tea.jpg'), questions: [{ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "" }]
                         // soal:questions 
                     }}
                     validationSchema={validationSchema}
@@ -161,7 +161,9 @@ const Createquiz = () => {
                             formdata.append(`questions[${i}]b_text`, all.questions[i].b_text)
                             formdata.append(`questions[${i}]c_text`, all.questions[i].c_text)
                             formdata.append(`questions[${i}]d_text`, all.questions[i].d_text)
+                            console.log(all.questions[i].key+" keyyyy")
                             if( all.questions[i].key==="1"){
+                            
                             formdata.append(`questions[${i}]key`, "a")
                             }
                             if( all.questions[i].key==="2"){
