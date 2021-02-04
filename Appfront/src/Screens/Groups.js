@@ -155,7 +155,6 @@ const Groups = ({navigation}) => {
        console.log('  omad to response')
        console.log('api/group'+likeotime)
 console.log(await AsyncStorage.getItem('token'));
-
       const response = await axiosinst.get('/group',{
         params: {
           filter:likeotime,

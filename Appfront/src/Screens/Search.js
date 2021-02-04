@@ -6,6 +6,7 @@ import {Container,Header,Title,Form,Item,Input,Button, Icon} from 'native-base';
 //searchbar
 import { StatusBar } from 'expo-status-bar';
 import Searchbar from '../components/Searchbar';
+//import { Searchbar } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Authorresult from './Authorresult';
 import Bookresult from './Bookresult';
@@ -15,9 +16,12 @@ import { sub } from 'react-native-reanimated';
 import axiosinst from '../api/axiosinst';
 import ResultsList from '../components/ResultsList';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Search = ({navigation}) => {
-    console.log({navigation})
+    // const [searchterm,setsearchterm]=useState('');
+    // const searching=(term)=>setsearchterm(term);
+    //console.log({navigation})
     const [term,setTerm]=useState('');
     const [results,setResults]=useState([]);
     // const [start,setStart]=useState(false);
@@ -30,8 +34,9 @@ const Search = ({navigation}) => {
     // setStart(false)
     const searchapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('books',{
             params:{
+               // page:1,
                 search:searchTerm,
                 //nemidonam chetori ham title va ham author ro behesh bedam
                 search_fields:'author',
@@ -39,10 +44,11 @@ const Search = ({navigation}) => {
                
             }
         })
+        console.log(response.data.results);
         setResults(response.data.results);
     }
     catch(err){
-        console.log('error');
+        console.log(err);
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
 
@@ -53,18 +59,20 @@ const Search = ({navigation}) => {
 
     const searchauthorapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('books',{
             params:{
+              //  page:1,
                 search:searchTerm,
                 search_fields:'author',
                
                
             }
         })
-        setAuthors(response.data.results);
+        console.log(response.data.results);
+        await setAuthors(response.data.results);
     }
     catch(err){
-        console.log('error');
+        console.log(err);
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
 
@@ -75,18 +83,22 @@ const Search = ({navigation}) => {
 
     const searchtitleapi=async (searchTerm)=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('books',{
             params:{
+               // page:1,
                 search:searchTerm,
                 search_fields:'title',
+            
                
                
             }
         })
-        setTitles(response.data.results);
+        console.log(searchTerm);
+        console.log("\n d;aklfj;lksjf;lksjfl;k+\n"+response.data.results);
+        await setTitles(response.data.results);
     }
     catch(err){
-        console.log('error');
+        console.log(err);
         Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
             
 
@@ -95,6 +107,12 @@ const Search = ({navigation}) => {
     }
     }
     const [exitsearch,setExitsearch]=useState([]);
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         searchapi('')&&
+    //         searchauthorapi('ف')&&
+    //         searchtitleapi('نا')  
+    //     }, [navigation]))
     useEffect(()=>{
             searchapi('')&&
             searchauthorapi('')&&
@@ -107,9 +125,41 @@ const Search = ({navigation}) => {
     
       <View style={{backgroundColor:'white',flex:1}}>
      
-        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{searchapi(term)&&searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
+        <Searchbar style={{}} term={term} onTermChange={(newterm)=>setTerm(newterm)} onTermsubmit={()=>{
+           // searchapi(term)&&
+            searchauthorapi(term)&&searchtitleapi(term)&&console.log(term)}}/>
+            {/* <Searchbar
+      placeholder="Search"
+      onChangeText={searching}
+      underlineColorAndroid={'#F1F3F9'}
+      value={searchterm}
+      onEndEditing={()=>{
+            searchauthorapi(searchterm)&&searchtitleapi(searchterm)&&console.log(searchterm)
+        }}
+      onIconPress={()=>{
+        searchauthorapi(searchterm)&&searchtitleapi(searchterm)&&console.log(searchterm)
+        }}
+      borderTopLeftRadius={hp('20%')}
+          borderTopRightRadius={20}
+          borderBottomRightRadius={20}
+          borderBottomLeftRadius={20}
+          placeholder={'نام کتاب نویسنده ...'}
+          style={{  borderTopLeftRadius:hp('5%'),
+          marginTop:hp('5%'),
+          
+          // alignSelf:'center',
+          marginLeft:wp('5%'),
+          borderTopRightRadius:hp('5%'),
+          borderBottomRightRadius:hp('5%'),
+          borderBottomLeftRadius:hp('5%'),
+          
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
+          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
+        
+          }} />} */}
+    {/* /> */}
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        <Text style={{marginTop:200,marginRight:170,marginTop:20,marginLeft:hp('2%')}}>با اطلاعات شما {results.length+titles.length} کتاب پیدا شدند</Text>
+        <Text style={{marginTop:200,marginRight:170,marginTop:20,marginLeft:hp('2%')}}>با اطلاعات شما {authors.length+titles.length} کتاب پیدا شدند</Text>
         <ScrollView>
         <ResultsList 
         navigation={navigation}

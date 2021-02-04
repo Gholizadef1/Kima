@@ -12,16 +12,19 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import Cookies from 'js-cookie'
 //import { CookiesProvider } from 'react-cookie';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 ReactDOM.render(
   
   // <CookiesProvider >
+  <BrowserRouter>
     <React.Fragment>
     <React.StrictMode>
       <App/>
     </React.StrictMode>
   </React.Fragment>
+  </BrowserRouter>
   // </CookiesProvider>
   ,
  

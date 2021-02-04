@@ -1,51 +1,36 @@
+import React, { useState, useEffect } from 'react';
+import {Button} from 'react-bootstrap';
 
-import React, { Component } from 'react';
-//import {NavLink} from 'react-router-dom';
-import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
-import {CgProfile} from 'react-icons/cg';
+//import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
-import { Modal, Form } from "react-bootstrap";
-import{ useState, useEffect } from "react";
+import { Modal } from "react-bootstrap";
  import "./UsersList.css";
-// import "./HelpingNavbar";
+ import "../slides/Slide.css";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
-//import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-
-//import {FaHome} from 'react-icons/fa';
 import {withStyles } from '@material-ui/core/styles';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useParams,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  // Redirect,
+  // Link,
+  // useRouteMatch,
+  // useParams,
+  //useHistory,
   withRouter
 } from "react-router-dom";
- //import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
-
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
-//import ReactNavbar from "react-responsive-animate-navbar";
-//import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
-//import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
-  const [user,setUser] = useState({user:null});
+  const [user,setUser] = useState({user:""});
   const [search,setSearch] = useState([]);
-
-
-  // const [users,setUsers] = useState([]);
-  const [error,setError] = useState("");
-
-
+  //const [error,setError] = useState("");
+  const [userpic,setuserpic] = useState("");
 
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -53,7 +38,8 @@ function NavBar (props){
 
 const searchUsers = async () => {
 
-const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+const result = await axios.get(`${API_BASE_URL}/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+
  ).then((res)=> {
  setSearch(res.data.results)
   
@@ -61,11 +47,12 @@ const result = await axios.get(`http://127.0.0.1:8000/dyanmicsearch/?search=${us
 }
 
 useEffect(() => {
-  axios.get('http://127.0.0.1:8000/api/user-profile/' + Cookies.get('userId'))
+  axios.get(API_BASE_URL + '/user/' + Cookies.get('userId'))
   .then(function (response){
     //console.log(response);
     //console.log(response.data);
-    Cookies.set('userPic',"http://127.0.0.1:8000"+response.data.profile_photo);
+    Cookies.set('userPic',API_BASE_URL+response.data.profile_photo);
+    setuserpic(API_BASE_URL+response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {
@@ -74,7 +61,7 @@ useEffect(() => {
   });
 
   searchUsers();
-  }, [user]);
+  }, [user,Cookies.get('userPic')]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -90,6 +77,9 @@ useEffect(() => {
 
   const routeToGroups = ()=>{
     props.history.push('/groups');
+  }
+  const routeToQuizPage = ()=>{
+    props.history.push('/quizepage');
   }
 
   const accent= { backgroundColor: purple[500], color: '#000' }
@@ -117,11 +107,12 @@ useEffect(() => {
     Cookies.remove('userToken');
     Cookies.remove('userName');
     Cookies.remove('userId');
+    Cookies.remove('userPic');
     props.history.push('/login');
 }
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
+      <nav className="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
           <GiBookshelf color="white" />
         </h1>
@@ -129,53 +120,53 @@ useEffect(() => {
          style = {{fontSize:33,fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
-        <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon "></span>
+        <button className="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav ml-5">
-            <li  class="nav-link btn"
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul className="navbar-nav ml-5">
+            <li  className="nav-link btn" onClick={routeToGroups}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToGroups}>گروه‌ها</a>
+              گروه‌ها
             </li>
-            <li  class="nav-link btn"
+            <li  className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a >آزمونک</a>
+
+              آزمونک
+
             </li>
-            <li class="nav-link btn"
+            <li className="nav-link btn" onClick={routeToHome}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToHome}>خانه</a>
+              خانه
             </li>
           </ul>
           <div className="d-flex flex-grow-1 mx-md-5 ">
               <Button variant="gray" className="mr-md-5" onClick={handleShow}>
                 <GoSearch className="" size="30" color="white" />
               </Button>
-              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1"  type="text" name="name" placeholder="   جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1 px-3"  type="text" name="name" placeholder="جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
               
                />  
               
           </div>
           <div className="d-flex justify-content-between mr-md-5">
-              <div className="btn-group mx-auto dropright" role="group">
-                <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
+              <div className="btn-group mx-auto " >
+                <div type="button" className="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <Avatar alt="" src={userpic} className="shadow " />
                 </div>
-                <div className="dropdown-menu px-1 mx-n2"  aria-labelledby="btnGroupDrop1">
-                  <div className="d-flex align-items-end flex-column">
-                  <div className="text-left mx-3" style={{fontSize:18,fontFamily:'Yekan'}} >
+                <div className="dropdown-menu text-right" >
+                  <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
-                  <div class="dropdown-divider"></div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16,fontFamily:'Yekan'}}>
+                  <div className="dropdown-divider "></div>
+                  <p type="button" className="dropdown-item my-n1"  onClick={routeToProfile}  style={{fontSize:16}}>
                     پروفایل
-                  </div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16,fontFamily:'Yekan'}} >
+                  </p>
+                  <p type="button" className="dropdown-item my-n1" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
-                  </div>
+                  </p>
                  
-                  </div>
                 </div>
               </div>
           </div>
@@ -183,7 +174,7 @@ useEffect(() => {
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header">
+           <div className="header"style={{fontFamily:"Yekan"}}>
           نتایج
           </div>
         </Modal.Header>
@@ -191,19 +182,35 @@ useEffect(() => {
           {search != 0 ?
           <div>
        {search.map((item) => (
-     <div className="out1" key={item.id} onClick={() => bookSelectedHandler( item)} >
-       <div className="card cat1">
+     <div className="out" key={item.id} onClick={() => bookSelectedHandler( item)} >
+       <div className="">
          <img
-           className="squere1"
+           className="squer img-responsive"
            src={item.imgurl}
          /> 
-         <small className= "title">
-         <h5 className="card-title3" >{item.title}</h5>
-         <h5 className="card-title4" >{item.author}</h5>
+         </div>
+         <div className="bod">
+              {item.title.length >20 ?
+<Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        width:180,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:30,}}>{item.title} </div>}> 
+    <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{item.title}</div>
+      </Tooltip>
+      : <div className="card-title1" style={{fontWeight:"bold",color:"black",fontFamily:"Yekan"}}>{item.title}</div>
+      
+} 
+                <small className= "title">
+                   <h5 className="card-title2"style={{fontWeight:"bold",color:"gray",fontFamily:"Yekan"}}>{item.author}</h5>
 
-          </small>
-          </div>
-       </div>
+                   </small>
+            </div>
+            </div>
+       
        ))}
        </div>
        :

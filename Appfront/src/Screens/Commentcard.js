@@ -483,7 +483,6 @@ const Commentcard = (prop) => {
               console.log('dislike error ||||||||||||')
 
             })
-
           }
           //  getlike(item);
 

@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
+import image from '../../assets/people&books.png';
+
 function RegistrationForm(props) {
     const [state , setState] = useState({
         userName : "",
@@ -33,9 +35,9 @@ function RegistrationForm(props) {
                 "password2":state.confirmPassword,
             }
             const back= JSON.stringify(payload)
-            axios.post(API_BASE_URL+'register', back,{"headers":{"content-type":"application/json"}})
+            axios.post(API_BASE_URL+'/register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     //console.log(response.data);
                     if(response.data.response=== "successfully registered a new user."){
                         setState(prevState => ({
@@ -44,7 +46,7 @@ function RegistrationForm(props) {
                         }))
                         Cookies.set('userToken',response.data.token);
                         Cookies.set('userName',state.userName);
-                        Cookies.set('userId',response.data.userid);
+                        Cookies.set('userId',response.data.id);
                         redirectToHome();
                         props.showError(null)
                     } else{
@@ -128,36 +130,38 @@ function RegistrationForm(props) {
         }
     }
 
-    const StyledButton = withStyles({
-        root: {
-          background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-          borderRadius: 3,
-          border: 0,
-          color: 'black',
-          height: 48,
-          padding: '0 30px',
-          boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
-        },
-        label: {
-          textTransform: 'capitalize',
-        },
-      })(Button);
+    // const StyledButton = withStyles({
+    //     root: {
+    //       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+    //       borderRadius: 3,
+    //       border: 0,
+    //       color: 'black',
+    //       height: 48,
+    //       padding: '0 30px',
+    //       boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+    //     },
+    //     label: {
+    //       textTransform: 'capitalize',
+    //     },
+    //   })(Button);
     return(
         <div className="d-flex justify-content-center py-sm-4 color4">
-        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
+        <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
             <div className="card color2 " >
-                <br></br>
-                <h1 style={{fontFamily:'Yekan'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Yekan',fontSize:24}}>در کیما می‌توانی به دنبال کتاب‌های مورد‌علاقه خودت بگردی</p>
-                <p style={{fontFamily:'Yekan',fontSize:20}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنی</p>
-                <img src="people&books.png" className="col-12 card-img-bottom hv-center" alt="" /> 
+              <div class="card-body mt-1">
+                <h1 className="mt-4 card-title" >به کیما خوش‌آمدید</h1>
+                <p className="card-text" style={{fontSize:24}}>در کیما می‌توانید به دنبال کتاب‌های مورد‌علاقه خودت بگردید</p>
+                <p className="card-text" style={{fontSize:20}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنید</p>
+                <img src={image} className="col-12 mt-n5 card-img-bottom hv-center mt-auto" alt="" /> 
+              </div>
+              
             </div>
-            <div className="card color2 p-2">
-            <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Yekan'}}>ثبت‌نام</h1>
+            <div className="card color2">
+            <form className="col-8 mx-auto mt-5 was-validated">
+                <h1 >ثبت‌نام</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputUserName" style={{fontFamily:'Yekan'}}>نام کاربری</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputUserName" >نام کاربری</label>
                 <input type="name" 
                        className="form-control" 
                        id="userName" 
@@ -172,7 +176,7 @@ function RegistrationForm(props) {
                 </div>
 
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Yekan'}}>ایمیل</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -187,7 +191,7 @@ function RegistrationForm(props) {
                 </div>
                 
                 <div className="form-group-sm text-right">
-                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
+                    <label className="mt-2 mb-n1" htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -201,7 +205,7 @@ function RegistrationForm(props) {
                     </div> */}
                 </div>
                 <div className="form-group text-right">
-                    <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>تأیید رمز</label>
+                    <label className="mt-2 mb-n1" htmlFor="exampleInputPassword1">تأیید رمز</label>
                     <input type="password" 
                         className="form-control" 
                         id="confirmPassword" 
@@ -216,9 +220,9 @@ function RegistrationForm(props) {
                 </div>
                 <p className="loginText"> {state.backError} </p>
                 <button
-                style={{fontFamily:'Yekan',color:'white'}}
+                
                     type="submit" 
-                    className="btn col-6 mx-auto bg-primary btn-block"
+                    className="btn  mx-auto btn-info"
                     onClick={handleSubmitClick}
                 >
                     ثبت
@@ -227,9 +231,9 @@ function RegistrationForm(props) {
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
-            <div className="mt-2">
-                <span style={{fontFamily:'Yekan'}}>قبلاً ثبت‌نام کرده‌اید؟ </span>
-                <span className="loginText" onClick={() => redirectToLogin()} style={{fontFamily:'Yekan'}}>اینجا وارد شوید</span> 
+            <div className="registerMessage">
+                <span >قبلاً ثبت‌نام کرده‌اید؟ </span>
+                <span className="loginText" onClick={() => redirectToLogin()} >اینجا وارد شوید</span> 
             </div>
             </div>
             </div>

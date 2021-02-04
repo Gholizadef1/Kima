@@ -47,7 +47,6 @@ const Bookview = (prop) => {
   //   comment4 = prop.comment
   // }
 
-
   useEffect(() => {
     getResult(id);
     getComments()
@@ -180,7 +179,6 @@ const Bookview = (prop) => {
     }
   }
 
-
   const getRate = async () => {
     axiosinst.get('/book/' + id + '/rate', {
       "headers": {
@@ -196,7 +194,6 @@ const Bookview = (prop) => {
           setratenum(response.data.data)
         }
       })
-
       .catch(async function (error) {
         console.log(error);
         console.log(error.code + 'ERROR CODE')
@@ -205,6 +202,7 @@ const Bookview = (prop) => {
       });
   }
   getRate();
+
 
   console.log('**' + rate)
 
@@ -268,7 +266,6 @@ const Bookview = (prop) => {
 
             <Text style={{ marginTop: hp('0.5%'), fontSize:hp('2.6%'), color: '#1F7A8C' }}>{result.author}</Text>
             <Text style={{ marginTop: hp('1%') }}>امتیاز کتاب {result.average_rating}</Text>
-
             <Text style={{ marginTop: hp('0.5%'), marginBottom: hp('1%') }}>به این کتاب امتیاز دهید</Text>
             <AirbnbRating style={{ marginTop: hp('5%'), borderColor: '#f1c40f' }}
               count={5}
@@ -308,7 +305,6 @@ const Bookview = (prop) => {
               </Card>
             </Content>
           </Body>
-
           {comments === "No Comment!" ?
             <Text style={{ color: '#1F7A8C', marginLeft: wp('24%'), marginTop: hp('3%') }}>نظری در مورد این کتاب ثبت نشده </Text> : null}
 

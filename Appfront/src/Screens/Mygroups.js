@@ -246,8 +246,7 @@ const Mygroups = (prop) => {
       }
       else {
         settheend(true)
-      }
-   
+      }   
     };
    
     useFocusEffect(

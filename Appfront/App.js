@@ -11,6 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loadingscreen from './src/Screens/Loadingscreen';
 import {NavigationContainer} from '@react-navigation/native';
 import { I18nManager } from 'react-native';
+import { SplashScreen } from 'expo';
+// import AppLoading from 'expo-app-loading';
 
 // import {Authcontext, Provider as AuthProvider } from './src/context/Authcontext';
 // import {Context as AuthContext} from './src/context/Authcontext'
@@ -51,7 +53,9 @@ import { I18nManager } from 'react-native';
 // // const SwitchNavigatorr=createAppContainer(SwitchNavigator);
 // // export default createAppContainer(SwitchNavigator);
 const a=true;
-
+const Loadingscreenwaiting=async()=>{
+  await setTimeout(() => {  console.log("hello!"); }, 5000);
+}
 const SwitchNavigatorr=(prop)=>{
   I18nManager.forceRTL(true);
   const value=useContext(AuthContext);
@@ -74,17 +78,31 @@ const SwitchNavigatorr=(prop)=>{
   console.log('checkkard4')
   }
   },[])
+  const [wait,setwait]=useState(false);
   // return (<NavigationContainer><TabScreen></TabScreen></NavigationContainer>)
-  if(!done){
+  console.log(wait);
+  if(!done||wait===true){
+    // async function a(){await setTimeout(() => {  console.log("hello!"); }, 5000);}
+    // a();
+    //new Promise(()=>setTimeout(() => {  console.log("hello!"); }, 5000))
+    //const sleep = ms => new Promise(resolve =>setTimeout(() => {  console.log("hello!"); }, 5000))
+    //new Promise(()=>(setTimeout(() => {  console.log("hello!"); }, 5000)))
+    // SplashScreen.preventAutoHide()
+      // SplashScreen.
+      
     return (
-    
-      <Loadingscreen></Loadingscreen>
+     
+      <Loadingscreen waitt={setwait}></Loadingscreen>
     )
+    
   }
   // const {logg,changelogg}=useContext(AuthContext);
   else{
+
   return(
+    // <SplashScreen></SplashScreen>
     // <TabScreen></TabScreen>
+    // <AppLoading ApplicationCache={<View><Text>jhgfjhgfjhgfjhgfjgfjhgfhfgjhgfjhgfjhgfjhfg</Text></View>}></AppLoading>
     <NavigationContainer>
     
      {value.logged!=null ? (<TabScreen/>):(<StackScreen/>)}

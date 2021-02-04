@@ -159,6 +159,7 @@ const GroupPage = (prop) => {
         await setjoin(true)
         await getMembers()
       })
+     
       .catch(function (error) {
         console.log(error);
       });
