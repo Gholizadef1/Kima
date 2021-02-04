@@ -80,7 +80,7 @@ const Eachgroup = (prop) => {
 
           </ImageBackground> : <ImageBackground borderRadius={100}
 
-            source={{ uri: "http://5d4a663fe10f.ngrok.io" + `${prop.quizphoto}` }}
+            source={{ uri:"http://cabc8a571308.ngrok.io/media/quiz_photos/test_iS65hkA.jpg"}}
             style={styles.avatar}
 
           >

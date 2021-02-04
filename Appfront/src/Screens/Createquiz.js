@@ -433,7 +433,7 @@ const Createquiz = () => {
 
                                                                     await setmaxnumquestion(true);
 
-                                                                    await setTimeout(async () => { await setmaxnumquestion(false); }, 5000)
+                                                                    await setTimeout(async () => { await setmaxnumquestion(false); }, 4000)
                                                                     // .then( resolve())
                                                                     //  await setminnumquestion(false);
 
@@ -485,7 +485,7 @@ const Createquiz = () => {
                                                                 //setminnumquestion(true);
                                                             }
                                                         }}
-                                                        style={{ marginTop: hp("0%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
+                                                        style={{ marginTop: hp("0.1%"), marginLeft: wp("2%"), backgroundColor: "white" }}>
                                                         <Text style={{ color: "#1f7a8c", fontSize: hp("1.5.5%"), fontWeight: "bold" }}>حذف کردن سوال</Text>
                                                     </TouchableOpacity>
                                                     {minnumquestion === true ?

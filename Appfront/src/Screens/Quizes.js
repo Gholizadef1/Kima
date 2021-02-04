@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Item, Segment, Content, Input, Label, Textarea } from 'native-base';
@@ -21,6 +22,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { EvilIcons } from '@expo/vector-icons';
 import Quizcard from "./Quizcard";
 import { Octicons } from '@expo/vector-icons';
+import { Searchbar } from 'react-native-paper';
 // import { TextInput } from 'react-native-paper';
 
 
@@ -50,6 +52,11 @@ const Quizes = (prop) => {
   const [count, setcount] = useState(1);
   const [seeresult, setseeresult] = useState(false);
   const [owner, setowner] = useState();
+  const [opensearch,setopensearch]=useState(false);
+  const searching=(term)=>setsearchterm(term);
+  const [searchterm,setsearchterm]=useState('');
+  const [numberofresults,setnumberofresults]=useState();
+  
 
   // let count=0;
   const response = async (page) => {
@@ -181,6 +188,58 @@ const Quizes = (prop) => {
 
     <View style={styles.container}>
       <View style={{ marginLeft: wp('2%') }}>
+      {opensearch?
+     <>
+      <AntDesign name="arrowleft" size={24} color="#1f7a8c"
+      style={{marginTop:hp('3%'),
+      position:'absolute',
+      marginRight:wp('5%'),
+      marginLeft:wp('87%')
+          }}
+          onPress={()=>{
+          setsearchterm('');
+          setnumberofresults();
+          setopensearch(false)}
+          }
+       />
+     <Searchbar
+      placeholder="Search"
+      onChangeText={searching}
+      underlineColorAndroid={'#F1F3F9'}
+      value={searchterm}
+      iconColor={"#1f7a8c"}
+      onIconPress={()=>{
+        searchpost(1)}}
+      borderTopLeftRadius={hp('20%')}
+          borderTopRightRadius={20}
+          borderBottomRightRadius={20}
+          borderBottomLeftRadius={20}
+          placeholder={'نام کوییز ...'}
+          style={{  borderTopLeftRadius:hp('5%'),
+          marginTop:hp('2%'),
+          
+          // alignSelf:'center',
+          marginLeft:wp('5%'),
+          borderTopRightRadius:hp('5%'),
+          borderBottomRightRadius:hp('5%'),
+          borderBottomLeftRadius:hp('5%'),
+          
+          backgroundColor:'#EDF2F4',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
+          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
+        
+          }} />}
+    /></>
+    :null}
+ 
+    {/* {!opensearch?<Button style={{position:'absolute',backgroundColor:'lightgray',height:hp('5.5%'),width:wp('11.3%'),borderRadius:1000,
+        backgroundColor:'#1f7a8c',left:wp('4%'),marginLeft:wp('78%'),marginTop:hp('2%'),elevation:20,justifyContent:'center'}}
+        onPress={()=>setopensearch(true)}
+        >
+      <Feather name="search" size={24} color="#F1F3F9" style={{
+         position:'absolute',
+         marginTop:hp('3.5%'),alignSelf:'center'
+      }} />
+      </Button>:null} */}
 
         {/* <View style={{height:hp('2%')}}></View> */}
 
@@ -268,7 +327,7 @@ const Quizes = (prop) => {
      
          </Button>
          </View> */}
-        <View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
+        {/* <View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
           <Button style={{
             justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
             backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp('77%'), marginLeft: wp('78%')
@@ -280,7 +339,17 @@ const Quizes = (prop) => {
               name="plus" size={32} color="#EDF2F4" />
 
           </Button>
-        </View>
+        </View> */}
+        {!opensearch?<View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
+          <Button style={{
+            justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
+            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp('77%'), marginLeft: wp('78%')
+          }} onPress={()=>setopensearch(true)} >
+            <Feather style={styles.plus}
+              name="search" size={hp("3.2%")} color="#EDF2F4" />
+
+          </Button>
+        </View>:null}
       </View>
       {/* <View style={{marginBottom:hp("-5%")}}></View> */}
 
