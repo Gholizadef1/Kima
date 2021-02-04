@@ -498,7 +498,6 @@ const Commentcard = (prop) => {
               console.log('dislike error ||||||||||||')
 
             })
-
           }
           //  getlike(item);
 
@@ -616,3 +615,4 @@ const styles = StyleSheet.create({
   },
 });
 export default Commentcard;
+

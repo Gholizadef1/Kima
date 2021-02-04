@@ -22,13 +22,14 @@ const IsRead = ({navigation}) => {
 
     const id=await AsyncStorage.getItem('id');    
 
-    axiosinst.get('/api/user-profile/'+id+'/Read',{"headers":{"content-type":"application/json",
+    axiosinst.get('/user/'+id+'/collection?type=Read',{
 
+    "headers":{"content-type":"application/json",
     "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
     }})
     .then(function(response){
-    setredImage(response.data)
-    console.log(response)
+    setredImage(response.data.data)
+    console.log('RESPONSEEE'+response.data.data[0].title)
     })
     .catch(function(error){
     console.log(error)

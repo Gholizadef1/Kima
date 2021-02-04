@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Button from '@material-ui/core/Button';
 import {withStyles } from '@material-ui/core/styles';
+import image from '../../assets/people&books.png';
+
 function RegistrationForm(props) {
     const [state , setState] = useState({
         userName : "",
@@ -35,7 +37,7 @@ function RegistrationForm(props) {
             const back= JSON.stringify(payload)
             axios.post(API_BASE_URL+'/register', back,{"headers":{"content-type":"application/json"}})
                 .then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     //console.log(response.data);
                     if(response.data.response=== "successfully registered a new user."){
                         setState(prevState => ({
@@ -146,10 +148,13 @@ function RegistrationForm(props) {
         <div className="d-flex justify-content-center py-sm-4 color4">
         <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
             <div className="card color2 " >
-                <h1 className="mt-5" >به کیما خوش‌آمدید</h1>
-                <p style={{fontSize:24}}>در کیما می‌توانید به دنبال کتاب‌های مورد‌علاقه خودت بگردید</p>
-                <p style={{fontSize:20}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنید</p>
-                <img src="people&books.png" className="col-12 mt-n5 card-img-bottom hv-center" alt="" /> 
+              <div class="card-body mt-1">
+                <h1 className="mt-4 card-title" >به کیما خوش‌آمدید</h1>
+                <p className="card-text" style={{fontSize:24}}>در کیما می‌توانید به دنبال کتاب‌های مورد‌علاقه خودت بگردید</p>
+                <p className="card-text" style={{fontSize:20}}>!و درباره‌ی کتاب‌ها گفت‌و‌گو کنید</p>
+                <img src={image} className="col-12 mt-n5 card-img-bottom hv-center mt-auto" alt="" /> 
+              </div>
+              
             </div>
             <div className="card color2">
             <form className="col-8 mx-auto mt-5 was-validated">

@@ -21,12 +21,13 @@ const WantToRead = ({navigation}) => {
 
         async function getwanttoreadImageFromAPI1(){
             const id=await AsyncStorage.getItem('id');
-            axiosinst.get('/api/user-profile/'+id+'/ToRead',{"headers":{"content-type":"application/json",
+            axiosinst.get('/user/'+id+'/collection?type=ToRead',{
+
+            "headers":{"content-type":"application/json",
             "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()
             }})
             .then(function(response){
-            setwanttoreadImage(response.data)
-            console.log(response)
+            setwanttoreadImage(response.data.data)
             })
             .catch(function(error){
             console.log(error)
