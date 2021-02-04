@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Item, Segment, Content, Input, Label, Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -156,8 +156,7 @@ const Myquizes = (prop) => {
 
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
+  useEffect(()=>{
       const a = new Promise(async (resolve, reject) => {
         await setinformation([]);
         await setpage(1);
@@ -179,7 +178,7 @@ const Myquizes = (prop) => {
         response(1);
         console.log('++++++++++' + information + '**********')
       })
-    }, [prop.navigation]))
+    },[])
   return (
 
 
