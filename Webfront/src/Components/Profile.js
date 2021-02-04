@@ -8,9 +8,8 @@ import teal from '@material-ui/core/colors/teal';
 import { Modal, Form } from "react-bootstrap";  
 import Cookies from 'js-cookie';
 import Tabs from '../Tabs/Tabs';
-import MyGroups from '../Tabs/MyGroups';
 import {API_BASE_URL} from '../constants/apiContants';
-
+import MyGroups from '../Tabs/MyGroupsTab.js';
 function ProFile (props){
     const [state , setState]=useState(
         {
@@ -210,23 +209,50 @@ function ProFile (props){
     console.log(res);
   })
 }
+const [read,setRead] = useState();
+const[reading,setReading] = useState();
+const[wantto,setWantto] = useState();
 
-const StyledButton = withStyles({
-    root: {
-      background: 'linear-gradient(45deg, #a0a0a0 30%, #a0a0a0 90%)',
-      color: 'black',
-      height: 50,
-      padding: '0 30px',
-      boxShadow: '5px 3px 4px 2px rgba(34, 33, 35, 0.3)',
-      fontWeight:'bolder',
 
-    },
-    label: {
-      textTransform: 'capitalize',
-    },
-  })(Button);
-
-const accent = teal[200]; // #e040fb
+const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
+const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
+const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
+useEffect(() => {
+  axios.get(apiURLRead,{
+    headers:{
+      "Content-Type":"application/json",
+   "Authorization":"Token "+Cookies.get("userToken")}
+    })
+    .then((data) => {
+      console.log(data.data.data);
+      console.log(data.data.Count);
+      setRead(data.data.Count);
+    });
+}, []);
+useEffect(() => {
+    axios.get(apiURLReading,{
+      headers:{
+        "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then((data) => {
+        console.log(data.data.data);
+        console.log(data.data.Count);
+        setReading(data.data.Count);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(apiURLWantto,{
+      headers:{
+        "Content-Type":"application/json",
+     "Authorization":"Token "+Cookies.get("userToken")}
+      })
+      .then((data) => {
+        console.log(data.data.data);
+        console.log(data.data.Count);
+        setWantto(data.data.Count);
+      });
+  }, []);
 
 useEffect(() => {
   }, [user]);
@@ -250,7 +276,7 @@ useEffect(() => {
                                     <h6 className="email">
                                        {user.email}
                                     </h6>
-                                    <button type="button" className="btn btn1 btn-primary"
+                                    <button type="button" className="btn btn1 btn-info rounded-lg"
                                      data-toggle="collapse" 
                                      data-target="#navbarToggleExternalContent" 
                                      aria-controls="navbarToggleExternalContent" 
@@ -259,7 +285,7 @@ useEffect(() => {
                                      onClick={handleShow}
 
 
-                                     aria-label="Toggle navigation"style={{fontFamily:'Yekan',marginTop:10,color:"white"}}>
+                                     aria-label="Toggle navigation"style={{fontFamily:'Yekan',marginTop:10,color:"white",fontWeight:"bold"}}>
                   ویرایش
 
                                     </button>
@@ -277,17 +303,17 @@ useEffect(() => {
 
                                 <hr className="line" style={{width:"100%",color:"#333",backgroundColor:"#333"}}></hr>
 
-                                        <div className="d-flex heading justify-content-between text-right mt-md-n1 ml-5 mr-5">
-                                        <b className="heading1"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.toRead}</b>
-                                        <b className="heading2"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.reading}</b>
-                                        <b className="heading3"style={{fontFamily:'Iranian Sans'}}>{bookNumbers.read}</b> 
+                                        <div className="d-flex heading justify-content-between mt-md-n1 ml-5 mr-5">
+                                        <b className="heading1 mr-n3 "style={{fontFamily:'Iranian Sans'}}>{read}</b>
+                                        <b className="heading2"style={{fontFamily:'Iranian Sans'}}>{wantto}</b>
+                                        <b className="heading3"style={{fontFamily:'Iranian Sans'}}>{reading}</b> 
                                         </div>
-                                        <div className="d-flex justify-content-between text-right mt-md-2">
+                                        <div className="d-flex justify-content-between mt-md-2">
+                                        <b className="description decsciptionmine3 ml-3 ">خوانده‌ام</b>
 
-                                        <b className="description decsciptionmine1">می‌خواهم بخوانم</b>
-                                        <b className="description decsciptionmine2">دارم می‌خوانم</b>
-                                        <b className="description decsciptionmine3">خوانده‌ام</b>
-                                        </div>   {/* < FaRegSmileBeam/> */}
+                                        <b className="description decsciptionmine1 ml-n4">می‌خواهم بخوانم</b>
+                                        <b className="description decsciptionmine2 pr-n5 mr-2">دارم می‌خوانم</b>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +329,7 @@ useEffect(() => {
              display: "block"}}/>
             <div className="d-flex justify-content-between p-4">
 
-                 <button className="btn custom-btn bg-primary" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
+                 <button className="btn custom-btn btn-info rounded-lg" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
 
                 <input class="form-control" 
                 type="file" accept="image/*" 
@@ -311,7 +337,7 @@ useEffect(() => {
                 ref={imageUploader} 
 
                 style={{ display: "none",color:"white" }} />
-              <button className="btn custom-btn1 bg-primary" type="submit" style={{fontFamily:'Yekan',color:"white"}}
+              <button className="btn custom-btn1 btn-info rounded-lg" type="submit" style={{fontFamily:'Yekan',color:"white"}}
 
                              onClick={() => imageUploader.current.click()} >
                              انتخاب عکس
@@ -326,7 +352,7 @@ useEffect(() => {
                                             <div class="my-1">
                                                 <label  for="userName"style={{fontFamily:'Yekan'}}>نام کاربری</label>
                                                 <input type="text"
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
                                                   id="userName"
                                                 //   placeholder={user.userName}
                                                   value={user.userName}
@@ -335,7 +361,7 @@ useEffect(() => {
                                             <div class=" my-2">
                                                 <button
                                                 type="submit" 
-                                                className="btn d-flex flex-row bg-primary "
+                                                className="btn d-flex flex-row btn-info rounded-lg "
                                                 onClick={handleChangeInfosClick}
 
 
@@ -344,10 +370,10 @@ useEffect(() => {
 
                                                 >ذخیره</button>
                                                 <div class="my-1">
-                                                <label for="password">رمز قبلی</label>
+                                                <label for="password" style={{fontFamily:"Yekan"}}>رمز قبلی</label>
                                                 <input type="password"
 
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
 
                                                   id="oldPass"
 
@@ -356,10 +382,10 @@ useEffect(() => {
                                                   onChange={handleChange}/>
                                             </div>
                                             <div class="my-1">
-                                                <label for="password">رمز جدید</label>
+                                                <label for="password"style={{fontFamily:"Yekan"}}>رمز جدید</label>
                                                 <input type="password"
 
-                                                  class="form-control rounded-pill"
+                                                  class="form-control"
 
 
                                                   id="newPass"
@@ -378,7 +404,7 @@ useEffect(() => {
                                             <div class=" my-2">
                                                 <button
                                                 type="submit" 
-                                                className="btn color5 d-flex flex-row bg-primary"
+                                                className="btn  d-flex flex-row btn-info rounded-lg"
                                                 onClick={handleChangePassClick}
 
 
@@ -397,7 +423,7 @@ useEffect(() => {
         <Modal.Footer>
 
         
-          <button className="btn bg-primary mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"white"}}>
+          <button className="btn rounded-lg mx-4"  onClick={handleClose} style={{fontFamily:'Yekan',color:"black"}}>
 
             بستن
           </button>

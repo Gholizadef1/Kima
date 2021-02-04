@@ -89,6 +89,7 @@ direction:"ltr",
 
 const [value, setValue] = useState(0);
 const [hover, setHover] = useState(-1);
+const [update,setUpdate] = useState();
 const [mess, setMess] = useState("");
 const [num, setNum] = useState();
 const classes = useStyles();
@@ -150,7 +151,7 @@ console.log(error);
 
 
 }
-},[props.match.params.bookId] );
+},[state,props.match.params.bookId] );
 
 // const StyledButton = withStyles({
 //     root: {
@@ -248,7 +249,7 @@ const Sendrequest =()=>{
     let back= JSON.stringify(payload);
     console.log(back);
     console.log(value);
-    axios.post('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    axios.post(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
 payload,{
 headers:{
 "Content-Type":"application/json",
@@ -268,12 +269,13 @@ headers:{
     console.log(bookId);
     console.log(bac);
     console.log(value);
-    axios.put('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId,
+    axios.put(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
     load,{
     headers:{
     "Content-Type":"application/json",
     "Authorization":"Token "+Cookies.get("userToken")}
     },)
+    
 
 }
 }
@@ -281,7 +283,7 @@ headers:{
 
 
 useEffect(() => {
-  axios.get('http://127.0.0.1:8000/api/bookrating/' + props.match.params.bookId
+  axios.get(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`
   ,{
   headers:{
   "Content-Type":"application/json",

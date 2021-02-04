@@ -12,6 +12,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
+  const bookid=prop.bookid;
+  const quoteid=prop.quoteid
   // const getlike=async()=>{
   //   const back2 = {
   
@@ -103,11 +105,11 @@ const Quotecard = (prop) => {
                   
                   text: 'حذف', onPress: async() => {
                     console.log(prop.lastinfo);
-                    prop.INFO(prop.quoteid)
+                    prop.INFO(quoteid)
                     console.log(prop.INFO)
                     console.log(prop.lastinfo);
                     // await setTimeout(() => {  console.log("World!"); }, 5000);
-                    axiosinst.delete('api/quotes/' + prop.quoteid, {
+                    axiosinst.delete('book/'+bookid +"/quote/"+ quoteid, {
                       "headers":
                       {
                         "Content-Type": "application/json",
@@ -117,7 +119,7 @@ const Quotecard = (prop) => {
                       .then(async function (response) {
                         
                         console.log(response);
-                        prop.INFO(prop.quoteid);
+                        prop.INFO(quoteid);
                         await(prop.DELETE(true))
                      
 
@@ -206,7 +208,7 @@ const Quotecard = (prop) => {
           // console.log((await AsyncStorage.getItem('token')).toString());
           // alert(prop.quoteid)
           console.log((await AsyncStorage.getItem('token')).toString())
-          console.log(prop.quoteid + 'PROP QUOTE ID');
+          console.log(quoteid + 'PROP QUOTE ID');
           // // console.log(item.account.id);
           const back={
                  
@@ -216,7 +218,11 @@ const Quotecard = (prop) => {
               
             const backk=JSON.stringify(back);
             // await setTimeout(() => {  console.log("World!"); }, 5000);
-          axiosinst.post('http://505a2dd8d5cc.ngrok.io/api/quotes/like/' + prop.quoteid,backk, {
+            if(heart==='lightblue'){
+          axiosinst.post('book/'+bookid +"/quote/"+ quoteid,backk, {
+            params:{
+              feedback:"like"
+            },
             "headers":
             {
               "Content-Type": "application/json",
@@ -228,9 +234,35 @@ const Quotecard = (prop) => {
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
-              if(heart==='lightblue')
+           
               setheart('#1f7a8c')
-              else
+             
+              setnumheart(response.data.data)
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('like error ||||||||||||')
+
+            })
+            }
+            else{
+              axiosinst.delete('book/'+bookid +"/quote/"+ quoteid, {
+            params:{
+              feedback:"like"
+            },
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              
+              console.log(response);
+              console.log(response.date)
+              console.log(response.data.data+'.DATA .DATA')
+            
               setheart('lightblue')
               setnumheart(response.data.data)
 
@@ -240,6 +272,9 @@ const Quotecard = (prop) => {
               console.log('like error ||||||||||||')
 
             })
+            }
+              
+            
           //  getlike(item);
 
 

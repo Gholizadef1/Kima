@@ -18,21 +18,21 @@ import { red } from "@material-ui/core/colors";
     const { index, style } = props;
     const [comment, setComment] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/mycomments`,{
+      fetch(`http://127.0.0.1:8000/user/${Cookies.get('userId')}/comment`,{
         headers:{
     "Content-Type":"application/json",
    }
             })
         .then((res) => res.json())
         .then((data) => {
-           console.log(data);
+           console.log(data.message);
           setComment(data);
         });
     }, []);
     return (
       <div>
-      {comment.message==='No Comment!' ? (                   
-      <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نظری برای نمایش وجود ندارد</div>
+      {comment.message==="No Comment!" ? (                   
+      <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نظری برای نمایش وجود ندارد</div>
 
         
        ) : (
@@ -49,8 +49,8 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
-              <div className="booktitle ml-auto mr-3">
+              <img  className="squere img-responsive"  src={current.current_book.smallimgurl} style={{width:63, height:100}} />
+              <div className="booktitle ml-auto mr-3"style={{fontFamily:"Yekan"}}>
                 <h5>
                 {current.current_book.title}
                 </h5>
@@ -72,7 +72,7 @@ import { red } from "@material-ui/core/colors";
               </div>
              </div>
  
-             <p  className="quote">
+             <p  className="quote"style={{fontFamily:"Yekan"}}>
             {current.comment_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>

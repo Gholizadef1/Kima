@@ -204,6 +204,7 @@ const GroupPage = (prop) => {
         // setjoined(true)
         getMembers()
       })
+     
       .catch(function (error) {
         console.log(error);
       });
@@ -384,6 +385,33 @@ const GroupPage = (prop) => {
 
 
 
+          <FlatList
+            horizontal={true}
+            style={{ marginBottom: hp('5%') }}
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => {
+
+              console.log('-----AKHAR LIST')
+            }}
+            onEndReachedThreshold={0.5}
+            keyExtractor={(item) => item.id}
+            refreshing={refreshmembers}
+            onRefresh={async () => {
+             console.log('refresh')
+            }}
+
+            data={members}
+            renderItem={({ item }) =><>
+
+              <View style={{maginLeft:wp('5%'),right:wp('5%'),marginTop:hp('2%')}}>
+                     {picture!='http://cc4552eb4e3a.ngrok.io/media/default.png'?<Avatar.Image style={{}} size={90}
+                      source={{uri:groupphoto}}
+                      ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={90}
+                      source={require('../../assets/group.jpg')}
+                      ></Avatar.Image>}
+                       <Text style={{alignSelf:'flex-start',left:wp('5%')}}>{item.user.username}</Text>
+              </View>
+              {/* <Body style={{marginTop:hp('8%') , marginLeft:wp('6%') , marginRight:wp('7%')}}>
         <FlatList
           // horizontal={true}s
           style={{ marginBottom: hp('5%') }}

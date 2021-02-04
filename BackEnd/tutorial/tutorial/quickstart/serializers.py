@@ -161,7 +161,7 @@ class GroupDetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Group
-        fields = ['title','owner','group_photo','summary','id','members_count',]
+        fields = ['title','owner','group_photo','summary','id','members_count','create_time']
 
 class MemberSerializer(serializers.ModelSerializer):
 
@@ -225,4 +225,4 @@ class MyGroupSerializer(serializers.ModelSerializer):
         fields = ['group_info']
 
     def to_representation(self,value):
-        return GroupDetSerializer(Group.objects.get(pk=value.group.id),).data
+        return (GroupDetSerializer(Group.objects.get(pk=value.group.id),).data)

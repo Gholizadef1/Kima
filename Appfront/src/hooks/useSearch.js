@@ -11,7 +11,7 @@ export default()=>{
     const serchitem='';
     const searchapi=async searchTerm=>{
         try{
-        const response = await axiosinst.get('/dyanmicsearch/',{
+        const response = await axiosinst.get('books',{
             params:{
                 search:searchTerm,
                 search_fields:'author',
@@ -32,7 +32,7 @@ export default()=>{
     }
 
     useEffect(()=>{
-        const tempresponse=searchapi('احمد ')
+        const tempresponse=searchapi('')
         .then(
         
         console.log(tempresponse)
