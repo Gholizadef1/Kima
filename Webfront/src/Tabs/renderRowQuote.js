@@ -35,7 +35,7 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
-      {quote.length===0 ? (
+      {quote.message==="No Quote!" ? (
                  
         <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
@@ -63,8 +63,8 @@ import { red } from "@material-ui/core/colors";
                 {`${current.sendtime.toString().split('T')[0]}`}
                 </small>
               </div>
-              <div className="d-flex flex-column">
-                <small className=" like mr-3">
+              <div className="d-flex f flex-column">
+                <small className=" like">
                 {current.Likes}
                 <GoHeart color="red" size="35"/>
                 </small>

@@ -13,16 +13,16 @@ import {
 } from "react-router-dom";
 import LoginForm from './components/loginForm/loginForm';
 import Profile from "./Components/Profile"; 
-import QuizesPage from "./Components/QuizesPage/QuizesPage";
 import Slide from './slides/Slide';
 import NavBar from "./Components/Navbar";
 import BookView from './components/bookView/bookView'
 import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
+import QuizesPage from "./Components/Quizespage/QuizesPage";
+import CreateQuiz from './Components/Quizespage/CreateQuiz';
 import ProtectedRoute  from "./components/protect";
 import Discussion  from "./components/discusstion/discussion";
-
 
 function App(props) {
   const [title, updateTitle] = useState(null);
@@ -57,6 +57,21 @@ function App(props) {
             
             <ProtectedRoute path="/book/:bookId" component={BookView}/>
 
+         
+            <Route path="/quizes">
+              <NavBar/>
+              <QuizesPage />
+            </Route>
+            <Route path="/creatquize">
+            <NavBar/>
+            <CreateQuiz/>
+            </Route>
+            <Route path="/takeQuiz/:quizId">
+                <NavBar/>
+            </Route>
+            <Route path="/reviw//:quizId">
+                <NavBar/>
+            </Route>
             <ProtectedRoute path="/groups" component={Groups}/>
 
             <ProtectedRoute path="/discussion" component={Discussion}/>

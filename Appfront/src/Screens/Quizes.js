@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
- import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
-// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-// import { useFocusEffect } from '@react-navigation/native';
-// import axiosinst from '../api/axiosinst';
+import React, { useState,useEffect } from 'react';
+import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Item, Segment, Content, Input, Label, Textarea } from 'native-base';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useFocusEffect } from '@react-navigation/native';
+import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-// import { MaterialIcons } from '@expo/vector-icons'; 
-// import { SearchBar } from 'react-native-elements';
-import { useFocusEffect } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 import Eachgroup from './Eachgroup';
-import axiosinst from '../api/axiosinst'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import { TouchableOpacity } from 'react-native';
+import { Formik, formik } from 'formik';
+import * as yup from 'yup';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+import { EvilIcons } from '@expo/vector-icons';
+import Quizcard from "./Quizcard";
+import { Octicons } from '@expo/vector-icons';
 import { Searchbar } from 'react-native-paper';
-import { number } from 'yup';
-import { set } from 'react-native-reanimated';
 // import { Button } from 'react-native-paper';
-const Groups = ({navigation}) => {
+const Quizes = (prop) => {
    
 
    const searchpost=async(page)=>{
@@ -38,21 +42,18 @@ const Groups = ({navigation}) => {
     }
     const backk = JSON.stringify(back);
     try{
-    const response = await axiosinst.get('groups',{
-      params: {
+      const response = await axiosinst.get('quizes?search='+searchterm+'&search-fields=title&page='+page,{
        
-        search: searchterm,
-        search_fields:'title',
-        page:page,
-      },
-    "headers":
-    {
-      "Content-Type": "application/json",
-      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-    }
-
+      "headers":
+      {
+        "Content-Type": "application/json",
+        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+      }
    
-  })
+     
+    })
+   
+  
    console.log(response.data)
   // setrefresh(true)
   settheend(false)
@@ -72,7 +73,7 @@ const Groups = ({navigation}) => {
   // settheend(true)
   // setcount(response.data.count)
   setnext(response.data.next)
-  if(next===null)
+  if(response.data.next===null)
   {
     settheend(true)
     console.log(next+'  NEXT TO IF')
@@ -125,11 +126,13 @@ const Groups = ({navigation}) => {
   const [count,setcount]=useState(1);
   const [pageone,setpageone]=useState(false);
   const [searchterm,setsearchterm]=useState('');
+  const [seeresult, setseeresult] = useState(false);
   // const idd=await(AsyncStorage.getItem('id');
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
   const [moreclicked,setmoreclicked]=useState(false);
   const [isowner,setisowner]=useState(false);
+  const [searchposition,setsearchposition]=useState("77%");
   const checkisowner=async(ID)=>{
     const id=await(AsyncStorage.getItem('id'))
     if(id===ID){
@@ -140,7 +143,7 @@ const Groups = ({navigation}) => {
   }
   const response=async (page)=>{
     // await setinformation([])
-   // setopensearch(false)
+    setopensearch(false)
     setpickerselected(false)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
@@ -163,27 +166,26 @@ const Groups = ({navigation}) => {
        console.log('api/group'+likeotime)
 
 
-      const response = await axiosinst.get('/group',{
+       const response = await axiosinst.get("quiz", {
         params: {
-          filter:likeotime,
           page: page
         },
-      "headers":
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-     
-   })
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+
+      })
    if(page<=count){
-   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+   if(response.data.Quiz+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
   await settheend(true)
   await setrefresh(false)
    console.log('#########')
    }
    else{
   // console.log(response.data+'RESPONSE.DATA')
-  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+  console.log(response.data.results+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
    console.log(page+' PAGE BAD COUNT')
@@ -200,7 +202,7 @@ const Groups = ({navigation}) => {
     //await setinformation(alaki);
     //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
      setrefresh(false)
-     setinformation(information=>[...information,...response.data.groups])
+     setinformation(information=>[...information,...response.data.Quiz])
     // console.log(response.data.groups.id+'  INFORMATION.ID')
     
       console.log('++++INFO++++'+information+"++++INFO++++")
@@ -303,7 +305,8 @@ const Groups = ({navigation}) => {
       marginRight:wp('5%'),
       marginLeft:wp('87%')
           }}
-          onPress={()=>{
+          onPress={async()=>{
+         // await setsearchposition("77%")
           setinformation([]);
           setpage(1)
           response(1);
@@ -331,12 +334,14 @@ const Groups = ({navigation}) => {
           marginTop:hp('2%'),
           
           // alignSelf:'center',
+        // marginBottom:hp("1%"),
           marginLeft:wp('5%'),
+        //  height:50,
           borderTopRightRadius:hp('5%'),
           borderBottomRightRadius:hp('5%'),
           borderBottomLeftRadius:hp('5%'),
           
-          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('1.8%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
         
           }} />}
@@ -381,7 +386,7 @@ const Groups = ({navigation}) => {
          name="plus" size={32} color="#EDF2F4" />
      
          </Button> */}
-      {!opensearch?<Button style={{position:'absolute',backgroundColor:'lightgray',height:hp('5.5%'),width:wp('11.3%'),borderRadius:1000,
+       {/* {!opensearch?<Button style={{backgroundColor:'lightgray',height:hp('5.5%'),width:wp('11.3%'),borderRadius:1000,
         backgroundColor:'#1f7a8c',left:wp('4%'),marginLeft:wp('78%'),marginTop:hp('2%'),elevation:20,justifyContent:'center'}}
         onPress={()=>setopensearch(true)}
         >
@@ -389,8 +394,8 @@ const Groups = ({navigation}) => {
          position:'absolute',
          marginTop:hp('3.5%'),alignSelf:'center'
       }} />
-      </Button>:null}
-      {!opensearch? <DropDownPicker
+      </Button>:null} */}
+      {/* {!opensearch? <DropDownPicker
           items={[
             { label: 'جدید ترین گروه ها',value:'none'},
             { label: 'معروف ترین گروه ها', value: 'like' },
@@ -458,13 +463,13 @@ const Groups = ({navigation}) => {
 
           }}
 
-        />:null}
+        />:null}  */}
         {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup> */}
 
-        <View style={{height:hp('2%')}}></View>
+        {/* <View style={{height:hp('2%')}}></View> */}
        
         {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
          <FlatList
@@ -473,9 +478,9 @@ const Groups = ({navigation}) => {
             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View> : 
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%')}}>گروه دیگری وجود ندارد</Text>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('-13%')}}>کوییز دیگری وجود ندارد</Text>
             </View>)}
-            style={{ marginBottom: hp('5%') }}
+            style={{ marginBottom: hp('0%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
               // if(page<count)
@@ -490,6 +495,7 @@ const Groups = ({navigation}) => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
+             // await setsearchposition("77%")
               // await setsearchterm('')
               if(searchterm===''){
                await(setnumberofresults())
@@ -505,54 +511,73 @@ const Groups = ({navigation}) => {
             }}
 
             data={information}
-            renderItem={({ item }) =><>
-         
-         <TouchableOpacity 
-           //activeOpacity={1}
-            style={{backgroundColor:'white',marginBottom:0}}
-            onPress={async()=>{
-              
-              console.log(moreclicked+' MORECLICKED in grouppppppp')
-               
-               if(moreclicked===false){
-             //if(gotogrouppage===true){
-              console.log(item.id+'####')
-              //setgotogrouppage(false)
-               //setmoreclicked(true);
-               console.log(moreclicked+' MORECLICKED in grp')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
-            <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
-             discription={item.summary} title={item.title} >
-              {/* <Text style={{position:'absolute'}}>kjhlkjhlkjhkjhlkjh</Text>
-              <TouchableOpacity 
-           //activeOpacity={1}
-            style={{backgroundColor:'lightblue',marginBottom:0,height:100}}
-            onPress={async()=>{
-              
-              console.log(moreclicked+' MORECLICKED in grouppppppp')
-               
-               if(moreclicked===false){
-             //if(gotogrouppage===true){
-              console.log(item.id+'####')
-              //setgotogrouppage(false)
-               //setmoreclicked(true);
-               console.log(moreclicked+' MORECLICKED in grp')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
-                <Text>kjhlkjhlkjhkjhlkjh</Text>
-                 </TouchableOpacity>
-              <Text>kjhlkjhlkjhkjhlkjh</Text> */}
-             
-             </Eachgroup>
-             </TouchableOpacity>
-         
-          
+            renderItem={({ item }) => {
            
-            </>
-            }
-          // extraData={finfo}
-          >
-          </FlatList> 
 
+           return (<>
+
+
+             <TouchableOpacity
+               activeOpacity={1}
+               style={{ backgroundColor: 'white', marginBottom: 0 }}
+               onPress={async () => {
+                 if (seeresult === true) {
+
+                   //prop.navigation.navigate("کوییز ها")
+                 }
+               }
+               }>
+               <Quizcard quizphoto={item.quiz_photo} seeresul={setseeresult} membernumber={item.question_count} discription={item.description} creator={item.creator} title={item.title} ></Quizcard>
+               {/* :null} */}
+             </TouchableOpacity>
+             {item.is_none === false ? <TouchableOpacity
+               onPress={async () => {
+                 const userid = await AsyncStorage.getItem("id")
+
+                 console.log(userid + " user iddfak;ljdf;lskjf;")
+                 await console.log(item.creator.id + " item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
+                 console.log((item.creator.id - userid) === 0 + " a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
+
+                 if (item.is_owner === true) {
+                   prop.navigation.navigate("quizresult", { id: item.id, ownerr: true, title: item.title })
+                 }
+                 else if (item.is_taken === true) {
+                   prop.navigation.navigate("quizresult", { id: item.id, ownerr: false, title: item.title })
+                 }
+                 // if(owner!=undefined){
+
+                 // }
+                 // await prop.seeresul(true);
+                 // setTimeout(() => prop.seeresul(false), 2000)
+               }}
+               style={{ backgroundColor: "#C5E7D7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+             >
+               <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
+             </TouchableOpacity> : <TouchableOpacity
+               onPress={() => prop.navigation.navigate("quizpage", { title: item.title })}
+               style={{ backgroundColor: "#F0F9F7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+             >
+                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>
+               </TouchableOpacity>}
+           </>
+           )
+         }}
+
+       >
+       </FlatList> 
+       {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز را بسازید</Text>} */}
+       {opensearch===false?<View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
+          <Button style={{
+            justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
+            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp("77%"), marginLeft: wp('78%')
+          }}   onPress={()=>{
+           // setsearchposition("69.5%")
+            setopensearch(true)}} >
+            <Feather style={styles.plus}
+              name="search" size={32} color="#EDF2F4" />
+
+          </Button>
+        </View>:null}
       </View>
       {/* <Text>
                 Groups
@@ -584,4 +609,4 @@ const styles = StyleSheet.create({
     marginTop:hp('10%')
   }
 });
-export default Groups;
+export default Quizes;

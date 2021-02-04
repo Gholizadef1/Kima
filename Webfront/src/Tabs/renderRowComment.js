@@ -27,7 +27,7 @@ import {API_BASE_URL} from '../constants/apiContants';
             })
         .then((res) => res.json())
         .then((data) => {
-           console.log(data.message);
+           console.log(data);
           setComment(data);
         });
     }, []);
@@ -67,7 +67,7 @@ import {API_BASE_URL} from '../constants/apiContants';
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className=" like mr-4">
+                <small className=" likec mr-4">
                 {current.LikeCount}
                 <AiOutlineLike  color="blue" size="25"/>
                 </small>

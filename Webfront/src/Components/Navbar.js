@@ -6,6 +6,7 @@ import {GiBookshelf} from 'react-icons/gi';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
+import {API_BASE_URL} from '../constants/apiContants';
  import "./UsersList.css";
  import "../slides/Slide.css";
 import "./Navbar.css";
@@ -27,7 +28,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
-  const [user,setUser] = useState({user:null});
+  const [user,setUser] = useState("");
   const [search,setSearch] = useState([]);
   const [error,setError] = useState("");
   const [userpic,setuserpic] = useState("");
@@ -37,16 +38,18 @@ function NavBar (props){
   }
 
 const searchUsers = async () => {
-
-const result = await axios.get(`${API_BASE_URL}/dyanmicsearch/?search=${user.user}&search_fields=author&search_fields=title`,
+console.log(user.user);
+const result = await axios.get(API_BASE_URL+ `/books?search=${user.user}&search-fields=author&search-fields=title`,
 
  ).then((res)=> {
  setSearch(res.data.results)
+ console.log(res);
   
 });
 }
 
 useEffect(() => {
+
   axios.get(API_BASE_URL + '/user/' + Cookies.get('userId'))
   .then(function (response){
     //console.log(response);
@@ -78,8 +81,8 @@ useEffect(() => {
   const routeToGroups = ()=>{
     props.history.push('/groups');
   }
-  const routeToQuizPage = ()=>{
-    props.history.push('/quizepage');
+  const routeToQuizes = ()=>{
+    props.history.push('/quizes');
   }
 
   const accent= { backgroundColor: purple[500], color: '#000' }
@@ -132,7 +135,7 @@ useEffect(() => {
             </li>
             <li  class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToQuizPage} >آزمونک</a>
+              <a onClick={routeToQuizes}>آزمونک</a>
             </li>
             <li class="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
@@ -176,8 +179,11 @@ useEffect(() => {
           نتایج
           </div>
         </Modal.Header>
-        <Modal.Body>
-          {search != 0 ?
+        <Modal.Body className="md">
+          {user.user != "" ?
+          <div>
+
+{search != 0 ?
           <div>
        {search.map((item) => (
      <div className="out" key={item.id} onClick={() => bookSelectedHandler( item)} >
@@ -188,7 +194,7 @@ useEffect(() => {
          /> 
          </div>
          <div className="bod">
-              {item.title.length >20 ?
+              {item.title.length >1 ?
 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
@@ -214,11 +220,15 @@ useEffect(() => {
        :
        <div className="not found text-center"> ): نتیجه‌ای یافت نشد</div>
 }
+          </div>
+          :
+          <div className="not found text-center">!چیزی سرچ کنید</div>
+}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info" onClick={handleClose}>
+          <button type="button" class="btn rounded-lg" onClick={handleClose}>
             بستن
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
 
@@ -234,3 +244,4 @@ useEffect(() => {
     }
 
     export default withRouter( NavBar);
+
