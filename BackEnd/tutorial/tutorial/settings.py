@@ -39,7 +39,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["e7e864967156.ngrok.io"]
+ALLOWED_HOSTS = ['f93932c7825e.ngrok.io']
 
 
 # Application definition
