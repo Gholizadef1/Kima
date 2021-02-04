@@ -139,7 +139,8 @@ const Createquiz = () => {
                         const formdata = new FormData();
                         formdata.append('title', values.title)
                         formdata.append('description', values.description)
-                        formdata.append("question_count", (numofquestion-1).toString());
+                        console.log(itemid+" item id ke migire")
+                        formdata.append("question_count", (itemid).toString());
                         // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
@@ -153,7 +154,7 @@ const Createquiz = () => {
 
                         //   all["quiz_photo"] = formdata;
                         console.log(itemid+"num of questionn")
-                        all["question_count"] =  itemid;
+                       // all["question_count"] =  numofquestion;
                         for (var i = 0; i < itemid; i++) {
                             formdata.append(`questions[${i}]question_text`, all.questions[i].question_text)
                             formdata.append(`questions[${i}]a_text`, all.questions[i].a_text)
@@ -173,6 +174,7 @@ const Createquiz = () => {
                             formdata.append(`questions[${i}]key`, "d")
                             }
                         }
+                        //formdata.append("question_count",numofquestion)
                         // console.log(all)
                         // var alll=json.stringify({
                         //     title:all.title,
