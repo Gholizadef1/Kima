@@ -334,12 +334,14 @@ const Quizes = ({navigation}) => {
           marginTop:hp('2%'),
           
           // alignSelf:'center',
+        // marginBottom:hp("1%"),
           marginLeft:wp('5%'),
+        //  height:50,
           borderTopRightRadius:hp('5%'),
           borderBottomRightRadius:hp('5%'),
           borderBottomLeftRadius:hp('5%'),
           
-          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
+          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('1.8%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
         
           }} />}
@@ -467,7 +469,7 @@ const Quizes = ({navigation}) => {
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup> */}
 
-        <View style={{height:hp('2%')}}></View>
+        {/* <View style={{height:hp('2%')}}></View> */}
        
         {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
          <FlatList
@@ -478,7 +480,7 @@ const Quizes = ({navigation}) => {
             <View style={styles.loader}>
             <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%')}}>گروه دیگری وجود ندارد</Text>
             </View>)}
-            style={{ marginBottom: hp('5%') }}
+            style={{ marginBottom: hp('0%') }}
             showsVerticalScrollIndicator={false}
             onEndReached={() => {
               // if(page<count)
@@ -548,14 +550,14 @@ const Quizes = ({navigation}) => {
                  // await prop.seeresul(true);
                  // setTimeout(() => prop.seeresul(false), 2000)
                }}
-               style={{ backgroundColor: "#B7E4C7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+               style={{ backgroundColor: "#C5E7D7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
              >
                <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
              </TouchableOpacity> : <TouchableOpacity
                onPress={() => prop.navigation.navigate("quizpage", { title: item.title })}
-               style={{ backgroundColor: "#238495", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
+               style={{ backgroundColor: "#F0F9F7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
              >
-                 <Text style={{ fontSize: hp("1.5.5%"), color: "#EEF9FB", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>
+                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>
                </TouchableOpacity>}
            </>
            )
@@ -564,18 +566,18 @@ const Quizes = ({navigation}) => {
        >
        </FlatList> 
        {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز را بسازید</Text>} */}
-       <View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
+       {opensearch===false?<View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
           <Button style={{
             justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
             backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp(searchposition), marginLeft: wp('78%')
           }}   onPress={()=>{
-            setsearchposition("70.5%")
+            setsearchposition("69.5%")
             setopensearch(true)}} >
             <Feather style={styles.plus}
               name="search" size={32} color="#EDF2F4" />
 
           </Button>
-        </View>
+        </View>:null}
       </View>
       {/* <Text>
                 Groups
