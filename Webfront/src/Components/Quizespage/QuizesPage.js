@@ -178,11 +178,11 @@ const handleCloseSnack = (event, reason) => {
   
   const routeToQuizHandler = ( id ) => {
     console.log(id);
-    props.history.push( '/takequiz/' + id );
+    props.history.push( '/takeQuiz/' + id );
   }
   const routeToMyQuizHandler = ( id ) => {
     console.log(id);
-    props.history.push( '/reviw/' + id );
+    props.history.push( '/reviewQuiz/' + id );
   }
 
 

@@ -224,14 +224,18 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
           }).then(data => {
             console.log(data.data.discussions);
-           
+            console.log(data);
             setShowdiscussion(data.data.discussions);
             
 
           })
+          .catch(error=>{
+            console.log(error);
+            setMassage("مشکلی پیش آمده دوباره امتحان کنید")
+            setOpenSnack(true);
+          });
     }, [
-      // showdiscussion,
-      props.match.params.groupId]);
+      showdiscussion,props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
       e.preventDefault();
@@ -892,7 +896,7 @@ height: 70}}
         {member.map ((current) => (
        <div className="col-md" key={current.id}>
           <Avatar
-          src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+          src={API_BASE_URL+`${current.user.profile_photo}`}
           style={{
           fontSize: '80px',
          width: 70,
