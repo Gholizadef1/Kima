@@ -439,7 +439,7 @@ const GroupPage = (prop) => {
                   <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
                     <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2.7%') }}>{item.title}</Text>
                     <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
-                    {notjoinedUser != "notjoinedUser" ?
+                    {joinedUser === 'joinedUser' || owner === 'owner' ?
                       <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
@@ -469,7 +469,7 @@ const GroupPage = (prop) => {
           </ScrollView>
 
 
-          {notjoinedUser != "notjoinedUser" ?
+          {joinedUser === 'joinedUser' || owner === 'owner' ?
             <Button onPress={() => setModalVisible(true)} style={{
               marginLeft: wp('20%'), width: wp('65%'), borderRadius: 20, marginTop: hp('1.5%')
               , backgroundColor: '#1F7A8C'
