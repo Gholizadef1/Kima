@@ -145,7 +145,7 @@ v
         <View style={styles.container}>
           <ScrollView>
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
-        <Text style={styles.kima}>کیما</Text>
+        {/* <Text style={styles.kima}>کیما</Text> */}
         <Image
 
          source={require('../../assets/backprof4.jpeg')}
@@ -224,7 +224,22 @@ v
                  <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
              </Button>
          </TouchableOpacity>
+         <Image
+         source={require('../../assets/line3.png')}
+         style={{height:hp('0.1%'),marginRight:wp('10%'),width:wp('94%')}}
+         ></Image>
+         <TouchableOpacity
+         onPress={()=>navigation.navigate('mybooks')}
+         >
+             <Button style={styles.lastquote}>
+                 <Text style={styles.lastquotetext}>
+                     کتاب های من
+                 </Text>
+                 <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
+             </Button>
+         </TouchableOpacity>
          </Card>
+        
          {/* <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}

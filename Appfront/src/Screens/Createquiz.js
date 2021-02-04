@@ -139,7 +139,7 @@ const Createquiz = () => {
                         const formdata = new FormData();
                         formdata.append('title', values.title)
                         formdata.append('description', values.description)
-                        formdata.append("question_count", (numofquestion - 1).toString());
+                        formdata.append("question_count", (numofquestion-1).toString());
                         // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
@@ -152,9 +152,9 @@ const Createquiz = () => {
                         var all = values;
 
                         //   all["quiz_photo"] = formdata;
-
-                        all["question_count"] = numofquestion - 1;
-                        for (var i = 0; i < numofquestion - 1; i++) {
+                        console.log(itemid+"num of questionn")
+                        all["question_count"] =  itemid;
+                        for (var i = 0; i < itemid; i++) {
                             formdata.append(`questions[${i}]question_text`, all.questions[i].question_text)
                             formdata.append(`questions[${i}]a_text`, all.questions[i].a_text)
                             formdata.append(`questions[${i}]b_text`, all.questions[i].b_text)
@@ -466,7 +466,7 @@ const Createquiz = () => {
                                                     {/* gahi  yeki ro ke mizani oon yeki ro migire ... */}
                                                     <TouchableOpacity
                                                         onPress={async () => {
-                                                            if (itemid > 2) {
+                                                            if (itemid > 1) {
                                                                 pop();
                                                                 for (var i = numofquestion - 1; i >= 0; i--) {
                                                                     console.log(props.values[i]);
