@@ -382,57 +382,64 @@ const Quizresult = (prop) => {
                                     //    resolve();
                                     // }).then(async()=>{
                                     await setnumofquestion(0);
-                                    console.log(numofquesiton+"num");
+                                    console.log(numofquesiton);
                                     await setseedis(" توضیحات")
-                                    console.log(" f;alskdj;l1111111111skjf;lksjf")
-                                    console.log(questions.Quiz.question_count+" question counttt")
+
                                     if (questions.Quiz.question_count === 1) {
                                         await setcansubmit("صفحه کوییز")
-                                      
-                                           
-                                    }
-                                   console.log(questions.user_answer[0] +"answer 0 user")
-                                   console.log(questions.Questions[0].key+" key soal")
                                         if (questions.Questions[0].key === "a") {
+                                            await setcolora("#95D5B2")
+                                        }
+
+                                        if (questions.Questions[0].key === "b") {
+                                            await setcolorb("#95D5B2")
+                                        }
+                                        if (questions.Questions[0].key === "c") {
+                                            await setcolorc("#95D5B2")
+                                        }
+                                        if (questions.Questions[0].key === "d") {
+                                            await setcolord("#95D5B2")
+                                        }
+                                    }
+                                    else {
+                                        if (questions.Questions[numofquesiton + 1].key === "a") {
                                             setcolora("#95D5B2")
                                         }
 
-                                        else if (questions.Questions[0].key === "b") {
+                                        if (questions.Questions[numofquesiton + 1].key === "b") {
                                             setcolorb("#95D5B2")
                                         }
-                                        else if (questions.Questions[0].key === "c") {
+                                        if (questions.Questions[numofquesiton + 1].key === "c") {
                                             setcolorc("#95D5B2")
                                         }
-                                        else if (questions.Questions[0].key === "d") {
+                                        if (questions.Questions[numofquesiton + 1].key === "d") {
                                             setcolord("#95D5B2")
                                         }
                                         // f28482
-                                        console.log(prop.route.params.ownerr+" owner hast ya na")
                                         if (prop.route.params.ownerr === false) {
                                             console.log("    asdfasdf3")
-                                            if (questions.user_answer[0] !== questions.Questions[0].key) {
-                                                console.log("yeki nabood")
-                                                if (questions.user_answer[0] === "a") {
+                                            if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                                if (questions.user_answer[numofquesiton + 1] === "a") {
                                                     setcolora("#EF8089")
                                                 }
-                                                if (questions.user_answer[0] === "b") {
+                                                if (questions.user_answer[numofquesiton + 1] === "b") {
                                                     setcolorb("#EF8089")
                                                 }
-                                                if (questions.user_answer[0] === "c") {
+                                                if (questions.user_answer[numofquesiton + 1] === "c") {
                                                     setcolorc("#EF8089")
                                                 }
-                                                if (questions.user_answer[0] === "d") {
+                                                if (questions.user_answer[numofquesiton + 1] === "d") {
                                                     setcolord("#EF8089")
                                                 }
                                             }
-                                            if (questions.user_answer[0] === "") {
+                                            if (questions.user_answer[numofquesiton + 1] === "") {
                                                 setpasokhnadadid(true)
                                             }
                                             else {
                                                 setpasokhnadadid(false)
                                             }
                                         }
-                                   
+                                    }
 
 
                                     console.log(" rang negah ghabli")
