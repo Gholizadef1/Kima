@@ -246,8 +246,7 @@ const Mygroups = (prop) => {
       }
       else {
         settheend(true)
-      }
-   
+      }   
     };
    
     useFocusEffect(
@@ -720,3 +719,4 @@ const styles = StyleSheet.create({
   }
   });
   export default Mygroups;
+
