@@ -415,13 +415,16 @@ const GroupPage = (prop) => {
             {groupinfo.summary}
           </Text>
 
+          <Text style={{ fontSize: hp('3%'), marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
 
           {discussion != undefined && discussion.length === 0 ?
-            <Text style={{ marginLeft: wp('10%'), marginTop: hp('2%') }}>بحثی برای نمایش وحود ندارد...</Text> : null}
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('18%'), marginTop: hp('4%'),marginBottom:hp('-4%'),top:hp('-0.5%') }}>بحثی برای نمایش وجود ندارد...</Text> : null}
+
+          {discussion != undefined && discussion.length === 0 ?
+            <AntDesign name="exception1" size={23} color="#1F7A8C" style={{ marginRight: wp('83.5%'), top: hp('0.3%') }} /> : null}
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: hp('3%'), marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
               <FlatList
                 style={{ marginBottom: hp('5%') }}
                 showsVerticalScrollIndicator={true}
