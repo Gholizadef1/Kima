@@ -15,6 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext,{AuthProvider} from '../context/Authcontext';
 // import AuthContext,{AuthProvider} from '../context/AuthContext';
 // import { Context as Authcontext } from '../context/AuthContext';  
+import { Video } from 'expo-av';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import axios from 'axios';
 import axiosinst from '../api/axiosinst';
@@ -54,13 +56,33 @@ const signschema=yup.object({
   return (
     
      <Container>
-
+     <Video
+  source={ require('../../assets/authvideo.mp4') }
+  rate={1.0}
+  volume={1.0}
+  isMuted={false}
+  resizeMode="cover"
+  shouldPlay
+  isLooping
+  style={{ width: wp('100%'), height:wp(hp('15.5%')),position:'absolute'  }}
+></Video>
+ <Text style={{color:'white',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
      
+ <AntDesign name="arrowleft" size={24} color="white"
+      style={{marginTop:hp('8%'),
+      position:'absolute',
+      marginRight:wp('5%'),
+      marginLeft:wp('85%')
+          }}
+          onPress={()=>{
+            pro.navigation.navigate('Log')
+          }}
+       />
      {/* <Title style={{color:'blue',fontSize:30,marginLeft:20,marginTop:40}}>
      kima
      </Title> */}
      
-     <View>
+     <View style={{marginTop:hp('13%')}}>
       <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
 
      </View>
@@ -336,18 +358,3 @@ const styles = StyleSheet.create({
   }
 });
 export default SignUp;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

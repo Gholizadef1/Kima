@@ -1,7 +1,7 @@
 import React, {useState,useEffect, Children} from 'react';
 import axios from 'axios';
 import Tooltip from '@material-ui/core/Tooltip';
-//import {API_BASE_URL} from '../../constants/apiContants';
+import {API_BASE_URL} from '../../constants/apiContants';
 import {
 //BrowserRouter as Router,
 // Switch,
@@ -99,49 +99,55 @@ const classes = useStyles();
 //const {bookId} = props.match.params;
 useEffect(() => {
 if (props.match.params.bookId) {
-axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId)
+axios.get(API_BASE_URL + '/book/' + props.match.params.bookId,
+{
+  headers:{
+ "Authorization":"Token "+Cookies.get("userToken")}
+  })
 .then(response => {
-//console.log(response);
+console.log(response);
 //console.log(response.data);
 //console.log(response.data.title);
 setState({
-author: response.data.author,
-average_rating_count:response.data.average_rating_count,
-average_rating:response.data.average_rating,
-
-avgrating: response.data.avgrating,
-description: response.data.description,
-id: response.data.id,
-imgurl: response.data.imgurl,
-numpages: response.data.numpages,
-publisher: response.data.publisher,
-ratecount: response.data.ratecount,
-smallimgurl: response.data.smallimgurl,
-title:response.data.title
+author: response.data.data.author,
+average_rating_count:response.data.data.average_rating_count,
+average_rating:response.data.data.average_rating,
+avgrating: response.data.data.avgrating,
+description: response.data.data.description,
+id: response.data.data.id,
+imgurl: response.data.data.imgurl,
+numpages: response.data.data.numpages,
+publisher: response.data.data.publisher,
+ratecount: response.data.data.ratecount,
+smallimgurl: response.data.data.smallimgurl,
+title:response.data.data.title
 });
 
-})
-.catch(function (error) {
-console.log(error);
-
-});
-axios.get('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId+'/getstate',
-{headers:{
-
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
-}
-)
-.then(function (response) {
-//console.log(response);
 setUserCoice(response.data.book_state);
-//console.log(response.data.book_state);
 document.getElementById(response.data.book_state).selected=true;
+
 })
 .catch(function (error) {
 console.log(error);
 
 });
+// axios.get(API_BASE_URL + '/book/' + props.match.params.bookId+'/getstate',
+// {headers:{
+
+// "Content-Type":"application/json",
+// "Authorization":"Token "+Cookies.get("userToken")}
+// }
+// )
+// .then(function (response) {
+// //console.log(response);
+// setUserCoice(response.data.book_state);
+// //console.log(response.data.book_state);
+// document.getElementById(response.data.book_state).selected=true;
+// })
+// .catch(function (error) {
+// console.log(error);
+
+// });
 
 
 }
@@ -178,15 +184,17 @@ const addBookToMineHandler = (choices)=>{
 setUserCoice(choices.target.value);
 //console.log(userCoice);
 const payload={
-"book_state": choices.target.value,
+"book_id": props.match.params.bookId,
 }
 const back= JSON.stringify(payload);
-axios.post('http://127.0.0.1:8000/bookdetail/' + props.match.params.bookId,
-back,{
+axios.post(API_BASE_URL + '/user/' + Cookies.get("userId") + '/collection?type=' + choices.target.value,
+back
+,{
 headers:{
-"Content-Type":"application/json",
-"Authorization":"Token "+Cookies.get("userToken")}
-})
+"Content-Type":"application/json"
+}
+}
+)
 .then(function (response){
 
 if(response.data=== "successfully added"){
@@ -241,7 +249,7 @@ const Sendrequest =()=>{
     let back= JSON.stringify(payload);
     console.log(back);
     console.log(value);
-    axios.post(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
+    axios.post(API_BASE_URL + `/book/${props.match.params.bookId}/rate`,
 payload,{
 headers:{
 "Content-Type":"application/json",
@@ -261,7 +269,7 @@ headers:{
     console.log(bookId);
     console.log(bac);
     console.log(value);
-    axios.put(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`,
+    axios.put(API_BASE_URL + `/book/${props.match.params.bookId}/rate`,
     load,{
     headers:{
     "Content-Type":"application/json",
@@ -275,7 +283,7 @@ headers:{
 
 
 useEffect(() => {
-  axios.get(`http://127.0.0.1:8000/book/ ${props.match.params.bookId}/rate`
+  axios.get(API_BASE_URL + `/book/${props.match.params.bookId}/rate`
   ,{
   headers:{
   "Content-Type":"application/json",
@@ -300,20 +308,20 @@ return(
 <div className="mx-md-5 px-md-5">
 
   <div className="container-fluid rTOl text-right px-md-5 rounded-lg" >
-    <div className="mx-md-5">
+    <div className="mx-md-5 my-4">
     <div className=" row no-gutters position-relative shadow color1 table-borderless my-1 mx-md-5 rounded-lg" style={{fontSize:16}}>
-      <div className="col-md-4 mb-md-0 p-4 rounded-lg" >
-        <img src={state.imgurl} className="img-fluid float-right rounded-lg" alt="" style={{width:'100%',height:'auto',boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
+     
+        <img src={state.imgurl} 
+        className="img-fluid mx-auto my-4 float-right rounded-lg" alt="" style={{width:270,boxShadow: '2px 2px 10px 8px rgba(35, 35, 35, 0.3)'}}/>
 
-      </div>
-      <div className=" position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
+      <div className="mx-auto position-static pl-md-0 d-flex flex-column mb-4 rounded-lg">
         <h2 className="p-3 mt-2" >{state.title}</h2>
         <div>
               <div className="ml-auto">
                  <div className={classes.root}>
-                 <button onClick={Sendrequest} className="btn bg-primary" style={{
+                 <button onClick={Sendrequest} className="btn bg-info" style={{
               height:25,width:35,marginBottom:8,borderRadius:7,marginRight:10}}>
-                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white",fontWeight:"bold"}}>
+                  <div style={{marginLeft:-7,marginTop:-5 ,color:"white"}}>
                   ثبت
                   </div>
                  </button>
@@ -336,7 +344,7 @@ return(
 
 
 
-          <table className="mt-auto table table-hover text-right " >
+          <table className="m-auto table table-hover text-right " >
             <tbody className="">
               <tr>
               <th >
@@ -370,11 +378,11 @@ return(
           </table>
           <div className="row mb-auto" >
           <label className="col-10 mr-2">به کتاب‌های خود اضافه کنید:</label>
-          <select className="form-control mr-4 rounded-pill" style={{width:170,fontSize:12}} id="bookMood" onChange={ addBookToMineHandler} >
-          <option id="none" value="none">هیچکدام</option>
-          <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
-          <option id="Reading" value="Reading">دارم می‌خوانم</option>
-          <option id="Read" value="Read">خوانده‌ام</option>
+          <select className="form-control mr-4 rounded-pill shadow" style={{width:170}} id="bookMood" onChange={ addBookToMineHandler} >
+            <option id="none" value="none">هیچکدام</option>
+            <option id="ToRead" value="ToRead">می‌خواهم بخوانم</option>
+            <option id="Reading" value="Reading">دارم می‌خوانم</option>
+            <option id="Read" value="Read">خوانده‌ام</option>
           </select>
           <div>
           <Snackbar
@@ -382,7 +390,7 @@ return(
           open={openSnack}
           autoHideDuration={3000}
           onClose={handleCloseSnack}
-          message={selectMassage}
+          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{selectMassage}</div>}
           />
       </div>
     </div>

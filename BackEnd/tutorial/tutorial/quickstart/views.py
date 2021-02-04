@@ -24,7 +24,7 @@ from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from django.core.paginator import Paginator
-import json
+
 
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
@@ -644,6 +644,7 @@ class LeaveGroupView(APIView):
     def delete(self ,request ,group_pk,member_pk):
         user=request.user
         group = Group.objects.get(id=group_pk)
+
         if user == group.owner:
             return Response({"message":"You are owner!You can't leave this group!"},status=HTTP_400_BAD_REQUEST)
         Member.objects.get(user=user,group=group).delete()
@@ -848,3 +849,4 @@ class DynamicQuizAPIView(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = MyQuizSerializer
     search_fields = ['title']
+

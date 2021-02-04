@@ -1,3 +1,4 @@
+import {API_BASE_URL} from '../constants/apiContants';
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "slick-carousel/slick/slick.css";
@@ -24,7 +25,7 @@ function Slide(props) {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/book")
+    fetch(API_BASE_URL + "/book")
       .then((res) => res.json())
       .then((data) => {
         setSuggestions(data);
@@ -32,7 +33,7 @@ function Slide(props) {
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/book?filter=rate")
+    fetch(API_BASE_URL + "/book?filter=rate")
 
       .then((res) => res.json())
       .then((data) => {
@@ -42,7 +43,7 @@ function Slide(props) {
   }, []);
   useEffect(() => {
 
-    fetch("http://127.0.0.1:8000/book?filter=comment")
+    fetch(API_BASE_URL + "/book?filter=comment")
 
       .then((res) => res.json())
       .then((data) => {

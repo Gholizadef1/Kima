@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const Quotecard = (prop) => {
+  const bookid = prop.bookid;
   console.log(prop.IDD + 'PROP IDD')
   console.log(prop.id + 'PROP ACCOUNT ID')
   // const[IDD,setIDD]=useState('');
@@ -20,43 +21,43 @@ const Quotecard = (prop) => {
   //   console.log('useEFFECTQUOTECARD')
   //   console.log(IDD)
   // }
-  const getlike=async()=>{
-    const back2 = {
-  
-    }
-      const backk2 = JSON.stringify(back2);
-      console.log((await AsyncStorage.getItem('token')).toString())
-      // await setTimeout(() => {  console.log("World!"); }, 5000);
-        axiosinst.get('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid , {
-          "headers":
-          {
-            "Content-Type": "application/json",
-            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-          }
-        })
-          .then(async function (response) {
-            
-            console.log(response)
-            // setnumlike(response.data.LikeCount)
-            if (response.data.message === 'True')
-            setheart('#1f7a8c')
-          else
-            setheart('lightblue')
-          //   console.log(response);
-  
-          })
-          .catch(function (error) {
-            console.log(error);
-            console.log('like error ||||||||||||')
-  
-          })
-  }
+  // const getlike=async()=>{
+  //   const back2 = {
+
+  //   }
+  //     const backk2 = JSON.stringify(back2);
+  //     console.log((await AsyncStorage.getItem('token')).toString())
+  //     // await setTimeout(() => {  console.log("World!"); }, 5000);
+  //       axiosinst.get('/api/quotes/like/' + prop.quoteid , {
+  //         "headers":
+  //         {
+  //           "Content-Type": "application/json",
+  //           "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+  //         }
+  //       })
+  //         .then(async function (response) {
+
+  //           console.log(response)
+  //           // setnumlike(response.data.LikeCount)
+  //           if (response.data.message === 'True')
+  //           setheart('#1f7a8c')
+  //         else
+  //           setheart('lightblue')
+  //         //   console.log(response);
+
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //           console.log('like error ||||||||||||')
+
+  //         })
+  // }
   useFocusEffect(
     React.useCallback(() => {
-      if(prop.isliked)
-      setheart('#1f7a8c')
+      if (prop.isliked)
+        setheart('#1f7a8c')
       else
-      setheart('lightblue')
+        setheart('lightblue')
       // getlike();
     }, [])
 
@@ -75,29 +76,31 @@ const Quotecard = (prop) => {
   console.log('quotecard')
   return (
     <View style={styles.container}>
-    
-      <Card style={{ marginLeft: wp('5%'), marginTop: hp('14%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
-    
-        {prop.IDD.toString() === prop.id.toString() ? <AntDesign name="delete"
+
+      <Card style={{ marginLeft: wp('5%'), marginTop: hp('9%'), height: prop.height, marginRight: wp('5%'), borderRadius: 10, elevation: 4, backgroundColor: '#EDF2F4' }}>
+
+        {/* {prop.IDD.toString() === prop.id.toString() ? */}
+        <AntDesign name="delete"
           size={hp('2.2%')} style={{ position: 'absolute', marginTop: hp('1.5%'), right: wp('3%') }}
           onPress={async () => {
             await Alert.alert(
               'از حذف این نقل قول اطمینان دارید؟',
-              
+
               '',
               [
                 {
                   text: 'انصراف',
                   onPress: () => console.log('Cancel Pressed'),
-                  style:'default'
+                  style: 'default'
                 },
                 {
-                  text: 'حذف', onPress: async() => {
+                  text: 'حذف', onPress: async () => {
                     console.log(prop.lastinfo);
                     prop.INFO(prop.quoteid)
                     console.log(prop.INFO)
                     console.log(prop.lastinfo);
-                    axiosinst.delete('api/quotes/' + prop.quoteid, {
+                    axiosinst.delete('book/' + bookid + "/quote/" + prop.quoteid, {
+                    
                       "headers":
                       {
                         "Content-Type": "application/json",
@@ -107,8 +110,8 @@ const Quotecard = (prop) => {
                       .then(async function (response) {
                         console.log(response);
                         prop.INFO(prop.quoteid);
-                        await(prop.DELETE(true))
-                     
+                        await (prop.DELETE(true))
+
 
                       })
                       .catch(function (error) {
@@ -124,13 +127,14 @@ const Quotecard = (prop) => {
 
             //  response();
           }}
-          color="#e56b6f" /> : null}
+          color="#e56b6f" />
+        {/* : null} */}
         <View style={{
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-       
+
           <Text style={{
             // textAlignVertical:'center',
             // alignContent:'center',
@@ -157,18 +161,18 @@ const Quotecard = (prop) => {
             <TouchableOpacity style={styles.bookpic}
               onPress={() => { }}>
 
-            <Image source={{uri:prop.book}} style={styles.bookpic}>
+              <Image source={{ uri: prop.book }} style={styles.bookpic}>
 
-            </Image>
-            <View style={{bottom:hp('27%'),width:wp('40%'),right:wp('30%') }}>
-            <Text style={{color:'#1f7a8c',fontSize:12,fontWeight:'bold',borderLeftColor:'black'}}>{ prop.booktitle }</Text>
-            </View>
-            <View style={{alignSelf:'center', bottom:hp('-3%'),width:wp('40%')}}>
-         
-            <Text style={{color:'gray',fontSize:12,fontWeight:'bold',alignSelf:'center'}}>{prop.bookauthor}</Text>
-            {/* <Image source={require('../../assets/line3.png')}></Image> */}
-           
-            </View>
+              </Image>
+              <View style={{ bottom: hp('27%'), width: wp('40%'), right: wp('30%') }}>
+                <Text style={{ color: '#1f7a8c', fontSize: 12, fontWeight: 'bold', borderLeftColor: 'black',elevation:0 }}>{prop.booktitle}</Text>
+              </View>
+              <View style={{ alignSelf: 'center', bottom: hp('-3%'), width: wp('40%') }}>
+
+                <Text style={{ color: 'gray', fontSize: 12, fontWeight: 'bold', alignSelf: 'center' }}>{prop.bookauthor}</Text>
+                {/* <Image source={require('../../assets/line3.png')}></Image> */}
+
+              </View>
 
 
             </TouchableOpacity>
@@ -184,38 +188,70 @@ const Quotecard = (prop) => {
         <AntDesign style={styles.heart} name="heart" onPress={async () => {
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
-          if (like === 'gray')
-            setlike('#1f7a8c')
-          else
-            setlike('gray')
+          const back = {
 
-          // console.log((await AsyncStorage.getItem('token')).toString());
-          // alert(prop.quoteid)
-          console.log((await AsyncStorage.getItem('token')).toString())
-          console.log(prop.quoteid + 'PROP QUOTE ID');
-          // // console.log(item.account.id);
-          axiosinst.post('http://fc0ce8a13f6f.ngrok.io/api/quotes/like/' + prop.quoteid, {
-            "headers":
-            {
-              "Content-Type": "application/json",
-              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-            }
-          })
-            .then(async function (response) {
-              console.log(response);
+          }
+          const backk = JSON.stringify(back);
+          if (heart === 'lightblue') {
+            //   setlike('#1f7a8c')
+            // else
+            //   setlike('gray')
 
+            // console.log((await AsyncStorage.getItem('token')).toString());
+            // alert(prop.quoteid)
+            console.log((await AsyncStorage.getItem('token')).toString())
+            console.log(prop.quoteid + 'PROP QUOTE ID');
+            // // console.log(item.account.id);
+            axiosinst.post('book/' + bookid + "/quote/" + prop.quoteid, backk, {
+              params: {
+                feedback: "like"
+              },
+              "headers":
+              {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+              }
             })
-            .catch(function (error) {
-              console.log(error);
-              console.log('like error ||||||||||||')
+              .then(async function (response) {
+                setheart('#1f7a8c')
+                console.log(response);
 
+              })
+              .catch(function (error) {
+                console.log(error);
+                console.log('like error ||||||||||||')
+
+              })
+          }
+          else {
+            axiosinst.delete('book/' + bookid + "/quote/" + prop.quoteid, {
+              params: {
+                feedback: "like"
+              },
+              "headers":
+              {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+              }
             })
+              .then(async function (response) {
+                setheart('lightblue')
+                console.log(response);
+
+              })
+              .catch(function (error) {
+                console.log(error);
+                console.log('like error ||||||||||||')
+
+              })
+          }
+        }
           //  getlike(item);
 
 
           //  response();
-        }} size={20} color={heart} />
-         <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
+        } size={20} color={heart} />
+        <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 
 
@@ -236,15 +272,15 @@ const styles = StyleSheet.create({
     //   alignItems: 'center',
     //   justifyContent: 'center',
   },
-  bookpic:{
-    height:112.5,
-    width:75,
-    position:'absolute',
-    bottom:hp('-8.5%') ,
-    alignSelf:'center' ,
-    borderRadius:5,
+  bookpic: {
+    height: 112.5,
+    width: 75,
+    position: 'absolute',
+    bottom: hp('-8.5%'),
+    alignSelf: 'center',
+    borderRadius: 5,
 
-    
+
   },
   avatar: {
     height: hp('7.8%'),

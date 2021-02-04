@@ -18,7 +18,7 @@ import Searchnavigation from './Searchnavigation';
 import Booknavigation from './Booknavigation'
 import Bookview from './Bookview';
 import { createSwitchNavigator } from 'react-navigation';
-import App from '../../App';
+//import App from '../../App';
 import Profile from './Profile';
 import Editprofile from './Editprofile';
 import Profilenavigation from './Profilenavigation';

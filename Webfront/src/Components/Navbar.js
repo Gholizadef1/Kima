@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import {Navbar,Nav,Button} from 'react-bootstrap';
 import {GiBookshelf} from 'react-icons/gi';
-import {CgProfile} from 'react-icons/cg';
+//import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
 import { Modal, Form } from "react-bootstrap";
 import{ useState, useEffect } from "react";
@@ -11,41 +11,27 @@ import {API_BASE_URL} from '../constants/apiContants';
  import "../slides/Slide.css";
 import "./Navbar.css";
 import purple from '@material-ui/core/colors/purple';
-//import teal from '@material-ui/core/colors/purple';
 import {GoSearch} from 'react-icons/go';
-
-//import {FaHome} from 'react-icons/fa';
 import {withStyles } from '@material-ui/core/styles';
-// import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useParams,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  // Redirect,
+  // Link,
+  // useRouteMatch,
+  // useParams,
   withRouter
 } from "react-router-dom";
- //import {MdGroup} from 'react-icons/md';
-// import UserList from './UsersList';
-
 import Cookies from 'js-cookie';
 import Avatar from '@material-ui/core/Avatar';
-//import ReactNavbar from "react-responsive-animate-navbar";
-//import { NavItem, NavDropdown, MenuIte} from 'react-bootstrap';
-//import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
   const [user,setUser] = useState("");
   const [search,setSearch] = useState([]);
-
-
-  // const [users,setUsers] = useState([]);
   const [error,setError] = useState("");
-
-
+  const [userpic,setuserpic] = useState("");
 
  const handleChange = event => {
     setUser({ user: event.target.value });
@@ -54,6 +40,7 @@ function NavBar (props){
 const searchUsers = async () => {
 console.log(user.user);
 const result = await axios.get(API_BASE_URL+ `/books?search=${user.user}&search-fields=author&search-fields=title`,
+
  ).then((res)=> {
  setSearch(res.data.results)
  console.log(res);
@@ -62,11 +49,13 @@ const result = await axios.get(API_BASE_URL+ `/books?search=${user.user}&search-
 }
 
 useEffect(() => {
-  axios.get(API_BASE_URL+ `/api/user-profile/' + ${Cookies.get('userId')}`)
+
+  axios.get(API_BASE_URL + '/user/' + Cookies.get('userId'))
   .then(function (response){
     //console.log(response);
     //console.log(response.data);
-    Cookies.set('userPic',API_BASE_URL+ response.data.profile_photo);
+    Cookies.set('userPic',API_BASE_URL+response.data.profile_photo);
+    setuserpic(API_BASE_URL+response.data.profile_photo);
       //console.log(user);
   })
   .catch(function (error) {
@@ -75,7 +64,7 @@ useEffect(() => {
   });
 
   searchUsers();
-  }, [user]);
+  }, [user,Cookies.get('userPic')]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -121,6 +110,7 @@ useEffect(() => {
     Cookies.remove('userToken');
     Cookies.remove('userName');
     Cookies.remove('userId');
+    Cookies.remove('userPic');
     props.history.push('/login');
 }
 
@@ -156,30 +146,28 @@ useEffect(() => {
               <Button variant="gray" className="mr-md-5" onClick={handleShow}>
                 <GoSearch className="" size="30" color="white" />
               </Button>
-              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1"  type="text" name="name" placeholder="   جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
+              <input className="rounded-pill text-right ml-4 ml-md-5 flex-fill my-1 px-3"  type="text" name="name" placeholder="جستجوی کتاب یا نویسنده..." onChange={handleChange}  value={user.user} 
               
                />  
               
           </div>
           <div className="d-flex justify-content-between mr-md-5">
-              <div className="btn-group mx-auto dropright" role="group">
-                <div type="button" class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <Avatar alt="" src={Cookies.get('userPic')} className="shadow" />
+              <div className="btn-group mx-auto " >
+                <div type="button" className="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <Avatar alt="" src={userpic} className="shadow " />
                 </div>
-                <div className="dropdown-menu px-1 mx-n2"  aria-labelledby="btnGroupDrop1">
-                  <div className="d-flex align-items-end flex-column">
-                  <div className="text-left mx-3" style={{fontSize:18,fontFamily:'Yekan'}} >
+                <div className="dropdown-menu text-right" >
+                  <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
-                  <div class="dropdown-divider"></div>
-                  <div className="btn"  onClick={routeToProfile}  style={{fontSize:16,fontFamily:'Yekan'}}>
+                  <div className="dropdown-divider"></div>
+                  <a type="button" className="dropdown-item"  onClick={routeToProfile}  style={{fontSize:16}}>
                     پروفایل
-                  </div>
-                  <div type="button" className="btn" onClick = {logout} style={{fontSize:16,fontFamily:'Yekan'}} >
+                  </a>
+                  <a type="button" className="dropdown-item" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
-                  </div>
+                  </a>
                  
-                  </div>
                 </div>
               </div>
           </div>

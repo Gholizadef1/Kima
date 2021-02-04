@@ -12,8 +12,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
 
+
 const Commentcard = (prop) => {
+  
   console.log('COMMENT CARD')
+  const bookid=prop.bookid;
   const [like, setlike] = useState('lightblue')
   const [dislike, setdislike] = useState('#F2A4A3')
   const[likeshode,setlikeshode]=useState(false);
@@ -202,7 +205,7 @@ const Commentcard = (prop) => {
                     // prop.INFO(prop.quoteid)
                     // console.log(prop.INFO)
                     // console.log(prop.lastinfo);
-                    axiosinst.delete('comment/' + prop.commentid + '/delete', {
+                    axiosinst.delete("book/"+bookid+'/comment/' + prop.commentid , {
                       "headers":
                       {
                         "Content-Type": "application/json",
@@ -249,18 +252,29 @@ const Commentcard = (prop) => {
      
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.picture === 'http://3fefbe690991.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       
+       {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={prop.pictureborder}
 
             source={require('../../assets/avatar.png')}
-            style={styles.avatar}
+            
+           // style={prop.avatar}
+            style={{
+            height: prop.picutrehieght,
+            width: prop.picturewidth,
+            //borderRadius: 100,
+            position: 'absolute'}}
 
           >
 
-          </ImageBackground> : <ImageBackground borderRadius={100}
+          </ImageBackground> : <ImageBackground borderRadius={prop.pictureborder}
 
             source={{ uri: prop.picture }}
-            style={styles.avatar}
-
+           // style={prop.avatar}
+           style={{
+            height: prop.picutrehieght,
+            width: prop.picturewidth,
+            //borderRadius: 100,
+            position: 'absolute'}}
           >
 
             </ImageBackground>}
@@ -268,7 +282,10 @@ const Commentcard = (prop) => {
         <Text style={styles.username}>{prop.name} </Text>
         <Text style={styles.date}>{prop.date}</Text>
       </View>
-      <View style={styles.comment}>
+      <View style={{ 
+        marginTop:prop.commentmargintop,
+        marginRight: '5%',
+        marginLeft: '5%',}}>
 
         {!more ? <Text>{comment4}</Text> : <Text>{prop.comment}</Text>}
       </View>
@@ -319,7 +336,11 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('comment/' + prop.commentid + '/like', backk, {
+          if(like==="lightblue"){
+          axiosinst.post("book/"+bookid+'/comment/' + prop.commentid , backk, {
+            params:{
+              feedback:"like"
+            },
             "headers":
             {
               "Content-Type": "application/json",
@@ -328,9 +349,36 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumlike(response.data.LikeCount)
-              if(like==='lightblue')
-              setlike('#1f7a8c')
-              else
+             // if(like==='lightblue')
+             setlike('#1f7a8c')
+              // else
+               //setlike('lightblue')
+              setnumdislike(response.data.DislikeCount)
+              // console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('like error ||||||||||||')
+
+            })
+          }
+          else{
+            axiosinst.delete("book/"+bookid+'/comment/' + prop.commentid , {
+            params:{
+              feedback:"like"
+            },
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumlike(response.data.LikeCount)
+              //if(like==='lightblue')
+              //setlike('#1f7a8c')
+              //else
               setlike('lightblue')
               setnumdislike(response.data.DislikeCount)
               // console.log(response);
@@ -341,6 +389,7 @@ const Commentcard = (prop) => {
               console.log('like error ||||||||||||')
 
             })
+          }
           //  getlike(item);
 
 
@@ -396,7 +445,11 @@ const Commentcard = (prop) => {
 
           }
           const backk = JSON.stringify(back);
-          axiosinst.post('comment/' + prop.commentid + '/dislike', backk, {
+          if(dislike==="#F2A4A3"){
+          axiosinst.post("book/"+bookid+'/comment/' + prop.commentid , backk, {
+            params:{
+              feedback:"dislike"
+            },
             "headers":
             {
               "Content-Type": "application/json",
@@ -405,10 +458,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               setnumdislike(response.data.DislikeCount)
-              if(dislike==='#F2A4A3')
+              //if(dislike==='#F2A4A3')
               setdislike('#E64846')
-              else
-              setdislike('#F2A4A3')
+              //else
+              //setdislike('#F2A4A3')
               setnumlike(response.data.LikeCount)
               // console.log(response);
 
@@ -418,6 +471,35 @@ const Commentcard = (prop) => {
               console.log('dislike error ||||||||||||')
 
             })
+          }
+          else{
+            axiosinst.delete("book/"+bookid+'/comment/' + prop.commentid , {
+            params:{
+              feedback:"dislike"
+            },
+            "headers":
+            {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+          })
+            .then(async function (response) {
+              setnumdislike(response.data.DislikeCount)
+             // if(dislike==='#F2A4A3')
+              //setdislike('#E64846')
+              // else
+               setdislike('#F2A4A3')
+              setnumlike(response.data.LikeCount)
+              // console.log(response);
+
+            })
+            .catch(function (error) {
+              console.log(error);
+              console.log('dislike error ||||||||||||')
+
+            })
+
+          }
           //  getlike(item);
 
 
@@ -483,7 +565,7 @@ const styles = StyleSheet.create({
   username: {
     position: 'absolute',
     marginTop: '5%',
-    left: 80,
+    marginLeft: wp("20%"),
     fontSize: 15,
     fontWeight: 'bold'
 
@@ -492,7 +574,8 @@ const styles = StyleSheet.create({
   comment: {
 
 
-    marginTop: 20,
+   // marginTop: 20,
+  //  marginTop:prop.commentmargintop,
     marginRight: '5%',
     marginLeft: '5%',
   },
@@ -510,7 +593,7 @@ const styles = StyleSheet.create({
   date: {
     position: 'absolute',
     marginTop: '17%',
-    left: 80,
+    marginLeft: wp("20%"),
     fontSize: 12,
     color: 'gray'
   },

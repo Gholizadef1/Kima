@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -24,6 +24,7 @@ const Groups = ({navigation}) => {
 
    const searchpost=async(page)=>{
      await setpage(page)
+     console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
     const back = {
       search:searchterm,
 
@@ -32,15 +33,17 @@ const Groups = ({navigation}) => {
     if(page===1){
       await settheend(false)
      await setinformation([])
+     console.log('IF PAGE === 1   ')
 
     }
     const backk = JSON.stringify(back);
     try{
-    const response = await axiosinst.get('api/group/search/',{
+    const response = await axiosinst.get('groups',{
       params: {
-        page:page,
+       
         search: searchterm,
-        search_fields:'title'
+        search_fields:'title',
+        page:page,
       },
     "headers":
     {
@@ -59,15 +62,19 @@ const Groups = ({navigation}) => {
     await setrefresh(false)
      console.log('#########')
      }
-  await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
-
-  console.log(information+'******######********########')
+     console.log('searchpost beforeee'+information+'1111111111111111111111')
+  // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+  // await setinformation([...information,...response.data.results])
+   await setinformation(information=>[...information,...response.data.results])
+   console.log('searchpost afterrrrrrr'+information+'222222222222222222')     
+  // console.log(information+'******######********########')
   // console.log(information[0].title)
   // settheend(true)
   // setcount(response.data.count)
   setnext(response.data.next)
   if(next===null)
   {
+    settheend(true)
     console.log(next+'  NEXT TO IF')
   }
   // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
@@ -104,21 +111,33 @@ const Groups = ({navigation}) => {
   // const [selectedValue, setselectedValue] = useState('none')
   // const selectedValue='none'
   const [selectedValue, setselectedValue] = useState('none')
+  const [gotogrouppage,setgotogrouppage]=useState(false);
   const [information, setinformation] = useState([]);
   const [next,setnext]=useState(null)
   const [search, setsearch] = useState([])
   const [refresh,setrefresh]=useState(false);
   const [pickerselected,setpickerselected]=useState(false);
   const [opensearch,setopensearch]=useState(false);
-  const [likeotime, setlikeotime] = useState('/filter-time');
+  const [likeotime, setlikeotime] = useState('time');
   const [theend,settheend]=useState(false);
   const[page,setpage]=useState(1);
   const[numberofpage,setnumberofpage]=useState(0);
   const [count,setcount]=useState(1);
   const [pageone,setpageone]=useState(false);
   const [searchterm,setsearchterm]=useState('');
+  // const idd=await(AsyncStorage.getItem('id');
   const [numberofresults,setnumberofresults]=useState();
   const searching=(term)=>setsearchterm(term);
+  const [moreclicked,setmoreclicked]=useState(false);
+  const [isowner,setisowner]=useState(false);
+  const checkisowner=async(ID)=>{
+    const id=await(AsyncStorage.getItem('id'))
+    if(id===ID){
+      return true;
+    }
+    else
+    return false
+  }
   const response=async (page)=>{
     // await setinformation([])
    // setopensearch(false)
@@ -144,8 +163,9 @@ const Groups = ({navigation}) => {
        console.log('api/group'+likeotime)
 
 
-      const response = await axiosinst.get('api/group'+ likeotime,{
+      const response = await axiosinst.get('/group',{
         params: {
+          filter:likeotime,
           page: page
         },
       "headers":
@@ -162,7 +182,7 @@ const Groups = ({navigation}) => {
    console.log('#########')
    }
    else{
-  console.log(response.data+'RESPONSE.DATA')
+  // console.log(response.data+'RESPONSE.DATA')
   console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
@@ -171,11 +191,17 @@ const Groups = ({navigation}) => {
 
     settheend(false)
    console.log('omade inja')
-    await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+   console.log('----INFO----'+information+"----INFO----")
+    // await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
   // setinformation(information.concat(response.data.groups))
     //  setinformation(response.data.groups)
+    //let alaki=[...information]
+    //alaki+=response.data.results;
+    //await setinformation(alaki);
+    //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
      setrefresh(false)
-    console.log(response.data.groups.id+'  INFORMATION.ID')
+     setinformation(information=>[...information,...response.data.groups])
+    // console.log(response.data.groups.id+'  INFORMATION.ID')
     
       console.log('++++INFO++++'+information+"++++INFO++++")
      
@@ -239,18 +265,33 @@ const Groups = ({navigation}) => {
       }
     }
     };
+    const callbackFunction = async (childData) => {
+     
+       await setmoreclicked(childData)
+      
+    }
  
-  useFocusEffect(
-    React.useCallback(() => {   
-        // setselectedValue('none')
-        setsearchterm('')
-        setnumberofresults()
-         setinformation([])
-      // if(searchterm==='')  
-        response(1)
+  useEffect(()=>{
+    // React.useCallback(() => { 
+      setsearchterm('')
+      setnumberofresults()
+        setinformation([])
+    // if(searchterm==='')  
+      response(1) 
+      // async function refreshing(){ 
+      // // setmoreclicked(false)
+      setselectedValue('none')
+      //   setsearchterm('')
+      //   setnumberofresults()
+      //    await setinformation([])
+      // // if(searchterm==='')  
+      //   response(1)
+      // }
         // else
         // searchpost(1)
-    },[]))
+    // }
+    // ,[])
+  },[])
   return (
 
     <View style={styles.container}>
@@ -263,6 +304,9 @@ const Groups = ({navigation}) => {
       marginLeft:wp('87%')
           }}
           onPress={()=>{
+          setinformation([]);
+          setpage(1)
+          response(1);
           setsearchterm('');
           setnumberofresults();
           setopensearch(false)}
@@ -273,7 +317,10 @@ const Groups = ({navigation}) => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      onEndEditing={()=>{setinformation([])
+        searchpost(1)}}
       onIconPress={()=>{
+        setinformation([])
         searchpost(1)}}
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
@@ -374,7 +421,7 @@ const Groups = ({navigation}) => {
               console.log('to none')
               // await setlikeotime('')
               console.log(likeotime+'BEIN TIME')
-               await setlikeotime('/filter-time')
+               await setlikeotime('time')
               // // setrefresh(true)
               // await setsearchterm('')
               // setnumberofresults()
@@ -392,7 +439,7 @@ const Groups = ({navigation}) => {
               console.log(item.value + 'VALUE')
               // await setlikeotime('')
               console.log(likeotime+'BEIN LIKE')
-               await setlikeotime('/filter-member')
+               await setlikeotime('member')
               //  setrefresh(true)
               // setpickerselected(true)
               // await setsearchterm('')
@@ -460,12 +507,45 @@ const Groups = ({navigation}) => {
             data={information}
             renderItem={({ item }) =><>
          
-            <TouchableOpacity onPress={()=>{
+         <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'white',marginBottom:0}}
+            onPress={async()=>{
+              
+              console.log(moreclicked+' MORECLICKED in grouppppppp')
+               
+               if(moreclicked===false){
+             //if(gotogrouppage===true){
               console.log(item.id+'####')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}>
-            <Eachgroup groupphoto={item.group_photo} isowner={item.is_owner} membernumber={item.members_count}
-             discription={item.summary} title={item.title} ></Eachgroup>
+              //setgotogrouppage(false)
+               //setmoreclicked(true);
+               console.log(moreclicked+' MORECLICKED in grp')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
+            <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
+             discription={item.summary} title={item.title} >
+              {/* <Text style={{position:'absolute'}}>kjhlkjhlkjhkjhlkjh</Text>
+              <TouchableOpacity 
+           //activeOpacity={1}
+            style={{backgroundColor:'lightblue',marginBottom:0,height:100}}
+            onPress={async()=>{
+              
+              console.log(moreclicked+' MORECLICKED in grouppppppp')
+               
+               if(moreclicked===false){
+             //if(gotogrouppage===true){
+              console.log(item.id+'####')
+              //setgotogrouppage(false)
+               //setmoreclicked(true);
+               console.log(moreclicked+' MORECLICKED in grp')
+              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
+                <Text>kjhlkjhlkjhkjhlkjh</Text>
+                 </TouchableOpacity>
+              <Text>kjhlkjhlkjhkjhlkjh</Text> */}
+             
+             </Eachgroup>
              </TouchableOpacity>
+         
+          
            
             </>
             }

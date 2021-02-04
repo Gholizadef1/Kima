@@ -35,9 +35,10 @@ urlpatterns = [
     path('book/<book_pk>/comment/<comment_pk>',CommentFeedView.as_view()),
     path('book/<int:pk>/quote',QuoteView.as_view()),
     path('book/<book_pk>/quote/<quote_pk>',LikeQuoteView.as_view()),
+    path('group/<group_pk>/member/<member_pk>',LeaveGroupView.as_view()),
+    path('books',kyma.views.DynamicBookAPIView.as_view()),
     path('group',GroupView.as_view()),
     path('group/<int:pk>/member',MemberGroupView.as_view()),
-    path('group/<group_pk>/member/<member_pk>',LeaveGroupView.as_view()),
     path('group/<int:pk>',GroupDetailsView.as_view()),
     path('groups',DynamicGroupAPIView.as_view()),
     path('group/<int:pk>/discussion',DiscussionView.as_view()),
@@ -48,7 +49,6 @@ urlpatterns = [
     path('user/<int:pk>/comment',CommentProfileView.as_view()),
     path('user/<int:pk>/group',MyGroupView.as_view()),
     path('user/<int:pk>',UserProfileView.as_view()),
-    path('books',kyma.views.DynamicBookAPIView.as_view()),
     path('user/<int:pk>/change-password', ChangePasswordView.as_view(), name='change-password'),
     path('user/<int:pk>/update-profile', UpdateUserProfileView.as_view(), name='update-profile'),
     path('bookinfo', kyma.views.BookListView.as_view()),
@@ -60,5 +60,6 @@ urlpatterns = [
     path('quiz/<int:pk>/photo',SetQuizPhotoView.as_view()),
     path('user/<user_pk>/quiz/<quiz_pk>/result',QuizResultView.as_view()),
     path('user/<int:pk>/quiz',MyQuizView.as_view()),
+
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

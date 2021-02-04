@@ -16,7 +16,8 @@ import axiosinst from '../api/axiosinst';
 import axios from 'axios';
 import AuthContext,{AuthProvider} from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Video } from 'expo-av';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const logschema=yup.object({
   Email:yup.string()
@@ -42,8 +43,19 @@ const logschema=yup.object({
       // <navigationconta>
     
      <Container backgroundColor='white'>
-     
-     <View>
+     <Video
+  source={ require('../../assets/authvideo2.mp4') }
+  rate={1.0}
+  volume={1.0}
+  isMuted={false}
+  resizeMode="cover"
+  shouldPlay
+  isLooping
+  style={{ width: wp('100%'), height:wp(hp('20%')),position:'absolute'  }}
+></Video>
+ <Text style={{color:'#1f7a8c',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('9.5%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
+     <View style={{marginTop:hp('12%')}}>
+    
       <Image source={require('../../assets/kima7.jpg')} style={styles.imagee}></Image>
      </View>
      <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}

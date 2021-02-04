@@ -7,7 +7,9 @@ import Cookies from 'js-cookie';
 import Slider from "react-slick";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import ListItemText from '@material-ui/core/ListItemText'
+import {API_BASE_URL} from '../constants/apiContants';
+
 import {
   withRouter
 } from "react-router-dom";
@@ -26,9 +28,9 @@ function Slide(props) {
   const [bookReading, setBookReading] = useState([]);
   const [bookWantto, setBookWantto] = useState([]);
  
-  const apiURLRead = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Read`;
-  const apiURLReading = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=Reading`;
-  const apiURLWantto = `http://127.0.0.1:8000/user/${Cookies.get('userId')}/collection?type=ToRead`;
+  const apiURLRead = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=Read`;
+  const apiURLReading = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=Reading`;
+  const apiURLWantto = API_BASE_URL + `/user/${Cookies.get('userId')}/collection?type=ToRead`;
     useEffect(() => {
       axios.get(apiURLRead,{
         headers:{
