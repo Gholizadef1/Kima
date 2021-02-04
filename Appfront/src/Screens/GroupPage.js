@@ -156,6 +156,11 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
+        Alert.alert('', 'بحث با موفقیت ساخته شد ', [
+          {
+            text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+          }
+        ], { cancelable: false }, { style: { height: hp('40%')} })
         await setjoin(true)
         await getMembers()
       })
@@ -174,7 +179,14 @@ console.log('groupiddd' +prop.route.params.id)
       }
     })
       .then(async function (response) {
-        getMembers()
+        Alert.alert('', 'شما گروه را ترک کردید', [
+          {
+            text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+          }
+        ], { cancelable: false }, { style: { height: hp('40%')} })
+        //await setjoin(false)
+        //await getMembers()
+        prop.navigation.navigate('Groupmainpage')
       })
       .catch(function (error) {
         console.log(error);
