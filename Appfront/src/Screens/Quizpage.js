@@ -105,12 +105,19 @@ const Quizpage = (prop) => {
     const getquiz = (async () => {
         try {
             const response = await axiosinst.get('quiz/'+prop.route.params.id)
+            if (response.data.Quiz.quiz_photo.toString().split(":")[0] === "http") {
+                setphotoo(response.data.Quiz.quiz_photo)
+            }
+            else {
+                setphotoo("http://e7e864967156.ngrok.io" + response.data.Quiz.quiz_photo )
+            }
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
             //  console.log(JSON.stringify(response)+"    response")
             // await setquestions(response.data)
             setquestions(response.data)
             await console.log(questions + " QUESTIONSS")
+          
             // if(questions!=undefined){
             //     setthisquestion(questions.Questions[0])
             // }
@@ -180,10 +187,13 @@ const Quizpage = (prop) => {
     const [colorb, setcolorb] = useState("rgba(237,242,244,0.9)")
     const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
     const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
+    const [photoo, setphotoo]=useState(undefined);
     // useFocusEffect(
     //     React.useCallback(() => {   
 
     useEffect(() => {
+      
+        console.log(photoo+"photoo")
 
         getquiz();
     }, [prop.navigation])
@@ -434,7 +444,7 @@ const Quizpage = (prop) => {
                                 backgroundColor: 'rgba(237,242,244,1)', alignself: "center", width: wp("90%"), marginHorizontal: wp("5%"),
                                 borderRadius: 10, elevation: 5, marginBottom: hp("0%"), marginVertical: hp("5%")
                             }}>
-                                {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
+                                {photoo === "http://e7e864967156.ngrok.io/media/default.png" ? <TouchableOpacity style={{
                                     height: hp('14%'),
                                     marginTop: hp('5%'),
                                     width: wp('28%'),
@@ -479,7 +489,7 @@ const Quizpage = (prop) => {
                                 }}
                                 >
                                         <ImageBackground borderRadius={100}
-                                            source={{ uri: "http://fb9ce5eee469.ngrok.io" + `${questions.Quiz.quiz_photo}` }}
+                                            source={{ uri: photoo}}
 
                                             style={{
                                                 height: hp('14%'),
