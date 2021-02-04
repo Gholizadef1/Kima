@@ -8,6 +8,7 @@ import Bookview from './Bookview';
 import Commentcard from './Commentcard';
 import Comment from './Comment';
 import Quote from './Quote';
+import Allhomepageresults from "./Allhomepageresults";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,8 @@ const Booknavigation = () => {
     // options={({navigation})=>({headerTitle:navigation.getParam()})}
       <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen name = 'Home' component={Home} options={{headerShown: false,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}}} ></Stack.Screen>
+       <Stack.Screen name = 'allhomeresults' component={Allhomepageresults} options={{headerShown: false,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4'}}} ></Stack.Screen>
       <Stack.Screen name = 'Showbookview' component={Bookview} options={{headerShown: false}} />
 

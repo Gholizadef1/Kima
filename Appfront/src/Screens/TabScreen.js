@@ -34,6 +34,7 @@ import Quizes from "./Quizes";
 import Eachquiz from "./Eachquiz";
 import Quiznavigation from "./Quiznavigation";
 import Createquiznavigation from "./Createquiznavigation";
+
 // import { useSafeArea } from 'react-native-safe-area-context';
 // import { white } from 'react-native-paper/lib/typescript/src/styles/colors';
 // const SNavigation = createStackNavigator();
