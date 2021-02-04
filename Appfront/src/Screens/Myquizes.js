@@ -235,10 +235,10 @@ const Myquizes = (prop) => {
                   console.log((item.creator.id-userid)===0+" a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
                   if((item.creator.id-userid===0))
                   {
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true})
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true,title:item.title})
                   }
                   else{
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false})
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false,title:item.title})
                   }
                   // if(owner!=undefined){
                 
