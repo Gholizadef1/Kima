@@ -273,7 +273,8 @@ const Quizes = (prop) => {
       
     }
  
-  useEffect(()=>{
+    useFocusEffect(
+      React.useCallback(() => {
     // React.useCallback(() => { 
       setsearchterm('')
       setnumberofresults()
@@ -293,7 +294,9 @@ const Quizes = (prop) => {
         // searchpost(1)
     // }
     // ,[])
-  },[])
+  }, [prop.navigation])
+
+  )
   return (
 
     <View style={styles.container}>
@@ -320,6 +323,7 @@ const Quizes = (prop) => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      iconColor={"#1f7a8c"}
       onEndEditing={()=>{setinformation([])
         searchpost(1)}}
       onIconPress={()=>{
@@ -329,7 +333,7 @@ const Quizes = (prop) => {
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
-          placeholder={'نام گروه ...'}
+          placeholder={'نام کوییز ...'}
           style={{  borderTopLeftRadius:hp('5%'),
           marginTop:hp('2%'),
           
@@ -354,14 +358,14 @@ const Quizes = (prop) => {
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
-          placeholder={'نام گروه ...'}
+          placeholder={'نام کوییز ...'}
           placeholderTextColor={'gray'}
           inputStyle={{color:'black',fontSize:hp('1.7%')}}
           containerStyle={{backgroundColor:'white',borderTopColor:'white',borderBottomColor:'white'}}
           inputContainerStyle={{backgroundColor:'#F1F3F9',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%'),borderRadius:20}}
           cancelIcon={<AntDesign style={{}}
          name="close" size={30} color="gray" />}
-        // placeholder="نام گروه ..."
+        // placeholder="نام کوییز ..."
         onChangeText={console.log('taghirkarde')}
         value={search}
       /> */}
@@ -397,8 +401,8 @@ const Quizes = (prop) => {
       </Button>:null} */}
       {/* {!opensearch? <DropDownPicker
           items={[
-            { label: 'جدید ترین گروه ها',value:'none'},
-            { label: 'معروف ترین گروه ها', value: 'like' },
+            { label: 'جدید ترین کوییز ها',value:'none'},
+            { label: 'معروف ترین کوییز ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
           labelStyle={{fontSize:wp('3%')}}
@@ -471,7 +475,7 @@ const Quizes = (prop) => {
 
         {/* <View style={{height:hp('2%')}}></View> */}
        
-        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
+        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} کوییز پیدا شد.</Text>:null}
          <FlatList
             ListFooterComponent={(theend === false ? 
             <View style={styles.loader}>

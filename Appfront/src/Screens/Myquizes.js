@@ -158,7 +158,8 @@ const Myquizes = (prop) => {
 
   };
 
-  useEffect(()=>{
+  useFocusEffect(
+    React.useCallback(() => {
       const a = new Promise(async (resolve, reject) => {
         await setinformation([]);
         await setpage(1);
@@ -180,7 +181,9 @@ const Myquizes = (prop) => {
         response(1);
         console.log('++++++++++' + information + '**********')
       })
-    },[])
+    }, [prop.navigation])
+
+    )
   return (
 
 

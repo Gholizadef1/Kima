@@ -140,7 +140,8 @@ const Quizpage = (prop) => {
         const back = {
             user_answer: answers
         }
-        const response = await axiosinst.post('quiz/5' , JSON.stringify(back), {
+        console.log(back);
+        const response = await axiosinst.post('quiz/'+prop.route.params.id , JSON.stringify(back), {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -151,7 +152,7 @@ const Quizpage = (prop) => {
                 const popAction = StackActions.pop(1);
 
                 await prop.navigation.dispatch(popAction);
-                await prop.navigation.navigate("quizresult", { id: prop.route.params.id })
+                await prop.navigation.navigate("quizresult", { id: prop.route.params.id , title:questions.Quiz.title ,owner:false})
                 console.log(response)
                 Alert.alert('', 'جواب شما با موفقیت ثبت شد ', [
                     {
@@ -548,7 +549,7 @@ const Quizpage = (prop) => {
                                     //     await setnumofquestion(numofquesiton+1);
                                     //    resolve();
                                     // }).then(async()=>{
-                                    await setnumofquestion(0);
+                                   //ننن await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
                                     if(questions.Quiz.question_count===1){
@@ -573,6 +574,7 @@ const Quizpage = (prop) => {
                                     await setcolord("rgba(40,160,184,1)")
                                     setoneofthem("d")
                                   }
+                                  await setnumofquestion(0);
                                     // })
                                 }}
                                 style={{ height: hp("7.5%"), elevation: 5, width: wp("60%"), backgroundColor: "rgba(31,122,140,1)", borderRadius: 50, marginTop: hp("11%"), alignSelf: "center" }}>
