@@ -42,7 +42,7 @@ const Quizes = ({navigation}) => {
     }
     const backk = JSON.stringify(back);
     try{
-      const response = await axiosinst.get('quizes?search=کوییز&search-fields=title&page='+page,{
+      const response = await axiosinst.get('quizes?search='+searchterm+'&search-fields=title&page='+page,{
        
       "headers":
       {
@@ -132,6 +132,7 @@ const Quizes = ({navigation}) => {
   const searching=(term)=>setsearchterm(term);
   const [moreclicked,setmoreclicked]=useState(false);
   const [isowner,setisowner]=useState(false);
+  const [searchposition,setsearchposition]=useState("77%");
   const checkisowner=async(ID)=>{
     const id=await(AsyncStorage.getItem('id'))
     if(id===ID){
@@ -304,7 +305,8 @@ const Quizes = ({navigation}) => {
       marginRight:wp('5%'),
       marginLeft:wp('87%')
           }}
-          onPress={()=>{
+          onPress={async()=>{
+          await setsearchposition("77%")
           setinformation([]);
           setpage(1)
           response(1);
@@ -491,6 +493,7 @@ const Quizes = ({navigation}) => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
+              await setsearchposition("77%")
               // await setsearchterm('')
               if(searchterm===''){
                await(setnumberofresults())
@@ -564,8 +567,10 @@ const Quizes = ({navigation}) => {
        <View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
           <Button style={{
             justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
-            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp('70%'), marginLeft: wp('78%')
-          }}   onPress={()=>setopensearch(true)} >
+            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp(searchposition), marginLeft: wp('78%')
+          }}   onPress={()=>{
+            setsearchposition("70.5%")
+            setopensearch(true)}} >
             <Feather style={styles.plus}
               name="search" size={32} color="#EDF2F4" />
 
