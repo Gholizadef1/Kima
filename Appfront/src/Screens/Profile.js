@@ -40,8 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-
-        const response = await axiosinst.get("http://f3a61a306745.ngrok.io/user/"+id)
+        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
 
             
         
@@ -53,8 +52,8 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
 
 
             console.log(';;;;;')
@@ -88,16 +87,14 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-
-        const response = await axiosinst.get("http://f3a61a306745.ngrok.io/user/"+id)
-
+        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
+v
             
         
       //  console.log(response)
       console.log('*****')
-
-            console.log(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
 
             console.log(picture);
           
@@ -171,8 +168,7 @@ import { Entypo } from '@expo/vector-icons';
         
 
 
-
-        {picture!='http://f3a61a306745.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+        {picture!='http://33613d59f2de.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
 
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}

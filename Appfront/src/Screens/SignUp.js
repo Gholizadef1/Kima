@@ -64,11 +64,11 @@ const signschema=yup.object({
   resizeMode="cover"
   shouldPlay
   isLooping
-  style={{ width: wp('100%'), height:wp(hp('15.5%')),position:'absolute'  }}
+  style={{ width: wp('100%'), height:hp('69%'),position:'absolute'  }}
 ></Video>
- <Text style={{color:'white',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
+ <Text style={{color:'#EDF2F4',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
      
- <AntDesign name="arrowleft" size={24} color="white"
+ <AntDesign name="arrowleft" size={hp("2.9%")} color="#EDF2F4"
       style={{marginTop:hp('8%'),
       position:'absolute',
       marginRight:wp('5%'),
@@ -204,7 +204,7 @@ const signschema=yup.object({
       }}
      >
      {(props)=>(
-     <View style={{alignItems:'center', marginTop:55,marginHorizontal:20}}>
+     <View style={{alignItems:'center', marginTop:hp("11%"),marginHorizontal:wp("4%")}}>
 
      <Item style={styles.input}>
 
@@ -214,12 +214,12 @@ const signschema=yup.object({
          value={props.values.Username}
          placeholder="نام خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="user" size={24} color="#BFDBF7" style={styles.Icon} />
+         <AntDesign name="user" size={hp("2.9%")} color="#BFDBF7" style={styles.Icon} />
         
        </Item>
        
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
+       <Text style={styles.errorr}>{props.touched.Username&&props.errors.Username}</Text>
  
        
 
@@ -229,14 +229,14 @@ const signschema=yup.object({
            onChangeText={props.handleChange('Email')}
            value={props.values.Email}
            onBlur={props.handleBlur('Email')}
-         placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray'>
+         placeholder="ایمیل خود را وارد کنید ..." placeholderTextColor='lightgray' >
         
          </Input>
-         <Feather name="mail" size={24} color="#BFDBF7" style={styles.Icon} />
+         <Feather name="mail" size={hp("2.9%")} color="#BFDBF7" style={styles.Icon} />
        </Item>
 
        
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Email&&props.errors.Email}</Text>
+       <Text style={styles.errorr}>{props.touched.Email&&props.errors.Email}</Text>
      
        
 
@@ -249,12 +249,12 @@ const signschema=yup.object({
          onBlur={props.handleBlur('Password')}
          placeholder="رمز خود را وارد کنید ..." placeholderTextColor='lightgray'>
          </Input>
-         <AntDesign name="lock" size={24} color="#BFDBF7"  style={styles.Icon}/>
+         <AntDesign name="lock" size={hp("2.9%")} color="#BFDBF7"  style={styles.Icon}/>
        </Item>
 
     
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
+       <Text style={styles.errorr}>{props.touched.Password&&props.errors.Password}</Text>
 
        
        <Item style={styles.input}>
@@ -265,19 +265,19 @@ const signschema=yup.object({
           onBlur={props.handleBlur('repeatPassword')}
           placeholder="رمز خود را تکرار کنید" placeholderTextColor='lightgray'>
          </Input>
-         <Feather name="check" size={24} color="#BFDBF7" style={styles.Icon} />
+         <Feather name="check" size={hp("2.9%")} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatPassword&&props.errors.repeatPassword}</Text>
+       <Text style={styles.errorr}>{props.touched.repeatPassword&&props.errors.repeatPassword}</Text>
        
   
-       <View style={{flexDirection:'row',width:400,marginRight:10,marginLeft:10}}>
+       <View style={{flexDirection:'row',width:wp("96%"),marginRight:wp("2%"),marginLeft:wp("2%")}}>
        
-     <CheckBox checked={check} onPress={()=>{if(check===true){setcheck(false)}else {setcheck(true)}}} 
+     {/* <CheckBox checked={check} onPress={()=>{if(check===true){setcheck(false)}else {setcheck(true)}}} 
      color='#BFDBF7' style={{marginTop:43,marginLeft:332,position:'absolute'}} />
             <Body>
-              <Text  style={{marginTop:45,marginLeft:150,color:'#1F7A8C',fontSize:12,fontWeight:'bold'}}>ثبت نام به عنوان ناشر؟</Text>
-            </Body>
+              {/* <Text  style={{marginTop:45,marginLeft:150,color:'#1F7A8C',fontSize:12,fontWeight:'bold'}}>ثبت نام به عنوان ناشر؟</Text> */}
+            {/* </Body> */}
    
    
      <Button bordered rounded style={styles.button}
@@ -287,7 +287,7 @@ const signschema=yup.object({
        
 
        >
-         <Text style={{color:'#1F7A8C', fontSize:15,fontWeight:'bold', marginHorizontal:60}}>ثبت نام</Text>
+         <Text style={{color:'#F0F9F7',width:wp("-10%"), fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("19.4%"),marginRight:wp("19.4%")}}>ثبت نام</Text>
         </Button>
       
      </View>
@@ -311,18 +311,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     // ImageBackground:'./assets/download.jpg',
-    height:100,
-    width:100
+    // height:3050,
+    // width:100
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   imagee:{
   
-    height:320,
-    width:300,
-    marginTop:450,
+    height:hp("30%"),
+    width:wp("70%"),
+    marginTop:hp("60%"),
     position:'absolute',
-    marginLeft:50
+    alignSelf:"center"
     
   },
   temp:{
@@ -330,31 +330,38 @@ const styles = StyleSheet.create({
   },
   button:{
     position:'absolute',
-    marginTop:30,
-    width:170,
-    backgroundColor:'#E1E5F2',
+    marginTop:hp("3%"),
+    width:wp("51%"),
+    backgroundColor:'#2592A7',
     borderColor:'#BFDBF7',
-    marginLeft:30
+    marginLeft:wp("23%"),
+   
     
   },
   input:{
-     marginTop:15,
-     marginLeft:20,
-     marginRight:20
+     marginTop:hp("1.5%"),
+     marginLeft:wp("4%"),
+     marginRight:wp("4%")
 
      
     // fontWeight:'100'
   },
   Input:{
-    fontSize:14,
+    fontSize:hp("1.7%"),
     fontStyle:'normal',
-    marginLeft:30,
+    // marginLeft:30,
+    marginBottom:hp("-0.5%"),
+    marginLeft:wp("7%"),
+   // marginBottom:hp("-0.5%")
     
     
   },
   Icon:{
-    marginRight:275,
+    alignSelf:"center",
     position:'absolute'
+  },
+  errorr:{
+    fontSize:hp("1.2.7%"), color:'red',marginTop:hp("0.5%"),alignSelf:"flex-start",marginLeft:wp("12.1%")
   }
 });
 export default SignUp;

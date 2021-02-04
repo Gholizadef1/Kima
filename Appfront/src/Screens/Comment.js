@@ -189,11 +189,14 @@ const Comment = (prop) => {
       <View style={styles.header}>
         <View style={styles.panelHeader}>
           <View style={styles.panelHandle} >
-            <Image
+            {/* <Image
               source={require('../../assets/line3.png')}
-              style={{ width: 100, height: 4, marginLeft: 155 }}
-            ></Image>
-            <Text style={{ marginLeft: '36%', fontWeight: 'bold', color: '#1f7a8c', marginTop: '3%', fontSize: 16 }}>نظر شما چیست؟</Text>
+              style={{ width: 100, height: 4,alignSelf:"center" }}
+            ></Image> */}
+            <View style={{backgroundColor:"lightgray",width:wp("25%"),height:hp("0.5%"),marginBottom:hp("0%"),borderRadius:100,alignSelf:"center"}}>
+
+            </View>
+            <Text style={{alignSelf:"center", fontWeight: 'bold', color: '#1f7a8c', marginTop: hp('2.2%'), fontSize: hp("1.9%") }}>نظر شما چیست؟</Text>
           </View>
         </View>
       </View>
@@ -244,29 +247,29 @@ const Comment = (prop) => {
             <View>
 
 
-              <View style={{ marginHorizontal: 30, borderColor: 'red', marginTop: 10 }}>
-                <Textarea rowSpan={7.5} bordered borderRadius={8}
+              <View style={{ marginHorizontal: wp("7.1%"), borderColor: 'red', marginTop: hp("1.1%") }}>
+                <Textarea rowSpan={hp("0.89.9%")} bordered borderRadius={8}
                   onChangeText={props.handleChange('comment')}
                   onBlur={props.handleBlur('comment')}
                   value={props.values.comment}
-                  placeholder={'  نظر شما ...    '} placeholderTextColor='black' fontSize={16} style={{ backgroundColor: 'white' }}>
+                  placeholder={'  نظر شما ...    '} placeholderTextColor='gray' fontSize={hp("1.8.5%")} style={{ backgroundColor: 'white' }}>
 
                 </Textarea>
               </View>
 
 
-              <Text style={{ fontSize: 10, color: 'red', marginLeft: '10%' }}>{props.touched.comment && props.errors.comment}</Text>
+              <Text style={{ fontSize: hp("1.3%"), color: 'red', marginLeft: hp('4.1%') }}>{props.touched.comment && props.errors.comment}</Text>
 
-              <View style={{ flexDirection: 'row', width: '100%', marginRight: 20, marginLeft: 10 }}>
-
-
+              <View style={{ flexDirection: 'row', width: '100%', marginRight: wp("5%"), marginLeft: wp('5%') }}>
 
 
-                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height: '50%', width: '40%',
-                 marginLeft: '28%', marginBottom: '8%', marginTop: '0.5%' }}
+
+
+                <Button bordered rounded style={{ backgroundColor: '#1F7A8C', borderRadius: 18, height:hp("4.2%"), width: wp("40%"),
+                 marginLeft: wp('25.3%'), marginBottom:hp("2%"), marginTop: hp('0.3%') }}
                   onPress={props.handleSubmit}
                 >
-                  <Text style={{ color: '#ffff', fontSize: 15, fontWeight: 'bold', marginLeft: '85%', width: '100%' }}>ثبت</Text>
+                  <Text style={{ color: '#ffff', fontSize: hp("1.8%"), fontWeight: 'bold', marginLeft: wp('94%'), width: wp('100%') }}>ثبت</Text>
                 </Button>
 
               </View>
@@ -286,7 +289,7 @@ const Comment = (prop) => {
     <View style={styles.container}>
       <BottomSheet style={{ position: '' }}
 
-        snapPoints={['40%', 0, 0]}
+        snapPoints={[hp('40%'), 0, 0]}
         ref={bs}
         initialSnap={1}
         callbackNode={fall}
@@ -319,18 +322,23 @@ const Comment = (prop) => {
             { label:likelable, value: 'like'},
           ]}
           defaultValue={selectedValue}
-          containerStyle={{ height: 40, width: 220, marginBottom: hp('2%') }}
+          labelStyle={{fontSize:wp('3%')}}
+          containerStyle={{ height: hp('8%'), width: wp('35%'), marginBottom: hp('0.2%') }}
           style={{
-            backgroundColor: '#fafafa', marginTop: hp('1%'), width: 220, marginBottom: hp('-3%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
-            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('1%')
+
+            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'),
+             marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('3%')
           }}
           itemStyle={{
+
             justifyContent: 'flex-start'
           }}
-      
-          // initialValues={'none'}
-          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('1%'), width: 220, position: 'absolute', marginBottom: hp('10%') }}
-          onChangeItem={async (item) => {
+          dropDownStyle={{
+            backgroundColor: '#fafafa',
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'),
+             width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
+          }}       onChangeItem={async (item) => {
           
             if (item.value === 'none') {
               const a=new Promise(async(resolve,reject)=>{
@@ -404,7 +412,7 @@ const Comment = (prop) => {
 
         />:null}
          { (information!=undefined) ? <FlatList
-          style={{ marginBottom: '17%' }}
+          style={{ marginBottom: hp('10%') }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
@@ -469,7 +477,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#B8B8B8',
     backgroundColor: '#ffff',
-    marginTop: 2
+    marginTop: hp("0%")
   },
   addcomment: {
 
@@ -481,17 +489,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F7A8C'
   },
   nazar: {
-    marginLeft: '33%',
+  
+    marginLeft: wp('23%'),
     fontWeight: 'bold',
     color: '#EDF2F4'
   },
   panel: {
-    padding: 20,
+    padding: hp("3%"),
     backgroundColor: '#edf2f4',
-    paddingTop: 20,
+    paddingTop:  hp("3%"),
     shadowColor: 'black',
     borderTopColor: 'black',
     shadowOpacity: 0.5,
+    elevation:10
 
   },
   header: {
@@ -501,7 +511,7 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOpacity: 0.5,
     // elevation: 5
-    paddingTop: 20,
+    paddingTop: hp("2.5%"),
     borderTopLeftRadius: 20,
     borderTopColor: 'black',
     borderTopRightRadius: 20,
