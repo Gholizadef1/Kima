@@ -64,17 +64,20 @@ const EditProfile = () => {
 
     const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
 
+
         
     
   //  console.log(response)
   console.log('*****')
 
-        console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+
+        console.log(`http://5c5235076a5d.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://5c5235076a5d.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://33613d59f2de.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://5c5235076a5d.ngrok.io/media/default.jpg"))
+
 
    console.log(picture===null)
   //  setimage(require(response.data.profile_photo))
@@ -128,7 +131,8 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
            const id=await AsyncStorage.getItem('id');
-          const response=await axiosinst.put('http://33613d59f2de.ngrok.io/user/'+id+'/update-profile',formdata,{
+
+          const response=await axiosinst.put('http://5c5235076a5d.ngrok.io/user/'+id+'/update-profile',formdata,{
 
 
             headers:{
@@ -219,7 +223,9 @@ useFocusEffect(
           }
            const backk=JSON.stringify(back);
            const id=await (await AsyncStorage.getItem('id')).toString();
-          const response=await axiosinst.put('http://33613d59f2de.ngrok.io/user/'+id+'/update-profile',formdata,{
+
+          const response=await axiosinst.put('http://5c5235076a5d.ngrok.io/user/'+id+'/update-profile',formdata,{
+
 
 
             headers:{
@@ -360,7 +366,8 @@ useFocusEffect(
         <TouchableOpacity style={{}}
          onPress={async()=>await bs.current.snapTo(0)}>
 
-      {picture==='http://33613d59f2de.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+
+      {picture==='http://5c5235076a5d.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}

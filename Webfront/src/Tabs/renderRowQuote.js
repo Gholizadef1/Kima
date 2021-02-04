@@ -5,6 +5,8 @@ import {
   import "./renderRowQuote.css";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import {API_BASE_URL} from '../constants/apiContants';
+
 import PropTypes from 'prop-types';
 import {GoHeart} from 'react-icons/go';
 import {AiOutlineLike} from 'react-icons/ai';
@@ -19,7 +21,7 @@ import { red } from "@material-ui/core/colors";
     const { index, style } = props;
     const [quote, setQuote] = useState([]);
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/user-profile/${Cookies.get('userId')}/MyQuotes`,{
+      fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/quote`,{
         headers:{
     "Content-Type":"application/json",
    }
@@ -33,9 +35,9 @@ import { red } from "@material-ui/core/colors";
     }, []);
     return (
       <div>
-      {quote.length===0 ? (
+      {quote.message==="No Quote!" ? (
                  
-        <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:200}}>نقل‌قولی برای نمایش وجود ندارد</div>
+        <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
        ) : (
          <div>
@@ -51,24 +53,25 @@ import { red } from "@material-ui/core/colors";
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-2 mt-n4">
-              <img  src={current.current_book.smallimgurl} style={{width:50, height:100}} />
+                
+              <img  className="squere img-responsive"  src={current.current_book.smallimgurl} style={{width:63, height:100}} />
               <div className="  ml-auto mr-3">
-                <h5 className="booktitle">
+                <h5 className="booktitle" style={{fontFamily:"Yekan"}}>
                 {current.current_book.title}
                 </h5>
                 <small className="date">
                 {`${current.sendtime.toString().split('T')[0]}`}
                 </small>
               </div>
-              <div className="d-flex flex-column">
-                <small className=" like mr-3">
+              <div className="d-flex f flex-column">
+                <small className=" like">
                 {current.Likes}
-                <GoHeart color="lightred" size="35"/>
+                <GoHeart color="red" size="35"/>
                 </small>
               </div>
              </div>
  
-             <p className="quote">
+             <p className="quote" style={{fontFamily:"Yekan"}}>
             {current.quote_text.split ('\n').map ((item, i) => <p key={i}>{item}</p>)}
 
              </p>

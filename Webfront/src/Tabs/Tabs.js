@@ -82,9 +82,9 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label=" نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Yekan",color:"black"}} />
-          <Tab label=" نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Yekan",color:"black"}} />
-          <Tab label="کتاب‌های من" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Yekan",color:"black"}} />
+          <Tab label=" نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
+          <Tab label=" نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
+          <Tab label="کتاب‌های من" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -103,7 +103,7 @@ export default function FullWidthTabs() {
       </FixedSizeList>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction} height={400}>
-        <FixedSizeList height={400} width={650} itemSize={10} itemCount={1}>
+        <FixedSizeList height={400} width={650} itemSize={20} itemCount={1}>
       {Scroll}
       </FixedSizeList>
         

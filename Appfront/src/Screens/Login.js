@@ -1,6 +1,3 @@
-
-
-
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
@@ -121,11 +118,6 @@ const Login = (pro) => {
             // console.log(response.status);
             val.changelogged(true);
             // pro.navigation.navigate('mainFlow');
-
-            console.log('Hiiiiiiii')
-            console.log('.....');
-
-
 
           })
           .catch(function (error) {

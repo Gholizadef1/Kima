@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
-// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-// import { useFocusEffect } from '@react-navigation/native';
-// import axiosinst from '../api/axiosinst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-// import { MaterialIcons } from '@expo/vector-icons'; 
-// import { SearchBar } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import Eachgroup from './Eachgroup';
 import axiosinst from '../api/axiosinst'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
-import { number } from 'yup';
-import { set } from 'react-native-reanimated';
-// import { Button } from 'react-native-paper';
+
+
 const Groups = ({navigation}) => {
    
-
    const searchpost=async(page)=>{
      await setpage(page)
      console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
@@ -140,7 +133,7 @@ const Groups = ({navigation}) => {
   }
   const response=async (page)=>{
     // await setinformation([])
-    setopensearch(false)
+   // setopensearch(false)
     setpickerselected(false)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
@@ -161,8 +154,7 @@ const Groups = ({navigation}) => {
      try{
        console.log('  omad to response')
        console.log('api/group'+likeotime)
-
-
+console.log(await AsyncStorage.getItem('token'));
       const response = await axiosinst.get('/group',{
         params: {
           filter:likeotime,
@@ -183,7 +175,7 @@ const Groups = ({navigation}) => {
    }
    else{
   // console.log(response.data+'RESPONSE.DATA')
-  console.log(response.data.groups+'RESPONSE.DATA.GROUPS')
+  console.log(JSON.stringify(response.data.groups)+'RESPONSE.DATA.GROUPS')
    await setcount(response.data.count);
    console.log(count+'  COUNT')
    console.log(page+' PAGE BAD COUNT')
@@ -585,3 +577,4 @@ const styles = StyleSheet.create({
   }
 });
 export default Groups;
+

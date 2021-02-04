@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './loginForm.css';
-import Button from '@material-ui/core/Button';
-import {withStyles } from '@material-ui/core/styles';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
+import image from '../../assets/people&books.png';
+
 
 function LoginForm(props) {
     const [state , setState] = useState({
@@ -38,9 +38,9 @@ function LoginForm(props) {
         //console.log(back);
         //console.log(props);
         //console.log(state);
-        axios.post(API_BASE_URL+'login',back,{"headers":{"content-type":"application/json" }})
+        axios.post(API_BASE_URL+'/login',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 //console.log(response.status);
                 //console.log(response.data);
                 if(response.status === 200){
@@ -77,36 +77,37 @@ function LoginForm(props) {
         props.history.push('/register'); 
         props.updateTitle('Register');
     }
-    const StyledButton = withStyles({
-        root: {
-          background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
-          borderRadius: 3,
-          border: 0,
-          color: 'black',
-          height: 48,
-          padding: '0 30px',
-          boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
-        },
-        label: {
-          textTransform: 'capitalize',
-        },
-      })(Button);
+    // const StyledButton = withStyles({
+    //     root: {
+    //       background: 'linear-gradient(45deg, #7eccb7 30%, #4a8a96  90%)',
+    //       borderRadius: 3,
+    //       border: 0,
+    //       color: 'black',
+    //       height: 48,
+    //       padding: '0 30px',
+    //       boxShadow: ' 0 3px 5px 2px rgba(165, 105, 255, 0.3)',
+    //     },
+    //     label: {
+    //       textTransform: 'capitalize',
+    //     },
+    //   })(Button);
     return(
         <div className="d-flex justify-content-center py-sm-4 color4">
-        <div className="card-group col-sm-10 my-sm-5 shadow-lg color4" >
-            <div className="card color2 " >
-                <br></br>
-                <h1 style={{fontFamily:'Yekan'}}>به کیما خوش‌آمدی</h1>
-                <p style={{fontFamily:'Yekan',fontSize:24}}>"کتاب یار مهربان است"</p>
-                <p style={{fontFamily:'Yekan',fontSize:20}}>خوشحالیم امروز می‌بینیمت</p>
-                <img src="people&books.png" className="col-12" alt=""/> 
+        <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
+            <div className="card color2" >
+                <div class="card-body mt-1">
+                    <h1 className="mt-4 card-title" >به کیما خوش‌آمدید</h1>
+                    <p className="card-text" style={{fontSize:24}}>"کتاب یار مهربان است"</p>
+                    <p className="card-text" style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
+                    <img src={image} className="col-12 mt-n5 card-img-bottom hv-center mt-auto" alt=""/> 
+                </div>
             </div>
-            <div className="card color2 p-2">
-            <form className="col-8 m-auto was-validated">
-                <h1 style={{fontFamily:'Yekan'}}>ورود</h1>
+            <div className="card color2">
+            <form className="col-8 mx-auto mt-5 was-validated">
+                <h1 >ورود</h1>
                 <br></br>
                 <div className="form-group-sm text-right">
-                <label htmlFor="exampleInputEmail1"style={{fontFamily:'Mitra'}}>ایمیل</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputEmail1">ایمیل</label>
                 <input type="email" 
                        className="form-control" 
                        id="email" 
@@ -123,7 +124,7 @@ function LoginForm(props) {
                 </div>
                 
                 <div className="form-group text-right">
-                <label htmlFor="exampleInputPassword1"style={{fontFamily:'Yekan'}}>رمز</label>
+                <label className="mt-2 mb-n1" htmlFor="exampleInputPassword1">رمز</label>
                 <input type="password" 
                        className="form-control" 
                        id="password" 
@@ -138,9 +139,9 @@ function LoginForm(props) {
                 </div>
                 <p className="loginText"> {state.backError} </p>
                 <button 
-                style={{fontFamily:'Yekan',color:"white"}}
+                
                     type="submit" 
-                    className="btn col-6 mx-auto bg-primary btn-block"
+                    className="btn  mx-auto btn-info"
                     onClick={handleSubmitClick}
                 >ثبت</button>
                 
@@ -150,8 +151,8 @@ function LoginForm(props) {
             </div>
             
             <div className="registerMessage">
-                <span style={{fontFamily:'Yekan'}}>قبلاً ثبت‌نام نکرده‌اید؟</span>
-                <span className="loginText" style={{fontFamily:'Yekan'}} onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
+                <span > قبلاً ثبت‌نام نکرده‌اید؟ </span>
+                <span className="loginText" onClick={() => redirectToRegister()}>اینجا ثبت‌نام کنید</span> 
             </div>
             </div>
         </div>
