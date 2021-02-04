@@ -60,7 +60,7 @@ const Quizes = (prop) => {
 
   // let count=0;
   const response = async (page) => {
-
+    setopensearch(false)
     // await setinformation(null)
     await (console.log(await (AsyncStorage.getItem('token'))))
 
@@ -145,6 +145,86 @@ const Quizes = (prop) => {
     }
 
   }
+
+
+
+
+  const searchpost=async(page)=>{
+    await setpage(page)
+    console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
+   const back = {
+     search:searchterm,
+
+   }
+   await settheend(false)
+   if(page===1){
+     await settheend(false)
+    await setinformation([])
+    console.log('IF PAGE === 1   ')
+
+   }
+   const backk = JSON.stringify(back);
+   try{
+   const response = await axiosinst.get('quizes',{
+     params: {
+      
+       search: searchterm,
+       search_fields:'title',
+       page:page,
+     },
+   "headers":
+   {
+     "Content-Type": "application/json",
+     "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+   }
+
+  
+ })
+  console.log(response.data)
+ // setrefresh(true)
+ settheend(false)
+ setrefresh(false)
+ if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+   await settheend(true)
+   await setrefresh(false)
+    console.log('#########')
+    }
+    console.log('searchpost beforeee'+information+'1111111111111111111111')
+ // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+ // await setinformation([...information,...response.data.results])
+  await setinformation(information=>[...information,...response.data.results])
+  console.log('searchpost afterrrrrrr'+information+'222222222222222222')     
+ // console.log(information+'******######********########')
+ // console.log(information[0].title)
+ // settheend(true)
+ // setcount(response.data.count)
+ setnext(response.data.next)
+ if(next===null)
+ {
+   settheend(true)
+   console.log(next+'  NEXT TO IF')
+ }
+ // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
+ console.log(next,' NEXTtttttttttttttttt')
+ setnumberofresults(response.data.count)
+ setpage(page);
+ 
+ }
+ catch(err){
+   setrefresh(false)
+  console.log(err)
+  Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+           
+
+   text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+   }],{cancelable:false},{style:{height:50}})
+   }     
+   
+ 
+ 
+  }
+
+
   const handleLoadMore = async () => {
     console.log('END OF THE LIST')
     //  if(page<numberofgp/10+1){
@@ -203,12 +283,15 @@ const Quizes = (prop) => {
           }
        />
      <Searchbar
-      placeholder="Search"
+    placeholder="Search"
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
-      iconColor={"#1f7a8c"}
+      backgroundColor={"#EDF2F4"}
+      onEndEditing={()=>{setinformation([])
+        searchpost(1)}}
       onIconPress={()=>{
+        setinformation([])
         searchpost(1)}}
       borderTopLeftRadius={hp('20%')}
           borderTopRightRadius={20}
@@ -242,7 +325,7 @@ const Quizes = (prop) => {
       </Button>:null} */}
 
         {/* <View style={{height:hp('2%')}}></View> */}
-
+        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
         {(information != undefined) ? <FlatList
           ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginBottom: hp('3%') }}>کوییز دیگری وجود ندارد</Text></View>)}

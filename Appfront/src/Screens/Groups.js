@@ -121,7 +121,7 @@ const Groups = ({navigation}) => {
   const searching=(term)=>setsearchterm(term);
   const response=async (page)=>{
     // await setinformation([])
-    setopensearch(false)
+   // setopensearch(false)
     setpickerselected(false)
     await (console.log(await(AsyncStorage.getItem('token'))))
    
