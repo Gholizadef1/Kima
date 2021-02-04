@@ -163,12 +163,10 @@ const GroupPage = (prop) => {
         console.log(error);
       });
   }
-
+console.log('groupiddd' +prop.route.params.id)
   const LeaveGroup = async () => {
     const id = await AsyncStorage.getItem('id');
-    const back = {}
-    const backk = JSON.stringify(back);
-    axiosinst.delete('/group/' + prop.route.params.id + '/member/' + id, backk, {
+    axiosinst.delete('/group/' + prop.route.params.id + '/member/' + id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()

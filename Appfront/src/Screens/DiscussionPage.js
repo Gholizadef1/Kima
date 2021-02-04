@@ -57,9 +57,8 @@ const DiscussionPage = (prop) => {
         try {
             // await setTimeout(() => {  console.log("World!"); }, 5000);
             setIDD(await (await AsyncStorage.getItem('id')).toString())
-            const response = await axiosinst.get("book/" + prop.route.params.id + '/comment', {
+            const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
                 params: {
-                    filter: likeotime,
                     page: page
                 },
                 "headers":
@@ -272,7 +271,7 @@ const DiscussionPage = (prop) => {
 
                         }}
                         renderItem={({ item }) => <>
-                            {username != item.user.username ?
+                            {username === item.user.username ?
                                 <View style={{}}>
                                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                                         source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
@@ -283,6 +282,7 @@ const DiscussionPage = (prop) => {
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
                                         <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%',marginBottom:hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
+                                        <AntDesign name="delete" size={14} color="#1F7A8C" style={{marginRight:wp('43%'),marginBottom:hp('1%'),marginTop:hp('-3%')}}/>
                                     </Card>
                                 </View>
                                 : <View style={{}}>
