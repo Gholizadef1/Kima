@@ -87,9 +87,9 @@ const Allsearchresults = (prop) => {
               await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/> */}
       
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        {authorcount != []? <Text style={{ marginTop: hp("2.5%"), alignSelf: "flex-start", marginLeft: hp('2%'), color: "gray" }}>با اطلاعات شما {authorcount } کتاب پیدا شدند</Text> : null}
+      
         {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
-        <View style={{marginTop:hp("1.5%"),marginBottom:hp("1.5%"),flex:1}}>
+        <View style={{marginTop:hp("0%"),marginBottom:hp("0%"),flex:1}}>
   
   
           {/* {authorloading === false ? */}
