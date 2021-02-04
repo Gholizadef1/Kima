@@ -71,9 +71,9 @@ function Quizespage (props){
         console.log(response.data.Quiz)
         console.log(response.data.Quiz.length)
 
-        const newList = response.data.Quiz.filter((item)=>item.is_none === true);
-        console.log(newList);
-        setGroups(newList);
+        // const newList = response.data.Quiz.filter((item)=>item.is_none === true);
+        // console.log(newList);
+        setGroups(response.data.Quiz);
         setPagesNumber(response.data.count)
         console.log(groups);
         console.log(me);
@@ -201,22 +201,13 @@ const handleCloseSnack = (event, reason) => {
                 </div>
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
-              <Tooltip  title= {<div style={{color: "white",
- fontFamily:"Yekan",
- fontSize:20,
- 
- width:190,
- height:80,
- textAlign:"center",
- marginLeft:-9,
- paddingTop:20,}}>آزمونک‌های شما در قسمت "آزمونک‌ها" نشان داده نمی‌شوند</div>}>
                 <select className="form-control rounded-pill shadow yekanfont" onClick={handleChangeList} >
                  
                   <option class="yekanfont" value="all">آزمونک‌ها</option>
                   
                   <option value="mine">آزمونک‌های من</option>
                 </select>
-                </Tooltip>
+                
               </div>
               <div>
                 <div className="btn btn-info rounded-lg  shadow" onClick={routeToCreateQuize}>
@@ -261,7 +252,7 @@ const handleCloseSnack = (event, reason) => {
                         <h6 class="card-subtitle pb-3  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
 
-                        {isMine === true  ?
+                        {isMine === true || current.creator.username === Cookies.get("userName") ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>
