@@ -70,12 +70,12 @@ const Home = ({navigation}) => {
             <Container style={styles.frame}>
                 <ScrollView>
                 <Header style={{backgroundColor:'#1F7A8C' ,marginTop:hp('4.5%')}}/>
-                <Title style={{fontSize:24 , fontWeight:'bold',color:'#E1E5F2' ,marginTop:-44 , marginLeft:10}}>کیما</Title>
+                <Title style={{fontSize:hp('4%') , fontWeight:'bold',color:'#E1E5F2' ,marginTop:hp('-7%') , marginLeft:wp('2.5%')}}>کیما</Title>
                  <ScrollView>
                      <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                      </View>
                      <View>
-                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     <Text style={{fontSize:hp('3.5%') , fontWeight:'bold' , color:'#1F7A8C',
                      marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های پیشنهادی</Text>
                         <FlatList
                         showsHorizontalScrollIndicator={false}
@@ -107,7 +107,7 @@ const Home = ({navigation}) => {
                      <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                      </View>
                      <View>
-                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     <Text style={{fontSize:hp('3.5%') , fontWeight:'bold' , color:'#1F7A8C',
                      marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>کتاب های برتر</Text>
                         <FlatList
                         showsHorizontalScrollIndicator={false}
@@ -139,7 +139,7 @@ const Home = ({navigation}) => {
                      <View style={{padding:hp('-2%') , marginRight:wp('2%')}}>
                      </View>
                      <View>
-                     <Text style={{fontSize: 23 , fontWeight:'bold' , color:'#1F7A8C',
+                     <Text style={{fontSize:hp('3.5%') , fontWeight:'bold' , color:'#1F7A8C',
                      marginTop:hp('5%'), marginLeft:wp('2%') ,fontWeight:'bold'}}>پربحث ترین کتاب ها</Text>
                         <FlatList
                         showsHorizontalScrollIndicator={false}
@@ -193,11 +193,11 @@ const styles = StyleSheet.create({
     ImageText: {
         position:'absolute',
         color:'#1F7A8C' ,
-        top:2 ,
+        top:hp('0.5%') ,
         fontWeight: 'bold',
-        right:20,
-        left: 20,
-        height:40
+        right:wp('9%'),
+        left: wp('5%'),
+        height:hp('20%')
 
     
     },
