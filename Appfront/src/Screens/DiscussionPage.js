@@ -57,10 +57,10 @@ const DiscussionPage = (prop) => {
         try {
             // await setTimeout(() => {  console.log("World!"); }, 5000);
             setIDD(await (await AsyncStorage.getItem('id')).toString())
-            const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
-                params: {
-                    page: page
-                },
+            const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
+                // params: {
+                //     page: page
+                // },
                 "headers":
                 {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const DiscussionPage = (prop) => {
 
             })
             console.log(count + '  count   dfajd;lfkjs;lkfj')
-            console.log(response.data.comments)
+            console.log(response.data.chats)
             await setcount(response.data.count);
             //console.log(response)
             console.log(count + ' COUNT COUNT COUNT COUNT COUTN')
@@ -84,10 +84,10 @@ const DiscussionPage = (prop) => {
                 // console.log(information)
                 console.log('RESPONSE DATE')
                 //console.log(response.date)
-                console.log(response.data.comments + ' RESPONSE DATA COMMENTS')
+                console.log(response.data.chats + ' RESPONSE DATA COMMENTS')
                 //page===1?setinformation(response.data):setinformation(information.concat(response.data))
                 if (response.data.message != "No Comment!") {
-                    await setinformation(information => [...information, ...response.data.comments])
+                    await setinformation(information => [...information, ...response.data.chats])
                 }
                 else {
                     setinformation(undefined)
@@ -146,6 +146,9 @@ const DiscussionPage = (prop) => {
     const getChats = async () => {
 
         axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
+            params: {
+                page: page
+            },
             "headers": {
                 "content-type": "application/json",
                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -192,6 +195,9 @@ const DiscussionPage = (prop) => {
                                         formdata.append('chat_text', values.Description)
 
                                         const response = await axiosinst.post('/group/' + groupid + '/discussion/' + discussionid + '/chat', formdata, {
+                                            params: {
+                                                page: page
+                                            },
                                             headers: {
                                                 "Content-Type": "application/json",
                                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -294,7 +300,7 @@ const DiscussionPage = (prop) => {
                                                     },
                                                     {
                                                         text: 'حذف', onPress: async () => {
-                                                            axiosinst.delete("group/" + groupid + '/discussion/' + discussionid +'/chat/' + item.id , {
+                                                            axiosinst.delete("group/" + groupid + '/discussion/' + discussionid + '/chat/' + item.id, {
                                                                 "headers":
                                                                 {
                                                                     "Content-Type": "application/json",
@@ -304,10 +310,10 @@ const DiscussionPage = (prop) => {
                                                                 .then(async function (response) {
                                                                     Alert.alert('', 'پیام شما حذف شد ', [
                                                                         {
-                                                                          text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+                                                                            text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                                         }
-                                                                      ], { cancelable: false }, { style: { height: hp('40%')} })
-                                                                      getChats();
+                                                                    ], { cancelable: false }, { style: { height: hp('40%') } })
+                                                                    getChats();
                                                                 })
                                                                 .catch(function (error) {
                                                                     console.log(error);

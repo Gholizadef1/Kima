@@ -40,7 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
+        const response = await axiosinst.get("http://e7e864967156.ngrok.io/user/"+id)
 
             
         
@@ -52,8 +52,8 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
 
 
             console.log(';;;;;')
@@ -87,14 +87,14 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
+        const response = await axiosinst.get("http://e7e864967156.ngrok.io/user/"+id)
 v
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
 
             console.log(picture);
           
@@ -168,7 +168,7 @@ v
         
 
 
-        {picture!='http://33613d59f2de.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+        {picture!='http://e7e864967156.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
 
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}

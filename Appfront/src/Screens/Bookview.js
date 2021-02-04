@@ -39,13 +39,14 @@ const Bookview = (prop) => {
 
   // let comment4 = '';
   // if (linenumber > 5) {
-  //   for (let i = 0; i < 4; i++)
-  //     comment4 += commenttt[i] + '\n'
-  //   comment4 += commenttt[4]
+  // for (let i = 0; i < 4; i++)
+  // comment4 += commenttt[i] + '\n'
+  // comment4 += commenttt[4]
   // }
   // else {
-  //   comment4 = prop.comment
+  // comment4 = prop.comment
   // }
+
 
   useEffect(() => {
     getResult(id);
@@ -87,9 +88,9 @@ const Bookview = (prop) => {
     })
       .then(function (response) {
         console.log('RESPONSE COMMENTSS')
-        console.log('**********'+response.data.comments[0].comment_text)
+        //console.log('**********' + response.data.comments[0].comment_text)
         if (response.data.message === "No Comment!") {
-          
+
           setComments("No Comment!")
         }
         else {
@@ -179,6 +180,7 @@ const Bookview = (prop) => {
     }
   }
 
+
   const getRate = async () => {
     axiosinst.get('/book/' + id + '/rate', {
       "headers": {
@@ -194,6 +196,7 @@ const Bookview = (prop) => {
           setratenum(response.data.data)
         }
       })
+
       .catch(async function (error) {
         console.log(error);
         console.log(error.code + 'ERROR CODE')
@@ -202,7 +205,6 @@ const Bookview = (prop) => {
       });
   }
   getRate();
-
 
   console.log('**' + rate)
 
@@ -256,16 +258,17 @@ const Bookview = (prop) => {
           <Body style={{}}>
             <Image source={{ uri: result.imgurl }} style={{
               marginTop: hp('-15%'), height: hp('35%'),
-              width: wp('45%'), borderRadius: 15 
+              width: wp('45%'), borderRadius: 15
             }} />
 
             <Text style={{
               marginTop: hp('1.5%'), fontWeight: 'bold',
-              fontSize:hp('3.8%')
+              fontSize: hp('3.8%')
             }}>{result.title}</Text>
 
-            <Text style={{ marginTop: hp('0.5%'), fontSize:hp('2.6%'), color: '#1F7A8C' }}>{result.author}</Text>
+            <Text style={{ marginTop: hp('0.5%'), fontSize: hp('2.6%'), color: '#1F7A8C' }}>{result.author}</Text>
             <Text style={{ marginTop: hp('1%') }}>امتیاز کتاب {result.average_rating}</Text>
+
             <Text style={{ marginTop: hp('0.5%'), marginBottom: hp('1%') }}>به این کتاب امتیاز دهید</Text>
             <AirbnbRating style={{ marginTop: hp('5%'), borderColor: '#f1c40f' }}
               count={5}
@@ -283,7 +286,7 @@ const Bookview = (prop) => {
                 { label: 'قبلا خوانده ام', value: 'Read' },
               ]}
               defaultValue={selectedValue}
-              containerStyle={{ height:hp('7%'), width:wp('53%'), marginBottom: hp('4%') }}
+              containerStyle={{ height: hp('7%'), width: wp('53%'), marginBottom: hp('4%') }}
               style={{ backgroundColor: '#fafafa', marginTop: hp('1%'), marginBottom: hp('-1%') }}
               itemStyle={{
                 justifyContent: 'flex-start'
@@ -300,11 +303,12 @@ const Bookview = (prop) => {
 
                 <Text style={{
                   marginTop: hp('2%'), marginLeft: wp('2%'),
-                  textAlign: 'left', alignSelf: 'stretch',marginBottom:hp('2%')
+                  textAlign: 'left', alignSelf: 'stretch', marginBottom: hp('2%')
                 }}>{result.description}</Text>
               </Card>
             </Content>
           </Body>
+
           {comments === "No Comment!" ?
             <Text style={{ color: '#1F7A8C', marginLeft: wp('24%'), marginTop: hp('3%') }}>نظری در مورد این کتاب ثبت نشده </Text> : null}
 
@@ -332,7 +336,7 @@ const Bookview = (prop) => {
               showsVerticalScrollIndicator={false}
               horizontal={true}
               onEndReached={() => {
-                //            console.log('-----AKHAR LIST')
+                // console.log('-----AKHAR LIST')
               }}
               onEndReachedThreshold={0.5}
               keyExtractor={(item) => item.id}
@@ -344,8 +348,8 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {item.account.profile_photo != 'http://f93932c7825e.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://f93932c7825e.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://e7e864967156.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://e7e864967156.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
@@ -398,7 +402,7 @@ const Bookview = (prop) => {
               showsVerticalScrollIndicator={false}
               horizontal={true}
               onEndReached={() => {
-                //            console.log('-----AKHAR LIST')
+                // console.log('-----AKHAR LIST')
               }}
               onEndReachedThreshold={0.5}
               keyExtractor={(item) => item.id}
@@ -414,8 +418,8 @@ const Bookview = (prop) => {
                     {(item.quote_text.toString().length) <= 100 ?
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
-                    {item.account.profile_photo != 'http://f93932c7825e.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://f93932c7825e.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://e7e864967156.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://e7e864967156.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
@@ -442,30 +446,30 @@ const Bookview = (prop) => {
             : null}
 
 
-            <Card style={styles.cardChat3}>
-              {user.profile_photo != '/media/default.png' ? <Avatar.Image
-                source={{ uri: "http://f93932c7825e.ngrok.io" + user.profile_photo }}
-              ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
-                source={require('../../assets/group.jpg')}
-              ></Avatar.Image>}
-              <Text style={{ top: hp('-7%'), marginRight: wp('32%') }}>{user.username}</Text>
-              <Button style={styles.button} bordered onPress={() => {
-                prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
-                  title: response.data.title,
-                });
-              }}>
-                <Text style={{ color: '#1F7A8C', marginLeft: wp('4%'), fontWeight: 'bold' }}>نوشتن نظر</Text>
-                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-8%') }} />
-              </Button>
-              <Button style={styles.button2} bordered onPress={() => {
-                prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
-                  title: response.data.title,
-                });
-              }}>
-                <Text style={{ color: '#1F7A8C', marginLeft: wp('2%'), fontWeight: 'bold' }}>نوشتن نقل قول</Text>
-                <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-6%') }} />
-              </Button>
-            </Card> 
+          <Card style={styles.cardChat3}>
+            {user.profile_photo != '/media/default.png' ? <Avatar.Image
+              source={{ uri: "http://e7e864967156.ngrok.io" + user.profile_photo }}
+            ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
+              source={require('../../assets/group.jpg')}
+            ></Avatar.Image>}
+            <Text style={{ top: hp('-7%'), marginRight: wp('32%') }}>{user.username}</Text>
+            <Button style={styles.button} bordered onPress={() => {
+              prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
+                title: response.data.title,
+              });
+            }}>
+              <Text style={{ color: '#1F7A8C', marginLeft: wp('4%'), fontWeight: 'bold' }}>نوشتن نظر</Text>
+              <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-8%') }} />
+            </Button>
+            <Button style={styles.button2} bordered onPress={() => {
+              prop.navigation.navigate('quote', { title: result.title, imgurl: result.imgurl, id: prop.route.params.id }) && prop.navigation.setOptions({
+                title: response.data.title,
+              });
+            }}>
+              <Text style={{ color: '#1F7A8C', marginLeft: wp('2%'), fontWeight: 'bold' }}>نوشتن نقل قول</Text>
+              <MaterialCommunityIcons name="fountain-pen" size={20} color={'#1F7A8C'} style={{ left: wp('-6%') }} />
+            </Button>
+          </Card>
         </ScrollView>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
       </Container>
@@ -555,5 +559,4 @@ const styles = StyleSheet.create({
 });
 
 export default Bookview;
-
 
