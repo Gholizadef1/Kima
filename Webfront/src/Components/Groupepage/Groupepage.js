@@ -317,7 +317,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
   <div class="card-body" key={ginfo.id}>
     
-    <img src={`http://127.0.0.1:8000${ginfo.group_photo}`} className="imageg img-responsive"></img>
+    <img src={API_BASE_URL+`${ginfo.group_photo}`} className="imageg img-responsive"></img>
   </div>
     </div>
     <div>
