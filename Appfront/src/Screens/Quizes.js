@@ -306,7 +306,7 @@ const Quizes = ({navigation}) => {
       marginLeft:wp('87%')
           }}
           onPress={async()=>{
-          await setsearchposition("77%")
+         // await setsearchposition("77%")
           setinformation([]);
           setpage(1)
           response(1);
@@ -478,7 +478,7 @@ const Quizes = ({navigation}) => {
             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View> : 
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%')}}>گروه دیگری وجود ندارد</Text>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('-13%')}}>کوییز دیگری وجود ندارد</Text>
             </View>)}
             style={{ marginBottom: hp('0%') }}
             showsVerticalScrollIndicator={false}
@@ -495,7 +495,7 @@ const Quizes = ({navigation}) => {
             keyExtractor={(item) => item.id}
             refreshing={refresh}
             onRefresh={async () => {
-              await setsearchposition("77%")
+             // await setsearchposition("77%")
               // await setsearchterm('')
               if(searchterm===''){
                await(setnumberofresults())
@@ -569,9 +569,9 @@ const Quizes = ({navigation}) => {
        {opensearch===false?<View style={{ height: hp('10%'), width: wp('14%'), borderRadius: 1000, position: 'absolute' }} >
           <Button style={{
             justifyContent: 'center', height: hp('7%'), width: wp('14%'), borderRadius: 1000,
-            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp(searchposition), marginLeft: wp('78%')
+            backgroundColor: '#1f7a8c', elevation: 5, marginTop: hp("77%"), marginLeft: wp('78%')
           }}   onPress={()=>{
-            setsearchposition("69.5%")
+           // setsearchposition("69.5%")
             setopensearch(true)}} >
             <Feather style={styles.plus}
               name="search" size={32} color="#EDF2F4" />

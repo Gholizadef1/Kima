@@ -98,12 +98,16 @@ const Myquizes = (prop) => {
       console.log(count + '  COUNT')
       console.log(page + ' PAGE BAD COUNT')
       console.log((page === count) + ' PAGE===COUNT')
-
+      if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+        await settheend(true)
+        await setrefresh(false)
+         console.log('#########')
+         }
       settheend(false)
       //console.log('omade inja')
       console.log('++++INFOGHABLESET++++' + information + "++++INFOGHABLESET++++")
-      console.log(response.data.groups)
-      if (response.data.message != "No Group!") {
+      console.log(response.data.Quiz)
+      if (response.data.Quiz.discription != undefined) {
         await setinformation(information => [...information, ...response.data.Quiz])
         //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
       }
@@ -248,7 +252,7 @@ const Myquizes = (prop) => {
           }}
 
         >
-        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
+        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز خود را بسازید</Text>}
         {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
         {/* <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
