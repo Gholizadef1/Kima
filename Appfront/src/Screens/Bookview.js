@@ -87,11 +87,14 @@ const Bookview = (prop) => {
       }
     })
       .then(function (response) {
+        console.log('RESPONSE COMMENTSS')
+        console.log('**********'+response.data.comments[0].comment_text)
         if (response.data.message === "No Comment!") {
+          
           setComments("No Comment!")
         }
         else {
-          setComments(response.data)
+          setComments(response.data.comments)
         }
         setloading2(false)
       })
@@ -108,11 +111,12 @@ const Bookview = (prop) => {
       }
     })
       .then(function (response) {
+        console.log('RESPONSE QUOT')
         if (response.data.message === "No Quote!") {
           setQuotes("No Quote!")
         }
         else {
-          setQuotes(response.data)
+          setQuotes(response.data.quotes)
         }
         setloading3(false)
       })
@@ -128,8 +132,6 @@ const Bookview = (prop) => {
       .then(function (response) {
         setUser(response.data)
         setloading4(false)
-        console.log('profile==' + user.profile_photo)
-        console.log('USERNAME' + response.data)
       })
   };
 
@@ -255,16 +257,16 @@ const Bookview = (prop) => {
           <Header style={{ backgroundColor: '#1F7A8C', marginTop: hp('20%') }} />
           <Body style={{}}>
             <Image source={{ uri: result.imgurl }} style={{
-              marginTop: hp('-15%'), height: 220,
-              width: 160, borderRadius: 10
+              marginTop: hp('-15%'), height: hp('35%'),
+              width: wp('45%'), borderRadius: 15 
             }} />
 
             <Text style={{
               marginTop: hp('1.5%'), fontWeight: 'bold',
-              fontSize: 27
+              fontSize:hp('3.8%')
             }}>{result.title}</Text>
 
-            <Text style={{ marginTop: hp('0.5%'), fontSize: 17, color: '#1F7A8C' }}>{result.author}</Text>
+            <Text style={{ marginTop: hp('0.5%'), fontSize:hp('2.6%'), color: '#1F7A8C' }}>{result.author}</Text>
             <Text style={{ marginTop: hp('1%') }}>امتیاز کتاب {result.average_rating}</Text>
 
             <Text style={{ marginTop: hp('0.5%'), marginBottom: hp('1%') }}>به این کتاب امتیاز دهید</Text>
@@ -284,7 +286,7 @@ const Bookview = (prop) => {
                 { label: 'قبلا خوانده ام', value: 'Read' },
               ]}
               defaultValue={selectedValue}
-              containerStyle={{ height: 40, width: 220, marginBottom: hp('4%') }}
+              containerStyle={{ height:hp('7%'), width:wp('53%'), marginBottom: hp('4%') }}
               style={{ backgroundColor: '#fafafa', marginTop: hp('1%'), marginBottom: hp('-1%') }}
               itemStyle={{
                 justifyContent: 'flex-start'
@@ -294,7 +296,7 @@ const Bookview = (prop) => {
             />
 
 
-            <Text style={{ fontWeight: 'bold', fontSize: 20, marginTop: hp('2%'), marginRight: wp('67%'), marginBottom: hp('0.7%') }}>
+            <Text style={{ fontWeight: 'bold', fontSize: hp('3.2%'), marginTop: hp('2%'), marginRight: wp('67%'), marginBottom: hp('0.7%') }}>
               درباره کتاب :</Text>
             <Content style={{}}>
               <Card style={{}}>
@@ -346,8 +348,8 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://62e406c8f854.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://f93932c7825e.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://f93932c7825e.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
@@ -416,8 +418,8 @@ const Bookview = (prop) => {
                     {(item.quote_text.toString().length) <= 100 ?
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
                       <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
-                    {item.account.profile_photo != 'http://62e406c8f854.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://62e406c8f854.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://f93932c7825e.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://f93932c7825e.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
@@ -446,7 +448,7 @@ const Bookview = (prop) => {
 
             <Card style={styles.cardChat3}>
               {user.profile_photo != '/media/default.png' ? <Avatar.Image
-                source={{ uri: "http://62e406c8f854.ngrok.io" + user.profile_photo }}
+                source={{ uri: "http://f93932c7825e.ngrok.io" + user.profile_photo }}
               ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
                 source={require('../../assets/group.jpg')}
               ></Avatar.Image>}
