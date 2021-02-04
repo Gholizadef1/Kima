@@ -138,18 +138,22 @@ const handleCloseSnack = (event, reason) => {
     console.log(validation);
   }
   const va =()=>{
-
-  const fd ={ 
-  "title":newQuiz.title,
-  "description":newQuiz.description,
-  "question_count":inputFields.length,
-  "quiz_photo":state.file,
-  "questions":inputFields
-  }
+  const fd = new FormData();
+  for (var i = 0; i < inputFields.length; i++) {
+    fd.append(`questions[${i}]question_text`, inputFields[i].question_text)
+    fd.append(`questions[${i}]a_text`, inputFields[i].a_text)
+    fd.append(`questions[${i}]b_text`, inputFields[i].b_text)
+    fd.append(`questions[${i}]c_text`, inputFields[i].c_text)
+    fd.append(`questions[${i}]d_text`, inputFields[i].d_text)
+    fd.append(`questions[${i}]key`, inputFields[i].key)
+    }
+    fd.append('title', newQuiz.title)
+    fd.append('description', newQuiz.description)
+    fd.append("question_count", (inputFields.length).toString());
+    fd.append("quiz_photo",state.file)
      console.log(input);
      let back= JSON.stringify(fd);
      console.log(fd);
-         
      if(newQuiz.title === ""){
       setMassage("عنوان آزمونک نمی‌تواند خالی باشد")
       setOpenSnack(true);
