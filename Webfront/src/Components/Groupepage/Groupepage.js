@@ -225,9 +225,11 @@ import Tooltip from '@material-ui/core/Tooltip';
            
             setShowdiscussion(data.data.discussions);
             
-         
+
           })
-    }, [showdiscussion,props.match.params.groupId]);
+    }, [
+      // showdiscussion,
+      props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
       e.preventDefault();
@@ -256,6 +258,7 @@ import Tooltip from '@material-ui/core/Tooltip';
              
             
           })
+
           .catch(error=>{
             console.log(error);
             setMassage("مشکلی پیش آمده دوباره امتحان کنید")
@@ -278,6 +281,14 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
     setOpenSnack(false);
   };
+
+
+  const discussionSelectedHandler = ( d ) => {
+    console.log(d);
+    //props.history.push('/home');
+    props.history.push('/discussion/'+props.match.params.groupId +"/"+ d.id );
+  }
+
 
     return(
       
@@ -354,7 +365,9 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-<p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+
+<p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
+
             
             </div>
               </div>
@@ -438,6 +451,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     <div class="card card-discussion">
   
     <div class="overflow-auto">
+
    
       {showdiscussion.length === 0  ? (
                  
@@ -457,8 +471,21 @@ import Tooltip from '@material-ui/core/Tooltip';
                 
                 </small>
                 <div className="text-right name-d" >
+
+                <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
+        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+
+                </Tooltip>
                
-               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+               
                            
                            </div>
               </div>
@@ -510,7 +537,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     <div class="card card-discussion">
   
     <div class="overflow-auto">
-   
+ 
       {showdiscussion.length === 0  ? (
                  
         <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
@@ -530,7 +557,21 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+
+               
+                <Tooltip  title= {<div style={{color: "white",
+        fontFamily:"Yekan",
+        fontSize:20,
+        
+        width:190,
+        height:80,
+        textAlign:"center",
+        marginLeft:-9,
+        paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
+        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+
+                </Tooltip>
+
                            
                            </div>
               </div>
@@ -595,7 +636,8 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+               <p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
+
                            
                            </div>
               </div>
@@ -714,7 +756,9 @@ import Tooltip from '@material-ui/core/Tooltip';
                 </small>
                 <div className="text-right name-d" >
                
-               <p><b><a className="pt-n3" href="default.asp" target="_blank">{current.title}</a></b></p>
+
+               <p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
+
                            
                            </div>
               </div>

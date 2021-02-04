@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+//  Redirect,
+//  useHistory
 //  Link,
 //  useRouteMatch,
 //  useParams,
@@ -15,13 +16,16 @@ import LoginForm from './components/loginForm/loginForm';
 import Profile from "./Components/Profile"; 
 import QuizesPage from "./Components/QuizesPage/QuizesPage";
 import Slide from './slides/Slide';
-import NavBar from "./Components/Navbar";
+//import NavBar from "./Components/Navbar";
 import BookView from './components/bookView/bookView'
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
 import Grouppage from './Components/Groupepage/Groupepage';
 import Groups from './components/groups/groupsPage';
 import ProtectedRoute  from "./components/protect";
 import Discussion  from "./components/discusstion/discussion";
+import TakeQuiz from "./components/quiz/takeQuiz";
+import ReviewQuiz from "./components/quiz/reviewQuiz"
+
 
 
 function App(props) {
@@ -59,7 +63,13 @@ function App(props) {
 
             <ProtectedRoute path="/groups" component={Groups}/>
 
-            <ProtectedRoute path="/discussion" component={Discussion}/>
+            <ProtectedRoute path="/discussion/:groupId/:discussionId" component={Discussion}/>
+
+            <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
+
+            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/>
+
+            
 
             <Route path="*">
               <div class="alert alert-warning" role="alert">

@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import {Navbar,Nav,Button} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import {Button} from 'react-bootstrap';
+
 import {GiBookshelf} from 'react-icons/gi';
 //import {CgProfile} from 'react-icons/cg';
 import axios from 'axios';
-import { Modal, Form } from "react-bootstrap";
-import{ useState, useEffect } from "react";
+import { Modal } from "react-bootstrap";
  import "./UsersList.css";
  import "../slides/Slide.css";
 import "./Navbar.css";
@@ -20,6 +19,7 @@ import {
   // Link,
   // useRouteMatch,
   // useParams,
+  //useHistory,
   withRouter
 } from "react-router-dom";
 import Cookies from 'js-cookie';
@@ -27,9 +27,9 @@ import Avatar from '@material-ui/core/Avatar';
 import {API_BASE_URL} from '../constants/apiContants';
 
 function NavBar (props){
-  const [user,setUser] = useState({user:null});
+  const [user,setUser] = useState({user:""});
   const [search,setSearch] = useState([]);
-  const [error,setError] = useState("");
+  //const [error,setError] = useState("");
   const [userpic,setuserpic] = useState("");
 
  const handleChange = event => {
@@ -112,7 +112,7 @@ useEffect(() => {
 }
 
     return(   
-      <nav class="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
+      <nav className="navbar navbar-expand-lg navbar-light px-5 color4 shadow sticky-top" style={{direction:"rtl"}}>
         <h1 className="mx-1 mb-n1">  
           <GiBookshelf color="white" />
         </h1>
@@ -120,23 +120,25 @@ useEffect(() => {
          style = {{fontSize:33,fontWeight:"bold",color:"white"}}
           
         >کیما</b> 
-        <button class="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon "></span>
+        <button className="navbar-toggler" style={{backgroundColor:"white"}}  type="button " data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav ml-5">
-            <li  class="nav-link btn"
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul className="navbar-nav ml-5">
+            <li  className="nav-link btn" onClick={routeToGroups}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToGroups}>گروه‌ها</a>
+              گروه‌ها
             </li>
-            <li  class="nav-link btn"
+            <li  className="nav-link btn"
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToQuizPage} >آزمونک</a>
+
+              آزمونک
+
             </li>
-            <li class="nav-link btn"
+            <li className="nav-link btn" onClick={routeToHome}
                style = {{fontSize:20,fontWeight:"bold",color:"white"}}>
-              <a onClick={routeToHome}>خانه</a>
+              خانه
             </li>
           </ul>
           <div className="d-flex flex-grow-1 mx-md-5 ">
@@ -157,13 +159,13 @@ useEffect(() => {
                   <div className="text-center" style={{fontSize:18}} >
                   {Cookies.get('userName')}
                   </div>
-                  <div className="dropdown-divider"></div>
-                  <a type="button" className="dropdown-item"  onClick={routeToProfile}  style={{fontSize:16}}>
+                  <div className="dropdown-divider "></div>
+                  <p type="button" className="dropdown-item my-n1"  onClick={routeToProfile}  style={{fontSize:16}}>
                     پروفایل
-                  </a>
-                  <a type="button" className="dropdown-item" onClick = {logout} style={{fontSize:16}} >
+                  </p>
+                  <p type="button" className="dropdown-item my-n1" onClick = {logout} style={{fontSize:16}} >
                     خروج ازحساب
-                  </a>
+                  </p>
                  
                 </div>
               </div>

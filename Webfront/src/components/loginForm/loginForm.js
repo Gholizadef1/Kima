@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './loginForm.css';
-import Button from '@material-ui/core/Button';
-import {withStyles } from '@material-ui/core/styles';
 import {API_BASE_URL} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
+import image from '../../assets/people&books.png';
+
 
 function LoginForm(props) {
     const [state , setState] = useState({
@@ -40,7 +40,7 @@ function LoginForm(props) {
         //console.log(state);
         axios.post(API_BASE_URL+'/login',back,{"headers":{"content-type":"application/json" }})
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 //console.log(response.status);
                 //console.log(response.data);
                 if(response.status === 200){
@@ -95,10 +95,12 @@ function LoginForm(props) {
         <div className="d-flex justify-content-center py-sm-4 color4">
         <div className="card-group col-sm-10 mx-sm-5 shadow-lg color4" >
             <div className="card color2" >
-                <h1 className="mt-5" >به کیما خوش‌آمدید</h1>
-                <p style={{fontSize:24}}>"کتاب یار مهربان است"</p>
-                <p style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
-                <img src="people&books.png" className="col-12 mt-n5 card-img-bottom hv-center" alt=""/> 
+                <div class="card-body mt-1">
+                    <h1 className="mt-4 card-title" >به کیما خوش‌آمدید</h1>
+                    <p className="card-text" style={{fontSize:24}}>"کتاب یار مهربان است"</p>
+                    <p className="card-text" style={{fontSize:20}}>خوشحالیم امروز می‌بینیمتون</p>
+                    <img src={image} className="col-12 mt-n5 card-img-bottom hv-center mt-auto" alt=""/> 
+                </div>
             </div>
             <div className="card color2">
             <form className="col-8 mx-auto mt-5 was-validated">

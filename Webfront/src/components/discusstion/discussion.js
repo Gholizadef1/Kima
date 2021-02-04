@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import {AiOutlineDislike} from 'react-icons/ai';
-import {AiOutlineLike} from 'react-icons/ai';
-import {AiFillLike} from 'react-icons/ai';
-import {AiFillDislike} from 'react-icons/ai';
 import axios from 'axios';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import {withStyles } from '@material-ui/core/styles';
 import {
     // BrowserRouter as Router,
     // Switch,
@@ -24,39 +10,62 @@ import {
     // Redirect,
     // Link,
     // useRouteMatch,
-    // useParams,
+    //useHistory,
+    //useParams,
     withRouter
   } from "react-router-dom";
-  import {GoSearch} from 'react-icons/go';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 function Discussion(props) {
+
+  //console.log(props);
 
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
     const [commentsPagesNumber, setCommentsPagesNumber] = useState();
     const [commentAgain,setcommentAgain] = useState(0);
+    const [discussion,setDiscussion] = useState([]);
+    const [creator,setCreator] = useState([]);
+
     useEffect(()=>{
-          axios.get(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
+          axios.get(`${API_BASE_URL}/group/${props.match.params.groupId}/discussion/${props.match.params.discussionId}/chat?page=${commentsPage}`,
           {
             headers:{
            "Authorization":"Token "+Cookies.get("userToken")}
             })
         .then(response=>{
-         setComments(response.data.comments);
+         setComments(response.data.chats);
          setCommentsPagesNumber(response.data.count)
           console.log(response);
         })
         .catch(error=>{
           console.log(error);
         });
-      },[props.gruopid,commentAgain,commentsPage]);
+      },[commentAgain,commentsPage
+      ,props.match.params.groupId ,props.match.params.discussionId ]);
+
+    useEffect(()=>{
+        axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId ,
+        {
+          headers:{
+         "Authorization":"Token "+Cookies.get("userToken")}
+          })
+      .then(response=>{
+       setDiscussion(response.data);
+       setCreator(response.data.creator);
+        console.log(response);
+      })
+      .catch(error=>{
+        console.log(error);
+      });
+    },[props.match.params.groupId , props.match.params.discussionId ]);
+
 
 
     const[userComment,setUserComment]=useState("")
@@ -78,7 +87,7 @@ function Discussion(props) {
           console.log(payload);
           const back= JSON.stringify(payload);
           console.log(back);
-          axios.post(API_BASE_URL + '/group/'+ 'props.groupid' +'/discussion/'+'props.discusid'+'/chat',
+          axios.post(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
           back
           ,{
            headers:{
@@ -88,9 +97,9 @@ function Discussion(props) {
           .then(response=>{
             console.log(response);
     
-            if(response.data.status==="success"){
+            if(response.data.message==="new chat!"){
               setOpenSnack(true);
-              setMassage("نظر شما با موفقیت ثبت شد")
+              setMassage("پاسخ شما با موفقیت ثبت شد")
               setUserComment("");
               setcommentAgain(commentAgain+1);
     
@@ -103,12 +112,24 @@ function Discussion(props) {
     
          }else{
           setOpenSnack(true);
-          setMassage("نظر خالی است لطفاً چیزی بنویسید")
+          setMassage("پاسخ خالی است لطفاً چیزی بنویسید")
          }
     
       }
-    const handleDeleteComment = (id) => {
-        axios.delete(API_BASE_URL ,
+
+      const [deleteId, setDeleteId] = useState();
+const [openDialog, setOpenDialog] = useState(false);
+const handleClickOpenDialog = (id) => {
+  setOpenDialog(true);
+  setDeleteId(id);
+};
+const handleCloseDialog = () => {
+  setOpenDialog(false);
+};
+
+    const handleDeleteComment = () => {
+      handleCloseDialog();
+        axios.delete(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+deleteId ,
         {
           headers:{
          "Content-Type":"application/json",
@@ -118,6 +139,7 @@ function Discussion(props) {
         .then(response=>{
           console.log(response);
           setcommentAgain(commentAgain+1);
+          setDeleteId();
         })
         .catch(error=>{
           console.log(error);
@@ -139,34 +161,133 @@ function Discussion(props) {
   return(
     <div>
       <div className="mx-md-5 px-md-5">
-        <div className="container-fluid rTOl text-right px-md-5 rounded-lg " >
-          <div className="mx-md-5 my-5 px-md-3">
+        <div className="rTOl text-right px-md-5 mx-md-5" >
+          <div className="mx-md-5 my-5 px-md-3 shadow border rounded-lg ">
               <div>
-                <h3 className="my-1 mx-md-5 rounded-lg" >عنوان</h3>
+                <div className="d-flex flex-wrap mx-2  rounded-lg pt-3">
+                  <div className="px-2">
+                    <Avatar className="" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`} style={{width:60, height:60}} />
+                    <h5 className="text-center mt-2">{creator.username}</h5>
+                  </div>
+                  <div className="d-flex flex-column flex-wrap mx-3">
+                    <h1 className="my-1 rounded-lg " >{discussion.title}</h1>
+                    <p className="my-1 ">{discussion.description}</p>
+                  </div>
+                </div> 
                 <hr className="border border-dark"></hr>
                 <div className="">
-                  <div className="d-flex flex-wrap p-3  ">
+                  <div className="d-flex flex-wrap p-3 mx-2 ">
                     <Avatar className="mx-auto" alt={Cookies.get('userName')} src={Cookies.get('userPic')} style={{width:60, height:60}} />
                     <div className="d-flex  flex-column mt-2 flex-fill">
                     <div className="d-flex flex-wrap">
                     <div className="flex-fill form-group mx-3">
-    
-                      <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>
-    
+                      <textarea className="form-control" rows="1" id="comment" name="text" onChange={handleChangeComment} value={userComment}></textarea>    
                     </div>
-                    
                     <div type="submit" className="btn btn-info rounded-lg shadow mx-auto align-self-start"
                     onClick={handleSubmitCommentClick}
                     >ثبت</div>
                     </div>
                     </div>
                   </div>
-                  <Divider className="mt-3" variant="fullWidth" />
+                  <Divider className="mt-2" variant="middle" />
                 </div>
               </div>
               <div>
-                  
+                <List >
+
+                {comments === undefined ? (
+                
+                
+                  <p >پاسخی برای نمایش وجود ندارد</p>
+                
+                 ) : (
+                   <div>
+                   
+                   {comments.map ((current) => (
+                   
+                <div className="border border-dark rounded-lg m-1 px-2 " style={{direction:"rtl",backgroundColor:"rgb(238,243,250)"}}>
+                   <div className="d-flex px-md-3 py-3">
+                     <Avatar alt={current.user.username} src={`${API_BASE_URL}${current.user.profile_photo}`} style={{width:60, height:60}} />
+                     <div className="ml-auto mr-3">
+                       <h5>
+                         {current.user.username}
+                       </h5>
+                       <small>
+                       {`${current.send_time.toString().split('T')[0]}`}
+                       </small>
+                     </div>
+                
+                
+                     {current.user.id !== Cookies.get("userId") ?(
+                       <div></div>
+                     ):(
+                       <div className="btn m-n1" onClick={()=>  handleClickOpenDialog(current.id)}>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                         </svg>
+                       </div>
+                     )
+                   }
+
+<Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <h5 className="text-right yekanfont">آیا از پاک کردن این مورد برای همیشه مطمئن‌اید؟</h5>
+        </DialogTitle>
+        <DialogActions>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={handleCloseDialog} color="black">
+            خیر
+          </Button>
+          <Button style={{fontFamily:'Yekan',fontSize:16}} onClick={()=>handleDeleteComment()} color="black" >
+            بله
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+                     
+                   </div>
+                   <p className="px-md-3">
+                   
+                     {current.chat_text}  
+                   </p>
+                   
+                   
+                   
+                </div>
+                ))}
+                </div>
+
+                    )} 
+
+                </List>
+                   
+                {commentsPagesNumber === 1 || commentsPagesNumber === undefined?(
+                 <p></p>
+                ):(
+                <div className="">
+                {Array.from(Array(commentsPagesNumber),(e,i)=>{
+                 return <div className="btn btn-light" 
+                 onClick={()=>{setCommentsPage(i+1)}}
+                 > {i+1} </div>
+                })}
+                </div>
+                )}
+
               </div>
+              <div>
+         <Snackbar
+              anchorOrigin={{ vertical:'top', horizontal:'center'}}
+              open={openSnack}
+              autoHideDuration={2500}
+              onClose={handleCloseSnack}
+              message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
+            />
+      </div>
           </div> 
         </div> 
       </div> 
