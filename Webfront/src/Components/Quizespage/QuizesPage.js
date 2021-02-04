@@ -236,7 +236,7 @@ const handleCloseSnack = (event, reason) => {
 
                   <div class="col mb-4">
                     <div class="card h-100 text-right shadow-lg" >
-                      <img src={current.quiz_photo} class="card-img-top shadow-sm " alt={current.title}/>
+                      <img src={API_BASE_URL+`${current.quiz_photo}`} class="card-img-top shadow-sm " alt={current.title}/>
                       <div class="card-body">
                         <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.description.length >= 80 ?(
                           <div>

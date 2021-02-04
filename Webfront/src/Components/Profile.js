@@ -322,12 +322,12 @@ useEffect(() => {
                     
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Body>
-         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle gholi img-fluid" style={{
+         <Avatar src={user.picture} ref={uploadedImage} alt="" className="" style={{
            width: 120,
              height: 120,
              marginLeft:180,
             marginTop:-5,
-             display: "block"}}/>
+             }}/>
             <div className="d-flex justify-content-between p-4">
 
                  <button className="btn custom-btn btn-info rounded-lg" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>

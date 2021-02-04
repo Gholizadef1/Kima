@@ -19,6 +19,7 @@ import {API_BASE_URL} from '../constants/apiContants';
  export function RenderRowcomment(props) {
     const { index, style } = props;
     const [comment, setComment] = useState([]);
+    const [message,setMessage]=useState("");
     useEffect(() => {
       fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/comment`,{
         headers:{
@@ -28,12 +29,13 @@ import {API_BASE_URL} from '../constants/apiContants';
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
+           setMessage(data.message);
           setComment(data.comments);
         });
     }, []);
     return (
       <div>
-      {comment.message==="No Comment!" ? (                   
+      {message==="No Comment!" ? (                   
       <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نظری برای نمایش وجود ندارد</div>
 
         

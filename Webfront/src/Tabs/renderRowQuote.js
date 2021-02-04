@@ -20,6 +20,7 @@ import { red } from "@material-ui/core/colors";
  export function RenderRowquote(props) {
     const { index, style } = props;
     const [quote, setQuote] = useState([]);
+    const [message,setMessage]=useState("");
     useEffect(() => {
       fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/quote`,{
         headers:{
@@ -30,12 +31,13 @@ import { red } from "@material-ui/core/colors";
         .then((data) => {
            console.log(data);
            console.log(data.message);
+           setMessage(data.message);
           setQuote(data.quotes);
         });
     }, []);
     return (
       <div>
-      {quote.message==="No Quote!" ? (
+      {message==="No Quote!" ? (
                  
         <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نقل‌قولی برای نمایش وجود ندارد</div>
 
