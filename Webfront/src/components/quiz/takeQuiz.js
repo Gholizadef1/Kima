@@ -15,7 +15,7 @@ function TakeQuiz(props) {
 
 
     useEffect(()=>{
-        axios.get(API_BASE_URL + "/quiz/" + 1)
+        axios.get(API_BASE_URL + "/quiz/" + props.match.params.quizId)
         .then(response=>{
             setQuiz(response.data.Quiz);
             setCreator(response.data.Quiz.creator);
@@ -29,20 +29,17 @@ function TakeQuiz(props) {
 
     const submitAnswer = (e) => {
       e.target.setAttribute("hidden", "");
-      //getElementById("handleRuoteToQuizs").setAttribute("hidden", "");
       document.getElementById("handleRuoteToQuizs").style.display = "block";
       //show true answers
-      //document.getElementById("a").style.backgroundColor = "red";
-      //document.getElementById("a").style.backgroundColor = "green";
-      //document.getElementById("a").style.color = "white";
+     
       var i;
-      for(i=1;i < questions.length+1;i++){
+      for(i=0;i < questions.length;i++){
         var chosen= document.getElementById(i).getElementsByClassName("active")[0].id;
         document.getElementById(chosen).style.color = "white";
         document.getElementById(chosen).style.backgroundColor = "red";
        
-        document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
-        document.getElementById(i+questions[i-1].key).style.color = "white";
+        document.getElementById(i+questions[i].key).style.backgroundColor = "green";
+        document.getElementById(i+questions[i].key).style.color = "white";
          setUserAnswers( userAnswers.push(chosen[chosen.length -1]));
      
        }
@@ -53,7 +50,7 @@ function TakeQuiz(props) {
       }
       //const back= JSON.stringify(userAnswers);
       //console.log(userAnswers);
-      axios.post(API_BASE_URL + "/quiz/" + 1
+      axios.post(API_BASE_URL + "/quiz/" + props.match.params.quizId
       ,payload
       ,{
         headers:{
@@ -71,7 +68,7 @@ function TakeQuiz(props) {
   }
 
   const handleRuoteToQuizs=() =>{
-    props.history.push('/quizez');
+    props.history.push('/quizes');
   }
 
 

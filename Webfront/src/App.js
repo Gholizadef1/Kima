@@ -62,17 +62,17 @@ function App(props) {
             <ProtectedRoute path="/book/:bookId" component={BookView}/>
             <ProtectedRoute path="/quizes" component={QuizesPage}/>
             <ProtectedRoute path="/creatquize" component={CreateQuiz}/>
-            {/* <ProtectedRoute path="//takeQuiz/:quizId" component={CreateQuiz}/> */}
-            {/* <ProtectedRoute path="/reviewQuiz/:quizId" component={CreateQuiz}/> */}
+            <ProtectedRoute path="/takeQuiz/:quizId" component={TakeQuiz}/> 
+            <ProtectedRoute path="/reviewQuiz/:quizId" component={ReviewQuiz}/>
             
             
             <ProtectedRoute path="/groups" component={Groups}/>
 
             <ProtectedRoute path="/discussion/:groupId/:discussionId" component={Discussion}/>
 
-            <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
+            {/* <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
 
-            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/>
+            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/> */}
 
             
 

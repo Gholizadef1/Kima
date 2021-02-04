@@ -17,7 +17,7 @@ function ReviewQuiz(props) {
     useEffect(()=>{
 
 
-        axios.get(API_BASE_URL + "/quiz/" + 1)
+        axios.get(API_BASE_URL + "/quiz/" + props.match.params.quizId)
         .then(response=>{
             setQuiz(response.data.Quiz);
             setCreator(response.data.Quiz.creator);
@@ -25,7 +25,7 @@ function ReviewQuiz(props) {
              console.log(response);
              
              if(response.data.Quiz.creator.id.toString() !== Cookies.get("userId").toString()){
-                axios.get(`${API_BASE_URL}/user/${1}/quiz/${1}/result`)
+                axios.get(`${API_BASE_URL}/user/${Cookies.get("userId")}/quiz/${ props.match.params.quizId}/result`)
                 .then(response=>{
                        console.log(response.data);
                        console.log(Cookies.get("userId"));
@@ -33,14 +33,14 @@ function ReviewQuiz(props) {
                        setUserAnswers(response.data.user_answer);
                        setUserScore(`امتیاز شما = ${response.data.score}`);
                        var i;
-                       for(i=1;i < response.data.Questions.length+1;i++){
-                         document.getElementById(i+response.data.user_answer[i-1]).style.backgroundColor = "red";
-                         document.getElementById(i+response.data.user_answer[i-1]).style.color = "white";
+                       for(i=0;i < response.data.Questions.length;i++){
+                         document.getElementById(i+response.data.user_answer[i]).style.backgroundColor = "red";
+                         document.getElementById(i+response.data.user_answer[i]).style.color = "white";
                         }
                        var i;
-                       for(i=1;i < response.data.Questions.length+1;i++){
-                         document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
-                         document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
+                       for(i=0;i < response.data.Questions.length;i++){
+                         document.getElementById(i+response.data.Questions[i].key).style.backgroundColor = "green";
+                         document.getElementById(i+response.data.Questions[i].key).style.color = "white";
                         }
                      
                      })
@@ -50,9 +50,9 @@ function ReviewQuiz(props) {
               }
               else{
                 var i;
-                for(i=1;i < response.data.Questions.length+1;i++){
-                  document.getElementById(i+response.data.Questions[i-1].key).style.backgroundColor = "green";
-                  document.getElementById(i+response.data.Questions[i-1].key).style.color = "white";
+                for(i=0;i < response.data.Questions.length;i++){
+                  document.getElementById(i+response.data.Questions[i].key).style.backgroundColor = "green";
+                  document.getElementById(i+response.data.Questions[i].key).style.color = "white";
                  }
               }
             
@@ -68,7 +68,7 @@ function ReviewQuiz(props) {
 
 
   const handleRuoteToQuizs=() =>{
-    props.history.push('/quizez');
+    props.history.push('/quizes');
   }
 
 
