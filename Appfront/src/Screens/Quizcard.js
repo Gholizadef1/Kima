@@ -21,21 +21,28 @@ const Eachgroup = (prop) => {
   const [senoghte, setsenoghte] = useState(false)
   const [kamshodde, setkamshodde] = useState();
   const [kamshodde2, setkamshodde2] = useState();
-  const commentt = `${prop.discription}`.toString();
-  const linenumber = (commentt.split('').length)
-  const commenttt = `${prop.discription}`.toString().split('');
-  let comment4 = '';
+  const [comment4,setcomment4]=useState();
+  const [linenumber,setlinenumber]=useState();
+ 
   useEffect(()=>{
+    var commentt = `${prop.discription}`.toString();
+    var linenumberr = (commentt.split('').length)
+    console.log(linenumberr+" prop discription")
+    var commenttt = `${prop.discription}`.toString().split('');
+    var comment42 = '';
 
-  if (linenumber > 250) {
+  if (linenumberr > 250) {
     for (let i = 0; i < 250; i++)
-      comment4 += commenttt[i]
+      comment42 += commenttt[i]
     // console.log(comment4+'  COMMENT4 FOR')
   }
   else {
-    comment4 = prop.discription
+    console.log("in jaaa;slkfd;alskjdf")
+    comment42 = prop.discription
 
   }
+  setlinenumber(linenumberr)
+  setcomment4(comment42)
 
   var kamshode = "";
   var a = prop.title.toString();
@@ -110,7 +117,7 @@ const Eachgroup = (prop) => {
         <View style={styles.comment}>
 
           <Text style={{ fontSize: hp('1.6%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('2%'), marginTop: hp('-1%'), marginHorizontal: wp("0%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {prop.creator.username}</Text>  </Text>
-          {!more ? <Text style={{ color: 'black' }}>{comment4}</Text> : <Text style={{ color: 'black' }}>{prop.discription}</Text>}
+          {!more ? <Text style={{ color: 'black' }}>{comment4}</Text> : <Text style={{ color: 'black' }}>{comment4}</Text>}
           {linenumber >= 250 ? <TouchableOpacity
 
             onPress={async () => {
