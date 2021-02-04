@@ -532,9 +532,12 @@ const Quizes = (prop) => {
              </TouchableOpacity>
              {item.is_none === false ? <TouchableOpacity
                onPress={async () => {
+                 console.log("none nkkn")
                  const userid = await AsyncStorage.getItem("id")
 
                  console.log(userid + " user iddfak;ljdf;lskjf;")
+                 console.log(item.id+" item idddddd")
+                 console.log(item+"  ITEMMM")
                  await console.log(item.creator.id + " item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
                  console.log((item.creator.id - userid) === 0 + " a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
 
@@ -554,7 +557,7 @@ const Quizes = (prop) => {
              >
                <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
              </TouchableOpacity> : <TouchableOpacity
-               onPress={() => prop.navigation.navigate("quizpage", { title: item.title })}
+               onPress={() => prop.navigation.navigate("quizpage", { title: item.title ,id: item.id})}
                style={{ backgroundColor: "#F0F9F7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
              >
                  <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>

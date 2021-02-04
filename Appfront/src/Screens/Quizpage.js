@@ -104,7 +104,7 @@ const Quizpage = (prop) => {
     const [questions, setquestions] = useState(undefined);
     const getquiz = (async () => {
         try {
-            const response = await axiosinst.get('quiz/5')
+            const response = await axiosinst.get('quiz/'+prop.route.params.id)
             //console.log(JSON.stringify( response.data)+" RESPONSE")
             //console.log(response.data+"      response.data")
             //  console.log(JSON.stringify(response)+"    response")
