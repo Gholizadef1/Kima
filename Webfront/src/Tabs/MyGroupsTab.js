@@ -6,9 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import "./Tabs.css";
+import "./MygroupTab.css";
 import RenderRowquote from"./renderRowQuote";
-import RenderRowcomment from "./renderRowComment";
+import Mygroup from "./Mygroup";
 import Scroll from "../Components/Scroll";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -26,7 +26,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={1}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -62,9 +62,9 @@ export default function FullWidthTabs() {
     setValue(index);
   };
   const useStyles = makeStyles((theme) => ({
-    root: {
+    rootg: {
       
-      height: 100,
+      height: 50,
       backgroundColor: theme.palette.background.paper,
      
     },
@@ -72,7 +72,7 @@ export default function FullWidthTabs() {
  
     const classes = useStyles();
   return (
-    <div className="root">
+    <div className="rootg">
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -82,9 +82,7 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label=" نقل‌قول‌ها" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
-          <Tab label=" نظر‌ها" {...a11yProps(1)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
-          <Tab label="کتاب‌های من" {...a11yProps(0)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
+          <Tab label="گروه‌های من" {...a11yProps(2)}style={{fontSize:18,fontFamily:"Yekan",color:"black",fontWeight:'bold'}} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -93,20 +91,9 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <FixedSizeList className="fixedlist" height={400} width={650} itemSize={150} itemCount={1}>
-          {RenderRowquote}
+          <FixedSizeList className="fixedlist" height={300} width={450} itemSize={10} itemCount={1}>
+          {Mygroup}
       </FixedSizeList>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-      <FixedSizeList height={400} width={650} itemSize={150} itemCount={1}>
-      {RenderRowcomment}
-      </FixedSizeList>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction} height={400}>
-        <FixedSizeList height={400} width={650} itemSize={20} itemCount={1}>
-      {Scroll}
-      </FixedSizeList>
-        
         </TabPanel>
       </SwipeableViews>
     </div>

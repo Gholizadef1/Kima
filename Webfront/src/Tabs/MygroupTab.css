@@ -1,8 +1,8 @@
 
 @media (min-width :360px) 
 {
-    .root{
-        height: 600px;
+    .rootg{
+        height: 450px;
         width: 340px;
         background-color:rgb(238, 243, 250);
         border:16px solid #fff;
@@ -13,9 +13,9 @@
   }
 @media (min-width :768px) 
 {
-    .root{
-        height: 600px;
-        width: 674px;
+    .rootg{
+        height: 450px;
+        width: 350px;
         background-color:rgb(238, 243, 250);
         position: fixed;
         border:16px solid #fff;
@@ -24,11 +24,10 @@
    
 
   }
-
 @media (min-width:960px){
-    .root{
-        height: 632px;
-        width: 750px;
+    .rootg{
+        height: 355px;
+        width: 535px;
         background-color:rgb(238, 243, 250);
         position: fixed;
         border:16px solid #fff;
@@ -38,5 +37,4 @@
         
         
     }
-   
 }

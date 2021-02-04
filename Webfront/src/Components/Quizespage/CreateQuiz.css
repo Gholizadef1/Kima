@@ -1,0 +1,332 @@
+.avatar-Q{
+    width: 190px;
+    height: 100px;
+    margin-top: -40px;
+    margin-left: -5px;
+    border-radius: 3%;
+}
+
+@media (min-width:360px){
+    .avatar-Q{
+        width: 190px;
+        height: 100px;
+        margin-top: -40px;
+        margin-left: -5px;
+        border-radius: 1%;
+    }
+    .pic{
+        width: 120px;
+        height: 80px;
+        margin-top: 20px;
+        margin-left: 30px;
+        border-style: dotted;
+      
+    }
+    .mark{
+        margin-left:140px;
+        margin-top: 40px;
+    }
+     .rowin{
+         margin-left: 80px;
+         margin-top: 10px;
+     }
+     .fg{
+         width: 200px;
+        
+     }
+    
+     .name-Q1{
+         margin-top: 20px;
+         margin-bottom: -20px;
+     }
+     .b{
+         margin-right: 140px;
+         margin-bottom: -54px;
+         width: 64px;
+         font-size: 10px;
+         
+     }
+     .b1{
+         margin-right: 46px;
+         margin-bottom:-8px;
+         font-size: 10px;
+
+     }
+     .b2{
+         margin-top: -40px;
+         margin-right: -10px;
+         width:50px;
+         font-size: 10px;
+
+     }
+    
+    }
+@media (min-width:386px){
+    .avatar-Q{
+        width: 190px;
+        height: 100px;
+        margin-top: -40px;
+        margin-left: -5px;
+        border-radius: 1%;
+    }
+    .pic{
+        width: 120px;
+        height: 80px;
+        margin-top: 20px;
+        margin-left: 50px;
+        border-style: dotted;
+      
+    }
+    .mark{
+        margin-left:150px;
+        margin-top: 40px;
+    }
+     .rowin{
+         margin-left: 80px;
+         margin-top: 10px;
+     }
+     .fg{
+         width: 200px;
+        
+     }
+    
+     .name-Q1{
+         margin-top: 20px;
+         margin-bottom: -20px;
+     }
+     .b{
+         margin-right: 140px;
+         margin-bottom: -54px;
+         width: 64px;
+         font-size: 10px;
+         
+     }
+     .b1{
+         margin-right: 46px;
+         margin-bottom:-8px;
+         font-size: 10px;
+
+     }
+     .b2{
+         margin-top: -40px;
+         margin-right: -10px;
+         width:50px;
+         font-size: 10px;
+
+     }
+    
+    }
+
+@media (min-width:414px){
+    .avatar-Q{
+        width: 190px;
+        height: 100px;
+        margin-top: -40px;
+        margin-left: -5px;
+        border-radius: 1%;
+    }
+    .pic{
+        width: 120px;
+        height: 80px;
+        margin-top: 20px;
+        margin-left: 50px;
+        border-style: dotted;
+      
+    }
+    .mark{
+        margin-left:150px;
+        margin-top: 40px;
+    }
+     .rowin{
+         margin-left: 80px;
+         margin-top: 10px;
+     }
+     .fg{
+         width: 200px;
+        
+     }
+    
+     .name-Q1{
+         margin-top: 20px;
+         margin-bottom: -20px;
+     }
+     .b{
+         margin-right: 140px;
+         margin-bottom: -54px;
+         width: 64px;
+         font-size: 10px;
+         
+     }
+     .b1{
+         margin-right: 46px;
+         margin-bottom:-8px;
+         font-size: 10px;
+
+     }
+     .b2{
+         margin-top: -40px;
+         margin-right: -10px;
+         width:50px;
+         font-size: 10px;
+
+     }
+    
+    }
+@media (min-width:768px){
+    .avatar-Q{
+        width: 350px;
+        height: 130px;
+        margin-top: -70px;
+        margin-left: -5px;
+        border-radius: 1%;
+    }
+    .pic{
+        width: 150px;
+        height: 90px;
+        margin-top: 20px;
+        margin-left: 50px;
+        border-style: dotted;
+      
+    }
+    .mark{
+        margin-left: -50px;
+        margin-top: 40px;
+    }
+     .rowin{
+         margin-left: 120px;
+         margin-top: 10px;
+     }
+     .fg{
+         width: 300px;
+        
+     }
+    
+     .name-Q1{
+         margin-top: 20px;
+         margin-bottom: -20px;
+     }
+     .b{
+         margin-right: 363px;
+         margin-bottom: -54px;
+         width: 85px;
+         
+     }
+     .b1{
+         margin-right: 91px;
+         margin-bottom:10px;
+         margin-top: -5px;
+     }
+     .b2{
+         margin-top: -78px;
+         margin-right: 1px;
+         width:80px;
+     }
+    
+    }
+@media (min-width:800px){
+    .avatar-Q{
+        width: 350px;
+        height: 130px;
+        margin-top: -70px;
+        margin-left: -5px;
+        border-radius: 1%;
+    }
+    .pic{
+        width: 150px;
+        height: 90px;
+        margin-top: 20px;
+        margin-left: 50px;
+        border-style: dotted;
+      
+    }
+    .mark{
+        margin-left: -50px;
+        margin-top: 40px;
+    }
+     .rowin{
+         margin-left: 120px;
+         margin-top: 10px;
+     }
+     .fg{
+         width: 300px;
+        
+     }
+    
+     .name-Q1{
+         margin-top: 20px;
+         margin-bottom: -20px;
+     }
+     .b{
+         margin-right: 363px;
+         margin-bottom: -54px;
+         width: 85px;
+         
+     }
+     .b1{
+         margin-right: 91px;
+         margin-bottom:10px;
+         margin-top: -5px;
+     }
+     .b2{
+         margin-top: -78px;
+         margin-right: 1px;
+         width:80px;
+     }
+    
+    }
+    @media (min-width:960px){
+        
+       .avatar-Q{
+        width: 750px;
+        height: 200px;
+        margin-top: -90px;
+        margin-left: 10px;
+        border-radius: 1%;
+       }
+       .pic{
+           width: 250px;
+           height: 130px;
+           margin-top: 20px;
+           margin-left: 170px;
+           border-style: dotted;
+         
+       }
+       .mark{
+           margin-left: -220px;
+           margin-top: 40px;
+       }
+        .rowin{
+            margin-left: 280px;
+            margin-top: 10px;
+        }
+        .fg{
+            width: 600px;
+           
+        }
+       
+        .name-Q1{
+            margin-top: 20px;
+            margin-bottom: -20px;
+        }
+        .b{
+            margin-right: 363px;
+            margin-bottom: -54px;
+            font-size: 15px;
+            
+        }
+        .b1{
+            margin-right: 240px;
+            margin-bottom:10px;
+            margin-top: -5px;
+            font-size: 15px;
+
+        }
+        .b2{
+            margin-top: -78px;
+            margin-right: 150px;
+            width:80px;
+            font-size: 15px;
+
+        }
+       
+    }
