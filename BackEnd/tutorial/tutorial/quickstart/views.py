@@ -651,7 +651,6 @@ class LeaveGroupView(APIView):
         serializer = MemberSerializer(members,many=True)
         return Response({"message":"You leaved this group!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
-
 class DynamicSearchFilter(filters.SearchFilter):
     def get_search_fields(self, view, request):
         return request.GET.getlist('search-fields', [])
@@ -825,5 +824,5 @@ class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
 class DynamicQuizAPIView(generics.ListCreateAPIView):
     filter_backends = (DynamicSearchFilter,)
     queryset = Quiz.objects.all()
-    serializer_class = QuizSerializer
+    serializer_class = MyQuizSerializer
     search_fields = ['title']
