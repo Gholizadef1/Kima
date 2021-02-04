@@ -190,13 +190,15 @@ const Login = (pro) => {
               <Text style={{ color: '#1F7A8C', fontSize: hp("1.7"), fontWeight: 'bold', marginTop: hp("1.9%"),marginLeft:wp("39.3%") }}>ثبت نام</Text>
 
             </TouchableOpacity>
+            {/* <TouchableOpacity style={{flexDirection:"row",right:wp("46%"),width:wp("51%")}}> */}
             <Button
               bordered rounded style={styles.button}
               onPress={props.handleSubmit}
             >
-              <Text style={{ color: '#1F7A8C', fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("21.6%"),fontWeight: 'bold',alignSelf:"center" }
+              <Text style={{ color: '#1F7A8C', fontSize:hp("1.8.5%"),fontWeight:'bold', marginRight:wp("21.6%"),marginLeft:wp("21.6%"),fontWeight: 'bold',alignSelf:"center" }
               }>ورود</Text>
             </Button>
+            {/* </TouchableOpacity> */}
             {/* <Button bordered success style={{position:'absolute', marginTop:90,marginHorizontal:40,width:300}}>
          <Text style={{color:'#25DECC', fontSize:17,fontWeight:'300',width:185}}>ورود ناشر</Text>
         </Button> */}

@@ -64,7 +64,7 @@ const signschema=yup.object({
   resizeMode="cover"
   shouldPlay
   isLooping
-  style={{ width: wp('100%'), height:wp(hp('15.5%')),position:'absolute'  }}
+  style={{ width: wp('100%'), height:hp('69%'),position:'absolute'  }}
 ></Video>
  <Text style={{color:'#EDF2F4',fontSize:hp('2.7%'),fontWeight:'bold',marginTop:hp('7.3%'),marginLeft:wp('10%'),position:'absolute'}}>کیما</Text>
      
@@ -287,7 +287,7 @@ const signschema=yup.object({
        
 
        >
-         <Text style={{color:'#F0F9F7', fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("19.4%")}}>ثبت نام</Text>
+         <Text style={{color:'#F0F9F7',width:wp("-10%"), fontSize:hp("1.8.5%"),fontWeight:'bold', marginLeft:wp("19.4%"),marginRight:wp("19.4%")}}>ثبت نام</Text>
         </Button>
       
      </View>
