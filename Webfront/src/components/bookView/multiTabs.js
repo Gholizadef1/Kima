@@ -516,7 +516,7 @@ const handleCloseDialog = () => {
                     </div>
 
 
-                    {current.account.id !== Cookies.get("userId") ?(
+                    {current.account.id.toString() !== Cookies.get("userId").toString() ?(
                       <div></div>
                     ):(
                       <div className="btn m-n1" onClick={()=> handleClickOpenDialog(current.id)}>
@@ -675,7 +675,7 @@ const handleCloseDialog = () => {
 
                     
 
-                    {current.account.id !== Cookies.get("userId") ?(
+                    {current.account.id.toString() !== Cookies.get("userId").toString() ?(
                       <div></div>
                     ):(
                       <div className="btn" onClick={()=> handleClickOpenDialog(current.id)}>

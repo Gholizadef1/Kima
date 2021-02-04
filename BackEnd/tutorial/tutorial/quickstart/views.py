@@ -760,7 +760,7 @@ class QuizView(APIView,PaginationHandlerMixin):
             return Response({"message":"No Quiz!"})
 
         quiz_list = self.paginate_queryset(quiz)
-        serializer = MyQuizSerializer(quiz_list,context={"request": request},many=True)
+        serializer = MyQuizSerializer(quiz_list,context={"request": request,"user":""},many=True)
         count = Paginator(quiz,10).num_pages
         return Response({"Quiz" : serializer.data, "count": count})
         
@@ -825,11 +825,11 @@ class MyQuizView(APIView):
     def get(self,request,pk):
         user = Account.objects.get(pk=pk)
         myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
-        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
+        taken_quiz = MyQuizSer(TakeQuiz.objects.filter(user=user),many=True).data
         myquiz=myquiz + taken_quiz
-        if myquiz is None:
+        if len(myquiz) == 0 :
             return Response({"message":"No Quiz!"})
-        return Response({"Quiz":myquiz}) 
+        return Response({"Quiz":myquiz})
 
 class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
     serializer_class = SetQuizPhotoSerializer

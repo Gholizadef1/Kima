@@ -253,24 +253,41 @@ class MyQuizSerializer(serializers.ModelSerializer):
         fields = ['title','creator','quiz_photo','description','id','question_count','is_owner','is_taken','is_none']
 
     def get_is_owner(self, obj):
-        user =  self.context['request'].user
+        if self.context['user'] =="":
+            user =  self.context['request'].user
+        if self.context['request'] == "":
+            user =  self.context['user']
         if obj.creator == user:
             return True
         return False
     
     def get_is_taken(self, obj):
-        user =  self.context['request'].user
+        if self.context['user'] =="":
+            user =  self.context['request'].user
+        if self.context['request'] == "":
+            user =  self.context['user']
         if TakeQuiz.objects.filter(user=user,quiz=obj.id).exists():
             return True
         return False
 
     def get_is_none(self,obj):
-        user = self.context['request'].user
+        if self.context['user'] =="":
+            user =  self.context['request'].user
+        if self.context['request'] == "":
+            user =  self.context['user']
         if (obj.creator != user) and (not TakeQuiz.objects.filter(user=user,quiz=obj.id).exists()):
             return True
         return False
 
-    
+class MyQuizSer(serializers.ModelSerializer):
+    quiz_info = serializers.RelatedField(source='quiz',read_only=True)
+    class Meta:
+        model = TakeQuiz
+        fields = ['quiz_info']
+
+    def to_representation(self,value):
+
+        return QuizSerializer(Quiz.objects.get(pk=value.quiz.id),).data
 
 class SetQuizPhotoSerializer(serializers.ModelSerializer):
 

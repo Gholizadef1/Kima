@@ -199,7 +199,7 @@ const handleCloseSnack = (event, reason) => {
           open={openSnack}
           autoHideDuration={2500}
           onClose={handleCloseSnack}
-          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
+          message={<div style={{fontFamily:'Yekan',fontSize:17,marginLeft:36}}>{massage}</div>}
           />
        </div>
        <div className="container-fluid text-center px-md-5 py-md-5" >
