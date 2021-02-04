@@ -49,30 +49,36 @@ function Quizespage (props){
   }
 
   useEffect(()=>{
-      axios.get(API_BASE_URL+ "/quiz"
+    if(isMine){
+      axios.get(API_BASE_URL+ `/user/${Cookies.get("userId")}/quiz`
       ,{
         headers:{
        "Authorization":"Token "+Cookies.get("userToken")}
         })
       .then(response=>{
         console.log(response.data.Quiz)
-        if(isMine){
-          const newList1 = response.data.Quiz.filter((item)=>item.is_none === false);
-          setGroups(newList1);
+        setGroups(response.data.Quiz);
           console.log("f")
-          console.log(newList1);
+        })}
+     if(isMine === false){
+        axios.get(API_BASE_URL+ `/quiz?page=`+page
+      ,{
+        headers:{
+       "Authorization":"Token "+Cookies.get("userToken")}
+        })
+      .then(response=>{
+        console.log(response.data.Quiz)
+        console.log(response.data.Quiz.length)
 
-        }else if(isMine === false){
-        const newList2 = response.data.Quiz.filter((item)=>item.is_none === true);
-        setGroups(newList2);
+        const newList = response.data.Quiz.filter((item)=>item.is_none === true);
+        console.log(newList);
+        setGroups(newList);
         setPagesNumber(response.data.count)
         console.log(groups);
         console.log(me);
         console.log("f")
-        }
-      
-        // setPagesNumber(response.data.count)
-      })
+        })
+      }
   },[filterBase,page,isMine])
 
 
@@ -204,7 +210,7 @@ const handleCloseSnack = (event, reason) => {
   const handleGoSearchGroup = ( ) => {
     console.log( searchWord);
     setPagesNumber(1);
-    axios.get(`${API_BASE_URL}/group?search=${searchWord}&search-fields=title`,{
+    axios.get(`${API_BASE_URL}/quizes?search=${searchWord}&search-fields=title`,{
       headers:{
      "Authorization":"Token "+Cookies.get("userToken")}
       })
@@ -287,7 +293,7 @@ const handleCloseSnack = (event, reason) => {
                         
                       </div>
                       <div className="align-items-center m-3">
-                        <h6 class="card-subtitle  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
+                        <h6 class="card-subtitle pb-3  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
 
                         {isMine === true  ?

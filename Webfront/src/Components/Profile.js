@@ -9,6 +9,7 @@ import { Modal, Form } from "react-bootstrap";
 import Cookies from 'js-cookie';
 import Tabs from '../Tabs/Tabs';
 import MyGroups from '../Tabs/MyGroupsTab.js';
+import { Avatar } from "@material-ui/core";
 function ProFile (props){
     const [state , setState]=useState(
         {
@@ -290,7 +291,7 @@ useEffect(() => {
                                     </button>
                                 </div>
                                     <div className="profile col-md-5">
-                                        <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle1 img-fluid"/>
+                                        <Avatar src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle1 img-fluid"style={{width:120, height:120}}/>
                                         {/* <img className="rounded-circle img-fluid" ref={uploadedImage}/> */}
 
                                 </div>

@@ -25,7 +25,7 @@ import { red } from "@material-ui/core/colors";
             })
         .then((res) => res.json())
         .then((data) => {
-           console.log(data.message);
+           console.log(data);
           setComment(data);
         });
     }, []);
