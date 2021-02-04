@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import Tooltip from '@material-ui/core/Tooltip';
 import {
   BrowserRouter as Router,
   Switch,
@@ -116,54 +117,6 @@ function Quizespage (props){
     }))
 }
 
-const handleCreateGroupSubmit =(e) =>{
-  e.preventDefault();
-
-  if(newGroup.name === ""){
-    setMassage("اسم آزمونک نمی‌تواند خالی باشد")
-    setOpenSnack(true);
-  }
-  else if(newGroup.description === ""){
-    setMassage("توضیحات آزمونک نمی‌تواند خالی باشد")
-    setOpenSnack(true);
-  }
-
-  else{
-
-  var formdata = new FormData()
-  formdata.append('title',newGroup.name)
-  formdata.append('summary',newGroup.description)
-  formdata.append('photo',state.file)
-
-  axios.post(API_BASE_URL+ '/group',formdata,
-  {
-    headers:{
-   "Content-Type":"application/json",
-   "Authorization":"Token "+Cookies.get("userToken")}
-    }
-  )
-  .then(response=>{
-    console.log(response);
-
-    if(response.data.message === "Your group is succesfully created!"){
-      setMassage('آزمونک با موفقیت ساخته شد')
-      setOpenSnack(true);
-      handleCloseCreateGroup();
-      routeToQuizHandler(response.data.data.id);
-    }
-    else{
-      setMassage("آزمونک از قبل وجود دارد")
-      setOpenSnack(true);
-    }
-  })
-  .catch(error=>{
-    console.log(error);
-    setMassage("مشکلی پیش آمده دوباره امتحان کنید")
-    setOpenSnack(true);
-  });
-}
-}
-
 const [state , setState]=useState(
   {
       navigate:false,
@@ -248,10 +201,22 @@ const handleCloseSnack = (event, reason) => {
                 </div>
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
+              <Tooltip  title= {<div style={{color: "white",
+ fontFamily:"Yekan",
+ fontSize:20,
+ 
+ width:190,
+ height:80,
+ textAlign:"center",
+ marginLeft:-9,
+ paddingTop:20,}}>آزمونک‌های شما در قسمت "آزمونک‌ها" نشان داده نمی‌شوند</div>}>
                 <select className="form-control rounded-pill shadow yekanfont" onClick={handleChangeList} >
-                  <option class="yekanfont" value="all">همهٔ آزمونک‌ها</option>
+                 
+                  <option class="yekanfont" value="all">آزمونک‌ها</option>
+                  
                   <option value="mine">آزمونک‌های من</option>
                 </select>
+                </Tooltip>
               </div>
               <div>
                 <div className="btn btn-info rounded-lg  shadow" onClick={routeToCreateQuize}>
