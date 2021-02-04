@@ -113,29 +113,37 @@ const handleCloseSnack = (event, reason) => {
   };
 
     const sendQuestion = ()=> {
-
+      var validate = true;
      inputFields.map((i)=>{
       if(i.question_text === '' || i.a_text === '' || i.b_text === '' || i.c_text === ''
-      || i.d_text === '' || i.key === '')
+      || i.d_text === '')
       {
         setMassage('تمامی فیلدهای مربوط به سؤال باید پر شوند')
         setOpenSnack(true);
+        validate = false;
+        
       }
-      else if(i.question_text.length>=100 || i.a_text.length>=20 || i.b_text.length>=20
-       || i.c_text.length>=20 || i.d_text.length>=20){
-        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 20 کاراکتر داشته باشد')
-        setOpenSnack(true);
-
-       }
-       else if(i.key !='a' && i.key!='b' && i.key!='c' && i.key!='d'){
+      else if(i.key !='a' && i.key!='b' && i.key!='c' && i.key!='d'){
         setMassage(' لطفاً کاراکترهای موردنظر را برای پاسخ درست وارد کنید')
         setOpenSnack(true);
         console.log(i.key);
+        validate = false;
        }
-      else
-      setValidation(true);
+       if(i.question_text.length>=100 || i.a_text.length>=20 || i.b_text.length>=20
+       || i.c_text.length>=20 || i.d_text.length>=20){
+        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 20 کاراکتر داشته باشد')
+        setOpenSnack(true);
+        validate = false;
+       }
+      
+    
     })
     console.log(validation);
+    if(validate){
+      setValidation(true);
+    }
+    else
+    setValidation(false);
   }
   const va =()=>{
   const fd = new FormData();
