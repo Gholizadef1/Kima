@@ -23,8 +23,15 @@ const Eachgroup = (prop) => {
   const [kamshodde2, setkamshodde2] = useState();
   const [comment4,setcomment4]=useState();
   const [linenumber,setlinenumber]=useState();
- console.log(prop.quizphoto);
+  const [photoo,setphotoo]=useState();
+ console.log(prop.quizphoto+" quiz photo");
   useEffect(()=>{
+    if(prop.quizphoto.toString().split(":")[0]==="http"){
+      setphotoo(prop.quizphoto)
+    }
+    else{
+      setphotoo("http://e7e864967156.ngrok.io"+prop.quizphoto)
+    }
     var commentt = `${prop.discription}`.toString();
     var linenumberr = (commentt.split('').length)
     console.log(linenumberr+" prop discription")
@@ -71,7 +78,7 @@ const Eachgroup = (prop) => {
 
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.quizphoto === '/media/default.png' ? <ImageBackground borderRadius={100}
+          {photoo === 'http://e7e864967156.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/quizz.png')}
             style={{
@@ -87,7 +94,7 @@ const Eachgroup = (prop) => {
 
           </ImageBackground> : <ImageBackground borderRadius={100}
 
-            source={{ uri:prop.quizphoto}}
+            source={{ uri:photoo}}
             style={styles.avatar}
 
           >

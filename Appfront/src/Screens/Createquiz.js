@@ -160,7 +160,18 @@ const Createquiz = () => {
                             formdata.append(`questions[${i}]b_text`, all.questions[i].b_text)
                             formdata.append(`questions[${i}]c_text`, all.questions[i].c_text)
                             formdata.append(`questions[${i}]d_text`, all.questions[i].d_text)
-                            formdata.append(`questions[${i}]key`, all.questions[i].key)
+                            if( all.questions[i].key==="1"){
+                            formdata.append(`questions[${i}]key`, "a")
+                            }
+                            if( all.questions[i].key==="2"){
+                            formdata.append(`questions[${i}]key`, "b")
+                            }
+                            if( all.questions[i].key==="3"){
+                            formdata.append(`questions[${i}]key`, "c")
+                            }
+                            if( all.questions[i].key==="4"){
+                            formdata.append(`questions[${i}]key`, "d")
+                            }
                         }
                         // console.log(all)
                         // var alll=json.stringify({

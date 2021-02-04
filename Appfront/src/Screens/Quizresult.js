@@ -284,7 +284,7 @@ const Quizresult = (prop) => {
                                 >
                                     <ImageBackground borderRadius={100}
 
-                                        source={require("../../assets/tea.jpg")}
+                                        source={require("../../assets/quizz.png")}
 
                                         style={{
                                             height: hp('14%'),
