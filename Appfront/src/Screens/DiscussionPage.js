@@ -22,7 +22,7 @@ const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setusername] = useState(null);
-    const [loading, setloading] = useState(true)
+    const [loading, setloading] = useState(false)
     const [refreshchats, setrefreshchats] = useState(false)
     const [picture, setpicture] = useState(null);
     const [chats, setChats] = useState();
@@ -55,7 +55,6 @@ const DiscussionPage = (prop) => {
         console.log(await (await AsyncStorage.getItem('id')).toString())
 
         try {
-            // await setTimeout(() => {  console.log("World!"); }, 5000);
             setIDD(await (await AsyncStorage.getItem('id')).toString())
             const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
                 // params: {
@@ -84,9 +83,9 @@ const DiscussionPage = (prop) => {
                 // console.log(information)
                 console.log('RESPONSE DATE')
                 //console.log(response.date)
-                console.log(response.data.chats + ' RESPONSE DATA COMMENTS')
+                console.log(response.data.chats + ' RESPONSE DATA CHATSS')
                 //page===1?setinformation(response.data):setinformation(information.concat(response.data))
-                if (response.data.message != "No Comment!") {
+                if (response.data.message != "No Chat!") {
                     await setinformation(information => [...information, ...response.data.chats])
                 }
                 else {
@@ -130,7 +129,6 @@ const DiscussionPage = (prop) => {
     };
 
     useEffect(() => {
-        getChats()
         getUsername()
     }, []);
 
@@ -143,27 +141,27 @@ const DiscussionPage = (prop) => {
             })
     };
 
-    const getChats = async () => {
+    // const getChats = async () => {
 
-        axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
-            params: {
-                page: page
-            },
-            "headers": {
-                "content-type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-            }
-        })
-            .then(function (response) {
-                setChats(response.data.chats)
-                setloading(false)
-            })
+    //     axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
+    //         params: {
+    //             page: page
+    //         },
+    //         "headers": {
+    //             "content-type": "application/json",
+    //             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+    //         }
+    //     })
+    //         .then(function (response) {
+    //             setChats(response.data.chats)
+    //             setloading(false)
+    //         })
 
-            .catch(async function (error) {
-                console.log(error);
-                console.log(error.code + 'ERROR CODE')
-            });
-    }
+    //         .catch(async function (error) {
+    //             console.log(error);
+    //             console.log(error.code + 'ERROR CODE')
+    //         });
+    // }
     //   console.log('CHATT'+chats.chat_text)
     //   console.log('USERR'+chats.user.username)
 
@@ -211,7 +209,8 @@ const DiscussionPage = (prop) => {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
                                                 ], { cancelable: false }, { style: { height: 50 } })
-                                                getChats();
+                                                //getChats();
+                                                response()
                                             })
                                             .catch(function (error) {
                                                 {

@@ -352,7 +352,7 @@ const GroupPage = (prop) => {
               marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => JoinGroup()}>
-              <Text style={{ marginLeft: wp('6.5%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
+              <Text style={{ marginLeft: wp('5.4%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
           {owner === "owner" ?
@@ -479,7 +479,7 @@ const GroupPage = (prop) => {
             : <Button onPress={() => Alert.alert('', ' برای ایجاد یک بحث جدید باید عضو گروه باشید', [{
               text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
             }], { cancelable: false }, { style: { height: hp('40%') } })} style={{
-              marginLeft: wp('21%'), width: wp('40%'), borderRadius: 20, marginTop: hp('3%')
+              marginLeft: wp('21%'), width: wp('65%'), borderRadius: 20, marginTop: hp('3%')
               , backgroundColor: '#1F7A8C'
             }}>
               <Text style={{ marginLeft: wp('18%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>

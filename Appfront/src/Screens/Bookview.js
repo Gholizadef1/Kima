@@ -26,6 +26,7 @@ const Bookview = (prop) => {
   const [loading4, setloading4] = useState(true);
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
+  const [average, setAverage] = useState(null);
   const [picture, setpicture] = useState(null);
   const [more, setmore] = useState(false);
   const [showmore, setshowmore] = useState('بیشتر...');
@@ -53,7 +54,7 @@ const Bookview = (prop) => {
     getComments()
     getQoutes()
     getUsername()
-  }, [refresh]);
+  }, [average]);
 
   // const commentt = `${}`.toString();
   // const linenumber = (commentt.split('\n').length)
@@ -71,6 +72,7 @@ const Bookview = (prop) => {
         setloading(false)
         setResult(response.data.data);
         setSelectedValue(response.data.book_state)
+        setAverage(response.data.average_rating)
         console.log('SELECTED VALUEE ==' + selectedValue)
       })
       .catch(function (error) {
@@ -224,7 +226,7 @@ const Bookview = (prop) => {
           //console.log(response.data)
           //console.log('\n' + '++++++++' + '\n')
           setratenum(rate);
-          //console.log('&&' + rate);
+          getResult(id)
           if (response.data.message === "You rated this book already!!") {
             console.log('TOYE PUTTTTT')
             axiosinst.put('/book/' + id + '/rate', back, {
