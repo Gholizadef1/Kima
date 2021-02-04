@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Item, Segment, Content, Input, Label, Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -53,39 +53,44 @@ const Quizes = (prop) => {
   const [seeresult, setseeresult] = useState(false);
   const [owner, setowner] = useState();
   const [opensearch,setopensearch]=useState(false);
-  const searching=(term)=>setsearchterm(term);
+  const searching=(term)=>{
+    setsearchterm(term)
+    console.log(searchterm +"term")
+  };
   const [searchterm,setsearchterm]=useState('');
-  const [numberofresults,setnumberofresults]=useState();
+  const [numberofresults,setnumberofresults]=useState(undefined);
+  const [next,setnext]=useState(null)
   
 
   // let count=0;
-  const response = async (page) => {
-    setopensearch(false)
-    // await setinformation(null)
-    await (console.log(await (AsyncStorage.getItem('token'))))
 
-    await setpage(page);
-    console.log(page + ' PAGEEEEEEEEEEEEEEEEPAGEEEEEEEEEE')
+
+  const response=async (page)=>{
+    // await setinformation([])
+    setopensearch(false)
+   // setpickerselected(false)
+    await (console.log(await(AsyncStorage.getItem('token'))))
+   
+    await setpage(page)
+    console.log(page+'  شماره صفحه اول ریسپانس')
 
     await settheend(false)
-    console.log(theend + '  THE END RESOPONSE AVAL')
-    if (page === 1) {
+    console.log(theend+'  THE END RESOPONSE AVAL')
+    if(page===1){
       await settheend(false)
-      await setinformation([])
-      console.log(information + 'BAYAN KHALI BASHEEEEEEEEEE')
-      console.log('----------------------PGAE 11111111---------------')
+     await setinformation([])
 
     }
-    console.log('DOVOM')
-    console.log(page + 'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    console.log('ALAIK ALIAKDALFKJASFKJAKSFKLJSFH')
-    try {
-      console.log('  omad to response')
-      console.log('api/group' + likeotime)
 
-      const id = await (AsyncStorage.getItem('id'))
-      console.log(id + "idf;lkadf;kjf;lkjf")
-      const response = await axiosinst.get("quiz", {
+    
+    console.log('DOVOM')
+     console.log(page+'PAGE')
+     try{
+       console.log('  omad to response')
+       console.log('api/group'+likeotime)
+
+
+       const response = await axiosinst.get("quiz", {
         params: {
           page: page
         },
@@ -96,60 +101,63 @@ const Quizes = (prop) => {
         }
 
       })
-      console.log(numberofgp / 10 + 'number of group ////////10')
-      console.log(numberofgp + '   !!!!!!!!!  ' + numberofgp)
-      console.log(JSON.stringify(response.data.Quiz) + "  response.data.quiz")
-      console.log(page + 'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeWWWW')
-      console.log(response.data + 'RESPONSE.DATA')
-      console.log(response.data.Quiz + 'RESPONSE.DATA.GROUPS')
-      await setcount(response.data.count);
-      console.log(count + '  COUNT')
-      console.log(page + ' PAGE BAD COUNT')
-      console.log((page === count) + ' PAGE===COUNT')
+     
+   if(page<=count){
+   if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+  await settheend(true)
+  await setrefresh(false)
+   console.log('#########')
+   }
+   else{
+  // console.log(response.data+'RESPONSE.DATA')
+  console.log(response.data.results+'RESPONSE.DATA.GROUPS')
+   await setcount(response.data.count);
+   console.log(count+'  COUNT')
+   console.log(page+' PAGE BAD COUNT')
+   console.log((page===count)+' PAGE===COUNT')
 
-      settheend(false)
-      //console.log('omade inja')
-      console.log('++++INFOGHABLESET++++' + information + "++++INFOGHABLESET++++")
-      console.log(response.data.groups)
-      if (response.data.message != "No Group!") {
-        await setinformation(information => [...information, ...response.data.Quiz])
-        //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
-      }
-      else {
-        await setinformation(undefined);
-        console.log(" KHALIIIII;KAJF;LKJ;LKJ")
-      }
-      setrefresh(false)
-      // console.log(response.data.groups.id+'  INFORMATION.ID')
-
-      console.log('++++INFO++++' + information + "++++INFO++++")
-
+    settheend(false)
+   console.log('omade inja')
+   console.log('----INFO----'+information+"----INFO----")
+        setrefresh(false)
+     setinformation(information=>[...information,...response.data.Quiz])
+    
+      console.log('++++INFO++++'+information+"++++INFO++++")
+     
+     }
     }
-    // }
+    else{
+      settheend(true)
+    }
+    }
+    
     //  }
-    catch (err) {
-      Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+   catch(err){
+     setrefresh(false)
+     Alert.alert('','مشکلی پیش اومده لطفا دوباره امتحان کن',[{
+            
 
-
-        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-      }], { cancelable: false }, { style: { height: 50 } })
-
-      console.log(err.response + '   error response')
-      setrefresh(false)
-      console.log(err.toString().split('\n')[0])
-      if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
-        settheend(true);
-      console.log(theend + 'THE END')
+      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
+      }],{cancelable:false},{style:{height:50}})
+       
+     console.log(err.toString().split('\n')[0])
+    if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
+    settheend(true);
+    console.log(theend+'THE END')
       console.log(err);
-
-    }
-
+    
+   
   }
+  
+   }
+
+ 
 
 
 
 
   const searchpost=async(page)=>{
+    console.log(page+" page search post")
     await setpage(page)
     console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
    const back = {
@@ -164,14 +172,15 @@ const Quizes = (prop) => {
 
    }
    const backk = JSON.stringify(back);
+   console.log(searchterm+"searchterm toye search postttt")
    try{
-   const response = await axiosinst.get('quizes',{
-     params: {
+   const response = await axiosinst.get("quizes?search="+searchterm+"&search-fields=title&page="+page,{
+    //  params: {
       
-       search: searchterm,
-       search_fields:'title',
-       page:page,
-     },
+    //    search: searchterm,
+    //    search_fields:'title',
+    //    page:page,
+    //  },
    "headers":
    {
      "Content-Type": "application/json",
@@ -180,24 +189,25 @@ const Quizes = (prop) => {
 
   
  })
-  console.log(response.data)
+ // console.log(response.data)
  // setrefresh(true)
  settheend(false)
  setrefresh(false)
- if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
-   await settheend(true)
-   await setrefresh(false)
-    console.log('#########')
-    }
-    console.log('searchpost beforeee'+information+'1111111111111111111111')
+//  if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
+//    await settheend(true)
+//    await setrefresh(false)
+//     console.log('#########')
+//     }
+   // console.log('searchpost beforeee'+JSON.stringify(information)+'1111111111111111111111')
  // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
  // await setinformation([...information,...response.data.results])
   await setinformation(information=>[...information,...response.data.results])
-  console.log('searchpost afterrrrrrr'+information+'222222222222222222')     
+console.log('searchpost afterrrrrrr'+JSON.stringify(response.data.results)+'222222222222222222')     
  // console.log(information+'******######********########')
  // console.log(information[0].title)
  // settheend(true)
  // setcount(response.data.count)
+ console.log(response.data.count+"   TEDATDDDDDDD")
  setnext(response.data.next)
  if(next===null)
  {
@@ -213,7 +223,7 @@ const Quizes = (prop) => {
  catch(err){
    setrefresh(false)
   console.log(err)
-  Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+  Alert.alert('','مشکلی پیش اومدهم سرورامون رو چک میکنیم',[{
            
 
    text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
@@ -225,43 +235,65 @@ const Quizes = (prop) => {
   }
 
 
-  const handleLoadMore = async () => {
+  const handleLoadMore = async() => {
     console.log('END OF THE LIST')
-    //  if(page<numberofgp/10+1){
-    if (page < count) {
-      if (theend === false)
-        response(page + 1);
+    console.log(next+'  NEXT NEXT NEXT NEXT')
+    if(searchterm===''){
+     if(page<count){
+       
+        await settheend(false)
+         response(page+1);
+      
+       
+     }
+     else
+     {
+       console.log(page+'handlemore page')
+       console.log(count +'handlemore count')
+       console.log('*********')
+       await settheend(true)
+      }
     }
-    else {
-      settheend(true)
+    else
+    {
+      if(next!=null){
+        await settheend(false)
+        searchpost(page+1);
+      }
+      else
+      {
+        console.log(page+'handlemore page')
+        console.log(count +'handlemore count')
+        console.log('*********')
+        await settheend(true)
+      }
     }
+    };
 
-  };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const a = new Promise(async (resolve, reject) => {
-        await setinformation([]);
-        await setpage(1);
-        //await setselecttime(true)
-        //با این ظاهرا درست شد :/
-        await setselectedValue('like')
-        //تاثیری نداشتن :/
-        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-        // await settimelable("فیلتر بر اساس تاریخ")
-        if (selectedValue === "none")
-          await setlikeotime("time");
-        else
-          await setlikeotime("like");
-        await setselectedValue('none')
+ 
 
-        resolve()
-      }).then(() => {
-        console.log('++++++++++' + information + '**********')
-        response(1);
-        console.log('++++++++++' + information + '**********')
-      })
-    }, [prop.navigation]))
+  useEffect(()=>{
+    // React.useCallback(() => { 
+      setsearchterm('')
+      setnumberofresults()
+        setinformation([])
+    // if(searchterm==='')  
+      response(1) 
+      // async function refreshing(){ 
+      // // setmoreclicked(false)
+     // setselectedValue('none')
+      //   setsearchterm('')
+      //   setnumberofresults()
+      //    await setinformation([])
+      // // if(searchterm==='')  
+      //   response(1)
+      // }
+        // else
+        // searchpost(1)
+    // }
+    // ,[])
+  },[])
   return (
 
 
@@ -287,6 +319,7 @@ const Quizes = (prop) => {
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      iconColor={"#1f7a8c"}
       backgroundColor={"#EDF2F4"}
       onEndEditing={()=>{setinformation([])
         searchpost(1)}}
@@ -336,11 +369,19 @@ const Quizes = (prop) => {
           keyExtractor={(item) => item.id}
           refreshing={refresh}
           onRefresh={async () => {
-            //await setinformation()
-            await setrefresh(true)
-            response(1)
-          }}
-
+              // await setsearchterm('')
+              if(searchterm===''){
+               await(setnumberofresults())
+              await setrefresh(true)         
+              // await setinformation([]);
+              // await setpage(1);
+              response(1)
+              }
+              else{
+                await setrefresh(true)   
+              searchpost(1)
+              }
+            }}
           data={information}
           onEndReachedThreshold={0.5}
 
@@ -397,7 +438,7 @@ const Quizes = (prop) => {
           }}
 
         >
-        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز را بسازید</Text>}
+        </FlatList> : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین کوییز را شما بسازید</Text>}
         {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
         {/* <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
