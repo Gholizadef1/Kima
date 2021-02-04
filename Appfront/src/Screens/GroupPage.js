@@ -219,7 +219,7 @@ const GroupPage = (prop) => {
     return (
       <View style={styles.container}>
         <View>
-          <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: 100, margin: 20, position: 'absolute' }} visible={modalVisible} animationType='fade' >
+          <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom:hp('8%'), margin:wp('20%'), position: 'absolute' }} visible={modalVisible} animationType='fade' >
 
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
@@ -251,7 +251,7 @@ const GroupPage = (prop) => {
                           {
                             text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                           }
-                        ], { cancelable: false }, { style: { height: 50 } })
+                        ], { cancelable: false }, { style: { height: hp('40%')} })
                         getDiscussion();
                       })
                       .catch(function (error) {
@@ -262,7 +262,7 @@ const GroupPage = (prop) => {
 
 
                             text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-                          }], { cancelable: false }, { style: { height: 50 } })
+                          }], { cancelable: false }, { style: { height: hp('40%') } })
                         }
                       })
 
@@ -325,7 +325,7 @@ const GroupPage = (prop) => {
             }}
 
           ></Image>
-          <View style={{ position: 'absolute', backgroundColor: 'white', height: 100, width: wp('100%'), marginTop: hp('30%'), borderTopStartRadius: 30, borderTopEndRadius: 30 }}>
+          <View style={{ position: 'absolute', backgroundColor: 'white', height:hp('60%'), width: wp('100%'), marginTop: hp('30%'), borderTopStartRadius: 30, borderTopEndRadius: 30 }}>
 
           </View>
           {/* <View style={styles.view}> */}
@@ -345,26 +345,26 @@ const GroupPage = (prop) => {
           {/* {joinedUser!=undefined&&owner!=undefined && notjoinedUser!=undefined<View> */}
           {joinedUser === "joinedUser" && notjoinedUser === undefined && owner === undefined ?
             <Button style={{
-              marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
+              marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => LeaveGroup()}>
-              <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
+              <Text style={{ marginLeft: wp('7%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
             </Button> : null}
 
           {owner===undefined&&joinedUser===undefined  ?
             <Button style={{
-              marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
+              marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => JoinGroup()}>
-              <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
+              <Text style={{ marginLeft: wp('6.5%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
           {owner === "owner" ?
             <Button style={{
-              marginLeft: wp('60%'), width: 110, borderRadius: 15, marginTop: hp('-8%')
+              marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-7%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => deleteGroup()}>
-              <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
+              <Text style={{ marginLeft: wp('6%'), fontSize:hp('2.4%'), fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
             </Button> : null}
 
           {/* {owner != undefined && joinedUser != undefined && notjoinedUser != undefined&&notjoinedUser==="notjoinedUser" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
@@ -374,7 +374,7 @@ const GroupPage = (prop) => {
               }} onPress={() => JoinGroup()}>
                 <Text style={{ marginLeft: wp('5.5%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
               </Button> : null} */}
-          <Text style={{ fontSize: 21, marginLeft: wp('4%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
+          <Text style={{ fontSize: hp('3.2%'), marginLeft: wp('4%'), marginTop: hp('10%'), color: '#1F7A8C', fontWeight: 'bold' }}>درباره گروه :</Text>
 
           <Text style={{ textAlign: 'left', marginTop: hp('2'), marginLeft: wp('10%'), marginRight: wp('1%') }}>
             {groupinfo.summary}
@@ -386,7 +386,7 @@ const GroupPage = (prop) => {
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
+              <Text style={{ fontSize: hp('3%'), marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
               <FlatList
                 style={{ marginBottom: hp('5%') }}
                 showsVerticalScrollIndicator={true}
@@ -402,7 +402,7 @@ const GroupPage = (prop) => {
                 data={discussion}
                 renderItem={({ item }) => <>
                   <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                    <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: 18 }}>{item.title}</Text>
+                    <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2.7%') }}>{item.title}</Text>
                     <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
                     {notjoinedUser != "notjoinedUser" ?
                       <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
@@ -412,16 +412,17 @@ const GroupPage = (prop) => {
                       : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => Alert.alert('', ' برای دیدن بحث های انجام شده باید عضو گروه باشید', [{
                           text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-                        }], { cancelable: false }, { style: { height: 50 } })}>
+                        }], { cancelable: false }, { style: { height: hp('40%') } })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
                       </Button>}
                     <View
                       style={{
-                        width: 320,
+                        width:wp('90%'),
+                        color:'#a9a9a9',
                         marginLeft: wp('5%'),
                         marginTop: hp('2%'),
-                        borderBottomColor: 'black',
-                        borderBottomWidth: 1
+                        borderBottomColor: '#a9a9a9',
+                        borderBottomWidth: wp('0.3%')
                       }}
                     />
                   </View>
@@ -435,24 +436,24 @@ const GroupPage = (prop) => {
 
           {notjoinedUser != "notjoinedUser" ?
             <Button onPress={() => setModalVisible(true)} style={{
-              marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
+              marginLeft: wp('20%'), width: wp('65%'), borderRadius: 20, marginTop: hp('1.5%')
               , backgroundColor: '#1F7A8C'
             }}>
-              <Text style={{ marginLeft: wp('17%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
+              <Text style={{ marginLeft: wp('18%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
             </Button>
             : <Button onPress={() => Alert.alert('', ' برای ایجاد یک بحث جدید باید عضو گروه باشید', [{
               text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-            }], { cancelable: false }, { style: { height: 50 } })} style={{
-              marginLeft: wp('21%'), width: 220, borderRadius: 20, marginTop: hp('3%')
+            }], { cancelable: false }, { style: { height: hp('40%') } })} style={{
+              marginLeft: wp('21%'), width: wp('40%'), borderRadius: 20, marginTop: hp('3%')
               , backgroundColor: '#1F7A8C'
             }}>
-              <Text style={{ marginLeft: wp('17%'), fontSize: 15, fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
+              <Text style={{ marginLeft: wp('18%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
             </Button>}
 
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: 20, marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' ,marginBottom:hp('-4%')}}> اعضای گروه :</Text>
+              <Text style={{ fontSize: hp('3%'), marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' ,marginBottom:hp('-4%')}}> اعضای گروه :</Text>
 
               <Button style={{ marginLeft: wp('90%'),top:hp('-1%') }} transparent
                 onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
@@ -461,7 +462,8 @@ const GroupPage = (prop) => {
 
               <FlatList
                 style={{ marginBottom: hp('5%') }}
-                showsVerticalScrollIndicator={true}
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
                 onEndReached={() => {
                   //          console.log('-----AKHAR LIST')
                 }}
@@ -473,23 +475,14 @@ const GroupPage = (prop) => {
                 }}
                 data={members}
                 renderItem={({ item }) => <>
-                  <View style={{ maginLeft: wp('5%'), marginTop: hp('-4%') }}>
+                  <View style={{paddingVertical:hp('3') , paddingRight:wp('1.5%')}}>
                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image  
                       source={{ uri: "http://a59dcb2a4875.ngrok.io" + item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image size={70} style={{marginLeft:wp('4%'),marginTop:hp('4%')}}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{alignSelf:'flex-end'}}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start',marginLeft:wp('8%'),marginTop:hp('1%') }}>{item.user.username}</Text>
-                    <View
-                      style={{
-                        width: 320,
-                        color: '#a9a9a9',
-                        marginLeft: wp('5%'),
-                        marginTop: hp('2%'),
-                        borderBottomColor: '#a9a9a9',
-                        borderBottomWidth: 1
-                      }}
-                    />
+                    <Text style={{ alignSelf: 'flex-start',marginLeft:wp('5%'),marginTop:hp('1%') }}>{item.user.username}</Text>
+
                   </View>
                 </>
                 }
@@ -547,9 +540,9 @@ const styles = StyleSheet.create({
   },
 
   groupname: {
-    fontSize: 15,
+    fontSize: hp('2.5%'),
     fontWeight: 'bold',
-    marginLeft: wp('21.5%'),
+    marginLeft: wp('21%'),
     marginTop: hp('3%'),
   },
   centeredView: {
