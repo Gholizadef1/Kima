@@ -23,7 +23,7 @@ const Eachgroup = (prop) => {
   const [kamshodde2, setkamshodde2] = useState();
   const [comment4,setcomment4]=useState();
   const [linenumber,setlinenumber]=useState();
- 
+ console.log(prop.quizphoto);
   useEffect(()=>{
     var commentt = `${prop.discription}`.toString();
     var linenumberr = (commentt.split('').length)
@@ -87,7 +87,7 @@ const Eachgroup = (prop) => {
 
           </ImageBackground> : <ImageBackground borderRadius={100}
 
-            source={{ uri:"http://cabc8a571308.ngrok.io/media/quiz_photos/test_iS65hkA.jpg"}}
+            source={{ uri:prop.quizphoto}}
             style={styles.avatar}
 
           >

@@ -23,7 +23,7 @@ import Quizcard from "./Quizcard";
 import { Octicons } from '@expo/vector-icons';
 import { Searchbar } from 'react-native-paper';
 // import { Button } from 'react-native-paper';
-const Quizes = ({navigation}) => {
+const Quizes = (prop) => {
    
 
    const searchpost=async(page)=>{

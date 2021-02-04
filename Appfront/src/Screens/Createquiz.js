@@ -137,56 +137,61 @@ const Createquiz = () => {
 
                         console.log('ON SUBMITTTTTTTTTTTTTT')
                         const formdata = new FormData();
-                         formdata.append('title', values.title)
-                         formdata.append('description', values.description)
+                        formdata.append('title', values.title)
+                        formdata.append('description', values.description)
+                        formdata.append("question_count", (numofquestion - 1).toString());
                         // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
                         if (picture.uri === '../../assets/tea.jpg') {
                             console.log("defualt toye picture")
                         }
                         else
-                           await formdata.append( "quiz_photo",picture)
-                        console.log((await AsyncStorage.getItem('token')).toString()+"  token");
+                            await formdata.append("quiz_photo", picture)
+                        console.log((await AsyncStorage.getItem('token')).toString() + "  token");
                         console.log(formdata.data + 'formdata')
                         var all = values;
 
-                     //   all["quiz_photo"] = formdata;
-                        
-                        all["question_count"]=numofquestion-1;
-                        for(var i=0;i<numofquestion-1;i++){
-                            formdata.append(`questions[${i}]question_text`,all.questions[i].question_text)
-                            formdata.append(`questions[${i}]a_text`,all.questions[i].a_text)
-                            formdata.append(`questions[${i}]b_text`,all.questions[i].b_text)
-                            formdata.append(`questions[${i}]c_text`,all.questions[i].c_text)
-                            formdata.append(`questions[${i}]d_text`,all.questions[i].d_text)
-                            formdata.append(`questions[${i}]key`,all.questions[i].key)
+                        //   all["quiz_photo"] = formdata;
+
+                        all["question_count"] = numofquestion - 1;
+                        for (var i = 0; i < numofquestion - 1; i++) {
+                            formdata.append(`questions[${i}]question_text`, all.questions[i].question_text)
+                            formdata.append(`questions[${i}]a_text`, all.questions[i].a_text)
+                            formdata.append(`questions[${i}]b_text`, all.questions[i].b_text)
+                            formdata.append(`questions[${i}]c_text`, all.questions[i].c_text)
+                            formdata.append(`questions[${i}]d_text`, all.questions[i].d_text)
+                            formdata.append(`questions[${i}]key`, all.questions[i].key)
                         }
-                       // console.log(all)
+                        // console.log(all)
                         // var alll=json.stringify({
                         //     title:all.title,
                         //     description:all.description,
                         //     question_count:all.question_count,
-                            
+
                         // })
-                       formdata.append("question_count",numofquestion-1);
-                      //  formdata.append("questions",all.questions)
-                      //  formdata.append(all)
-                     // console.log(JSON.stringify({"part":all,"quiz_photo":formdata})+"  innnnnnnn")
-                      console.log(JSON.stringify(formdata)+" FORM DATA")
-                        console.log(numofquestion+"num of questk;kj");
+
+                        //  formdata.append("questions",all.questions)
+                        //  formdata.append(all)
+                        // console.log(JSON.stringify({"part":all,"quiz_photo":formdata})+"  innnnnnnn")
+                        console.log(JSON.stringify(formdata) + " FORM DATA")
+                        console.log(numofquestion + "num of questk;kj");
 
                         const response = await axiosinst.post('quiz', formdata, {
                             headers: {
-                                 "Content-Type": "Application/json",
+                                "Content-Type": "Application/json",
                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
                             }
                         }
                         )
                             .then(async function (response) {
-                                console.log(JSON.stringify(response.data.Quiz)+" RESPONSE DATA")
-                                const id=response.data.Quiz.id;
-                              
-                            
+                                console.log(JSON.stringify(response.data.Quiz) + " RESPONSE DATA")
+                                const id = response.data.Quiz.id;
+
+                                Alert.alert('', "کوییز شما با موفقیت ساخته شد", [{
+
+
+                                    text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                                }], { cancelable: false }, { style: { height: 50 } })
 
 
                             })
