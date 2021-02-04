@@ -262,7 +262,7 @@ const DiscussionPage = (prop) => {
                         onEndReached={() => handleLoadMore()}
                         onEndReachedThreshold={0.7}
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
-                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center',marginTop:hp('5%') }}>پیام دیگری وجود ندارد</Text></View>)}
+                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('5%') }}>پیام دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: hp('15.5%') }}
                         onRefresh={async () => {
                             await setrefresh(true)
@@ -281,8 +281,45 @@ const DiscussionPage = (prop) => {
                                     <Card style={styles.cardChat}>
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
                                         <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
-                                        <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%',marginBottom:hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
-                                        <AntDesign name="delete" size={14} color="#1F7A8C" style={{marginRight:wp('43%'),marginBottom:hp('1%'),marginTop:hp('-3%')}}/>
+                                        <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%', marginBottom: hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
+                                        <TouchableOpacity onPress={async () => {
+                                            await Alert.alert(
+                                                'از حذف این پیام اطمینان دارید؟',
+
+                                                '',
+                                                [
+                                                    {
+                                                        text: 'انصراف',
+                                                        onPress: () => console.log('Cancel Pressed'),
+                                                        style: 'default'
+                                                    },
+                                                    {
+                                                        text: 'حذف', onPress: async () => {
+                                                            axiosinst.delete("group/" + groupid + '/discussion/' + discussionid +'/chat/' + item.id , {
+                                                                "headers":
+                                                                {
+                                                                    "Content-Type": "application/json",
+                                                                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                                                                }
+                                                            })
+                                                                .then(async function (response) {
+                                                                    await (prop.DELETE(true))
+                                                                })
+                                                                .catch(function (error) {
+                                                                    console.log(error);
+                                                                    console.log('delete error ||||||||||||')
+
+                                                                })
+                                                        }
+                                                    }
+                                                ],
+                                                { cancelable: false }
+                                            );
+
+                                            //  response();
+                                        }}>
+                                            <AntDesign name="delete" size={16} color="#1F7A8C" style={{ marginRight: wp('43%'), marginBottom: hp('1%'), marginTop: hp('-3%') }} />
+                                        </TouchableOpacity>
                                     </Card>
                                 </View>
                                 : <View style={{}}>
