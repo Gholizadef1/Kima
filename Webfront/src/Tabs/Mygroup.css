@@ -36,11 +36,36 @@
         width:100%;
        
     }
+    .creator{
+        font-size: 15px;
+        font-family: "Yekan";
+    }
+    .member{
+        font-size: 15px;
+        font-family: "Yekan";
+    }
     .my-groups{
         font-size: 15px;
         margin-top: -170px;
     }
+    .creator{
+        font-size: 20px;
+        font-family: "Yekan";
+    }
+    .booktitle{
+        font-size: 16px;
+    font-family: "Yekan"; 
+    }
+    .tozih {
+        font-size: 16px;
+    font-family: "Yekan"; 
 
+    }
+    .g-img {
+        width: 60px;
+        height: 90px;
+        margin-right: 30px;
+    }
   }
 @media (min-width :768px) 
 {
@@ -93,6 +118,10 @@
         background-size: 100px;
 
     }
+    .member{
+        font-size: 20px;
+        font-family: "Yekan";
+    }
     .g-line{
         margin-top: 15px;
     
@@ -102,6 +131,19 @@
     color: black;
  
         
+    }
+    .booktitle{
+        font-size: 19px;
+    font-family: "Yekan"; 
+    }
+    .tozih {
+        font-size: 19px;
+    font-family: "Yekan"; 
+
+    }
+    .g-img {
+        width: 63px;
+        height: 100px;
     }
     
     

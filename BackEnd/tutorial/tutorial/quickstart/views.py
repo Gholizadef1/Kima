@@ -2,7 +2,7 @@ from rest_framework.mixins import UpdateModelMixin,RetrieveModelMixin
 from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser,MultiPartParser
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -24,6 +24,7 @@ from rest_framework.settings import api_settings
 from tutorial.kyma.models import book
 from tutorial.kyma.serializers import bookSerializer
 from django.core.paginator import Paginator
+
 
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
@@ -638,9 +639,12 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
         serializer = MemberSerializer(members,many=True)
         return Response({"message":"You joined before!","members":serializer.data,"owner":UserProfileSerializer(group.owner,many=False).data})
 
-    def delete(self ,request ,pk):
+class LeaveGroupView(APIView):
+
+    def delete(self ,request ,group_pk,member_pk):
         user=request.user
-        group = Group.objects.get(id=pk)
+        group = Group.objects.get(id=group_pk)
+
         if user == group.owner:
             return Response({"message":"You are owner!You can't leave this group!"},status=HTTP_400_BAD_REQUEST)
         Member.objects.get(user=user,group=group).delete()
@@ -691,7 +695,6 @@ class MyGroupView(APIView,PaginationHandlerMixin):
                     count = Paginator(serializer.data,10).num_pages
                     return Response({"groups" : gp_list, "count": count})
 
-
                 if filter=="member":
                     sorted_q = sorted(serializer.data, key=lambda x: -x['members_count'])
                     gp_list=self.paginate_queryset(sorted_q)
@@ -700,6 +703,150 @@ class MyGroupView(APIView,PaginationHandlerMixin):
             
             gp_list=self.paginate_queryset(serializer.data)
             count = Paginator(serializer.data,10).num_pages
-            return Response({"groups" : gp_list, "count": count})
+            return Response({"groups" : gp_list, "count": count,"group":serializer.data})
         response = {'message' : 'No Group!',}
         return Response(response)
+
+class QuizView(APIView,PaginationHandlerMixin):
+    pagination_class = BasicPagination
+    model = Quiz
+
+    def post(self,request):
+        user = request.user
+        title = request.data.get("title")
+        description = request.data.get("description")
+        question_count = int(request.data.get("question_count"))
+        if 'quiz_photo' in request.FILES:
+            new_quiz = Quiz(creator=user,title=title,description=description,quiz_photo=request.FILES["quiz_photo"],question_count=question_count)
+        else:
+            new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
+
+        counter = 0
+        new_quiz.save()
+        while counter < question_count:
+            question = request.data.get('questions['+str(counter)+']')
+            new_que = Question(quiz=new_quiz,question_num=counter,question_text=request.data.get('questions['+str(counter)+']question_text'),a_text=request.data.get('questions['+str(counter)+']a_text')
+                    ,b_text=request.data.get('questions['+str(counter)+']b_text'),c_text=request.data.get('questions['+str(counter)+']c_text'),d_text=request.data.get('questions['+str(counter)+']d_text'),key=request.data.get('questions['+str(counter)+']key'))
+            new_que.save()
+            counter+=1
+        q_list = Question.objects.filter(quiz=new_quiz).order_by('question_num')
+        question_list=QuestionSerializer(q_list,many=True)
+        quiz = QuizSerializer(new_quiz,many=False).data
+        return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
+    # def post(self,request):
+    #     user = request.user
+    #     title = request.data.get("title")
+    #     description = request.data.get("description")
+    #     question_count = request.data.get("question_count")
+    #     new_quiz = Quiz(creator=user,title=title,description=description,question_count=question_count)
+    #     counter = 0
+    #     questions = request.data.get("questions")
+    #     new_quiz.save()
+    #     while counter < question_count:
+    #         question = questions[counter]
+    #         counter+=1
+    #         new_que = Question(quiz=new_quiz,question_num=counter,question_text=question['question_text'],a_text=question['a_text']
+    #             ,b_text=question['b_text'],c_text=question['c_text'],d_text=question['d_text'],key=question['key'])
+    #         new_que.save()
+        
+    #     q_list = Question.objects.filter(quiz=new_quiz).order_by('question_num')
+    #     question_list=QuestionSerializer(q_list,many=True)
+    #     quiz = QuizSerializer(new_quiz,many=False).data
+    #     return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
+            
+    def get(self,request):
+        quiz = Quiz.objects.all()
+        if quiz is None:
+            return Response({"message":"No Quiz!"})
+
+        quiz_list = self.paginate_queryset(quiz)
+        serializer = MyQuizSerializer(quiz_list,context={"request": request},many=True)
+        count = Paginator(quiz,10).num_pages
+        return Response({"Quiz" : serializer.data, "count": count})
+        
+class TakeQuizView(APIView):
+    
+    def post(self,request,pk):
+        user = request.user
+        quiz = Quiz.objects.get(pk=pk)
+        if not TakeQuiz.objects.filter(quiz=quiz,user=user).exists():
+            user_answer = request.data.get("user_answer")
+            score = 0
+            counter = 0
+            q_list = Question.objects.filter(quiz=quiz).order_by('question_num')
+            while counter < quiz.question_count:
+                if user_answer[counter] == q_list[counter].key:
+                    score+=1
+                counter+=1
+                
+        
+            TakeQ = TakeQuiz(user=user,quiz=quiz,score=score,user_answer=user_answer)
+            TakeQ.save()
+            return Response({"message":"You successfully submit your quiz!","Your answers":TakeQ.user_answer,"score":TakeQ.score})
+
+        return Response({"message":"You have taken this quiz before"})
+
+    def get(self,request,pk):
+        
+        quiz = Quiz.objects.get(pk=pk)
+        quiz_ser = QuizSerializer(quiz)
+        question_list = Question.objects.filter(quiz=quiz.id).order_by('question_num')
+        q_list = QuestionSerializer(question_list,many=True)
+        return Response({"Quiz":quiz_ser.data,"Questions":q_list.data})
+
+    def delete(self,request,pk):
+        user = request.user
+        quiz = Quiz.objects.get(pk=pk)
+        if user == quiz.creator:
+            quiz.delete()
+            return Response({"message":"You successfully deleted your quiz!"})
+        return Response({"message":"You are not allowed to delete this quiz!"})
+
+    # def put(self,request,pk):
+    #     quiz = Quiz.objects.get(pk=pk)
+    #     quiz.quiz_photo = request.FILES["quiz_photo"]
+    #     quiz.save()
+    #     return Response({"quiz_photo":quiz.quiz_photo},status=status.HTTP_200_OK)
+
+class QuizResultView(APIView):
+
+    def get(self,request,user_pk,quiz_pk):
+        user = Account.objects.get(pk=user_pk)
+        quiz = Quiz.objects.get(pk=quiz_pk)
+        quiz_ser = QuizSerializer(quiz)
+        question_list = Question.objects.filter(quiz=quiz_pk).order_by('question_num')
+        q_list = QuestionSerializer(question_list,many=True)
+        user_answer = TakeQuiz.objects.get(user=user,quiz=quiz).user_answer
+        score = TakeQuiz.objects.get(user=user,quiz=quiz).score
+        return Response({"Quiz":quiz_ser.data,"Questions":q_list.data,"user_answer":user_answer,"score":score})
+
+class MyQuizView(APIView):
+
+    def get(self,request,pk):
+        user = Account.objects.get(pk=pk)
+        myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
+        taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
+        myquiz=myquiz + taken_quiz
+        if myquiz is None:
+            return Response({"message":"No Quiz!"})
+        return Response({"Quiz":myquiz}) 
+
+class SetQuizPhotoView(generics.UpdateAPIView,UpdateModelMixin):
+    serializer_class = SetQuizPhotoSerializer
+    queryset = Quiz.objects.all()
+
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = get_object_or_404(queryset,pk=self.request.data.get('quiz_id'))
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def put(self,request,*args,**kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+class DynamicQuizAPIView(generics.ListCreateAPIView):
+    filter_backends = (DynamicSearchFilter,)
+    queryset = Quiz.objects.all()
+    serializer_class = MyQuizSerializer
+    search_fields = ['title']
+

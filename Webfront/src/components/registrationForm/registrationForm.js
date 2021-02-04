@@ -242,3 +242,4 @@ function RegistrationForm(props) {
 }
 
 export default withRouter(RegistrationForm);
+

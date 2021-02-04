@@ -40,7 +40,9 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://f93716f20ee8.ngrok.io/user/"+id)
+
+        const response = await axiosinst.get("http://f3a61a306745.ngrok.io/user/"+id)
+
             
         
         // console.log(response)
@@ -51,8 +53,9 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+
 
             console.log(';;;;;')
             console.log(picture);
@@ -85,13 +88,17 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://f93716f20ee8.ngrok.io/user/"+id)
+
+        const response = await axiosinst.get("http://f3a61a306745.ngrok.io/user/"+id)
+
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://f93716f20ee8.ngrok.io${response.data.profile_photo}`)
+
+            console.log(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://f3a61a306745.ngrok.io${response.data.profile_photo}`)
+
             console.log(picture);
           
        console.log(response.data.profile_photo)
@@ -164,7 +171,9 @@ import { Entypo } from '@expo/vector-icons';
         
 
 
-        {picture!='http://f93716f20ee8.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+
+        {picture!='http://f3a61a306745.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
         source={require('../../assets/avatar.png')}
@@ -196,7 +205,8 @@ import { Entypo } from '@expo/vector-icons';
          <Card style={{backgroundColor:'#F8F8F8',marginTop:hp('8%'),marginLeft:wp('3%'),marginRight:wp('3%'),borderRadius:10}}>
          <Text style={{fontSize:15,fontWeight:'bold',alignSelf:'flex-start',marginBottom:hp('2%'),marginTop:hp('1%'),left:wp('3%'),color:"#1f7a8c"}}>فعالیت های من</Text>
       
-         <TouchableOpacity>
+         <TouchableOpacity
+          onPress={()=>navigation.navigate('mycomment')}>
              <Button style={styles.lastquote}>
                  <Text style={styles.lastquotetext}>
                      نظر های من
@@ -220,7 +230,6 @@ import { Entypo } from '@expo/vector-icons';
          </TouchableOpacity>
          </Card>
          {/* <Image
-
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}
          ></Image>
@@ -231,7 +240,6 @@ import { Entypo } from '@expo/vector-icons';
            <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('14%'),width:80,height:2,alignSelf:'flex-end'}}
-
          ></Image>
           */}
 

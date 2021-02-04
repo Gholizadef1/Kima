@@ -1,6 +1,4 @@
-
-
-.card-title2{
+.bookauthor{
     font-size: 14px;
     direction: rtl;
     overflow:hidden; 
@@ -8,7 +6,7 @@
     text-overflow: ellipsis;
     font-family: 'Yekan';  
 
-}.card-title1{
+}.bookname{
     font-family: 'Yekan';
     color: #000000;
     padding-top: 10px;
@@ -66,11 +64,11 @@
             width: 80px;
             height: 128px;
         }
-        .card-title1{
+        .bookname{
            
             font-size: 11px;
         }
-        .body{
+        .bodyHome{
             margin-right: 1px;
         }
         .slick-prev:before {
@@ -110,7 +108,7 @@
             margin-left: 13px;
         }
 
-.card-title2{
+.bookauthor{
     font-size: 15px;
     direction: rtl;
     text-align: center;
@@ -119,7 +117,7 @@
     text-overflow: ellipsis;
     font-family: 'Yekan';  
 
-}.card-title1{
+}.bookname{
     font-family: 'Yekan';
     color: #000000;
     padding-top: 10px;
@@ -163,11 +161,11 @@
               width: 70px;
               height: 112px;
           }
-          .card-title1{
+          .bookname{
              
               font-size: 11px;
           }
-          .body{
+          .bodyHome{
               margin-right: 1px;
           }
           .slick-prev:before {
@@ -207,7 +205,7 @@
               margin-left: 13px;
           }
   
-  .card-title2{
+  .bookauthor{
       font-size: 15px;
       direction: rtl;
       text-align: center;
@@ -216,7 +214,7 @@
       text-overflow: ellipsis;
       font-family: 'Yekan';  
   
-  }.card-title1{
+  }.bookname{
       font-family: 'Yekan';
       color: #000000;
       padding-top: 10px;
@@ -261,7 +259,7 @@
               height: 112px;
           }
           
-          .body{
+          .bodyHome{
               margin-right: 1px;
           }
           .slick-prev:before {
@@ -301,7 +299,7 @@
               margin-left: 13px;
           }
   
-  .card-title2{
+  .bookauthor{
       font-size: 13px;
       direction: rtl;
       text-align: center;
@@ -310,7 +308,7 @@
       text-overflow: ellipsis;
       font-family: 'Yekan';  
   
-  }.card-title1{
+  }.bookname{
       font-family: 'Yekan';
       color: #000000;
       padding-top: 10px;
@@ -320,15 +318,6 @@
       overflow:hidden; 
       white-space:nowrap; 
       text-overflow: ellipsis;
-  }
-  .card-titl{
-    font-family: 'Yekan';
-    color: #000000;
-    padding-top: 10px;
-    margin-left: 19px;
-    text-align: center;
-    font-size: 14px;
-    direction: rtl;
  
   
    
@@ -357,11 +346,11 @@
             width: 100px;
             height: 160px;
         }
-        .card-title1{
+        .bookname{
            
             font-size: 14px;
         }
-        .body{
+        .bodyHome{
             margin-right: 5px;
         }
         .brand{
@@ -422,15 +411,19 @@
              
             
           }
-          .body{
-              margin-left: -1px;
+          .bodyHome{
+              margin-left: -20px;
+              margin-top: 50px;
+              
           }
-
-.card-title2{
+.bookauthor{
     font-size: 16px; 
+    margin-left: 20px;
 
-}.card-title1{
+}.bookname{
     font-size: 16px;
+    margin-top: -50px;
+    margin-left: 20px;
 }
 .brand{
     margin-top: 100px;
@@ -459,14 +452,10 @@ top: -40px;
 position: absolute;
 top: -40px;
 
-
-}
-
-
-
-
-    
           }
     
     
 
+
+    
+          }

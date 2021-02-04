@@ -36,6 +36,20 @@
         margin-top: 200px;
         margin-left: 10px;
     } 
+    .f{
+        margin-left: -300px;
+        
+    }
+    .likec{
+        margin-left: 30px;
+    }
+    .dislike {
+        margin-left: -200px;
+        padding-left: 190px;
+    }
+    .date{
+        font-size: 17px;
+    }
    
   }
 

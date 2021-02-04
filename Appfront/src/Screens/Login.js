@@ -1,6 +1,3 @@
-
-
-
 import { StatusBar } from 'expo-status-bar';
 import React ,{useState,useContext} from 'react';
 import { StyleSheet, Text, View,Image,ImageBackground, TouchableOpacity,Alert } from 'react-native';
@@ -74,11 +71,11 @@ const logschema=yup.object({
           password:values.Password,
         }
          const backk=JSON.stringify(back);
-
+       console.log("Hi")
 
 
          axiosinst.post('/login',backk,{"headers":{"content-type":"application/json",}})
-
+        
 
         .then(async function(response){
           console.log(response.data.userid)

@@ -1,11 +1,9 @@
-
-@media (min-width:360px){
     .avatar{
         width: 190px;
         height: 100px;
         margin-top: -40px;
         margin-left: -5px;
-        border-radius: 3%;
+        border-radius: 1%;
     }
     .cardG{
         width: 80px;
@@ -103,7 +101,7 @@
         color: black;
       
           }
-}
+
 
 @media (min-width:374px){
     .avatar{
@@ -111,7 +109,7 @@
         height: 100px;
         margin-top: -40px;
         margin-left: -5px;
-        border-radius: 3%;
+        border-radius: 1%;
     }
     .cardG{
         width: 80px;
@@ -217,7 +215,7 @@
         height: 100px;
         margin-top: -40px;
         margin-left: -5px;
-        border-radius: 3%;
+        border-radius: 1%;
     }
     .cardG{
         width: 80px;
@@ -323,7 +321,7 @@
             height: 130px;
             margin-top: -70px;
             margin-left: -5px;
-            border-radius: 3%;
+            border-radius: 1%;
         }
         .cardG{
             width: 100px;
@@ -429,7 +427,7 @@
                 height: 130px;
                 margin-top: -70px;
                 margin-left: -5px;
-                border-radius: 3%;
+                border-radius: 1%;
             }
             .cardG{
                 width: 100px;
@@ -535,7 +533,7 @@
                 height: 200px;
                 margin-top: -90px;
                 margin-left: 10px;
-                border-radius: 3%;
+                border-radius: 1%;
 
             }
             .cardG{
@@ -658,3 +656,6 @@
               }
              
             }
+
+   
+

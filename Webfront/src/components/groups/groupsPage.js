@@ -136,7 +136,7 @@ const handleCreateGroupSubmit =(e) =>{
   formdata.append('title',newGroup.name)
   formdata.append('summary',newGroup.description)
   formdata.append('photo',state.file)
-
+    console.log(formdata);
   axios.post(API_BASE_URL+ '/group',formdata,
   {
     headers:{
@@ -278,16 +278,6 @@ const handleCloseSnack = (event, reason) => {
 
                   <form className="yekanfont">
                     <label className="mt-2 mb-n1 ">نام گروه</label>
-                    {/* <TextField
-                      autoFocus
-                      margin="dense"
-                      id="name"
-                      value={newGroup.name}
-                      type="title"
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-                    /> */}
                     <input 
                     className="form-control" 
                       id="name"

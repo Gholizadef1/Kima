@@ -162,9 +162,26 @@ class Chat(models.Model):
     chat_text = models.TextField()
     send_time = models.DateTimeField(default=timezone.now, editable=False)
 
+class Quiz(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE)
+    create_time = models.DateTimeField(default=timezone.now, editable=False)
+    quiz_photo = models.ImageField(upload_to='quiz_photos',default='default.png')
+    question_count = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(15)])
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+    question_num = models.IntegerField(default=1)
+    question_text = models.TextField()
+    a_text = models.TextField()
+    b_text = models.TextField()
+    c_text = models.TextField()
+    d_text = models.TextField()
+    key = models.CharField(max_length=1)
     
-
-
-
-
-
+class TakeQuiz(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
+    user_answer = ArrayField(models.CharField(max_length=1))

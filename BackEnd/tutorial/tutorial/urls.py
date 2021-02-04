@@ -35,6 +35,7 @@ urlpatterns = [
     path('book/<book_pk>/comment/<comment_pk>',CommentFeedView.as_view()),
     path('book/<int:pk>/quote',QuoteView.as_view()),
     path('book/<book_pk>/quote/<quote_pk>',LikeQuoteView.as_view()),
+    path('group/<group_pk>/member/<member_pk>',LeaveGroupView.as_view()),
     path('books',kyma.views.DynamicBookAPIView.as_view()),
     path('group',GroupView.as_view()),
     path('group/<int:pk>/member',MemberGroupView.as_view()),
@@ -53,5 +54,12 @@ urlpatterns = [
     path('bookinfo', kyma.views.BookListView.as_view()),
     path('register',RegistrationView.as_view()),
     path('login',LoginView.as_view()),
+    path('quiz',QuizView.as_view()),
+    path('quizes',DynamicQuizAPIView.as_view()),
+    path('quiz/<int:pk>',TakeQuizView.as_view()),
+    path('quiz/<int:pk>/photo',SetQuizPhotoView.as_view()),
+    path('user/<user_pk>/quiz/<quiz_pk>/result',QuizResultView.as_view()),
+    path('user/<int:pk>/quiz',MyQuizView.as_view()),
+
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
