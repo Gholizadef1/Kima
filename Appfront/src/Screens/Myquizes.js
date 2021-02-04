@@ -98,29 +98,31 @@ const Myquizes = (prop) => {
       console.log(count + '  COUNT')
       console.log(page + ' PAGE BAD COUNT')
       console.log((page === count) + ' PAGE===COUNT')
-      if(response.data.Quiz===[]){
+      if(response.data.message==="No Quiz!"){
         await settheend(true)
         await setrefresh(false)
          console.log('#########')
-         await setinformation(undefined);
+        // await setinformation(undefined);
          }
+         else{
       settheend(false)
       //console.log('omade inja')
       console.log('++++INFOGHABLESET++++' + information + "++++INFOGHABLESET++++")
      // console.log(response.data.groups)
       //console.log(response.data.Quiz.lenght+" lenght")
-      if (response.data.Quiz!="Array[]") {
+      if (response.data.message!="No Quiz!") {
         await setinformation(information => [...information, ...response.data.Quiz])
         //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
-      }
-      else {
-        await setinformation(undefined);
-        console.log(" KHALIIIII;KAJF;LKJ;LKJ")
-      }
+       }
+      // else {
+      //   await setinformation(undefined);
+      //   console.log(" KHALIIIII;KAJF;LKJ;LKJ")
+      // }
       setrefresh(false)
       // console.log(response.data.groups.id+'  INFORMATION.ID')
 
       console.log('++++INFO++++' + information + "++++INFO++++")
+         }
 
     }
     // }
