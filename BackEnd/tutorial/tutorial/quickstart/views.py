@@ -642,7 +642,7 @@ class MemberGroupView(APIView,PaginationHandlerMixin):
 class LeaveGroupView(APIView):
 
     def delete(self ,request ,group_pk,member_pk):
-        user=Member.objects.get(pk=member_pk).user
+        user=request.user
         group = Group.objects.get(id=group_pk)
         if user == group.owner:
             return Response({"message":"You are owner!You can't leave this group!"},status=HTTP_400_BAD_REQUEST)
