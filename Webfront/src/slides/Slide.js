@@ -98,22 +98,8 @@ function Slide(props) {
           slidesToScroll: 2,
         },
       },
-      {
-        breakpoint: 1400,
-        settings: {
-
-          slidesToShow: 9,
-          slidesToScroll: 6,
-        },
-      },
-      {
-        breakpoint: 2000,
-        settings: {
-
-          slidesToShow: 9,
-          slidesToScroll: 6,
-        },
-      },
+     
+  
      
     ],
   };
