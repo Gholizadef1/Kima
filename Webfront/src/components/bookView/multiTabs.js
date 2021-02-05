@@ -552,7 +552,7 @@ const handleCloseDialog = () => {
                     
                     <div className="d-flex flex-column m-n1">
 
-                      {current.LikeCount ?
+                      {current.isliked ?
                       <div className="btn "> 
                       <AiFillLike  color="blue" size="25" onClick={()=> handleLikeClickAgain(current.id)}/>
                       </div>
