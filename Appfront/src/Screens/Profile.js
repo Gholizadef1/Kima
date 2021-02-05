@@ -258,9 +258,15 @@ v
             onPress={()=>{
                 // console.log(navigation);
                 // navigation.navigate('loginFlow')}}
-                AsyncStorage.removeItem('token')
+                Alert.alert('','آیا قصد خروج از حساب کاربری را دارید؟',[{
+            
+
+            text:'بله',onPress:()=>{ AsyncStorage.removeItem('token')
                 // AsyncStorage.setItem('token',null)
-                val.changelogged(null);
+                val.changelogged(null);},style:'default'
+            },{text:"خیر" , onPress:()=>console.log("cancle")    ,   style: 'cancel'  } ],{cancelable:true},{style:{height:50}})
+            
+               
 
             }}
       >
