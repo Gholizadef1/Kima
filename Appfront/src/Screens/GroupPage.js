@@ -330,9 +330,9 @@ const GroupPage = (prop) => {
           </View>
 
 
-          {groupinfo.group_photo != '/media/default.png' ? <Avatar.Image style={styles.avatar}
+          {groupinfo.group_photo != '/media/default.png' ? <Avatar.Image
             source={{ uri: "http://a59dcb2a4875.ngrok.io" + groupinfo.group_photo }}
-          ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
+          ></Avatar.Image> : <Avatar.Image style={{marginLeft:wp('15%'),marginTop:hp('-9%')}} size={90}
             source={require('../../assets/group.jpg')}
           ></Avatar.Image>}
 

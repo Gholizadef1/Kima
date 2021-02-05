@@ -73,7 +73,6 @@ const DiscussionPage = (prop) => {
 
         if (chatsPage < chatsCount) {
             if (chatAgain === 10) {
-                settheend(true)
                 setChatsPage(chatsPage + 1)
                 getChats()
                 setchatAgain(0)
@@ -245,8 +244,6 @@ const DiscussionPage = (prop) => {
                                                 ],
                                                 { cancelable: false }
                                             );
-
-                                            //  response();
                                         }}>
                                             <AntDesign name="delete" size={20} color="#1F7A8C" style={{ marginRight: wp('43%'), marginBottom: hp('1%'), marginTop: hp('-3%') }} />
                                         </TouchableOpacity>
