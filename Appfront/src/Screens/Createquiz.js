@@ -75,9 +75,12 @@ const Createquiz = () => {
             }
         }
         else {
-            Alert.alert('oops', ' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید', [{
-                Title: 'فهمیدم', onPress: () => console.log('alert closed')
-            }])
+            Alert.alert('', 'برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید', [{
+
+
+                text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+            }], { cancelable: false }, { style: { height: 50 } })
+         
         }
 
     }

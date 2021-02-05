@@ -447,30 +447,33 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
-            
+          Alert.alert('', 'نام کاربری شما با موفقیت تغییر کرد ', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+         
           
           
         })
         .catch( function(error){
          
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
-            
+              Alert.alert('', 'نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+              
+              
             }
             else
             {
-              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
             }
 
          
@@ -546,11 +549,12 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('oops','رمزتون با موفقیت تغییر کرد',[{
-            
+          Alert.alert('', 'رمزتان با موفقیت تغییر کرد', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-          }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+         
       
           
           
@@ -560,19 +564,20 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
           // await console.log(AsyncStorage.getItem('token'))
             // console.log(error);
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('oops','رمزتون رو اشتباه وارد کردید',[{
-            
+              Alert.alert('', 'رمزتون رو اشتباه وارد کردید', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+            
             }
             else
             {
-              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
             }
            
          

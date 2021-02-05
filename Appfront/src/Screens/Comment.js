@@ -312,6 +312,7 @@ const Comment = (prop) => {
 
       />
       <Animated.View style={{
+        marginBottom:hp("1.3%"),
 
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
@@ -481,6 +482,7 @@ const styles = StyleSheet.create({
   },
   addcomment: {
 
+   
     width: wp('70%'),
     marginHorizontal: '15%',
     marginTop: hp('80.1%'),
@@ -489,7 +491,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F7A8C'
   },
   nazar: {
-  
+    
     marginLeft: wp('23%'),
     fontWeight: 'bold',
     color: '#EDF2F4'

@@ -62,11 +62,11 @@ const Allsearchresults = (prop) => {
         }
         catch (err) {
           console.log(err);
-          Alert.alert('oops', ' حتما اشتباهی شده دوباره امتحان کن :)', [{
-    
-    
-            Title: 'فهمیدم', onPress: () => console.log('alert closed')
-          }])
+          Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+
+
+            text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+            }], { cancelable: false }, { style: { height: 50 } })
         }
       }
      
