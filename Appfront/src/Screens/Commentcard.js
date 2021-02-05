@@ -20,6 +20,10 @@ const Commentcard = (prop) => {
   const [like, setlike] = useState('lightblue')
   const [dislike, setdislike] = useState('#F2A4A3')
   const[likeshode,setlikeshode]=useState(false);
+  const [kamshodde, setkamshodde] = useState();
+  const [kamshodde2, setkamshodde2] = useState();
+  const [comment4,setcomment4]=useState();
+  const [linenumber,setlinenumber]=useState();
 // const[commentID,setcommentID]=useState();
 //  setcommentID(prop.commentid)
 // const getlike=async()=>{
@@ -140,6 +144,24 @@ const Commentcard = (prop) => {
   // getdislike();
   useFocusEffect(
     React.useCallback(() => {
+      var commentt = `${prop.comment}`.toString();
+      var linenumberr = (commentt.split('').length)
+      console.log(linenumberr+" prop discription")
+      var commenttt = `${prop.comment}`.toString().split('');
+      var comment42 = '';
+  
+    if (linenumberr > 100) {
+      for (let i = 0; i < 100; i++)
+        comment42 += commenttt[i]
+      // console.log(comment4+'  COMMENT4 FOR')
+    }
+    else {
+      console.log("in jaaa;slkfd;alskjdf")
+      comment42 = prop.comment
+  
+    }
+    setlinenumber(linenumberr)
+    setcomment4(comment42)
       if(prop.isliked)
       setlike('#1f7a8c')
       if(prop.isdisliked)
@@ -166,18 +188,18 @@ const Commentcard = (prop) => {
   const [numdislike, setnumdislike] = useState(prop.dislikenumber);
   const [photoo,setphotoo]=useState();
   // console.log((prop.comment.toString().split('\n').lenght===1))
-  const commentt = `${prop.comment}`.toString();
-  const linenumber = (commentt.split('\n').length)
-  const commenttt = `${prop.comment}`.toString().split('\n');
-  let comment4 = '';
-  if (linenumber > 5) {
-    for (let i = 0; i < 4; i++)
-      comment4 += commenttt[i] + '\n'
-    comment4 += commenttt[4]
-  }
-  else {
-    comment4 = prop.comment
-  }
+  // const commentt = `${prop.comment}`.toString();
+  // const linenumber = (commentt.split('\n').length)
+  // const commenttt = `${prop.comment}`.toString().split('\n');
+  // let comment4 = '';
+  // if (linenumber > 5) {
+  //   for (let i = 0; i < 4; i++)
+  //     comment4 += commenttt[i] + '\n'
+  //   comment4 += commenttt[4]
+  // }
+  // else {
+  //   comment4 = prop.comment
+  // }
 
 //   React.usallback(() => {
 //         getdislike()
@@ -532,7 +554,7 @@ const Commentcard = (prop) => {
           }
         }} name="dislike1" size={20} color={dislike} style={styles.dislike} />
         <Text style={styles.dislikenumber}>{numdislike}</Text>
-        {`${prop.comment}`.toString().split('\n').length >= 5 ? <TouchableOpacity
+        {`${prop.comment}`.toString().split('').length >= 100 ? <TouchableOpacity
           onPress={async() => {
             if(likeshode===true)
             await setlikeshode(false)
