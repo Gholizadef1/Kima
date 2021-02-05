@@ -95,17 +95,19 @@ console.log(photoo+" photo")
       {/* {prop.discription!='' ? (<View > */}
       <View style={{flexDirection:'row'}}>
           <View style={styles.avatarname}>
-     
+         
      <TouchableOpacity style={styles.avatar}
        onPress={() => {}}>
-       {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={20}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
         width: wp('16%'),
          borderRadius: 20,
-        position: 'absolute',borderColor:'#1f7a8c'
-        ,borderWidth:wp('0.3%'),
+        position: 'absolute'
+        // ,borderColor:'#1f7a8c'
+        
+        // ,borderWidth:wp('0.3%'),
         // borderBottomColor:'red',borderBottomWidth:2,borderRightWidth:2,borderRightColor:'green'
         }}
 
@@ -127,7 +129,14 @@ console.log(photoo+" photo")
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
     
-
+     {photoo==='http://e7ae29f4056b.ngrok.io/media/default.png'?
+     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('8.4%'),
+      left:wp("-0.3%"),top:hp("-0.2%"),
+        width: wp('16.7%'),
+    
+    elevation:0}}   >
+     </TouchableOpacity>
+     :null}
     
    </View>
    </View>
