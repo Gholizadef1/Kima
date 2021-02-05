@@ -215,6 +215,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     //const backsummary = JSON.stringify(payloadsummary);
     console.log(backtitle);
     //console.log(backsummary);
+    const [updateDiscuss, setupdateDiscuss] = useState(0);
     useEffect(() => {
       axios.get(
         API_BASE_URL + `/group/${props.match.params.groupId}/discussion`,
@@ -235,7 +236,7 @@ import Tooltip from '@material-ui/core/Tooltip';
             setOpenSnack(true);
           });
     }, [
-      showdiscussion,props.match.params.groupId]);
+      updateDiscuss,props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
       e.preventDefault();
@@ -261,6 +262,7 @@ import Tooltip from '@material-ui/core/Tooltip';
               setMassage('بحث با موفقیت ساخته شد')
               setOpenSnack(true);
               handleCloseCreateGroup();
+              setupdateDiscuss(updateDiscuss+1);
              
             
           })
@@ -830,56 +832,116 @@ import Tooltip from '@material-ui/core/Tooltip';
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-190,position:"relative",marginLeft:600}}> ({ginfo.members_count}) اعضا</b>
        
        <div className="row" key={member.id}>
-{member.length >=3 ?
+{member.length >=6 ?
           <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
-            <div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:19,position:"relative",marginLeft:-60, paddingRight:20}}>...بیش‌تر</div>
+            <div className="more btn mt-auto" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20}}>...بیش‌تر</div>
+            <div>
 
+              
           <Avatar
-          src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
+          className="m-2"
+          src={`${API_BASE_URL}${member[0].user.profile_photo}`}
           style={{
           fontSize: '80px',
          width: 70,
          height: 70}}
           
         />
-        <div className="mt-5"> {member[0].user.username} </div>
-
+        <div className=""> {member[0].user.username} </div>
+        </div>
+        <div>
         <Avatar
-                  src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
+        className="m-2"
+                  src={`${API_BASE_URL}${member[1].user.profile_photo}`}
                   style={{
                   fontSize: '80px',
                  width: 70,
                  height: 70}}
                   
                 />
-            <div className="mt-5"> {member[1].user.username} </div>
-
+            <div className=""> {member[1].user.username} </div>
+            </div>
+<div>
                 <Avatar
-                  src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
+                className="m-2"
+                  src={`${API_BASE_URL}${member[2].user.profile_photo}`}
                   style={{
                   fontSize: '80px',
                  width: 70,
                  height: 70}}
                   
                 />
-              <div className=" mt-5"> {member[2].user.username} </div>
+              <div className=" "> {member[2].user.username} </div>
+              </div>
+              <div>
 
-</div>
-:
-<div >
-{member.map ((current) => (
-  <div>
+              
 <Avatar
-src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+className="m-2"
+src={`${API_BASE_URL}${member[3].user.profile_photo}`}
 style={{
 fontSize: '80px',
 width: 70,
 height: 70}}
 
 />
+<div className=""> {member[3].user.username} </div>
+</div>
+<div>
+<Avatar
+className="m-2"
+        src={`${API_BASE_URL}${member[4].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+  <div className=""> {member[4].user.username} </div>
+  </div>
+<div>
+      <Avatar
+      className="m-2"
+        src={`${API_BASE_URL}${member[5].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+    <div className=" "> {member[5].user.username} </div>
+    </div>
+    
 
-      </div>
+
+</div>
+:
+<div >
+
+  <div>
+     <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
+     {member.map ((current) => (
+            <div>
+
+
+<Avatar
+className="m-2"
+src={`${API_BASE_URL}${current.user.profile_photo}`}
+style={{
+fontSize: '80px',
+width: 70,
+height: 70}}
+
+/>
+<div className=""> {member[0].user.username} </div>
+        </div>
+   
 ))}
+     </div>  
+
+
+
+</div>
     </div>
 
 }
@@ -887,7 +949,7 @@ height: 70}}
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header"style={{fontFamily:'Yekan',paddingLeft:200}}>
+           <div className="header"style={{fontFamily:'Yekan',paddingRight:50}}>
           همه اعضا
           </div>
         </Modal.Header>
@@ -896,13 +958,14 @@ height: 70}}
         {member.map ((current) => (
        <div className="col-md" key={current.id}>
           <Avatar
+          className="m-auto"
           src={API_BASE_URL+`${current.user.profile_photo}`}
           style={{
           fontSize: '80px',
          width: 70,
          height: 70}}
         />
-        <div className="pl-2"> {current.user.username} </div>
+        <div style={{fontFamily:'Yekan'}} className=" text-center"> {current.user.username} </div>
         </div>
         ))}
         </div>
