@@ -125,6 +125,7 @@ const Groups = ({ navigation }) => {
   const [moreclicked, setmoreclicked] = useState(false);
   const [isowner, setisowner] = useState(false);
   const [selecttime, setselecttime] = useState("none")
+  const [backsearch,setbacksearch]=useState(false);
 
 
   const checkisowner = async (ID) => {
@@ -274,8 +275,11 @@ const Groups = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       const a = new Promise(async (resolve, reject) => {
+        await setopensearch(false);
         await setinformation([]);
         await setpage(1);
+        setsearchterm('');
+        setnumberofresults(undefined);
         await settheend(false);
         console.log("toye use focus effectt ")
         if (selecttime === "none") {
@@ -305,7 +309,7 @@ const Groups = ({ navigation }) => {
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [navigation, selecttime]))
+    }, [navigation, selecttime,backsearch]))
   return (
 
     <View style={styles.container}>
@@ -319,12 +323,18 @@ const Groups = ({ navigation }) => {
               marginLeft: wp('87%')
             }}
             onPress={() => {
-              setinformation([]);
-              setpage(1)
-              response(1);
-              setsearchterm('');
-              setnumberofresults();
-              setopensearch(false)
+              if(backsearch===true){
+              setbacksearch(false)
+              }
+              else{
+                setbacksearch(true)
+              }
+              // setinformation([]);
+              // setpage(1)
+              // response(1);
+              // setsearchterm('');
+              // setnumberofresults();
+              // setopensearch(false)
             }
             }
           />
@@ -492,7 +502,7 @@ const Groups = ({ navigation }) => {
 
         <View style={{ height: hp('2%') }}></View>
 
-        {numberofresults != undefined ? <Text style={{ marginLeft: hp('2%'), color: 'gray', fontSize: hp('1.4%'), marginBottom: hp('0.5%') }}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text> : null}
+        {numberofresults != undefined? <Text style={{ marginLeft: hp('2%'), color: 'gray', fontSize: hp('1.4%'), marginBottom: hp('0.5%') }}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text> : null}
         <FlatList
           ListFooterComponent={(theend === false ?
             <View style={styles.loader}>
