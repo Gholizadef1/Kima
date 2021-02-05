@@ -32,7 +32,7 @@ const Groups = ({ navigation }) => {
     const backk = JSON.stringify(back);
     try {
       console.log(searchterm)
-      const response = await axiosinst.get('groups?search='+searchterm+'search-fields=title&page='+page
+      const response = await axiosinst.get('groups?search='+searchterm+'&search-fields=title&page='+page
       , {
         // params: {
 
