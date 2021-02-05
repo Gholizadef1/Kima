@@ -76,7 +76,7 @@ const Home = ({ navigation }) => {
                         <View style={{ padding: hp('-2%'), marginRight: wp('2%') }}>
                         </View>
                         <View>
-                            
+
                             <Text style={{
                                 fontSize: hp('3.5%'), fontWeight: 'bold', color: '#1F7A8C',
                                 marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold'
@@ -108,7 +108,7 @@ const Home = ({ navigation }) => {
                             />
                         </View>
                     </ScrollView>
-                  
+
 
                     <ScrollView>
                         <View style={{ padding: hp('-2%'), marginRight: wp('2%') }}>
@@ -182,18 +182,31 @@ const Home = ({ navigation }) => {
                         </View>
                     </ScrollView>
                     <AntDesign
-                                onPress={() => {
-                                    navigation.navigate("allhomeresults")
-                                    console.log("onpress")
-                                    }}
-                                name="arrowleft" style={{ marginTop: hp("20.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
+                        onPress={() => {
+                            navigation.navigate("allhomeresults")
+                            console.log("onpress")
+                        }}
+                        name="arrowleft" style={{ marginTop: hp("18.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
+
+                    <AntDesign
+                        onPress={() => {
+                            navigation.navigate("alltopbooksresults")
+                            console.log("onpress")
+                        }}
+                        name="arrowleft" style={{ marginTop: hp("60.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
+
+
+                    <AntDesign
+                        onPress={() => {
+                            navigation.navigate("allhomeresults")
+                            console.log("onpress")
+                        }}
+                        name="arrowleft" style={{ marginTop: hp("18.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
 
 
                 </ScrollView>
 
-                <AntDesign
-                    onPress={() => navigation.navigate("allsearchresults", { title: "جستجوی " + `" ${searchterm} "`, searchmode: "title", searchterm: searchterm })}
-                    name="arrowleft" style={{ marginTop: hp("45.5%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
+
                 <StatusBar backgroundColor='#BFDBF7' style='light' />
             </Container>
         );
