@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -57,7 +57,7 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
-  const[selecttime,setselecttime]=useState(true)
+  const[selecttime,setselecttime]=useState("none")
   const [likeotime, setlikeotime] = useState('time');
   const [timelable,settimelable]=useState('فیلتر بر اساس تاریخ')
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
@@ -85,13 +85,17 @@ const Comment = (prop) => {
     console.log(id)
     console.log(await (await AsyncStorage.getItem('token')).toString())
     console.log(await (await AsyncStorage.getItem('id')).toString())
-
+    var a="";
+    if(selecttime==="none")
+    a="time";
+    else
+    a="like"
     try {
       // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get("book/" + prop.route.params.id+'/comment' , {
         params: {
-          filter:likeotime,
+          filter:a,
           page: page
         },
         "headers":
@@ -148,22 +152,33 @@ const Comment = (prop) => {
 
     }
   }
+  // useEffect(()=>{
+  //   setselecttime("none")
+  // },[])
   useFocusEffect(
     React.useCallback(() => {
       const a=new Promise(async(resolve,reject)=>{
         await setinformation([]);
         await setpage(1);
-        await setselecttime(true)
+        await settheend(false);
+        console.log("toye use focus effectt ")
+        if(selecttime==="none"){
+          setlikeotime("time")
+        }
+        else{
+          setlikeotime("like")
+        }
+        //await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
-        //تاثیری نداشتن :/
-        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-        // await settimelable("فیلتر بر اساس تاریخ")
-        if(selectedValue==="none")
-       await setlikeotime("time");
-       else
-       await setlikeotime("like");
-       await setselectedValue('none')
+      //   await setselectedValue('like')
+      //   //تاثیری نداشتن :/
+      //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+      //   // await settimelable("فیلتر بر اساس تاریخ")
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
       }).then(()=>{
@@ -174,10 +189,17 @@ const Comment = (prop) => {
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation])
+    }, [prop.navigation,selecttime])
 
   )
   const handleLoadMore = async() => {
+    // if(selecttime==="none"){
+    //   setlikeotime("time")
+    // }
+    // else
+    // {
+    //   setlikeotime("like")
+    // }
     console.log('END OF THE LIST')
     if(page<count){
       console.log(page+'PAGEDEEFFDHASKDFJLSKFH')
