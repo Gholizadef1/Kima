@@ -8,6 +8,8 @@ import Bookview from './Bookview';
 import Commentcard from './Commentcard';
 import Comment from './Comment';
 import Quote from './Quote';
+import Allhomepageresults from "./Allhomepageresults";
+import Alltopbooksresults from "./Alltopbooksresults";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +19,14 @@ const Booknavigation = () => {
       <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen name = 'Home' component={Home} options={{headerShown: false,headerTitleStyle:{fontSize:18,fontWeight:'bold'
       },headerStyle:{backgroundColor:'#EDF2F4'}}} ></Stack.Screen>
+      <Stack.Screen name = 'allhomeresults' component={Allhomepageresults}  options={({route}) => ({title: "کتاب های پیشنهادی",headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}/>
+        <Stack.Screen name = 'alltopbooksresults' component={Alltopbooksresults}  options={({route}) => ({title: "کتاب های پیشنهادی",headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}/>
       <Stack.Screen name = 'Showbookview' component={Bookview} options={{headerShown: false}} />
 
       <Stack.Screen name = 'comment' component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'

@@ -108,24 +108,31 @@ const Quizresult = (prop) => {
 
 
         // })
-       
+
         //     await seturl('quiz/' + prop.route.params.id)
         // }
         // else {
         //     await seturl('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
         // }
-       console.log("ghabl set kardan url")
-      //  if(url!=undefined){
+        console.log("ghabl set kardan url")
+        //  if(url!=undefined){
         try {
-            var response="";
+            var response = "";
             if (prop.route.params.ownerr === true) {
-                response =await axiosinst.get('quiz/' + prop.route.params.id)
+                response = await axiosinst.get('quiz/' + prop.route.params.id)
             }
-            else{
-                response=await axiosinst.get('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
+            else {
+                response = await axiosinst.get('user/' + await AsyncStorage.getItem("id") + '/quiz/' + prop.route.params.id + '/result')
             }
             //  if(url!=undefined){
-           
+            if (response.data.Quiz.quiz_photo.toString().split(":")[0] === "http") {
+                setphotoo(response.data.Quiz.quiz_photo)
+            }
+            else {
+                setphotoo("http://e7e864967156.ngrok.io" + response.data.Quiz.quiz_photo )
+            }
+            console.log(photoo+"photoo")
+
             //const response = await axiosinst.get(url)
             // }
             //console.log(JSON.stringify( response.data)+" RESPONSE")
@@ -150,7 +157,7 @@ const Quizresult = (prop) => {
 
 
         }
-   // }
+        // }
 
     })
 
@@ -172,6 +179,7 @@ const Quizresult = (prop) => {
     const [colorc, setcolorc] = useState("rgba(237,242,244,0.9)")
     const [colord, setcolord] = useState("rgba(237,242,244,0.9)")
     const [pasocknadadid, setpasokhnadadid] = useState(false);
+    const [photoo, setphotoo]=useState(undefined);
     // useFocusEffect(
     //     React.useCallback(() => {   
 
@@ -270,7 +278,7 @@ const Quizresult = (prop) => {
                                 backgroundColor: '#F3F8F9', alignself: "center", width: wp("90%"), marginHorizontal: wp("5%"),
                                 borderRadius: 10, elevation: 5, marginBottom: hp("0%"), marginVertical: hp("5%")
                             }}>
-                                {questions.Quiz.quiz_photo === "/media/default.png" ? <TouchableOpacity style={{
+                                {photoo === "http://e7e864967156.ngrok.io/media/default.png" ? <TouchableOpacity style={{
                                     height: hp('14%'),
                                     marginTop: hp('5%'),
                                     width: wp('28%'),
@@ -284,16 +292,16 @@ const Quizresult = (prop) => {
                                 >
                                     <ImageBackground borderRadius={100}
 
-                                        source={require("../../assets/tea.jpg")}
+                                        source={require("../../assets/quizz.png")}
 
                                         style={{
                                             height: hp('14%'),
 
-                                                marginTop: hp('0%'),
-                                                width: wp('28%'),
-                                                marginLeft: wp('0%'),
-                                                borderRadius: 20,
-                                                position: 'absolute',
+                                            marginTop: hp('0%'),
+                                            width: wp('28%'),
+                                            marginLeft: wp('0%'),
+                                            borderRadius: 20,
+                                            position: 'absolute',
                                         }}
                                     //  onBlur={props.handleBlur('photo')}
 
@@ -314,7 +322,7 @@ const Quizresult = (prop) => {
                                 }}
                                 >
                                         <ImageBackground borderRadius={100}
-                                            source={{ uri: "http://fb9ce5eee469.ngrok.io" + `${questions.Quiz.quiz_photo}` }}
+                                            source={{ uri: photoo }}
 
                                             style={{
                                                 height: hp('14%'),
@@ -343,7 +351,7 @@ const Quizresult = (prop) => {
                                 <Text style={{ fontSize: hp('1.5%'), color: 'gray', alignSelf: "flex-start", left: wp("40%"), top: hp("-8.3%") }}>
                                     {questions.Quiz.create_time.toString().split('T')[0]} (تاریخ ساخت)
                         </Text>
-                    {prop.route.params.ownerr===false?<Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text>:null}
+                                {prop.route.params.ownerr === false ? <Text style={{ fontSize: hp("1.8"), color: "#83c5be", fontWeight: "bold", alignSelf: "flex-end", position: "absolute", marginTop: hp("22.9%"), right: wp("10%") }}><Text style={{ color: "black", fontSize: hp("1.6%") }}>( امتیاز شما :</Text>{questions.score} <Text style={{ color: "black", fontSize: hp("1.6%") }}>) </Text></Text> : null}
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('-6%'), alignSelf: "flex-start", marginTop: hp('-1%'), marginHorizontal: wp("5%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {questions.Quiz.creator.username}</Text>  </Text>
                                 <Text style={{ fontSize: hp('1.7%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginHorizontal: wp("5%") }}>تعداد سوال<Text style={{ color: "lightblue" }}> -- <Text style={{ color: "#1f7a8c" }}> {questions.Quiz.question_count}</Text></Text></Text>
 
@@ -376,63 +384,86 @@ const Quizresult = (prop) => {
                                     await setnumofquestion(0);
                                     console.log(numofquesiton);
                                     await setseedis(" توضیحات")
-                                    
-                                    if(questions.Quiz.question_count===1){
+
+                                    if (questions.Quiz.question_count === 1) {
                                         await setcansubmit("صفحه کوییز")
                                         if (questions.Questions[0].key === "a") {
-                                        await setcolora("#95D5B2")
-                                    }
+                                            await setcolora("#95D5B2")
+                                        }
 
-                                    if (questions.Questions[0 ].key === "b") {
-                                        await setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[0 ].key === "c") {
-                                       await  setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[0 ].key === "d") {
-                                       await setcolord("#95D5B2")
-                                    }
-                                    }
-                                    else{
-                                    if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#95D5B2")
-                                    }
-
-                                    if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#95D5B2")
-                                    }
-                                    // f28482
-                                    if(prop.route.params.onwnerr===false){
-                                        console.log("    asdfasdf3")
-                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
-                                        if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#EF8089")
+                                        if (questions.Questions[0].key === "b") {
+                                            await setcolorb("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#EF8089")
+                                        if (questions.Questions[0].key === "c") {
+                                            await setcolorc("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#EF8089")
+                                        if (questions.Questions[0].key === "d") {
+                                            await setcolord("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#EF8089")
+                                        if (prop.route.params.ownerr === false) {
+                                            console.log("    asdfasdf3")
+                                            if (questions.user_answer[0] !== questions.Questions[0].key) {
+                                                if (questions.user_answer[0] === "a") {
+                                                    setcolora("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "b") {
+                                                    setcolorb("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "c") {
+                                                    setcolorc("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "d") {
+                                                    setcolord("#EF8089")
+                                                }
+                                            }
+                                            if (questions.user_answer[0] === "") {
+                                                setpasokhnadadid(true)
+                                            }
+                                            else {
+                                                setpasokhnadadid(false)
+                                            }
                                         }
-                                    }
-                                    if (questions.user_answer[numofquesiton + 1] === "") {
-                                        setpasokhnadadid(true)
                                     }
                                     else {
-                                        setpasokhnadadid(false)
+                                        if (questions.Questions[numofquesiton + 1].key === "a") {
+                                            setcolora("#95D5B2")
+                                        }
+
+                                        if (questions.Questions[numofquesiton + 1].key === "b") {
+                                            setcolorb("#95D5B2")
+                                        }
+                                        if (questions.Questions[numofquesiton + 1].key === "c") {
+                                            setcolorc("#95D5B2")
+                                        }
+                                        if (questions.Questions[numofquesiton + 1].key === "d") {
+                                            setcolord("#95D5B2")
+                                        }
+                                        // f28482
+                                        if (prop.route.params.ownerr === false) {
+                                            console.log("    asdfasdf3")
+                                            if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                                if (questions.user_answer[numofquesiton + 1] === "a") {
+                                                    setcolora("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "b") {
+                                                    setcolorb("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "c") {
+                                                    setcolorc("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "d") {
+                                                    setcolord("#EF8089")
+                                                }
+                                            }
+                                            if (questions.user_answer[numofquesiton + 1] === "") {
+                                                setpasokhnadadid(true)
+                                            }
+                                            else {
+                                                setpasokhnadadid(false)
+                                            }
+                                        }
                                     }
-                                    }
-                                    }
-                                  
+
 
                                     console.log(" rang negah ghabli")
 
@@ -502,28 +533,28 @@ const Quizresult = (prop) => {
                                     }
 
                                     // f28482
-                                    if(!prop.route.params.ownerr){
+                                    if (!prop.route.params.ownerr) {
                                         console.log("    asdfasdf2")
-                                    if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
-                                        if (questions.user_answer[numofquesiton - 1] === "a") {
-                                            setcolora("#EF8089")
+                                        if (questions.user_answer[numofquesiton - 1] !== questions.Questions[numofquesiton - 1].key) {
+                                            if (questions.user_answer[numofquesiton - 1] === "a") {
+                                                setcolora("#EF8089")
+                                            }
+                                            if (questions.user_answer[numofquesiton - 1] === "b") {
+                                                setcolorb("#EF8089")
+                                            }
+                                            if (questions.user_answer[numofquesiton - 1] === "c") {
+                                                setcolorc("#EF8089")
+                                            }
+                                            if (questions.user_answer[numofquesiton - 1] === "d") {
+                                                setcolord("#EF8089")
+                                            }
                                         }
-                                        if (questions.user_answer[numofquesiton - 1] === "b") {
-                                            setcolorb("#EF8089")
+                                        if (questions.user_answer[numofquesiton - 1] === "") {
+                                            setpasokhnadadid(true)
                                         }
-                                        if (questions.user_answer[numofquesiton - 1] === "c") {
-                                            setcolorc("#EF8089")
+                                        else {
+                                            setpasokhnadadid(false)
                                         }
-                                        if (questions.user_answer[numofquesiton - 1] === "d") {
-                                            setcolord("#EF8089")
-                                        }
-                                    }
-                                    if (questions.user_answer[numofquesiton - 1] === "") {
-                                        setpasokhnadadid(true)
-                                    }
-                                    else {
-                                        setpasokhnadadid(false)
-                                    }
                                     }
                                 }
                                 //update nemishe chon :\
@@ -551,89 +582,89 @@ const Quizresult = (prop) => {
                     <View style={{ marginLeft: wp("50%"), marginTop: hp("10.7") }}>
                         <TouchableOpacity
                             onPress={async () => {
-                                if(questions.Quiz.question_count!=1||cansubmit!="صفحه کوییز"){
-                                await setseedis(" سوال قبلی")
+                                if (questions.Quiz.question_count != 1 || cansubmit != "صفحه کوییز") {
+                                    await setseedis(" سوال قبلی")
 
-                                var a = answers;
-                                a[numofquesiton] = oneofthem;
-                                setoneofthem("")
-                                console.log(a);
-                                setanswers(a);
-                                await setcolora("rgba(237,242,244,0.9)")
-                                await setcolorb("rgba(237,242,244,0.9)")
-                                await setcolorc("rgba(237,242,244,0.9)")
-                                await setcolord("rgba(237,242,244,0.9)")
+                                    var a = answers;
+                                    a[numofquesiton] = oneofthem;
+                                    setoneofthem("")
+                                    console.log(a);
+                                    setanswers(a);
+                                    await setcolora("rgba(237,242,244,0.9)")
+                                    await setcolorb("rgba(237,242,244,0.9)")
+                                    await setcolorc("rgba(237,242,244,0.9)")
+                                    await setcolord("rgba(237,242,244,0.9)")
 
 
 
-                                await setseedis("سوال قبلی")
-                                // new Promise(async(resolve,reject)=>{
-                                //     await setnumofquestion(numofquesiton+1);
-                                //    resolve();
-                                // }).then(async()=>{
+                                    await setseedis("سوال قبلی")
+                                    // new Promise(async(resolve,reject)=>{
+                                    //     await setnumofquestion(numofquesiton+1);
+                                    //    resolve();
+                                    // }).then(async()=>{
 
-                                await setbuttoncolor("rgba(31,122,140,1)")
-                                console.log(numofquesiton + " num of question");
-                                if (numofquesiton + 1 < questions.Quiz.question_count) {
-                                    if (questions.Questions[numofquesiton + 1].key === "a") {
-                                        setcolora("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "b") {
-                                        setcolorb("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "c") {
-                                        setcolorc("#95D5B2")
-                                    }
-                                    if (questions.Questions[numofquesiton + 1].key === "d") {
-                                        setcolord("#95D5B2")
-                                    }
-                                    // f28482
-                                    if(prop.route.params.ownerr===false){
-                                        console.log("    asdfasdf1")
-                                    if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
-                                        if (questions.user_answer[numofquesiton + 1] === "a") {
-                                            setcolora("#EF8089")
+                                    await setbuttoncolor("rgba(31,122,140,1)")
+                                    console.log(numofquesiton + " num of question");
+                                    if (numofquesiton + 1 < questions.Quiz.question_count) {
+                                        if (questions.Questions[numofquesiton + 1].key === "a") {
+                                            setcolora("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "b") {
-                                            setcolorb("#EF8089")
+                                        if (questions.Questions[numofquesiton + 1].key === "b") {
+                                            setcolorb("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "c") {
-                                            setcolorc("#EF8089")
+                                        if (questions.Questions[numofquesiton + 1].key === "c") {
+                                            setcolorc("#95D5B2")
                                         }
-                                        if (questions.user_answer[numofquesiton + 1] === "d") {
-                                            setcolord("#EF8089")
+                                        if (questions.Questions[numofquesiton + 1].key === "d") {
+                                            setcolord("#95D5B2")
                                         }
-                                    }
-                                    }
-                                    await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("سوال بعدی")
-                                    setthisquestion(questions.Questions[numofquesiton + 1]);
+                                        // f28482
+                                        if (prop.route.params.ownerr === false) {
+                                            console.log("    asdfasdf1")
+                                            if (questions.user_answer[numofquesiton + 1] !== questions.Questions[numofquesiton + 1].key) {
+                                                if (questions.user_answer[numofquesiton + 1] === "a") {
+                                                    setcolora("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "b") {
+                                                    setcolorb("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "c") {
+                                                    setcolorc("#EF8089")
+                                                }
+                                                if (questions.user_answer[numofquesiton + 1] === "d") {
+                                                    setcolord("#EF8089")
+                                                }
+                                            }
+                                        }
+                                        await setnumofquestion(numofquesiton + 1);
+                                        await setcansubmit("سوال بعدی")
+                                        setthisquestion(questions.Questions[numofquesiton + 1]);
 
-                                    console.log("next pressed")
-                                }
-                                if (cansubmit === "صفحه کوییز") {
-                                    await postquiz();
-                                }
-                                if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
-                                    await setnumofquestion(numofquesiton + 1);
-                                    await setcansubmit("صفحه کوییز")
-                                }
-                                console.log(numofquesiton);
-                                if(prop.route.params.ownerr===false){
-                                    console.log("    asdfasdf")
-                                if (questions.user_answer[numofquesiton + 1] === "") {
-                                    setpasokhnadadid(true)
+                                        console.log("next pressed")
+                                    }
+                                    if (cansubmit === "صفحه کوییز") {
+                                        await postquiz();
+                                    }
+                                    if (numofquesiton + 1 === questions.Quiz.question_count - 1) {
+                                        await setnumofquestion(numofquesiton + 1);
+                                        await setcansubmit("صفحه کوییز")
+                                    }
+                                    console.log(numofquesiton);
+                                    if (prop.route.params.ownerr === false) {
+                                        console.log("    asdfasdf")
+                                        if (questions.user_answer[numofquesiton + 1] === "") {
+                                            setpasokhnadadid(true)
+                                        }
+                                        else {
+                                            setpasokhnadadid(false)
+                                        }
+                                    }
                                 }
                                 else {
-                                    setpasokhnadadid(false)
-                                }
-                                }
-                                }
-                                else{
                                     console.log("کوییز یه سوال دارههههههه")
-                                await postquiz();
+                                    await postquiz();
                                 }
-                                
+
                                 // })
                             }}
                             style={{ height: hp("10%"), elevation: 5, margin: 0, width: wp("25%"), backgroundColor: "rgba(31,122,140,1)", left: wp("0%"), top: hp("0%"), borderTopLeftRadius: 50, alignSelf: "flex-end" }}>

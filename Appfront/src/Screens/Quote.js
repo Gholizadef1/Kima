@@ -29,12 +29,13 @@ const commentschema = yup.object({
 
 
 const Quote = (prop) => {
-
+console.log(selectedValue+"selected Value")
   const callbackFunction = async (childData) => {
     if (childData === true) {
       // await setrefresh(childData)
-      console.log('TRUE')
-      await response(1)
+      // console.log('TRUE')
+      // await response(1)
+  
       // if(finfo===true)
       // await setfinfo(false);
       // else
@@ -82,6 +83,7 @@ const Quote = (prop) => {
   const [loading, setloading] = useState(false);
   const [page, setpage] = useState(1);
   const [liked, setliked] = useState(false);
+  
   const [like, setlike] = useState('gray')
   const [close, setclose] = useState(false);
   const [information, setinformation] = useState([]);
@@ -93,6 +95,7 @@ const Quote = (prop) => {
   const maxnumber = 500;
   const [numcolor, setnumcolor] = useState('green');
   const [currentnumber, setcurrentnumber] = useState(0);
+  const[selecttime,setselecttime]=useState("none")
   const equal = async (item) => {
 
     setIDD(await AsyncStorage.getItem('id').toString());
@@ -100,33 +103,33 @@ const Quote = (prop) => {
   }
   const changecolor = (val) => {
     console.log("adfksahf")
-    if(val<50){
-      return("green")
+    if (val < 50) {
+      return ("green")
     }
     else if (val >= 50 && val < 300) {
       console.log("adfksahflkjshflkjhafslkjhsalkjfhlkasjhfdlkjhaslkfjhsalkfjhlskjfhdlkjsahf")
-     // setnumcolor('#2a9d8f')
-     return('#2a9d8f')
+      // setnumcolor('#2a9d8f')
+      return ('#2a9d8f')
     }
-    else if(val>=300 && val<=350){
-      return("#3ECCBB")
+    else if (val >= 300 && val <= 350) {
+      return ("#3ECCBB")
     }
-    else if(val>=350 && val<400){
-      return("#BFEEE8")
+    else if (val >= 350 && val < 400) {
+      return ("#BFEEE8")
     }
-    else if(val>400&&val<=420){
-      return("#F7BC8D")
+    else if (val > 400 && val <= 420) {
+      return ("#F7BC8D")
     }
-    else if(val>420 && val<=440){
+    else if (val > 420 && val <= 440) {
       return ("#F0852D")
     }
-    else if(val>440&&val<=480){
-      return("#EB886F")
+    else if (val > 440 && val <= 480) {
+      return ("#EB886F")
     }
     else {
-      return("red")
+      return ("red")
     }
-   
+
   }
   const response = async (page) => {
     //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
@@ -146,11 +149,16 @@ const Quote = (prop) => {
     const id = prop.route.params.id
     console.log(id)
     console.log(page + 'PAGE')
+    var a=""
+    if(selecttime==="none")
+    a="time";
+    else
+    a="like"
     try {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get('book/' + id + "/quote", {
         params: {
-          filter: likeotime,
+          filter: a,
           page: page
         },
         "headers":
@@ -196,31 +204,41 @@ const Quote = (prop) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      const a = new Promise(async (resolve, reject) => {
+      const a=new Promise(async(resolve,reject)=>{
         await setinformation([]);
         await setpage(1);
+        await settheend(false);
+        console.log("toye use focus effectt ")
+        if(selecttime==="none"){
+          setlikeotime("time")
+        }
+        else{
+          setlikeotime("like")
+        }
         //await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
-        //تاثیری نداشتن :/
-        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-        // await settimelable("فیلتر بر اساس تاریخ")
-        if (selectedValue === "none")
-          await setlikeotime("time");
-        else
-          await setlikeotime("like");
-        await setselectedValue('none')
+      //   await setselectedValue('like')
+      //   //تاثیری نداشتن :/
+      //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+      //   // await settimelable("فیلتر بر اساس تاریخ")
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
-      }).then(() => {
-        console.log('++++++++++' + information + '**********')
-        response(1);
-        console.log('++++++++++' + information + '**********')
+      }).then(()=>{
+      console.log('++++++++++' + information + '**********')
+      response(1);
+      console.log('++++++++++' + information + '**********')
       })
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation]))
+    }, [prop.navigation,selecttime,delet])
+
+  )
   const renderInner = () => {
     return (
       // console.log('inner');
@@ -285,8 +303,8 @@ const Quote = (prop) => {
                     //   setnumcolor('#2a9d8f')
                     // }
                     // else { }
-                 // }
-                    changecolor(props.values.comment.length,setnumcolor)
+                    // }
+                    changecolor(props.values.comment.length, setnumcolor)
                     // function changecolor(props.values.comment.length){
 
                     // console.log("adfksahf")
@@ -389,26 +407,33 @@ const Quote = (prop) => {
           containerStyle={{ height: 40, width: wp('50%'), marginBottom: hp('4%') }}
           style={{
 
-            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
-            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
+            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'),
+            marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('5%')
           }}
           itemStyle={{
 
             justifyContent: 'flex-start'
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%') }}
+          dropDownStyle={{
+            backgroundColor: '#fafafa',
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('5%'),
+            width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
+          }}
           onChangeItem={async (item) => {
 
             if (item.value === 'none') {
               console.log(item.value + 'VALUE')
               console.log('to none')
               await setlikeotime('time')
+              await setselecttime('none');
 
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
               await setlikeotime('like')
+              await setselecttime('like');
 
             }
 
@@ -478,7 +503,7 @@ const Quote = (prop) => {
 
             renderItem={({ item }) => (<><Quotecrad name={item.account.username}
               isliked={item.isliked}
-              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
+              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={setdelet} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
               picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
 
 

@@ -42,7 +42,7 @@ const Quizes = (prop) => {
     }
     const backk = JSON.stringify(back);
     try{
-      const response = await axiosinst.get('quizes?search='+searchterm+'&search-fields=title&page='+page,{
+      const response = await axiosinst.get('quizes?search='+searchterm+'&page='+page,{
        
       "headers":
       {
@@ -133,6 +133,7 @@ const Quizes = (prop) => {
   const [moreclicked,setmoreclicked]=useState(false);
   const [isowner,setisowner]=useState(false);
   const [searchposition,setsearchposition]=useState("77%");
+  const [backsearch,setbacksearch]=useState(false);
   const checkisowner=async(ID)=>{
     const id=await(AsyncStorage.getItem('id'))
     if(id===ID){
@@ -273,27 +274,44 @@ const Quizes = (prop) => {
       
     }
  
-  useEffect(()=>{
-    // React.useCallback(() => { 
-      setsearchterm('')
-      setnumberofresults()
-        setinformation([])
-    // if(searchterm==='')  
-      response(1) 
-      // async function refreshing(){ 
-      // // setmoreclicked(false)
-      setselectedValue('none')
-      //   setsearchterm('')
-      //   setnumberofresults()
-      //    await setinformation([])
-      // // if(searchterm==='')  
-      //   response(1)
-      // }
-        // else
-        // searchpost(1)
-    // }
-    // ,[])
-  },[])
+    useFocusEffect(
+      React.useCallback(() => {
+        const a = new Promise(async (resolve, reject) => {
+          await setopensearch(false);
+          await setinformation([]);
+          await setpage(1);
+          setsearchterm('');
+          setnumberofresults(undefined);
+          await settheend(false);
+          console.log("toye use focus effectt ")
+          // if (selecttime === "none") {
+          //   setlikeotime("time")
+          // }
+          // else {
+          //   setlikeotime("like")
+          // }
+          //await setselecttime(true)
+          //با این ظاهرا درست شد :/
+          //   await setselectedValue('like')
+          //   //تاثیری نداشتن :/
+          //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          //   // await settimelable("فیلتر بر اساس تاریخ")
+          //   if(selectedValue==="none")
+          //  await setlikeotime("time");
+          //  else
+          //  await setlikeotime("like");
+          //  await setselectedValue('none')
+  
+          resolve()
+        }).then(() => {
+          console.log('++++++++++' + information + '**********')
+          response(1);
+          console.log('++++++++++' + information + '**********')
+        })
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
+      }, [prop.navigation,backsearch]))
   return (
 
     <View style={styles.container}>
@@ -306,20 +324,27 @@ const Quizes = (prop) => {
       marginLeft:wp('87%')
           }}
           onPress={async()=>{
+            if(backsearch===true){
+              setbacksearch(false)
+              }
+              else{
+                setbacksearch(true)
+              }
          // await setsearchposition("77%")
-          setinformation([]);
-          setpage(1)
-          response(1);
-          setsearchterm('');
-          setnumberofresults();
-          setopensearch(false)}
-          }
+          // setinformation([]);
+          // setpage(1)
+          // response(1);
+          // setsearchterm('');
+          // setnumberofresults();
+          // setopensearch(false)}
+          }}
        />
      <Searchbar
       placeholder="Search"
       onChangeText={searching}
       underlineColorAndroid={'#F1F3F9'}
       value={searchterm}
+      iconColor={"#1f7a8c"}
       onEndEditing={()=>{setinformation([])
         searchpost(1)}}
       onIconPress={()=>{
@@ -329,7 +354,7 @@ const Quizes = (prop) => {
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
-          placeholder={'نام گروه ...'}
+          placeholder={'نام کوییز ...'}
           style={{  borderTopLeftRadius:hp('5%'),
           marginTop:hp('2%'),
           
@@ -354,14 +379,14 @@ const Quizes = (prop) => {
           borderTopRightRadius={20}
           borderBottomRightRadius={20}
           borderBottomLeftRadius={20}
-          placeholder={'نام گروه ...'}
+          placeholder={'نام کوییز ...'}
           placeholderTextColor={'gray'}
           inputStyle={{color:'black',fontSize:hp('1.7%')}}
           containerStyle={{backgroundColor:'white',borderTopColor:'white',borderBottomColor:'white'}}
           inputContainerStyle={{backgroundColor:'#F1F3F9',height:hp('5%'),marginTop:hp('1%'),marginBottom:hp('-1%'),borderRadius:20}}
           cancelIcon={<AntDesign style={{}}
          name="close" size={30} color="gray" />}
-        // placeholder="نام گروه ..."
+        // placeholder="نام کوییز ..."
         onChangeText={console.log('taghirkarde')}
         value={search}
       /> */}
@@ -397,8 +422,8 @@ const Quizes = (prop) => {
       </Button>:null} */}
       {/* {!opensearch? <DropDownPicker
           items={[
-            { label: 'جدید ترین گروه ها',value:'none'},
-            { label: 'معروف ترین گروه ها', value: 'like' },
+            { label: 'جدید ترین کوییز ها',value:'none'},
+            { label: 'معروف ترین کوییز ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
           labelStyle={{fontSize:wp('3%')}}
@@ -471,14 +496,14 @@ const Quizes = (prop) => {
 
         {/* <View style={{height:hp('2%')}}></View> */}
        
-        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
+        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} کوییز پیدا شد.</Text>:null}
          <FlatList
             ListFooterComponent={(theend === false ? 
             <View style={styles.loader}>
             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View> : 
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('-13%')}}>کوییز دیگری وجود ندارد</Text>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('10%')}}>کوییز دیگری وجود ندارد</Text>
             </View>)}
             style={{ marginBottom: hp('0%') }}
             showsVerticalScrollIndicator={false}
@@ -498,7 +523,8 @@ const Quizes = (prop) => {
              // await setsearchposition("77%")
               // await setsearchterm('')
               if(searchterm===''){
-               await(setnumberofresults())
+                await setopensearch(false);
+               await(setnumberofresults(undefined))
               await setrefresh(true)         
               // await setinformation([]);
               // await setpage(1);
@@ -532,9 +558,12 @@ const Quizes = (prop) => {
              </TouchableOpacity>
              {item.is_none === false ? <TouchableOpacity
                onPress={async () => {
+                 console.log("none nkkn")
                  const userid = await AsyncStorage.getItem("id")
 
                  console.log(userid + " user iddfak;ljdf;lskjf;")
+                 console.log(item.id+" item idddddd")
+                 console.log(item+"  ITEMMM")
                  await console.log(item.creator.id + " item idakfdj;klaskjl;sfkl;jakjl;fskl;jasfdkjlasfk;jldd;lkj")
                  console.log((item.creator.id - userid) === 0 + " a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
 
@@ -554,7 +583,7 @@ const Quizes = (prop) => {
              >
                <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
              </TouchableOpacity> : <TouchableOpacity
-               onPress={() => prop.navigation.navigate("quizpage", { title: item.title })}
+               onPress={() => prop.navigation.navigate("quizpage", { title: item.title ,id: item.id})}
                style={{ backgroundColor: "#F0F9F7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("25%"), borderRadius: 50, left: wp("64%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
              >
                  <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>شرکت در کوییز</Text>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { StyleSheet, Text, View, Modal, ImageBackground, Alert, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Item, Segment, Content, Input, Label, Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -98,35 +98,37 @@ const Myquizes = (prop) => {
       console.log(count + '  COUNT')
       console.log(page + ' PAGE BAD COUNT')
       console.log((page === count) + ' PAGE===COUNT')
-      if(response.data.Quiz===[]){
+      if(response.data.message==="No Quiz!"){
         await settheend(true)
         await setrefresh(false)
          console.log('#########')
-         await setinformation(undefined);
+        // await setinformation(undefined);
          }
+         else{
       settheend(false)
       //console.log('omade inja')
       console.log('++++INFOGHABLESET++++' + information + "++++INFOGHABLESET++++")
      // console.log(response.data.groups)
       //console.log(response.data.Quiz.lenght+" lenght")
-      if (response.data.Quiz!="Array[]") {
+      if (response.data.message!="No Quiz!") {
         await setinformation(information => [...information, ...response.data.Quiz])
         //wait page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.groups])
-      }
-      else {
-        await setinformation(undefined);
-        console.log(" KHALIIIII;KAJF;LKJ;LKJ")
-      }
+       }
+      // else {
+      //   await setinformation(undefined);
+      //   console.log(" KHALIIIII;KAJF;LKJ;LKJ")
+      // }
       setrefresh(false)
       // console.log(response.data.groups.id+'  INFORMATION.ID')
 
       console.log('++++INFO++++' + information + "++++INFO++++")
+         }
 
     }
     // }
     //  }
     catch (err) {
-      Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+      Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
 
         text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
@@ -179,7 +181,9 @@ const Myquizes = (prop) => {
         response(1);
         console.log('++++++++++' + information + '**********')
       })
-    }, [prop.navigation]))
+    }, [prop.navigation])
+
+    )
   return (
 
 
@@ -235,10 +239,10 @@ const Myquizes = (prop) => {
                   console.log((item.creator.id-userid)===0+" a;dlfj;lskajdf;lkjsadf;lkjadf;lkjsf")
                   if((item.creator.id-userid===0))
                   {
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true})
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:true,title:item.title})
                   }
                   else{
-                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false})
+                    prop.navigation.navigate("quizresult",{id:item.id,ownerr:false,title:item.title})
                   }
                   // if(owner!=undefined){
                 
@@ -246,7 +250,7 @@ const Myquizes = (prop) => {
                   // await prop.seeresul(true);
                   // setTimeout(() => prop.seeresul(false), 2000)
                 }}
-                style={{ backgroundColor: "#B7E4C7",position:"absolute", height: hp("4.5%"), bottom: hp("11.8%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-end" }}
+                style={{ backgroundColor: "#C5E7D7", position: "absolute", height: hp("4.5%"), top: hp("4%"), marginTop: hp("0%"), width: wp("18%"), borderRadius: 50, left: wp("68.5%"), marginBottom: hp("0%"), alignSelf: "flex-start" }}
               >
                 <Text style={{ fontSize: hp("1.5.5%"), color: "#1f7a8c", fontWeight: "bold", alignSelf: "center", marginTop: hp("1.1%") }}>پاسخ ها</Text>
               </TouchableOpacity>

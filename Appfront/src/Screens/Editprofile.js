@@ -62,7 +62,7 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://e7e864967156.ngrok.io/user/"+id)
+    const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/"+id)
 
 
         
@@ -71,12 +71,12 @@ const EditProfile = () => {
   console.log('*****')
 
 
-        console.log(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://e7e864967156.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://e7ae29f4056b.ngrok.io/media/default.jpg"))
 
 
    console.log(picture===null)
@@ -132,7 +132,7 @@ useFocusEffect(
            const backk=JSON.stringify(back);
            const id=await AsyncStorage.getItem('id');
 
-          const response=await axiosinst.put('http://e7e864967156.ngrok.io/user/'+id+'/update-profile',formdata,{
+          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
 
 
             headers:{
@@ -224,7 +224,7 @@ useFocusEffect(
            const backk=JSON.stringify(back);
            const id=await (await AsyncStorage.getItem('id')).toString();
 
-          const response=await axiosinst.put('http://e7e864967156.ngrok.io/user/'+id+'/update-profile',formdata,{
+          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
 
 
 
@@ -276,7 +276,8 @@ useFocusEffect(
    
     // const val = useContext(AuthContext);  
     //nd
-   
+    const [backgroundColor,setbackgroudcolor]=useState("white");
+    const [opacities,setopacities]=useState(1);
     const [name,setname]=useState(null);
   
      const renderHeader=()=>{
@@ -344,30 +345,43 @@ useFocusEffect(
 
 // const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
-      
-        <View style={styles.container}>
+  
+      <>
+    
+        <View style={{  flex:1,
+      backgroundColor: backgroundColor,}}>
       
         <BottomSheet
-             snapPoints={[hp('46.5%'), 0, 0]}
+            snapPoints={[hp('34%'), 0, 0]}
             ref={bs}
             initialSnap={1}
+            // onCloseEnd={setbackgroudcolor("white")}
             callbackNode={fall}
             enabledGestureInteraction={true}
             enabledContentTapInteraction={false}
             renderContent={renderInner}
-            renderHeader={renderHeader}            
+            renderHeader={renderHeader}   
+            onCloseEnd={()=>setbackgroudcolor("white")}
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
             backgroundColor={'white'}
         
        />
-       <View >
+        <Animated.View style={{
+  backgroundColor:backgroundColor,
+opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
+}}> 
+       
+     
         
-        <View style={{position:'absolute',height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
+        <View style={{position:'absolute',opacity:opacities,height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
         <TouchableOpacity style={{}}
-         onPress={async()=>await bs.current.snapTo(0)}>
+         onPress={async()=>{
+            await setbackgroudcolor("#F5F5F5")
+          //  await setopacities(0.5)
+           await bs.current.snapTo(0)}}>
 
 
-      {picture==='http://e7e864967156.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://e7ae29f4056b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}
@@ -385,7 +399,10 @@ useFocusEffect(
       </ImageBackground>}
       {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
       
-      <TouchableOpacity  onPress={async()=>await bs.current.snapTo(0)} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
+      <TouchableOpacity  onPress={async()=>{
+        setbackgroudcolor("#F5F5F5")
+    
+        await bs.current.snapTo(0)}} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
       <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
       </TouchableOpacity>
       {/* </TouchableOpacity> */}
@@ -430,30 +447,33 @@ useFocusEffect(
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
-            
+          Alert.alert('', 'نام کاربری شما با موفقیت تغییر کرد ', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+         
           
           
         })
         .catch( function(error){
          
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
-            
+              Alert.alert('', 'نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+              
+              
             }
             else
             {
-              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
             }
 
          
@@ -465,6 +485,7 @@ useFocusEffect(
       }}
      >
      {(props)=>(
+       
      <View style={{ marginTop:hp('25.5%'),marginHorizontal:wp('10%')}}>
 
      <Item style={styles.input}>
@@ -488,7 +509,7 @@ useFocusEffect(
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
         </Button>
       
      </View>
@@ -516,7 +537,7 @@ useFocusEffect(
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-
+        const id=await AsyncStorage.getItem("id");
         const response=axiosinst.put('user/'+id+'/change-password',backk,{
 
           headers:{
@@ -528,11 +549,12 @@ useFocusEffect(
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('oops','رمزتون با موفقیت تغییر کرد',[{
-            
+          Alert.alert('', 'رمزتان با موفقیت تغییر کرد', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-          }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+         
       
           
           
@@ -542,19 +564,20 @@ useFocusEffect(
           // await console.log(AsyncStorage.getItem('token'))
             // console.log(error);
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('oops','رمزتون رو اشتباه وارد کردید',[{
-            
+              Alert.alert('', 'رمزتون رو اشتباه وارد کردید', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
+            
             }
             else
             {
-              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
             }
            
          
@@ -578,7 +601,7 @@ useFocusEffect(
        
         
        </Item>
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
+       <Text style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.Password&&props.errors.Password}</Text>
        <Item style={styles.input}>
          <Input  style={styles.Input} 
           secureTextEntry
@@ -593,7 +616,7 @@ useFocusEffect(
 
     
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
+       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
 
        
        <Item style={{}}>
@@ -608,7 +631,7 @@ useFocusEffect(
          <Feather name="check" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
+       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
        
 
 
@@ -633,7 +656,7 @@ useFocusEffect(
         borderRadius:17}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
         </Button>
       
      </View>
@@ -653,10 +676,15 @@ useFocusEffect(
         {/* </TouchableOpacity> */}
       
     {/* </ScrollView> */}
-    </View>
+  
+    </Animated.View>
+    {/* <View style={{backgroundColor:"gray",flex:1}}></View> */}
     <StatusBar backgroundColor='#BFDBF7' style='light' />
 
         </View>
+       
+        </>
+        
         
    
         // {/* <Text>HI</Text>
@@ -743,22 +771,32 @@ const styles = StyleSheet.create({
         
         
       },
+      panel: {
+        padding: hp("3%"),
+        backgroundColor: 'white',
+        paddingTop:  hp("3%"),
+        shadowColor: 'black',
+        borderTopColor: 'black',
+        shadowOpacity: 0.5,
+        elevation:10
+    
+      },
       header: {
         backgroundColor: 'white',
         shadowColor: 'black',
-        shadowOffset: {width: -1, height: -3},
+        shadowOffset: { width: -1, height: -3 },
         shadowRadius: 20,
         shadowOpacity: 0.5,
-        // elevation: 5,
-        paddingTop: 20,
+        // elevation: 5
+        paddingTop: hp("2.5%"),
         borderTopLeftRadius: 20,
-        borderTopColor:'black',
+        borderTopColor: 'black',
         borderTopRightRadius: 20,
       },
       panelHeader: {
-        borderTopColor:'black',
+        borderTopColor: 'black',
     
-      },  
+      }, 
 //         input:{
 //      marginTop:5,
 //      marginLeft:5,

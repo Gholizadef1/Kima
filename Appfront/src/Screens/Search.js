@@ -58,11 +58,11 @@ const Search = ({ navigation }) => {
     }
     catch (err) {
       console.log(err);
-      Alert.alert('oops', ' حتما اشتباهی شده دوباره امتحان کن :)', [{
+      Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
 
-        Title: 'فهمیدم', onPress: () => console.log('alert closed')
-      }])
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
     }
   }
 
@@ -89,11 +89,11 @@ const Search = ({ navigation }) => {
     }
     catch (err) {
       console.log(err);
-      Alert.alert('oops', ' حتما اشتباهی شده دوباره امتحان کن :)', [{
+      Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
 
-        Title: 'فهمیدم', onPress: () => console.log('alert closed')
-      }])
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
     }
   }
 
@@ -122,11 +122,11 @@ const Search = ({ navigation }) => {
     }
     catch (err) {
       console.log(err);
-      Alert.alert('oops', ' حتما اشتباهی شده دوباره امتحان کن :)', [{
+      Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
 
-        Title: 'فهمیدم', onPress: () => console.log('alert closed')
-      }])
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
     }
   }
   const [exitsearch, setExitsearch] = useState([]);
@@ -192,7 +192,7 @@ const Search = ({ navigation }) => {
       // icon={ <Feather name="search" size={24} color="#1f7a8c" style={{height:30,width:30,alignSelf:"flex-start"}}  />}
       />
       {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-      {authorcount != undefined && titlecount != undefined ? <Text style={{ marginTop: hp("13.5%"), alignSelf: "flex-start",position:"absolute" ,marginLeft: hp('2%'),fontSize:hp("1.4%"), color: "gray" }}>با اطلاعات شما {authorcount + titlecount} کتاب پیدا شدند</Text> : null}
+      {authorcount != undefined && titlecount != undefined ? <Text style={{ marginTop: hp("13.5%"), alignSelf: "flex-start",position:"absolute" ,marginLeft: hp('2%'),fontSize:hp("1.4%"), color: "gray" }}>با اطلاعات شما {authorcount + titlecount} کتاب پیدا شد</Text> : null}
       {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
       <View style={{marginTop:hp("4%")}}></View>
       <ScrollView style={{}}>

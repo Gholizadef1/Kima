@@ -23,7 +23,7 @@ const Commentactivity = (prop) => {
      
     }
   }
-  const [delet, setdelet] = useState(false)
+ 
   const [refresh, setrefresh] = useState(false);
   const [count,setcount]=useState(1);
   const [IDD, setIDD] = useState('');
@@ -37,6 +37,7 @@ const Commentactivity = (prop) => {
   const [timelable,settimelable]=useState('فیلتر بر اساس تاریخ')
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
+  const [delet, setdelet] = useState(false)
   const [page, setpage] = useState(1);
 
   console.log('AVAL')
@@ -125,15 +126,15 @@ const Commentactivity = (prop) => {
         await setpage(1);
         await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
+        //await setselectedValue('like')
         //تاثیری نداشتن :/
         // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
         // await settimelable("فیلتر بر اساس تاریخ")
-        if(selectedValue==="none")
-       await setlikeotime("time");
-       else
-       await setlikeotime("like");
-       await setselectedValue('none')
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
       }).then(()=>{
@@ -171,7 +172,7 @@ const Commentactivity = (prop) => {
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
       { (information!=undefined) ? <FlatList
-          style={{ marginBottom: '17%' }}
+          style={{ marginBottom: '0%' }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
@@ -181,7 +182,7 @@ const Commentactivity = (prop) => {
           onEndReachedThreshold={0.7}
           ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
-          style={{ marginBottom: hp('15.5%') }}
+          // style={{ bottom: hp('5.5%') }}
           onRefresh={async () => {
             await setrefresh(true)
 
@@ -199,11 +200,11 @@ const Commentactivity = (prop) => {
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id}
-             dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
-            picture={`${item.current_book.imgurl}`} comment={item.comment_text} ></Commentcard>)}
+             dislikenumber={item.DislikeCount} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            picture={`${item.current_book.imgurl}`} likedisable={true} comment={item.comment_text} ></Commentcard>)}
         >
 
-        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
+        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}> اولین نظر خود را ثبت کنید</Text>}
 
 
       </Animated.View>
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#B8B8B8',
     backgroundColor: '#ffff',
-    marginTop: 2
+   // marginTop: 2
   },
   nazar: {
     marginLeft: '33%',
