@@ -268,7 +268,8 @@ console.log(await AsyncStorage.getItem('token'));
       
     }
  
-  useEffect(()=>{
+    useFocusEffect(
+      React.useCallback(() => {
     // React.useCallback(() => { 
       setsearchterm('')
       setnumberofresults()
@@ -288,7 +289,9 @@ console.log(await AsyncStorage.getItem('token'));
         // searchpost(1)
     // }
     // ,[])
-  },[])
+  }, [navigation])
+
+  )
   return (
 
     <View style={styles.container}>
