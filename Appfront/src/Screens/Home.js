@@ -240,7 +240,8 @@ const styles = StyleSheet.create({
 
     },
     frame: {
-        color: '#1F7A8C'
+        color: '#1F7A8C',
+        flex:1
     }
 });
 export default Home;

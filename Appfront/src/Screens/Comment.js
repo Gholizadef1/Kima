@@ -120,11 +120,11 @@ const Comment = (prop) => {
         settheend(false)
         console.log(IDD + 'IDDresponse');
         //  console.log(response.data)
-         console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
+        // console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
         // console.log(information)
          console.log('RESPONSE DATE')
          //console.log(response.date)
-         console.log(response.data.comments+' RESPONSE DATA COMMENTS')
+        // console.log(response.data.comments+' RESPONSE DATA COMMENTS')
          //page===1?setinformation(response.data):setinformation(information.concat(response.data))
          if(response.data.message!="No Comment!"){
           await setinformation(information=>[...information,...response.data.comments])
@@ -475,7 +475,7 @@ const Comment = (prop) => {
             avatar={styles.avatar}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} selectt={selecttime} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            date={item.sendtime.toString().split('T')[0]} selectt={selecttime} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} kdelete={delet} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
