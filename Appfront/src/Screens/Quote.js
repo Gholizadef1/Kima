@@ -93,7 +93,7 @@ console.log(selectedValue+"selected Value")
   const maxnumber = 500;
   const [numcolor, setnumcolor] = useState('green');
   const [currentnumber, setcurrentnumber] = useState(0);
-  const[selecttime,setselecttime]=useState(true)
+  const[selecttime,setselecttime]=useState("none")
   const equal = async (item) => {
 
     setIDD(await AsyncStorage.getItem('id').toString());
@@ -147,11 +147,16 @@ console.log(selectedValue+"selected Value")
     const id = prop.route.params.id
     console.log(id)
     console.log(page + 'PAGE')
+    var a=""
+    if(selecttime==="none")
+    a="time";
+    else
+    a="like"
     try {
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get('book/' + id + "/quote", {
         params: {
-          filter: likeotime,
+          filter: a,
           page: page
         },
         "headers":
@@ -197,31 +202,41 @@ console.log(selectedValue+"selected Value")
 
   useFocusEffect(
     React.useCallback(() => {
-      const a = new Promise(async (resolve, reject) => {
+      const a=new Promise(async(resolve,reject)=>{
         await setinformation([]);
         await setpage(1);
+        await settheend(false);
+        console.log("toye use focus effectt ")
+        if(selecttime==="none"){
+          setlikeotime("time")
+        }
+        else{
+          setlikeotime("like")
+        }
         //await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
-        //تاثیری نداشتن :/
-        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-        // await settimelable("فیلتر بر اساس تاریخ")
-        if (selectedValue === "none")
-          await setlikeotime("time");
-        else
-          await setlikeotime("like");
-        await setselectedValue('none')
+      //   await setselectedValue('like')
+      //   //تاثیری نداشتن :/
+      //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+      //   // await settimelable("فیلتر بر اساس تاریخ")
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
-      }).then(() => {
-        console.log('++++++++++' + information + '**********')
-        response(1);
-        console.log('++++++++++' + information + '**********')
+      }).then(()=>{
+      console.log('++++++++++' + information + '**********')
+      response(1);
+      console.log('++++++++++' + information + '**********')
       })
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation]))
+    }, [prop.navigation,selecttime])
+
+  )
   const renderInner = () => {
     return (
       // console.log('inner');

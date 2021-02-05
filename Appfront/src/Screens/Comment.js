@@ -90,6 +90,8 @@ const Comment = (prop) => {
     a="time";
     else
     a="like"
+    console.log(a+"aaaaaa")
+    console.log((await AsyncStorage.getItem('token')).toString())
     try {
       // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
@@ -107,6 +109,7 @@ const Comment = (prop) => {
       })
       console.log(count+'  count   dfajd;lfkjs;lkfj')
        console.log(response.data.comments)
+      
       await setcount(response.data.count);
       //console.log(response)
       console.log(count+' COUNT COUNT COUNT COUNT COUTN')
