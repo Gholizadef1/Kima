@@ -33,8 +33,9 @@ console.log(selectedValue+"selected Value")
   const callbackFunction = async (childData) => {
     if (childData === true) {
       // await setrefresh(childData)
-      console.log('TRUE')
-      await response(1)
+      // console.log('TRUE')
+      // await response(1)
+  
       // if(finfo===true)
       // await setfinfo(false);
       // else
@@ -82,6 +83,7 @@ console.log(selectedValue+"selected Value")
   const [loading, setloading] = useState(false);
   const [page, setpage] = useState(1);
   const [liked, setliked] = useState(false);
+  
   const [like, setlike] = useState('gray')
   const [close, setclose] = useState(false);
   const [information, setinformation] = useState([]);
@@ -234,7 +236,7 @@ console.log(selectedValue+"selected Value")
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation,selecttime])
+    }, [prop.navigation,selecttime,delet])
 
   )
   const renderInner = () => {
@@ -501,7 +503,7 @@ console.log(selectedValue+"selected Value")
 
             renderItem={({ item }) => (<><Quotecrad name={item.account.username}
               isliked={item.isliked}
-              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
+              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={setdelet} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
               picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
 
 

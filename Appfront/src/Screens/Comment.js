@@ -192,7 +192,7 @@ const Comment = (prop) => {
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation,selecttime])
+    }, [prop.navigation,selecttime,delet])
 
   )
   const handleLoadMore = async() => {
@@ -475,7 +475,7 @@ const Comment = (prop) => {
             avatar={styles.avatar}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} selectt={selecttime} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            date={item.sendtime.toString().split('T')[0]} selectt={selecttime} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
