@@ -349,6 +349,9 @@ const Commentcard = (prop) => {
             }
           })
             .then(async function (response) {
+              if(prop.selectt==="like"){
+                await(prop.DELETE(true))
+              }
               setnumlike(response.data.LikeCount)
              // if(like==='lightblue')
              setlike('#1f7a8c')
@@ -376,6 +379,9 @@ const Commentcard = (prop) => {
             }
           })
             .then(async function (response) {
+              if(prop.selectt==="like"){
+                await(prop.DELETE(true))
+              }
               setnumlike(response.data.LikeCount)
               //if(like==='lightblue')
               //setlike('#1f7a8c')
@@ -460,6 +466,9 @@ const Commentcard = (prop) => {
             }
           })
             .then(async function (response) {
+              if(prop.selectt==="like"){
+                await(prop.DELETE(true))
+              }
               setnumdislike(response.data.DislikeCount)
               //if(dislike==='#F2A4A3')
               setdislike('#E64846')
@@ -487,6 +496,9 @@ const Commentcard = (prop) => {
             }
           })
             .then(async function (response) {
+              if(prop.selectt==="like"){
+                await(prop.DELETE(true))
+              }
               setnumdislike(response.data.DislikeCount)
              // if(dislike==='#F2A4A3')
               //setdislike('#E64846')
