@@ -157,7 +157,7 @@ console.log(photoo+" photo")
             console.log(prop.moreclickedD+' PROP MORE CLICKED IN EACHGROUP')
             //setmoreclicked(true)
             //prop.gotogp(false);
-             await prop.moreclickedd(true);
+             await prop.moreclickedd(true,prop.id);
             console.log(prop.moreclickedD+' PROP MORE CLICKED IN EACHGROUP')
     
             // if(likeshode===true)

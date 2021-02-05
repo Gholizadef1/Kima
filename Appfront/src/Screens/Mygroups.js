@@ -41,7 +41,12 @@ const userschema=yup.object({
 const Mygroups = (prop) => {
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
-  
+  const callbackFunction = async (childData,id) => {
+    prop.navigation.navigate('ShowGroupPage', { id: id })
+
+    await setmoreclicked(childData)
+
+  }
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
@@ -127,6 +132,7 @@ const Mygroups = (prop) => {
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
+    const [moreclicked, setmoreclicked] = useState(false);
     // cosnt [closee,setclosee]=useState(false);
    const [count,setcount]=useState(1);
   // let count=0;
@@ -609,7 +615,7 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {/* {item.is_owner||item.is_member? */}
-            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
+            <Eachgroup groupphoto={item.group_photo} id={item.id} membernumber={item.members_count} moreclickedd={callbackFunction} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
             {/* :null} */}
             </TouchableOpacity>
             </>

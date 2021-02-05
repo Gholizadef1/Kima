@@ -266,7 +266,8 @@ const Groups = ({ navigation }) => {
       }
     }
   };
-  const callbackFunction = async (childData) => {
+  const callbackFunction = async (childData,id) => {
+    navigation.navigate('ShowGroupPage', { id: id })
 
     await setmoreclicked(childData)
 
@@ -551,14 +552,14 @@ const Groups = ({ navigation }) => {
 
                 console.log(moreclicked + ' MORECLICKED in grouppppppp')
 
-                if (moreclicked === false) {
-                  //if(gotogrouppage===true){
-                  console.log(item.id + '####')
+                // if (moreclicked === false) {
+                //   //if(gotogrouppage===true){
+                //   console.log(item.id + '####')
                   //setgotogrouppage(false)
                   //setmoreclicked(true);
                   console.log(moreclicked + ' MORECLICKED in grp')
                   navigation.navigate('ShowGroupPage', { id: item.id })
-                }
+              //  }
               }}>
               <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
                 discription={item.summary} title={item.title} >
