@@ -311,14 +311,14 @@ const Bookview = (prop) => {
                 });
               }}>
               <Text style={{ color: '#1F7A8C' }}>بیشتر...</Text>
-            </Button >
+            </Button>
             : null}
 
           {comments != "No Comment!" ?
             <ScrollView>
               <View style={{ alignItems: 'flex-start' }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
-              </View >
+              </View>
               <ScrollView>
                 <View style={{ alignItems: 'flex-start' }}>
                   <FlatList
@@ -338,8 +338,8 @@ const Bookview = (prop) => {
                     renderItem={({ item }) => <>
                       <View style={{}}>
                         <Card style={styles.cardChat}>
-                          {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
-                            source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
+                          {item.account.profile_photo != '/media/default.png' ? <Avatar.Image
+                            source={{ uri: item.account.profile_photo }}
                           ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                             source={require('../../assets/group.jpg')}
                           ></Avatar.Image>}
@@ -413,8 +413,8 @@ const Bookview = (prop) => {
                   renderItem={({ item }) => <>
                     <View style={{}}>
                       <Card style={styles.cardChat2}>
-                        {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
-                          source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
+                        {item.account.profile_photo != '/media/default.png' ? <Avatar.Image
+                          source={{ uri:item.account.profile_photo }}
                         ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                           source={require('../../assets/group.jpg')}
                         ></Avatar.Image>}
@@ -450,7 +450,7 @@ const Bookview = (prop) => {
 
           <Card style={styles.cardChat3}>
             {user.profile_photo != '/media/default.png' ? <Avatar.Image
-              source={{ uri: "http://6ef98d38edf2.ngrok.io" + user.profile_photo }}
+              source={{ uri: "http://e7ae29f4056b.ngrok.io" + user.profile_photo }}
             ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
               source={require('../../assets/group.jpg')}
             ></Avatar.Image>}
