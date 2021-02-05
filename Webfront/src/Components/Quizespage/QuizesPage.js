@@ -48,13 +48,15 @@ function Quizespage (props){
       setIsMine(true);
     }
   }
-
+const [id,setId]= useState();
   useEffect(()=>{
     if(isMine){
       axios.get(API_BASE_URL+ `/user/${Cookies.get("userId")}/quiz`
      )
       .then(response=>{
-        console.log(response.data.Quiz)
+        console.log(response.data.Quiz[0].creator.username)
+        console.log(response.data.Quiz[0].id)
+
         setGroups(response.data.Quiz);
           console.log("f")
         })}
@@ -248,10 +250,11 @@ const handleCloseSnack = (event, reason) => {
                       <div className="align-items-center m-3">
                         <h6 class="card-subtitle pb-3  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
-
+                        
                         {(isMine === true &&(current.creator.username === Cookies.get("userName") || current.is_none===false)) || (isMine===false&& current.is_none === false) ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
+          
                         </div>
                         :
                         

@@ -153,8 +153,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   const leaveGroup = ()=>{
     console.log(Cookies.get("userToken"));
     axios.delete(
-      API_BASE_URL+ `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
-    
+      API_BASE_URL + `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
     {
       headers:{
         "Content-Type":"application/json",
@@ -338,12 +337,14 @@ import Tooltip from '@material-ui/core/Tooltip';
   </b>
   <b style={{position:'relative'}}>{ginfo.title}</b>
   </div>
-  <div className="ml-3">
-                <small className="creator">
+  <div className="cont">
+                <small className="creator pr-2">
                 <AiFillStar></AiFillStar>
-                {creatoreg}
-                :سازنده
+                سازنده:
+                </small>
+                <small className="creatorb pl-3">{creatoreg}
                 <AiFillStar></AiFillStar>
+
                 </small>
                </div>
 
@@ -375,9 +376,11 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
+                      
+                سازنده:
+                </small>
+                <small>
                 {current.creator.username}
-                :سازنده
-                
                 </small>
                 <div className="text-right name-d" >
                
@@ -481,11 +484,13 @@ import Tooltip from '@material-ui/core/Tooltip';
             
           <li class="list-group-item py-1">
           <div className="text-left">
-                <small className="creator">
-                {current.creator.username}
+                <small className="creator text-right">
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+</div>
                 <div className="text-right name-d" >
 
                 <Tooltip  title= {<div style={{color: "white",
@@ -567,10 +572,12 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+            </div>
                 <div className="text-right name-d" >
                
 
@@ -646,10 +653,12 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+</div>
                 <div className="text-right name-d" >
                
                <p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
@@ -766,10 +775,12 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+</div>
                 <div className="text-right name-d" >
                
 

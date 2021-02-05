@@ -124,7 +124,7 @@ const handleCloseSnack = (event, reason) => {
         
       }
       else if(i.key !='1' && i.key!='2' && i.key!='3' && i.key!='4'){
-        setMassage(' لطفاً کاراکترهای موردنظر را برای پاسخ درست وارد کنید')
+        setMassage(' لطفاً عددهای موردنظر را برای پاسخ درست وارد کنید')
         setOpenSnack(true);
         console.log(i.key);
         validate = false;
@@ -178,10 +178,15 @@ const handleCloseSnack = (event, reason) => {
    "Authorization":"Token "+Cookies.get("userToken")}
     }
   ).then(response=>{    
-    console.log(response);
+    console.log(response.data.Quiz.id);
     if(response.data.message === "Your quiz successfully created!"){
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
+      var id = response.data.id;
+      
+        console.log(id);
+        props.history.push( '/reviewQuiz/' + response.data.Quiz.id );
+      
     }
     
   })
