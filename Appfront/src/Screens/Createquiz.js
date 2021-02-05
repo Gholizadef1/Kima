@@ -115,7 +115,8 @@ const Createquiz = () => {
             .min(3, "اسم گروه نمیتواند کم تر از 3 حرف باشد"),
 
         description: yup.string()
-            .required("توضیحات گروه نمیتواند خالی باشد"),
+            .required("توضیحات گروه نمیتواند خالی باشد")
+            .max(600, "توضیحات کوییز شما طولانی تر از حداکثر مقدار قابل قبول است")
     });
     //  const [questions,setquestions]=[{question:"",a:"",b:"",c:"",d:"",key:""}];
     return (

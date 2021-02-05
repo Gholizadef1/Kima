@@ -39,8 +39,12 @@ const userschema=yup.object({
 })
 
 const Mygroups = (prop) => {
+
+
+  
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
+  const [iddd,setiddd]=useState();
   const callbackFunction = async (childData,id) => {
     prop.navigation.navigate('ShowGroupPage', { id: id })
 
@@ -113,12 +117,19 @@ const Mygroups = (prop) => {
       }
   
   }
+  
     const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
     const checkisowner=async(ID)=>{
-      console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
-      const id=await(AsyncStorage.getItem('id'))
-      if(id===ID){
+    // if(id===response.data.groups.owner.id){}
+
+      console.log(ID+"  didifiهیییکنبکمنتیشکبمنتکبمنیتکشمنبیتکمنشبتیکadf")
+      //console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
+      //const id=await(AsyncStorage.getItem('id'))
+      console.log(id===ID)
+      console.log("    amosavi MOSAVI")
+      console.log(id+"iddl;kf;lksjd;lfkj;dslkjf;lksdjf;lkjsf;lkdsjf;lkjsaf;lkjsadf;lkjsa;lkfj;slkdfj;lskdfj")
+      if(await(AsyncStorage.getItem('id'))===ID){
         return true;
       }
       else
@@ -135,11 +146,13 @@ const Mygroups = (prop) => {
     const [moreclicked, setmoreclicked] = useState(false);
     // cosnt [closee,setclosee]=useState(false);
    const [count,setcount]=useState(1);
+   const [isonwerrr,setisonwerrr]=useState(false);
   // let count=0;
   const response=async (page)=>{
-
+      setiddd(await(AsyncStorage.getItem('id')))
     // await setinformation(null)
     await (console.log(await(AsyncStorage.getItem('token'))))
+    await (console.log(await(AsyncStorage.getItem('id')+"      f نکتمنت kd;lkکنمتتکنتlk;aj lk    l;kj adf")))
    
     await setpage(page);
     console.log(page+' PAGEEEEEEEEEEEEEEEEPAGEEEEEEEEEE')
@@ -192,7 +205,6 @@ const Mygroups = (prop) => {
   //  }
   //  if(numberofgp===0)
   //  settheend(true)
-
    console.log(numberofgp/10+'number of group ////////10')
    console.log(numberofgp+'   !!!!!!!!!  '+numberofgp)
    console.log(response.data)
@@ -615,14 +627,14 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {/* {item.is_owner||item.is_member? */}
-            <Eachgroup groupphoto={item.group_photo} id={item.id} membernumber={item.members_count} moreclickedd={callbackFunction} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
+            <Eachgroup groupphoto={item.group_photo} id={item.id} membernumber={item.members_count} moreclickedd={callbackFunction} isowner={async()=>{await AsyncStorage.getItem("id")===item.owner.id}} discription={item.summary} title={item.title} ></Eachgroup>
             {/* :null} */}
             </TouchableOpacity>
             </>
             )}
           // extraData={finfo}
           >
-          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
+          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید یا عضو گروهی شوید</Text>}
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,

@@ -16,7 +16,7 @@ import Groups from './Groups';
 
 
 const Eachgroup = (prop) => {
-
+console.log(JSON.stringify(prop.isowner)+"k   IS OWNERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
   const [more, setmore] = useState(false);
   const [kamshodde, setkamshodde] = useState();
   const [kamshodde2, setkamshodde2] = useState();
