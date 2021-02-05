@@ -70,7 +70,7 @@ console.log(photoo+" photo")
       setphotoo(prop.groupphoto)
     }
     else{
-      setphotoo("http://e7e864967156.ngrok.io"+prop.groupphoto)
+      setphotoo("http://e7ae29f4056b.ngrok.io"+prop.groupphoto)
     }
   },[])
 
@@ -98,7 +98,7 @@ console.log(photoo+" photo")
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => {}}>
-       {photoo === 'e7e864967156.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+       {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),

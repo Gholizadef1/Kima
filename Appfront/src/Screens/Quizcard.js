@@ -24,14 +24,17 @@ const Eachgroup = (prop) => {
   const [comment4,setcomment4]=useState();
   const [linenumber,setlinenumber]=useState();
   const [photoo,setphotoo]=useState();
- console.log(prop.quizphoto+" quiz photo");
+ //console.log(prop.quizphoto+" quiz photo");
   useEffect(()=>{
     if(prop.quizphoto.toString().split(":")[0]==="http"){
       setphotoo(prop.quizphoto)
     }
     else{
-      setphotoo("http://e7e864967156.ngrok.io"+prop.quizphoto)
+      setphotoo("http://e7ae29f4056b.ngrok.io"+prop.quizphoto)
     }
+
+
+    console.log(photoo+" quiz photo");
     var commentt = `${prop.discription}`.toString();
     var linenumberr = (commentt.split('').length)
     console.log(linenumberr+" prop discription")
@@ -78,7 +81,7 @@ const Eachgroup = (prop) => {
 
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {photoo === 'http://e7e864967156.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+          {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/quizz.png')}
             style={{
