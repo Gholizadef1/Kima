@@ -100,33 +100,33 @@ const Quote = (prop) => {
   }
   const changecolor = (val) => {
     console.log("adfksahf")
-    if(val<50){
-      return("green")
+    if (val < 50) {
+      return ("green")
     }
     else if (val >= 50 && val < 300) {
       console.log("adfksahflkjshflkjhafslkjhsalkjfhlkasjhfdlkjhaslkfjhsalkfjhlskjfhdlkjsahf")
-     // setnumcolor('#2a9d8f')
-     return('#2a9d8f')
+      // setnumcolor('#2a9d8f')
+      return ('#2a9d8f')
     }
-    else if(val>=300 && val<=350){
-      return("#3ECCBB")
+    else if (val >= 300 && val <= 350) {
+      return ("#3ECCBB")
     }
-    else if(val>=350 && val<400){
-      return("#BFEEE8")
+    else if (val >= 350 && val < 400) {
+      return ("#BFEEE8")
     }
-    else if(val>400&&val<=420){
-      return("#F7BC8D")
+    else if (val > 400 && val <= 420) {
+      return ("#F7BC8D")
     }
-    else if(val>420 && val<=440){
+    else if (val > 420 && val <= 440) {
       return ("#F0852D")
     }
-    else if(val>440&&val<=480){
-      return("#EB886F")
+    else if (val > 440 && val <= 480) {
+      return ("#EB886F")
     }
     else {
-      return("red")
+      return ("red")
     }
-   
+
   }
   const response = async (page) => {
     //توی پست کردن توی باتم شیت انگار مهمه که بگم ریسپانس چه صفحه ای توی اینکه کجا کوت جدید بیاد
@@ -285,8 +285,8 @@ const Quote = (prop) => {
                     //   setnumcolor('#2a9d8f')
                     // }
                     // else { }
-                 // }
-                    changecolor(props.values.comment.length,setnumcolor)
+                    // }
+                    changecolor(props.values.comment.length, setnumcolor)
                     // function changecolor(props.values.comment.length){
 
                     // console.log("adfksahf")
@@ -389,14 +389,19 @@ const Quote = (prop) => {
           containerStyle={{ height: 40, width: wp('50%'), marginBottom: hp('4%') }}
           style={{
 
-            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'), marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 17, borderTopRightRadius: 17,
-            borderBottomLeftRadius: 17, borderBottomRightRadius: 17, marginLeft: wp('5%')
+            borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'),
+            marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('5%')
           }}
           itemStyle={{
 
             justifyContent: 'flex-start'
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa', marginLeft: wp('5%'), width: wp('50%'), position: 'absolute', marginBottom: hp('10%') }}
+          dropDownStyle={{
+            backgroundColor: '#fafafa',
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'),
+            width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
+          }}
           onChangeItem={async (item) => {
 
             if (item.value === 'none') {
