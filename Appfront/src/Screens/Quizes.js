@@ -133,6 +133,7 @@ const Quizes = (prop) => {
   const [moreclicked,setmoreclicked]=useState(false);
   const [isowner,setisowner]=useState(false);
   const [searchposition,setsearchposition]=useState("77%");
+  const [backsearch,setbacksearch]=useState(false);
   const checkisowner=async(ID)=>{
     const id=await(AsyncStorage.getItem('id'))
     if(id===ID){
@@ -275,28 +276,42 @@ const Quizes = (prop) => {
  
     useFocusEffect(
       React.useCallback(() => {
-    // React.useCallback(() => { 
-      setsearchterm('')
-      setnumberofresults()
-        setinformation([])
-    // if(searchterm==='')  
-      response(1) 
-      // async function refreshing(){ 
-      // // setmoreclicked(false)
-      setselectedValue('none')
-      //   setsearchterm('')
-      //   setnumberofresults()
-      //    await setinformation([])
-      // // if(searchterm==='')  
-      //   response(1)
-      // }
-        // else
-        // searchpost(1)
-    // }
-    // ,[])
-  }, [prop.navigation])
-
-  )
+        const a = new Promise(async (resolve, reject) => {
+          await setopensearch(false);
+          await setinformation([]);
+          await setpage(1);
+          setsearchterm('');
+          setnumberofresults(undefined);
+          await settheend(false);
+          console.log("toye use focus effectt ")
+          // if (selecttime === "none") {
+          //   setlikeotime("time")
+          // }
+          // else {
+          //   setlikeotime("like")
+          // }
+          //await setselecttime(true)
+          //با این ظاهرا درست شد :/
+          //   await setselectedValue('like')
+          //   //تاثیری نداشتن :/
+          //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          //   // await settimelable("فیلتر بر اساس تاریخ")
+          //   if(selectedValue==="none")
+          //  await setlikeotime("time");
+          //  else
+          //  await setlikeotime("like");
+          //  await setselectedValue('none')
+  
+          resolve()
+        }).then(() => {
+          console.log('++++++++++' + information + '**********')
+          response(1);
+          console.log('++++++++++' + information + '**********')
+        })
+        // //   console.log('Listenn')
+        // alert('in')
+        //   return() => alert('lost')
+      }, [prop.navigation,backsearch]))
   return (
 
     <View style={styles.container}>
@@ -309,14 +324,20 @@ const Quizes = (prop) => {
       marginLeft:wp('87%')
           }}
           onPress={async()=>{
+            if(backsearch===true){
+              setbacksearch(false)
+              }
+              else{
+                setbacksearch(true)
+              }
          // await setsearchposition("77%")
-          setinformation([]);
-          setpage(1)
-          response(1);
-          setsearchterm('');
-          setnumberofresults();
-          setopensearch(false)}
-          }
+          // setinformation([]);
+          // setpage(1)
+          // response(1);
+          // setsearchterm('');
+          // setnumberofresults();
+          // setopensearch(false)}
+          }}
        />
      <Searchbar
       placeholder="Search"
@@ -502,7 +523,8 @@ const Quizes = (prop) => {
              // await setsearchposition("77%")
               // await setsearchterm('')
               if(searchterm===''){
-               await(setnumberofresults())
+                await setopensearch(false);
+               await(setnumberofresults(undefined))
               await setrefresh(true)         
               // await setinformation([]);
               // await setpage(1);
