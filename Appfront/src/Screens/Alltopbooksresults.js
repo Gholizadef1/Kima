@@ -29,7 +29,7 @@ const Allsearchresults = (prop) => {
         //console.log(searchTerm + "  SEARCHTERMAUTHORAPI")
         try {
     
-          const response = await axiosinst.get('/books?page='+page)
+          const response =   axiosinst.get('/book?filter=rate&page='+page)
           
         
           setnext(response.data.next)
