@@ -18,6 +18,8 @@ import Groups from './Groups';
 const Eachgroup = (prop) => {
 
   const [more, setmore] = useState(false);
+  const [kamshodde, setkamshodde] = useState();
+  const [kamshodde2, setkamshodde2] = useState();
   console.log(prop.groupphoto);
   console.log(prop.isownerid+";kasfj;lsf;lkjsf;lakj;slk;lskfj;lkj")
   const [showmore, setshowmore] = useState('بیشتر...');
@@ -45,6 +47,24 @@ const Eachgroup = (prop) => {
  
 console.log(photoo+" photo")
   useEffect(()=>{
+    var kamshode = "";
+    var a = prop.title.toString();
+    var b = a.lenght;
+    for (var i = 0; i <= 18; i++) {
+      if (a[i] != undefined) {
+        kamshode += a[i]
+        // console.log(kamshode);
+      }
+    }
+  
+    if (a === kamshode) {
+      //  setsenoghte(false)
+    }
+    else {
+      //setsenoghte(true);
+      kamshode += "..."
+    }
+    setkamshodde(kamshode);
 
     if(prop.groupphoto.toString().split(":")[0]==="http"){
       setphotoo(prop.groupphoto)
@@ -102,7 +122,7 @@ console.log(photoo+" photo")
      </TouchableOpacity>
      {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
 
-     <Text style={styles.username}>{prop.title}</Text>
+     <Text style={styles.username}>{kamshodde}</Text>
      {/* prop.isownerid===new Promise(async(resolve,reject)=>{return(await AsyncStorage.getItem("id"))}) */}
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>

@@ -125,6 +125,8 @@ const Groups = ({navigation}) => {
   const searching=(term)=>setsearchterm(term);
   const [moreclicked,setmoreclicked]=useState(false);
   const [isowner,setisowner]=useState(false);
+
+
   const checkisowner=async(ID)=>{
     const id=await(AsyncStorage.getItem('id'))
     if(id===ID){
@@ -192,6 +194,7 @@ console.log(await AsyncStorage.getItem('token'));
     //let alaki=[...information]
     //alaki+=response.data.results;
     //await setinformation(alaki);
+    
     //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
      setrefresh(false)
      setinformation(information=>[...information,...response.data.groups])
