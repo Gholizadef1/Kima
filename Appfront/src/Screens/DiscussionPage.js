@@ -25,112 +25,26 @@ const DiscussionPage = (prop) => {
     const [loading, setloading] = useState(true)
     const [refreshchats, setrefreshchats] = useState(false)
     const [picture, setpicture] = useState(null);
-    const [chats, setChats] = useState();
+    const [chats, setChats] = useState([]);
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
+    const [chatsPage, setChatsPage] = useState(1);
+    const [chatAgain, setchatAgain] = useState(0);
     const [theend, settheend] = useState(false)
-    const [information, setinformation] = useState([]);
-    const [count, setcount] = useState(1);
+    const [chatsCount, setChatsCount] = useState();
+    const [counter, setCounter] = useState();
+    const [delet, setdelet] = useState(false)
+    const [refresh, setrefresh] = useState(false);
+    const [count,setcount]=useState(1);
+
     const [page, setpage] = useState(1);
-
-    const response = async (page) => {
-        console.log('PAGEEEE' + page)
-        console.log('DOVOM')
-        await setpage(page)
-        console.log('PAGEEEE' + page)
-        if (page === 1) {
-            console.log('PAGE 111')
-            await settheend(false)
-            await setinformation([])
-
-            console.log('IT IS HEAR SET INFO []')
-            console.log(information)
-
-        }
-        // await settheend(false)
-        // await setinformation([])
-        const id = prop.route.params.id
-        console.log(id)
-        console.log(await (await AsyncStorage.getItem('token')).toString())
-        console.log(await (await AsyncStorage.getItem('id')).toString())
-
-        try {
-            // await setTimeout(() => {  console.log("World!"); }, 5000);
-            setIDD(await (await AsyncStorage.getItem('id')).toString())
-            const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
-                // params: {
-                //     page: page
-                // },
-                "headers":
-                {
-                    "Content-Type": "application/json",
-                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-                }
-
-            })
-            console.log(count + '  count   dfajd;lfkjs;lkfj')
-            console.log(response.data.chats)
-            await setcount(response.data.count);
-            //console.log(response)
-            console.log(count + ' COUNT COUNT COUNT COUNT COUTN')
-            console.log(response.data.count + ' COUNTTTTTTTTTTTT')
-            if (response.data.detail === 'Invalid page.')
-                settheend(true);
-            else {
-                settheend(false)
-                console.log(IDD + 'IDDresponse');
-                //  console.log(response.data)
-                console.log('++++INFO++++' + information + "++++INFO++++" + '11111')
-                // console.log(information)
-                console.log('RESPONSE DATE')
-                //console.log(response.date)
-                console.log(response.data.chats + ' RESPONSE DATA COMMENTS')
-                //page===1?setinformation(response.data):setinformation(information.concat(response.data))
-                if (response.data.message != "No Comment!") {
-                    await setinformation(information => [...information, ...response.data.chats])
-                }
-                else {
-                    setinformation(undefined)
-                }
-
-                console.log('++++INFO++++' + information + "++++INFO++++" + '22222')
-                //console.log(information)
-                setrefresh(false)
-                //     setloading(false);
-            }
-            //  console.log(information[0])
-        }
-        catch (err) {
-
-            // else if(theend===true)
-            // settheend(false)
-            setrefresh(false)
-            console.log(err.toString().split('\n')[0])
-            if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
-                settheend(true);
-            // else if(theend===true)
-            // settheend(false)
-            console.log(theend + 'THE ENDDD')
-            console.log(err);
-
-        }
-    }
-
-    const handleLoadMore = async () => {
-        console.log('END OF THE LIST')
-        if (page < count) {
-            console.log(page + 'PAGEDEEFFDHASKDFJLSKFH')
-            console.log(count + 'C OUNT ASKDFJ;LKSFJ')
-            if (theend === false)
-                response(page + 1);
-        }
-        else {
-            settheend(true)
-        }
-    };
+    const [idd,setidd]=useState();
+    
+   const getid=async()=>{
+        return(await AsyncStorage.getItem("id"))
+   }
 
     useEffect(() => {
-        getChats()
         getUsername()
     }, []);
 
@@ -138,43 +52,137 @@ const DiscussionPage = (prop) => {
         const id = await AsyncStorage.getItem('id');
         const response = axiosinst.get('/user/' + id)
             .then(function (response) {
-                console.log('USERNAME' + response.data.username)
                 setusername(response.data.username)
             })
     };
 
-    const getChats = async () => {
 
-        axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
-            params: {
-                page: page
-            },
+
+
+
+
+    const getChats = async (page) => {
+        await setpage(page)
+        console.log('PAGEEEE' + page)
+        if (page === 1) {
+            console.log('PAGE 111')
+            await settheend(false)
+            await setChats([])
+
+            console.log('IT IS HEAR SET INFO []')
+            console.log(chats)
+
+        }
+        console.log(await (await AsyncStorage.getItem('id')).toString())
+        axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
             "headers": {
-                "content-type": "application/json",
+                "content-type": "a`pplication/json",
                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
             }
         })
-            .then(function (response) {
-                setChats(response.data.chats)
-                setloading(false)
+            .then(async function (response) {
+                setidd(await AsyncStorage.getItem("id"))
+                await setcount(response.data.count);
+                
+                settheend(false)
+               
+                //  console.log(response.data)
+                
+                console.log('++++INFO++++' + JSON.stringify(chats) + "++++INFO++++" + '11111')
+                // console.log(chats)
+                console.log('RESPONSE DATE')
+                //console.log(response.date)
+                console.log(response.data.chats + ' RESPONSE DATA COMMENTS')
+                //page===1?setchats(response.data):setchats(chats.concat(response.data))
+                await setChats(chats => [...chats, ...response.data.chats])
+                // if (response.data.message != "No Comment!") {
+                //     await setChats(chats => [...chats, ...response.data.chats])
+                // }
+                // else {
+                //     setChats(undefined)
+                // }
+
+                console.log('++++INFO++++' +  JSON.stringify(chats) + "++++INFO++++" + '22222')
+                //console.log(chats)
+                setrefresh(false)
+                // setChats(response.data.chats)
+                // setChatsCount(response.data.count)
+                // setloading(false)
             })
 
             .catch(async function (error) {
+                setrefresh(false)
                 console.log(error);
                 console.log(error.code + 'ERROR CODE')
             });
     }
-    //   console.log('CHATT'+chats.chat_text)
-    //   console.log('USERR'+chats.user.username)
+    useEffect(() => {
+        const a = new Promise(async (resolve, reject) => {
+            await setChats([]);
+            await setpage(1);
+            await settheend(false);
+            console.log("toye use focus effectt ")
+            // if (selecttime === "none") {
+            //     setlikeotime("time")
+            // }
+            // else {
+            //     setlikeotime("like")
+            // }
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
-            </View>
-        );
-    }
-    else {
+            resolve()
+        }).then(() => {
+            console.log('++++++++++' + chats + '**********')
+            getChats(1);
+            console.log('++++++++++' + chats + '**********')
+        })
+    }, [prop.navigation,delet])
+
+
+    // }, [chatsPage, chatAgain, groupid, discussionid]);
+
+    // const handleLoadMore = async () => {
+
+    //     if (chatsPage < chatsCount) {
+    //             setChatsPage(chatsPage + 1)
+    //             getChats(chatsPage)
+    //             setchatAgain(0)
+    //     }
+    //     else {
+    //         settheend(true)
+    //     }
+    // };
+
+
+    const handleLoadMore = async () => {
+        
+        // if(selecttime==="none"){
+        //   setlikeotime("time")
+        // }
+        // else
+        // {
+        //   setlikeotime("like")
+        // }
+        console.log('END OF THE LIST')
+        if (page < count) {
+            console.log(page + 'PAGEDEEFFDHASKDFJLSKFH')
+            console.log(count + 'C OUNT ASKDFJ;LKSFJ')
+            if (theend === false)
+                getChats(page + 1);
+        }
+        else {
+            settheend(true)
+        }
+    };
+
+
+    // if (loading) {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+    //         </View>
+    //     );
+    // }
+    // else {
         return (
             <View style={styles.container}>
                 <View>
@@ -182,7 +190,13 @@ const DiscussionPage = (prop) => {
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                 <TouchableOpacity style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%'), height: hp('5%'), width: wp('8%'), backgroundColor: 'white', position: 'absolute' }} onPress={() => setModalVisible(false)}>
-                                    <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }} onPress={() => setModalVisible(false)}
+                                    <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }} onPress={() =>{
+                                        if(delet===false)
+                                        setdelet(true)
+                                        // avordan
+                                        else
+                                        setdelet(false)
+                                        setModalVisible(false)}}
                                         name="close" size={23} color="#D75A5A" />
                                 </TouchableOpacity>
                                 <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
@@ -195,9 +209,6 @@ const DiscussionPage = (prop) => {
                                         formdata.append('chat_text', values.Description)
 
                                         const response = await axiosinst.post('/group/' + groupid + '/discussion/' + discussionid + '/chat', formdata, {
-                                            params: {
-                                                page: page
-                                            },
                                             headers: {
                                                 "Content-Type": "application/json",
                                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -211,12 +222,14 @@ const DiscussionPage = (prop) => {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
                                                 ], { cancelable: false }, { style: { height: 50 } })
+                                                setchatAgain(chatAgain + 1)
                                                 getChats();
+
                                             })
                                             .catch(function (error) {
                                                 {
                                                     console.log(error)
-                                                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+                                                    Alert.alert('', '  مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
                                                         text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
                                                     }], { cancelable: false }, { style: { height: 50 } })
                                                 }
@@ -258,17 +271,15 @@ const DiscussionPage = (prop) => {
                     <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
                     <FlatList
                         style={{ marginBottom: hp('5%') }}
-                        showsVerticalScrollIndicator={true}
+                        removeClippedSubviews={true}
+                        showsVerticalScrollIndicator={false}
                         keyExtractor={(item) => item.id}
-                        refreshing={refreshchats}
-                        onRefresh={async () => {
-                            console.log('refresh')
-                        }}
                         data={chats}
+                        refreshing={refreshchats}
                         onEndReached={() => handleLoadMore()}
                         onEndReachedThreshold={0.7}
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
-                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('5%') }}>پیام دیگری وجود ندارد</Text></View>)}
+                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>پیام دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: hp('15.5%') }}
                         onRefresh={async () => {
                             await setrefresh(true)
@@ -277,16 +288,17 @@ const DiscussionPage = (prop) => {
 
                         }}
                         renderItem={({ item }) => <>
-                            {username === item.user.username ?
+                            { username===item.user.username ?
                                 <View style={{}}>
+                                {/* <Text style={{marginTop:hp("40%"),fontSize:20}}>a;dfj;alkdfj;lsakdfj</Text> */}
                                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                                         source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
                                     ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar}
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat}>
-                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                        <Text style={{ marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%'), color: 'black' }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%', marginBottom: hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
                                         <TouchableOpacity onPress={async () => {
                                             await Alert.alert(
@@ -313,6 +325,7 @@ const DiscussionPage = (prop) => {
                                                                             text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                                         }
                                                                     ], { cancelable: false }, { style: { height: hp('40%') } })
+                                                                    setchatAgain(chatAgain - 1)
                                                                     getChats();
                                                                 })
                                                                 .catch(function (error) {
@@ -325,8 +338,6 @@ const DiscussionPage = (prop) => {
                                                 ],
                                                 { cancelable: false }
                                             );
-
-                                            //  response();
                                         }}>
                                             <AntDesign name="delete" size={20} color="#1F7A8C" style={{ marginRight: wp('43%'), marginBottom: hp('1%'), marginTop: hp('-3%') }} />
                                         </TouchableOpacity>
@@ -339,8 +350,8 @@ const DiscussionPage = (prop) => {
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
-                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                        <Text style={{ color: 'black', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%' }}>{item.send_time.toString().split('T')[0]}</Text>
                                     </Card>
                                 </View>}
@@ -349,7 +360,7 @@ const DiscussionPage = (prop) => {
                     >
                     </FlatList>
 
-                    {chats.length === 0 ?
+                    {chats === [] ?
                         <Text style={{ marginLeft: wp('18%'), marginTop: hp('20%'), fontSize: 15, color: '#1F7A8C' }}>در این بحث تابحال صحبتی صورت نگرفته ...</Text> : null}
 
                     <Button onPress={() => setModalVisible(true)} style={{
@@ -369,7 +380,7 @@ const DiscussionPage = (prop) => {
             </View>
         )
     }
-}
+// }
 
 const styles = StyleSheet.create({
     container: {

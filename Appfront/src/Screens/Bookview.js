@@ -26,6 +26,7 @@ const Bookview = (prop) => {
   const [loading4, setloading4] = useState(true);
   const [refresh, setRefresh] = useState(true);
   const [result, setResult] = useState(null);
+  const [average, setAverage] = useState(null);
   const [picture, setpicture] = useState(null);
   const [more, setmore] = useState(false);
   const [showmore, setshowmore] = useState('بیشتر...');
@@ -53,7 +54,7 @@ const Bookview = (prop) => {
     getComments()
     getQoutes()
     getUsername()
-  }, [refresh]);
+  }, [average]);
 
   // const commentt = `${}`.toString();
   // const linenumber = (commentt.split('\n').length)
@@ -71,6 +72,7 @@ const Bookview = (prop) => {
         setloading(false)
         setResult(response.data.data);
         setSelectedValue(response.data.book_state)
+        setAverage(response.data.average_rating)
         console.log('SELECTED VALUEE ==' + selectedValue)
       })
       .catch(function (error) {
@@ -224,7 +226,7 @@ const Bookview = (prop) => {
           //console.log(response.data)
           //console.log('\n' + '++++++++' + '\n')
           setratenum(rate);
-          //console.log('&&' + rate);
+          getResult(id)
           if (response.data.message === "You rated this book already!!") {
             console.log('TOYE PUTTTTT')
             axiosinst.put('/book/' + id + '/rate', back, {
@@ -348,13 +350,16 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat}>
-                    {item.account.profile_photo != 'http://e7e864967156.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://e7e864967156.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                     <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
-                    <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text>
+                    {(item.comment_text.toString().length) <= 70 ?
+                      <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text> :
+                      <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text.substr(0, 110) + '...'}</Text>}
+
                   </Card>
                 </View>
               </>
@@ -414,15 +419,16 @@ const Bookview = (prop) => {
               renderItem={({ item }) => <>
                 <View style={{}}>
                   <Card style={styles.cardChat2}>
-                    <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.account.username}</Text>
-                    {(item.quote_text.toString().length) <= 100 ?
-                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
-                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('2%') }}>{item.quote_text.toString()}</Text>}
-                    {item.account.profile_photo != 'http://e7e864967156.ngrok.io/media/default.png' ? <Avatar.Image
-                      source={{ uri: "http://e7e864967156.ngrok.io" + item.account.profile_photo }}
+                    {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
+                      source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
+                    <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('-6%') }}>{item.account.username}</Text>
+                    {(item.quote_text.toString().length) <= 100 ?
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
+                      <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%') }}>{item.quote_text.substr(0, 110) + '...'}</Text>}
+
                   </Card>
 
                 </View>
@@ -448,7 +454,7 @@ const Bookview = (prop) => {
 
           <Card style={styles.cardChat3}>
             {user.profile_photo != '/media/default.png' ? <Avatar.Image
-              source={{ uri: "http://e7e864967156.ngrok.io" + user.profile_photo }}
+              source={{ uri: "http://6ef98d38edf2.ngrok.io" + user.profile_photo }}
             ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
               source={require('../../assets/group.jpg')}
             ></Avatar.Image>}
@@ -532,8 +538,8 @@ const styles = StyleSheet.create({
     marginTop: hp('5%')
   },
   avatar2: {
-    top: hp('1%'),
-    marginLeft: wp('20%')
+    top: hp('27%'),
+    marginLeft: wp('22%')
   },
   avatar3: {
     marginTop: hp('3%'),

@@ -51,8 +51,8 @@ const GroupPage = (prop) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [membernumber, setmembernumber] = useState();
   const [discussion, setdiscussion] = useState(undefined);
-  const [notjoinedloading,setnotjoinedloading]=useState(true);
- 
+  const [notjoinedloading, setnotjoinedloading] = useState(true);
+
   useEffect(() => {
     // setjoinedUser(false)
     // setowner(false)
@@ -79,54 +79,54 @@ const GroupPage = (prop) => {
           await setmembernumber(groupinfo.members_count);
           console.log('PHOTOOO' + response.data.group_photo)
           setgroupphoto(response.data.group_photo)
-          const id=await AsyncStorage.getItem("id");
-          console.log(id +"id")
-          console.log(response.data.owner.id+"  back id")
-          console.log((id.toString()=== response.data.owner.id.toString())+"  ownefi;wejf;lksd;lfkj;lasfj")
-          if ( id.toString()=== response.data.owner.id.toString()) {
+          const id = await AsyncStorage.getItem("id");
+          console.log(id + "id")
+          console.log(response.data.owner.id + "  back id")
+          console.log((id.toString() === response.data.owner.id.toString()) + "  ownefi;wejf;lksd;lfkj;lasfj")
+          if (id.toString() === response.data.owner.id.toString()) {
             console.log('@@@@@@@@@@owner')
             await setowner("owner")
           }
-        //  setloading2(false)
+          //  setloading2(false)
         })
     }
     getgroupDetails()
-  }, [join])
+  }, [join , membernumber])
 
   useEffect((async) => {
     async function getMembers() {
-      
-    // const [a,seta]=useState(undefined);
+
+      // const [a,seta]=useState(undefined);
       const response = axiosinst.get('/group/' + prop.route.params.id + '/member')
         .then(async function (response) {
           setmembers(response.data.members)
-          const id=await AsyncStorage.getItem("id");
+          const id = await AsyncStorage.getItem("id");
           console.log(response.data.members[0].user.profile_photo + " PROFILE PHOTOOOOO")
-         
-          console.log(id+" id user khodemoon")
-          console.log(response.data.members.length +" lenght member ha")
-        
+
+          console.log(id + " id user khodemoon")
+          console.log(response.data.members.length + " lenght member ha")
+
           for (let i = 0; i < response.data.members.length; i++) {
-            console.log((response.data.members[i].user.id.toString())+" user id back");
-            console.log(id.toString()+" id khodemoon toye for")
-          console.log(response.data.members[i].user.id.toString() === id.toString()+"  mosavi member ba ma yeki")
+            console.log((response.data.members[i].user.id.toString()) + " user id back");
+            console.log(id.toString() + " id khodemoon toye for")
+            console.log(response.data.members[i].user.id.toString() === id.toString() + "  mosavi member ba ma yeki")
             if (response.data.members[i].user.id.toString() === id.toString() && id.toString() != response.data.owner.id.toString()) {
               setjoinedUser("joinedUser")
-             
+
               console.log('%%%%%%%%%%%%%%%%%%%joineduser')
               break;
               // await seta(true)
             }
-            
+
           }
           setnotjoinedloading(false);
-         //if(joinedUser===undefined)
-       // if(a===false){
-      //     if (joinedUser === undefined && id.toString()!= response.data.owner.id.toString() ) {
-      //       setnotjoinedUser("notjoinedUser")
-      //       console.log("###############notjoineduser")
-      //     }
-      //  // }
+          //if(joinedUser===undefined)
+          // if(a===false){
+          //     if (joinedUser === undefined && id.toString()!= response.data.owner.id.toString() ) {
+          //       setnotjoinedUser("notjoinedUser")
+          //       console.log("###############notjoineduser")
+          //     }
+          //  // }
           setloading1(false)
         })
     }
@@ -156,15 +156,20 @@ const GroupPage = (prop) => {
       }
     })
       .then(async function (response) {
+        Alert.alert('', 'شما عضو گروه شدید ', [
+          {
+            text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+          }
+        ], { cancelable: false }, { style: { height: hp('40%') } })
         await setjoin(true)
         await getMembers()
       })
-     
+
       .catch(function (error) {
         console.log(error);
       });
   }
-console.log('groupiddd' +prop.route.params.id)
+  console.log('groupiddd' + prop.route.params.id)
   const LeaveGroup = async () => {
     const id = await AsyncStorage.getItem('id');
     axiosinst.delete('/group/' + prop.route.params.id + '/member/' + id, {
@@ -174,20 +179,12 @@ console.log('groupiddd' +prop.route.params.id)
       }
     })
       .then(async function (response) {
-        getMembers()
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  const deleteGroup = async () => {
-    axiosinst.delete('/group/' + prop.route.params.id, {
-      "headers": {
-        "content-type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-    })
-      .then(async function (response) {
+        Alert.alert('', 'شما گروه را ترک کردید', [
+          {
+            text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+          }
+        ], { cancelable: false }, { style: { height: hp('40%') } })
+
         prop.navigation.navigate('Groupmainpage')
       })
       .catch(function (error) {
@@ -214,11 +211,11 @@ console.log('groupiddd' +prop.route.params.id)
       });
   }
 
-  if (owner!=undefined || joinedUser !=undefined || (owner===undefined && joinedUser===undefined)) {
+  if (owner != undefined || joinedUser != undefined || (owner === undefined && joinedUser === undefined)) {
     return (
       <View style={styles.container}>
         <View>
-          <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom:hp('8%'), margin:wp('20%'), position: 'absolute' }} visible={modalVisible} animationType='fade' >
+          <Modal transparent={true} StatusBar={{ backgroundColor: 'blue' }} style={{ bottom: hp('8%'), margin: wp('20%'), position: 'absolute' }} visible={modalVisible} animationType='fade' >
 
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
@@ -250,14 +247,14 @@ console.log('groupiddd' +prop.route.params.id)
                           {
                             text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                           }
-                        ], { cancelable: false }, { style: { height: hp('40%')} })
+                        ], { cancelable: false }, { style: { height: hp('40%') } })
                         getDiscussion();
                       })
                       .catch(function (error) {
                         {
                           console.log(error)
 
-                          Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+                          Alert.alert('', ' مشکلی پیش اومده لطفا دوباره امتحان کن  ', [{
 
 
                             text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
@@ -324,7 +321,7 @@ console.log('groupiddd' +prop.route.params.id)
             }}
 
           ></Image>
-          <View style={{ position: 'absolute', backgroundColor: 'white', height:hp('60%'), width: wp('100%'), marginTop: hp('30%'), borderTopStartRadius: 30, borderTopEndRadius: 30 }}>
+          <View style={{ position: 'absolute', backgroundColor: 'white', height: hp('60%'), width: wp('100%'), marginTop: hp('30%'), borderTopStartRadius: 30, borderTopEndRadius: 30 }}>
 
           </View>
           {/* <View style={styles.view}> */}
@@ -333,9 +330,9 @@ console.log('groupiddd' +prop.route.params.id)
           </View>
 
 
-          {groupinfo.group_photo != '/media/default.png' ? <Avatar.Image style={styles.avatar}
+          {groupinfo.group_photo != '/media/default.png' ? <Avatar.Image
             source={{ uri: "http://a59dcb2a4875.ngrok.io" + groupinfo.group_photo }}
-          ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
+          ></Avatar.Image> : <Avatar.Image style={{marginLeft:wp('15%'),marginTop:hp('-9%')}} size={90}
             source={require('../../assets/group.jpg')}
           ></Avatar.Image>}
 
@@ -350,20 +347,59 @@ console.log('groupiddd' +prop.route.params.id)
               <Text style={{ marginLeft: wp('7%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ترک گروه</Text>
             </Button> : null}
 
-          {owner===undefined&&joinedUser===undefined  ?
+          {owner === undefined && joinedUser === undefined ?
             <Button style={{
               marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-8%')
               , backgroundColor: '#1F7A8C'
             }} onPress={() => JoinGroup()}>
-              <Text style={{ marginLeft: wp('6.5%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
+              <Text style={{ marginLeft: wp('5.4%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}> عضو شدن</Text>
             </Button> : null}
 
           {owner === "owner" ?
             <Button style={{
               marginLeft: wp('60%'), width: wp('30%'), borderRadius: 15, marginTop: hp('-7%')
               , backgroundColor: '#1F7A8C'
-            }} onPress={() => deleteGroup()}>
-              <Text style={{ marginLeft: wp('6%'), fontSize:hp('2.4%'), fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
+            }} onPress={async () => {
+              await Alert.alert(
+                'از حذف این گروه اطمینان دارید؟',
+                '',
+                [
+                  {
+                    text: 'انصراف',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'default'
+                  },
+                  {
+                    text: 'حذف', onPress: async () => {
+                      axiosinst.delete('/group/' + prop.route.params.id, {
+                        "headers":
+                        {
+                          "Content-Type": "application/json",
+                          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                        }
+                      })
+                        .then(async function (response) {
+                          Alert.alert('', 'گروه با موفقیت حذف شد  ', [
+                            {
+                              text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
+                            }
+                          ], { cancelable: false }, { style: { height: hp('40%') } })
+                          prop.navigation.navigate('Groupmainpage')
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                          console.log('delete error ||||||||||||')
+
+                        })
+                    }
+                  }
+                ],
+                { cancelable: false }
+              );
+
+              //  response();
+            }}>
+              <Text style={{ marginLeft: wp('6%'), fontSize: hp('2.4%'), fontWeight: 'bold', color: 'white' }}>حذف گروه</Text>
             </Button> : null}
 
           {/* {owner != undefined && joinedUser != undefined && notjoinedUser != undefined&&notjoinedUser==="notjoinedUser" && loading1 === false && loading2 === false && loading3 === false && loading4 === false ?
@@ -379,13 +415,16 @@ console.log('groupiddd' +prop.route.params.id)
             {groupinfo.summary}
           </Text>
 
+          <Text style={{ fontSize: hp('3%'), marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
 
-          {discussion!=undefined && discussion.length === 0 ?
-            <Text style={{ marginLeft: wp('10%'), marginTop: hp('2%') }}>بحثی برای نمایش وحود ندارد...</Text> : null}
+          {discussion != undefined && discussion.length === 0 ?
+            <Text style={{ color: '#1F7A8C', marginLeft: wp('18%'), marginTop: hp('4%'),marginBottom:hp('-4%'),top:hp('-0.5%') }}>بحثی برای نمایش وجود ندارد...</Text> : null}
+
+          {discussion != undefined && discussion.length === 0 ?
+            <AntDesign name="exception1" size={23} color="#1F7A8C" style={{ marginRight: wp('83.5%'), top: hp('0.3%') }} /> : null}
 
           <ScrollView>
             <View>
-              <Text style={{ fontSize: hp('3%'), marginTop: hp('3%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' }}>بحث های انجام شده :</Text>
               <FlatList
                 style={{ marginBottom: hp('5%') }}
                 showsVerticalScrollIndicator={true}
@@ -403,7 +442,7 @@ console.log('groupiddd' +prop.route.params.id)
                   <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
                     <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2.7%') }}>{item.title}</Text>
                     <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
-                    {notjoinedUser != "notjoinedUser" ?
+                    {joinedUser === 'joinedUser' || owner === 'owner' ?
                       <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
@@ -416,8 +455,8 @@ console.log('groupiddd' +prop.route.params.id)
                       </Button>}
                     <View
                       style={{
-                        width:wp('90%'),
-                        color:'#a9a9a9',
+                        width: wp('90%'),
+                        color: '#a9a9a9',
                         marginLeft: wp('5%'),
                         marginTop: hp('2%'),
                         borderBottomColor: '#a9a9a9',
@@ -433,7 +472,7 @@ console.log('groupiddd' +prop.route.params.id)
           </ScrollView>
 
 
-          {notjoinedUser != "notjoinedUser" ?
+          {joinedUser === 'joinedUser' || owner === 'owner' ?
             <Button onPress={() => setModalVisible(true)} style={{
               marginLeft: wp('20%'), width: wp('65%'), borderRadius: 20, marginTop: hp('1.5%')
               , backgroundColor: '#1F7A8C'
@@ -443,7 +482,7 @@ console.log('groupiddd' +prop.route.params.id)
             : <Button onPress={() => Alert.alert('', ' برای ایجاد یک بحث جدید باید عضو گروه باشید', [{
               text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
             }], { cancelable: false }, { style: { height: hp('40%') } })} style={{
-              marginLeft: wp('21%'), width: wp('40%'), borderRadius: 20, marginTop: hp('3%')
+              marginLeft: wp('21%'), width: wp('65%'), borderRadius: 20, marginTop: hp('3%')
               , backgroundColor: '#1F7A8C'
             }}>
               <Text style={{ marginLeft: wp('18%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
@@ -451,36 +490,35 @@ console.log('groupiddd' +prop.route.params.id)
 
 
           <ScrollView>
-            <View>
-              <Text style={{ fontSize: hp('3%'), marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold' ,marginBottom:hp('-4%')}}> اعضای گروه :</Text>
+            <View style ={{alignItems:'flex-start'}}>
+              <Text style={{ fontSize: hp('3%'), marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold', marginBottom: hp('-4%') }}> اعضای گروه :</Text>
 
-              <Button style={{ marginLeft: wp('90%'),top:hp('-1%') }} transparent
+              <Button style={{ marginLeft: wp('90%'), top: hp('-1%') }} transparent
                 onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
                 <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
               </Button>
-
-              <FlatList
-                style={{ marginBottom: hp('5%') }}
+              <ScrollView>
+                <View>
+                <FlatList style={styles.flastlist}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
                 onEndReached={() => {
                   //          console.log('-----AKHAR LIST')
                 }}
                 onEndReachedThreshold={0.5}
-                keyExtractor={(item) => item.id}
                 refreshing={refreshmembers}
                 onRefresh={async () => {
                   //            console.log('refresh')
                 }}
                 data={members}
-                renderItem={({ item }) => <>
-                  <View style={{paddingVertical:hp('3') , paddingRight:wp('1.5%')}}>
-                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image  
+                renderItem={({ item}) => <>
+                  <View>
+                    {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                       source={{ uri: "http://a59dcb2a4875.ngrok.io" + item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image size={70} style={{alignSelf:'flex-end'}}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{ alignSelf: 'flex-start' }}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
-                    <Text style={{ alignSelf: 'flex-start',marginLeft:wp('5%'),marginTop:hp('1%') }}>{item.user.username}</Text>
+                    <Text style={{ alignSelf: 'flex-start', marginLeft: wp('5%'), marginTop: hp('1%') }}>{item.user.username}</Text>
 
                   </View>
                 </>
@@ -488,6 +526,8 @@ console.log('groupiddd' +prop.route.params.id)
               >
 
               </FlatList>
+                </View>
+              </ScrollView>
               {/* :<ActivityIndicator  animating color={'gray'} size={"large"} style={{ marginTop: hp('5%'),marginBottom:hp("5%"),height:hp("5%"),width:wp("10%"),color:"black",alignSelf:"center"}} anim></ActivityIndicator>} */}
 
             </View>
@@ -537,7 +577,12 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('32%')
   },
-
+  flastlist: {
+    marginHorizontal: wp("0%"),
+    alignSelf: "flex-start",
+    marginTop: 0,
+    start: 2
+  },
   groupname: {
     fontSize: hp('2.5%'),
     fontWeight: 'bold',
@@ -568,7 +613,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginTop: hp('-9%'),
-    marginLeft:wp('15%')
+    marginVertical:wp('5%')
   },
   loader: {
     alignItems: 'center',
