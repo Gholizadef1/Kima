@@ -22,7 +22,7 @@ const DiscussionPage = (prop) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setusername] = useState(null);
-    const [loading, setloading] = useState(false)
+    const [loading, setloading] = useState(true)
     const [refreshchats, setrefreshchats] = useState(false)
     const [picture, setpicture] = useState(null);
     const [chats, setChats] = useState();
@@ -34,32 +34,21 @@ const DiscussionPage = (prop) => {
     const [page, setpage] = useState(1);
 
     const response = async (page) => {
-        console.log('PAGEEEE' + page)
-        console.log('DOVOM')
         await setpage(page)
-        console.log('PAGEEEE' + page)
         if (page === 1) {
-            console.log('PAGE 111')
             await settheend(false)
             await setinformation([])
 
-            console.log('IT IS HEAR SET INFO []')
             console.log(information)
 
         }
-        // await settheend(false)
-        // await setinformation([])
         const id = prop.route.params.id
-        console.log(id)
-        console.log(await (await AsyncStorage.getItem('token')).toString())
-        console.log(await (await AsyncStorage.getItem('id')).toString())
+
 
         try {
             setIDD(await (await AsyncStorage.getItem('id')).toString())
             const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
-                // params: {
-                //     page: page
-                // },
+
                 "headers":
                 {
                     "Content-Type": "application/json",
@@ -67,48 +56,37 @@ const DiscussionPage = (prop) => {
                 }
 
             })
-            console.log(count + '  count   dfajd;lfkjs;lkfj')
-            console.log(response.data.chats)
-            await setcount(response.data.count);
-            //console.log(response)
-            console.log(count + ' COUNT COUNT COUNT COUNT COUTN')
-            console.log(response.data.count + ' COUNTTTTTTTTTTTT')
-            if (response.data.detail === 'Invalid page.')
-                settheend(true);
-            else {
-                settheend(false)
-                console.log(IDD + 'IDDresponse');
-                //  console.log(response.data)
-                console.log('++++INFO++++' + information + "++++INFO++++" + '11111')
-                // console.log(information)
-                console.log('RESPONSE DATE')
-                //console.log(response.date)
-                console.log(response.data.chats + ' RESPONSE DATA CHATSS')
-                //page===1?setinformation(response.data):setinformation(information.concat(response.data))
-                if (response.data.message != "No Chat!") {
-                    await setinformation(information => [...information, ...response.data.chats])
-                }
+            .then (function(response) {
+                console.log(count + '  countt')
+                console.log(response.data.chats)
+                setChats(response.data.chats)
+                setloading(false)
+
+                setcount(response.data.count);
+                if (response.data.detail === 'Invalid page.')
+                    settheend(true);
                 else {
-                    setinformation(undefined)
+                    settheend(false)
+    
+                    if (response.data.message != "No Chat!") {
+                        setinformation(information => [...information, ...response.data.chats])
+                    }
+                    else {
+                        setinformation(undefined)
+                    }
+    
+                    setrefresh(false)
                 }
 
-                console.log('++++INFO++++' + information + "++++INFO++++" + '22222')
-                //console.log(information)
-                setrefresh(false)
-                //     setloading(false);
-            }
-            //  console.log(information[0])
+            })
+
         }
         catch (err) {
 
-            // else if(theend===true)
-            // settheend(false)
             setrefresh(false)
             console.log(err.toString().split('\n')[0])
             if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
                 settheend(true);
-            // else if(theend===true)
-            // settheend(false)
             console.log(theend + 'THE ENDDD')
             console.log(err);
 
@@ -118,8 +96,8 @@ const DiscussionPage = (prop) => {
     const handleLoadMore = async () => {
         console.log('END OF THE LIST')
         if (page < count) {
-            console.log(page + 'PAGEDEEFFDHASKDFJLSKFH')
-            console.log(count + 'C OUNT ASKDFJ;LKSFJ')
+            console.log(page + 'PAGE')
+            console.log(count + 'COUNT')
             if (theend === false)
                 response(page + 1);
         }
@@ -204,13 +182,15 @@ const DiscussionPage = (prop) => {
                                         )
                                             .then(function (response) {
                                                 console.log(response)
+                                                
                                                 Alert.alert('', ' پیام شما ارسال شد', [
                                                     {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
                                                 ], { cancelable: false }, { style: { height: 50 } })
                                                 //getChats();
-                                                response()
+                                                response(1)
+                                            
                                             })
                                             .catch(function (error) {
                                                 {
