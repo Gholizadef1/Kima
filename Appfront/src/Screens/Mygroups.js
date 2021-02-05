@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator,TextInput} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator,TextInput, useColorScheme} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -122,10 +122,12 @@ const Mygroups = (prop) => {
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState([]);
     const [refresh,setrefresh]=useState(false);
+    const [selecttime, setselecttime] = useState("none")
     const [likeotime, setlikeotime] = useState('time');
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
+    // cosnt [closee,setclosee]=useState(false);
    const [count,setcount]=useState(1);
   // let count=0;
   const response=async (page)=>{
@@ -155,9 +157,15 @@ const Mygroups = (prop) => {
     console.log('DOVOM')
      console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
      console.log('ALAIK ALIAKDALFKJASFKJAKSFKLJSFH')
+     var a="";
+     if(selecttime==="none")
+     a="time";
+     else
+     a="like"
+     console.log(a+"aaaaaa")
      try{
        console.log('  omad to response')
-       console.log('api/group'+likeotime)
+       console.log('api/group'+a)
 
       const id= await(AsyncStorage.getItem('id'))
       const response = await axiosinst.get("user/"+id+"/group",{
@@ -250,21 +258,29 @@ const Mygroups = (prop) => {
     };
    
     useFocusEffect(
-      React.useCallback(() => {   
+      React.useCallback(() => {
         const a = new Promise(async (resolve, reject) => {
           await setinformation([]);
           await setpage(1);
+          await settheend(false);
+          console.log("toye use focus effectt ")
+          if (selecttime === "none") {
+            setlikeotime("time")
+          }
+          else {
+            setlikeotime("like")
+          }
           //await setselecttime(true)
           //با این ظاهرا درست شد :/
-          await setselectedValue('like')
-          //تاثیری نداشتن :/
-          // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-          // await settimelable("فیلتر بر اساس تاریخ")
-          if (selectedValue === "none")
-            await setlikeotime("time");
-          else
-            await setlikeotime("like");
-          await setselectedValue('none')
+          //   await setselectedValue('like')
+          //   //تاثیری نداشتن :/
+          //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          //   // await settimelable("فیلتر بر اساس تاریخ")
+          //   if(selectedValue==="none")
+          //  await setlikeotime("time");
+          //  else
+          //  await setlikeotime("like");
+          //  await setselectedValue('none')
   
           resolve()
         }).then(() => {
@@ -275,7 +291,7 @@ const Mygroups = (prop) => {
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
-      }, [prop.navigation]))
+      }, [prop.navigation, selecttime,modalopen]))
     return(
      
      
@@ -291,7 +307,7 @@ const Mygroups = (prop) => {
       <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} 
         onPress={()=>{
-          response(1);
+          // response(1);
           setmodalopen(false)}}
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>
@@ -536,6 +552,7 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
               // settheend(false)
               // response(1)
               await setlikeotime('time')
+               setselecttime("none")
               // setselectedValue('none')
         
             }
@@ -547,6 +564,7 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
               // settheend(false)
               // response(1)
               await setlikeotime('member')
+               setselecttime("like")
          
             }
 
