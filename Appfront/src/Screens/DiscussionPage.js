@@ -25,7 +25,7 @@ const DiscussionPage = (prop) => {
     const [loading, setloading] = useState(true)
     const [refreshchats, setrefreshchats] = useState(false)
     const [picture, setpicture] = useState(null);
-    const [chats, setChats] = useState();
+    const [chats, setChats] = useState([]);
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
     const [chatsPage, setChatsPage] = useState(1);
@@ -33,8 +33,16 @@ const DiscussionPage = (prop) => {
     const [theend, settheend] = useState(false)
     const [chatsCount, setChatsCount] = useState();
     const [counter, setCounter] = useState();
+    const [delet, setdelet] = useState(false)
+    const [refresh, setrefresh] = useState(false);
+    const [count,setcount]=useState(1);
 
-
+    const [page, setpage] = useState(1);
+    const [idd,setidd]=useState();
+    
+   const getid=async()=>{
+        return(await AsyncStorage.getItem("id"))
+   }
 
     useEffect(() => {
         getUsername()
@@ -47,34 +55,119 @@ const DiscussionPage = (prop) => {
                 setusername(response.data.username)
             })
     };
-    useEffect(() => {
-        const getChats = async () => {
-            axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + chatsPage, {
-                "headers": {
-                    "content-type": "a`pplication/json",
-                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-                }
-            })
-                .then(function (response) {
-                    setChats(response.data.chats)
-                    setChatsCount(response.data.count)
-                    setloading(false)
-                })
 
-                .catch(async function (error) {
-                    console.log(error);
-                    console.log(error.code + 'ERROR CODE')
-                });
+
+
+
+
+
+    const getChats = async (page) => {
+        await setpage(page)
+        console.log('PAGEEEE' + page)
+        if (page === 1) {
+            console.log('PAGE 111')
+            await settheend(false)
+            await setChats([])
+
+            console.log('IT IS HEAR SET INFO []')
+            console.log(chats)
+
         }
-        getChats();
-    }, [chatsPage, chatAgain, groupid, discussionid]);
+        console.log(await (await AsyncStorage.getItem('id')).toString())
+        axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
+            "headers": {
+                "content-type": "a`pplication/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+            }
+        })
+            .then(async function (response) {
+                setidd(await AsyncStorage.getItem("id"))
+                await setcount(response.data.count);
+                
+                settheend(false)
+               
+                //  console.log(response.data)
+                
+                console.log('++++INFO++++' + JSON.stringify(chats) + "++++INFO++++" + '11111')
+                // console.log(chats)
+                console.log('RESPONSE DATE')
+                //console.log(response.date)
+                console.log(response.data.chats + ' RESPONSE DATA COMMENTS')
+                //page===1?setchats(response.data):setchats(chats.concat(response.data))
+                await setChats(chats => [...chats, ...response.data.chats])
+                // if (response.data.message != "No Comment!") {
+                //     await setChats(chats => [...chats, ...response.data.chats])
+                // }
+                // else {
+                //     setChats(undefined)
+                // }
+
+                console.log('++++INFO++++' +  JSON.stringify(chats) + "++++INFO++++" + '22222')
+                //console.log(chats)
+                setrefresh(false)
+                // setChats(response.data.chats)
+                // setChatsCount(response.data.count)
+                // setloading(false)
+            })
+
+            .catch(async function (error) {
+                setrefresh(false)
+                console.log(error);
+                console.log(error.code + 'ERROR CODE')
+            });
+    }
+    useEffect(() => {
+        const a = new Promise(async (resolve, reject) => {
+            await setChats([]);
+            await setpage(1);
+            await settheend(false);
+            console.log("toye use focus effectt ")
+            // if (selecttime === "none") {
+            //     setlikeotime("time")
+            // }
+            // else {
+            //     setlikeotime("like")
+            // }
+
+            resolve()
+        }).then(() => {
+            console.log('++++++++++' + chats + '**********')
+            getChats(1);
+            console.log('++++++++++' + chats + '**********')
+        })
+    }, [prop.navigation,delet])
+
+
+    // }, [chatsPage, chatAgain, groupid, discussionid]);
+
+    // const handleLoadMore = async () => {
+
+    //     if (chatsPage < chatsCount) {
+    //             setChatsPage(chatsPage + 1)
+    //             getChats(chatsPage)
+    //             setchatAgain(0)
+    //     }
+    //     else {
+    //         settheend(true)
+    //     }
+    // };
+
 
     const handleLoadMore = async () => {
-
-        if (chatsPage < chatsCount) {
-                setChatsPage(chatsPage + 1)
-                getChats(chatsPage)
-                setchatAgain(0)
+        
+        // if(selecttime==="none"){
+        //   setlikeotime("time")
+        // }
+        // else
+        // {
+        //   setlikeotime("like")
+        // }
+        console.log('END OF THE LIST')
+        if (page < count) {
+            console.log(page + 'PAGEDEEFFDHASKDFJLSKFH')
+            console.log(count + 'C OUNT ASKDFJ;LKSFJ')
+            if (theend === false)
+                getChats(page + 1);
         }
         else {
             settheend(true)
@@ -82,14 +175,14 @@ const DiscussionPage = (prop) => {
     };
 
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
-            </View>
-        );
-    }
-    else {
+    // if (loading) {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+    //         </View>
+    //     );
+    // }
+    // else {
         return (
             <View style={styles.container}>
                 <View>
@@ -97,7 +190,13 @@ const DiscussionPage = (prop) => {
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                 <TouchableOpacity style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%'), height: hp('5%'), width: wp('8%'), backgroundColor: 'white', position: 'absolute' }} onPress={() => setModalVisible(false)}>
-                                    <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }} onPress={() => setModalVisible(false)}
+                                    <AntDesign style={{ position: 'absolute', alignSelf: 'flex-end', top: hp('1%'), right: hp('1%') }} onPress={() =>{
+                                        if(delet===false)
+                                        setdelet(true)
+                                        // avordan
+                                        else
+                                        setdelet(false)
+                                        setModalVisible(false)}}
                                         name="close" size={23} color="#D75A5A" />
                                 </TouchableOpacity>
                                 <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
@@ -183,14 +282,15 @@ const DiscussionPage = (prop) => {
                             <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>پیام دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: hp('15.5%') }}
                         onRefresh={async () => {
-                            await setrefreshchats(true)
+                            await setrefresh(true)
 
-                            setChatsPage(chatsPage + 1)
+                            response(1);
 
                         }}
                         renderItem={({ item }) => <>
-                            {username === item.user.username ?
+                            { username===item.user.username ?
                                 <View style={{}}>
+                                {/* <Text style={{marginTop:hp("40%"),fontSize:20}}>a;dfj;alkdfj;lsakdfj</Text> */}
                                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                                         source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
                                     ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar}
@@ -198,7 +298,7 @@ const DiscussionPage = (prop) => {
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat}>
                                         <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
-                                        <Text style={{ marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%'),color:'black' }}>{item.chat_text}</Text>
+                                        <Text style={{ marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%'), color: 'black' }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%', marginBottom: hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
                                         <TouchableOpacity onPress={async () => {
                                             await Alert.alert(
@@ -260,7 +360,7 @@ const DiscussionPage = (prop) => {
                     >
                     </FlatList>
 
-                    {chats.length === 0 ?
+                    {chats === [] ?
                         <Text style={{ marginLeft: wp('18%'), marginTop: hp('20%'), fontSize: 15, color: '#1F7A8C' }}>در این بحث تابحال صحبتی صورت نگرفته ...</Text> : null}
 
                     <Button onPress={() => setModalVisible(true)} style={{
@@ -280,7 +380,7 @@ const DiscussionPage = (prop) => {
             </View>
         )
     }
-}
+// }
 
 const styles = StyleSheet.create({
     container: {
