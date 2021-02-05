@@ -239,9 +239,10 @@ const Activityquote = (prop) => {
             const a = new Promise(async (resolve, reject) => {
                 await setinformation([])
                 // .then(setpage(1))
-                if(information===[]){
-                await setpage(1);
-                }
+                await setpage(1)
+                // if(information===[]){
+                // await setpage(1);
+                // }
                 //await setselecttime(true)
                 //با این ظاهرا درست شد :/
                 //await setselectedValue('like')
@@ -263,7 +264,7 @@ const Activityquote = (prop) => {
             // //   console.log('Listenn')
             // alert('in')
             //   return() => alert('lost')
-        }, [prop.navigation]))
+        }, [prop.navigation,delet]))
     const [showbutton, setshowbutton] = useState(true);
 
     return (
@@ -317,7 +318,7 @@ const Activityquote = (prop) => {
 
                     renderItem={({ item }) => (<><Activityquotecard name={item.account.username}
                         isliked={item.isliked}
-                        date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={callbackFunction} bookid={item.current_book.id} booktitle={item.current_book.title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
+                        date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} heartnumber={item.Likes} DELETE={setdelet} bookid={item.current_book.id} booktitle={item.current_book.title} bookauthor={item.current_book.author} book={item.current_book.imgurl} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')} picture={`http://505a2dd8d5cc.ngrok.io${item.account.profile_photo}`} naghlghol={item.quote_text} ></Activityquotecard>
 
 
 
@@ -325,7 +326,7 @@ const Activityquote = (prop) => {
                     )}
                 // extraData={finfo}
                 >
-                </FlatList> : <Text style={{ alignSelf: 'center', marginTop: '70%', color: 'gray', fontWeight: 'bold' }} >نقل قولی ندارید</Text>}
+                </FlatList> : <Text style={{ alignSelf: 'center', marginTop: '70%', color: 'gray', fontWeight: 'bold' }} >اولین نقل قول خود را ثبت کنید</Text>}
             </View>
 
 
