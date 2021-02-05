@@ -23,7 +23,7 @@ const Commentactivity = (prop) => {
      
     }
   }
-  const [delet, setdelet] = useState(false)
+ 
   const [refresh, setrefresh] = useState(false);
   const [count,setcount]=useState(1);
   const [IDD, setIDD] = useState('');
@@ -37,6 +37,7 @@ const Commentactivity = (prop) => {
   const [timelable,settimelable]=useState('فیلتر بر اساس تاریخ')
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
+  const [delet, setdelet] = useState(false)
   const [page, setpage] = useState(1);
 
   console.log('AVAL')
@@ -125,15 +126,15 @@ const Commentactivity = (prop) => {
         await setpage(1);
         await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
+        //await setselectedValue('like')
         //تاثیری نداشتن :/
         // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
         // await settimelable("فیلتر بر اساس تاریخ")
-        if(selectedValue==="none")
-       await setlikeotime("time");
-       else
-       await setlikeotime("like");
-       await setselectedValue('none')
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
       }).then(()=>{
@@ -199,11 +200,11 @@ const Commentactivity = (prop) => {
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id}
-             dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+             dislikenumber={item.DislikeCount} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.current_book.imgurl}`} likedisable={true} comment={item.comment_text} ></Commentcard>)}
         >
 
-        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}>برای این کتاب نظری وجود ندارد</Text>}
+        </FlatList>:<Text style={{color:'gray',alignSelf:'center',marginTop:hp('40%'),fontWeight:'bold'}}> اولین نظر خود را ثبت کنید</Text>}
 
 
       </Animated.View>
