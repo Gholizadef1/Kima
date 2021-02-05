@@ -400,6 +400,29 @@ const Quizresult = (prop) => {
                                         if (questions.Questions[0].key === "d") {
                                             await setcolord("#95D5B2")
                                         }
+                                        if (prop.route.params.ownerr === false) {
+                                            console.log("    asdfasdf3")
+                                            if (questions.user_answer[0] !== questions.Questions[0].key) {
+                                                if (questions.user_answer[0] === "a") {
+                                                    setcolora("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "b") {
+                                                    setcolorb("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "c") {
+                                                    setcolorc("#EF8089")
+                                                }
+                                                if (questions.user_answer[0] === "d") {
+                                                    setcolord("#EF8089")
+                                                }
+                                            }
+                                            if (questions.user_answer[0] === "") {
+                                                setpasokhnadadid(true)
+                                            }
+                                            else {
+                                                setpasokhnadadid(false)
+                                            }
+                                        }
                                     }
                                     else {
                                         if (questions.Questions[numofquesiton + 1].key === "a") {
