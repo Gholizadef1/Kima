@@ -516,7 +516,7 @@ useFocusEffect(
         // console.log(back);
          const backk=JSON.stringify(back);
         const params=JSON.stringify({password:'12345',password2:'12345'});
-
+        const id=await AsyncStorage.getItem("id");
         const response=axiosinst.put('user/'+id+'/change-password',backk,{
 
           headers:{
