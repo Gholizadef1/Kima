@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Alert, ScrollView,Modal } from 'react-native';
 //  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -21,6 +21,7 @@ const Eachgroup = (prop) => {
   console.log(prop.groupphoto);
   console.log(prop.isownerid+";kasfj;lsf;lkjsf;lakj;slk;lskfj;lkj")
   const [showmore, setshowmore] = useState('بیشتر...');
+  const [photoo,setphotoo]=useState();
   const commentt = `${prop.discription}`.toString();
   // const [moreclicked,setmoreclicked]=useState(false);
   const linenumber = (commentt.split('').length)
@@ -42,6 +43,18 @@ const Eachgroup = (prop) => {
   // console.log('****'+comment4)
   // console.log('*****************'+prop.discription+'  prop discription*********************')
  
+console.log(photoo+" photo")
+  useEffect(()=>{
+
+    if(prop.groupphoto.toString().split(":")[0]==="http"){
+      setphotoo(prop.groupphoto)
+    }
+    else{
+      setphotoo("http://e7e864967156.ngrok.io"+prop.groupphoto)
+    }
+  },[])
+
+
     return(
     
       // <TouchableOpacity onPress={async()=>{
@@ -65,7 +78,7 @@ const Eachgroup = (prop) => {
      
      <TouchableOpacity style={styles.avatar}
        onPress={() => {}}>
-       {prop.groupphoto === '/media/default.png' ? <ImageBackground borderRadius={100}
+       {photoo === 'e7e864967156.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
@@ -80,7 +93,7 @@ const Eachgroup = (prop) => {
 
        </ImageBackground> : <ImageBackground borderRadius={20}
 
-         source={{uri:prop.groupphoto}}
+         source={{uri:photoo}}
          style={styles.avatar}
 
        >

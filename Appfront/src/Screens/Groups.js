@@ -55,6 +55,7 @@ const Groups = ({navigation}) => {
     await setrefresh(false)
      console.log('#########')
      }
+    
      console.log('searchpost beforeee'+information+'1111111111111111111111')
   // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
   // await setinformation([...information,...response.data.results])
@@ -103,6 +104,7 @@ const Groups = ({navigation}) => {
   const [modalopen, setmodalopen] = useState(false)
   // const [selectedValue, setselectedValue] = useState('none')
   // const selectedValue='none'
+  const [photoo,setphotoo]=useState();
   const [selectedValue, setselectedValue] = useState('none')
   const [gotogrouppage,setgotogrouppage]=useState(false);
   const [information, setinformation] = useState([]);
