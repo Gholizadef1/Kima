@@ -292,6 +292,7 @@ const Commentcard = (prop) => {
       <View style={{ flexDirection: 'row' }}>
       {/* like */}
         <AntDesign onPress={async () => {
+          if(prop.likedisable!=true){
           if(likeshode===true)
           await setlikeshode(false)
           else
@@ -394,6 +395,7 @@ const Commentcard = (prop) => {
 
 
           //  response();
+          }
         }} name="like1" size={20} color={like} style={styles.like} />
 
         <Text style={styles.likenumber}>{numlike}</Text>
@@ -402,6 +404,7 @@ const Commentcard = (prop) => {
 
 
         <AntDesign onPress={async () => {
+          if(prop.likedisable!=true){
           const back2 = {
 
           }
@@ -503,6 +506,7 @@ const Commentcard = (prop) => {
 
 
           //  response();
+          }
         }} name="dislike1" size={20} color={dislike} style={styles.dislike} />
         <Text style={styles.dislikenumber}>{numdislike}</Text>
         {`${prop.comment}`.toString().split('\n').length >= 5 ? <TouchableOpacity
