@@ -144,6 +144,12 @@ const Commentcard = (prop) => {
       setlike('#1f7a8c')
       if(prop.isdisliked)
       setdislike('#E64846')
+      if(prop.picture.toString().split(":")[0]==="http"){
+        setphotoo(prop.picture)
+      }
+      else{
+        setphotoo("http://e7ae29f4056b.ngrok.io"+prop.picture)
+      }
       //  getdislike()
       //  getlike(prop.commentid)
     }, [])
@@ -158,6 +164,7 @@ const Commentcard = (prop) => {
   const [showmore, setshowmore] = useState('بیشتر...');
   const [numlike, setnumlike] = useState(prop.likenumber);
   const [numdislike, setnumdislike] = useState(prop.dislikenumber);
+  const [photoo,setphotoo]=useState();
   // console.log((prop.comment.toString().split('\n').lenght===1))
   const commentt = `${prop.comment}`.toString();
   const linenumber = (commentt.split('\n').length)
@@ -180,9 +187,13 @@ const Commentcard = (prop) => {
 
   //  useEffect(()=>{
    
-  //    getdislike()
-  //    getlike()
-  // }, [like,dislike])
+  //   if(prop.groupphoto.toString().split(":")[0]==="http"){
+  //     setphotoo(prop.groupphoto)
+  //   }
+  //   else{
+  //     setphotoo("http://e7ae29f4056b.ngrok.io"+prop.groupphoto)
+  //   }
+  // }, [])
   // console.log('commentcard')
   return (
     <View style={styles.container}>
@@ -253,7 +264,7 @@ const Commentcard = (prop) => {
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
        
-       {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={prop.pictureborder}
+       {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={prop.pictureborder}
 
             source={require('../../assets/avatar.png')}
             
@@ -268,7 +279,7 @@ const Commentcard = (prop) => {
 
           </ImageBackground> : <ImageBackground borderRadius={prop.pictureborder}
 
-            source={{ uri: prop.picture }}
+            source={{ uri: photoo }}
            // style={prop.avatar}
            style={{
             height: prop.picutrehieght,
