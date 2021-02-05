@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { Container, Header, Title, Form, Item, Input, Button, Icon } from 'native-base';
 import { Feather } from '@expo/vector-icons';
@@ -20,6 +20,7 @@ import { Video } from 'expo-av';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import AppLoading from 'expo-app-loading';
 import { Modal } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 
@@ -38,11 +39,14 @@ const logschema = yup.object({
 
 const Login = (pro) => {
   const [videoo, setvideoo] = useState();
-  const [videoloaded, setvideoloaded] = useState("خوشحالیم دوباره میبینیمت");
+  const [videoloaded, setvideoloaded] = useState(undefined);
   // const { state, signin } = useContext(Context);
   // const { state, signin, clearErrorMessage } = useContext(Context);      
   const val = useContext(AuthContext);
 
+  useEffect(()=>{
+
+  },[])
  // setTimeout(() => console.log("aksdjf"), 1000)
   // if (videoloaded === false) {
   //   return (<AppLoading
@@ -64,6 +68,7 @@ const Login = (pro) => {
   //   />)
   // }
   // else {
+
   return (<Container backgroundColor='white'>
 
     <Video
@@ -74,7 +79,7 @@ const Login = (pro) => {
       resizeMode="cover"
       shouldPlay
       isLooping
-      onLoad={() => setTimeout(()=>setvideoloaded("کیما"),3000)
+      onLoad={() => setvideoloaded(true)
       }
       style={{ width: wp('100%'), height: wp(hp('20%')), position: 'absolute' }}
     ></Video>
@@ -82,6 +87,7 @@ const Login = (pro) => {
     ></Modal> */}
 {/* 
   {videoloaded==="کیما"? */}
+  {videoloaded!=undefined?<View>
   <Text style={{ color: '#1f7a8c', fontSize: hp('2.7%'), fontWeight: 'bold', marginTop: hp('9.5%'), marginLeft: wp('10%'), position: 'absolute' }}>کیما</Text>
     {/* <Text style={{ color: '#1f7a8c', fontSize: hp("5%"), fontWeight: 'bold', marginTop: hp('9.5%'),alignSelf:"center", position: 'absolute' }}>به کیما خوش اومدی</Text>} */}
     
@@ -205,7 +211,7 @@ const Login = (pro) => {
 
 
 
-
+</View>:<ActivityIndicator size={"small"} color={"gray"}></ActivityIndicator>}
     <StatusBar backgroundColor='#BFDBF7' style='light' />
   </Container>
 
