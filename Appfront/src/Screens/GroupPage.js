@@ -91,7 +91,7 @@ const GroupPage = (prop) => {
         })
     }
     getgroupDetails()
-  }, [join])
+  }, [join , membernumber])
 
   useEffect((async) => {
     async function getMembers() {
@@ -490,32 +490,32 @@ const GroupPage = (prop) => {
 
 
           <ScrollView>
-            <View>
+            <View style ={{alignItems:'flex-start'}}>
               <Text style={{ fontSize: hp('3%'), marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold', marginBottom: hp('-4%') }}> اعضای گروه :</Text>
 
               <Button style={{ marginLeft: wp('90%'), top: hp('-1%') }} transparent
                 onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
                 <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
               </Button>
-
-              <FlatList style={styles.flastlist}
+              <ScrollView>
+                <View>
+                <FlatList style={styles.flastlist}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
                 onEndReached={() => {
                   //          console.log('-----AKHAR LIST')
                 }}
                 onEndReachedThreshold={0.5}
-                keyExtractor={(item) => item.id}
                 refreshing={refreshmembers}
                 onRefresh={async () => {
                   //            console.log('refresh')
                 }}
                 data={members}
-                renderItem={({ item }) => <>
-                  <View style={{ paddingVertical: hp('3'), paddingRight: wp('1.5%'), alignSelf: 'flex-end' }}>
+                renderItem={({ item}) => <>
+                  <View>
                     {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
                       source={{ uri: "http://a59dcb2a4875.ngrok.io" + item.user.profile_photo }}
-                    ></Avatar.Image> : <Avatar.Image size={70} style={{ alignSelf: 'flex-end' }}
+                    ></Avatar.Image> : <Avatar.Image size={70} style={{ alignSelf: 'flex-start' }}
                       source={require('../../assets/group.jpg')}
                     ></Avatar.Image>}
                     <Text style={{ alignSelf: 'flex-start', marginLeft: wp('5%'), marginTop: hp('1%') }}>{item.user.username}</Text>
@@ -526,6 +526,8 @@ const GroupPage = (prop) => {
               >
 
               </FlatList>
+                </View>
+              </ScrollView>
               {/* :<ActivityIndicator  animating color={'gray'} size={"large"} style={{ marginTop: hp('5%'),marginBottom:hp("5%"),height:hp("5%"),width:wp("10%"),color:"black",alignSelf:"center"}} anim></ActivityIndicator>} */}
 
             </View>
@@ -611,7 +613,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginTop: hp('-9%'),
-    marginLeft: wp('15%')
+    marginVertical:wp('5%')
   },
   loader: {
     alignItems: 'center',
