@@ -123,7 +123,7 @@ const handleCloseSnack = (event, reason) => {
         validate = false;
         
       }
-      else if(i.key !='a' && i.key!='b' && i.key!='c' && i.key!='d'){
+      else if(i.key !='1' && i.key!='2' && i.key!='3' && i.key!='4'){
         setMassage(' لطفاً کاراکترهای موردنظر را برای پاسخ درست وارد کنید')
         setOpenSnack(true);
         console.log(i.key);
@@ -270,7 +270,7 @@ const handleCloseSnack = (event, reason) => {
   <label className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
   <textarea className="form-control border border-dark input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">a گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">1 گزینهٔ</label>
 
                 <input
                        className="form-control border-dark input-normal text-right" 
@@ -282,7 +282,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">b گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">2 گزینهٔ</label>
 
 
                 <input
@@ -297,7 +297,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">c گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">3 گزینهٔ</label>
   <div class="form-check text-right mr-n4 ">
 </div>
 
@@ -314,7 +314,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">d گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">4 گزینهٔ</label>
 
                 <input 
                      type=""
@@ -331,7 +331,7 @@ const handleCloseSnack = (event, reason) => {
                 <input 
                      type=""
                        className="form-control border-dark input-normal text-right" 
-                       placeholder="...a مثلاً"
+                       placeholder="... مثلاً 1"
                        required
                        name="key"
                        value={inputField.key}
