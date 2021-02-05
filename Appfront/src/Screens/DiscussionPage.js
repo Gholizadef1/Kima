@@ -72,19 +72,13 @@ const DiscussionPage = (prop) => {
     const handleLoadMore = async () => {
 
         if (chatsPage < chatsCount) {
-            if (chatAgain === 10) {
                 setChatsPage(chatsPage + 1)
-                getChats()
+                getChats(chatsPage)
                 setchatAgain(0)
-            }
-            else {
-                settheend(false)
-            }
         }
         else {
             settheend(true)
         }
-
     };
 
 
@@ -203,8 +197,8 @@ const DiscussionPage = (prop) => {
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat}>
-                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                        <Text style={{ marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%'),color:'black' }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%', marginBottom: hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
                                         <TouchableOpacity onPress={async () => {
                                             await Alert.alert(
@@ -256,8 +250,8 @@ const DiscussionPage = (prop) => {
                                         source={require('../../assets/group.jpg')}
                                     ></Avatar.Image>}
                                     <Card style={styles.cardChat2}>
-                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%') }}>{item.user.username}</Text>
-                                        <Text style={{ color: '#a9a9a9', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                        <Text style={{ color: 'black', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
                                         <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%' }}>{item.send_time.toString().split('T')[0]}</Text>
                                     </Card>
                                 </View>}
