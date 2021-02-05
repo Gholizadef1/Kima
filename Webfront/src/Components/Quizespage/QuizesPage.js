@@ -160,7 +160,7 @@ const handleCloseSnack = (event, reason) => {
   const handleGoSearchGroup = ( ) => {
     console.log( searchWord);
     setPagesNumber(1);
-    axios.get(`${API_BASE_URL}/quizes?search=${searchWord}&search-fields=title`,{
+    axios.get(`${API_BASE_URL}/quizes?search=${searchWord}`,{
       headers:{
      "Authorization":"Token "+Cookies.get("userToken")}
       })
@@ -249,7 +249,7 @@ const handleCloseSnack = (event, reason) => {
                         <h6 class="card-subtitle pb-3  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
 
-                        {isMine === true || current.creator.username === Cookies.get("userName") || current.is_taken===true ?
+                        {(isMine === true &&(current.creator.username === Cookies.get("userName") || current.is_none===false)) || (isMine===false&& current.is_none === false) ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
                         </div>

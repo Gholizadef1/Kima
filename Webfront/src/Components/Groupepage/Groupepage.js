@@ -89,12 +89,18 @@ import Tooltip from '@material-ui/core/Tooltip';
       backError : ""
     }); 
   };
-
+  const [mem,setMem] = useState("");
   useEffect(() => {
     axios.get(API_BASE_URL + `/group/${props.match.params.groupId}/member`)
       .then((data) => {
-         console.log(data.data.members);
+         console.log(data.data);
+         if(data.data.message === "No member!"){
+           setMem("No member!");
+         }
+         else{
         setMembers(data.data.members);
+        console.log(data.data.members);
+         }
         
           for(var i =0; i<data.data.members.length ; i++){
             if(data.data.members[i].user.username === Cookies.get("userName") && data.data.owner.username != Cookies.get("userName")){
@@ -145,6 +151,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     });
   }
   const leaveGroup = ()=>{
+    console.log(Cookies.get("userToken"));
     axios.delete(
       API_BASE_URL + `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
     {},
@@ -158,6 +165,7 @@ import Tooltip from '@material-ui/core/Tooltip';
             setMassage("!شما با مؤفقیت از گروه خارج شدید")
            
         }
+
           console.log(data.statusText);
           
         })
@@ -830,7 +838,9 @@ import Tooltip from '@material-ui/core/Tooltip';
     
    
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-190,position:"relative",marginLeft:600}}> ({ginfo.members_count}) اعضا</b>
-       
+       {mem === "No member!"?
+              <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>عضوی برای نمایش وجود ندارد</div>
+       :
        <div className="row" key={member.id}>
 {member.length >=6 ?
           <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
@@ -946,6 +956,7 @@ height: 70}}
 
 }
 </div>
+  }
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>

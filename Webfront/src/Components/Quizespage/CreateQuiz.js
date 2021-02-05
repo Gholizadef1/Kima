@@ -270,7 +270,7 @@ const handleCloseSnack = (event, reason) => {
   <label className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
   <textarea className="form-control border border-dark input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">a جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">a گزینهٔ</label>
 
                 <input
                        className="form-control border-dark input-normal text-right" 
@@ -282,7 +282,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">b جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">b گزینهٔ</label>
 
 
                 <input
@@ -297,7 +297,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">c جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">c گزینهٔ</label>
   <div class="form-check text-right mr-n4 ">
 </div>
 
@@ -314,7 +314,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">d جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">d گزینهٔ</label>
 
                 <input 
                      type=""
