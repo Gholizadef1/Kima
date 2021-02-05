@@ -39,7 +39,7 @@ const logschema = yup.object({
 
 const Login = (pro) => {
   const [videoo, setvideoo] = useState();
-  const [videoloaded, setvideoloaded] = useState(undefined);
+  const [videoloaded, setvideoloaded] = useState(0);
   // const { state, signin } = useContext(Context);
   // const { state, signin, clearErrorMessage } = useContext(Context);      
   const val = useContext(AuthContext);
@@ -79,15 +79,16 @@ const Login = (pro) => {
       resizeMode="cover"
       shouldPlay
       isLooping
-      onLoad={() => setvideoloaded(true)
+      onLoad={() => setvideoloaded(1)
       }
-      style={{ width: wp('100%'), height: wp(hp('20%')), position: 'absolute' }}
+      style={{ width: wp('100%'), height: wp(hp('20%')),opacity:videoloaded, position: 'absolute' }}
     ></Video>
     {/* <Modal
     ></Modal> */}
 {/* 
   {videoloaded==="کیما"? */}
-  {videoloaded!=undefined?<View>
+  {/* paridan safhe dorost shod */}
+  {videoloaded!=0?<View>
   <Text style={{ color: '#1f7a8c', fontSize: hp('2.7%'), fontWeight: 'bold', marginTop: hp('9.5%'), marginLeft: wp('10%'), position: 'absolute' }}>کیما</Text>
     {/* <Text style={{ color: '#1f7a8c', fontSize: hp("5%"), fontWeight: 'bold', marginTop: hp('9.5%'),alignSelf:"center", position: 'absolute' }}>به کیما خوش اومدی</Text>} */}
     
@@ -211,7 +212,7 @@ const Login = (pro) => {
 
 
 
-</View>:<ActivityIndicator size={"small"} color={"gray"}></ActivityIndicator>}
+</View>:<ActivityIndicator size={"small"} color={"gray"} style={{marginTop:hp("40%")}}></ActivityIndicator>}
     <StatusBar backgroundColor='#BFDBF7' style='light' />
   </Container>
 
