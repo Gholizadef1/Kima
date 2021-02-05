@@ -42,7 +42,7 @@ const Quizes = (prop) => {
     }
     const backk = JSON.stringify(back);
     try{
-      const response = await axiosinst.get('quizes?search='+searchterm+'&search-fields=title&page='+page,{
+      const response = await axiosinst.get('quizes?search='+searchterm+'&page='+page,{
        
       "headers":
       {
@@ -503,7 +503,7 @@ const Quizes = (prop) => {
             <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View> : 
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('-13%')}}>کوییز دیگری وجود ندارد</Text>
+            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('10%')}}>کوییز دیگری وجود ندارد</Text>
             </View>)}
             style={{ marginBottom: hp('0%') }}
             showsVerticalScrollIndicator={false}
