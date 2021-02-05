@@ -178,6 +178,9 @@ const Createquiz = () => {
                             if (all.questions[i].key === "4") {
                                 formdata.append(`questions[${i}]key`, "d")
                             }
+                            if(all.questions[i].key===""){
+                                formdata.append(`questions[${i}]key`, "a")
+                            }
                         }
                         //formdata.append("question_count",numofquestion)
                         // console.log(all)
