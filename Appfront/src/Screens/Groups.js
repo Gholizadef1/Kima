@@ -31,13 +31,15 @@ const Groups = ({ navigation }) => {
     }
     const backk = JSON.stringify(back);
     try {
-      const response = await axiosinst.get('groups', {
-        params: {
+      console.log(searchterm)
+      const response = await axiosinst.get('groups?search='+searchterm+'search-fields=title&page='+page
+      , {
+        // params: {
 
-          search: searchterm,
-          search_fields: 'title',
-          page: page,
-        },
+        //   search: searchterm,
+        //   search_fields: 'title',
+        //   page: page,
+        // },
         "headers":
         {
           "Content-Type": "application/json",
@@ -46,7 +48,7 @@ const Groups = ({ navigation }) => {
 
 
       })
-      console.log(response.data)
+      console.log(JSON.stringify(response.data)+"   respoifdkasjfd;lkjs a;fljkas;ldfj j ;lkj;lfk joi unpoeiunvpouiopvniupeoinrvqupoiunrvpoiunrvpoiuqnrvpoiunqwproviunpowqrviunporvinupovnqupoqivwnupovkner")
       // setrefresh(true)
       settheend(false)
       setrefresh(false)
@@ -73,6 +75,8 @@ const Groups = ({ navigation }) => {
       // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
       console.log(next, ' NEXTtttttttttttttttt')
       setnumberofresults(response.data.count)
+      console.log(response.data.count+" response countttttt")
+      console.log(numberofresults+" numberofreustlflkj")
       setpage(page);
 
     }

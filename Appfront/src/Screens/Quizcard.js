@@ -129,19 +129,20 @@ const Eachgroup = (prop) => {
           <Text style={{ fontSize: hp('1.6%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('2%'), marginTop: hp('-1%'), marginHorizontal: wp("0%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {prop.creator.username}</Text>  </Text>
           {!more ? <Text style={{ color: 'black' }}>{comment4}</Text> : <Text style={{ color: 'black' }}>{comment4}</Text>}
           {linenumber >= 250 ? <TouchableOpacity
+          activeOpacity={1}
 
-            onPress={async () => {
+            // onPress={async () => {
 
-              if (more === false) {
-                setmore(true)
-                setshowmore('کم تر')
+            //   if (more === false) {
+            //     setmore(true)
+            //     setshowmore('کم تر')
 
-              }
-              else {
-                setmore(false)
-                setshowmore('بیشتر...')
-              }
-            }}
+            //   }
+            //   else {
+            //     setmore(false)
+            //     setshowmore('بیشتر...')
+            //   }
+            // }}
             style={{ marginTop: hp('1%'), left: wp('75%') }}
           ><Text style={{ color: '#1f7a8c' }}>{showmore}</Text>
           </TouchableOpacity> : null}
