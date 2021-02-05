@@ -271,7 +271,7 @@ v
             }}
       >
 
-          <Text style={{alignSelf:'center',color:'#1f7a8c',fontWeight:'bold'}}>خروج از حسب کاربری</Text>
+          <Text style={{alignSelf:'center',color:'#1f7a8c',fontWeight:'bold'}}>خروج از حساب کاربری</Text>
       </TouchableOpacity> 
       {/* </View> */}
     
