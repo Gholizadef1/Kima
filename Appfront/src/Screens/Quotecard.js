@@ -14,6 +14,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const Quotecard = (prop) => {
   const bookid=prop.bookid;
   const quoteid=prop.quoteid
+  console.log(prop.selectt+" selecttt")
   // const getlike=async()=>{
   //   const back2 = {
   
@@ -234,6 +235,9 @@ const Quotecard = (prop) => {
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
+              if(prop.selectt==="like"){
+              await(prop.DELETE(true))
+              }
            
               setheart('#1f7a8c')
              
@@ -262,6 +266,9 @@ const Quotecard = (prop) => {
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
+              if(prop.selectt==="like"){
+              await(prop.DELETE(true))
+              }
             
               setheart('lightblue')
               setnumheart(response.data.data)

@@ -29,7 +29,7 @@ const commentschema = yup.object({
 
 
 const Quote = (prop) => {
-
+console.log(selectedValue+"selected Value")
   const callbackFunction = async (childData) => {
     if (childData === true) {
       // await setrefresh(childData)
@@ -93,6 +93,7 @@ const Quote = (prop) => {
   const maxnumber = 500;
   const [numcolor, setnumcolor] = useState('green');
   const [currentnumber, setcurrentnumber] = useState(0);
+  const[selecttime,setselecttime]=useState(true)
   const equal = async (item) => {
 
     setIDD(await AsyncStorage.getItem('id').toString());
@@ -399,7 +400,7 @@ const Quote = (prop) => {
           }}
           dropDownStyle={{
             backgroundColor: '#fafafa',
-            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'),
+            borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('5%'),
             width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
           }}
           onChangeItem={async (item) => {
@@ -408,12 +409,14 @@ const Quote = (prop) => {
               console.log(item.value + 'VALUE')
               console.log('to none')
               await setlikeotime('time')
+              await setselecttime('none');
 
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
               await setlikeotime('like')
+              await setselecttime('like');
 
             }
 
@@ -483,7 +486,7 @@ const Quote = (prop) => {
 
             renderItem={({ item }) => (<><Quotecrad name={item.account.username}
               isliked={item.isliked}
-              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
+              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={callbackFunction} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
               picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
 
 
