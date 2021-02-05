@@ -153,8 +153,8 @@ import Tooltip from '@material-ui/core/Tooltip';
   const leaveGroup = ()=>{
     console.log(Cookies.get("userToken"));
     axios.delete(
-      API_BASE_URL + `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
-    {},
+      API_BASE_URL+ `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
+    
     {
       headers:{
         "Content-Type":"application/json",
@@ -169,9 +169,9 @@ import Tooltip from '@material-ui/core/Tooltip';
           console.log(data.statusText);
           
         })
-    .catch(error=>{
-      console.log(error);
-    });
+    // .catch(error=>{
+    //   console.log(error);
+    //});
     props.history.push('/groups');
   }
   const deletGroup =()=>{
