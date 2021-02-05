@@ -57,7 +57,6 @@ urlpatterns = [
     path('quiz',QuizView.as_view()),
     path('quizes',DynamicQuizAPIView.as_view()),
     path('quiz/<int:pk>',TakeQuizView.as_view()),
-    path('quiz/<int:pk>/photo',SetQuizPhotoView.as_view()),
     path('user/<user_pk>/quiz/<quiz_pk>/result',QuizResultView.as_view()),
     path('user/<int:pk>/quiz',MyQuizView.as_view()),
 
