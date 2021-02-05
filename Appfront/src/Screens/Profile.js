@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEd
 import {Container,Header,Title,Button,Form,Item,Input, Icon,Card} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Avatar } from 'react-native-paper';
+import { ActivityIndicator, Avatar } from 'react-native-paper';
 // import Login from './Login';
 // import { Context as AuthContext } from '../context/AuthContext'; 
 // import { Button } from 'native-base';
@@ -139,10 +139,10 @@ v
      
 
       
-   
+   if(picture!=undefined){
     return(
       
-        <View style={styles.container}>
+      <View style={styles.container}>
           <ScrollView>
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
         {/* <Text style={styles.kima}>کیما</Text> */}
@@ -283,6 +283,16 @@ v
         // {/* <Text>HI</Text>
         // </ScrollView> */}
     );
+   }
+   else{
+       return(
+        <View style={styles.container}>
+        <ActivityIndicator color={"gray"} size={"large"} style={{marginTop:hp("40%")}} ></ActivityIndicator>
+        <StatusBar backgroundColor='#BFDBF7' style='light' />
+        </View>
+
+       )
+   }
 }
 
 const styles = StyleSheet.create({
