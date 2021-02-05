@@ -185,72 +185,74 @@ const Quotecard = (prop) => {
 
 
 
-        <AntDesign style={styles.heart} name="heart" onPress={async () => {
+        <AntDesign style={styles.heart} name="heart" 
+        // onPress={async () => {
           //  console.log(item.account.id)
           // setSelectedIndex(item.id)
-          const back = {
+        //   const back = {
 
-          }
-          const backk = JSON.stringify(back);
-          if (heart === 'lightblue') {
-            //   setlike('#1f7a8c')
-            // else
-            //   setlike('gray')
+        //   }
+        //   const backk = JSON.stringify(back);
+        //   if (heart === 'lightblue') {
+        //     //   setlike('#1f7a8c')
+        //     // else
+        //     //   setlike('gray')
 
-            // console.log((await AsyncStorage.getItem('token')).toString());
-            // alert(prop.quoteid)
-            console.log((await AsyncStorage.getItem('token')).toString())
-            console.log(prop.quoteid + 'PROP QUOTE ID');
-            // // console.log(item.account.id);
-            axiosinst.post('book/' + bookid + "/quote/" + prop.quoteid, backk, {
-              params: {
-                feedback: "like"
-              },
-              "headers":
-              {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-              }
-            })
-              .then(async function (response) {
-                setheart('#1f7a8c')
-                console.log(response);
+        //     // console.log((await AsyncStorage.getItem('token')).toString());
+        //     // alert(prop.quoteid)
+        //     console.log((await AsyncStorage.getItem('token')).toString())
+        //     console.log(prop.quoteid + 'PROP QUOTE ID');
+        //     // // console.log(item.account.id);
+        //     axiosinst.post('book/' + bookid + "/quote/" + prop.quoteid, backk, {
+        //       params: {
+        //         feedback: "like"
+        //       },
+        //       "headers":
+        //       {
+        //         "Content-Type": "application/json",
+        //         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        //       }
+        //     })
+        //       .then(async function (response) {
+        //         setheart('#1f7a8c')
+        //         console.log(response);
 
-              })
-              .catch(function (error) {
-                console.log(error);
-                console.log('like error ||||||||||||')
+        //       })
+        //       .catch(function (error) {
+        //         console.log(error);
+        //         console.log('like error ||||||||||||')
 
-              })
-          }
-          else {
-            axiosinst.delete('book/' + bookid + "/quote/" + prop.quoteid, {
-              params: {
-                feedback: "like"
-              },
-              "headers":
-              {
-                "Content-Type": "application/json",
-                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-              }
-            })
-              .then(async function (response) {
-                setheart('lightblue')
-                console.log(response);
+        //       })
+        //   }
+        //   else {
+        //     axiosinst.delete('book/' + bookid + "/quote/" + prop.quoteid, {
+        //       params: {
+        //         feedback: "like"
+        //       },
+        //       "headers":
+        //       {
+        //         "Content-Type": "application/json",
+        //         "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        //       }
+        //     })
+        //       .then(async function (response) {
+        //         setheart('lightblue')
+        //         console.log(response);
 
-              })
-              .catch(function (error) {
-                console.log(error);
-                console.log('like error ||||||||||||')
+        //       })
+        //       .catch(function (error) {
+        //         console.log(error);
+        //         console.log('like error ||||||||||||')
 
-              })
-          }
-        }
+        //       })
+        //   }
+        // }
           //  getlike(item);
 
 
           //  response();
-        } size={20} color={heart} />
+        //} 
+        size={20} color={heart} />
         <Text style={styles.heartnumber}>{prop.heartnumber}</Text>
         <Text style={styles.date}>{prop.date}</Text>
 

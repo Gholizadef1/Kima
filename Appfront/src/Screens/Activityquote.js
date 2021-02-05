@@ -153,7 +153,8 @@ const Activityquote = (prop) => {
              console.log(response.data.quotes+' RESPONSE DATA COMMENTS')
              //page===1?setinformation(response.data):setinformation(information.concat(response.data))
              if(response.data.message!="No Quote!"){
-              await setinformation(information=>[...information,...response.data.quotes])
+                //  setinformation(information.concat(response.data.quotes))
+               await setinformation(information=>[...information,...response.data.quotes])
               }
               else{
                 setinformation(undefined)
@@ -236,8 +237,11 @@ const Activityquote = (prop) => {
     useFocusEffect(
         React.useCallback(() => {
             const a = new Promise(async (resolve, reject) => {
-                await setinformation([]);
+                await setinformation([])
+                // .then(setpage(1))
+                if(information===[]){
                 await setpage(1);
+                }
                 //await setselecttime(true)
                 //با این ظاهرا درست شد :/
                 //await setselectedValue('like')
