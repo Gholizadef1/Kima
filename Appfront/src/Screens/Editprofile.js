@@ -276,7 +276,8 @@ useFocusEffect(
    
     // const val = useContext(AuthContext);  
     //nd
-   
+    const [backgroundColor,setbackgroudcolor]=useState("white");
+    const [opacities,setopacities]=useState(1);
     const [name,setname]=useState(null);
   
      const renderHeader=()=>{
@@ -344,27 +345,40 @@ useFocusEffect(
 
 // const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
-      
-        <View style={styles.container}>
+  
+      <>
+    
+        <View style={{  flex:1,
+      backgroundColor: backgroundColor,}}>
       
         <BottomSheet
-             snapPoints={[hp('46.5%'), 0, 0]}
+            snapPoints={[hp('34%'), 0, 0]}
             ref={bs}
             initialSnap={1}
+            // onCloseEnd={setbackgroudcolor("white")}
             callbackNode={fall}
             enabledGestureInteraction={true}
             enabledContentTapInteraction={false}
             renderContent={renderInner}
-            renderHeader={renderHeader}            
+            renderHeader={renderHeader}   
+            onCloseEnd={()=>setbackgroudcolor("white")}
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
             backgroundColor={'white'}
         
        />
-       <View >
+        <Animated.View style={{
+  backgroundColor:backgroundColor,
+opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
+}}> 
+       
+     
         
-        <View style={{position:'absolute',height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
+        <View style={{position:'absolute',opacity:opacities,height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
         <TouchableOpacity style={{}}
-         onPress={async()=>await bs.current.snapTo(0)}>
+         onPress={async()=>{
+            await setbackgroudcolor("#F5F5F5")
+          //  await setopacities(0.5)
+           await bs.current.snapTo(0)}}>
 
 
       {picture==='http://e7ae29f4056b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
@@ -385,7 +399,10 @@ useFocusEffect(
       </ImageBackground>}
       {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
       
-      <TouchableOpacity  onPress={async()=>await bs.current.snapTo(0)} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
+      <TouchableOpacity  onPress={async()=>{
+        setbackgroudcolor("#F5F5F5")
+    
+        await bs.current.snapTo(0)}} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
       <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
       </TouchableOpacity>
       {/* </TouchableOpacity> */}
@@ -465,6 +482,7 @@ useFocusEffect(
       }}
      >
      {(props)=>(
+       
      <View style={{ marginTop:hp('25.5%'),marginHorizontal:wp('10%')}}>
 
      <Item style={styles.input}>
@@ -653,10 +671,15 @@ useFocusEffect(
         {/* </TouchableOpacity> */}
       
     {/* </ScrollView> */}
-    </View>
+  
+    </Animated.View>
+    {/* <View style={{backgroundColor:"gray",flex:1}}></View> */}
     <StatusBar backgroundColor='#BFDBF7' style='light' />
 
         </View>
+       
+        </>
+        
         
    
         // {/* <Text>HI</Text>
@@ -743,22 +766,32 @@ const styles = StyleSheet.create({
         
         
       },
+      panel: {
+        padding: hp("3%"),
+        backgroundColor: 'white',
+        paddingTop:  hp("3%"),
+        shadowColor: 'black',
+        borderTopColor: 'black',
+        shadowOpacity: 0.5,
+        elevation:10
+    
+      },
       header: {
         backgroundColor: 'white',
         shadowColor: 'black',
-        shadowOffset: {width: -1, height: -3},
+        shadowOffset: { width: -1, height: -3 },
         shadowRadius: 20,
         shadowOpacity: 0.5,
-        // elevation: 5,
-        paddingTop: 20,
+        // elevation: 5
+        paddingTop: hp("2.5%"),
         borderTopLeftRadius: 20,
-        borderTopColor:'black',
+        borderTopColor: 'black',
         borderTopRightRadius: 20,
       },
       panelHeader: {
-        borderTopColor:'black',
+        borderTopColor: 'black',
     
-      },  
+      }, 
 //         input:{
 //      marginTop:5,
 //      marginLeft:5,
