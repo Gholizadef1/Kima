@@ -254,7 +254,9 @@ const Commentcard = (prop) => {
                       .then(async function (response) {
                         // console.log(response);
                         // prop.INFO(prop.quoteid);
-                        if(prop.kdelet===false)
+                        console.log(prop.kdelete+"  KDELETEEEEEEEEEEEEEEEEEEEEEEEEE")
+                       
+                        if(prop.kdelete===false)
                          await(prop.DELETE(true))
                          else
                          await(prop.DELETE(false))
@@ -391,7 +393,11 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               if(prop.selectt==="like"){
-                await(prop.DELETE(true))
+                if(prop.kdelete===false)
+                         await(prop.DELETE(true))
+                         else
+                         await(prop.DELETE(false))
+
               }
               setnumlike(response.data.LikeCount)
              // if(like==='lightblue')
@@ -421,7 +427,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               if(prop.selectt==="like"){
-                await(prop.DELETE(true))
+                if(prop.kdelete===false)
+                         await(prop.DELETE(true))
+                         else
+                         await(prop.DELETE(false))
               }
               setnumlike(response.data.LikeCount)
               //if(like==='lightblue')
@@ -508,7 +517,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               if(prop.selectt==="like"){
-                await(prop.DELETE(true))
+                if(prop.kdelete===false)
+                         await(prop.DELETE(true))
+                         else
+                         await(prop.DELETE(false))
               }
               setnumdislike(response.data.DislikeCount)
               //if(dislike==='#F2A4A3')
@@ -538,7 +550,10 @@ const Commentcard = (prop) => {
           })
             .then(async function (response) {
               if(prop.selectt==="like"){
-                await(prop.DELETE(true))
+                if(prop.kdelete===false)
+                         await(prop.DELETE(true))
+                         else
+                         await(prop.DELETE(false))
               }
               setnumdislike(response.data.DislikeCount)
              // if(dislike==='#F2A4A3')
