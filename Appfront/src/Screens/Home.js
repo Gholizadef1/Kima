@@ -71,15 +71,15 @@ const Home = ({ navigation }) => {
             <Container style={styles.frame}>
                 <ScrollView>
                     <Header style={{ backgroundColor: '#1F7A8C', marginTop: hp('4.5%') }} />
-                    <Title style={{ fontSize: hp('4%'), fontWeight: 'bold', color: '#E1E5F2', marginTop: hp('-7%'), marginLeft: wp('2.5%') }}>کیما</Title>
+                    <Title style={{ fontSize: hp('3%'), fontWeight: 'bold', color: '#E1E5F2', marginTop: hp('-6.1%'), marginLeft: wp('2.5%') }}>کیما</Title>
                     <ScrollView>
                         <View style={{ padding: hp('-2%'), marginRight: wp('2%') }}>
                         </View>
                         <View>
 
                             <Text style={{
-                                fontSize: hp('3.5%'), fontWeight: 'bold', color: '#1F7A8C',
-                                marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold'
+                                fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1F7A8C',
+                                marginTop: hp('5%'), marginLeft: wp('2%'),marginBottom:hp("-0.5%"), fontWeight: 'bold'
                             }}>کتاب های پیشنهادی</Text>
                             <FlatList
                                 showsHorizontalScrollIndicator={false}
@@ -87,13 +87,13 @@ const Home = ({ navigation }) => {
                                 data={image}
                                 renderItem={({ item }) => {
                                     return (
-                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('1.5%') }}>
+                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('2.5%') }}>
                                             <TouchableOpacity onPress={() => navigation.navigate('Showbookview', { id: item.id })}>
-                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 15 }}>
+                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 10 }}>
                                                     <CardItem cardBody>
                                                         <Image source={{ uri: item.imgurl }} style={{
                                                             width: 120,
-                                                            height: 180, borderRadius: 15
+                                                            height: 180, borderRadius: 10
                                                         }} />
                                                     </CardItem>
                                                 </Card>
@@ -111,12 +111,12 @@ const Home = ({ navigation }) => {
 
 
                     <ScrollView>
-                        <View style={{ padding: hp('-2%'), marginRight: wp('2%') }}>
+                        <View style={{ padding: hp('-2%'), marginRight: wp('2%'),marginTop:hp("-1.3%") }}>
                         </View>
                         <View>
                             <Text style={{
-                                fontSize: hp('3.5%'), fontWeight: 'bold', color: '#1F7A8C',
-                                marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold'
+                                fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1F7A8C',
+                                marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold',marginBottom:hp("-0.5%")
                             }}>کتاب های برتر</Text>
                             <FlatList
                                 showsHorizontalScrollIndicator={false}
@@ -124,13 +124,13 @@ const Home = ({ navigation }) => {
                                 data={best}
                                 renderItem={({ item }) => {
                                     return (
-                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('1.5%') }}>
+                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('2.5%') }}>
                                             <TouchableOpacity onPress={() => navigation.navigate('Showbookview', { id: item.id })}>
-                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 15 }}>
+                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 10 }}>
                                                     <CardItem cardBody>
                                                         <Image source={{ uri: item.imgurl }} style={{
                                                             width: 120,
-                                                            height: 180, borderRadius: 15
+                                                            height: 180, borderRadius: 10
                                                         }} />
                                                     </CardItem>
                                                 </Card>
@@ -147,12 +147,12 @@ const Home = ({ navigation }) => {
                     </ScrollView>
 
                     <ScrollView>
-                        <View style={{ padding: hp('-2%'), marginRight: wp('2%') }}>
+                        <View style={{ padding: hp('-2%'), marginRight: wp('2%'),marginTop:hp("-1.3%") }}>
                         </View>
                         <View>
                             <Text style={{
-                                fontSize: hp('3.5%'), fontWeight: 'bold', color: '#1F7A8C',
-                                marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold'
+                                fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1F7A8C',
+                                marginTop: hp('5%'), marginLeft: wp('2%'), fontWeight: 'bold',marginBottom:hp("-0.5%")
                             }}>پربحث ترین کتاب ها</Text>
                             <FlatList
                                 showsHorizontalScrollIndicator={false}
@@ -160,13 +160,13 @@ const Home = ({ navigation }) => {
                                 data={mostdis}
                                 renderItem={({ item }) => {
                                     return (
-                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('1.5%') }}>
+                                        <View style={{ paddingVertical: hp('3'), paddingLeft: wp('2.5%') }}>
                                             <TouchableOpacity onPress={() => navigation.navigate('Showbookview', { id: item.id })}>
-                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 15 }}>
+                                                <Card style={{ backgroundColor: '#1F7A8C', borderRadius: 10 }}>
                                                     <CardItem cardBody>
                                                         <Image source={{ uri: item.imgurl }} style={{
                                                             width: 120,
-                                                            height: 180, borderRadius: 15
+                                                            height: 180, borderRadius: 10
                                                         }} />
                                                     </CardItem>
                                                 </Card>
@@ -186,9 +186,9 @@ const Home = ({ navigation }) => {
                             navigation.navigate("allhomeresults")
                             console.log("onpress")
                         }}
-                        name="arrowleft" style={{ marginTop: hp("18.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
+                        name="arrowleft" style={{ marginTop: hp("15.5%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
 
-                    <AntDesign
+                    {/* <AntDesign
                         onPress={() => {
                             navigation.navigate("alltopbooksresults")
                             console.log("onpress")
@@ -202,7 +202,7 @@ const Home = ({ navigation }) => {
                             console.log("onpress")
                         }}
                         name="arrowleft" style={{ marginTop: hp("18.7%"), position: "absolute", alignSelf: "flex-end", right: wp("4%") }} size={hp("3%")} color="#1f7a8c" />
-
+ */}
 
                 </ScrollView>
 
