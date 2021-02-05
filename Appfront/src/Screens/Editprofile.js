@@ -62,7 +62,7 @@ const EditProfile = () => {
     // console.log(id)
     try{
 
-    const response = await axiosinst.get("http://e7e864967156.ngrok.io/user/"+id)
+    const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/"+id)
 
 
         
@@ -71,12 +71,12 @@ const EditProfile = () => {
   console.log('*****')
 
 
-        console.log(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://e7e864967156.ngrok.io${response.data.profile_photo}`)
+        console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+        setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
         console.log(picture)
       
    console.log(response.data.profile_photo)
-   console.log(!(picture==="http://e7e864967156.ngrok.io/media/default.jpg"))
+   console.log(!(picture==="http://e7ae29f4056b.ngrok.io/media/default.jpg"))
 
 
    console.log(picture===null)
@@ -132,7 +132,7 @@ useFocusEffect(
            const backk=JSON.stringify(back);
            const id=await AsyncStorage.getItem('id');
 
-          const response=await axiosinst.put('http://e7e864967156.ngrok.io/user/'+id+'/update-profile',formdata,{
+          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
 
 
             headers:{
@@ -224,7 +224,7 @@ useFocusEffect(
            const backk=JSON.stringify(back);
            const id=await (await AsyncStorage.getItem('id')).toString();
 
-          const response=await axiosinst.put('http://e7e864967156.ngrok.io/user/'+id+'/update-profile',formdata,{
+          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
 
 
 
@@ -367,7 +367,7 @@ useFocusEffect(
          onPress={async()=>await bs.current.snapTo(0)}>
 
 
-      {picture==='http://e7e864967156.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+      {picture==='http://e7ae29f4056b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
 
       
         source={require('../../assets/avatar.png')}
@@ -488,7 +488,7 @@ useFocusEffect(
      <Button bordered rounded style={styles.button}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
         </Button>
       
      </View>
@@ -578,7 +578,7 @@ useFocusEffect(
        
         
        </Item>
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.Password&&props.errors.Password}</Text>
+       <Text style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.Password&&props.errors.Password}</Text>
        <Item style={styles.input}>
          <Input  style={styles.Input} 
           secureTextEntry
@@ -593,7 +593,7 @@ useFocusEffect(
 
     
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
+       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
 
        
        <Item style={{}}>
@@ -608,7 +608,7 @@ useFocusEffect(
          <Feather name="check" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
        </Item>
       
-       <Text style={{fontSize:10, color:'red'}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
+       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
        
 
 
@@ -633,7 +633,7 @@ useFocusEffect(
         borderRadius:17}}
        onPress={props.handleSubmit}
        >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%')}}>تایید</Text>
+         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
         </Button>
       
      </View>
