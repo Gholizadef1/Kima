@@ -200,7 +200,7 @@ const Commentactivity = (prop) => {
             isliked={item.isliked}
             isdisliked={item.isdisliked}
             date={item.sendtime.toString().split('T')[0]} bookid={item.current_book.id} accountid={item.account.id}
-             dislikenumber={item.DislikeCount} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+             dislikenumber={item.DislikeCount} fromcommentactivity={true} kdelet={delet} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.current_book.imgurl}`} likedisable={true} comment={item.comment_text} ></Commentcard>)}
         >
 

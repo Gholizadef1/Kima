@@ -166,12 +166,18 @@ const Commentcard = (prop) => {
       setlike('#1f7a8c')
       if(prop.isdisliked)
       setdislike('#E64846')
+      if(prop.fromcommentactivity!=true){
       if(prop.picture.toString().split(":")[0]==="http"){
         setphotoo(prop.picture)
       }
       else{
         setphotoo("http://e7ae29f4056b.ngrok.io"+prop.picture)
       }
+    }
+    else
+    {
+      setphotoo(prop.picture)
+    }
       //  getdislike()
       //  getlike(prop.commentid)
     }, [])
@@ -248,8 +254,10 @@ const Commentcard = (prop) => {
                       .then(async function (response) {
                         // console.log(response);
                         // prop.INFO(prop.quoteid);
+                        if(prop.kdelet===false)
                          await(prop.DELETE(true))
-
+                         else
+                         await(prop.DELETE(false))
 
                       })
                       .catch(function (error) {
