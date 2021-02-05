@@ -528,7 +528,8 @@ const Groups = ({ navigation }) => {
           onRefresh={async () => {
             // await setsearchterm('')
             if (searchterm === '') {
-              await (setnumberofresults())
+              await setopensearch(false);
+              await (setnumberofresults(undefined))
               await setrefresh(true)
               // await setinformation([]);
               // await setpage(1);
