@@ -23,8 +23,18 @@ const Eachgroup = (prop) => {
   const [kamshodde2, setkamshodde2] = useState();
   const [comment4,setcomment4]=useState();
   const [linenumber,setlinenumber]=useState();
- console.log(prop.quizphoto);
+  const [photoo,setphotoo]=useState();
+ //console.log(prop.quizphoto+" quiz photo");
   useEffect(()=>{
+    if(prop.quizphoto.toString().split(":")[0]==="http"){
+      setphotoo(prop.quizphoto)
+    }
+    else{
+      setphotoo("http://e7ae29f4056b.ngrok.io"+prop.quizphoto)
+    }
+
+
+    console.log(photoo+" quiz photo");
     var commentt = `${prop.discription}`.toString();
     var linenumberr = (commentt.split('').length)
     console.log(linenumberr+" prop discription")
@@ -71,7 +81,7 @@ const Eachgroup = (prop) => {
 
         <TouchableOpacity style={styles.avatar}
           onPress={() => { }}>
-          {prop.quizphoto === '/media/default.png' ? <ImageBackground borderRadius={100}
+          {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
             source={require('../../assets/quizz.png')}
             style={{
@@ -87,7 +97,7 @@ const Eachgroup = (prop) => {
 
           </ImageBackground> : <ImageBackground borderRadius={100}
 
-            source={{ uri:prop.quizphoto}}
+            source={{ uri:photoo}}
             style={styles.avatar}
 
           >
@@ -119,19 +129,20 @@ const Eachgroup = (prop) => {
           <Text style={{ fontSize: hp('1.6%'), fontWeight: 'bold', color: 'lightblue', marginBottom: hp('2%'), marginTop: hp('-1%'), marginHorizontal: wp("0%") }}>#<Text style={{ color: "#1f7a8c" }}> سازنده : {prop.creator.username}</Text>  </Text>
           {!more ? <Text style={{ color: 'black' }}>{comment4}</Text> : <Text style={{ color: 'black' }}>{comment4}</Text>}
           {linenumber >= 250 ? <TouchableOpacity
+          activeOpacity={1}
 
-            onPress={async () => {
+            // onPress={async () => {
 
-              if (more === false) {
-                setmore(true)
-                setshowmore('کم تر')
+            //   if (more === false) {
+            //     setmore(true)
+            //     setshowmore('کم تر')
 
-              }
-              else {
-                setmore(false)
-                setshowmore('بیشتر...')
-              }
-            }}
+            //   }
+            //   else {
+            //     setmore(false)
+            //     setshowmore('بیشتر...')
+            //   }
+            // }}
             style={{ marginTop: hp('1%'), left: wp('75%') }}
           ><Text style={{ color: '#1f7a8c' }}>{showmore}</Text>
           </TouchableOpacity> : null}

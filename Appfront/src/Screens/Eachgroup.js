@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Alert, ScrollView,Modal } from 'react-native';
 //  import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -18,9 +18,12 @@ import Groups from './Groups';
 const Eachgroup = (prop) => {
 
   const [more, setmore] = useState(false);
+  const [kamshodde, setkamshodde] = useState();
+  const [kamshodde2, setkamshodde2] = useState();
   console.log(prop.groupphoto);
   console.log(prop.isownerid+";kasfj;lsf;lkjsf;lakj;slk;lskfj;lkj")
   const [showmore, setshowmore] = useState('بیشتر...');
+  const [photoo,setphotoo]=useState();
   const commentt = `${prop.discription}`.toString();
   // const [moreclicked,setmoreclicked]=useState(false);
   const linenumber = (commentt.split('').length)
@@ -42,6 +45,36 @@ const Eachgroup = (prop) => {
   // console.log('****'+comment4)
   // console.log('*****************'+prop.discription+'  prop discription*********************')
  
+console.log(photoo+" photo")
+  useEffect(()=>{
+    var kamshode = "";
+    var a = prop.title.toString();
+    var b = a.lenght;
+    for (var i = 0; i <= 18; i++) {
+      if (a[i] != undefined) {
+        kamshode += a[i]
+        // console.log(kamshode);
+      }
+    }
+  
+    if (a === kamshode) {
+      //  setsenoghte(false)
+    }
+    else {
+      //setsenoghte(true);
+      kamshode += "..."
+    }
+    setkamshodde(kamshode);
+
+    if(prop.groupphoto.toString().split(":")[0]==="http"){
+      setphotoo(prop.groupphoto)
+    }
+    else{
+      setphotoo("http://e7ae29f4056b.ngrok.io"+prop.groupphoto)
+    }
+  },[])
+
+
     return(
     
       // <TouchableOpacity onPress={async()=>{
@@ -62,17 +95,19 @@ const Eachgroup = (prop) => {
       {/* {prop.discription!='' ? (<View > */}
       <View style={{flexDirection:'row'}}>
           <View style={styles.avatarname}>
-     
+         
      <TouchableOpacity style={styles.avatar}
        onPress={() => {}}>
-       {prop.groupphoto === '/media/default.png' ? <ImageBackground borderRadius={100}
+       {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={20}
 
          source={require('../../assets/group.jpg')}
          style={ { height: hp('8%'),
         width: wp('16%'),
          borderRadius: 20,
-        position: 'absolute',borderColor:'#1f7a8c'
-        ,borderWidth:wp('0.3%'),
+        position: 'absolute'
+        // ,borderColor:'#1f7a8c'
+        
+        // ,borderWidth:wp('0.3%'),
         // borderBottomColor:'red',borderBottomWidth:2,borderRightWidth:2,borderRightColor:'green'
         }}
 
@@ -80,7 +115,7 @@ const Eachgroup = (prop) => {
 
        </ImageBackground> : <ImageBackground borderRadius={20}
 
-         source={{uri:prop.groupphoto}}
+         source={{uri:photoo}}
          style={styles.avatar}
 
        >
@@ -89,12 +124,19 @@ const Eachgroup = (prop) => {
      </TouchableOpacity>
      {/* <Text style={styles.username}><Text>#</Text>{prop.title}</Text> */}
 
-     <Text style={styles.username}>{prop.title}</Text>
+     <Text style={styles.username}>{kamshodde}</Text>
      {/* prop.isownerid===new Promise(async(resolve,reject)=>{return(await AsyncStorage.getItem("id"))}) */}
      {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
     
-
+     {photoo==='http://e7ae29f4056b.ngrok.io/media/default.png'?
+     <TouchableOpacity style={{borderRadius:20,borderWidth:wp('0.2%'),borderColor:'#1f7a8c',position:'absolute',height: hp('8.4%'),
+      left:wp("-0.3%"),top:hp("-0.2%"),
+        width: wp('16.7%'),
+    
+    elevation:0}}   >
+     </TouchableOpacity>
+     :null}
     
    </View>
    </View>
@@ -115,7 +157,7 @@ const Eachgroup = (prop) => {
             console.log(prop.moreclickedD+' PROP MORE CLICKED IN EACHGROUP')
             //setmoreclicked(true)
             //prop.gotogp(false);
-             await prop.moreclickedd(true);
+             await prop.moreclickedd(true,prop.id);
             console.log(prop.moreclickedD+' PROP MORE CLICKED IN EACHGROUP')
     
             // if(likeshode===true)
