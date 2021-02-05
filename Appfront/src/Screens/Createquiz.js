@@ -88,7 +88,7 @@ const Createquiz = () => {
     const [numofquestion, setnumofquestion] = useState(2)
     const [minnumquestion, setminnumquestion] = useState(false);
     const [maxnumquestion, setmaxnumquestion] = useState(false);
-    const [picture, setpicture] = useState({ uri: '../../assets/tea.jpg', name: '', type: '' });
+    const [picture, setpicture] = useState({ uri: '../../assets/quizz.png', name: '', type: '' });
     const [showallerror, setshowallerror] = useState(false);
     const [stillhaveerror, setstillhaveerror] = useState(false);
     const [lasttouch, setlasttouch] = useState(0);
@@ -129,7 +129,7 @@ const Createquiz = () => {
                     style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
                     validationSchema={validationSchema}
                     initialValues={{
-                        title: '', description: '', quiz_photo: require('../../assets/tea.jpg'), questions: [{ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "" }]
+                        title: '', description: '', quiz_photo: require('../../assets/quizz.png'), questions: [{ question_text: "", a_text: "", b_text: "", c_text: "", d_text: "", key: "" }]
                         // soal:questions 
                     }}
                     validationSchema={validationSchema}
@@ -139,11 +139,11 @@ const Createquiz = () => {
                         const formdata = new FormData();
                         formdata.append('title', values.title)
                         formdata.append('description', values.description)
-                        console.log(itemid+" item id ke migire")
+                        console.log(itemid + " item id ke migire")
                         formdata.append("question_count", (itemid).toString());
                         // formdata.append("question_count",1);
                         console.log(picture.uri + "pictureee")
-                        if (picture.uri === '../../assets/tea.jpg') {
+                        if (picture.uri === '../../assets/quizz.png') {
                             console.log("defualt toye picture")
                         }
                         else
@@ -153,27 +153,27 @@ const Createquiz = () => {
                         var all = values;
 
                         //   all["quiz_photo"] = formdata;
-                        console.log(itemid+"num of questionn")
-                       // all["question_count"] =  numofquestion;
+                        console.log(itemid + "num of questionn")
+                        // all["question_count"] =  numofquestion;
                         for (var i = 0; i < itemid; i++) {
                             formdata.append(`questions[${i}]question_text`, all.questions[i].question_text)
                             formdata.append(`questions[${i}]a_text`, all.questions[i].a_text)
                             formdata.append(`questions[${i}]b_text`, all.questions[i].b_text)
                             formdata.append(`questions[${i}]c_text`, all.questions[i].c_text)
                             formdata.append(`questions[${i}]d_text`, all.questions[i].d_text)
-                            console.log(all.questions[i].key+" keyyyy")
-                            if( all.questions[i].key==="1"){
-                            
-                            formdata.append(`questions[${i}]key`, "a")
+                            console.log(all.questions[i].key + " keyyyy")
+                            if (all.questions[i].key === "1") {
+
+                                formdata.append(`questions[${i}]key`, "a")
                             }
-                            if( all.questions[i].key==="2"){
-                            formdata.append(`questions[${i}]key`, "b")
+                            if (all.questions[i].key === "2") {
+                                formdata.append(`questions[${i}]key`, "b")
                             }
-                            if( all.questions[i].key==="3"){
-                            formdata.append(`questions[${i}]key`, "c")
+                            if (all.questions[i].key === "3") {
+                                formdata.append(`questions[${i}]key`, "c")
                             }
-                            if( all.questions[i].key==="4"){
-                            formdata.append(`questions[${i}]key`, "d")
+                            if (all.questions[i].key === "4") {
+                                formdata.append(`questions[${i}]key`, "d")
                             }
                         }
                         //formdata.append("question_count",numofquestion)
@@ -235,7 +235,7 @@ const Createquiz = () => {
 
                                     {/* // {props.values.quiz_photo === require('../../assets/quizicon.png') ?  */}
                                     {/* bedoone view nemishod in barr */}
-                                    {props.values.quiz_photo === require('../../assets/tea.jpg') ? <TouchableOpacity style={{
+                                    {props.values.quiz_photo === require('../../assets/quizz.png') ? <TouchableOpacity activeOpacity={0.5} style={{
                                         height: hp('14%'),
                                         //marginTop: hp('0%'),
                                         width: wp('28%'),
@@ -273,7 +273,7 @@ const Createquiz = () => {
 
                                         </ImageBackground>
 
-                                    </TouchableOpacity> : <TouchableOpacity style={{
+                                    </TouchableOpacity> : <TouchableOpacity activeOpacity={0.5} style={{
                                         height: hp('14%'),
                                         marginTop: hp('0%'),
                                         width: wp('28%'),
@@ -303,6 +303,9 @@ const Createquiz = () => {
 
                                             </ImageBackground>
                                         </TouchableOpacity>}
+                                    {/* <TouchableOpacity onPress={async () => await pickfromgallery(props, props.handleChange) } style={{ backgroundColor: '#EDF2F4', elevation: 8, height: hp('5.2%'), width: wp('10.5%'),left:wp("5%"),marginBottom:hp("-5%"),bottom:hp("4%"), borderRadius: 100 }}>
+                                        <EvilIcons name="camera" size={27} style={{ alignSelf: 'center', top: hp('1.4%') }} color="#1f7a8c" />
+                                    </TouchableOpacity> */}
                                 </View>
 
                                 <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('1%'), marginLeft: wp('38%'), marginTop: hp("-11.3%") }}>نام کوییز</Text>
@@ -324,11 +327,12 @@ const Createquiz = () => {
                                 </Item>
 
 
-                                <TouchableOpacity onPress={() => { pickfromgallery(props, props.handleChange) }} style={{ backgroundColor: '#EDF2F4', elevation: 1, height: hp('4.2%'), width: wp('8.5%'), top: hp('8%'), left: wp('-3%'), position: 'absolute', borderRadius: 100 }}>
-                                    <EvilIcons onPress={() => { pickfromgallery(props, props.handleChange) }} name="camera" size={25} style={{ alignSelf: 'center', top: hp('1%') }} color="#1f7a8c" />
+                                <TouchableOpacity onPress={() => { pickfromgallery(props, props.handleChange) }} style={{ backgroundColor: '#EDF2F4', elevation: 8,height:hp('5.2%'),bottom:hp("0.5%"),width:wp('10.5%'),right:wp("-5%"), borderRadius: 100 }}>
+                                    <EvilIcons onPress={() => { pickfromgallery(props, props.handleChange) }} name="camera" size={25} style={{alignSelf:'center',top:hp('1.4%')}}  color="#1f7a8c" />
                                 </TouchableOpacity>
+
                                 <View style={{}}>
-                                    <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('8%'), marginLeft: wp('5%') }}>توضیحات</Text>
+                                    <Text style={{ fontSize: hp('1.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('4%'), marginLeft: wp('5%') }}>توضیحات</Text>
                                     <TouchableOpacity activeOpacity={1}>
                                         <Textarea rowSpan={hp('0.9.1%')} bordered borderRadius={8}
                                             borderColor={'#EDF2F4'}
@@ -621,7 +625,7 @@ const Createquiz = () => {
                                                         //     console.log("\n"+props.errors)
                                                         //     formdata.append('title', values.title)
                                                         //     formdata.append('summary', values.description)
-                                                        //     if (picture.uri === '../../assets/tea.jpg') {
+                                                        //     if (picture.uri === '../../assets/quizz.png') {
                                                         //     }
                                                         //     else
                                                         //         formdata.append('quiz_photo', picture)
