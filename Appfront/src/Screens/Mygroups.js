@@ -289,7 +289,10 @@ const Mygroups = (prop) => {
         <View style={styles.modalView}>
         {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
       <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
-        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
+        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} 
+        onPress={()=>{
+          response(1);
+          setmodalopen(false)}}
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>
        {/* </View> */}

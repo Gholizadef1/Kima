@@ -171,7 +171,7 @@ const Commentactivity = (prop) => {
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
       { (information!=undefined) ? <FlatList
-          style={{ marginBottom: '17%' }}
+          style={{ marginBottom: '0%' }}
           removeClippedSubviews={true} 
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
@@ -181,7 +181,7 @@ const Commentactivity = (prop) => {
           onEndReachedThreshold={0.7}
           ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>نظر دیگری وجود ندارد</Text></View>)}
-          style={{ marginBottom: hp('15.5%') }}
+          // style={{ bottom: hp('5.5%') }}
           onRefresh={async () => {
             await setrefresh(true)
 
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#B8B8B8',
     backgroundColor: '#ffff',
-    marginTop: 2
+   // marginTop: 2
   },
   nazar: {
     marginLeft: '33%',

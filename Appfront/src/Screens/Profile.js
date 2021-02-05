@@ -287,7 +287,7 @@ v
    else{
        return(
         <View style={styles.container}>
-        <ActivityIndicator color={"gray"} size={"large"} style={{marginTop:hp("40%")}} ></ActivityIndicator>
+        <ActivityIndicator color={"gray"} size={"small"} style={{marginTop:hp("40%")}} ></ActivityIndicator>
         <StatusBar backgroundColor='#BFDBF7' style='light' />
         </View>
 
