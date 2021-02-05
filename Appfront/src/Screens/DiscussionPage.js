@@ -75,6 +75,7 @@ const DiscussionPage = (prop) => {
             if (chatAgain === 10) {
                 settheend(true)
                 setChatsPage(chatsPage + 1)
+                getChats()
                 setchatAgain(0)
             }
             else {
@@ -136,7 +137,7 @@ const DiscussionPage = (prop) => {
                                             .catch(function (error) {
                                                 {
                                                     console.log(error)
-                                                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+                                                    Alert.alert('', '  مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
                                                         text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
                                                     }], { cancelable: false }, { style: { height: 50 } })
                                                 }

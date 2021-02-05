@@ -254,7 +254,7 @@ const GroupPage = (prop) => {
                         {
                           console.log(error)
 
-                          Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+                          Alert.alert('', ' مشکلی پیش اومده لطفا دوباره امتحان کن  ', [{
 
 
                             text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
