@@ -28,83 +28,13 @@ const DiscussionPage = (prop) => {
     const [chats, setChats] = useState();
     const discussionid = prop.route.params.id;
     const groupid = prop.route.params.id2;
+    const [chatsPage, setChatsPage] = useState(1);
+    const [chatAgain, setchatAgain] = useState(0);
     const [theend, settheend] = useState(false)
-    const [information, setinformation] = useState([]);
-    const [count, setcount] = useState(1);
-    const [page, setpage] = useState(1);
-
-    const response = async (page) => {
-        await setpage(page)
-        if (page === 1) {
-            await settheend(false)
-            await setinformation([])
-
-            console.log(information)
-
-        }
-        const id = prop.route.params.id
+    const [chatsCount, setChatsCount] = useState();
+    const [counter, setCounter] = useState();
 
 
-        try {
-            setIDD(await (await AsyncStorage.getItem('id')).toString())
-            const response = await axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + page, {
-
-                "headers":
-                {
-                    "Content-Type": "application/json",
-                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-                }
-
-            })
-            .then (function(response) {
-                console.log(count + '  countt')
-                console.log(response.data.chats)
-                setChats(response.data.chats)
-                setloading(false)
-
-                setcount(response.data.count);
-                if (response.data.detail === 'Invalid page.')
-                    settheend(true);
-                else {
-                    settheend(false)
-    
-                    if (response.data.message != "No Chat!") {
-                        setinformation(information => [...information, ...response.data.chats])
-                    }
-                    else {
-                        setinformation(undefined)
-                    }
-    
-                    setrefresh(false)
-                }
-
-            })
-
-        }
-        catch (err) {
-
-            setrefresh(false)
-            console.log(err.toString().split('\n')[0])
-            if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
-                settheend(true);
-            console.log(theend + 'THE ENDDD')
-            console.log(err);
-
-        }
-    }
-
-    const handleLoadMore = async () => {
-        console.log('END OF THE LIST')
-        if (page < count) {
-            console.log(page + 'PAGE')
-            console.log(count + 'COUNT')
-            if (theend === false)
-                response(page + 1);
-        }
-        else {
-            settheend(true)
-        }
-    };
 
     useEffect(() => {
         getUsername()
@@ -114,34 +44,49 @@ const DiscussionPage = (prop) => {
         const id = await AsyncStorage.getItem('id');
         const response = axiosinst.get('/user/' + id)
             .then(function (response) {
-                console.log('USERNAME' + response.data.username)
                 setusername(response.data.username)
             })
     };
+    useEffect(() => {
+        const getChats = async () => {
+            axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat?page=' + chatsPage, {
+                "headers": {
+                    "content-type": "a`pplication/json",
+                    "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+                }
+            })
+                .then(function (response) {
+                    setChats(response.data.chats)
+                    setChatsCount(response.data.count)
+                    setloading(false)
+                })
 
-    // const getChats = async () => {
+                .catch(async function (error) {
+                    console.log(error);
+                    console.log(error.code + 'ERROR CODE')
+                });
+        }
+        getChats();
+    }, [chatsPage, chatAgain, groupid, discussionid]);
 
-    //     axiosinst.get('/group/' + groupid + '/discussion/' + discussionid + '/chat', {
-    //         params: {
-    //             page: page
-    //         },
-    //         "headers": {
-    //             "content-type": "application/json",
-    //             "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-    //         }
-    //     })
-    //         .then(function (response) {
-    //             setChats(response.data.chats)
-    //             setloading(false)
-    //         })
+    const handleLoadMore = async () => {
 
-    //         .catch(async function (error) {
-    //             console.log(error);
-    //             console.log(error.code + 'ERROR CODE')
-    //         });
-    // }
-    //   console.log('CHATT'+chats.chat_text)
-    //   console.log('USERR'+chats.user.username)
+        if (chatsPage < chatsCount) {
+            if (chatAgain === 10) {
+                settheend(true)
+                setChatsPage(chatsPage + 1)
+                setchatAgain(0)
+            }
+            else {
+                settheend(false)
+            }
+        }
+        else {
+            settheend(true)
+        }
+
+    };
+
 
     if (loading) {
         return (
@@ -171,9 +116,6 @@ const DiscussionPage = (prop) => {
                                         formdata.append('chat_text', values.Description)
 
                                         const response = await axiosinst.post('/group/' + groupid + '/discussion/' + discussionid + '/chat', formdata, {
-                                            params: {
-                                                page: page
-                                            },
                                             headers: {
                                                 "Content-Type": "application/json",
                                                 "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
@@ -182,15 +124,14 @@ const DiscussionPage = (prop) => {
                                         )
                                             .then(function (response) {
                                                 console.log(response)
-                                                
                                                 Alert.alert('', ' پیام شما ارسال شد', [
                                                     {
                                                         text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                     }
                                                 ], { cancelable: false }, { style: { height: 50 } })
-                                                //getChats();
-                                                response(1)
-                                            
+                                                setchatAgain(chatAgain + 1)
+                                                getChats();
+
                                             })
                                             .catch(function (error) {
                                                 {
@@ -237,22 +178,20 @@ const DiscussionPage = (prop) => {
                     <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
                     <FlatList
                         style={{ marginBottom: hp('5%') }}
-                        showsVerticalScrollIndicator={true}
+                        removeClippedSubviews={true}
+                        showsVerticalScrollIndicator={false}
                         keyExtractor={(item) => item.id}
-                        refreshing={refreshchats}
-                        onRefresh={async () => {
-                            console.log('refresh')
-                        }}
                         data={chats}
+                        refreshing={refreshchats}
                         onEndReached={() => handleLoadMore()}
                         onEndReachedThreshold={0.7}
                         ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
-                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('5%') }}>پیام دیگری وجود ندارد</Text></View>)}
+                            <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>پیام دیگری وجود ندارد</Text></View>)}
                         style={{ marginBottom: hp('15.5%') }}
                         onRefresh={async () => {
-                            await setrefresh(true)
+                            await setrefreshchats(true)
 
-                            response(1);
+                            setChatsPage(chatsPage + 1)
 
                         }}
                         renderItem={({ item }) => <>
@@ -292,6 +231,7 @@ const DiscussionPage = (prop) => {
                                                                             text: 'فهمیدم', style: 'default', onPress: () => console.log('alert closed')
                                                                         }
                                                                     ], { cancelable: false }, { style: { height: hp('40%') } })
+                                                                    setchatAgain(chatAgain - 1)
                                                                     getChats();
                                                                 })
                                                                 .catch(function (error) {
