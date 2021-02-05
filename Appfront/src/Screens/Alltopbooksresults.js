@@ -63,13 +63,16 @@ const Allsearchresults = (prop) => {
         }
       }
      
-      useEffect(() => {
+      useFocusEffect(
+        React.useCallback(() => {
          // setpage(1);
         //   if(page===1){
         //   searchauthorapi(prop.route.params.searchterm,1)
         //   }
         searchauthorapi(1);
-      }, [])
+    }, [prop.navigation])
+
+    )
       const handleloadmore=async()=>{
         //  await setpage(page+1);
           await setauthorloading(true);
