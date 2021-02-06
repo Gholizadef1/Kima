@@ -63,6 +63,7 @@ const Comment = (prop) => {
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
   const [page, setpage] = useState(1);
+  const [com,setcom]=useState(true);
 
   console.log('AVAL')
   const response = async(page) => {
@@ -205,7 +206,7 @@ const Comment = (prop) => {
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation,selecttime,delet])
+    }, [prop.navigation,selecttime,delet,com])
 
   )
   const handleLoadMore = async() => {
@@ -345,12 +346,17 @@ const Comment = (prop) => {
         enabledGestureInteraction={true}
         enabledContentTapInteraction={false}
         onCloseEnd={() => {
+          if(com===true){
+            setcom(false)
+          }
+          else
+          setcom(true)
           setshowbutton(true)
           // if(closed===true)
           // setclosed(false)
           // else
           // setclosed(true)
-          response(1)
+          // response(1)
 
         }}
         //  isBackDropDismisByPress={true}
