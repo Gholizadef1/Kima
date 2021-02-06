@@ -18,6 +18,13 @@ import Editprofile from './Editprofile';
 import Activityquote from './Activityquote';
 import Commentactivity from "./Commentactivity";
 import Mybooks from "./Mybooks";
+import WantToRead from './WantToRead';
+import IsRead from './IsRead';
+import IsReading from './IsReading'
+import Comment from './Comment';
+import Bookview from "./Bookview"
+
+import Quote from './Quote';
 
 
 
@@ -31,6 +38,20 @@ const Profilenavigation=(prop)=>{
      <profilenav.Screen name="myquote"   component={Activityquote}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'نقل قول های من',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',fontSize:17}}}></profilenav.Screen>
      <profilenav.Screen name="mycomment"   component={Commentactivity}  options={{headerShown:true,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'نظر های من',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',fontSize:17}}}></profilenav.Screen>
      <profilenav.Screen name="mybooks"   component={Mybooks}  options={{headerShown:false,headerStyle:{backgroundColor:'#EDF2F4' },headerTitle:'کتاب های من',headerTintColor:"#1F7A8C",headerTitleStyle:{color:'#1F7A8C',fontWeight:'bold',fontSize:17}}}></profilenav.Screen>
+     <profilenav.Screen name = "ShowToRead" component={WantToRead} options={{headerShown: false}} />
+      <profilenav.Screen name = "ShowReading" component={IsReading} options={{headerShown: false}} />
+      <profilenav.Screen name = "ShowRead" component={IsRead} options={{headerShown: false}} />
+      <profilenav.Screen name="Showbookview"   component={Bookview} options={{headerShown: false}}></profilenav.Screen>
+
+      <profilenav.Screen name="comment"   component={Comment}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}></profilenav.Screen>
+
+       <profilenav.Screen name="quote"   component={Quote}  options={({route}) => ({title: route.params.title,headerTintColor:'#1f7a8c'
+      ,headerTitleStyle:{fontSize:18,fontWeight:'bold'
+      },headerStyle:{backgroundColor:'#EDF2F4'}
+      })}></profilenav.Screen>
 
    </profilenav.Navigator>
  
