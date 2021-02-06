@@ -496,7 +496,7 @@ const GroupPage = (prop) => {
               <Text style={{ fontSize: hp('2.3%'), marginTop: hp('4%'), marginLeft: wp('4%'), color: '#1F7A8C', fontWeight: 'bold', marginBottom: hp('-4%') }}> اعضای گروه :</Text>
 
               <Button style={{ marginLeft: wp('90%'), top: hp('-1%') }} transparent
-                onPress={() => prop.navigation.navigate('ShowMembersPage', { id: prop.route.params.id })}>
+                onPress={() => prop.navigation.navigate('اعضای گروه', { id: prop.route.params.id })}>
                 <Text style={{ color: '#1F7A8C' }}>بیشتر</Text>
               </Button>
               <ScrollView>
