@@ -268,7 +268,7 @@ const GroupPage = (prop) => {
                     <View style={{ marginTop: hp('5%') }}>
                       <View style={{ borderColor: 'blue' }}>
 
-                        <Text style={{ fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('2%'), marginLeft: wp('1%'), marginTop: hp('-2%') }}>موضوع بحث</Text>
+                        <Text style={{ fontSize: hp('2.2%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('2%'), marginLeft: wp('1%'), marginTop: hp('-2%') }}>موضوع بحث</Text>
                         <Item style={styles.item} rounded >
 
                           <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
@@ -284,7 +284,7 @@ const GroupPage = (prop) => {
 
                       </View>
                       <View>
-                        <Text style={{ fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('5%'), marginLeft: wp('1%') }}>توضیحات</Text>
+                        <Text style={{ fontSize: hp('2.2%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('5%'), marginLeft: wp('1%') }}>توضیحات</Text>
                         <TouchableOpacity>
                           <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
                             borderColor={'lightgray'}
@@ -441,9 +441,9 @@ const GroupPage = (prop) => {
                 }}
                 data={discussion}
                 renderItem={({ item }) => <>
-                  <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
-                    <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2.7%') }}>{item.title}</Text>
-                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'), marginTop: hp('1%') }}>{item.description}</Text>
+                  <View style={{ maginLeft: wp('5%'), marginTop: hp('5%') }}>
+                    <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2%') }}>{item.title}</Text>
+                    <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'),alignSelf:"flex-start",left:wp("1%"), marginTop: hp('1%') }}>{item.description}</Text>
                     {joinedUser === 'joinedUser' || owner === 'owner' ?
                       <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
