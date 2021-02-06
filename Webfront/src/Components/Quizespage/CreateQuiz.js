@@ -129,9 +129,9 @@ const handleCloseSnack = (event, reason) => {
         console.log(i.key);
         validate = false;
        }
-       if(i.question_text.length>=100 || i.a_text.length>=20 || i.b_text.length>=20
-       || i.c_text.length>=20 || i.d_text.length>=20){
-        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 20 کاراکتر داشته باشد')
+       if(i.question_text.length>=100 || i.a_text.length>=50 || i.b_text.length>=50
+       || i.c_text.length>=50 || i.d_text.length>=50){
+        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 50 کاراکتر داشته باشد')
         setOpenSnack(true);
         validate = false;
        }
@@ -178,15 +178,14 @@ const handleCloseSnack = (event, reason) => {
    "Authorization":"Token "+Cookies.get("userToken")}
     }
   ).then(response=>{    
-    console.log(response.data.Quiz.id);
+    console.log(response);
     if(response.data.message === "Your quiz successfully created!"){
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
       var id = response.data.id;
-      
-        console.log(id);
-        props.history.push( '/reviewQuiz/' + response.data.Quiz.id );
-      
+
+      console.log(id);
+      props.history.push( '/reviewQuiz/' + response.data.Quiz.id );
     }
     
   })
@@ -275,7 +274,7 @@ const handleCloseSnack = (event, reason) => {
   <label className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
   <textarea className="form-control border border-dark input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">1 گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 1</label>
 
                 <input
                        className="form-control border-dark input-normal text-right" 
@@ -287,7 +286,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">2 گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 2</label>
 
 
                 <input
@@ -302,7 +301,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">3 گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 3</label>
   <div class="form-check text-right mr-n4 ">
 </div>
 
@@ -319,7 +318,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">4 گزینهٔ</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 4</label>
 
                 <input 
                      type=""
@@ -336,7 +335,7 @@ const handleCloseSnack = (event, reason) => {
                 <input 
                      type=""
                        className="form-control border-dark input-normal text-right" 
-                       placeholder="... مثلاً 1"
+                       placeholder="...1 مثلاً"
                        required
                        name="key"
                        value={inputField.key}
