@@ -22,15 +22,18 @@
      .username{
         font-family: 'Yekan';
         font-weight: bold;
-        font-size: 15px;
+        font-size: 14px;
         margin-top: -1rem;
+        margin-left: 20px;
+
        
         
     }
     .email{
         font-family: 'Yekan';
         font-weight: bold;
-        font-size: 13px;
+        font-size: 12px;
+        margin-left: 20px;
     }
      .btn1{
         width: 70px;
@@ -87,8 +90,196 @@
     margin-left: 10px;
 }
   }
+  
 
 
+  @media (min-width :439px)
+  {
+      .cardp{
+            left: 3rem;
+            height: 240px;
+            width: 350px;
+          border-radius: 2%;
+           margin-top: 1.5rem;
+           background-color:rgb(238, 243, 250);
+       }
+  
+       .rounded-circle1{
+           width: 120px;
+           height: 120px;
+           display: "block";
+          margin-bottom: 15px;
+          margin-left: 3px;
+           margin-top: 1rem;
+          
+       }
+       .username{
+          font-family: 'Yekan';
+          font-weight: bold;
+          font-size: 14px;
+          margin-top: -1rem;
+          margin-left: 20px;
+  
+         
+          
+      }
+      .email{
+          font-family: 'Yekan';
+          font-weight: bold;
+          font-size: 12px;
+          margin-left: 20px;
+      }
+       .btn1{
+          width: 70px;
+          height: 40px;
+      }
+      .line{
+          margin-top:-1px;
+      }
+      .decsciptionmine{
+          font-size: 14px;
+          font-family: 'Yekan';
+      }
+         
+  .heading{
+      font-size: 15;
+  
+  }
+  .heading1{
+      margin-left: -12px;
+      }
+      .heading2{
+      margin-left: 90px;
+      padding-right: 10px;
+      }
+      .heading3{
+      margin-left: 70px;
+      }
+  
+      .decsciptionmine1{
+          font-size: 15px;
+          font-family: 'Yekan';
+          
+          
+      }
+      .decsciptionmine2{
+          font-size: 15px;
+          font-family: 'Yekan';
+          margin-left: -30px;
+         
+      }
+  
+      .decsciptionmine3{
+          font-size: 15px;
+          font-family: 'Yekan';
+          
+      }
+      .Tabz{
+  
+      margin-left: 20px;
+      margin-top: -15px;
+      
+  }
+  .mygroups{
+      margin-left: 15px;
+  }
+    }
+    
+  
+@media (min-width :600px)
+{
+    .cardp{
+        left: 5rem;
+          height: 240px;
+          width: 430px;
+        border-radius: 2%;
+         margin-top: 1.5rem;
+         background-color:rgb(238, 243, 250);
+     }
+
+     .rounded-circle1{
+         width: 120px;
+         height: 120px;
+         display: "block";
+        margin-bottom: 15px;
+        margin-left: 3px;
+         margin-top: 1rem;
+        
+     }
+     .username{
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: -1rem;
+        margin-left: 20px;
+
+       
+        
+    }
+    .email{
+        font-family: 'Yekan';
+        font-weight: bold;
+        font-size: 15px;
+        margin-left: 20px;
+    }
+     .btn1{
+        width: 70px;
+        height: 40px;
+    }
+    .line{
+        margin-top:-1px;
+    }
+    .decsciptionmine{
+        font-size: 14px;
+        font-family: 'Yekan';
+    }
+       
+.heading{
+    font-size: 15;
+
+}
+.heading1{
+    margin-left: -12px;
+    }
+    .heading2{
+    margin-left: 90px;
+    padding-right: 10px;
+    }
+    .heading3{
+    margin-left: 70px;
+    }
+
+    .decsciptionmine1{
+        font-size: 15px;
+        font-family: 'Yekan';
+        
+        
+    }
+    .decsciptionmine2{
+        font-size: 15px;
+        font-family: 'Yekan';
+        margin-left: -30px;
+       
+    }
+
+    .decsciptionmine3{
+        font-size: 15px;
+        font-family: 'Yekan';
+        
+    }
+    .Tabz{
+
+    margin-left: 30px;
+    margin-top: -15px;
+    
+}
+.mygroups{
+    margin-left: 70px;
+}
+  }
+  
+
+  
   @media (min-width :768px) 
   {
   

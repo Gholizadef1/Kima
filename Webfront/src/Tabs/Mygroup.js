@@ -51,7 +51,7 @@ const[mygroup,setMygroup] = useState([]);
               <List >
             <div className="" style={{direction:"rtl"}}>
               <div className="d-flex p-n1 pb-n5 mt-n3">
-              <img  className="g-img img-responsive"  src={current.group_photo} />
+              <img  className="g-img img-responsive"  src={API_BASE_URL+`${current.group_photo}`} />
               <div className="booktitle ml-auto mr-3">
               <div>
               <b className="">نام گروه:  {current.title}</b>

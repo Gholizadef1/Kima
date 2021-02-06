@@ -803,7 +803,7 @@ class MyQuizView(APIView):
         myquiz=myquiz + taken_quiz
         if len(myquiz) == 0 :
             return Response({"message":"No Quiz!"})
-        return Response({"Quiz":myquiz}) 
+        return Response({"Quiz":myquiz})
 
 class DynamicQuizAPIView(APIView):
     

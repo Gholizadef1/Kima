@@ -99,6 +99,8 @@ function Slide(props) {
         },
       },
      
+  
+     
     ],
   };
 

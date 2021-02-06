@@ -118,6 +118,7 @@ function ProFile (props){
 
     const handleChangePassClick = (e) => {
         e.preventDefault();
+
         setUser(prevState => ({
             ...prevState,
             backError : ""
@@ -161,6 +162,12 @@ function ProFile (props){
              'backError' : 'لطفاً همه را درست وارد کنید'
          })); 
          }
+
+         setUser(prevState => ({
+          ...prevState,
+          oldPass : "",
+          newPass:""
+      })); 
 
     }
 
@@ -322,12 +329,12 @@ useEffect(() => {
                     
       <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Body>
-         <img src={user.picture} ref={uploadedImage} alt="" className="rounded-circle rounded-circle gholi img-fluid" style={{
+         <Avatar src={user.picture} ref={uploadedImage} alt="" className="" style={{
            width: 120,
              height: 120,
              marginLeft:180,
             marginTop:-5,
-             display: "block"}}/>
+             }}/>
             <div className="d-flex justify-content-between p-4">
 
                  <button className="btn custom-btn btn-info rounded-lg" type="submit"onClick={handleUpload}style={{fontFamily:'Yekan',color:"white"}}>ثبت عکس</button>
@@ -353,7 +360,7 @@ useEffect(() => {
                                             <div class="my-1">
                                                 <label  for="userName"style={{fontFamily:'Yekan'}}>نام کاربری</label>
                                                 <input type="text"
-                                                  class="form-control"
+                                                  class="form-control text-right"
                                                   id="userName"
                                                 //   placeholder={user.userName}
                                                   value={user.userName}
@@ -374,7 +381,7 @@ useEffect(() => {
                                                 <label for="password" style={{fontFamily:"Yekan"}}>رمز قبلی</label>
                                                 <input type="password"
 
-                                                  class="form-control"
+                                                  class="form-control text-right"
 
                                                   id="oldPass"
 
@@ -386,7 +393,7 @@ useEffect(() => {
                                                 <label for="password"style={{fontFamily:"Yekan"}}>رمز جدید</label>
                                                 <input type="password"
 
-                                                  class="form-control"
+                                                  class="form-control text-right"
 
 
                                                   id="newPass"

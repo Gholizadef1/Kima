@@ -15,7 +15,7 @@ function TakeQuiz(props) {
 
 
     useEffect(()=>{
-        axios.get(API_BASE_URL + "/quiz/" + 1)
+        axios.get(API_BASE_URL + "/quiz/" + props.match.params.quizId)
         .then(response=>{
             setQuiz(response.data.Quiz);
             setCreator(response.data.Quiz.creator);
@@ -29,20 +29,17 @@ function TakeQuiz(props) {
 
     const submitAnswer = (e) => {
       e.target.setAttribute("hidden", "");
-      //getElementById("handleRuoteToQuizs").setAttribute("hidden", "");
       document.getElementById("handleRuoteToQuizs").style.display = "block";
       //show true answers
-      //document.getElementById("a").style.backgroundColor = "red";
-      //document.getElementById("a").style.backgroundColor = "green";
-      //document.getElementById("a").style.color = "white";
+     
       var i;
-      for(i=1;i < questions.length+1;i++){
+      for(i=0;i < questions.length;i++){
         var chosen= document.getElementById(i).getElementsByClassName("active")[0].id;
         document.getElementById(chosen).style.color = "white";
         document.getElementById(chosen).style.backgroundColor = "red";
        
-        document.getElementById(i+questions[i-1].key).style.backgroundColor = "green";
-        document.getElementById(i+questions[i-1].key).style.color = "white";
+        document.getElementById(i+questions[i].key).style.backgroundColor = "green";
+        document.getElementById(i+questions[i].key).style.color = "white";
          setUserAnswers( userAnswers.push(chosen[chosen.length -1]));
      
        }
@@ -53,7 +50,7 @@ function TakeQuiz(props) {
       }
       //const back= JSON.stringify(userAnswers);
       //console.log(userAnswers);
-      axios.post(API_BASE_URL + "/quiz/" + 1
+      axios.post(API_BASE_URL + "/quiz/" + props.match.params.quizId
       ,payload
       ,{
         headers:{
@@ -71,7 +68,7 @@ function TakeQuiz(props) {
   }
 
   const handleRuoteToQuizs=() =>{
-    props.history.push('/quizez');
+    props.history.push('/quizes');
   }
 
 
@@ -87,7 +84,7 @@ function TakeQuiz(props) {
                     <p className="my-1 text-break ">{quiz.description}</p>
                   </div>
                   <div className=" px-3 border-right border-dark my-auto">
-                    <Avatar className="mx-auto mb-2" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`}  />
+                    <Avatar className="mx-auto mb-2" alt={creator.username} src={`${API_BASE_URL}tutorial${creator.profile_photo}`}  />
                     <p className="text-center my-n1">{` سازنده : ${creator.username}`}</p>
                     {/* <small className="text-center text-muted my-n1">{`${quiz.create_time.toString().split('T')[0]}`}</small> */}
                   </div>
@@ -110,19 +107,19 @@ function TakeQuiz(props) {
 
                   <div className="border-left border-right">
                       
-                      <h4 className="my-3 col-8 mx-auto"><p className="badge border-bottom border-left border-dark rounded-pill m-2">{current.question_num}</p>{current.question_text} </h4>
+                      <h4 className="my-3 col-8 mx-auto"><p className="badge border-bottom border-left border-dark rounded-pill m-2">{current.question_num+1}</p>{current.question_text} </h4>
                       <div>
                         <div className=" btn-group-toggle d-flex flex-column col-8 mx-auto " id={current.question_num} data-toggle="buttons">
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"a"}>
+                          <label className="btn btn-outline-dark m-1" id={current.question_num+"1"}>
                             <input type="radio" name={current.question_num} id="a" /> {current.a_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"b"}>
+                          <label className="btn btn-outline-dark m-1" id={current.question_num+"2"}>
                             <input type="radio" name={current.question_num} id="b" /> {current.b_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"c"}>
+                          <label className="btn btn-outline-dark m-1" id={current.question_num+"3"}>
                             <input type="radio" name={current.question_num} id="c" />{current.c_text}
                           </label>
-                          <label className="btn btn-outline-dark m-1" id={current.question_num+"d"}>
+                          <label className="btn btn-outline-dark m-1" id={current.question_num+"4"}>
                             <input type="radio" name={current.question_num} id="d" />{current.d_text}
                           </label>
                           <label className="active" id={current.question_num+"none"} ></label>

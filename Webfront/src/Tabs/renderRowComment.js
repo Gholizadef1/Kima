@@ -19,6 +19,7 @@ import {API_BASE_URL} from '../constants/apiContants';
  export function RenderRowcomment(props) {
     const { index, style } = props;
     const [comment, setComment] = useState([]);
+    const [message,setMessage]=useState("");
     useEffect(() => {
       fetch(API_BASE_URL + `/user/${Cookies.get('userId')}/comment`,{
         headers:{
@@ -28,12 +29,13 @@ import {API_BASE_URL} from '../constants/apiContants';
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
-          setComment(data);
+           setMessage(data.message);
+          setComment(data.comments);
         });
     }, []);
     return (
       <div>
-      {comment.message==="No Comment!" ? (                   
+      {message==="No Comment!" ? (                   
       <div className="Noqoute" style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold"}}>نظری برای نمایش وجود ندارد</div>
 
         
@@ -61,17 +63,26 @@ import {API_BASE_URL} from '../constants/apiContants';
                 </small>
               </div>
               <div className="d-flex flex-column">
-                <small className=" dislike mr-3">
-                {current.DislikeCount}
-                <AiOutlineDislike color="red" size="25"/>
-                </small>
-              </div>
-              <div className="d-flex flex-column">
-                <small className=" likec mr-4">
-                {current.LikeCount}
-                <AiOutlineLike  color="blue" size="25"/>
-                </small>
-              </div>
+                   <div className=" mt-n1">
+                   <AiOutlineLike  color="blue" size="25"/>
+
+                   </div>
+                   <small className="mr-2">
+                     {current.LikeCount}
+                     </small>
+                   </div>
+              <div className=" d-flex flex-column mr-3">
+                    <div>                     
+                      <AiOutlineDislike color="red" size="25"/>
+                      </div>
+                           <small className="mr-2">
+                             {current.DislikeCount}
+                           </small>
+                         </div>
+                   
+                     <div>
+                     </div>
+              
              </div>
  
              <p  className="quote"style={{fontFamily:"Yekan"}}>

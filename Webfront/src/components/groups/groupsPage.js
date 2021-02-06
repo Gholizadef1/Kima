@@ -212,13 +212,14 @@ const handleCloseSnack = (event, reason) => {
   const handleGoSearchGroup = ( ) => {
     console.log( searchWord);
     setPagesNumber(1);
-    axios.get(`${API_BASE_URL}/group?search=${searchWord}&search-fields=title`,{
+    axios.get(`${API_BASE_URL}/groups?search=${searchWord}&search-fields=title`,{
       headers:{
      "Authorization":"Token "+Cookies.get("userToken")}
       })
       .then(response=>{
         console.log(response);
         setGroups(response.data.results);
+        Document.getElementbyId("select").value= "mine"
       })
       .catch(error=>{
         console.log(error);
@@ -246,7 +247,7 @@ const handleCloseSnack = (event, reason) => {
                 </div>
               </div>
               <div className="rounded-pill mx-md-4 mx-2">
-                <select className="form-control rounded-pill shadow" onClick={handleChangeList} >
+                <select id='select'className="form-control rounded-pill shadow" onClick={handleChangeList} >
                   <option value="time">جدیدترین گروه ها</option>
                   <option value="member">محبوب‌ترین گروه ها</option>
                   <option value="mine">گروه‌های من</option>

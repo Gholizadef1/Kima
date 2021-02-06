@@ -89,12 +89,19 @@ import Tooltip from '@material-ui/core/Tooltip';
       backError : ""
     }); 
   };
-
+  const [mem,setMem] = useState("");
   useEffect(() => {
     axios.get(API_BASE_URL + `/group/${props.match.params.groupId}/member`)
       .then((data) => {
-         console.log(data.data.members);
+         console.log(data.data.members); 
+          console.log(data.data);
+         if(data.data.message === "No member!"){
+           setMem("No member!");
+         }
+         else{
         setMembers(data.data.members);
+        console.log(data.data.members);
+         }
         
           for(var i =0; i<data.data.members.length ; i++){
             if(data.data.members[i].user.username === Cookies.get("userName") && data.data.owner.username != Cookies.get("userName")){
@@ -122,13 +129,14 @@ import Tooltip from '@material-ui/core/Tooltip';
   }, [join,props.match.params.groupId]);
   const joinGroup =()=> { 
     axios.post(
-      API_BASE_URL + `/group/${props.match.params.groupId}/member`,
+      API_BASE_URL + `group/${props.match.params.groupId}/member`,
     {},
     {
       headers:{
         "Content-Type":"application/json",
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
+          
         setJoin(true);
         setUser("You joind this group!");
     
@@ -147,12 +155,13 @@ import Tooltip from '@material-ui/core/Tooltip';
   const leaveGroup = ()=>{
     axios.delete(
       API_BASE_URL + `/group/${props.match.params.groupId}/member/${Cookies.get("userId")}`,
-    {},
     {
+      
       headers:{
-        "Content-Type":"application/json",
+        "content-Type":"application/json",
        "Authorization":"Token "+Cookies.get("userToken")}
         }).then(data => {
+          console.log(data);
           if(data.message ==="You leaved this group!"){
             setOpenSnack(true);
             setMassage("!شما با مؤفقیت از گروه خارج شدید")
@@ -168,7 +177,7 @@ import Tooltip from '@material-ui/core/Tooltip';
   }
   const deletGroup =()=>{
     axios.delete(
-      API_BASE_URL + `/group/${props.match.params.groupId}`,
+      API_BASE_URL + `group/${props.match.params.groupId}`,
     
     {
       headers:{
@@ -215,6 +224,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     //const backsummary = JSON.stringify(payloadsummary);
     console.log(backtitle);
     //console.log(backsummary);
+    const [updateDiscuss, setupdateDiscuss] = useState(0);
     useEffect(() => {
       axios.get(
         API_BASE_URL + `/group/${props.match.params.groupId}/discussion`,
@@ -224,14 +234,17 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
           }).then(data => {
             console.log(data.data.discussions);
-           
             setShowdiscussion(data.data.discussions);
             
-
+         
           })
+          .catch(error=>{
+            console.log(error);
+            setMassage("مشکلی پیش آمده دوباره امتحان کنید")
+            setOpenSnack(true);
+          });
     }, [
-      // showdiscussion,
-      props.match.params.groupId]);
+      updateDiscuss,props.match.params.groupId]);
 
     const handleCreateDiscussionSubmit =(e) =>{
       e.preventDefault();
@@ -246,7 +259,7 @@ import Tooltip from '@material-ui/core/Tooltip';
       }
       else{
       axios.post(
-        API_BASE_URL + `/group/${props.match.params.groupId}/discussion`,backtitle,
+        API_BASE_URL + `group/${props.match.params.groupId}/discussion`,backtitle,
       {
         headers:{
           "Content-Type":"application/json",
@@ -257,10 +270,10 @@ import Tooltip from '@material-ui/core/Tooltip';
               setMassage('بحث با موفقیت ساخته شد')
               setOpenSnack(true);
               handleCloseCreateGroup();
+              setupdateDiscuss(updateDiscuss+1);
              
             
           })
-
           .catch(error=>{
             console.log(error);
             setMassage("مشکلی پیش آمده دوباره امتحان کنید")
@@ -284,7 +297,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     setOpenSnack(false);
   };
 
-
+  
   const discussionSelectedHandler = ( d ) => {
     console.log(d);
     //props.history.push('/home');
@@ -313,7 +326,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
   <div class="card-body" key={ginfo.id}>
     
-    <img src={`http://127.0.0.1:8000${ginfo.group_photo}`} className="imageg img-responsive"></img>
+    <img src={API_BASE_URL+`tutorial${ginfo.group_photo}`} className="imageg img-responsive"></img>
   </div>
     </div>
     <div>
@@ -324,11 +337,12 @@ import Tooltip from '@material-ui/core/Tooltip';
   </b>
   <b style={{position:'relative'}}>{ginfo.title}</b>
   </div>
-  <div className="ml-3">
-                <small className="creator">
+  <div className="cont">
+                <small className="creator pr-2">
                 <AiFillStar></AiFillStar>
-                {creatoreg}
-                :سازنده
+                سازنده:
+                </small>
+                <small className="creatorb pl-3">{creatoreg}
                 <AiFillStar></AiFillStar>
                 </small>
                </div>
@@ -336,7 +350,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     {joinduser === "You joind this group!" ?
     <div className="group-info">
     <button onClick={leaveGroup}  className="btn btn-g btn-info rounded-lg" style={{color:'white'}}>خارج‌شدن از گروه</button>
-    <b className="title-g">:دربارهٔ گروه</b>
+    <b className="title-g">:درباره گروه</b>
   <h5 className="text-right summary">{ginfo.summary}
 </h5>
 <div className="btn btn-d btn-info rounded-lg ml-4" style={{color:"white"}} onClick={handleClickOpenCreateDiscussion}>
@@ -361,15 +375,15 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
-                :سازنده
                 
+                سازنده:
+                </small>
+                <small>
+                {current.creator.username}
                 </small>
                 <div className="text-right name-d" >
                
-
-<p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
-
+                <p><b className="pt-n3 btn"  onClick={() => discussionSelectedHandler( current )}>{current.title}</b></p>
             
             </div>
               </div>
@@ -453,7 +467,6 @@ import Tooltip from '@material-ui/core/Tooltip';
     <div class="card card-discussion">
   
     <div class="overflow-auto">
-
    
       {showdiscussion.length === 0  ? (
                  
@@ -467,13 +480,15 @@ import Tooltip from '@material-ui/core/Tooltip';
             
           <li class="list-group-item py-1">
           <div className="text-left">
-                <small className="creator">
-                {current.creator.username}
+          <small className="creator text-right">
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+</div>
                 <div className="text-right name-d" >
-
+               
                 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
         fontSize:20,
@@ -483,12 +498,12 @@ import Tooltip from '@material-ui/core/Tooltip';
         textAlign:"center",
         marginLeft:-9,
         paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
-        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+        <p><b className="pt-n3 btn" >{current.title}</b></p>
 
                 </Tooltip>
                
                
-                           
+                                          
                            </div>
               </div>
               
@@ -539,7 +554,7 @@ import Tooltip from '@material-ui/core/Tooltip';
     <div class="card card-discussion">
   
     <div class="overflow-auto">
- 
+   
       {showdiscussion.length === 0  ? (
                  
         <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>بحثی برای نمایش وجود ندارد</div>
@@ -553,13 +568,13 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+            </div>
                 <div className="text-right name-d" >
-               
-
                
                 <Tooltip  title= {<div style={{color: "white",
         fontFamily:"Yekan",
@@ -570,11 +585,11 @@ import Tooltip from '@material-ui/core/Tooltip';
         textAlign:"center",
         marginLeft:-9,
         paddingTop:20,}}>برای ورود به بحث باید در گروه عضو باشید</div>}> 
-        <p><b><a className="pt-n3" href="">{current.title}</a></b></p>
+        <p><b className="pt-n3 btn" >{current.title}</b></p>
 
                 </Tooltip>
 
-                           
+                                             
                            </div>
               </div>
               
@@ -632,14 +647,12 @@ import Tooltip from '@material-ui/core/Tooltip';
           <li class="list-group-item py-1">
           <div className="text-left">
                 <small className="creator">
-                {current.creator.username}
-                :سازنده
                 
+               { `سازنده : ${current.creator.username}`}
                 </small>
                 <div className="text-right name-d" >
                
-               <p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
-
+                <p><b className="pt-n3 btn"  onClick={() => discussionSelectedHandler( current )}>{current.title}</b></p>
                            
                            </div>
               </div>
@@ -751,16 +764,16 @@ import Tooltip from '@material-ui/core/Tooltip';
             
           <li class="list-group-item py-1">
           <div className="text-left">
-                <small className="creator">
-                {current.creator.username}
+          <small className="creator">
                 :سازنده
                 
                 </small>
+                <div className="creatorb">  
+             {current.creator.username}
+</div>
                 <div className="text-right name-d" >
                
-
-               <p><b><a className="pt-n3" href="" onClick={() => discussionSelectedHandler( current )}>{current.title}</a></b></p>
-
+                <p><b className="pt-n3 btn"  onClick={() => discussionSelectedHandler( current )}>{current.title}</b></p>
                            
                            </div>
               </div>
@@ -825,65 +838,129 @@ import Tooltip from '@material-ui/core/Tooltip';
    
     <b className="title-g" style={{fontFamily:'Yekan',fontSize:20,top:-190,position:"relative",marginLeft:600}}> ({ginfo.members_count}) اعضا</b>
        
+    {mem === "No member!"?
+              <div style={{fontFamily:"Yekan",fontSize:20,color:"red",fontWeight:"bold",marginTop:30}}>عضوی برای نمایش وجود ندارد</div>
+       :
        <div className="row" key={member.id}>
-{member.length >=3 ?
+{member.length >=6 ?
           <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
-            <div className="more" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20,top:19,position:"relative",marginLeft:-60, paddingRight:20}}>...بیش‌تر</div>
+            <div className="more btn mt-auto" onClick={handleShow} style={{fontFamily:'Yekan',fontSize:20}}>...بیش‌تر</div>
+            <div>
 
+              
           <Avatar
-          src={`http://127.0.0.1:8000${member[0].user.profile_photo}`}
+          className="m-2"
+          src={`${API_BASE_URL}tutorial${member[0].user.profile_photo}`}
           style={{
           fontSize: '80px',
          width: 70,
          height: 70}}
           
         />
-        <div className="mt-5"> {member[0].user.username} </div>
-
+        <div className=""> {member[0].user.username} </div>
+        </div>
+        <div>
         <Avatar
-                  src={`http://127.0.0.1:8000${member[1].user.profile_photo}`}
+        className="m-2"
+                  src={`${API_BASE_URL}tutorial${member[1].user.profile_photo}`}
                   style={{
                   fontSize: '80px',
                  width: 70,
                  height: 70}}
                   
                 />
-            <div className="mt-5"> {member[1].user.username} </div>
-
+            <div className=""> {member[1].user.username} </div>
+            </div>
+<div>
                 <Avatar
-                  src={`http://127.0.0.1:8000${member[2].user.profile_photo}`}
+                className="m-2"
+                  src={`${API_BASE_URL}tutorial${member[2].user.profile_photo}`}
                   style={{
                   fontSize: '80px',
                  width: 70,
                  height: 70}}
                   
                 />
-              <div className=" mt-5"> {member[2].user.username} </div>
+              <div className=" "> {member[2].user.username} </div>
+              </div>
+              <div>
 
-</div>
-:
-<div >
-{member.map ((current) => (
-  <div>
+              
 <Avatar
-src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+className="m-2"
+src={`${API_BASE_URL}tutorial${member[3].user.profile_photo}`}
 style={{
 fontSize: '80px',
 width: 70,
 height: 70}}
 
 />
+<div className=""> {member[3].user.username} </div>
+</div>
+<div>
+<Avatar
+className="m-2"
+        src={`${API_BASE_URL}tutorial${member[4].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+  <div className=""> {member[4].user.username} </div>
+  </div>
+<div>
+      <Avatar
+      className="m-2"
+        src={`${API_BASE_URL}tutorial${member[5].user.profile_photo}`}
+        style={{
+        fontSize: '80px',
+       width: 70,
+       height: 70}}
+        
+      />
+    <div className=" "> {member[5].user.username} </div>
+    </div>
+    
 
-      </div>
+
+</div>
+:
+<div >
+
+  <div>
+     <div className="row" style={{top:-170,position:"relative",marginLeft:490}}>
+     {member.map ((current) => (
+            <div>
+
+
+<Avatar
+className="m-2"
+src={`${API_BASE_URL}tutorial${current.user.profile_photo}`}
+style={{
+fontSize: '80px',
+width: 70,
+height: 70}}
+
+/>
+<div className=""> {current.user.username} </div>
+        </div>
+   
 ))}
+     </div>  
+
+
+
+</div>
     </div>
 
 }
 </div>
+  }
 
             <Modal show={show} onHide={handleClose} className="maodal">
         <Modal.Header closeButton>
-           <div className="header"style={{fontFamily:'Yekan',paddingLeft:200}}>
+           <div className="header"style={{fontFamily:'Yekan',paddingLeft:50}}>
           همه اعضا
           </div>
         </Modal.Header>
@@ -892,13 +969,14 @@ height: 70}}
         {member.map ((current) => (
        <div className="col-md" key={current.id}>
           <Avatar
-          src={`http://127.0.0.1:8000${current.user.profile_photo}`}
+          className="m-auto"
+          src={`${API_BASE_URL}tutorial${current.user.profile_photo.substring(27)}`}
           style={{
           fontSize: '80px',
          width: 70,
          height: 70}}
         />
-        <div className="pl-2"> {current.user.username} </div>
+        <div style={{fontFamily:'Yekan'}} className="text-center"> {current.user.username} </div>
         </div>
         ))}
         </div>

@@ -32,14 +32,15 @@ function Discussion(props) {
     const [commentAgain,setcommentAgain] = useState(0);
     const [discussion,setDiscussion] = useState([]);
     const [creator,setCreator] = useState([]);
-
+    const [message,setMessage] = useState([]);
     useEffect(()=>{
-          axios.get(`${API_BASE_URL}/group/${props.match.params.groupId}/discussion/${props.match.params.discussionId}/chat?page=${commentsPage}`,
+          axios.get(`${API_BASE_URL}group/${props.match.params.groupId}/discussion/${props.match.params.discussionId}/chat?page=${commentsPage}`,
           {
             headers:{
            "Authorization":"Token "+Cookies.get("userToken")}
             })
         .then(response=>{
+          setMessage(response.data.message);
          setComments(response.data.chats);
          setCommentsPagesNumber(response.data.count)
           console.log(response);
@@ -51,7 +52,7 @@ function Discussion(props) {
       ,props.match.params.groupId ,props.match.params.discussionId ]);
 
     useEffect(()=>{
-        axios.get(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId ,
+        axios.get(API_BASE_URL + 'group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId ,
         {
           headers:{
          "Authorization":"Token "+Cookies.get("userToken")}
@@ -87,7 +88,7 @@ function Discussion(props) {
           console.log(payload);
           const back= JSON.stringify(payload);
           console.log(back);
-          axios.post(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
+          axios.post(API_BASE_URL + 'group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat',
           back
           ,{
            headers:{
@@ -129,7 +130,7 @@ const handleCloseDialog = () => {
 
     const handleDeleteComment = () => {
       handleCloseDialog();
-        axios.delete(API_BASE_URL + '/group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+deleteId ,
+        axios.delete(API_BASE_URL + 'group/'+ props.match.params.groupId +'/discussion/'+ props.match.params.discussionId +'/chat/'+deleteId ,
         {
           headers:{
          "Content-Type":"application/json",
@@ -166,7 +167,7 @@ const handleCloseDialog = () => {
               <div>
                 <div className="d-flex flex-wrap mx-2  rounded-lg pt-3">
                   <div className="px-2">
-                    <Avatar className="" alt={creator.username} src={`${API_BASE_URL}${creator.profile_photo}`} style={{width:60, height:60}} />
+                    <Avatar className="" alt={creator.username} src={`${API_BASE_URL}tutorial${creator.profile_photo}`} style={{width:60, height:60}} />
                     <h5 className="text-center mt-2">{creator.username}</h5>
                   </div>
                   <div className="d-flex flex-column flex-wrap mx-3">
@@ -195,7 +196,7 @@ const handleCloseDialog = () => {
               <div>
                 <List >
 
-                {comments === undefined ? (
+                {message === "No Chat!" ? (
                 
                 
                   <p >پاسخی برای نمایش وجود ندارد</p>
@@ -207,7 +208,7 @@ const handleCloseDialog = () => {
                    
                 <div className="border border-dark rounded-lg m-1 px-2 " style={{direction:"rtl",backgroundColor:"rgb(238,243,250)"}}>
                    <div className="d-flex px-md-3 py-3">
-                     <Avatar alt={current.user.username} src={`${API_BASE_URL}${current.user.profile_photo}`} style={{width:60, height:60}} />
+                     <Avatar alt={current.user.username} src={`${API_BASE_URL}tutorial${current.user.profile_photo.substring(27)}`} style={{width:60, height:60}} />
                      <div className="ml-auto mr-3">
                        <h5>
                          {current.user.username}
@@ -218,7 +219,7 @@ const handleCloseDialog = () => {
                      </div>
                 
                 
-                     {current.user.id !== Cookies.get("userId") ?(
+                     {current.user.id.toString() !== Cookies.get("userId").toString() ?(
                        <div></div>
                      ):(
                        <div className="btn m-n1" onClick={()=>  handleClickOpenDialog(current.id)}>

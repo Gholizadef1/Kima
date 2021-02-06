@@ -257,8 +257,10 @@ class MyQuizSerializer(serializers.ModelSerializer):
             user =  self.context['request'].user
         if self.context['request'] == "":
             user =  self.context['user']
+
         print("*****")
         print(user)
+
         if obj.creator == user:
             return True
         return False
@@ -283,6 +285,7 @@ class MyQuizSerializer(serializers.ModelSerializer):
 
 class MyQuizSer(serializers.ModelSerializer):
     quiz_info = serializers.RelatedField(source='quiz',read_only=True)
+
     class Meta:
         model = TakeQuiz
         fields = ['quiz_info']

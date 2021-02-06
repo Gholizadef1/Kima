@@ -113,29 +113,37 @@ const handleCloseSnack = (event, reason) => {
   };
 
     const sendQuestion = ()=> {
-
+      var validate = true;
      inputFields.map((i)=>{
       if(i.question_text === '' || i.a_text === '' || i.b_text === '' || i.c_text === ''
-      || i.d_text === '' || i.key === '')
+      || i.d_text === '')
       {
         setMassage('تمامی فیلدهای مربوط به سؤال باید پر شوند')
         setOpenSnack(true);
+        validate = false;
+        
       }
-      else if(i.question_text.length>=100 || i.a_text.length>=20 || i.b_text.length>=20
-       || i.c_text.length>=20 || i.d_text.length>=20){
-        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 20 کاراکتر داشته باشد')
-        setOpenSnack(true);
-
-       }
-       else if(i.key !='a' && i.key!='b' && i.key!='c' && i.key!='d'){
-        setMassage(' لطفاً کاراکترهای موردنظر را برای پاسخ درست وارد کنید')
+      else if(i.key !='1' && i.key!='2' && i.key!='3' && i.key!='4'){
+        setMassage(' لطفاً عددهای موردنظر را برای پاسخ درست وارد کنید')
         setOpenSnack(true);
         console.log(i.key);
+        validate = false;
        }
-      else
-      setValidation(true);
+       if(i.question_text.length>=100 || i.a_text.length>=50 || i.b_text.length>=50
+       || i.c_text.length>=50 || i.d_text.length>=50){
+        setMassage('متن سؤال باید حداکثر 100 و متن جواب حداکثر 50 کاراکتر داشته باشد')
+        setOpenSnack(true);
+        validate = false;
+       }
+      
+    
     })
     console.log(validation);
+    if(validate){
+      setValidation(true);
+    }
+    else
+    setValidation(false);
   }
   const va =()=>{
   const fd = new FormData();
@@ -174,6 +182,10 @@ const handleCloseSnack = (event, reason) => {
     if(response.data.message === "Your quiz successfully created!"){
       setMassage('آزمونک با موفقیت ساخته شد')
       setOpenSnack(true);
+      var id = response.data.id;
+
+      console.log(id);
+      props.history.push( '/reviewQuiz/' + response.data.Quiz.id );
     }
     
   })
@@ -191,7 +203,7 @@ const handleCloseSnack = (event, reason) => {
           open={openSnack}
           autoHideDuration={2500}
           onClose={handleCloseSnack}
-          message={<div style={{fontFamily:'Yekan',fontSize:17}}>{massage}</div>}
+          message={<div style={{fontFamily:'Yekan',fontSize:17,marginLeft:36}}>{massage}</div>}
           />
        </div>
        <div className="container-fluid text-center px-md-5 py-md-5" >
@@ -262,7 +274,7 @@ const handleCloseSnack = (event, reason) => {
   <label className="mt-5 mb-n1 yekanfont" htmlFor="exampleInputUserName" style={{fontSize:23}}>سوال{inputField.count}</label>
   <textarea className="form-control border border-dark input-normal text-right"onChange={event => handleChangeInput(inputField.id, event)}
  rows="1" value={inputField.question_text} placeholder="...صورت سؤال"  name="question_text"></textarea>
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">a جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 1</label>
 
                 <input
                        className="form-control border-dark input-normal text-right" 
@@ -274,7 +286,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">b جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 2</label>
 
 
                 <input
@@ -289,7 +301,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">c جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 3</label>
   <div class="form-check text-right mr-n4 ">
 </div>
 
@@ -306,7 +318,7 @@ const handleCloseSnack = (event, reason) => {
                        
                 />
 
-  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">d جواب</label>
+  <label style={{fontSize:18}} className="mt-2 mb-n1 yekanfont">گزینه 4</label>
 
                 <input 
                      type=""
@@ -323,7 +335,7 @@ const handleCloseSnack = (event, reason) => {
                 <input 
                      type=""
                        className="form-control border-dark input-normal text-right" 
-                       placeholder="...a مثلاً"
+                       placeholder="...1 مثلاً"
                        required
                        name="key"
                        value={inputField.key}

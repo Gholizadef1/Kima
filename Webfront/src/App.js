@@ -60,29 +60,19 @@ function App(props) {
             <ProtectedRoute path="/quizepage" component={QuizesPage}/>
             
             <ProtectedRoute path="/book/:bookId" component={BookView}/>
-
-         
-            <Route path="/quizes">
-              <NavBar/>
-              <QuizesPage />
-            </Route>
-            <Route path="/creatquize">
-            <NavBar/>
-            <CreateQuiz/>
-            </Route>
-            <Route path="/takeQuiz/:quizId">
-                <NavBar/>
-            </Route>
-            <Route path="/reviw//:quizId">
-                <NavBar/>
-            </Route>
+            <ProtectedRoute path="/quizes" component={QuizesPage}/>
+            <ProtectedRoute path="/creatquize" component={CreateQuiz}/>
+            <ProtectedRoute path="/takeQuiz/:quizId" component={TakeQuiz}/> 
+            <ProtectedRoute path="/reviewQuiz/:quizId" component={ReviewQuiz}/>
+            
+            
             <ProtectedRoute path="/groups" component={Groups}/>
 
             <ProtectedRoute path="/discussion/:groupId/:discussionId" component={Discussion}/>
 
-            <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
+            {/* <ProtectedRoute path="/takeQuiz" component={TakeQuiz}/>
 
-            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/>
+            <ProtectedRoute path="/reviewQuiz" component={ReviewQuiz}/> */}
 
             
 

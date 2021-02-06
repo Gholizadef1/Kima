@@ -256,7 +256,8 @@ headers:{
 "Authorization":"Token "+Cookies.get("userToken")}
 }).then((data)=>{
   setMess(data.message);
-  console.log(data.message);
+    setSelectMassage("امتیاز شما با مؤفقیت ثبت شد");
+    setOpenSnack(true);
 })
 }
     
@@ -275,8 +276,8 @@ headers:{
     "Content-Type":"application/json",
     "Authorization":"Token "+Cookies.get("userToken")}
     },)
-    
-
+      setSelectMassage("امتیاز شما با مؤفقیت عوض شد");
+      setOpenSnack(true);
 }
 }
 
