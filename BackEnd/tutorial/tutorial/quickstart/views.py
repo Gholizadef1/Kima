@@ -736,7 +736,7 @@ class QuizView(APIView,PaginationHandlerMixin):
         return Response({"message":"Your quiz successfully created!","Quiz":quiz,"Questions":question_list.data})
        
     def get(self,request):
-        quiz = Quiz.objects.all()
+        quiz = Quiz.objects.all().order_by('-create_time')
         if quiz is None:
             return Response({"message":"No Quiz!"})
 
