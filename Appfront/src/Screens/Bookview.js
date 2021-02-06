@@ -338,8 +338,8 @@ const Bookview = (prop) => {
                     renderItem={({ item }) => <>
                       <View style={{}}>
                         <Card style={styles.cardChat}>
-                          {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
-                            source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
+                          {item.account.profile_photo != 'http://24a3546bd708.ngrok.io/media/default.png' ? <Avatar.Image
+                            source={{ uri: "http://24a3546bd708.ngrok.io" + item.account.profile_photo }}
                           ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
                             source={require('../../assets/group.jpg')}
                           ></Avatar.Image>}
@@ -413,8 +413,8 @@ const Bookview = (prop) => {
                   renderItem={({ item }) => <>
                     <View style={{}}>
                       <Card style={styles.cardChat2}>
-                        {item.account.profile_photo != 'http://6ef98d38edf2.ngrok.io/media/default.png' ? <Avatar.Image
-                          source={{ uri: "http://6ef98d38edf2.ngrok.io" + item.account.profile_photo }}
+                        {item.account.profile_photo != 'http://24a3546bd708.ngrok.io/media/default.png' ? <Avatar.Image
+                          source={{ uri: "http://24a3546bd708.ngrok.io" + item.account.profile_photo }}
                         ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
                           source={require('../../assets/group.jpg')}
                         ></Avatar.Image>}
