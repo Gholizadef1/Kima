@@ -22,7 +22,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Cookies from 'js-cookie';
 import Snackbar from '@material-ui/core/Snackbar';
 import {API_BASE_URL} from '../../constants/apiContants';
-
+import {AiFillStar} from "react-icons/ai";
 
 
 function Quizespage (props){
@@ -42,21 +42,19 @@ function Quizespage (props){
     console.log(isMine);
     }else {
       console.log(groups);
-      const newList = groups.filter((item)=>item.is_none === false);
-      setGroups(newList);
+      // const newList = groups.filter((item)=>item.is_none === false);
+      // setGroups(newList);
       setPagesNumber(0)
       setIsMine(true);
     }
   }
-const [id,setId]= useState();
+
   useEffect(()=>{
     if(isMine){
       axios.get(API_BASE_URL+ `/user/${Cookies.get("userId")}/quiz`
      )
       .then(response=>{
-        console.log(response.data.Quiz[0].creator.username)
-        console.log(response.data.Quiz[0].id)
-
+        console.log(response.data.Quiz)
         setGroups(response.data.Quiz);
           console.log("f")
         })}
@@ -235,7 +233,12 @@ const handleCloseSnack = (event, reason) => {
 
                   <div class="col mb-4">
                     <div class="card h-100 text-right shadow-lg" >
-                      <img src={API_BASE_URL+`${current.quiz_photo}`} class="card-img-top shadow-sm " alt={current.title}/>
+                      {
+                        isMine === true ? <img src={API_BASE_URL+`tutorial`+current.quiz_photo} class="card-img-top shadow-sm " alt={current.title}/>
+                        :
+                        <img src={API_BASE_URL+`tutorial`+current.quiz_photo.substring(27)} class="card-img-top shadow-sm " alt={current.title}/>
+                      }
+                      
                       <div class="card-body">
                         <h5 class="card-title m-n2  yekanfont"  style={{fontSize:22}}>عنوان: {current.title}</h5>  {current.description.length >= 80 ?(
                           <div>
@@ -250,16 +253,18 @@ const handleCloseSnack = (event, reason) => {
                       <div className="align-items-center m-3">
                         <h6 class="card-subtitle pb-3  text-muted  yekanfont">تعداد سؤالات: {current.question_count}</h6>
                         <h6 class="card-subtitle  text-muted  yekanfont">سازنده: {current.creator.username}</h6>
+                        {(current.creator.username === Cookies.get.userName) ? <AiFillStar></AiFillStar>:<div></div>
                         
-                        {(isMine === true &&(current.creator.username === Cookies.get("userName") || current.is_none===false)) || (isMine===false&& current.is_none === false) ?
+                      }
+
+                        {(isMine === true ) || (isMine===false&& current.is_none === false) ?
                         <div className="text-left mt-n3 ">
                         <button onClick={() => routeToMyQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>مرور آزمون</button>
-          
                         </div>
                         :
                         
                          <div className="text-left mt-n3 ">
-                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت آزمون</button>
+                        <button onClick={() => routeToQuizHandler(current.id)} className="btn mt-n3  btn-info rounded-lg" style={{color:'white'}}>شرکت در آزمون</button>
                        
                         </div>
                         }
