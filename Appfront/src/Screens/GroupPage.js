@@ -449,7 +449,7 @@ const GroupPage = (prop) => {
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
                       </Button>
-                      : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
+                      : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("4.5%") }} transparent
                         onPress={() => Alert.alert('', ' برای دیدن بحث های انجام شده باید عضو گروه باشید', [{
                           text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
                         }], { cancelable: false }, { style: { height: hp('40%') } })}>
