@@ -21,7 +21,7 @@ const Allsearchresults = (prop) => {
     const [onend,setonend]=useState(false);
     const[next,setnext]=useState();
     const[page,setpage]=useState(1);
-    const searchauthorapi = async (searchTerm,page) => {
+    const searchauthorapi = async (page) => {
        // setAuthors([]);
        
         setauthorloading(true);
@@ -29,15 +29,8 @@ const Allsearchresults = (prop) => {
         //console.log(searchTerm + "  SEARCHTERMAUTHORAPI")
         try {
     
-          const response = await axiosinst.get('books' + "?search=" + searchTerm + "&search-fields="+prop.route.params.searchmode+"&page="+page)
-          //     params:{
-          //       //  page:1,
-          //         search:searchTerm,
-          //         search_fields:'author',
-    
-    
-          //     }
-          // })
+          const response = await axiosinst.get('/books?page='+page)
+          
         
           setnext(response.data.next)
          // console.log(JSON.stringify(response.data.results));
@@ -72,15 +65,16 @@ const Allsearchresults = (prop) => {
      
       useEffect(() => {
          // setpage(1);
-          if(page===1){
-          searchauthorapi(prop.route.params.searchterm,1)
-          }
+        //   if(page===1){
+        //   searchauthorapi(prop.route.params.searchterm,1)
+        //   }
+        searchauthorapi(1);
       }, [])
       const handleloadmore=async()=>{
         //  await setpage(page+1);
           await setauthorloading(true);
       
-          await searchauthorapi(prop.route.params.searchterm,page+1);
+          await searchauthorapi(page+1);
          // await setpage(page+1);
         //   console.log("load more!")
           
@@ -93,9 +87,9 @@ const Allsearchresults = (prop) => {
               await searchauthorapi(term)& await searchtitleapi(term)&console.log(term)}}/> */}
       
         {/* <AntDesign name="close" size={24}  color="black" style={{marginLeft:10,position:'absolute',marginTop:10}} /> */}
-        {authorcount != []? <Text style={{ marginTop: hp("2.5%"), alignSelf: "flex-start", marginLeft: hp('2%'), color: "gray" }}>با اطلاعات شما {authorcount } کتاب پیدا شدند</Text> : null}
+      
         {/* //{searchapi!=[]&&searchauthorapi!=[]&&searchtitleapi!=[]? */}
-        <View style={{marginTop:hp("1.5%"),marginBottom:hp("1.5%"),flex:1}}>
+        <View style={{marginTop:hp("0%"),marginBottom:hp("0%"),flex:1}}>
   
   
           {/* {authorloading === false ? */}
@@ -113,7 +107,7 @@ const Allsearchresults = (prop) => {
             next={next}
             authorloading={authorloading}
             
-            stylee={{}} title="جستجو بر اساس نویسنده"></ResultsList> 
+            stylee={{}} ></ResultsList> 
             {authorloading===true? <ActivityIndicator style={{ height: hp("10%") }} size={"small"} color={"gray"} ></ActivityIndicator>:null}
             </View>
          </View>

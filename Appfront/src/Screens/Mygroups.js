@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator,TextInput} from 'react-native';
+import { StyleSheet, Text, View ,Modal,ImageBackground,Alert,FlatList,ActivityIndicator,TextInput, useColorScheme} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,Item, Segment, Content,Input,Label,Textarea } from 'native-base';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFocusEffect } from '@react-navigation/native';
@@ -39,9 +39,18 @@ const userschema=yup.object({
 })
 
 const Mygroups = (prop) => {
+
+
+  
   const [numberofgp,setnumberofgp]=useState(0);
   const [picture,setpicture]=useState({uri:'../../assets/group.jpg',name:'',type:''});
-  
+  const [iddd,setiddd]=useState();
+  const callbackFunction = async (childData,id) => {
+    prop.navigation.navigate('ShowGroupPage', { id: id })
+
+    await setmoreclicked(childData)
+
+  }
   const pickfromgallery = async (props,change)=>{
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
@@ -108,12 +117,19 @@ const Mygroups = (prop) => {
       }
   
   }
+  
     const[inforamtionchange,setinfromationchange]=useState(false)
     const [modalopen,setmodalopen]=useState(false)
     const checkisowner=async(ID)=>{
-      console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
-      const id=await(AsyncStorage.getItem('id'))
-      if(id===ID){
+    // if(id===response.data.groups.owner.id){}
+
+      console.log(ID+"  didifiهیییکنبکمنتیشکبمنتکبمنیتکشمنبیتکمنشبتیکadf")
+      //console.log(ID+"akdfj;slkf;lksajf;lkaf;lkj;slakj;lksjaf;lkjsf;lkjsaf")
+      //const id=await(AsyncStorage.getItem('id'))
+      console.log(id===ID)
+      console.log("    amosavi MOSAVI")
+      console.log(id+"iddl;kf;lksjd;lfkj;dslkjf;lksdjf;lkjsf;lkdsjf;lkjsaf;lkjsadf;lkjsa;lkfj;slkdfj;lskdfj")
+      if(await(AsyncStorage.getItem('id'))===ID){
         return true;
       }
       else
@@ -122,16 +138,23 @@ const Mygroups = (prop) => {
     const [selectedValue, setselectedValue] = useState('none')
     const [information, setinformation] = useState([]);
     const [refresh,setrefresh]=useState(false);
+    const [selecttime, setselecttime] = useState("none")
     const [likeotime, setlikeotime] = useState('time');
     const [theend,settheend]=useState(false);
     const[page,setpage]=useState(1);
     const[numberofpage,setnumberofpage]=useState(0);
+    const [moreclicked, setmoreclicked] = useState(false);
+    const [IDD, setIDD] = useState('');
+    // cosnt [closee,setclosee]=useState(false);
    const [count,setcount]=useState(1);
+   const [isonwerrr,setisonwerrr]=useState(false);
+   const [groupref,setgroupref]=useState(false)
   // let count=0;
   const response=async (page)=>{
-
+      setiddd(await(AsyncStorage.getItem('id')))
     // await setinformation(null)
     await (console.log(await(AsyncStorage.getItem('token'))))
+    await (console.log(await(AsyncStorage.getItem('id')+"      f نکتمنت kd;lkکنمتتکنتlk;aj lk    l;kj adf")))
    
     await setpage(page);
     console.log(page+' PAGEEEEEEEEEEEEEEEEPAGEEEEEEEEEE')
@@ -155,9 +178,16 @@ const Mygroups = (prop) => {
     console.log('DOVOM')
      console.log(page+'PAGEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
      console.log('ALAIK ALIAKDALFKJASFKJAKSFKLJSFH')
+     var a="";
+     if(selecttime==="none")
+     a="time";
+     else
+     a="member"
+     console.log(a+"aaaaaa")
      try{
+      setIDD(await (await AsyncStorage.getItem('id')).toString())
        console.log('  omad to response')
-       console.log('api/group'+likeotime)
+       console.log('api/group'+a)
 
       const id= await(AsyncStorage.getItem('id'))
       const response = await axiosinst.get("user/"+id+"/group",{
@@ -178,7 +208,6 @@ const Mygroups = (prop) => {
   //  }
   //  if(numberofgp===0)
   //  settheend(true)
-
    console.log(numberofgp/10+'number of group ////////10')
    console.log(numberofgp+'   !!!!!!!!!  '+numberofgp)
    console.log(response.data)
@@ -250,21 +279,30 @@ const Mygroups = (prop) => {
     };
    
     useFocusEffect(
-      React.useCallback(() => {   
+      React.useCallback(() => {
         const a = new Promise(async (resolve, reject) => {
+          setIDD(await (await AsyncStorage.getItem('id')).toString())
           await setinformation([]);
           await setpage(1);
+          await settheend(false);
+          console.log("toye use focus effectt ")
+          if (selecttime === "none") {
+            setlikeotime("time")
+          }
+          else {
+            setlikeotime("member")
+          }
           //await setselecttime(true)
           //با این ظاهرا درست شد :/
-          await setselectedValue('like')
-          //تاثیری نداشتن :/
-          // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-          // await settimelable("فیلتر بر اساس تاریخ")
-          if (selectedValue === "none")
-            await setlikeotime("time");
-          else
-            await setlikeotime("like");
-          await setselectedValue('none')
+          //   await setselectedValue('like')
+          //   //تاثیری نداشتن :/
+          //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+          //   // await settimelable("فیلتر بر اساس تاریخ")
+          //   if(selectedValue==="none")
+          //  await setlikeotime("time");
+          //  else
+          //  await setlikeotime("like");
+          //  await setselectedValue('none')
   
           resolve()
         }).then(() => {
@@ -275,7 +313,7 @@ const Mygroups = (prop) => {
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
-      }, [prop.navigation]))
+      }, [prop.navigation, selecttime,groupref]))
     return(
      
      
@@ -288,8 +326,23 @@ const Mygroups = (prop) => {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
         {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
-      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
-        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} onPress={()=>setmodalopen(false)}
+      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>{
+        if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
+        setpicture({uri:'../../assets/group.jpg',name:'',type:''})
+        setmodalopen(false)}}>
+        <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} 
+        onPress={()=>{
+          // response(1);
+          // setpicture();
+          if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
+          setpicture({uri:'../../assets/group.jpg',name:'',type:''})
+          setmodalopen(false)}}
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>
        {/* </View> */}
@@ -331,6 +384,7 @@ const Mygroups = (prop) => {
           }
              )
         .then( function(response){
+
           if(response.data.message==="A group with this name exists!"){
             Alert.alert('','گروهی با این نام از قبل وجود دارد ',[
             {
@@ -339,6 +393,11 @@ const Mygroups = (prop) => {
             ],{cancelable:false},{style:{height:50}})
           }
           else{
+            if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
+            setpicture({uri:'../../assets/group.jpg',name:'',type:''})
           console.log(picture+' PICTURE POST')
         
           console.log(response)
@@ -354,11 +413,11 @@ const Mygroups = (prop) => {
             {
               console.log(error)
             
-              Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
+              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-            text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-            }],{cancelable:false},{style:{height:50}})
+
+text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+}], { cancelable: false }, { style: { height: 50 } })
             }     
         })
 
@@ -533,6 +592,7 @@ const Mygroups = (prop) => {
               // settheend(false)
               // response(1)
               await setlikeotime('time')
+               setselecttime("none")
               // setselectedValue('none')
         
             }
@@ -544,6 +604,7 @@ const Mygroups = (prop) => {
               // settheend(false)
               // response(1)
               await setlikeotime('member')
+               setselecttime("member")
          
             }
 
@@ -588,14 +649,14 @@ const Mygroups = (prop) => {
             onPress={async()=>{
               prop.navigation.navigate('ShowGroupPage',{id:item.id})}}>
             {/* {item.is_owner||item.is_member? */}
-            <Eachgroup groupphoto={item.group_photo} membernumber={item.members_count} isowner={checkisowner(item.owner.id)} discription={item.summary} title={item.title} ></Eachgroup>
+            <Eachgroup groupphoto={item.group_photo} IDD={IDD} IDDD={item.owner.id} id={item.id} membernumber={item.members_count} moreclickedd={callbackFunction}  discription={item.summary} title={item.title} ></Eachgroup>
             {/* :null} */}
             </TouchableOpacity>
             </>
             )}
           // extraData={finfo}
           >
-          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید</Text>}
+          </FlatList> :<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>اولین گروه خود را بسازید یا عضو گروهی شوید</Text>}
           {/* : <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>} */}
           <View style={{height:hp('10%'),width:wp('14%'),borderRadius:1000,position:'absolute'}} >
         <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,

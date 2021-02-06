@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import Commentcard from './Commentcard';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -35,6 +35,17 @@ const Comment = (prop) => {
       // await setfinfo(true);
     }
   }
+  const callbackFunction2 = async (childData) => {
+    if (childData === true) {
+      // await setrefresh(childData)
+      console.log('TRUE')
+      await response(1)
+      // if(finfo===true)
+      // await setfinfo(false);
+      // else
+      // await setfinfo(true);
+    }
+  }
   const [delet, setdelet] = useState(false)
   const [refresh, setrefresh] = useState(false);
   const [count,setcount]=useState(1);
@@ -46,12 +57,13 @@ const Comment = (prop) => {
   }
   const [closed, setclosed] = useState(false);
   const [information, setinformation] = useState([]);
-  const[selecttime,setselecttime]=useState(true)
+  const[selecttime,setselecttime]=useState("none")
   const [likeotime, setlikeotime] = useState('time');
   const [timelable,settimelable]=useState('فیلتر بر اساس تاریخ')
   const [likelable,setlikelable]=useState('فیلتر بر اساس تعداد پسند ها')
   const [theend, settheend] = useState(false)
   const [page, setpage] = useState(1);
+  const [com,setcom]=useState(true);
 
   console.log('AVAL')
   const response = async(page) => {
@@ -74,13 +86,19 @@ const Comment = (prop) => {
     console.log(id)
     console.log(await (await AsyncStorage.getItem('token')).toString())
     console.log(await (await AsyncStorage.getItem('id')).toString())
-
+    var a="";
+    if(selecttime==="none")
+    a="time";
+    else
+    a="like"
+    console.log(a+"aaaaaa")
+    console.log((await AsyncStorage.getItem('token')).toString())
     try {
       // await setTimeout(() => {  console.log("World!"); }, 5000);
       setIDD(await (await AsyncStorage.getItem('id')).toString())
       const response = await axiosinst.get("book/" + prop.route.params.id+'/comment' , {
         params: {
-          filter:likeotime,
+          filter:a,
           page: page
         },
         "headers":
@@ -92,6 +110,7 @@ const Comment = (prop) => {
       })
       console.log(count+'  count   dfajd;lfkjs;lkfj')
        console.log(response.data.comments)
+      
       await setcount(response.data.count);
       //console.log(response)
       console.log(count+' COUNT COUNT COUNT COUNT COUTN')
@@ -102,11 +121,23 @@ const Comment = (prop) => {
         settheend(false)
         console.log(IDD + 'IDDresponse');
         //  console.log(response.data)
-         console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
+        // console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
         // console.log(information)
-         console.log('RESPONSE DATE')
+        // var a=[];
+        //  console.log('RESPONSE DATE')
+        //  for(var i=0;i<10;i++){
+           
+        //    if(response.data.comments.Inclue(nformation[i].id))
+        //   {
+
+        //   }
+        //   else
+        //   {
+          
+        //   }
+        //  }
          //console.log(response.date)
-         console.log(response.data.comments+' RESPONSE DATA COMMENTS')
+        // console.log(response.data.comments+' RESPONSE DATA COMMENTS')
          //page===1?setinformation(response.data):setinformation(information.concat(response.data))
          if(response.data.message!="No Comment!"){
           await setinformation(information=>[...information,...response.data.comments])
@@ -137,22 +168,34 @@ const Comment = (prop) => {
 
     }
   }
+  // useEffect(()=>{
+  //   setselecttime("none")
+  // },[])
   useFocusEffect(
     React.useCallback(() => {
       const a=new Promise(async(resolve,reject)=>{
         await setinformation([]);
+        console.log(information+" INFORMATION IN FOR MATION INF FOR")
         await setpage(1);
-        await setselecttime(true)
+        await settheend(false);
+        console.log("toye use focus effectt ")
+        if(selecttime==="none"){
+          setlikeotime("time")
+        }
+        else{
+          setlikeotime("like")
+        }
+        //await setselecttime(true)
         //با این ظاهرا درست شد :/
-        await setselectedValue('like')
-        //تاثیری نداشتن :/
-        // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
-        // await settimelable("فیلتر بر اساس تاریخ")
-        if(selectedValue==="none")
-       await setlikeotime("time");
-       else
-       await setlikeotime("like");
-       await setselectedValue('none')
+      //   await setselectedValue('like')
+      //   //تاثیری نداشتن :/
+      //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+      //   // await settimelable("فیلتر بر اساس تاریخ")
+      //   if(selectedValue==="none")
+      //  await setlikeotime("time");
+      //  else
+      //  await setlikeotime("like");
+      //  await setselectedValue('none')
 
         resolve()
       }).then(()=>{
@@ -163,10 +206,17 @@ const Comment = (prop) => {
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation])
+    }, [prop.navigation,selecttime,delet,com])
 
   )
   const handleLoadMore = async() => {
+    // if(selecttime==="none"){
+    //   setlikeotime("time")
+    // }
+    // else
+    // {
+    //   setlikeotime("like")
+    // }
     console.log('END OF THE LIST')
     if(page<count){
       console.log(page+'PAGEDEEFFDHASKDFJLSKFH')
@@ -296,12 +346,17 @@ const Comment = (prop) => {
         enabledGestureInteraction={true}
         enabledContentTapInteraction={false}
         onCloseEnd={() => {
+          if(com===true){
+            setcom(false)
+          }
+          else
+          setcom(true)
           setshowbutton(true)
           // if(closed===true)
           // setclosed(false)
           // else
           // setclosed(true)
-          response(1)
+          // response(1)
 
         }}
         //  isBackDropDismisByPress={true}
@@ -312,6 +367,7 @@ const Comment = (prop) => {
 
       />
       <Animated.View style={{
+        marginBottom:hp("1.3%"),
 
         opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       }}>
@@ -438,7 +494,7 @@ const Comment = (prop) => {
             avatar={styles.avatar}
             isliked={item.isliked}
             isdisliked={item.isdisliked}
-            date={item.sendtime.toString().split('T')[0]} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} DELETE={callbackFunction} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
+            date={item.sendtime.toString().split('T')[0]} selectt={selecttime} bookid={prop.route.params.id} accountid={item.account.id} dislikenumber={item.DislikeCount} kdelete={delet} DELETE={setdelet} commentid={item.id} IDD={IDD} likenumber={item.LikeCount} 
             picture={`${item.account.profile_photo}`} comment={item.comment_text} ></Commentcard>)}
         >
 
@@ -481,6 +537,7 @@ const styles = StyleSheet.create({
   },
   addcomment: {
 
+   
     width: wp('70%'),
     marginHorizontal: '15%',
     marginTop: hp('80.1%'),
@@ -489,7 +546,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F7A8C'
   },
   nazar: {
-  
+    
     marginLeft: wp('23%'),
     fontWeight: 'bold',
     color: '#EDF2F4'

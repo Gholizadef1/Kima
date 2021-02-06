@@ -14,6 +14,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const Quotecard = (prop) => {
   const bookid=prop.bookid;
   const quoteid=prop.quoteid
+  console.log(prop.selectt+" selecttt")
   // const getlike=async()=>{
   //   const back2 = {
   
@@ -62,11 +63,19 @@ const Quotecard = (prop) => {
 
   // const [dislike,setdislike]=useState('lightblue')
   const [heart, setheart] = useState('lightblue');
+  const [photoo,setphotoo]=useState();
   // useEffect(()=>{
   //   getlike();
   // },[])
   useFocusEffect(
     React.useCallback(() => {
+      if(prop.picture.toString().split(":")[0]==="http"){
+        setphotoo(prop.picture)
+      }
+      else{
+        setphotoo("http://e7ae29f4056b.ngrok.io"+prop.picture)
+      }
+  
       if(prop.isliked)
       setheart('#1f7a8c')
       else
@@ -120,7 +129,10 @@ const Quotecard = (prop) => {
                         
                         console.log(response);
                         prop.INFO(quoteid);
+                        if(prop.kdelet===false)
                         await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
                      
 
                       })
@@ -171,7 +183,7 @@ const Quotecard = (prop) => {
 
               <TouchableOpacity style={styles.avatar}
                 onPress={() => { }}>
-                {prop.picture === '/media/default.png' ? <ImageBackground borderRadius={100}
+                {photoo === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
 
                   source={require('../../assets/avatar.png')}
                   style={styles.avatar}
@@ -180,7 +192,7 @@ const Quotecard = (prop) => {
 
                 </ImageBackground> : <ImageBackground borderRadius={100}
 
-                  source={{ uri: prop.picture }}
+                  source={{ uri: photoo }}
                   style={styles.avatar}
 
                 >
@@ -234,6 +246,13 @@ const Quotecard = (prop) => {
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
+              if(prop.selectt==="like"){
+
+               if(prop.kdelet===false)
+                        await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
+              }
            
               setheart('#1f7a8c')
              
@@ -262,6 +281,12 @@ const Quotecard = (prop) => {
               console.log(response);
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
+              if(prop.selectt==="like"){
+                if(prop.kdelet===false)
+                        await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
+              }
             
               setheart('lightblue')
               setnumheart(response.data.data)
