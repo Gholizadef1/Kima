@@ -329,6 +329,8 @@ const Mygroups = (prop) => {
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} 
         onPress={()=>{
           // response(1);
+          // setpicture();
+          setpicture({uri:'../../assets/group.jpg',name:'',type:''})
           setmodalopen(false)}}
          name="close" size={23} color="#D75A5A" />
          </TouchableOpacity>
@@ -371,6 +373,7 @@ const Mygroups = (prop) => {
           }
              )
         .then( function(response){
+
           if(response.data.message==="A group with this name exists!"){
             Alert.alert('','گروهی با این نام از قبل وجود دارد ',[
             {
@@ -379,6 +382,7 @@ const Mygroups = (prop) => {
             ],{cancelable:false},{style:{height:50}})
           }
           else{
+            setpicture({uri:'../../assets/group.jpg',name:'',type:''})
           console.log(picture+' PICTURE POST')
         
           console.log(response)
