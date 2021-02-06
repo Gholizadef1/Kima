@@ -239,7 +239,7 @@ const Bookview = (prop) => {
       <Container>
         <ScrollView>
           <Header style={{ backgroundColor: '#1F7A8C', marginTop: hp('20%') }} />
-          <Body style={{}}>
+          <Body style={{marginBottom:hp("3%")}}>
             <Image source={{ uri: result.imgurl }} style={{
               marginTop: hp('-15%'), height: hp('35%'),
               width: wp('45%'), borderRadius: 15
@@ -305,7 +305,7 @@ const Bookview = (prop) => {
 : null} */}
 
           {comments != "No Comment!" && comments.length >= 3 ?
-            <Button style={{ marginLeft: wp('80%'), marginTop: hp('4%'), marginBottom: hp('-7%') }} transparent
+            <Button style={{ marginLeft: wp('80%'), marginTop: hp('3%'), marginBottom: hp('-3%') }} transparent
               onPress={() => {
                 prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
                   title: response.data.title,
@@ -317,8 +317,8 @@ const Bookview = (prop) => {
 
           {comments != "No Comment!" ?
             <ScrollView>
-              <View style={{ alignItems: 'flex-start' }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
+              <View style={{ alignItems: 'flex-start' ,backgroundColor:"white",width:wp("80%")}}>
+                <Text  style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5.5%') }}>نظرات کاربران :</Text>
               </View >
               <ScrollView>
                 <View style={{ alignItems: 'flex-start' }}>
@@ -342,12 +342,12 @@ const Bookview = (prop) => {
                           {item.account.profile_photo !='/media/default.png' ? <Avatar.Image style={styles.avatar}
                             source={{ uri:  item.account.profile_photo }}
                           ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={40}
-                            source={require('../../assets/group.jpg')}
+                            source={require('../../assets/avatar.png')}
                           ></Avatar.Image>}
                           <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('20%'), marginTop: hp('-4.5%') }}>{item.account.username}</Text>
                           {(item.comment_text.toString().length) <= 70 ?
-                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text> :
-                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text.substr(0, 110) + '...'}</Text>}
+                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'),fontSize:hp("1.6%"), marginBottom: hp('6%') }}>{item.comment_text}</Text> :
+                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'),fontSize:hp("1.6%"), marginBottom: hp('6%') }}>{item.comment_text.substr(0, 110) + '...'}</Text>}
 
                         </Card>
                       </View>
@@ -419,12 +419,12 @@ const Bookview = (prop) => {
                         {item.account.profile_photo != '/media/default.png' ? <Avatar.Image  style={styles.avatar2}
                           source={{ uri:  item.account.profile_photo }}
                         ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
-                          source={require('../../assets/group.jpg')}
+                          source={require('../../assets/avatar.png')}
                         ></Avatar.Image>}
                         <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('-6%') }}>{item.account.username}</Text>
                         {(item.quote_text.toString().length) <= 100 ?
-                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%'),marginRight:wp("4%"), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
-                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%') ,marginRight:wp("4%")}}>{item.quote_text.substr(0, 110) + '...'}</Text>}
+                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'),fontSize:hp("1.6%"), marginTop: hp('1%'),marginRight:wp("4%"), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
+                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'),fontSize:hp("1.6%"), marginTop: hp('1%') ,marginRight:wp("4%")}}>{item.quote_text.substr(0, 110) + '...'}</Text>}
 
                       </Card>
 

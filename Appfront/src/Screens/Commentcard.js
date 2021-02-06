@@ -150,8 +150,8 @@ const Commentcard = (prop) => {
       var commenttt = `${prop.comment}`.toString().split('');
       var comment42 = '';
   
-    if (linenumberr > 100) {
-      for (let i = 0; i < 100; i++)
+    if (linenumberr > 175) {
+      for (let i = 0; i < 175; i++)
         comment42 += commenttt[i]
       // console.log(comment4+'  COMMENT4 FOR')
     }
@@ -577,7 +577,7 @@ const Commentcard = (prop) => {
           }
         }} name="dislike1" size={20} color={dislike} style={styles.dislike} />
         <Text style={styles.dislikenumber}>{numdislike}</Text>
-        {`${prop.comment}`.toString().split('').length >= 100 ? <TouchableOpacity
+        {`${prop.comment}`.toString().split('').length >= 175 ? <TouchableOpacity
           onPress={async() => {
             if(likeshode===true)
             await setlikeshode(false)

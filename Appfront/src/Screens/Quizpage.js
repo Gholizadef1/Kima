@@ -105,6 +105,7 @@ const Quizpage = (prop) => {
     const getquiz = (async () => {
         try {
             const response = await axiosinst.get('quiz/' + prop.route.params.id)
+            console.log(response.data.Quiz.quiz_photo.toString()+"  THISSSS THISSS");
             if (response.data.Quiz.quiz_photo.toString().split(":")[0] === "http") {
                 setphotoo(response.data.Quiz.quiz_photo)
             }
