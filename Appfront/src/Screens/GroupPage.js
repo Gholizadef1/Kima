@@ -334,7 +334,7 @@ const GroupPage = (prop) => {
           style={{marginLeft:wp('15%'),marginTop:hp('-9%')}} size={90}
             source={{ uri: "http://e7ae29f4056b.ngrok.io" + groupinfo.group_photo }}
           ></Avatar.Image> : <Avatar.Image style={{marginLeft:wp('15%'),marginTop:hp('-9%')}} size={90}
-            source={require('../../assets/group.jpg')}
+            source={require('../../assets/avatar.png')}
           ></Avatar.Image>}
           <View style={{width:wp("50%"),marginTop:hp("0.5%"),height:hp("4%"),marginLeft:wp("2%"),backgroundColor:"white"}}>
           <Text style={styles.groupname}>{groupinfo.title}</Text>
@@ -445,7 +445,7 @@ const GroupPage = (prop) => {
                     <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2%') }}>{item.title}</Text>
                     <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'),alignSelf:"flex-start",left:wp("1%"), marginTop: hp('1%') }}>{item.description}</Text>
                     {joinedUser === 'joinedUser' || owner === 'owner' ?
-                      <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') }} transparent
+                      <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("4.5%")}} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
                       </Button>
@@ -520,7 +520,7 @@ const GroupPage = (prop) => {
                     size={70}
                       source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
                     ></Avatar.Image> : <Avatar.Image size={70} style={{ alignSelf: 'flex-start', marginLeft: wp('5%'),marginTop:hp("2%") }}
-                      source={require('../../assets/group.jpg')}
+                      source={require('../../assets/avatar.png')}
                     ></Avatar.Image>}
                     {/* <View style={{width:wp("20%"),marginLeft:wp("2.7%"),height:hp("2%"),backgroundColor:"lightblue",marginBottom:hp("5%")}}> */}
                     <Text style={{ alignSelf: 'flex-start',fontSize:hp("1.3.5%"), marginLeft: wp('7%'),marginRight:wp("7%"), marginTop: hp('1%'),marginBottom:hp("5%") }}>{item.user.username}</Text>
