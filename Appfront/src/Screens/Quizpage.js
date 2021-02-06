@@ -124,7 +124,7 @@ const Quizpage = (prop) => {
         }
         catch (err) {
             console.log(err)
-            Alert.alert('', 'مشکلی پیش اومده ', [{
+            Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
 
 
                 text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
@@ -166,7 +166,7 @@ const Quizpage = (prop) => {
                 {
                     console.log(error)
 
-                    Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+                    Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
 
                         text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'

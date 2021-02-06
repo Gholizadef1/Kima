@@ -106,17 +106,17 @@ console.log(selectedValue+"selected Value")
     if (val < 50) {
       return ("green")
     }
-    else if (val >= 50 && val < 300) {
+    else if (val >= 50 && val <= 400) {
       console.log("adfksahflkjshflkjhafslkjhsalkjfhlkasjhfdlkjhaslkfjhsalkfjhlskjfhdlkjsahf")
       // setnumcolor('#2a9d8f')
       return ('#2a9d8f')
     }
-    else if (val >= 300 && val <= 350) {
-      return ("#3ECCBB")
-    }
-    else if (val >= 350 && val < 400) {
-      return ("#BFEEE8")
-    }
+    // else if (val >= 300 && val <= 350) {
+    //   return ("#3ECCBB")
+    // }
+    // else if (val >= 350 && val < 400) {
+    //   return ("#BFEEE8")
+    // }
     else if (val > 400 && val <= 420) {
       return ("#F7BC8D")
     }
@@ -356,11 +356,14 @@ console.log(selectedValue+"selected Value")
       <View style={styles.header}>
         <View style={styles.panelHeader}>
           <View style={styles.panelHandle} >
+          <View style={{backgroundColor:"lightgray",width:wp("25%"),height:hp("0.5%"),marginBottom:hp("0%"),borderRadius:100,alignSelf:"center"}}>
+
+</View>
             {/* <View style={{borderRadius:100}}> */}
-            <ImageBackground borderRadius={100}
+            {/* <ImageBackground borderRadius={100}
               source={require('../../assets/line5.png')}
               style={{ width: wp('21%'), height: hp('0.3%'), alignSelf: 'center', borderRadius: 100 }}
-            ></ImageBackground>
+            ></ImageBackground> */}
             {/* </View> */}
             <Text style={{ alignSelf: 'center', fontWeight: 'bold', color: '#1f7a8c', marginTop: hp('1.3%'), marginBottom: hp('1.3%'), fontSize: wp('4%') }}>نقل قول شما چیست؟</Text>
           </View>

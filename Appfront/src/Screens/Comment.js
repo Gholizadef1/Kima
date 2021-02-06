@@ -122,7 +122,19 @@ const Comment = (prop) => {
         //  console.log(response.data)
         // console.log('++++INFO++++' + information + "++++INFO++++"+'11111')
         // console.log(information)
-         console.log('RESPONSE DATE')
+        // var a=[];
+        //  console.log('RESPONSE DATE')
+        //  for(var i=0;i<10;i++){
+           
+        //    if(response.data.comments.Inclue(nformation[i].id))
+        //   {
+
+        //   }
+        //   else
+        //   {
+          
+        //   }
+        //  }
          //console.log(response.date)
         // console.log(response.data.comments+' RESPONSE DATA COMMENTS')
          //page===1?setinformation(response.data):setinformation(information.concat(response.data))
@@ -162,6 +174,7 @@ const Comment = (prop) => {
     React.useCallback(() => {
       const a=new Promise(async(resolve,reject)=>{
         await setinformation([]);
+        console.log(information+" INFORMATION IN FOR MATION INF FOR")
         await setpage(1);
         await settheend(false);
         console.log("toye use focus effectt ")
