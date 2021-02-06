@@ -102,6 +102,9 @@ const DiscussionPage = (prop) => {
                 // else {
                 //     setChats(undefined)
                 // }
+                if(chats.length===0){
+                    settheend(true)
+                }
 
                 console.log('++++INFO++++' + JSON.stringify(chats) + "++++INFO++++" + '22222')
                 //console.log(chats)
@@ -269,7 +272,10 @@ const DiscussionPage = (prop) => {
             </View>
 
             <ScrollView>
-              
+                <Header style={{ backgroundColor: '#EDF2F4', height: hp('0%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
+                <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
+
+                {/* <View style={{width:hp("100%")}}></View> */}
                 <FlatList
                     style={{ marginBottom: hp('9%') }}
                     removeClippedSubviews={true}
@@ -364,7 +370,7 @@ const DiscussionPage = (prop) => {
                 >
                 </FlatList>
 
-                {chats === [] ?
+                {chats.length === 0 ?
                     <Text style={{ marginLeft: wp('18%'), marginTop: hp('20%'), fontSize: 15, color: '#1F7A8C' }}>در این بحث تابحال صحبتی صورت نگرفته ...</Text> : null}
             </ScrollView>
 

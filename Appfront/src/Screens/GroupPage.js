@@ -445,11 +445,11 @@ const GroupPage = (prop) => {
                     <Text style={{ alignSelf: 'flex-start', left: wp('5%'), fontSize: hp('2%') }}>{item.title}</Text>
                     <Text style={{ color: '#a9a9a9', marginLeft: wp('4%'),alignSelf:"flex-start",left:wp("1%"), marginTop: hp('1%') }}>{item.description}</Text>
                     {joinedUser === 'joinedUser' || owner === 'owner' ?
-                      <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("4.5%")}} transparent
+                      <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("3%")}} transparent
                         onPress={() => prop.navigation.navigate('ShowDiscussionPage', { id: item.id, id2: prop.route.params.id, title: item.title })}>
                         <Text style={{ color: '#1F7A8C' }}>مشاهده</Text>
                       </Button>
-                      : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("4.5%") }} transparent
+                      : <Button style={{ marginLeft: wp('80%'), marginTop: wp('-11%') ,bottom:hp("3%") }} transparent
                         onPress={() => Alert.alert('', ' برای دیدن بحث های انجام شده باید عضو گروه باشید', [{
                           text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
                         }], { cancelable: false }, { style: { height: hp('40%') } })}>
