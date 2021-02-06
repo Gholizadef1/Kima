@@ -148,6 +148,7 @@ const Mygroups = (prop) => {
     // cosnt [closee,setclosee]=useState(false);
    const [count,setcount]=useState(1);
    const [isonwerrr,setisonwerrr]=useState(false);
+   const [groupref,setgroupref]=useState(false)
   // let count=0;
   const response=async (page)=>{
       setiddd(await(AsyncStorage.getItem('id')))
@@ -312,7 +313,7 @@ const Mygroups = (prop) => {
         // //   console.log('Listenn')
         // alert('in')
         //   return() => alert('lost')
-      }, [prop.navigation, selecttime,modalopen]))
+      }, [prop.navigation, selecttime,groupref]))
     return(
      
      
@@ -325,11 +326,21 @@ const Mygroups = (prop) => {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
         {/* <View style={{alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),backgroundColor:'blue'}}> */}
-      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>setmodalopen(false)}>
+      <TouchableOpacity  style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%'),height:hp('5%'),width:wp('8%'),backgroundColor:'white',position:'absolute'}} onPress={()=>{
+        if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
+        setpicture({uri:'../../assets/group.jpg',name:'',type:''})
+        setmodalopen(false)}}>
         <AntDesign style={{position:'absolute',alignSelf:'flex-end',top:hp('1%'),right:hp('1%')}} 
         onPress={()=>{
           // response(1);
           // setpicture();
+          if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
           setpicture({uri:'../../assets/group.jpg',name:'',type:''})
           setmodalopen(false)}}
          name="close" size={23} color="#D75A5A" />
@@ -382,6 +393,10 @@ const Mygroups = (prop) => {
             ],{cancelable:false},{style:{height:50}})
           }
           else{
+            if(groupref===true)
+        setgroupref(false)
+        else
+        setgroupref(true)
             setpicture({uri:'../../assets/group.jpg',name:'',type:''})
           console.log(picture+' PICTURE POST')
         
