@@ -269,8 +269,6 @@ const DiscussionPage = (prop) => {
             </View>
 
             <ScrollView>
-                <Header style={{ backgroundColor: '#EDF2F4', height: hp('13%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
-                <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
               
                 <FlatList
                     style={{ marginBottom: hp('9%') }}
@@ -299,7 +297,7 @@ const DiscussionPage = (prop) => {
                                 size={55} style={styles.avatar}
                                     source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
                                 ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar}
-                                    source={require('../../assets/group.jpg')}
+                                    source={require('../../assets/avatar.png')}
                                 ></Avatar.Image>}
                                 <Card style={styles.cardChat}>
                                     <Text style={{ alignSelf: 'flex-end', fontSize: 14, marginRight: wp('1%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
@@ -353,7 +351,7 @@ const DiscussionPage = (prop) => {
                                  size={55} style={styles.avatar2}
                                     source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
                                 ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar2}
-                                    source={require('../../assets/group.jpg')}
+                                    source={require('../../assets/avatar.png')}
                                 ></Avatar.Image>}
                                 <Card style={styles.cardChat2}>
                                     <Text style={{ alignSelf: 'flex-end', fontSize: 14, marginRight: wp('1%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
@@ -372,7 +370,7 @@ const DiscussionPage = (prop) => {
 
             <View style={{ borderRadius: 1000, position: 'absolute' }}>
                 <Button onPress={() => setModalVisible(true)} style={{
-                    marginTop: hp('84%'), backgroundColor: '#1F7A8C',borderRadius:20,width:wp('40%')
+                    marginTop: hp('70%'), backgroundColor: '#1F7A8C',borderRadius:20,width:wp('40%')
 
                 }}>
                     <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginRight: wp('5%') ,marginLeft:wp('13%')}}> ارسال پیام </Text>

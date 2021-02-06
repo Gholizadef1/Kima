@@ -52,9 +52,9 @@ const MembersPage = (prop) => {
           <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
             {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
             style={styles.avatar} size={75}
-              source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
-            ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={75}
-              source={require('../../assets/group.jpg')}
+            source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
+            ></Avatar.Image> : <Avatar.Image size={70} style={{ alignSelf: 'flex-start', marginLeft: wp('5%'),marginTop:hp("2%") }}
+              source={require('../../assets/avatar.png')}
             ></Avatar.Image>}
             <Text style={{ alignSelf: 'flex-start', marginLeft: wp('30%'), top: hp('-6%') }}>{item.user.username}</Text>
             <View
