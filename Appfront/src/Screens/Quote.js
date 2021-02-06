@@ -92,6 +92,7 @@ console.log(selectedValue+"selected Value")
   const [finfo, setfinfo] = useState(true)
   const [refresh, setrefresh] = useState(false);
   const [forrefresh, setforrefresh] = useState(false);
+  const [com,setcom]=useState(true);
   const maxnumber = 500;
   const [numcolor, setnumcolor] = useState('green');
   const [currentnumber, setcurrentnumber] = useState(0);
@@ -236,7 +237,7 @@ console.log(selectedValue+"selected Value")
       // //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-    }, [prop.navigation,selecttime,delet])
+    }, [prop.navigation,selecttime,delet,com])
 
   )
   const renderInner = () => {
@@ -385,8 +386,14 @@ console.log(selectedValue+"selected Value")
         enabledGestureInteraction={true}
         enabledContentTapInteraction={false}
         onCloseEnd={() => {
+        if(com===true){
+          setcom(false)
+        }
+        else{
+          setcom(true)
+        }
           setshowbutton(true)
-          response(1)
+          // response(1)
           // if(theend===true)
 
           // response(page-1)
