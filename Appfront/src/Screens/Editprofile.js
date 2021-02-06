@@ -276,8 +276,7 @@ useFocusEffect(
    
     // const val = useContext(AuthContext);  
     //nd
-    const [backgroundColor,setbackgroudcolor]=useState("white");
-    const [opacities,setopacities]=useState(1);
+   
     const [name,setname]=useState(null);
   
      const renderHeader=()=>{
@@ -345,40 +344,27 @@ useFocusEffect(
 
 // const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
     return(
-  
-      <>
-    
-        <View style={{  flex:1,
-      backgroundColor: backgroundColor,}}>
+      
+        <View style={styles.container}>
       
         <BottomSheet
-            snapPoints={[hp('34%'), 0, 0]}
+             snapPoints={[hp('46.5%'), 0, 0]}
             ref={bs}
             initialSnap={1}
-            // onCloseEnd={setbackgroudcolor("white")}
             callbackNode={fall}
             enabledGestureInteraction={true}
             enabledContentTapInteraction={false}
             renderContent={renderInner}
-            renderHeader={renderHeader}   
-            onCloseEnd={()=>setbackgroudcolor("white")}
+            renderHeader={renderHeader}            
                // style={{position:'absolute',height:200,width:250,marginTop:400}}
             backgroundColor={'white'}
         
        />
-        <Animated.View style={{
-  backgroundColor:backgroundColor,
-opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
-}}> 
-       
-     
+       <View >
         
-        <View style={{position:'absolute',opacity:opacities,height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
+        <View style={{position:'absolute',height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
         <TouchableOpacity style={{}}
-         onPress={async()=>{
-            await setbackgroudcolor("#F5F5F5")
-          //  await setopacities(0.5)
-           await bs.current.snapTo(0)}}>
+         onPress={async()=>await bs.current.snapTo(0)}>
 
 
       {picture==='http://e7ae29f4056b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
@@ -399,10 +385,7 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
       </ImageBackground>}
       {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
       
-      <TouchableOpacity  onPress={async()=>{
-        setbackgroudcolor("#F5F5F5")
-    
-        await bs.current.snapTo(0)}} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
+      <TouchableOpacity  onPress={async()=>await bs.current.snapTo(0)} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
       <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
       </TouchableOpacity>
       {/* </TouchableOpacity> */}
@@ -447,33 +430,30 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('', 'نام کاربری شما با موفقیت تغییر کرد ', [{
+          Alert.alert('oops','نام کاربری شما با موفقیت تغییر کرد ',[{
+            
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-         
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
           
           
         })
         .catch( function(error){
          
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('', 'نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)', [{
+              Alert.alert('oops','نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)',[{
+            
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-              
-              
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
             }
             else
             {
-              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
             }
 
          
@@ -485,7 +465,6 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
       }}
      >
      {(props)=>(
-       
      <View style={{ marginTop:hp('25.5%'),marginHorizontal:wp('10%')}}>
 
      <Item style={styles.input}>
@@ -549,12 +528,11 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
           // console.log(response);
           // console.log(response.data.username)
           // console.log(response.username)
-          Alert.alert('', 'رمزتان با موفقیت تغییر کرد', [{
+          Alert.alert('oops','رمزتون با موفقیت تغییر کرد',[{
+            
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-         
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+          }])
       
           
           
@@ -564,20 +542,19 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
           // await console.log(AsyncStorage.getItem('token'))
             // console.log(error);
             if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('', 'رمزتون رو اشتباه وارد کردید', [{
-
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
+              Alert.alert('oops','رمزتون رو اشتباه وارد کردید',[{
             
+
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
             }
             else
             {
-              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+              Alert.alert('oops','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
+            
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
+            Title:'فهمیدم',onPress:()=>console.log('alert closed')
+            }])
             }
            
          
@@ -676,15 +653,10 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
         {/* </TouchableOpacity> */}
       
     {/* </ScrollView> */}
-  
-    </Animated.View>
-    {/* <View style={{backgroundColor:"gray",flex:1}}></View> */}
+    </View>
     <StatusBar backgroundColor='#BFDBF7' style='light' />
 
         </View>
-       
-        </>
-        
         
    
         // {/* <Text>HI</Text>
@@ -771,32 +743,22 @@ const styles = StyleSheet.create({
         
         
       },
-      panel: {
-        padding: hp("3%"),
-        backgroundColor: 'white',
-        paddingTop:  hp("3%"),
-        shadowColor: 'black',
-        borderTopColor: 'black',
-        shadowOpacity: 0.5,
-        elevation:10
-    
-      },
       header: {
         backgroundColor: 'white',
         shadowColor: 'black',
-        shadowOffset: { width: -1, height: -3 },
+        shadowOffset: {width: -1, height: -3},
         shadowRadius: 20,
         shadowOpacity: 0.5,
-        // elevation: 5
-        paddingTop: hp("2.5%"),
+        // elevation: 5,
+        paddingTop: 20,
         borderTopLeftRadius: 20,
-        borderTopColor: 'black',
+        borderTopColor:'black',
         borderTopRightRadius: 20,
       },
       panelHeader: {
-        borderTopColor: 'black',
+        borderTopColor:'black',
     
-      }, 
+      },  
 //         input:{
 //      marginTop:5,
 //      marginLeft:5,

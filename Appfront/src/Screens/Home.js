@@ -214,6 +214,7 @@ const Home = ({ navigation }) => {
     else {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+             <StatusBar backgroundColor='#BFDBF7' style='light' />
                 <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
             </View>
         )

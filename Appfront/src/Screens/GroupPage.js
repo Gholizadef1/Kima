@@ -487,7 +487,7 @@ const GroupPage = (prop) => {
               marginLeft: wp('21%'), width: wp('65%'), borderRadius: 20, marginTop: hp('3%')
               , backgroundColor: '#1F7A8C'
             }}>
-              <Text style={{ marginLeft: wp('18%'), fontSize: hp('2.5%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
+              <Text style={{ marginLeft: wp('18%'), fontSize: hp('2%'), fontWeight: 'bold', color: 'white' }}>ایجاد بحث جدید</Text>
             </Button>}
 
 
