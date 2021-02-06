@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Modal,FlatList,ActivityIndicator, TextPropTypes,Alert } from 'react-native';
- import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content,SearchBar } from 'native-base';
+import { StyleSheet, Text, View, Modal, FlatList, ActivityIndicator, TextPropTypes, Alert } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, SearchBar } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -13,327 +13,372 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 
 
-const Groups = ({navigation}) => {
-   
-   const searchpost=async(page)=>{
-     await setpage(page)
-     console.log(page +'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
+const Groups = ({ navigation }) => {
+
+  const searchpost = async (page) => {
+    await setpage(page)
+    console.log(page + 'PAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEE SEARCHPOSTT')
     const back = {
-      search:searchterm,
+      search: searchterm,
 
     }
     await settheend(false)
-    if(page===1){
+    if (page === 1) {
       await settheend(false)
-     await setinformation([])
-     console.log('IF PAGE === 1   ')
+      await setinformation([])
+      console.log('IF PAGE === 1   ')
 
     }
     const backk = JSON.stringify(back);
-    try{
-    const response = await axiosinst.get('groups',{
-      params: {
-       
-        search: searchterm,
-        search_fields:'title',
-        page:page,
-      },
-    "headers":
-    {
-      "Content-Type": "application/json",
-      "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+    try {
+      console.log(searchterm)
+      const response = await axiosinst.get('groups?search='+searchterm+'&search-fields=title&page='+page
+      , {
+        // params: {
+
+        //   search: searchterm,
+        //   search_fields: 'title',
+        //   page: page,
+        // },
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
+
+
+      })
+      console.log(JSON.stringify(response.data)+"   respoifdkasjfd;lkjs a;fljkas;ldfj j ;lkj;lfk joi unpoeiunvpouiopvniupeoinrvqupoiunrvpoiunrvpoiuqnrvpoiunqwproviunpowqrviunporvinupovnqupoqivwnupovkner")
+      // setrefresh(true)
+      settheend(false)
+      setrefresh(false)
+      if (response.data.results + 'RESPONSE.DATA.GROUPS' === 'RESPONSE.DATA.GROUPS') {
+        await settheend(true)
+        await setrefresh(false)
+        console.log('#########')
+      }
+
+      console.log('searchpost beforeee' + information + '1111111111111111111111')
+      // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
+      // await setinformation([...information,...response.data.results])
+      await setinformation(information => [...information, ...response.data.results])
+      console.log('searchpost afterrrrrrr' + information + '222222222222222222')
+      // console.log(information+'******######********########')
+      // console.log(information[0].title)
+      // settheend(true)
+      // setcount(response.data.count)
+      setnext(response.data.next)
+      if (next === null) {
+        settheend(true)
+        console.log(next + '  NEXT TO IF')
+      }
+      // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
+      console.log(next, ' NEXTtttttttttttttttt')
+      setnumberofresults(response.data.count)
+      console.log(response.data.count+" response countttttt")
+      console.log(numberofresults+" numberofreustlflkj")
+      setpage(page);
+
+    }
+    catch (err) {
+      setrefresh(false)
+      console.log(err)
+      Alert.alert('', 'مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم', [{
+
+
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
     }
 
-   
-  })
-   console.log(response.data)
-  // setrefresh(true)
-  settheend(false)
-  setrefresh(false)
-  if(response.data.results+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
-    await settheend(true)
-    await setrefresh(false)
-     console.log('#########')
-     }
-     console.log('searchpost beforeee'+information+'1111111111111111111111')
-  // await(page===1?setinformation(response.data.results):setinformation(information.concat(response.data.results)))
-  // await setinformation([...information,...response.data.results])
-   await setinformation(information=>[...information,...response.data.results])
-   console.log('searchpost afterrrrrrr'+information+'222222222222222222')     
-  // console.log(information+'******######********########')
-  // console.log(information[0].title)
-  // settheend(true)
-  // setcount(response.data.count)
-  setnext(response.data.next)
-  if(next===null)
-  {
-    settheend(true)
-    console.log(next+'  NEXT TO IF')
+
+
   }
-  // console.log(response.data.groups.next+'nextttttttttttttttttttttttttttttttt')
-  console.log(next,' NEXTtttttttttttttttt')
-  setnumberofresults(response.data.count)
-  setpage(page);
-  
-  }
-  catch(err){
-    setrefresh(false)
-   console.log(err)
-   Alert.alert('','مشکلی پیش اومده اینترنتت رو چک کن ما هم سرورامون رو چک میکنیم',[{
-            
-
-    text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-    }],{cancelable:false},{style:{height:50}})
-    }     
-    
-  
-  
-   }
 
 
 
 
 
-   const lastinformation=()=>{
-    if(information.length>0)
-    return information;
+  const lastinformation = () => {
+    if (information.length > 0)
+      return information;
     console.log('mikhad chap kone dige nist')
-    return( <Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>)
-   }
+    return (<Text style={{ color: 'gray', alignSelf: 'center', marginTop: hp('30%'), fontWeight: 'bold' }}>نقل قولی وجود ندارد</Text>)
+  }
   const [modalopen, setmodalopen] = useState(false)
   // const [selectedValue, setselectedValue] = useState('none')
   // const selectedValue='none'
+  const [photoo, setphotoo] = useState();
   const [selectedValue, setselectedValue] = useState('none')
-  const [gotogrouppage,setgotogrouppage]=useState(false);
+  const [gotogrouppage, setgotogrouppage] = useState(false);
   const [information, setinformation] = useState([]);
-  const [next,setnext]=useState(null)
+  const [next, setnext] = useState(null)
   const [search, setsearch] = useState([])
-  const [refresh,setrefresh]=useState(false);
-  const [pickerselected,setpickerselected]=useState(false);
-  const [opensearch,setopensearch]=useState(false);
+  const [refresh, setrefresh] = useState(false);
+  const [pickerselected, setpickerselected] = useState(false);
+  const [opensearch, setopensearch] = useState(false);
   const [likeotime, setlikeotime] = useState('time');
-  const [theend,settheend]=useState(false);
-  const[page,setpage]=useState(1);
-  const[numberofpage,setnumberofpage]=useState(0);
-  const [count,setcount]=useState(1);
-  const [pageone,setpageone]=useState(false);
-  const [searchterm,setsearchterm]=useState('');
+  const [theend, settheend] = useState(false);
+  const [page, setpage] = useState(1);
+  const [numberofpage, setnumberofpage] = useState(0);
+  const [count, setcount] = useState(1);
+  const [pageone, setpageone] = useState(false);
+  const [searchterm, setsearchterm] = useState('');
   // const idd=await(AsyncStorage.getItem('id');
-  const [numberofresults,setnumberofresults]=useState();
-  const searching=(term)=>setsearchterm(term);
-  const [moreclicked,setmoreclicked]=useState(false);
-  const [isowner,setisowner]=useState(false);
-  const checkisowner=async(ID)=>{
-    const id=await(AsyncStorage.getItem('id'))
-    if(id===ID){
+  const [numberofresults, setnumberofresults] = useState();
+  const searching = (term) => setsearchterm(term);
+  const [moreclicked, setmoreclicked] = useState(false);
+  const [isowner, setisowner] = useState(false);
+  const [selecttime, setselecttime] = useState("none")
+  const [backsearch,setbacksearch]=useState(false);
+
+
+  const checkisowner = async (ID) => {
+    const id = await (AsyncStorage.getItem('id'))
+    if (id === ID) {
       return true;
     }
     else
-    return false
+      return false
   }
-  const response=async (page)=>{
+  const response = async (page) => {
     // await setinformation([])
-   // setopensearch(false)
+    // setopensearch(false)
     setpickerselected(false)
-    await (console.log(await(AsyncStorage.getItem('token'))))
-   
+    await (console.log(await (AsyncStorage.getItem('token'))))
+
     await setpage(page)
-    console.log(page+'  شماره صفحه اول ریسپانس')
+    console.log(page + '  شماره صفحه اول ریسپانس')
 
     await settheend(false)
-    console.log(theend+'  THE END RESOPONSE AVAL')
-    if(page===1){
+    console.log(theend + '  THE END RESOPONSE AVAL')
+    if (page === 1) {
       await settheend(false)
-     await setinformation([])
+      await setinformation([])
 
     }
 
-    
+
     console.log('DOVOM')
-     console.log(page+'PAGE')
-     try{
-       console.log('  omad to response')
-       console.log('api/group'+likeotime)
-console.log(await AsyncStorage.getItem('token'));
-      const response = await axiosinst.get('/group',{
+    console.log(page + 'PAGE')
+    var a="";
+    if(selecttime==="none")
+    a="time";
+    else
+    a="member"
+    console.log(a+"aaaaaa")
+    try {
+      console.log('  omad to response')
+      console.log('api/group' + likeotime)
+      console.log(await AsyncStorage.getItem('token'));
+      const response = await axiosinst.get('/group', {
         params: {
-          filter:likeotime,
+          filter: a,
           page: page
         },
-      "headers":
-      {
-        "Content-Type": "application/json",
-        "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
-      }
-     
-   })
-   if(page<=count){
-   if(response.data.groups+'RESPONSE.DATA.GROUPS'==='RESPONSE.DATA.GROUPS'){
-  await settheend(true)
-  await setrefresh(false)
-   console.log('#########')
-   }
-   else{
-  // console.log(response.data+'RESPONSE.DATA')
-  console.log(JSON.stringify(response.data.groups)+'RESPONSE.DATA.GROUPS')
-   await setcount(response.data.count);
-   console.log(count+'  COUNT')
-   console.log(page+' PAGE BAD COUNT')
-   console.log((page===count)+' PAGE===COUNT')
+        "headers":
+        {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+        }
 
-    settheend(false)
-   console.log('omade inja')
-   console.log('----INFO----'+information+"----INFO----")
-    // await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
-  // setinformation(information.concat(response.data.groups))
-    //  setinformation(response.data.groups)
-    //let alaki=[...information]
-    //alaki+=response.data.results;
-    //await setinformation(alaki);
-    //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
-     setrefresh(false)
-     setinformation(information=>[...information,...response.data.groups])
-    // console.log(response.data.groups.id+'  INFORMATION.ID')
-    
-      console.log('++++INFO++++'+information+"++++INFO++++")
-     
-     }
+      })
+      if (page <= count) {
+        if (response.data.groups + 'RESPONSE.DATA.GROUPS' === 'RESPONSE.DATA.GROUPS') {
+          await settheend(true)
+          await setrefresh(false)
+          console.log('#########')
+        }
+        else {
+          // console.log(response.data+'RESPONSE.DATA')
+          console.log(JSON.stringify(response.data.groups) + 'RESPONSE.DATA.GROUPS')
+          await setcount(response.data.count);
+          console.log(count + '  COUNT')
+          console.log(page + ' PAGE BAD COUNT')
+          console.log((page === count) + ' PAGE===COUNT')
+
+          settheend(false)
+          console.log('omade inja')
+          console.log('----INFO----' + information + "----INFO----")
+          // await(page===1?setinformation(response.data.groups):setinformation(information.concat(response.data.groups)))
+          // setinformation(information.concat(response.data.groups))
+          //  setinformation(response.data.groups)
+          //let alaki=[...information]
+          //alaki+=response.data.results;
+          //await setinformation(alaki);
+
+          //await page===1?setinformation(response.data.groups):setinformation(information=>[...information,...response.data.results])
+          setrefresh(false)
+          setinformation(information => [...information, ...response.data.groups])
+          // console.log(response.data.groups.id+'  INFORMATION.ID')
+
+          console.log('++++INFO++++' + information + "++++INFO++++")
+
+        }
+      }
+      else {
+        settheend(true)
+      }
     }
-    else{
-      settheend(true)
-    }
-    }
-    
+
     //  }
-   catch(err){
-     setrefresh(false)
-     Alert.alert('','مشکلی پیش اومده لطفا دوباره امتحان کن',[{
-            
+    catch (err) {
+      setrefresh(false)
+      Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-      text:'فهمیدم',onPress:()=>console.log('alert closed'),style:'default'
-      }],{cancelable:false},{style:{height:50}})
-       
-     console.log(err.toString().split('\n')[0])
-    if(err.toString().split('\n')[0].toString()==='Error: Request failed with status code 404')
-    settheend(true);
-    console.log(theend+'THE END')
+
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
+
+      console.log(err.toString().split('\n')[0])
+      if (err.toString().split('\n')[0].toString() === 'Error: Request failed with status code 404')
+        settheend(true);
+      console.log(theend + 'THE END')
       console.log(err);
-    
-   
-  }
-  
-   }
-   const handleLoadMore = async() => {
-    console.log('END OF THE LIST')
-    console.log(next+'  NEXT NEXT NEXT NEXT')
-    if(searchterm===''){
-     if(page<count){
-       
-        await settheend(false)
-         response(page+1);
-      
-       
-     }
-     else
-     {
-       console.log(page+'handlemore page')
-       console.log(count +'handlemore count')
-       console.log('*********')
-       await settheend(true)
-      }
+
+
     }
-    else
-    {
-      if(next!=null){
+
+  }
+  const handleLoadMore = async () => {
+    console.log('END OF THE LIST')
+    console.log(next + '  NEXT NEXT NEXT NEXT')
+    if (searchterm === '') {
+      if (page < count) {
+
         await settheend(false)
-        searchpost(page+1);
+        response(page + 1);
+
+
       }
-      else
-      {
-        console.log(page+'handlemore page')
-        console.log(count +'handlemore count')
+      else {
+        console.log(page + 'handlemore page')
+        console.log(count + 'handlemore count')
         console.log('*********')
         await settheend(true)
       }
     }
-    };
-    const callbackFunction = async (childData) => {
-     
-       await setmoreclicked(childData)
-      
+    else {
+      if (next != null) {
+        await settheend(false)
+        searchpost(page + 1);
+      }
+      else {
+        console.log(page + 'handlemore page')
+        console.log(count + 'handlemore count')
+        console.log('*********')
+        await settheend(true)
+      }
     }
- 
-  useEffect(()=>{
-    // React.useCallback(() => { 
-      setsearchterm('')
-      setnumberofresults()
-        setinformation([])
-    // if(searchterm==='')  
-      response(1) 
-      // async function refreshing(){ 
-      // // setmoreclicked(false)
-      setselectedValue('none')
-      //   setsearchterm('')
-      //   setnumberofresults()
-      //    await setinformation([])
-      // // if(searchterm==='')  
-      //   response(1)
-      // }
-        // else
-        // searchpost(1)
-    // }
-    // ,[])
-  },[])
+  };
+  const callbackFunction = async (childData,id) => {
+    navigation.navigate('ShowGroupPage', { id: id })
+
+    await setmoreclicked(childData)
+
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const a = new Promise(async (resolve, reject) => {
+        await setopensearch(false);
+        await setinformation([]);
+        await setpage(1);
+        setsearchterm('');
+        setnumberofresults(undefined);
+        await settheend(false);
+        console.log("toye use focus effectt ")
+        if (selecttime === "none") {
+          setlikeotime("time")
+        }
+        else {
+          setlikeotime("member")
+        }
+        //await setselecttime(true)
+        //با این ظاهرا درست شد :/
+        //   await setselectedValue('like')
+        //   //تاثیری نداشتن :/
+        //   // await setlikelable('فیلتر بر اساس تعداد پسند ها ')
+        //   // await settimelable("فیلتر بر اساس تاریخ")
+        //   if(selectedValue==="none")
+        //  await setlikeotime("time");
+        //  else
+        //  await setlikeotime("like");
+        //  await setselectedValue('none')
+
+        resolve()
+      }).then(() => {
+        console.log('++++++++++' + information + '**********')
+        response(1);
+        console.log('++++++++++' + information + '**********')
+      })
+      // //   console.log('Listenn')
+      // alert('in')
+      //   return() => alert('lost')
+    }, [navigation, selecttime,backsearch]))
   return (
 
     <View style={styles.container}>
-     {opensearch?
-     <>
-      <AntDesign name="arrowleft" size={24} color="#1f7a8c"
-      style={{marginTop:hp('3%'),
-      position:'absolute',
-      marginRight:wp('5%'),
-      marginLeft:wp('87%')
-          }}
-          onPress={()=>{
-          setinformation([]);
-          setpage(1)
-          response(1);
-          setsearchterm('');
-          setnumberofresults();
-          setopensearch(false)}
-          }
-       />
-     <Searchbar
-      placeholder="Search"
-      onChangeText={searching}
-      underlineColorAndroid={'#F1F3F9'}
-      value={searchterm}
-      onEndEditing={()=>{setinformation([])
-        searchpost(1)}}
-      onIconPress={()=>{
-        setinformation([])
-        searchpost(1)}}
-      borderTopLeftRadius={hp('20%')}
-          borderTopRightRadius={20}
-          borderBottomRightRadius={20}
-          borderBottomLeftRadius={20}
-          placeholder={'نام گروه ...'}
-          style={{  borderTopLeftRadius:hp('5%'),
-          marginTop:hp('2%'),
-          
-          // alignSelf:'center',
-          marginLeft:wp('5%'),
-          borderTopRightRadius:hp('5%'),
-          borderBottomRightRadius:hp('5%'),
-          borderBottomLeftRadius:hp('5%'),
-          
-          backgroundColor:'#F1F3F9',height:hp('5%'),width:wp('80%'),marginBottom:hp('-0.5%')}}
-          searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%'),
-        
-          }} />}
-    /></>
-    :null}
+      {opensearch ?
+        <>
+          <AntDesign name="arrowleft" size={24} color="#1f7a8c"
+            style={{
+              marginTop: hp('3%'),
+              position: 'absolute',
+              marginRight: wp('5%'),
+              marginLeft: wp('87%')
+            }}
+            onPress={() => {
+              if(backsearch===true){
+              setbacksearch(false)
+              }
+              else{
+                setbacksearch(true)
+              }
+              // setinformation([]);
+              // setpage(1)
+              // response(1);
+              // setsearchterm('');
+              // setnumberofresults();
+              // setopensearch(false)
+            }
+            }
+          />
+          <Searchbar
+            placeholder="Search"
+            onChangeText={searching}
+            underlineColorAndroid={'#F1F3F9'}
+            value={searchterm}
+            onEndEditing={() => {
+              setinformation([])
+              searchpost(1)
+            }}
+            onIconPress={() => {
+              setinformation([])
+              searchpost(1)
+            }}
+            borderTopLeftRadius={hp('20%')}
+            borderTopRightRadius={20}
+            borderBottomRightRadius={20}
+            borderBottomLeftRadius={20}
+            placeholder={'نام گروه ...'}
+            style={{
+              borderTopLeftRadius: hp('5%'),
+              marginTop: hp('2%'),
+
+              // alignSelf:'center',
+              marginLeft: wp('5%'),
+              borderTopRightRadius: hp('5%'),
+              borderBottomRightRadius: hp('5%'),
+              borderBottomLeftRadius: hp('5%'),
+
+              backgroundColor: '#F1F3F9', height: hp('5%'), width: wp('80%'), marginBottom: hp('-0.5%')
+            }}
+            searchIcon={<Feather name="search" size={24} color="#1f7a8c" style={{
+              left: wp('2.5%'), marginRight: wp('1%'),
+
+            }} />}
+          /></>
+        : null}
       {/* <SearchBar
           style={{backgroundColor:'#F1F3F9',height:hp('4.5%'),width:wp('50%')}}
           searchIcon={ <Feather name="search" size={24} color="#1f7a8c" style={{left:wp('2.5%'),marginRight:wp('1%')}} />}
@@ -365,7 +410,7 @@ console.log(await AsyncStorage.getItem('token'));
 
 
       <View style={{ marginLeft: wp('2%') }}>
-      {/* <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
+        {/* <Button style={{justifyContent:'center',height:hp('7%'),width:wp('14%'),borderRadius:1000,
         backgroundColor:'#1f7a8c',elevation:5,marginTop:hp('77%'),marginLeft:wp('78%')}} onPress={()=>{
           console.log('PLUS PRESSED')
           setmodalopen(true)}} >
@@ -373,27 +418,29 @@ console.log(await AsyncStorage.getItem('token'));
          name="plus" size={32} color="#EDF2F4" />
      
          </Button> */}
-      {!opensearch?<Button style={{position:'absolute',backgroundColor:'lightgray',height:hp('5.5%'),width:wp('11.3%'),borderRadius:1000,
-        backgroundColor:'#1f7a8c',left:wp('4%'),marginLeft:wp('78%'),marginTop:hp('2%'),elevation:20,justifyContent:'center'}}
-        onPress={()=>setopensearch(true)}
+        {!opensearch ? <Button style={{
+          position: 'absolute', backgroundColor: 'lightgray', height: hp('5.5%'), width: wp('11.3%'), borderRadius: 1000,
+          backgroundColor: '#1f7a8c', left: wp('4%'), marginLeft: wp('78%'), marginTop: hp('2%'), elevation: 20, justifyContent: 'center'
+        }}
+          onPress={() => setopensearch(true)}
         >
-      <Feather name="search" size={24} color="#F1F3F9" style={{
-         position:'absolute',
-         marginTop:hp('3.5%'),alignSelf:'center'
-      }} />
-      </Button>:null}
-      {!opensearch? <DropDownPicker
+          <Feather name="search" size={24} color="#F1F3F9" style={{
+            position: 'absolute',
+            marginTop: hp('3.5%'), alignSelf: 'center'
+          }} />
+        </Button> : null}
+        {!opensearch ? <DropDownPicker
           items={[
-            { label: 'جدید ترین گروه ها',value:'none'},
+            { label: 'جدید ترین گروه ها', value: 'none' },
             { label: 'معروف ترین گروه ها', value: 'like' },
           ]}
           defaultValue={selectedValue}
-          labelStyle={{fontSize:wp('3%')}}
+          labelStyle={{ fontSize: wp('3%') }}
           containerStyle={{ height: hp('8%'), width: wp('35%'), marginBottom: hp('-0.3%') }}
           style={{
 
             borderColor: '#1f7a8c', backgroundColor: '#fafafa', marginTop: hp('2%'), width: wp('50%'),
-             marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
+            marginBottom: hp('-5%'), position: 'absolute', borderTopLeftRadius: 30, borderTopRightRadius: 30,
             borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginLeft: wp('3%')
           }}
           itemStyle={{
@@ -403,7 +450,7 @@ console.log(await AsyncStorage.getItem('token'));
           dropDownStyle={{
             backgroundColor: '#fafafa',
             borderBottomLeftRadius: 30, borderBottomRightRadius: 30, marginTop: hp('2%'), marginLeft: wp('3%'),
-             width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
+            width: wp('50%'), position: 'absolute', marginBottom: hp('10%')
           }}
           onChangeItem={async (item) => {
             setsearchterm('');
@@ -412,8 +459,8 @@ console.log(await AsyncStorage.getItem('token'));
               console.log(item.value + 'VALUE')
               console.log('to none')
               // await setlikeotime('')
-              console.log(likeotime+'BEIN TIME')
-               await setlikeotime('time')
+              console.log(likeotime + 'BEIN TIME')
+              await setlikeotime('time')
               // // setrefresh(true)
               // await setsearchterm('')
               // setnumberofresults()
@@ -422,16 +469,18 @@ console.log(await AsyncStorage.getItem('token'));
               //  await setinformation()
               //  settheend(true)
               //  response(1)
+              await setselecttime("none")
               console.log('set shod be time')
-              console.log(likeotime+'likeotime')
+              console.log(likeotime + 'likeotime')
               // response(1)
             }
             else if (item.value === 'like') {
               console.log('tolike')
               console.log(item.value + 'VALUE')
               // await setlikeotime('')
-              console.log(likeotime+'BEIN LIKE')
-               await setlikeotime('member')
+              console.log(likeotime + 'BEIN LIKE')
+              await setlikeotime('member')
+              await setselecttime("member");
               //  setrefresh(true)
               // setpickerselected(true)
               // await setsearchterm('')
@@ -441,7 +490,7 @@ console.log(await AsyncStorage.getItem('token'));
               // await setpage(1)
               // response(1)
               console.log('set shod be like')
-              console.log(likeotime+'likeotime')
+              console.log(likeotime + 'likeotime')
               // response(1)
 
             }
@@ -450,72 +499,75 @@ console.log(await AsyncStorage.getItem('token'));
 
           }}
 
-        />:null}
+        /> : null}
         {/* <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup>
         <Eachgroup></Eachgroup> */}
 
-        <View style={{height:hp('2%')}}></View>
-       
-        {numberofresults!=undefined?<Text style={{marginLeft:hp('2%'),color:'gray',fontSize:hp('1.4%'),marginBottom:hp('0.5%')}}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text>:null}
-         <FlatList
-            ListFooterComponent={(theend === false ? 
+        <View style={{ height: hp('2%') }}></View>
+
+        {numberofresults != undefined? <Text style={{ marginLeft: hp('2%'), color: 'gray', fontSize: hp('1.4%'), marginBottom: hp('0.5%') }}> با اطلاعات شما {numberofresults} گروه پیدا شد.</Text> : null}
+        <FlatList
+          ListFooterComponent={(theend === false ?
             <View style={styles.loader}>
-            <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
-            </View> : 
+              <ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator>
+            </View> :
             <View style={styles.loader}>
-            <Text style={{ color: 'gray', alignSelf: 'center',marginBottom:hp('7%')}}>گروه دیگری وجود ندارد</Text>
+              <Text style={{ color: 'gray', alignSelf: 'center', marginBottom: hp('7%') }}>گروه دیگری وجود ندارد</Text>
             </View>)}
-            style={{ marginBottom: hp('5%') }}
-            showsVerticalScrollIndicator={false}
-            onEndReached={() => {
-              // if(page<count)
-              // if(pageone===false)
-              // setpageone(true)
-              // else{
-                handleLoadMore()
-              // }
-              console.log('-----AKHAR LIST')
-            }}
-            onEndReachedThreshold={0.5}
-            keyExtractor={(item) => item.id}
-            refreshing={refresh}
-            onRefresh={async () => {
-              // await setsearchterm('')
-              if(searchterm===''){
-               await(setnumberofresults())
-              await setrefresh(true)         
+          style={{ marginBottom: hp('5%') }}
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => {
+            // if(page<count)
+            // if(pageone===false)
+            // setpageone(true)
+            // else{
+            handleLoadMore()
+            // }
+            console.log('-----AKHAR LIST')
+          }}
+          onEndReachedThreshold={0.5}
+          keyExtractor={(item) => item.id}
+          refreshing={refresh}
+          onRefresh={async () => {
+            // await setsearchterm('')
+            if (searchterm === '') {
+              await setopensearch(false);
+              await (setnumberofresults(undefined))
+              await setrefresh(true)
               // await setinformation([]);
               // await setpage(1);
               response(1)
-              }
-              else{
-                await setrefresh(true)   
+            }
+            else {
+              await setrefresh(true)
               searchpost(1)
-              }
-            }}
+            }
+          }}
 
-            data={information}
-            renderItem={({ item }) =><>
-         
-         <TouchableOpacity 
-           //activeOpacity={1}
-            style={{backgroundColor:'white',marginBottom:0}}
-            onPress={async()=>{
-              
-              console.log(moreclicked+' MORECLICKED in grouppppppp')
-               
-               if(moreclicked===false){
-             //if(gotogrouppage===true){
-              console.log(item.id+'####')
-              //setgotogrouppage(false)
-               //setmoreclicked(true);
-               console.log(moreclicked+' MORECLICKED in grp')
-              navigation.navigate('ShowGroupPage',{id:item.id})}}}>
-            <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
-             discription={item.summary} title={item.title} >
-              {/* <Text style={{position:'absolute'}}>kjhlkjhlkjhkjhlkjh</Text>
+          data={information}
+          renderItem={({ item }) => <>
+
+            <TouchableOpacity
+              //activeOpacity={1}
+              style={{ backgroundColor: 'white', marginBottom: 0 }}
+              onPress={async () => {
+
+                console.log(moreclicked + ' MORECLICKED in grouppppppp')
+
+                // if (moreclicked === false) {
+                //   //if(gotogrouppage===true){
+                //   console.log(item.id + '####')
+                  //setgotogrouppage(false)
+                  //setmoreclicked(true);
+                  console.log(moreclicked + ' MORECLICKED in grp')
+                  navigation.navigate('ShowGroupPage', { id: item.id })
+              //  }
+              }}>
+              <Eachgroup groupphoto={item.group_photo} id={item.id} gotogp={setgotogrouppage} moreclickedD={moreclicked} moreclickedd={callbackFunction} isowner={item.is_owner} membernumber={item.members_count}
+                discription={item.summary} title={item.title} >
+                {/* <Text style={{position:'absolute'}}>kjhlkjhlkjhkjhlkjh</Text>
               <TouchableOpacity 
            //activeOpacity={1}
             style={{backgroundColor:'lightblue',marginBottom:0,height:100}}
@@ -533,17 +585,17 @@ console.log(await AsyncStorage.getItem('token'));
                 <Text>kjhlkjhlkjhkjhlkjh</Text>
                  </TouchableOpacity>
               <Text>kjhlkjhlkjhkjhlkjh</Text> */}
-             
-             </Eachgroup>
-             </TouchableOpacity>
-         
-          
-           
-            </>
-            }
-          // extraData={finfo}
-          >
-          </FlatList> 
+
+              </Eachgroup>
+            </TouchableOpacity>
+
+
+
+          </>
+          }
+        // extraData={finfo}
+        >
+        </FlatList>
 
       </View>
       {/* <Text>
@@ -558,7 +610,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     //   alignItems: 'center',
-  
+
     //   justifyContent: 'center',
   },
   plus: {
@@ -566,14 +618,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center'
 
-  }, 
-  loader:{
+  },
+  loader: {
 
-    alignItems:'center',
-    marginBottom:hp('15%'),
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop:hp('10%')
+    alignItems: 'center',
+    marginBottom: hp('15%'),
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: hp('10%')
   }
 });
 export default Groups;

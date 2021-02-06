@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView, ImageEd
 import {Container,Header,Title,Button,Form,Item,Input, Icon,Card} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Avatar } from 'react-native-paper';
+import { ActivityIndicator, Avatar } from 'react-native-paper';
 // import Login from './Login';
 // import { Context as AuthContext } from '../context/AuthContext'; 
 // import { Button } from 'native-base';
@@ -40,7 +40,7 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         console.log(id)
         try{
-        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
+        const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/"+id)
 
             
         
@@ -52,8 +52,8 @@ import { Entypo } from '@expo/vector-icons';
        console.log('*****')
        console.log(response.data.profile_photo)
 
-            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
 
 
             console.log(';;;;;')
@@ -69,11 +69,11 @@ import { Entypo } from '@expo/vector-icons';
     catch(err){
         // console.log(response)
         // console.log(err);
-        Alert.alert('oops',' حتما اشتباهی شده دوباره امتحان کن :)',[{
-            
+        Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
 
-                Title:'فهمیدم',onPress:()=>console.log('alert closed')
-                }])
+
+            text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+          }], { cancelable: false }, { style: { height: 50 } })
     }
     }
 
@@ -87,14 +87,14 @@ import { Entypo } from '@expo/vector-icons';
         const id=await AsyncStorage.getItem('id');
         // console.log(id)
         try{
-        const response = await axiosinst.get("http://33613d59f2de.ngrok.io/user/"+id)
+        const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/"+id)
 v
             
         
       //  console.log(response)
       console.log('*****')
-            console.log(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
-            setpicture(`http://33613d59f2de.ngrok.io${response.data.profile_photo}`)
+            console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+            setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
 
             console.log(picture);
           
@@ -104,11 +104,11 @@ v
     }
     catch(err){
          console.log(err);
-        Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن',[{
-            
-    
-                Title:'فهمیدم',onPress:()=>console.log('alert closed')
-                }])
+         Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+
+
+            text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+          }], { cancelable: false }, { style: { height: 50 } })
     }
     }
  
@@ -139,13 +139,13 @@ v
      
 
       
-   
+   if(picture!=undefined){
     return(
       
-        <View style={styles.container}>
+      <View style={styles.container}>
           <ScrollView>
         {/* <Header style={{marginTop:35,backgroundColor:'white',position:'absolute'}}></Header> */}
-        <Text style={styles.kima}>کیما</Text>
+        {/* <Text style={styles.kima}>کیما</Text> */}
         <Image
 
          source={require('../../assets/backprof4.jpeg')}
@@ -168,7 +168,7 @@ v
         
 
 
-        {picture!='http://33613d59f2de.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
+        {picture!='http://e7ae29f4056b.ngrok.io/media/default.png'?<Avatar.Image style={styles.avatar} size={105}
 
         source={{uri:picture}}
         ></Avatar.Image>: <Avatar.Image style={styles.avatar} size={105}
@@ -224,7 +224,22 @@ v
                  <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
              </Button>
          </TouchableOpacity>
+         <Image
+         source={require('../../assets/line3.png')}
+         style={{height:hp('0.1%'),marginRight:wp('10%'),width:wp('94%')}}
+         ></Image>
+         <TouchableOpacity
+         onPress={()=>navigation.navigate('mybooks')}
+         >
+             <Button style={styles.lastquote}>
+                 <Text style={styles.lastquotetext}>
+                     کتاب های من
+                 </Text>
+                 <Entypo name="chevron-small-left" style={styles.quotecomment} size={25} color="gray" />
+             </Button>
+         </TouchableOpacity>
          </Card>
+        
          {/* <Image
          source={require('../../assets/Line.png')}
          style={{marginTop:hp('5%'),width:80,height:2,alignSelf:'flex-end'}}
@@ -243,14 +258,20 @@ v
             onPress={()=>{
                 // console.log(navigation);
                 // navigation.navigate('loginFlow')}}
-                AsyncStorage.removeItem('token')
+                Alert.alert('','آیا قصد خروج از حساب کاربری را دارید؟',[{
+            
+
+            text:'بله',onPress:async()=>{ await AsyncStorage.removeItem('token')
                 // AsyncStorage.setItem('token',null)
-                val.changelogged(null);
+                 await val.changelogged(null);},style:'default'
+            },{text:"خیر" , onPress:()=>console.log("cancle")    ,   style: 'cancel'  } ],{cancelable:true},{style:{height:50}})
+            
+               
 
             }}
       >
 
-          <Text style={{alignSelf:'center',color:'#1f7a8c',fontWeight:'bold'}}>خروج از حسب کاربری</Text>
+          <Text style={{alignSelf:'center',color:'#1f7a8c',fontWeight:'bold'}}>خروج از حساب کاربری</Text>
       </TouchableOpacity> 
       {/* </View> */}
     
@@ -262,6 +283,16 @@ v
         // {/* <Text>HI</Text>
         // </ScrollView> */}
     );
+   }
+   else{
+       return(
+        <View style={styles.container}>
+        <ActivityIndicator color={"gray"} size={"small"} style={{marginTop:hp("40%")}} ></ActivityIndicator>
+        <StatusBar backgroundColor='#BFDBF7' style='light' />
+        </View>
+
+       )
+   }
 }
 
 const styles = StyleSheet.create({

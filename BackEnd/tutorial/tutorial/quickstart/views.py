@@ -827,7 +827,7 @@ class MyQuizView(APIView):
         myquiz = QuizSerializer(Quiz.objects.filter(creator=user),many=True).data
         taken_quiz = MyQuizSerializer(TakeQuiz.objects.filter(user=user),many=True).data
         myquiz=myquiz + taken_quiz
-        if myquiz is None:
+        if len(myquiz) == 0 :
             return Response({"message":"No Quiz!"})
         return Response({"Quiz":myquiz}) 
 

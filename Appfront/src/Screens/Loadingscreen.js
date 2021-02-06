@@ -47,7 +47,7 @@ const Loadingscreen=(prop)=>{
     //        await prop.waitt(false);
     //     //  return(<View><Text>akd;skjf;lsjf</Text></View>)
     //     }).catch(()=>{console.log('Im in loading catch')}))
-    return(<View><Text>akd;skjf;lsjf</Text></View>)
+    return(null)
   
 }
 export default Loadingscreen;
