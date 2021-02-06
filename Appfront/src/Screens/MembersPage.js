@@ -32,9 +32,9 @@ const MembersPage = (prop) => {
 
   return (
 
-    <View>
-      <Header style={{ backgroundColor: '#EDF2F4', height: hp('13%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
-      <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>اعضای گروه</Title>
+    <View style={{flex:1}}>
+      {/* <Header style={{ backgroundColor: '#EDF2F4', height: hp('13%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
+      <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>اعضای گروه</Title> */}
       <FlatList
         style={{ marginBottom: hp('5%') }}
         showsVerticalScrollIndicator={false}
@@ -51,11 +51,12 @@ const MembersPage = (prop) => {
         renderItem={({ item }) => <>
           <View style={{ maginLeft: wp('5%'), marginTop: hp('2%') }}>
             {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
-              source={{ uri: "http://a59dcb2a4875.ngrok.io" + item.user.profile_photo }}
-            ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={90}
+            style={styles.avatar} size={75}
+              source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
+            ></Avatar.Image> : <Avatar.Image style={styles.avatar} size={75}
               source={require('../../assets/group.jpg')}
             ></Avatar.Image>}
-            <Text style={{ alignSelf: 'flex-start', marginLeft: wp('10%'), marginTop: hp('1%') }}>{item.user.username}</Text>
+            <Text style={{ alignSelf: 'flex-start', marginLeft: wp('30%'), top: hp('-6%') }}>{item.user.username}</Text>
             <View
               style={{
                 width: 320,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   avatar: {
-    marginLeft:wp('2%')
+    marginLeft:wp('5%')
   }
 });
 

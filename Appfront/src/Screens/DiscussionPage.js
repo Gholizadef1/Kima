@@ -243,7 +243,7 @@ const DiscussionPage = (prop) => {
                                         <View style={{ borderColor: 'blue' }}>
                                         </View>
                                         <View>
-                                            <Text style={{ fontSize: hp('2.5%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-5%'), marginTop: hp('5%'), marginLeft: wp('1%') }}>متن خود را وارد کنید</Text>
+                                            <Text style={{ fontSize: hp('2%'), fontWeight: 'bold', color: '#1f7a8c', marginBottom: hp('-2%'), marginTop: hp('4%'), marginLeft: wp('1%') }}>متن خود را وارد کنید</Text>
                                             <TouchableOpacity>
                                                 <Textarea rowSpan={hp('1%')} bordered borderRadius={8}
                                                     borderColor={'lightgray'}
@@ -271,8 +271,9 @@ const DiscussionPage = (prop) => {
             <ScrollView>
                 <Header style={{ backgroundColor: '#EDF2F4', height: hp('13%'), width: wp('100%'), borderEndColor: '#EDF2F4' }} />
                 <Title style={{ fontSize: 22, fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('-7%'), marginLeft: 10, marginBottom: hp('3%') }}>{prop.route.params.title}</Title>
+              
                 <FlatList
-                    style={{ marginBottom: hp('5%') }}
+                    style={{ marginBottom: hp('9%') }}
                     removeClippedSubviews={true}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.id}
@@ -282,7 +283,7 @@ const DiscussionPage = (prop) => {
                     onEndReachedThreshold={0.7}
                     ListFooterComponent={(theend === false ? <View style={styles.loader}><ActivityIndicator animating color={'gray'} size={"large"}></ActivityIndicator></View> :
                         <View style={styles.loader}><Text style={{ color: 'gray', alignSelf: 'center' }}>پیام دیگری وجود ندارد</Text></View>)}
-                    style={{ marginBottom: hp('15.5%') }}
+                    style={{ marginBottom: hp('15.5%'),marginTop:hp("0%") }}
                     onRefresh={async () => {
                         await setrefresh(true)
 
@@ -290,16 +291,18 @@ const DiscussionPage = (prop) => {
 
                     }}
                     renderItem={({ item }) => <>
+                    
                         {username === item.user.username ?
-                            <View style={{}}>
+                            <View style={{ marginTop:hp("4%"),marginBottom:hp("0%")}}>
                                 {/* <Text style={{marginTop:hp("40%"),fontSize:20}}>a;dfj;alkdfj;lsakdfj</Text> */}
                                 {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
-                                    source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
+                                size={55} style={styles.avatar}
+                                    source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
                                 ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar}
                                     source={require('../../assets/group.jpg')}
                                 ></Avatar.Image>}
                                 <Card style={styles.cardChat}>
-                                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                    <Text style={{ alignSelf: 'flex-end', fontSize: 14, marginRight: wp('1%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
                                     <Text style={{ marginLeft: wp('4%'), marginTop: hp('0.5%'), marginBottom: hp('6%'), color: 'black' }}>{item.chat_text}</Text>
                                     <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%', marginBottom: hp('1%') }}>{item.send_time.toString().split('T')[0]}</Text>
                                     <TouchableOpacity onPress={async () => {
@@ -345,14 +348,15 @@ const DiscussionPage = (prop) => {
                                     </TouchableOpacity>
                                 </Card>
                             </View>
-                            : <View style={{}}>
+                            : <View style={{ marginTop:hp("0%"),marginBottom:hp("0%")}}>
                                 {item.user.profile_photo != '/media/default.png' ? <Avatar.Image
-                                    source={{ uri: "http://c4e2a698ddac.ngrok.io" + item.user.profile_photo }}
+                                 size={55} style={styles.avatar2}
+                                    source={{ uri: "http://e7ae29f4056b.ngrok.io" + item.user.profile_photo }}
                                 ></Avatar.Image> : <Avatar.Image size={55} style={styles.avatar2}
                                     source={require('../../assets/group.jpg')}
                                 ></Avatar.Image>}
                                 <Card style={styles.cardChat2}>
-                                    <Text style={{ alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('38%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
+                                    <Text style={{ alignSelf: 'flex-end', fontSize: 14, marginRight: wp('1%'), marginTop: hp('0.5%'), color: '#a9a9a9' }}>{item.user.username}</Text>
                                     <Text style={{ color: 'black', marginLeft: wp('5%'), marginRight: wp('3%'), marginTop: hp('0.5%'), marginBottom: hp('6%') }}>{item.chat_text}</Text>
                                     <Text style={{ fontSize: 12, color: '#a9a9a9', marginRight: '3%' }}>{item.send_time.toString().split('T')[0]}</Text>
                                 </Card>

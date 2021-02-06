@@ -20,6 +20,7 @@ console.log(JSON.stringify(prop.isowner)+"k   IS OWNERRRRRRRRRRRRRRRRRRRRRRRRRRR
   const [more, setmore] = useState(false);
   const [kamshodde, setkamshodde] = useState();
   const [kamshodde2, setkamshodde2] = useState();
+  const [idb,setidb]=useState();
   console.log(prop.groupphoto);
   console.log(prop.isownerid+";kasfj;lsf;lkjsf;lakj;slk;lskfj;lkj")
   const [showmore, setshowmore] = useState('بیشتر...');
@@ -47,6 +48,7 @@ console.log(JSON.stringify(prop.isowner)+"k   IS OWNERRRRRRRRRRRRRRRRRRRRRRRRRRR
  
 console.log(photoo+" photo")
   useEffect(()=>{
+    setidb(AsyncStorage.getItem('id').toString())
     var kamshode = "";
     var a = prop.title.toString();
     var b = a.lenght;
@@ -126,7 +128,7 @@ console.log(photoo+" photo")
 
      <Text style={styles.username}>{kamshodde}</Text>
      {/* prop.isownerid===new Promise(async(resolve,reject)=>{return(await AsyncStorage.getItem("id"))}) */}
-     {prop.isowner?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
+     {prop.isowner||(prop.IDD===prop.IDDD &&prop.IDDD!=undefined)?<Text style={styles.yourgroup}>#گروه شما</Text>:null}
      <Text style={styles.date}>{prop.membernumber}<Text style={{color:'gray'}}> عضو</Text></Text>
     
      {photoo==='http://e7ae29f4056b.ngrok.io/media/default.png'?

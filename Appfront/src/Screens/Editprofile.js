@@ -1,20 +1,20 @@
-import React,{useContext,useState,useRef, useEffect} from 'react';
-import { StyleSheet, Text, View,Image,ImageBackground,Alert ,ScrollView} from 'react-native';
-import {Container,Header,Title,Form,Item,Input,Button, Icon,CheckBox,Body, ActionSheet} from 'native-base';
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, ImageBackground, Alert, ScrollView } from 'react-native';
+import { Container, Header, Title, Form, Item, Input, Button, Icon, CheckBox, Body, ActionSheet } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Avatar } from 'react-native-paper';
 // import { State } from 'react-native-gesture-handler';
 import App from '../../App';
-import AuthContext,{AuthProvider} from '../context/Authcontext';
+import AuthContext, { AuthProvider } from '../context/Authcontext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AntDesign } from '@expo/vector-icons'; 
-import { Entypo } from '@expo/vector-icons'; 
-import { Feather } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-import {Formik,formik} from 'formik';
+import { Formik, formik } from 'formik';
 import * as yup from 'yup';
 import axiosinst from '../api/axiosinst';
 import * as permissions from 'expo-permissions';
@@ -23,7 +23,7 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 import { useFocusEffect } from '@react-navigation/native';
 import { EvilIcons } from '@expo/vector-icons';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
@@ -31,152 +31,157 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 
 
-const userschema=yup.object({
+const userschema = yup.object({
 
-    Username:yup.string()
+  Username: yup.string()
     .required("لطفا نام کاربری جدید خود را وارد کنید")
     .min(4, "نام کاربری نمیتواند کم تر از 4 حرف باشد"),
-  
-  })
-  const passschema=yup.object({
-    Password:yup.string()
+
+})
+const passschema = yup.object({
+  Password: yup.string()
     .required("رمز عبور نمیتواند خالی باشد.")
-    .min(5,"لطفا رمزی به طول حداقل 5 کاراکتر وارد کنید"),
-    newPassword:yup.string()
+    .min(5, "لطفا رمزی به طول حداقل 5 کاراکتر وارد کنید"),
+  newPassword: yup.string()
     .required("رمز جدید شما نمیتواند خالی باشد.")
-    .min(5,"اندازه رمز شما باید حداقل 5 کرارکتر باشد"),
-    repeatnewPassword:yup.string()
+    .min(5, "اندازه رمز شما باید حداقل 5 کرارکتر باشد"),
+  repeatnewPassword: yup.string()
     .required("لطفا رمز جدید خود را تکرار کنید")
-    .min(5,"طول رمز شما حداقل 5 کلمه است")
-    .oneOf([yup.ref('newPassword'),''],'رمز ها باید یکی باشند')
-  
-  })
-  // const loggg=async()=>{
-  //   console.log(await AsyncStorage.getItem('token'));
-  // }
+    .min(5, "طول رمز شما حداقل 5 کلمه است")
+    .oneOf([yup.ref('newPassword'), ''], 'رمز ها باید یکی باشند')
+
+})
+// const loggg=async()=>{
+//   console.log(await AsyncStorage.getItem('token'));
+// }
 const EditProfile = () => {
-  const [picture,setpicture]=useState(null);
-  const photoresponse=async ()=>{
-    console.log('**'+'\n'+'PHOTRESPONSE'+'\n'+'**')
-    const id=await AsyncStorage.getItem('id');
+  const [picture, setpicture] = useState(null);
+  const photoresponse = async () => {
+    console.log('**' + '\n' + 'PHOTRESPONSE' + '\n' + '**')
+    const id = await AsyncStorage.getItem('id');
     // console.log(id)
-    try{
+    try {
 
-    const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/"+id)
-
-
-        
-    
-  //  console.log(response)
-  console.log('*****')
+      const response = await axiosinst.get("http://e7ae29f4056b.ngrok.io/user/" + id)
 
 
-        console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
-        setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
-        console.log(picture)
-      
-   console.log(response.data.profile_photo)
-   console.log(!(picture==="http://e7ae29f4056b.ngrok.io/media/default.jpg"))
 
 
-   console.log(picture===null)
-  //  setimage(require(response.data.profile_photo))
-  setname(response.data.username);
+      //  console.log(response)
+      console.log('*****')
 
-}
-catch(err){
-     console.log(err);
-    Alert.alert('oops',' مشکلی پیش اومده دوباره امتحان کن :)',[{
-        
 
-            Title:'فهمیدم',onPress:()=>console.log('alert closed')
-            }])
-}
-}
-useFocusEffect(
-  React.useCallback((picture) => {
+      console.log(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+      setpicture(`http://e7ae29f4056b.ngrok.io${response.data.profile_photo}`)
+      console.log(picture)
+
+      console.log(response.data.profile_photo)
+      console.log(!(picture === "http://e7ae29f4056b.ngrok.io/media/default.jpg"))
+
+
+      console.log(picture === null)
+      //  setimage(require(response.data.profile_photo))
+      setname(response.data.username);
+
+    }
+    catch (err) {
+      console.log(err);
+      Alert.alert('', ' مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
+
+
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
+    }
+  }
+  useFocusEffect(
+    React.useCallback((picture) => {
       photoresponse();
       //   console.log('Listenn')
       // alert('in')
       //   return() => alert('lost')
-  },[])
- 
+    }, [])
+
   )
-// useEffect(()=>{photoresponse(),[]})
-  const pickfromgallery = async ()=>{
+  // useEffect(()=>{photoresponse(),[]})
+  const pickfromgallery = async () => {
     await console.log(await AsyncStorage.getItem('token'));
     console.log('gallery')
-      const {granted}=await permissions.askAsync(permissions.CAMERA_ROLL)
-      if(granted){
-          console.log(granted)
-          let data=await ImagePicker.launchImageLibraryAsync({
-            mediaTypes:ImagePicker.MediaTypeOptions.Images,
-            allowsEditing:true,
-            aspect:[1,1],
-            quality:1
-          })
-          console.log(data);
-          console.log(data.uri)
-          const formdata = new FormData();
-          const newfile={uri:data.uri,
-            type:`test/${data.uri.split(".")[3]}`,
-            name:`test.${data.uri.split(".")[3]}`}
-          console.log(newfile)
+    const { granted } = await permissions.askAsync(permissions.CAMERA_ROLL)
+    if (granted) {
+      console.log(granted)
+      let data = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1
+      })
+      console.log(data);
+      console.log(data.uri)
+      const formdata = new FormData();
+      const newfile = {
+        uri: data.uri,
+        type: `test/${data.uri.split(".")[3]}`,
+        name: `test.${data.uri.split(".")[3]}`
+      }
+      console.log(newfile)
 
-          formdata.append('profile_photo',newfile)
-          
-          if(data.cancelled===false){
-          const back={        
-            profile_photo:data
+      formdata.append('profile_photo', newfile)
+
+      if (data.cancelled === false) {
+        const back = {
+          profile_photo: data
+        }
+        const backk = JSON.stringify(back);
+        const id = await AsyncStorage.getItem('id');
+
+        const response = await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/' + id + '/update-profile', formdata, {
+
+
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
           }
-           const backk=JSON.stringify(back);
-           const id=await AsyncStorage.getItem('id');
-
-          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
-
-
-            headers:{
-              "Content-Type":"application/json",
-              "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-            }
-               )
-          .then( function(response){
+        }
+        )
+          .then(function (response) {
             console.log(response)
             console.log('1')
             console.log(response.data.profile_photo);
             console.log('1')
             console.log('*************')
             console.log('\n')
-            const a=response.data.profile_photo
+            const a = response.data.profile_photo
             console.log(picture)
             setpicture(a);
 
-           
+
             console.log(picture);
-            console.log('\n'+'this')
+            console.log('\n' + 'this')
             console.log(response.data.profile_photo)
             console.log('***********')
 
-          
-            
+
+
           })
-          .catch( function(error){
+          .catch(function (error) {
             console.log(error)
           })
-          // photoresponse();
-          // setimage(data.uri);
-         
-     
-          }
-           //bs.current.snapTo(0);
+        // photoresponse();
+        // setimage(data.uri);
+
+
       }
-      else
-      {
-        Alert.alert('oops',' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید',[{
-          Title:'فهمیدم',onPress:()=>console.log('alert closed')
-          }])
-      }
-  
+      //bs.current.snapTo(0);
+    }
+    else {
+      Alert.alert('', ' برای انتخاب از گالری باید اجازه دسترسی به گالریتون رو به ما بدید', [{
+
+
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
+
+    }
+
   }
   // await console.log(await AsyncStorage.getItem('token'));
   // console.log('cameraaa')
@@ -195,97 +200,101 @@ useFocusEffect(
   //   // aspect:[1,1],
   //   quality:1
   // })
-  const pickfromcamera = async ()=>{
+  const pickfromcamera = async () => {
     await console.log(await AsyncStorage.getItem('token'));
     console.log('cameraaa')
-    const {granted}=await permissions.askAsync(permissions.CAMERA)
-      if(granted){
-          console.log(granted)
-          let data=await ImagePicker.launchCameraAsync({
-            mediaTypes:ImagePicker.MediaTypeOptions.Images,
-            allowsEditing:true,
-            // aspect:[1,1],
-            quality:1
-          })
-          console.log(data);
-          console.log(data.uri)
-          const formdata = new FormData();
-          const newfile={uri:data.uri,
-            type:`test/${data.uri.split(".")[3]}`,
-            name:`test.${data.uri.split(".")[3]}`}
-          console.log(newfile)
+    const { granted } = await permissions.askAsync(permissions.CAMERA)
+    if (granted) {
+      console.log(granted)
+      let data = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        // aspect:[1,1],
+        quality: 1
+      })
+      console.log(data);
+      console.log(data.uri)
+      const formdata = new FormData();
+      const newfile = {
+        uri: data.uri,
+        type: `test/${data.uri.split(".")[3]}`,
+        name: `test.${data.uri.split(".")[3]}`
+      }
+      console.log(newfile)
 
-          formdata.append('profile_photo',newfile)
-          
-          if(data.cancelled===false){
-          const back={        
-            profile_photo:data
+      formdata.append('profile_photo', newfile)
+
+      if (data.cancelled === false) {
+        const back = {
+          profile_photo: data
+        }
+        const backk = JSON.stringify(back);
+        const id = await (await AsyncStorage.getItem('id')).toString();
+
+        const response = await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/' + id + '/update-profile', formdata, {
+
+
+
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
           }
-           const backk=JSON.stringify(back);
-           const id=await (await AsyncStorage.getItem('id')).toString();
-
-          const response=await axiosinst.put('http://e7ae29f4056b.ngrok.io/user/'+id+'/update-profile',formdata,{
-
-
-
-            headers:{
-              "Content-Type":"application/json",
-              "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-            }
-               )
-          .then( function(response){
+        }
+        )
+          .then(function (response) {
             console.log(response)
             console.log('1')
             console.log(response.data.profile_photo);
             console.log('1')
             console.log('*************')
             console.log('\n')
-            const a=response.data.profile_photo
+            const a = response.data.profile_photo
             console.log(picture)
             setpicture(a);
             console.log(picture)
-           
+
             console.log(picture);
-            console.log('\n'+'this')
+            console.log('\n' + 'this')
             console.log(response.data.profile_photo)
             console.log('***********')
 
-          
-            
+
+
           })
-          .catch( function(error){
+          .catch(function (error) {
             console.log(error)
           })
-          // photoresponse();
-          // setimage(data.uri);
-         
-     
-          }
-           //bs.current.snapTo(1);
+        // photoresponse();
+        // setimage(data.uri);
+
+
       }
-      else
-      {
-        Alert.alert('oops',' برای گرفتن عکس باید اجازه دسترسی به دوربینتون رو به ما بدید',[{
-          Title:'فهمیدم',onPress:()=>console.log('alert closed')
-          }])
-      }
-   
+      //bs.current.snapTo(1);
+    }
+    else {
+      Alert.alert('', ' برای گرفتن عکس باید اجازه دسترسی به دوربینتون رو به ما بدید', [{
+
+
+        text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+      }], { cancelable: false }, { style: { height: 50 } })
+
+    }
+
   }
-  
-// loggg();
-   
-    // const val = useContext(AuthContext);  
-    //nd
-    const [backgroundColor,setbackgroudcolor]=useState("white");
-    const [opacities,setopacities]=useState(1);
-    const [name,setname]=useState(null);
-  
-     const renderHeader=()=>{
-      console.log('header')
-      return(
-    
-      
-        <View style={styles.header}>
+
+  // loggg();
+
+  // const val = useContext(AuthContext);  
+  //nd
+
+  const [name, setname] = useState(null);
+
+  const renderHeader = () => {
+    console.log('header')
+    return (
+
+
+      <View style={styles.header}>
         <View style={styles.panelHeader}>
           <View style={styles.panelHandle} >
             {/* <Image
@@ -293,120 +302,104 @@ useFocusEffect(
          style={{width:300,height:3}}
          ></Image> */}
             <Image
-         source={require('../../assets/line3.png')}
-         style={{width:wp('25%'),height:hp('0.8%'),alignSelf:'center'}}
-         ></Image>
-            <Text style={{alignSelf:'center',fontWeight:'bold',color:'#1F7A8C',marginTop:hp('1.8%'),fontSize:hp('2%') }}>انتخاب عکس</Text>
-            </View>
+              source={require('../../assets/line3.png')}
+              style={{ width: wp('25%'), height: hp('0.8%'), alignSelf: 'center' }}
+            ></Image>
+            <Text style={{ alignSelf: 'center', fontWeight: 'bold', color: '#1F7A8C', marginTop: hp('1.8%'), fontSize: hp('2%') }}>انتخاب عکس</Text>
+          </View>
         </View>
 
-        </View>
-        )
-    }
-    const print=console.log('1111')
-     const renderInner=()=>{
-      return(
-        // console.log('inner');
-      <View style={{backgroundColor:'#EDF2F4'}}>
+      </View>
+    )
+  }
+  const print = console.log('1111')
+  const renderInner = () => {
+    return (
+      // console.log('inner');
+      <View style={{ backgroundColor: '#EDF2F4' }}>
 
-         <Image
-         source={require('../../assets/bottomsheet.jpeg')}
-         style={{width:wp('100%'),height:hp('38%'),position:'absolute'}}
-         ></Image>
+        <Image
+          source={require('../../assets/bottomsheet.jpeg')}
+          style={{ width: wp('100%'), height: hp('38%'), position: 'absolute' }}
+        ></Image>
 
-         <Button
-         bordered rounded style={styles.button}
-        
-        onPress={async()=>await pickfromcamera()}
-        style={{alignSelf:'center',marginTop:hp('4.5%'),borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+        <Button
+          bordered rounded style={styles.button}
+
+          onPress={async () => await pickfromcamera()}
+          style={{ alignSelf: 'center', marginTop: hp('4.5%'), borderColor: '#BFDBF7', backgroundColor: '#1F7A8C', borderRadius: 15 }}
         >
 
-         <Text style={{color:'white', fontSize:hp('1.8%'),fontWeight:'bold', alignItems:'center',marginHorizontal:wp('20.5%')}
-         }>گرفتن عکس</Text>
+          <Text style={{ color: 'white', fontSize: hp('1.8%'), fontWeight: 'bold', alignItems: 'center', marginHorizontal: wp('20.5%') }
+          }>گرفتن عکس</Text>
         </Button>
 
         <Button
-         bordered rounded style={styles.button}
-        onPress={async()=>await pickfromgallery()}
-        style={{alignSelf:'center',marginTop:hp('3%'),borderColor:'#BFDBF7',backgroundColor:'#1F7A8C',borderRadius:15}}
+          bordered rounded style={styles.button}
+          onPress={async () => await pickfromgallery()}
+          style={{ alignSelf: 'center', marginTop: hp('3%'), borderColor: '#BFDBF7', backgroundColor: '#1F7A8C', borderRadius: 15 }}
         >
 
-         <Text style={{color:'white', fontSize:hp('1.8%'),fontWeight:'bold', alignItems:'center',marginHorizontal:wp('17.7%')}
-         }>انتخاب از گالری</Text>
+          <Text style={{ color: 'white', fontSize: hp('1.8%'), fontWeight: 'bold', alignItems: 'center', marginHorizontal: wp('17.7%') }
+          }>انتخاب از گالری</Text>
         </Button>
-      
-        </View>
-      )
-    }
-         const bs = React.createRef()
-         const fall=new Animated.Value(1);
-        console.log('2222')
-       
 
-// const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
-    return(
-  
-      <>
-    
-        <View style={{  flex:1,
-      backgroundColor: backgroundColor,}}>
-      
-        <BottomSheet
-            snapPoints={[hp('34%'), 0, 0]}
-            ref={bs}
-            initialSnap={1}
-            // onCloseEnd={setbackgroudcolor("white")}
-            callbackNode={fall}
-            enabledGestureInteraction={true}
-            enabledContentTapInteraction={false}
-            renderContent={renderInner}
-            renderHeader={renderHeader}   
-            onCloseEnd={()=>setbackgroudcolor("white")}
-               // style={{position:'absolute',height:200,width:250,marginTop:400}}
-            backgroundColor={'white'}
-        
-       />
-        <Animated.View style={{
-  backgroundColor:backgroundColor,
-opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
-}}> 
-       
-     
-        
-        <View style={{position:'absolute',opacity:opacities,height:hp('20%'),alignSelf:'center',marginTop:hp('4%'),alignSelf:"center",borderRadius:100}}>
-        <TouchableOpacity style={{}}
-         onPress={async()=>{
-            await setbackgroudcolor("#F5F5F5")
-          //  await setopacities(0.5)
-           await bs.current.snapTo(0)}}>
+      </View>
+    )
+  }
+  const bs = React.createRef()
+  const fall = new Animated.Value(1);
+  console.log('2222')
 
 
-      {picture==='http://e7ae29f4056b.ngrok.io/media/default.png'?<ImageBackground borderRadius={100}
+  // const[pic,setpic]=useState('http://3097034fddc8.ngrok.io/media/profile_photos/test_spQxL7A.jpg')
+  return (
 
-      
-        source={require('../../assets/avatar.png')}
-        style={{height:hp('18.2%'),width:wp('36.7%'),borderRadius:100}}
-        
-        >
+    <View style={styles.container}>
 
-        </ImageBackground>:<ImageBackground borderRadius={100}
-      
-      source={{uri:picture}}
-      style={{height:hp('18.2%'),width:wp('36.7%'),borderRadius:100}}
-      
-      >
+      <BottomSheet
+        snapPoints={[hp('46.5%'), 0, 0]}
+        ref={bs}
+        initialSnap={1}
+        callbackNode={fall}
+        enabledGestureInteraction={true}
+        enabledContentTapInteraction={false}
+        renderContent={renderInner}
+        renderHeader={renderHeader}
+        // style={{position:'absolute',height:200,width:250,marginTop:400}}
+        backgroundColor={'white'}
 
-      </ImageBackground>}
-      {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
-      
-      <TouchableOpacity  onPress={async()=>{
-        setbackgroudcolor("#F5F5F5")
-    
-        await bs.current.snapTo(0)}} style={{backgroundColor:'#EDF2F4',elevation:3,height:hp('5.2%'),width:wp('10.5%'),top:hp('13%'),position:'absolute',borderRadius:100}}>
-      <EvilIcons name="camera" size={27} style={{alignSelf:'center',top:hp('1.4%')}} color="#1f7a8c" />
-      </TouchableOpacity>
-      {/* </TouchableOpacity> */}
-      {/* <Feather style={{position:'absolute',Top:'70%',Left:'40%',
+      />
+      <View >
+
+        <View style={{ position: 'absolute', height: hp('20%'), alignSelf: 'center', marginTop: hp('4%'), alignSelf: "center", borderRadius: 100 }}>
+          <TouchableOpacity style={{}}
+            onPress={async () => await bs.current.snapTo(0)}>
+
+
+            {picture === 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <ImageBackground borderRadius={100}
+
+
+              source={require('../../assets/avatar.png')}
+              style={{ height: hp('18.2%'), width: wp('36.7%'), borderRadius: 100 }}
+
+            >
+
+            </ImageBackground> : <ImageBackground borderRadius={100}
+
+              source={{ uri: picture }}
+              style={{ height: hp('18.2%'), width: wp('36.7%'), borderRadius: 100 }}
+
+            >
+
+              </ImageBackground>}
+            {/* <TouchableOpacity style={{position:'absolute',top:hp('10%'),right:wp('32%'),backgroundColor:'blue',height:hp('3.5%'),width:wp('7%'),borderRadius:100}}> */}
+
+            <TouchableOpacity onPress={async () => await bs.current.snapTo(0)} style={{ backgroundColor: '#EDF2F4', elevation: 3, height: hp('5.2%'), width: wp('10.5%'), top: hp('13%'), position: 'absolute', borderRadius: 100 }}>
+              <EvilIcons name="camera" size={27} style={{ alignSelf: 'center', top: hp('1.4%') }} color="#1f7a8c" />
+            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
+            {/* <Feather style={{position:'absolute',Top:'70%',Left:'40%',
                       opacity: 0.7,
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -414,395 +407,380 @@ opacity: Animated.add(0.5, Animated.multiply(fall, 1.0)),
                       borderColor: '#fff',
                       borderRadius: 10,
                     }} name="camera" size={24} color="black" /> */}
-        </TouchableOpacity>
+          </TouchableOpacity>
         </View>
 
-        <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Username:''}}
-      validationSchema={userschema}
-      
-
-        onSubmit={async(values,actions)=>{
-        //  signup(values);
-        const back={
-          username:values.Username,
-        
-        }
-        // const token=AsyncStorage.getItem('token');
-        // console.log(token)
-        // await console.log(await AsyncStorage.getItem('token'))
-         const backk=JSON.stringify(back);
-        const params=JSON.stringify({username:'Hi'});
-
-        const id=await (await AsyncStorage.getItem('id')).toString();
-        const response=await axiosinst.put('user/'+id+'/update-profile',backk,{
+        <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
+          initialValues={{ Username: '' }}
+          validationSchema={userschema}
 
 
-          headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()}
-          }
-             )
-        .then( function(response){
-          // console.log(response);
-          // console.log(response.data.username)
-          // console.log(response.username)
-          Alert.alert('', 'نام کاربری شما با موفقیت تغییر کرد ', [{
+          onSubmit={async (values, actions) => {
+            //  signup(values);
+            const back = {
+              username: values.Username,
 
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-         
-          
-          
-        })
-        .catch( function(error){
-         
-            if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('', 'نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید :)', [{
-
-
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-              
-              
             }
-            else
-            {
-              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+            // const token=AsyncStorage.getItem('token');
+            // console.log(token)
+            // await console.log(await AsyncStorage.getItem('token'))
+            const backk = JSON.stringify(back);
+            const params = JSON.stringify({ username: 'Hi' });
+
+            const id = await (await AsyncStorage.getItem('id')).toString();
+            const response = await axiosinst.put('user/' + id + '/update-profile', backk, {
 
 
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+              }
             }
-
-         
-            
-           
-         
-        })
-
-      }}
-     >
-     {(props)=>(
-       
-     <View style={{ marginTop:hp('25.5%'),marginHorizontal:wp('10%')}}>
-
-     <Item style={styles.input}>
-
-         <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
-         onChangeText={props.handleChange('Username')}
-         onBlur={props.handleBlur('Username')}
-         value={props.values.Username}
-         placeholder={name} placeholderTextColor='gray' style={{}}>
-         </Input>
-         <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
-        
-       </Item>
-       <Text style={{fontSize:hp('1.5%'), color:'red'}}>{props.touched.Username&&props.errors.Username}</Text>
-      
-       <View style={{flexDirection:'row',width:wp('98%'),marginRight:10,marginLeft:10}}>
-       
-    
-          
-   
-     <Button bordered rounded style={styles.button}
-       onPress={props.handleSubmit}
-       >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
-        </Button>
-      
-     </View>
-    
-     </View>
-       
-       
-     )}
-
-     </Formik>
-     <Formik style={{borderStyle:'dashed',justifyContent:'space-around'}}
-      initialValues={{Password:'',newPassword:'',repeatnewPassword:'' }}
-      validationSchema={passschema}
-      
-
-        onSubmit={async(values,actions)=>{
-        //  signup(values);
-        // loggg();
-        const back={
-          
-          old_password:values.Password,
-          new_password:values.newPassword,
-        
-        }
-        // console.log(back);
-         const backk=JSON.stringify(back);
-        const params=JSON.stringify({password:'12345',password2:'12345'});
-        const id=await AsyncStorage.getItem("id");
-        const response=axiosinst.put('user/'+id+'/change-password',backk,{
-
-          headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Token "+(await AsyncStorage.getItem('token')).toString()} , 
-          })
-         
-        .then( function(response){
-          // console.log(response);
-          // console.log(response.data.username)
-          // console.log(response.username)
-          Alert.alert('', 'رمزتان با موفقیت تغییر کرد', [{
+            )
+              .then(function (response) {
+                // console.log(response);
+                // console.log(response.data.username)
+                // console.log(response.username)
+                Alert.alert('', 'نام کاربری شما با موفقیت تغییر کرد ', [{
 
 
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-         
-      
-          
-          
-        })
-        .catch( function(error){
-         
-          // await console.log(AsyncStorage.getItem('token'))
-            // console.log(error);
-            if(error.toString().split('\n')[0]==='Error: Request failed with status code 400'){
-              Alert.alert('', 'رمزتون رو اشتباه وارد کردید', [{
+                  text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                }], { cancelable: false }, { style: { height: 50 } })
 
 
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-            
+
+              })
+              .catch(function (error) {
+
+                if (error.toString().split('\n')[0] === 'Error: Request failed with status code 400') {
+                  Alert.alert('', 'نام کاربری ای که انتخاب کردید تکراریه لطفا یکی دیگه امتحان کنید ', [{
+
+
+                    text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                  }], { cancelable: false }, { style: { height: 50 } })
+
+                }
+                else {
+                  Alert.alert('', ' مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
+
+
+                    text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                  }], { cancelable: false }, { style: { height: 50 } })
+                }
+
+
+
+
+
+              })
+
+          }}
+        >
+          {(props) => (
+            <View style={{ marginTop: hp('25.5%'), marginHorizontal: wp('10%') }}>
+
+              <Item style={styles.input}>
+
+                <Input style={styles.Input} autoCapitalize='words' autoCorrect={true}
+                  onChangeText={props.handleChange('Username')}
+                  onBlur={props.handleBlur('Username')}
+                  value={props.values.Username}
+                  placeholder={name} placeholderTextColor='gray' style={{}}>
+                </Input>
+                <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
+
+              </Item>
+              <Text style={{ fontSize: hp('1.5%'), color: 'red' }}>{props.touched.Username && props.errors.Username}</Text>
+
+              <View style={{ flexDirection: 'row', width: wp('98%'), marginRight: 10, marginLeft: 10 }}>
+
+
+
+
+                <Button bordered rounded style={styles.button}
+                  onPress={props.handleSubmit}
+                >
+                  <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', marginLeft: wp('17%'), marginRight: wp("16%") }}>تایید</Text>
+                </Button>
+
+              </View>
+
+            </View>
+
+
+          )}
+
+        </Formik>
+        <Formik style={{ borderStyle: 'dashed', justifyContent: 'space-around' }}
+          initialValues={{ Password: '', newPassword: '', repeatnewPassword: '' }}
+          validationSchema={passschema}
+
+
+          onSubmit={async (values, actions) => {
+            //  signup(values);
+            // loggg();
+            const back = {
+
+              old_password: values.Password,
+              new_password: values.newPassword,
+
             }
-            else
-            {
-              Alert.alert('', 'مشکلی پیش اومده لطفا دوباره امتحان کن', [{
+            // console.log(back);
+            const backk = JSON.stringify(back);
+            const params = JSON.stringify({ password: '12345', password2: '12345' });
+            const id = await AsyncStorage.getItem("id");
+            const response = axiosinst.put('user/' + id + '/change-password', backk, {
+
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + (await AsyncStorage.getItem('token')).toString()
+              },
+            })
+
+              .then(function (response) {
+                // console.log(response);
+                // console.log(response.data.username)
+                // console.log(response.username)
+                Alert.alert('', 'رمزتون با موفقیت تغییر کرد', [{
 
 
-text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
-}], { cancelable: false }, { style: { height: 50 } })
-            }
-           
-         
-        })
-
-      }}
-     >
-     {(props)=>(
-     <View style={{alignItems:'center', marginTop:110,marginHorizontal:40}}>
-
-     <Item style={styles.input}>
-
-         <Input style={styles.Input} autoCapitalize='none' autoCorrect={false}
-         secureTextEntry
-         onChangeText={props.handleChange('Password')}
-         onBlur={props.handleBlur('Password')}
-         value={props.values.Password}
-         placeholder="رمز خود را وارد کنید  ..." placeholderTextColor='lightgray'>
-         </Input>
-         <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
-       
-        
-       </Item>
-       <Text style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.Password&&props.errors.Password}</Text>
-       <Item style={styles.input}>
-         <Input  style={styles.Input} 
-          secureTextEntry
-          autoCapitalize='none' autoCorrect={false}
-         onChangeText={props.handleChange('newPassword')}
-         value={props.values.newPassword}
-         onBlur={props.handleBlur('newPassword')}
-         placeholder="رمز جدید خود را وارد کنید ..." placeholderTextColor='lightgray'>
-         </Input>
-         <AntDesign name="lock" size={hp('2.8%')} color="#BFDBF7"  style={styles.Icon}/>
-       </Item>
-
-    
-      
-       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.newPassword&&props.errors.newPassword}</Text>
-
-       
-       <Item style={{}}>
-         <Input  style={styles.Input} 
-          secureTextEntry
-          autoCapitalize='none' autoCorrect={false}
-          onChangeText={props.handleChange('repeatnewPassword')}
-          value={props.values.repeatnewPassword}
-          onBlur={props.handleBlur('repeatnewPassword')}
-          placeholder="رمز جدید خود را تکرار کنید" placeholderTextColor='lightgray'>
-         </Input>
-         <Feather name="check" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
-       </Item>
-      
-       <Text  style={{fontSize:hp('1.3.5%'), color:'red',alignSelf:"flex-start",marginLeft:wp("2%")}}>{props.touched.repeatnewPassword&&props.errors.repeatnewPassword}</Text>
-       
+                  text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                }], { cancelable: false }, { style: { height: 50 } })
 
 
 
-  
 
-      
-       <View style={{flexDirection:'row',width:wp('98%')}}>
-       
-       
-       
-    
-          
-   
-     <Button bordered rounded style={{ position:'absolute',
-        marginTop:hp('3.5%'),
-       
-        width:wp('41%'),
-        backgroundColor:'#1f7a8c',
-        borderColor:'#BFDBF7',
-        marginLeft:wp('29.5%'),
-        borderRadius:17}}
-       onPress={props.handleSubmit}
-       >
-         <Text style={{color:'#E1E5F2', fontSize:hp('1.8%'),fontWeight:'bold',marginLeft:wp('17%'),marginRight:wp("16%")}}>تایید</Text>
-        </Button>
-      
-     </View>
-    
-     </View>
-       
-       
-     )}
+              })
+              .catch(function (error) {
 
-     </Formik>
-        
+                // await console.log(AsyncStorage.getItem('token'))
+                // console.log(error);
+                if (error.toString().split('\n')[0] === 'Error: Request failed with status code 400') {
+                  Alert.alert('', 'رمزتون رو اشتباه وارد کردید', [{
+
+
+                    text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                  }], { cancelable: false }, { style: { height: 50 } })
+
+                }
+                else {
+                  Alert.alert('', ' مشکلی پیش اومده لطفا دوباره امتحان کن ', [{
+
+
+                    text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'default'
+                  }], { cancelable: false }, { style: { height: 50 } })
+                }
+
+
+              })
+
+          }}
+        >
+          {(props) => (
+            <View style={{ alignItems: 'center', marginTop: 110, marginHorizontal: 40 }}>
+
+              <Item style={styles.input}>
+
+                <Input style={styles.Input} autoCapitalize='none' autoCorrect={false}
+                  secureTextEntry
+                  onChangeText={props.handleChange('Password')}
+                  onBlur={props.handleBlur('Password')}
+                  value={props.values.Password}
+                  placeholder="رمز خود را وارد کنید  ..." placeholderTextColor='lightgray'>
+                </Input>
+                <AntDesign name="user" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
+
+
+              </Item>
+              <Text style={{ fontSize: hp('1.3.5%'), color: 'red', alignSelf: "flex-start", marginLeft: wp("2%") }}>{props.touched.Password && props.errors.Password}</Text>
+              <Item style={styles.input}>
+                <Input style={styles.Input}
+                  secureTextEntry
+                  autoCapitalize='none' autoCorrect={false}
+                  onChangeText={props.handleChange('newPassword')}
+                  value={props.values.newPassword}
+                  onBlur={props.handleBlur('newPassword')}
+                  placeholder="رمز جدید خود را وارد کنید ..." placeholderTextColor='lightgray'>
+                </Input>
+                <AntDesign name="lock" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
+              </Item>
+
+
+
+              <Text style={{ fontSize: hp('1.3.5%'), color: 'red', alignSelf: "flex-start", marginLeft: wp("2%") }}>{props.touched.newPassword && props.errors.newPassword}</Text>
+
+
+              <Item style={{}}>
+                <Input style={styles.Input}
+                  secureTextEntry
+                  autoCapitalize='none' autoCorrect={false}
+                  onChangeText={props.handleChange('repeatnewPassword')}
+                  value={props.values.repeatnewPassword}
+                  onBlur={props.handleBlur('repeatnewPassword')}
+                  placeholder="رمز جدید خود را تکرار کنید" placeholderTextColor='lightgray'>
+                </Input>
+                <Feather name="check" size={hp('2.8%')} color="#BFDBF7" style={styles.Icon} />
+              </Item>
+
+              <Text style={{ fontSize: hp('1.3.5%'), color: 'red', alignSelf: "flex-start", marginLeft: wp("2%") }}>{props.touched.repeatnewPassword && props.errors.repeatnewPassword}</Text>
+
+
+
+
+
+
+
+              <View style={{ flexDirection: 'row', width: wp('98%') }}>
+
+
+
+
+
+
+                <Button bordered rounded style={{
+                  position: 'absolute',
+                  marginTop: hp('3.5%'),
+
+                  width: wp('41%'),
+                  backgroundColor: '#1f7a8c',
+                  borderColor: '#BFDBF7',
+                  marginLeft: wp('29.5%'),
+                  borderRadius: 17
+                }}
+                  onPress={props.handleSubmit}
+                >
+                  <Text style={{ color: '#E1E5F2', fontSize: hp('1.8%'), fontWeight: 'bold', marginLeft: wp('17%'), marginRight: wp("16%") }}>تایید</Text>
+                </Button>
+
+              </View>
+
+            </View>
+
+
+          )}
+
+        </Formik>
+
         {/* </View>
         </TouchableOpacity>
   */}
-  {/* //<View style={{position:'absolute',marginTop:700,width:380,height:100}}> */}
-   
-        {/* </TouchableOpacity> */}
-      
-    {/* </ScrollView> */}
-  
-    </Animated.View>
-    {/* <View style={{backgroundColor:"gray",flex:1}}></View> */}
-    <StatusBar backgroundColor='#BFDBF7' style='light' />
+        {/* //<View style={{position:'absolute',marginTop:700,width:380,height:100}}> */}
 
-        </View>
-       
-        </>
-        
-        
-   
-        // {/* <Text>HI</Text>
-        // </ScrollView> */}
-    );
+        {/* </TouchableOpacity> */}
+
+        {/* </ScrollView> */}
+      </View>
+      <StatusBar backgroundColor='#BFDBF7' style='light' />
+
+    </View>
+
+
+    // {/* <Text>HI</Text>
+    // </ScrollView> */}
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
 
-      
-      height:850,
-      backgroundColor: '#fff',
+
+    height: 850,
+    backgroundColor: '#fff',
     //   alignItems: 'center',
     //   justifyContent: 'center',
-    },
-    kima:{
-        color:'#1F7A8C',
-        marginTop:50,
-        marginRight:20,
-        fontSize:20,
-        fontWeight:'bold'
-        
-        
-    },
-    logout:{
-        
-        marginTop:800,
-        marginBottom:30,
-        width:210,
-        backgroundColor:'#E1E5F2',
-        borderColor:'#BFDBF7',
-        marginLeft:98,
-        height:43,
-        // fontSize:20
-        
-    },
-    info:{
-        marginRight:45,
-        marginTop:hp('5%'),
-        color:"#1F7A8C"
-    },
-    donoghte:{
-        color:"black",marginLeft:100,position:'absolute'
-    },
-    Icon:{
-      
-    
-      
-     
-       
-    },
-    avatar:{
-        position:'absolute',
-        marginTop:hp('10%'),
-        marginLeft:50,
-    
-        
-    },
-    edit:{
-        height:hp('5%'),
-        width:200,
-        backgroundColor:'#E1E5F2',
-        borderRadius:25,
-        marginLeft:105,
-        marginTop:80,
-      
-    },
-    button:{
-        position:'absolute',
-        marginTop:hp('3.5%'),
-        marginLeft:wp('20%'),
-        width:wp('41%'),
-        backgroundColor:'#1f7a8c',
-        borderColor:'#BFDBF7',
-        marginLeft:wp('18%'),
-        borderRadius:17
-        
-      },
-      Input:{
-        fontSize:hp('1.8%'),
-        fontStyle:'normal',
-        marginLeft:wp('1%')
-        
-        
-      },
-      panel: {
-        padding: hp("3%"),
-        backgroundColor: 'white',
-        paddingTop:  hp("3%"),
-        shadowColor: 'black',
-        borderTopColor: 'black',
-        shadowOpacity: 0.5,
-        elevation:10
-    
-      },
-      header: {
-        backgroundColor: 'white',
-        shadowColor: 'black',
-        shadowOffset: { width: -1, height: -3 },
-        shadowRadius: 20,
-        shadowOpacity: 0.5,
-        // elevation: 5
-        paddingTop: hp("2.5%"),
-        borderTopLeftRadius: 20,
-        borderTopColor: 'black',
-        borderTopRightRadius: 20,
-      },
-      panelHeader: {
-        borderTopColor: 'black',
-    
-      }, 
-//         input:{
-//      marginTop:5,
-//      marginLeft:5,
-//      marginRight:5
-//     // fontWeight:'100'
-//   },
-  });
-  // React.memo(EditProfile);
-  export default EditProfile;
+  },
+  kima: {
+    color: '#1F7A8C',
+    marginTop: 50,
+    marginRight: 20,
+    fontSize: 20,
+    fontWeight: 'bold'
+
+
+  },
+  logout: {
+
+    marginTop: 800,
+    marginBottom: 30,
+    width: 210,
+    backgroundColor: '#E1E5F2',
+    borderColor: '#BFDBF7',
+    marginLeft: 98,
+    height: 43,
+    // fontSize:20
+
+  },
+  info: {
+    marginRight: 45,
+    marginTop: hp('5%'),
+    color: "#1F7A8C"
+  },
+  donoghte: {
+    color: "black", marginLeft: 100, position: 'absolute'
+  },
+  Icon: {
+
+
+
+
+
+  },
+  avatar: {
+    position: 'absolute',
+    marginTop: hp('10%'),
+    marginLeft: 50,
+
+
+  },
+  edit: {
+    height: hp('5%'),
+    width: 200,
+    backgroundColor: '#E1E5F2',
+    borderRadius: 25,
+    marginLeft: 105,
+    marginTop: 80,
+
+  },
+  button: {
+    position: 'absolute',
+    marginTop: hp('3.5%'),
+    marginLeft: wp('20%'),
+    width: wp('41%'),
+    backgroundColor: '#1f7a8c',
+    borderColor: '#BFDBF7',
+    marginLeft: wp('18%'),
+    borderRadius: 17
+
+  },
+  Input: {
+    fontSize: hp('1.8%'),
+    fontStyle: 'normal',
+    marginLeft: wp('1%')
+
+
+  },
+  header: {
+    backgroundColor: 'white',
+    shadowColor: 'black',
+    shadowOffset: { width: -1, height: -3 },
+    shadowRadius: 20,
+    shadowOpacity: 0.5,
+    // elevation: 5,
+    paddingTop: 20,
+    borderTopLeftRadius: 20,
+    borderTopColor: 'black',
+    borderTopRightRadius: 20,
+  },
+  panelHeader: {
+    borderTopColor: 'black',
+
+  },
+  //         input:{
+  //      marginTop:5,
+  //      marginLeft:5,
+  //      marginRight:5
+  //     // fontWeight:'100'
+  //   },
+});
+// React.memo(EditProfile);
+export default EditProfile;

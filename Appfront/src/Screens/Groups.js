@@ -164,7 +164,7 @@ const Groups = ({ navigation }) => {
     if(selecttime==="none")
     a="time";
     else
-    a="like"
+    a="member"
     console.log(a+"aaaaaa")
     try {
       console.log('  omad to response')
@@ -291,7 +291,7 @@ const Groups = ({ navigation }) => {
           setlikeotime("time")
         }
         else {
-          setlikeotime("like")
+          setlikeotime("member")
         }
         //await setselecttime(true)
         //با این ظاهرا درست شد :/
@@ -480,7 +480,7 @@ const Groups = ({ navigation }) => {
               // await setlikeotime('')
               console.log(likeotime + 'BEIN LIKE')
               await setlikeotime('member')
-              await setselecttime("like");
+              await setselecttime("member");
               //  setrefresh(true)
               // setpickerselected(true)
               // await setsearchterm('')

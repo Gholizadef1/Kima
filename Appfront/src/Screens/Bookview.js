@@ -41,7 +41,7 @@ const Bookview = (prop) => {
     getComments()
     getQoutes()
     getUsername()
-  }, [average, quotes, comments]);
+  }, []);
 
   const getResult = async () => {
     axiosinst.get('/book/' + id, {
@@ -239,7 +239,7 @@ const Bookview = (prop) => {
       <Container>
         <ScrollView>
           <Header style={{ backgroundColor: '#1F7A8C', marginTop: hp('20%') }} />
-          <Body style={{}}>
+          <Body style={{marginBottom:hp("3%")}}>
             <Image source={{ uri: result.imgurl }} style={{
               marginTop: hp('-15%'), height: hp('35%'),
               width: wp('45%'), borderRadius: 15
@@ -280,13 +280,14 @@ const Bookview = (prop) => {
             />
 
 
-            <Text style={{ fontWeight: 'bold', fontSize: hp('3.2%'), marginTop: hp('2%'), marginRight: wp('67%'), marginBottom: hp('0.7%') }}>
+            <Text style={{ fontWeight: 'bold', fontSize: hp('2.5%'), marginTop: hp('2%'), marginRight: wp('67%'),marginLeft:wp("4%"), marginBottom: hp('0.7%') }}>
               درباره کتاب :</Text>
             <Content style={{}}>
               <Card style={{}}>
 
                 <Text style={{
-                  marginTop: hp('2%'), marginLeft: wp('2%'),
+                  marginHorizontal:wp("4%"),
+                  marginTop: hp('2%'),
                   textAlign: 'left', alignSelf: 'stretch', marginBottom: hp('2%')
                 }}>{result.description}</Text>
               </Card>
@@ -300,11 +301,11 @@ const Bookview = (prop) => {
             <AntDesign name="exception1" size={23} color="#1F7A8C" style={{ marginRight: wp('78%'), top: hp('-3.5%') }} /> : null}
 
           {/* {comments != "No Comment!" ?
-            <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
-            : null} */}
+<Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
+: null} */}
 
           {comments != "No Comment!" && comments.length >= 3 ?
-            <Button style={{ marginLeft: wp('80%'), marginTop: hp('-6%'), marginBottom: hp('-1%') }} transparent
+            <Button style={{ marginLeft: wp('80%'), marginTop: hp('3%'), marginBottom: hp('-3%') }} transparent
               onPress={() => {
                 prop.navigation.navigate('comment', { title: result.title, imgurl: result.imgurl, id: id }) && prop.navigation.setOptions({
                   title: response.data.title,
@@ -316,8 +317,8 @@ const Bookview = (prop) => {
 
           {comments != "No Comment!" ?
             <ScrollView>
-              <View style={{ alignItems: 'flex-start' }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5%') }}>نظرات کاربران :</Text>
+              <View style={{ alignItems: 'flex-start' ,backgroundColor:"white",width:wp("80%")}}>
+                <Text  style={{ fontWeight: 'bold', fontSize: 19, marginTop: hp('2%'), marginBottom: hp('0.7%'), marginLeft: wp('5.5%') }}>نظرات کاربران :</Text>
               </View >
               <ScrollView>
                 <View style={{ alignItems: 'flex-start' }}>
@@ -338,15 +339,15 @@ const Bookview = (prop) => {
                     renderItem={({ item }) => <>
                       <View style={{}}>
                         <Card style={styles.cardChat}>
-                          {item.account.profile_photo != 'http://24a3546bd708.ngrok.io/media/default.png' ? <Avatar.Image
-                            source={{ uri: "http://24a3546bd708.ngrok.io" + item.account.profile_photo }}
-                          ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={50}
-                            source={require('../../assets/group.jpg')}
+                          {item.account.profile_photo !='/media/default.png' ? <Avatar.Image style={styles.avatar}
+                            source={{ uri:  item.account.profile_photo }}
+                          ></Avatar.Image> : <Avatar.Image style={{}} style={styles.avatar} size={40}
+                            source={require('../../assets/avatar.png')}
                           ></Avatar.Image>}
-                          <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('18%'), marginTop: hp('-9%') }}>{item.account.username}</Text>
+                          <Text style={{ color: '#a9a9a9', alignSelf: 'flex-start', fontSize: 14, marginLeft: wp('20%'), marginTop: hp('-4.5%') }}>{item.account.username}</Text>
                           {(item.comment_text.toString().length) <= 70 ?
-                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text}</Text> :
-                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'), marginBottom: hp('6%') }}>{item.comment_text.substr(0, 110) + '...'}</Text>}
+                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'),fontSize:hp("1.6%"), marginBottom: hp('6%') }}>{item.comment_text}</Text> :
+                            <Text style={{ marginLeft: wp('4%'), marginTop: hp('5%'),fontSize:hp("1.6%"), marginBottom: hp('6%') }}>{item.comment_text.substr(0, 110) + '...'}</Text>}
 
                         </Card>
                       </View>
@@ -356,17 +357,19 @@ const Bookview = (prop) => {
                   </FlatList>
                 </View>
               </ScrollView>
-            </ScrollView>:null}
+            </ScrollView> : null}
 
           {comments != "No Comment!" ?
             <View
               style={{
-                width: 320,
+                width: wp("85%"),
                 color: '#dcdcdc',
-                marginLeft: wp('7%'),
+                // marginHorizantal: wp('3%'),
+                marginLeft:wp("9%"),
+                marginRight:wp("0%"),
                 marginTop: hp('-3%'),
                 marginBottom: hp('1%'),
-                borderBottomColor: '#a9a9a9',
+                borderBottomColor: 'lightgray',
                 borderBottomWidth: 1
               }}
             />
@@ -413,15 +416,15 @@ const Bookview = (prop) => {
                   renderItem={({ item }) => <>
                     <View style={{}}>
                       <Card style={styles.cardChat2}>
-                        {item.account.profile_photo != 'http://24a3546bd708.ngrok.io/media/default.png' ? <Avatar.Image
-                          source={{ uri: "http://24a3546bd708.ngrok.io" + item.account.profile_photo }}
+                        {item.account.profile_photo != '/media/default.png' ? <Avatar.Image  style={styles.avatar2}
+                          source={{ uri:  item.account.profile_photo }}
                         ></Avatar.Image> : <Avatar.Image style={styles.avatar2} size={50}
-                          source={require('../../assets/group.jpg')}
+                          source={require('../../assets/avatar.png')}
                         ></Avatar.Image>}
                         <Text style={{ alignSelf: 'flex-start', color: '#a9a9a9', fontSize: 14, marginLeft: wp('4%'), marginTop: hp('-6%') }}>{item.account.username}</Text>
                         {(item.quote_text.toString().length) <= 100 ?
-                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%'), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
-                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'), marginTop: hp('1%') }}>{item.quote_text.substr(0, 110) + '...'}</Text>}
+                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'),fontSize:hp("1.6%"), marginTop: hp('1%'),marginRight:wp("4%"), marginBottom: hp('7%') }}>{item.quote_text}</Text> :
+                          <Text style={{ marginLeft: wp('4%'), top: hp('1%'),fontSize:hp("1.6%"), marginTop: hp('1%') ,marginRight:wp("4%")}}>{item.quote_text.substr(0, 110) + '...'}</Text>}
 
                       </Card>
 
@@ -436,12 +439,14 @@ const Bookview = (prop) => {
           {quotes != "No Quote!" ?
             <View
               style={{
-                width: 320,
+                width: wp("85%"),
                 color: '#dcdcdc',
-                marginLeft: wp('7%'),
+                // marginHorizantal: wp('3%'),
+                marginLeft:wp("9%"),
+                marginRight:wp("0%"),
                 marginTop: hp('-3%'),
                 marginBottom: hp('1%'),
-                borderBottomColor: '#a9a9a9',
+                borderBottomColor: 'lightgray',
                 borderBottomWidth: 1
               }}
             />
@@ -449,10 +454,10 @@ const Bookview = (prop) => {
 
 
           <Card style={styles.cardChat3}>
-            {user.profile_photo != '/media/default.png' ? <Avatar.Image
-              source={{ uri: "http://6ef98d38edf2.ngrok.io" + user.profile_photo }}
+            {user.profile_photo != 'http://e7ae29f4056b.ngrok.io/media/default.png' ? <Avatar.Image style={styles.avatar3}
+              source={{ uri:  "http://e7ae29f4056b.ngrok.io"+user.profile_photo }}
             ></Avatar.Image> : <Avatar.Image style={styles.avatar3} size={70}
-              source={require('../../assets/group.jpg')}
+              source={require('../../assets/avatar.png')}
             ></Avatar.Image>}
             <Text style={{ top: hp('-7%'), textAlign: 'center' }}>{user.username}</Text>
             <Button style={styles.button} bordered onPress={() => {
@@ -505,14 +510,15 @@ const styles = StyleSheet.create({
     marginTop: hp('8%'),
     top: hp('-6%'),
     marginBottom: hp('-2%'),
-    borderTopRightRadius: 30,
-    borderBottomLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    // borderBottomLeftRadius: 30,
+    borderRadius:15,
     backgroundColor: '#EDF2F4',
 
   },
   cardChat2: {
     height: hp('32%'),
-    width: wp('55%'),
+    width: wp('65%'),
     marginLeft: wp('5%'),
     marginTop: hp('8%'),
     top: hp('-6%'),
@@ -536,15 +542,16 @@ const styles = StyleSheet.create({
   },
   avatar: {
     marginLeft: wp('2%'),
-    top: hp('-3.5%'),
-    marginTop: hp('5%')
+    top: hp('1%'),
+    //marginTop: hp('5%')
   },
   avatar2: {
-    top: hp('27%'),
-    marginLeft: wp('22%')
+    top: hp('27.5%'),
+    alignSelf:"center"
+   // marginLeft: wp('20%')
   },
   avatar3: {
-    marginTop: hp('3%'),
+    marginTop: hp('3.5%'),
     top: hp('-8%'),
     marginLeft: wp('28%')
   },
@@ -567,4 +574,3 @@ const styles = StyleSheet.create({
 });
 
 export default Bookview;
-
