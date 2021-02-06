@@ -513,7 +513,7 @@ console.log(selectedValue+"selected Value")
 
             renderItem={({ item }) => (<><Quotecrad name={item.account.username}
               isliked={item.isliked}
-              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} DELETE={setdelet} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
+              date={item.sendtime.toString().split('T')[0]} lastinfo={finfo} selectt={selecttime} bookid={prop.route.params.id} heartnumber={item.Likes} kdelet={delet} DELETE={setdelet} RESPONSE={response} page={setpage} INFO={setfinfo} IDD={IDD} quoteid={item.id} id={item.account.id} height={hp('42.5%')}
               picture={`${item.account.profile_photo}`} naghlghol={item.quote_text} ></Quotecrad>
 
 

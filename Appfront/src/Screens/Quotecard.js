@@ -129,7 +129,10 @@ const Quotecard = (prop) => {
                         
                         console.log(response);
                         prop.INFO(quoteid);
+                        if(prop.kdelet===false)
                         await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
                      
 
                       })
@@ -244,7 +247,11 @@ const Quotecard = (prop) => {
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
               if(prop.selectt==="like"){
-              await(prop.DELETE(true))
+
+               if(prop.kdelet===false)
+                        await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
               }
            
               setheart('#1f7a8c')
@@ -275,7 +282,10 @@ const Quotecard = (prop) => {
               console.log(response.date)
               console.log(response.data.data+'.DATA .DATA')
               if(prop.selectt==="like"){
-              await(prop.DELETE(true))
+                if(prop.kdelet===false)
+                        await(prop.DELETE(true))
+                        else
+                        await(prop.DELETE(false))
               }
             
               setheart('lightblue')
