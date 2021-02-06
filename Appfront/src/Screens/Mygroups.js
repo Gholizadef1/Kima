@@ -181,7 +181,7 @@ const Mygroups = (prop) => {
      if(selecttime==="none")
      a="time";
      else
-     a="like"
+     a="member"
      console.log(a+"aaaaaa")
      try{
       setIDD(await (await AsyncStorage.getItem('id')).toString())
@@ -280,7 +280,7 @@ const Mygroups = (prop) => {
     useFocusEffect(
       React.useCallback(() => {
         const a = new Promise(async (resolve, reject) => {
-         
+          setIDD(await (await AsyncStorage.getItem('id')).toString())
           await setinformation([]);
           await setpage(1);
           await settheend(false);
@@ -289,7 +289,7 @@ const Mygroups = (prop) => {
             setlikeotime("time")
           }
           else {
-            setlikeotime("like")
+            setlikeotime("member")
           }
           //await setselecttime(true)
           //با این ظاهرا درست شد :/
@@ -585,7 +585,7 @@ text: 'فهمیدم', onPress: () => console.log('alert closed'), style: 'defaul
               // settheend(false)
               // response(1)
               await setlikeotime('member')
-               setselecttime("like")
+               setselecttime("member")
          
             }
 
